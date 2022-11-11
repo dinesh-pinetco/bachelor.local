@@ -62,8 +62,3 @@ function datetimeFormatForHubspot(Carbon\Carbon $datetime)
 {
     return $datetime->getTimestampMs();
 }
-
-function createJsonUserPrefence()
-{
-    return json_encode(collect(config('application.applicants_fields')));
-}

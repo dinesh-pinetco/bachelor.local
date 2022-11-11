@@ -16,7 +16,7 @@ class UserPreferenceFactory extends Factory
     {
         return [
             'user_id' => User::role(ROLE_EMPLOYEE)->inRandomOrder()->first(),
-            'settings' => createJsonUserPrefence(),
+            'settings' => config('application.applicants_fields'),
             'type' => 'application_table',
         ];
     }
