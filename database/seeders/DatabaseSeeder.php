@@ -30,12 +30,9 @@ class DatabaseSeeder extends Seeder
         $this->call(StateSeeder::class);
         $this->call(DistrictSeeder::class);
         $this->call(UniversitySeeder::class);
-        $this->call(StudyProgramSeeder::class);
         $this->call(FinalExamSeeder::class);
         $this->call(NationalitySeeder::class);
         $this->call(EntranceQualificationSeeder::class);
-        $this->call(CourseOfStudySeeder::class);
-        $this->call(StudyTypeSeeder::class);
         $this->call(HealthInsuranceCompanySeeder::class);
 
         if (app()->environment('local', 'staging')) {

@@ -44,12 +44,6 @@ class Tabs extends Component
         } else {
             $this->tabs = Tab::all();
 
-            $this->nakUniversityId = University::where('name', 'NORDAKADEMIE')->first()->id;
-
-            $universityId = $this->applicant->getValueByField('university');
-
-            $this->universityId = $universityId != null ? $universityId->value : null;
-
             $grade = $this->applicant->getValueByField('grade');
 
             $this->grade = $grade != null ? str_replace(',', '.', $grade->value) : null;
@@ -99,7 +93,7 @@ class Tabs extends Component
             $error = __('Please check the document');
         }
 
-        if (is_null($error) && $this->nakUniversityId == $this->universityId && $this->grade <= 2.5) {
+        if (is_null($error) && $this->grade <= 2.5) {
             $this->applicant->application_status = USER::STATUS_TEST_TAKEN;
             $this->applicant->save();
             Mail::to($this->applicant->email)->bcc(config('mail.supporter.address'))

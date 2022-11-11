@@ -266,7 +266,7 @@ class Data
             [
                 'name' => 'Industry',
                 'description' => 'Industry Description',
-                'slug' => 'industry',
+                'slug' => 'industries',
                 'icon' => 'industry',
                 'sort_order' => 2,
                 'meta_data' => [
