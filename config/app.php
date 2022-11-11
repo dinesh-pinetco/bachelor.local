@@ -172,7 +172,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
 
