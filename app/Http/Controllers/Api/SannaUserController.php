@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SannaUserResource;
 use App\Models\User;
@@ -14,7 +15,7 @@ class SannaUserController extends Controller
     {
         $size = request()->get('size') ?? 15;
 
-        $users = User::where('application_status', '=', User::STATUS_CONTRACT_RETURNED_ON)
+        $users = User::where('application_status', '=', ApplicationStatus::REGISTRATION_SUBMITTED)
             ->where('is_synced_to_sanna', false)
             ->whereHas('study_sheet', function ($query) {
                 $query->where('is_submit', 1);

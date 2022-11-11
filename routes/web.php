@@ -6,14 +6,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\GovernmentFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SelectionTestController;
-use App\Http\Controllers\StudySheetController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
-use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,14 +34,8 @@ Route::get('test-government-form/{user}', [TestController::class, 'governmentFor
 Route::view('study-programs', 'study-programs')->name('study-programs');
 
 Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
-    Route::get('logs', [LogViewerController::class, 'index']);
     Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');
     Route::get('preview/backup/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
-});
-
-Route::middleware(['signed'])->group(function () {
-    Route::get('/study-sheet/{user}', StudySheetController::class)->name('study-sheet');
-    Route::get('/government-form/{user}', GovernmentFormController::class)->name('government-form');
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'role:'.ROLE_APPLICANT])->group(function () {
