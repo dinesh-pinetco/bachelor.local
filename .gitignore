@@ -27,4 +27,3 @@ public/vendor
 /.php-cs-fixer.cache
 tests/cypress/support/routes.json
 package-lock.json
-/composer.lock
