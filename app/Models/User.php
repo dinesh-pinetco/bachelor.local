@@ -55,7 +55,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $fillable = [
         'application_status_id', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
-        'cubia_id', 'competency_catch_up', 'comment', 'is_sync',
+        'cubia_id', 'competency_catch_up', 'comment', 'is_synced_to_sanna',
     ];
 
     protected $hidden = [
@@ -63,8 +63,9 @@ class User extends Authenticatable implements ContractsAuditable
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at'   => 'datetime',
         'competency_catch_up' => 'boolean',
+        'is_synced_to_sanna'  => 'boolean',
     ];
 
     protected $appends = [

@@ -26,12 +26,11 @@ class CreateUsersTable extends Migration
             $table->text('phone')->nullable();
             $table->rememberToken();
             $table->string('cubia_id')->nullable();
-            $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->boolean('competency_catch_up')->default(false);
             $table->mediumText('competency_comment')->nullable();
             $table->mediumText('application_reject_reason')->nullable();
-            $table->boolean('is_sync')->default(false);
+            $table->boolean('is_synced_to_sanna')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

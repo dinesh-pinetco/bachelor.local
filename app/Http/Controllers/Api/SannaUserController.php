@@ -15,7 +15,7 @@ class SannaUserController extends Controller
         $size = request()->get('size') ?? 15;
 
         $users = User::where('application_status_id', '=', User::STATUS_CONTRACT_RETURNED_ON)
-            ->where('is_sync', false)
+            ->where('is_synced_to_sanna', false)
             ->whereHas('study_sheet', function ($query) {
                 $query->where('is_submit', 1);
             })
@@ -72,7 +72,7 @@ class SannaUserController extends Controller
         $size = request()->get('size') ?? 15;
 
         $users = User::where('application_status_id', '=', User::STATUS_SELECTION_INTERVIEW_ON)
-            ->where('is_sync', false)
+            ->where('is_synced_to_sanna', false)
             ->with([
                 'course',
                 'values',
@@ -91,7 +91,7 @@ class SannaUserController extends Controller
             'applicant_id' => 'required|exists:users,id',
         ]);
 
-        User::where('id', $request->applicant_id)->update(['is_sync' => 1]);
+        User::where('id', $request->applicant_id)->update(['is_synced_to_sanna' => true]);
 
         return response()->json(['message' => __('User sync successfully.')]);
     }
