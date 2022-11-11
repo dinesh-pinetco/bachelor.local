@@ -63,20 +63,6 @@
                         </x-jet-nav-link>
                     </li>
                 @endif
-                <li>
-                    <x-jet-nav-link :active="urlContains('interview')"
-                        href="{{ route('employee.applicants.edit', ['slug' => 'interviews', 'applicant' => $applicant]) }}"
-                        class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm">
-                        {{ __('Interview') }}
-                    </x-jet-nav-link>
-                </li>
-                <li>
-                    <x-jet-nav-link :active="urlContains('contract')"
-                        href="{{ route('employee.applicants.edit', ['slug' => 'contracts', 'applicant' => $applicant]) }}"
-                        class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm">
-                        {{ __('Contract') }}
-                    </x-jet-nav-link>
-                </li>
             @endif
         </ul>
         <div class="block sm:hidden">
@@ -108,14 +94,6 @@
                             {{ __('Selection Test') }}
                         </option>
                     @endif
-                    <option {{ urlContains('interview') ? 'selected' : '' }}
-                        value="{{ route('employee.applicants.edit', ['slug' => 'interviews', 'applicant' => $applicant]) }}">
-                        {{ __('Interview') }}
-                    </option>
-                    <option {{ urlContains('contract') ? 'selected' : '' }}
-                        value="{{ route('employee.applicants.edit', ['slug' => 'contracts', 'applicant' => $applicant]) }}">
-                        {{ __('Contract') }}
-                    </option>
                 @endif
             </x-livewire-select>
         </div>

@@ -6,7 +6,6 @@ use App\Mail\ApplicationApproved;
 use App\Models\Result;
 use App\Models\Tab;
 use App\Models\Test;
-use App\Models\University;
 use App\Models\User;
 use App\Services\Moodle;
 use App\Services\ProgressBar;
