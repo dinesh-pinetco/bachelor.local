@@ -35,22 +35,22 @@ class Contact
     public function get()
     {
         return [
-            'email'                               => $this->user->email,
-            'firstname'                           => $this->user->first_name,
-            'lastname'                            => $this->user->last_name,
-            'phone'                               => $this->user->phone,
-            'study_course'                        => $this->study_course(),
-            'desired_beginning'                   => $this->desired_beginning(),
-            'previous_university'                 => $this->previous_university(),
+            'email' => $this->user->email,
+            'firstname' => $this->user->first_name,
+            'lastname' => $this->user->last_name,
+            'phone' => $this->user->phone,
+            'study_course' => $this->study_course(),
+            'desired_beginning' => $this->desired_beginning(),
+            'previous_university' => $this->previous_university(),
             'study_course_of_previous_university' => $this->study_course_of_previous_university(),
-            'application_submitted'               => $this->application_submitted(),
-            'application_accepted'                => $this->application_accepted(),
-            'test_completed'                      => $this->test_completed(),
-            'selection_interview_on'              => $this->selection_interview_on(),
-            'contract_sent_on'                    => $this->contract_sent_on(),
-            'contract_returned_on'                => $this->contract_returned_on(),
-            'rejected_by_applicant'               => $this->rejected_by_applicant(),
-            'rejected_by_nak'                     => $this->rejected_by_nak(),
+            'application_submitted' => $this->application_submitted(),
+            'application_accepted' => $this->application_accepted(),
+            'test_completed' => $this->test_completed(),
+            'selection_interview_on' => $this->selection_interview_on(),
+            'contract_sent_on' => $this->contract_sent_on(),
+            'contract_returned_on' => $this->contract_returned_on(),
+            'rejected_by_applicant' => $this->rejected_by_applicant(),
+            'rejected_by_nak' => $this->rejected_by_nak(),
         ];
     }
 
@@ -105,7 +105,7 @@ class Contact
     public function selection_interview_on()
     {
         $date = $this->user->audits
-            ->where('new_values.application_status_id',
+            ->where('new_values.application_status',
                 ApplicationStatus::where('identifier', 'selection_interview_on')->value('name'))
             ->last()?->created_at;
 
@@ -117,7 +117,7 @@ class Contact
     public function contract_sent_on()
     {
         $date = $this->user->audits
-            ->where('new_values.application_status_id',
+            ->where('new_values.application_status',
                 ApplicationStatus::where('identifier', 'contract_sent_on')->value('name'))
             ->last()?->created_at;
 
@@ -129,7 +129,7 @@ class Contact
     public function contract_returned_on()
     {
         $date = $this->user->audits
-            ->where('new_values.application_status_id',
+            ->where('new_values.application_status',
                 ApplicationStatus::where('identifier', 'contract_returned_on')->value('name'))
             ->last()?->created_at;
 
@@ -141,7 +141,7 @@ class Contact
     private function getBooleanValueOfStatus($status)
     {
         return $this->user->audits
-            ->where('new_values.application_status_id',
+            ->where('new_values.application_status',
                 ApplicationStatus::where('identifier', $status)->value('name'))
             ->isNotEmpty();
     }

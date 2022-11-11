@@ -21,7 +21,7 @@ class ProgressBar
     {
         $progressPoints = $this->calculateProgressByTab('profile')
             + $this->calculateProgressByTab('motivation')
-            + $this->calculateProgressByTab('career')
+            + $this->calculateProgressByTab('industries')
             + $this->documentProgress();
 
         return round($progressPoints);

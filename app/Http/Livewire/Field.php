@@ -138,8 +138,8 @@ class Field extends Component
         } else {
             $this->authorizeForUser($this->applicant, 'create', FieldValue::class);
             $this->value = $this->applicant->values()->create([
-                'field_id'  => $this->field->id,
-                'value'     => $this->fieldValue,
+                'field_id' => $this->field->id,
+                'value' => $this->fieldValue,
                 'group_key' => $this->groupKey,
             ]);
         }

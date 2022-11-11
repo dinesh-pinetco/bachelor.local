@@ -14,9 +14,9 @@ class DistrictImport implements ToModel, WithCustomCsvSettings, WithHeadingRow
     public function model(array $row)
     {
         District::create([
-            'sana_id'  => $row['id'],
+            'sana_id' => $row['id'],
             'state_id' => substr($row['id'], 0, -3),
-            'name'     => $row['bezeichnung'],
+            'name' => $row['bezeichnung'],
             'id_short' => $row['id_short'],
         ]);
     }
@@ -32,7 +32,7 @@ class DistrictImport implements ToModel, WithCustomCsvSettings, WithHeadingRow
     {
         return [
             'input_encoding' => 'ISO-8859-1',
-            'delimiter'      => ';',
+            'delimiter' => ';',
         ];
     }
 }

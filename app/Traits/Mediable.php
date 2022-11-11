@@ -33,7 +33,7 @@ trait Mediable
     {
         return Media::whereIn('id', $ids)->update([
             'mediable_type' => get_class($this),
-            'mediable_id'   => $this->id,
+            'mediable_id' => $this->id,
         ]);
     }
 }

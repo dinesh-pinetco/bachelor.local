@@ -10,11 +10,11 @@ class Profile extends Component
     public User $user;
 
     protected array $rules = [
-        'user.first_name'       => ['required'],
-        'user.last_name'        => ['required'],
-        'user.phone'            => ['required'],
-        'user.old_password'     => ['nullable', 'required_with:user.new_password', 'current_password'],
-        'user.new_password'     => ['required_with:user.old_password'],
+        'user.first_name' => ['required'],
+        'user.last_name' => ['required'],
+        'user.phone' => ['required'],
+        'user.old_password' => ['nullable', 'required_with:user.new_password', 'current_password'],
+        'user.new_password' => ['required_with:user.old_password'],
         'user.confirm_password' => ['same:user.new_password'],
     ];
 

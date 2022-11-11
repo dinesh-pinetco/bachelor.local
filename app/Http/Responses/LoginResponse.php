@@ -8,7 +8,7 @@ use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 class LoginResponse implements LoginResponseContract
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function toResponse($request)
     {

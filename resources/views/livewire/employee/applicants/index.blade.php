@@ -58,10 +58,10 @@
                 @endif
                 @if(data_get($authPreferencesFields,'application_status_name'))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
-                        <a wire:click="sort('application_status_id')" role="button" href="#">
+                        <a wire:click="sort('application_status')" role="button" href="#">
                             {{ __('Status') }}
                             @include('components.data-table.sort-icon', [
-                                'field' => 'application_status_id',
+                                'field' => 'application_status',
                             ])
                         </a>
                     </th>
@@ -78,7 +78,7 @@
                         <a role="button" href="#">
                             {{ __('government_form_is_submit') }}
                             @include('components.data-table.sort-icon', [
-                                'field' => 'application_status_id',
+                                'field' => 'application_status',
                             ])
                         </a>
                     </th>
@@ -88,7 +88,7 @@
                         <a role="button" href="#">
                             {{ __('study_sheet_is_submit') }}
                             @include('components.data-table.sort-icon', [
-                                'field' => 'application_status_id',
+                                'field' => 'application_status',
                             ])
                         </a>
                     </th>
@@ -98,7 +98,7 @@
                         <a role="button" href="#">
                             {{ __('sanna_is_sync') }}
                             @include('components.data-table.sort-icon', [
-                                'field' => 'application_status_id',
+                                'field' => 'application_status',
                             ])
                         </a>
                     </th>
@@ -129,7 +129,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->course->first()?->course_start_date?->format('d.m.Y')) }}</td>
                     @endif
                     @if(data_get($authPreferencesFields,'application_status_name'))
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->application_status->name) }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->application_status->value) }}</td>
                     @endif
                     @if(data_get($authPreferencesFields,'ects_point'))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">

@@ -137,8 +137,8 @@ class AuditCustomDriver implements AuditDriver
     private function addResultCustomField($auditField, Auditable $model)
     {
         $testArray = [
-            'user'      => $model->user->fullName,
-            'test'      => $model->test->name,
+            'user' => $model->user->fullName,
+            'test' => $model->test->name,
             'test_type' => $model->test->type,
         ];
 

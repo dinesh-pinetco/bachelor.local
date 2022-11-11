@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
         $profileProgress = $this->progressBar->calculateProgressByTab('profile');
         $motivateProgress = $this->progressBar->calculateProgressByTab('motivation');
-        $careerProgress = $this->progressBar->calculateProgressByTab('career');
+        $careerProgress = $this->progressBar->calculateProgressByTab('industries');
         $documentProgress = $this->progressBar->documentProgress();
 
         return view('dashboard', compact('profileProgress', 'motivateProgress', 'careerProgress', 'documentProgress'));

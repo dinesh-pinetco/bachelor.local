@@ -35,9 +35,9 @@ class DatabaseBackupController extends Controller
             $filename = last(explode('/', $file));
 
             $returningFiles->push([
-                'name'         => $filename,
-                'size'         => round(Storage::size($file) / 1024000, 2),
-                'url'          => route('preview.backup', $filename),
+                'name' => $filename,
+                'size' => round(Storage::size($file) / 1024000, 2),
+                'url' => route('preview.backup', $filename),
                 'lastModified' => Carbon::createFromTimestamp(Storage::lastModified($file)),
             ]);
         }

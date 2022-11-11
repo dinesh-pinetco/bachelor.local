@@ -27,19 +27,19 @@
         @endif
         <ul class="h-auto px-4 pb-4 overflow-y-auto divide-y max-h-60 divide-gray">
             <!-- Select All Checkbox Start -->
-        {{-- <li class="flex items-center py-2 space-x-2">
-            <input type="checkbox" id="select-all" class="rounded-sm border-gray-medium focus:ring-0">
-            <label for="select-all" class="font-normal text-gray-medium truncate cursor-pointer">Select All</label>
-        </li> --}}
-        <!-- Select All Checkbox End -->
+            {{-- <li class="flex items-center py-2 space-x-2">
+                <input type="checkbox" id="select-all" class="rounded-sm border-gray-medium focus:ring-0">
+                <label for="select-all" class="font-normal text-gray-medium truncate cursor-pointer">Select All</label>
+            </li> --}}
+            <!-- Select All Checkbox End -->
             @forelse ($options as $option)
                 <li class="flex items-center py-2 space-x-2">
-                    <input name="{{ $name }}" wire:model="{{ $name }}.{{ $option->{$value} }}" type="checkbox"
-                           id="{{ $option->{$value} }}"
-                           value="{{ $option->{$value} }}"
+                    <input name="{{ $name }}" wire:model="{{ $name }}.{{ data_get($option,$value) }}" type="checkbox"
+                           id="{{ data_get($option,$value) }}"
+                           value="{{ data_get($option,$value) }}"
                            class="rounded-sm w-4 h-4 text-primary focus:ring focus:ring-primary-light focus:ring-opacity-50">
-                    <label for="{{ $option->{$value} }}"
-                           class="text-sm text-darkgray font-normal truncate cursor-pointer">{{ $option->{$label} }}</label>
+                    <label for="{{ data_get($option,$value) }}"
+                           class="text-sm text-darkgray font-normal truncate cursor-pointer">{{ data_get($option,$label) }}</label>
                 </li>
             @empty
                 <li class="text-center pt-4">

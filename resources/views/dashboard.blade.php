@@ -44,7 +44,7 @@
                 </p>
                 <x-progress-bar :progress="$motivateProgress"></x-progress-bar>
             </a>
-            <a href="{{ route('application.index',['tab' => 'career']) }}"
+            <a href="{{ route('application.index',['tab' => 'industries']) }}"
                class="flex flex-col py-4 md:py-12 px-2 sm:px-6 md:px-4 xl:px-0 max-w-sm w-1/2 cursor-pointer">
                 <svg class="flex-shrink-0 mx-auto h-10 w-10 sm:h-14 sm:w-14 lg:w-20 lg:h-20 xl:w-28 xl:h-28" width="120" height="120"
                      viewBox="0 0 120 120"

@@ -15,7 +15,7 @@ class EntranceQualificationImport implements ToModel, WithCustomCsvSettings, Wit
     {
         EntranceQualification::create([
             'sana_id' => $row['id'],
-            'name'    => $row['bezeichnung'],
+            'name' => $row['bezeichnung'],
         ]);
     }
 
@@ -30,7 +30,7 @@ class EntranceQualificationImport implements ToModel, WithCustomCsvSettings, Wit
     {
         return [
             'input_encoding' => 'ISO-8859-1',
-            'delimiter'      => ';',
+            'delimiter' => ';',
         ];
     }
 }

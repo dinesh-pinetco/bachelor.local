@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Employee\Applicants;
 
-use App\Models\ApplicationStatus;
+use App\Enums\ApplicationStatus;
 use App\Models\ModelHasCourse;
 use App\Models\User;
 use App\Models\UserPreference;
@@ -51,7 +51,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->statuses = ApplicationStatus::select(['id', 'name'])->get();
+        $this->statuses = ApplicationStatus::selectionOptions();
 
         $this->authPreferencesFields = $this->getUserPreferenceFields();
         $this->applicantsTableFields = config('application.applicants_fields');

@@ -17,10 +17,6 @@ class ApplicantController extends Controller
     {
         if ($slug == 'documents') {
             return view('application.documents', ['applicant' => $applicant, 'tab' => $slug]);
-        } elseif ($slug == 'interviews') {
-            return view('application.interviews', ['applicant' => $applicant, 'tab' => $slug]);
-        } elseif ($slug == 'contracts') {
-            return view('application.contracts', ['applicant' => $applicant, 'tab' => $slug]);
         } else {
             $tab = Tab::where('slug', $slug)->first();
 

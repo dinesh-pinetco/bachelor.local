@@ -27,8 +27,8 @@ class ContractSent extends Mailable
         return $this->subject(__('Your contract is on the way').' | '.$this->applicant->courses->first()->name.' | NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.contract-sent', [
-                'name'             => $this->applicant->full_name,
-                'course'           => $this->applicant->courses->first()->name,
+                'name' => $this->applicant->full_name,
+                'course' => $this->applicant->courses->first()->name,
                 'desiredBeginning' => $this->applicant->course->first()->desired_beginning_id == 1 ? __('Summer semester') : __('Winter semester'),
             ]);
     }

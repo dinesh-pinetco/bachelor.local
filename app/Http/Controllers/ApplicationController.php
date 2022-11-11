@@ -25,7 +25,7 @@ class ApplicationController extends Controller
         Mail::to($applicant->email)
             ->cc(config('mail.supporter.address'))
             ->send(new ApplicationSubmit($applicant, $employee));
-        $applicant->application_status_id = USER::STATUS_APPLICATION_SUBMITTED;
+        $applicant->application_status = USER::STATUS_APPLICATION_SUBMITTED;
         $applicant->save();
 
         return back()->with('message', __('Message Sent Successfully!!'));

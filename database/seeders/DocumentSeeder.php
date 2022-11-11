@@ -18,19 +18,19 @@ class DocumentSeeder extends Seeder
     public function run()
     {
         Document::create([
-            'creator_id'  => User::first()->id,
-            'name'        => 'CV',
+            'creator_id' => User::first()->id,
+            'name' => 'CV',
             'description' => __('Upload your CV'),
             'is_required' => true,
-            'is_active'   => true,
+            'is_active' => true,
         ])->attachCourses(Course::pluck('id')->toArray())->extensions()->attach(Extension::pluck('id')->toArray());
 
         Document::create([
-            'creator_id'  => User::first()->id,
-            'name'        => 'Testimonies',
+            'creator_id' => User::first()->id,
+            'name' => 'Testimonies',
             'description' => __('Upload your Testimonies'),
             'is_required' => true,
-            'is_active'   => true,
+            'is_active' => true,
         ])->attachCourses([1, 2, 3])->extensions()->attach(Extension::pluck('id')->toArray());
     }
 }

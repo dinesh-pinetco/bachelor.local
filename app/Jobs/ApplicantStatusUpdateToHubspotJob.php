@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Hubspot\Contact;
-use App\Models\ApplicationStatus;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +19,7 @@ class ApplicantStatusUpdateToHubspotJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(protected User $user, protected $application_status_id)
+    public function __construct(protected User $user, protected $application_status)
     {
         $this->user = $user->load('hubspotConfiguration');
     }
@@ -32,12 +31,11 @@ class ApplicantStatusUpdateToHubspotJob implements ShouldQueue
      */
     public function handle()
     {
-        $application_status_name = ApplicationStatus::where('id', $this->application_status_id)->value('identifier');
-        $applicantStatus = \App\Services\Hubspot\Contact::make($this->user)->{$application_status_name}();
+        $applicantStatus = \App\Services\Hubspot\Contact::make($this->user)->{$this->application_status}();
 
         $hubspotConfiguration = $this->user->hubspotConfiguration;
         Contact::make()
-            ->update($hubspotConfiguration->contact_id, [$application_status_name => $applicantStatus]);
+            ->update($hubspotConfiguration->contact_id, [$this->application_status => $applicantStatus]);
         $hubspotConfiguration->updateLastHubspotContactUpdatedAt();
     }
 }

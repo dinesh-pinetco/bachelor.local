@@ -13,7 +13,7 @@ class InterviewPolicy
 
     public function create(User $user): Response|bool
     {
-        $applicantStatus = $user->application_status_id;
+        $applicantStatus = $user->application_status;
         $applicationRejectStatus = [User::STATUS_APPLICATION_REJECTED_BY_APPLICANT, User::STATUS_APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
             return false;
@@ -29,7 +29,7 @@ class InterviewPolicy
 
     public function update(User $user, Interview $interview): Response|bool
     {
-        $applicantStatus = $user->application_status_id;
+        $applicantStatus = $user->application_status;
         $applicationRejectStatus = [User::STATUS_APPLICATION_REJECTED_BY_APPLICANT, User::STATUS_APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
             return false;

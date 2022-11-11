@@ -32,8 +32,8 @@ class GovernmentStudySheetSubmit extends Mailable
     {
         return $this->subject(__('Government And Study Sheet Form Submit.').' | '.$this->user->courses()->first()->name.'| NORDAKADEMIE')
             ->markdown('emails.government-study-sheet-submit', [
-                'link'         => route('selection-test.index'),
-                'name'         => $this->user->full_name,
+                'link' => route('selection-test.index'),
+                'name' => $this->user->full_name,
                 'applicant_id' => $this->user->id,
             ]);
     }

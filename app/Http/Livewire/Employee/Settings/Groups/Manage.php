@@ -18,11 +18,11 @@ class Manage extends Component
     public string $formMode = 'create';
 
     protected array $rules = [
-        'group.parent_id'      => ['sometimes'],
-        'group.internal_name'  => ['required'],
-        'group.title'          => ['sometimes'],
-        'group.description'    => [],
-        'group.can_add_more'   => ['nullable'],
+        'group.parent_id' => ['sometimes'],
+        'group.internal_name' => ['required'],
+        'group.title' => ['sometimes'],
+        'group.description' => [],
+        'group.can_add_more' => ['nullable'],
         'group.add_more_label' => ['sometimes'],
     ];
 

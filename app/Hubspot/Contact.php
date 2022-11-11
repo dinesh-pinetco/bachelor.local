@@ -44,7 +44,7 @@ class Contact extends Base
         collect($request)->each(function ($value, $key) use (&$properties) {
             $properties[] = [
                 'property' => $key,
-                'value'    => $value,
+                'value' => $value,
             ];
         });
 

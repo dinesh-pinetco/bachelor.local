@@ -17,7 +17,7 @@ class SelectionTest extends Component
     {
         $this->message = '';
         $applicant = auth()->user()->hasRole(ROLE_APPLICANT) ? auth()->user() : null;
-        $applicantStatus = $applicant?->application_status_id;
+        $applicantStatus = $applicant?->application_status;
 
         $nakUniversityId = University::where('name', 'NORDAKADEMIE')->first()->id;
 

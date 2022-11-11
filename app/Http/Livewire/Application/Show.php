@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Application;
 
+use App\Enums\ApplicationStatus;
 use App\Models\FieldValue;
 use App\Models\Group;
 use App\Models\Tab;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
@@ -27,7 +27,7 @@ class Show extends Component
 
     public array $rules = [
         'applicant.competency_catch_up' => 'required|boolean',
-        'applicant.competency_comment'  => 'required|nullable',
+        'applicant.competency_comment' => 'required|nullable',
     ];
 
     public function mount()
@@ -38,13 +38,9 @@ class Show extends Component
     public function refreshData($groupId = null)
     {
         if (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
-            // $this->isEdit = in_array(
-            //     $this->applicant->application_status_id,
-            //     [User::STATUS_APPLICATION_INCOMPLETE, User::STATUS_APPLICATION_SUBMITTED]
-            // );
             $this->isEdit = true;
         } elseif (auth()->user()->hasRole(ROLE_APPLICANT)) {
-            $this->isEdit = $this->applicant->application_status_id == User::STATUS_APPLICATION_INCOMPLETE;
+            $this->isEdit = $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED;
         }
 
         $this->tab = Tab::activeFields($this->applicant->id)->find($this->tabId);

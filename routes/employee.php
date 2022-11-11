@@ -47,7 +47,7 @@ Route::group(['prefix' => 'applicants/{applicant}'], function () {
     Route::resource('selection-tests', SelectionTestController::class)->only(['index', 'show']);
     Route::get('{slug}', [ApplicantController::class, 'edit'])
         ->name('applicants.edit')
-        ->where('slug', 'profile|career|motivation|documents|interviews|contracts');
+        ->where('slug', 'profile|industries|motivation|documents|interviews|contracts');
 });
 
 Route::resource('applicants', ApplicantController::class)->only(['index', 'create']);

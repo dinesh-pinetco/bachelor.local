@@ -64,15 +64,15 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->whereIn('application_status_id', $this->rejectedStatus)
+        return $applicant->whereIn('application_status', $this->rejectedStatus)
             ->whereHas('audits', function ($query) {
-                $query->where('new_values->application_status_id',
+                $query->where('new_values->application_status',
                     $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_APPLICANT])
-                    ->orWhere('new_values->application_status_id',
+                    ->orWhere('new_values->application_status',
                         User::STATUS_APPLICATION_REJECTED_BY_APPLICANT)
-                    ->orWhere('new_values->application_status_id',
+                    ->orWhere('new_values->application_status',
                         $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_NAK])
-                    ->orWhere('new_values->application_status_id',
+                    ->orWhere('new_values->application_status',
                         User::STATUS_APPLICATION_REJECTED_BY_NAK);
             })
             ->coursesIn([$this->courseId])
@@ -83,7 +83,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status_id', User::STATUS_APPLICATION_INCOMPLETE)
+        return $applicant->where('application_status', User::STATUS_APPLICATION_INCOMPLETE)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -92,7 +92,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status_id', User::STATUS_APPLICATION_SUBMITTED)
+        return $applicant->where('application_status', User::STATUS_APPLICATION_SUBMITTED)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -101,22 +101,22 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->whereIn('application_status_id', $this->rejectedStatus)
+        return $applicant->whereIn('application_status', $this->rejectedStatus)
             ->whereHas('audits', function ($query) {
                 $query->where(function ($query1) {
-                    $query1->where('old_values->application_status_id',
+                    $query1->where('old_values->application_status',
                         $this->statusText[User::STATUS_APPLICATION_INCOMPLETE])
-                        ->orWhere('old_values->application_status_id',
+                        ->orWhere('old_values->application_status',
                             User::STATUS_APPLICATION_INCOMPLETE);
                 })
                     ->where(function ($query1) {
-                        $query1->where('new_values->application_status_id',
+                        $query1->where('new_values->application_status',
                             $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_APPLICANT])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_APPLICANT)
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_NAK])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_NAK);
                     });
             })
@@ -128,7 +128,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status_id', User::STATUS_APPLICATION_ACCEPTED)
+        return $applicant->where('application_status', User::STATUS_APPLICATION_ACCEPTED)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -137,22 +137,22 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->whereIn('application_status_id', $this->rejectedStatus)
+        return $applicant->whereIn('application_status', $this->rejectedStatus)
             ->whereHas('audits', function ($query) {
                 $query->where(function ($query1) {
-                    $query1->where('old_values->application_status_id',
+                    $query1->where('old_values->application_status',
                         $this->statusText[User::STATUS_APPLICATION_SUBMITTED])
-                        ->orWhere('old_values->application_status_id',
+                        ->orWhere('old_values->application_status',
                             User::STATUS_APPLICATION_SUBMITTED);
                 })
                     ->where(function ($query1) {
-                        $query1->where('new_values->application_status_id',
+                        $query1->where('new_values->application_status',
                             $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_APPLICANT])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_APPLICANT)
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_NAK])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_NAK);
                     });
             })
@@ -164,7 +164,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status_id', User::STATUS_TEST_TAKEN)
+        return $applicant->where('application_status', User::STATUS_TEST_TAKEN)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -173,22 +173,22 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->whereIn('application_status_id', $this->rejectedStatus)
+        return $applicant->whereIn('application_status', $this->rejectedStatus)
             ->whereHas('audits', function ($query) {
                 $query->where(function ($query1) {
-                    $query1->where('old_values->application_status_id',
+                    $query1->where('old_values->application_status',
                         $this->statusText[User::STATUS_APPLICATION_ACCEPTED])
-                        ->orWhere('old_values->application_status_id',
+                        ->orWhere('old_values->application_status',
                             User::STATUS_APPLICATION_ACCEPTED);
                 })
                     ->where(function ($query1) {
-                        $query1->where('new_values->application_status_id',
+                        $query1->where('new_values->application_status',
                             $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_APPLICANT])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_APPLICANT)
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_NAK])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_NAK);
                     });
             })
@@ -200,7 +200,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status_id', User::STATUS_SELECTION_INTERVIEW_ON)
+        return $applicant->where('application_status', User::STATUS_SELECTION_INTERVIEW_ON)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -209,22 +209,22 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->whereIn('application_status_id', $this->rejectedStatus)
+        return $applicant->whereIn('application_status', $this->rejectedStatus)
             ->whereHas('audits', function ($query) {
                 $query->where(function ($query1) {
-                    $query1->where('old_values->application_status_id',
+                    $query1->where('old_values->application_status',
                         $this->statusText[User::STATUS_TEST_TAKEN])
-                        ->orWhere('old_values->application_status_id',
+                        ->orWhere('old_values->application_status',
                             User::STATUS_TEST_TAKEN);
                 })
                     ->where(function ($query1) {
-                        $query1->where('new_values->application_status_id',
+                        $query1->where('new_values->application_status',
                             $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_APPLICANT])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_APPLICANT)
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_NAK])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_NAK);
                     });
             })
@@ -236,7 +236,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status_id', User::STATUS_CONTRACT_SENT_ON)
+        return $applicant->where('application_status', User::STATUS_CONTRACT_SENT_ON)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -245,22 +245,22 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->whereIn('application_status_id', $this->rejectedStatus)
+        return $applicant->whereIn('application_status', $this->rejectedStatus)
             ->whereHas('audits', function ($query) {
                 $query->where(function ($query1) {
-                    $query1->where('old_values->application_status_id',
+                    $query1->where('old_values->application_status',
                         $this->statusText[User::STATUS_SELECTION_INTERVIEW_ON])
-                        ->orWhere('old_values->application_status_id',
+                        ->orWhere('old_values->application_status',
                             User::STATUS_SELECTION_INTERVIEW_ON);
                 })
                     ->where(function ($query1) {
-                        $query1->where('new_values->application_status_id',
+                        $query1->where('new_values->application_status',
                             $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_APPLICANT])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_APPLICANT)
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_NAK])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_NAK);
                     });
             })
@@ -273,7 +273,7 @@ class ExportStatistics
         //        Todo: Below Code must be change.
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status_id', User::STATUS_CONTRACT_RETURNED_ON)
+        return $applicant->where('application_status', User::STATUS_CONTRACT_RETURNED_ON)
             ->where(function ($q) {
                 $q->whereDoesntHave('study_sheet')
                     ->orWhereHas('study_sheet', function ($q) {
@@ -292,22 +292,22 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->whereIn('application_status_id', $this->rejectedStatus)
+        return $applicant->whereIn('application_status', $this->rejectedStatus)
             ->whereHas('audits', function ($query) {
                 $query->where(function ($query1) {
-                    $query1->where('old_values->application_status_id',
+                    $query1->where('old_values->application_status',
                         $this->statusText[User::STATUS_CONTRACT_SENT_ON])
-                        ->orWhere('old_values->application_status_id',
+                        ->orWhere('old_values->application_status',
                             User::STATUS_CONTRACT_SENT_ON);
                 })
                     ->where(function ($query1) {
-                        $query1->where('new_values->application_status_id',
+                        $query1->where('new_values->application_status',
                             $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_APPLICANT])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_APPLICANT)
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 $this->statusText[User::STATUS_APPLICATION_REJECTED_BY_NAK])
-                            ->orWhere('new_values->application_status_id',
+                            ->orWhere('new_values->application_status',
                                 User::STATUS_APPLICATION_REJECTED_BY_NAK);
                     });
             })

@@ -40,16 +40,16 @@ class Tab extends Model implements ContractsAuditable
             ->with([
                 'parent_groups',
                 'parent_groups.child',
-                'parent_groups.child.fields'        => function ($query) {
+                'parent_groups.child.fields' => function ($query) {
                     $query->where('is_active', 1);
                 },
                 'parent_groups.child.fields.values' => function ($query) use ($user_id) {
                     $query->where('user_id', $user_id);
                 },
-                'parent_groups.fields'              => function ($query) {
+                'parent_groups.fields' => function ($query) {
                     $query->where('is_active', 1);
                 },
-                'parent_groups.fields.values'       => function ($query) use ($user_id) {
+                'parent_groups.fields.values' => function ($query) use ($user_id) {
                     $query->where('user_id', $user_id);
                 },
             ])

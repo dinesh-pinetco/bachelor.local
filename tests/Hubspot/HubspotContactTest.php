@@ -11,12 +11,12 @@ class HubspotContactTest extends TestCase
     public function create_contact_on_hubspot()
     {
         $properties = [
-            'company'   => 'NAK Test',
-            'email'     => 'nak@testing.com',
+            'company' => 'NAK Test',
+            'email' => 'nak@testing.com',
             'firstname' => 'NAK',
-            'lastname'  => 'Test',
-            'phone'     => '9978883355',
-            'website'   => 'naktesting.com',
+            'lastname' => 'Test',
+            'phone' => '9978883355',
+            'website' => 'naktesting.com',
         ];
 
         $hubspotContact = Contact::make()->create($properties);
@@ -32,10 +32,10 @@ class HubspotContactTest extends TestCase
     public function find_contact_on_hubspot()
     {
         $properties = [
-            'company'   => 'NAK Test',
-            'email'     => 'nak.find@testing.com',
+            'company' => 'NAK Test',
+            'email' => 'nak.find@testing.com',
             'firstname' => 'NAK',
-            'lastname'  => 'Test',
+            'lastname' => 'Test',
         ];
 
         $hubspotContact = Contact::make()->create($properties);
@@ -49,10 +49,10 @@ class HubspotContactTest extends TestCase
     public function update_contact_on_hubspot()
     {
         $properties = [
-            'company'   => 'NAK Test',
-            'email'     => 'nak.find@testing.com',
+            'company' => 'NAK Test',
+            'email' => 'nak.find@testing.com',
             'firstname' => 'NAK',
-            'lastname'  => 'Test',
+            'lastname' => 'Test',
         ];
 
         $hubspotContact = Contact::make()->create($properties);
@@ -76,12 +76,12 @@ class HubspotContactTest extends TestCase
     public function update_or_create_contact_on_hubspot()
     {
         $properties = [
-            'company'   => 'NAK Test',
-            'email'     => 'nak@testing.com',
+            'company' => 'NAK Test',
+            'email' => 'nak@testing.com',
             'firstname' => 'NAK',
-            'lastname'  => 'Test',
-            'phone'     => '9978883355',
-            'website'   => 'naktesting.com',
+            'lastname' => 'Test',
+            'phone' => '9978883355',
+            'website' => 'naktesting.com',
         ];
 
         $response = Contact::make()->updateOrCreate($properties['email'], $properties);

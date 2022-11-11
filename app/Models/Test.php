@@ -82,7 +82,7 @@ class Test extends Model implements ContractsAuditable
 
     public function getTestLink($user, $otherParameter = null)
     {
-        if ($user->application_status_id == USER::STATUS_APPLICATION_ACCEPTED) {
+        if ($user->application_status == USER::STATUS_APPLICATION_ACCEPTED) {
             if ($this['type'] == self::TYPE_MOODLE) {
                 $moodle = (new Moodle($user));
 

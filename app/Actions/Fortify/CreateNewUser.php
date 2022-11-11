@@ -27,18 +27,18 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            'first_name'        => ['required', 'string', 'max:255'],
-            'last_name'         => ['required', 'string', 'max:255'],
-            'email'             => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone'             => ['nullable'],
-            'course_id'         => ['required'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['nullable'],
+            'course_id' => ['required'],
             'desired_beginning' => ['required'],
         ], [], [
-            'first_name'        => 'Vorname',
-            'last_name'         => 'Nachname',
-            'email'             => 'E-Mail Adresse',
-            'phone'             => 'Phone',
-            'course_id'         => 'Studiengang',
+            'first_name' => 'Vorname',
+            'last_name' => 'Nachname',
+            'email' => 'E-Mail Adresse',
+            'phone' => 'Phone',
+            'course_id' => 'Studiengang',
             'desired_beginning' => 'gewünschter Beginn',
         ])->validate();
 
@@ -46,10 +46,10 @@ class CreateNewUser implements CreatesNewUsers
 
         $user = User::create([
             'first_name' => $input['first_name'],
-            'last_name'  => $input['last_name'],
-            'email'      => $input['email'],
-            'phone'      => $input['phone'],
-            'password'   => Hash::make($password),
+            'last_name' => $input['last_name'],
+            'email' => $input['email'],
+            'phone' => $input['phone'],
+            'password' => Hash::make($password),
         ])->assignRole(ROLE_APPLICANT);
 
         $user->attachCourseWithDesiredBeginning(data_get($input, 'course_id'), data_get($input, 'desired_beginning_id'), data_get($input, 'course_start_date'));

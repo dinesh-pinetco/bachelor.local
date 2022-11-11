@@ -16,9 +16,9 @@ class SannaUserSepaResource extends JsonResource
     {
         return [
             'kontoinhaber' => $this->account_holder,
-            'erteilt'      => $this->is_authorize,
-            'bic'          => $this->withoutSpace($this->swift_code),
-            'iban'         => $this->withoutSpace($this->iban),
+            'erteilt' => $this->is_authorize,
+            'bic' => $this->withoutSpace($this->swift_code),
+            'iban' => $this->withoutSpace($this->iban),
         ];
     }
 

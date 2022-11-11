@@ -31,9 +31,10 @@
             @endif
             @isset($statuses)
                 <div class="w-full lg:w-1/3 px-2 order-2 xl:order-3 mt-4 sm:mt-0 sm:mb-4 lg:mb-0">
-                    <x-multi-select name='selectedStatuses' :placeholder="__('Select Status')" :options='$statuses'
+                    <x-multi-select name='selectedStatuses' :placeholder="__('Select Status')"
+                                    :options='$statuses'
                                     :summeryText='$selectedStatusesSummery'
-                                    label="translated_name"/>
+                                    label="label"/>
                 </div>
             @endisset
             @isset($applicantsTableFields)

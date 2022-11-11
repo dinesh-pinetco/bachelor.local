@@ -17,9 +17,9 @@ class Manage extends Component
 
     protected array $rules = [
         'user.first_name' => ['required'],
-        'user.last_name'  => ['required'],
-        'user.email'      => ['required', 'unique:users,email'],
-        'user.phone'      => ['nullable', 'string'],
+        'user.last_name' => ['required'],
+        'user.email' => ['required', 'unique:users,email'],
+        'user.phone' => ['nullable', 'string'],
     ];
 
     public function mount(User $user)
@@ -45,10 +45,10 @@ class Manage extends Component
         $password = Str::random('10');
         $employee = User::create([
             'first_name' => data_get($this->user, 'first_name'),
-            'last_name'  => data_get($this->user, 'last_name'),
-            'email'      => data_get($this->user, 'email'),
-            'phone'      => data_get($this->user, 'phone'),
-            'password'   => Hash::make($password),
+            'last_name' => data_get($this->user, 'last_name'),
+            'email' => data_get($this->user, 'email'),
+            'phone' => data_get($this->user, 'phone'),
+            'password' => Hash::make($password),
         ])->assignRole(ROLE_EMPLOYEE);
 
         Mail::to($employee)->send(new EmployeeCreated($employee, $password));

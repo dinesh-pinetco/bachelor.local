@@ -21,9 +21,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         FieldValue::class => FieldValuePolicy::class,
-        Result::class     => ResultPolicy::class,
-        Interview::class  => InterviewPolicy::class,
-        Contract::class   => ContractPolicy::class,
+        Result::class => ResultPolicy::class,
+        Interview::class => InterviewPolicy::class,
+        Contract::class => ContractPolicy::class,
     ];
 
     /**

@@ -31,10 +31,10 @@ class Manage extends Component
     public $selectedCoursesSummery;
 
     public array $rules = [
-        'contactProfile.name'  => ['required'],
+        'contactProfile.name' => ['required'],
         'contactProfile.email' => ['required'],
         'contactProfile.phone' => ['required'],
-        'photo'                => ['required', 'image'],
+        'photo' => ['required', 'image'],
     ];
 
     public function mount(ContactProfile $contactProfile)

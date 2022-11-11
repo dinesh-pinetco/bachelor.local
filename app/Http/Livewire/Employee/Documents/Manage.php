@@ -31,11 +31,11 @@ class Manage extends Component
     public $selectedExtensionsSummery;
 
     protected array $rules = [
-        'document.name'        => ['required', 'unique:documents,name'],
+        'document.name' => ['required', 'unique:documents,name'],
         'document.description' => ['nullable'],
         'document.is_required' => ['required'],
-        'document.is_active'   => ['required'],
-        'extensions'           => ['array', 'min:1'],
+        'document.is_active' => ['required'],
+        'extensions' => ['array', 'min:1'],
     ];
 
     public function render()

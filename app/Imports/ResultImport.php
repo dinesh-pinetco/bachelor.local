@@ -60,7 +60,7 @@ class ResultImport implements ToModel, WithCustomCsvSettings
     {
         return [
             'input_encoding' => 'ISO-8859-1',
-            'delimiter'      => ';',
+            'delimiter' => ';',
         ];
     }
 }

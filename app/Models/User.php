@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
@@ -35,26 +36,8 @@ class User extends Authenticatable implements ContractsAuditable
 
     const SEARCHABLE_FIELDS = ['first_name', 'last_name', 'email', 'phone', 'created_at'];
 
-    const STATUS_APPLICATION_INCOMPLETE = '1';
-
-    const STATUS_APPLICATION_SUBMITTED = '2';
-
-    const STATUS_APPLICATION_ACCEPTED = '3';
-
-    const STATUS_TEST_TAKEN = '4';
-
-    const STATUS_SELECTION_INTERVIEW_ON = '5';
-
-    const STATUS_CONTRACT_SENT_ON = '6';
-
-    const STATUS_CONTRACT_RETURNED_ON = '7';
-
-    const STATUS_APPLICATION_REJECTED_BY_NAK = '8';
-
-    const STATUS_APPLICATION_REJECTED_BY_APPLICANT = '9';
-
     protected $fillable = [
-        'application_status_id', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
+        'application_status', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
         'cubia_id', 'competency_catch_up', 'comment', 'is_synced_to_sanna',
     ];
 
@@ -63,9 +46,10 @@ class User extends Authenticatable implements ContractsAuditable
     ];
 
     protected $casts = [
-        'email_verified_at'   => 'datetime',
+        'email_verified_at' => 'datetime',
         'competency_catch_up' => 'boolean',
-        'is_synced_to_sanna'  => 'boolean',
+        'is_synced_to_sanna' => 'boolean',
+        'application_status' => ApplicationStatus::class,
     ];
 
     protected $appends = [
@@ -73,24 +57,9 @@ class User extends Authenticatable implements ContractsAuditable
     ];
 
     protected array $auditInclude = [
-        'application_status_id',
+        'application_status',
         'competency_catch_up',
     ];
-
-    public static function statuses(): array
-    {
-        return [
-            self::STATUS_APPLICATION_INCOMPLETE,
-            self::STATUS_APPLICATION_SUBMITTED,
-            self::STATUS_APPLICATION_ACCEPTED,
-            self::STATUS_TEST_TAKEN,
-            self::STATUS_SELECTION_INTERVIEW_ON,
-            self::STATUS_CONTRACT_SENT_ON,
-            self::STATUS_CONTRACT_RETURNED_ON,
-            self::STATUS_APPLICATION_REJECTED_BY_NAK,
-            self::STATUS_APPLICATION_REJECTED_BY_APPLICANT,
-        ];
-    }
 
     public function scopeFilter($query)
     {
@@ -138,7 +107,7 @@ class User extends Authenticatable implements ContractsAuditable
             ->get();
 
         if ($results->count() == $results->where('is_passed', true)->count()) {
-            $this->application_status_id = self::STATUS_TEST_TAKEN;
+            $this->application_status = \App\Enums\ApplicationStatus::TEST_TAKEN;
             $this->save();
         }
     }
@@ -158,14 +127,7 @@ class User extends Authenticatable implements ContractsAuditable
         });
     }
 
-    protected function isEligibleToUpdate(): Attribute
-    {
-        return Attribute::get(function ($value, $attributes) {
-            return data_get($attributes, 'application_status_id') < self::STATUS_APPLICATION_SUBMITTED;
-        });
-    }
-
-    protected function applicationStatusId(): Attribute
+    protected function applicationStatus(): Attribute
     {
         return Attribute::set(function ($value, $attributes) {
             if (! app()->environment('local') && $this->hubspotConfiguration()->exists()) {

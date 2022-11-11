@@ -14,7 +14,7 @@ class SannaUserController extends Controller
     {
         $size = request()->get('size') ?? 15;
 
-        $users = User::where('application_status_id', '=', User::STATUS_CONTRACT_RETURNED_ON)
+        $users = User::where('application_status', '=', User::STATUS_CONTRACT_RETURNED_ON)
             ->where('is_synced_to_sanna', false)
             ->whereHas('study_sheet', function ($query) {
                 $query->where('is_submit', 1);
@@ -71,7 +71,7 @@ class SannaUserController extends Controller
     {
         $size = request()->get('size') ?? 15;
 
-        $users = User::where('application_status_id', '=', User::STATUS_SELECTION_INTERVIEW_ON)
+        $users = User::where('application_status', '=', User::STATUS_SELECTION_INTERVIEW_ON)
             ->where('is_synced_to_sanna', false)
             ->with([
                 'course',

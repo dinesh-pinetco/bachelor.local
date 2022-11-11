@@ -41,17 +41,17 @@ class Moodle
             if (data_get($responseJson, 'exception')) {
                 Log::error('Moodle Create-user API response: ', [
                     'requested_url' => $url,
-                    'response'      => $responseJson,
-                    'user'          => $this->user,
+                    'response' => $responseJson,
+                    'user' => $this->user,
                 ]);
 
                 return 'Moodle: '.str_replace('error/', '', html_entity_decode(data_get($responseJson, 'debuginfo')));
             } else {
                 MoodleModel::create([
-                    'id'        => data_get($responseJson, '0.id'),
-                    'user_id'   => $this->user->id,
+                    'id' => data_get($responseJson, '0.id'),
+                    'user_id' => $this->user->id,
                     'id_number' => $idNumber,
-                    'username'  => data_get($responseJson, '0.username'),
+                    'username' => data_get($responseJson, '0.username'),
                 ]);
 
                 $this->user->load('moodle');
@@ -98,8 +98,8 @@ class Moodle
             if (data_get($responseJson, 'exception')) {
                 Log::error('Moodle Attach-course API response: ', [
                     'requested_url' => $url,
-                    'response'      => $responseJson,
-                    'user'          => $this->user,
+                    'response' => $responseJson,
+                    'user' => $this->user,
                 ]);
 
                 return str_replace('error/', '', html_entity_decode(data_get($responseJson, 'message')));
@@ -125,8 +125,8 @@ class Moodle
             if (data_get($responseJson, 'exception')) {
                 Log::error('Moodle Generate-test-url API response: ', [
                     'requested_url' => $url,
-                    'response'      => $responseJson,
-                    'user'          => $this->user,
+                    'response' => $responseJson,
+                    'user' => $this->user,
                 ]);
 
                 return str_replace('error/', '', html_entity_decode(data_get($responseJson, 'message')));

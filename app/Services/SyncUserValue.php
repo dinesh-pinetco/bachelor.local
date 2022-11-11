@@ -31,9 +31,9 @@ class SyncUserValue
     {
         if ($field = Field::where('key', $key)->first()) {
             $this->user->values()->create([
-                'field_id'  => $field->id,
+                'field_id' => $field->id,
                 'group_key' => $this->user->id.$field->group_id.'0',
-                'value'     => $value,
+                'value' => $value,
             ]);
         }
     }

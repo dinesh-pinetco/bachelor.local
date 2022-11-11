@@ -31,28 +31,28 @@ class Manage extends Component
     public string $formMode = 'create';
 
     protected array $rules = [
-        'field.group_id'             => ['required'],
-        'field.label'                => ['nullable', 'unique:fields,label'],
-        'field.placeholder'          => ['nullable'],
-        'field.key'                  => ['nullable'],
-        'field.type'                 => ['required'],
-        'wantToUseTable'             => ['required_if:field.type,select'],
+        'field.group_id' => ['required'],
+        'field.label' => ['nullable', 'unique:fields,label'],
+        'field.placeholder' => ['nullable'],
+        'field.key' => ['nullable'],
+        'field.type' => ['required'],
+        'wantToUseTable' => ['required_if:field.type,select'],
         'field.related_option_table' => ['required_if:wantToUseTable,true'],
-        'field.is_required'          => ['boolean'],
-        'field.is_active'            => ['required'],
-        'options.*.key'              => ['exclude_if:wantToUseTable,true', 'required_if:field.type,select,radio,checkbox'],
-        'options.*.value'            => ['exclude_if:wantToUseTable,true', 'required_if:field.type,select,radio,checkbox'],
+        'field.is_required' => ['boolean'],
+        'field.is_active' => ['required'],
+        'options.*.key' => ['exclude_if:wantToUseTable,true', 'required_if:field.type,select,radio,checkbox'],
+        'options.*.value' => ['exclude_if:wantToUseTable,true', 'required_if:field.type,select,radio,checkbox'],
     ];
 
     /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
     public function validationAttributes(): array
     {
         return [
-            'field.is_active'            => __('Status'),
-            'field.is_required'          => __('Is Required'),
+            'field.is_active' => __('Status'),
+            'field.is_required' => __('Is Required'),
             'field.related_option_table' => __('Table name'),
-            'options.*.key'              => 'Key',
-            'options.*.value'            => 'Value',
+            'options.*.key' => 'Key',
+            'options.*.value' => 'Value',
         ];
     }
 

@@ -26,6 +26,6 @@ class UserFilters extends Filter
 
     public function selectedStatuses($column)
     {
-        $this->builder->whereIn('application_status_id', $column);
+        $this->builder->whereIn('application_status', $column);
     }
 }

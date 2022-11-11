@@ -15,7 +15,7 @@ class FinalExamImport implements ToModel, WithCustomCsvSettings, WithHeadingRow
     {
         FinalExam::create([
             'sana_id' => $row['id'],
-            'name'    => $row['bezeichnung'],
+            'name' => $row['bezeichnung'],
         ]);
     }
 
@@ -30,7 +30,7 @@ class FinalExamImport implements ToModel, WithCustomCsvSettings, WithHeadingRow
     {
         return [
             'input_encoding' => 'ISO-8859-1',
-            'delimiter'      => ';',
+            'delimiter' => ';',
         ];
     }
 }

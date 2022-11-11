@@ -15,7 +15,7 @@ class NationalityImport implements ToModel, WithCustomCsvSettings, WithHeadingRo
     {
         Nationality::create([
             'sana_id' => $row['id'],
-            'name'    => $row['bezeichnung'],
+            'name' => $row['bezeichnung'],
         ]);
     }
 
@@ -30,7 +30,7 @@ class NationalityImport implements ToModel, WithCustomCsvSettings, WithHeadingRo
     {
         return [
             'input_encoding' => 'ISO-8859-1',
-            'delimiter'      => ';',
+            'delimiter' => ';',
         ];
     }
 }

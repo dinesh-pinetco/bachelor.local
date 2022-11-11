@@ -22,15 +22,15 @@ class Manage extends Component
     public string $formMode = 'create';
 
     protected array $rules = [
-        'course.sana_id'       => ['nullable'],
-        'course.name'          => ['required', 'unique:courses,name', 'min:5', 'max:50'],
+        'course.sana_id' => ['nullable'],
+        'course.name' => ['required', 'unique:courses,name', 'min:5', 'max:50'],
         'course.form_of_study' => ['required'],
-        'course.description'   => ['required'],
-        'course.is_active'     => ['required'],
-        'course.first_start'   => ['required', 'date'],
-        'course.last_start'    => ['nullable', 'date', 'after_or_equal:course.first_start'],
-        'course.lead_time'     => ['required', 'numeric', 'gt:course.dead_time'],
-        'course.dead_time'     => ['required', 'numeric', 'lt:course.lead_time'],
+        'course.description' => ['required'],
+        'course.is_active' => ['required'],
+        'course.first_start' => ['required', 'date'],
+        'course.last_start' => ['nullable', 'date', 'after_or_equal:course.first_start'],
+        'course.lead_time' => ['required', 'numeric', 'gt:course.dead_time'],
+        'course.dead_time' => ['required', 'numeric', 'lt:course.lead_time'],
     ];
 
     protected $listeners = [

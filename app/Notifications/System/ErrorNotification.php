@@ -45,12 +45,12 @@ class ErrorNotification extends SlackNotification
         $e = $this->exception;
 
         $fields = collect([
-            'Request URL'  => $this->request->fullUrl(),
+            'Request URL' => $this->request->fullUrl(),
             'Request Type' => $this->request->getMethod(),
-            'Code'         => $e->getCode(),
-            'Message'      => $e->getMessage(),
-            'File'         => $e->getFile(),
-            'Line'         => $e->getLine(),
+            'Code' => $e->getCode(),
+            'Message' => $e->getMessage(),
+            'File' => $e->getFile(),
+            'Line' => $e->getLine(),
         ]);
 
         if ($this->user) {

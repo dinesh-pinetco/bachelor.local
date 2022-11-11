@@ -18,10 +18,10 @@ class HealthInsuranceCompanySeeder extends Seeder
     {
         HealthInsuranceCompany::create([
             'short_description' => 'Andere Krankenkasse',
-            'name1'             => '',
-            'name2'             => '',
-            'name3'             => '',
-            'company_number'    => '',
+            'name1' => '',
+            'name2' => '',
+            'name3' => '',
+            'company_number' => '',
         ]);
         Excel::import(new HealthInsuranceCompanyImport(), public_path('csv/gkv_krankenkassen.csv'));
     }

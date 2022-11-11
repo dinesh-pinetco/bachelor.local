@@ -429,6 +429,7 @@
     "Application rejected": "Antrag abgelehnt",
     "Application accepted": "Bewerbung akzeptiert",
     "Test taken": "Test absolviert",
+    "test_taken": "Test absolviert",
     "Selection interview on": "Auswahlgespräch am",
     "Contract sent on": "Vertrag verschickt am",
     "Contract returned on": "Vertrag zurück am",
@@ -719,5 +720,13 @@
     "Private Document": "Privates Dokument",
     "Your access data For": "Ihre Zugangsdaten für",
     "Field dynamic": "Dynamisches Feld",
-    "Desired beginning": "Gewünschter Beginn"
+    "Desired beginning": "Gewünschter Beginn",
+
+    "registration_submitted": "Registration submitted",
+    "profile_information_completed": "Profile Information Completed",
+    "test_passed": "Test passed",
+    "test_result_pdf_retrieved_on": "Test result pdf retrieved on",
+    "personal_data_completed": "Personal data completed",
+    "test_failed": "Test failed",
+    "test_failed_confirm": "Test failed confirm"
 }

@@ -36,10 +36,10 @@ class UserCreated extends Mailable implements ShouldQueue
         return $this->subject(__('Your access data').' | '.$this->user->courses()?->first()?->name.'| NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.user-created', [
-                'link'     => route('login', ['email' => $this->user->email]),
-                'email'    => $this->user->email,
+                'link' => route('login', ['email' => $this->user->email]),
+                'email' => $this->user->email,
                 'password' => $this->password,
-                'name'     => $this->user->full_name,
+                'name' => $this->user->full_name,
             ]);
     }
 }

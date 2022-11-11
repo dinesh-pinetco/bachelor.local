@@ -74,7 +74,7 @@ return [
     ],
     'mimes' => 'Das :attribute muss eine Datei vom Typ: :values sein.',
     'mimetypes' => 'Das :attribute muss eine Datei vom Typ: :values sein.',
-    'min' =>  [
+    'min' => [
         'numeric' => 'Das :attribute muss mindestens :min sein.',
         'file' => 'Das :attribute muss mindestens :min kilobytes groß sein.',
         'string' => 'Das :attribute muss mindestens :min Zeichen enthalten.',
@@ -98,7 +98,7 @@ return [
     'prohibited_if' => 'Das Feld :attribute ist verboten, wenn :other :value ist.',
     'prohibited_unless' => 'Das Feld :attribute ist verboten, wenn :other nicht in :values enthalten ist.',
     'same' => 'Das :attribute und :other müssen übereinstimmen.',
-    'size' =>  [
+    'size' => [
         'numeric' => 'Das :attribute muss :size sein.',
         'file' => 'Das :attribute muss :size kilobytes sein.',
         'string' => 'Das :attribute muss :size Zeichen sein.',

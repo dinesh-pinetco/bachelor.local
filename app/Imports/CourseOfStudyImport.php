@@ -14,12 +14,12 @@ class CourseOfStudyImport implements ToModel, WithCustomCsvSettings, WithHeading
     public function model(array $row)
     {
         CourseOfStudy::create([
-            'sana_id'          => $row['id'],
-            'short_form'       => $row['kurzform'],
-            'name'             => $row['bezeichnung'],
-            'name_en'          => $row['bezeichnung_en'],
-            'title'            => $row['titel'],
-            'title_short'      => $row['titel_kurz'],
+            'sana_id' => $row['id'],
+            'short_form' => $row['kurzform'],
+            'name' => $row['bezeichnung'],
+            'name_en' => $row['bezeichnung_en'],
+            'title' => $row['titel'],
+            'title_short' => $row['titel_kurz'],
             'study_program_id' => $row['id_repasentation_fur_schlussel_41'],
         ]);
     }
@@ -35,7 +35,7 @@ class CourseOfStudyImport implements ToModel, WithCustomCsvSettings, WithHeading
     {
         return [
             'input_encoding' => 'ISO-8859-1',
-            'delimiter'      => ';',
+            'delimiter' => ';',
         ];
     }
 }

@@ -9,31 +9,12 @@
             <div class="flex flex-wrap xl:ml-auto gap-1 md:gap-3">
                 @if (auth()->user()->hasRole([ROLE_ADMIN,ROLE_EMPLOYEE]))
 
-                    @if (!in_array($applicant->application_status_id, [User::STATUS_APPLICATION_REJECTED_BY_NAK, User::STATUS_APPLICATION_REJECTED_BY_APPLICANT, User::STATUS_CONTRACT_RETURNED_ON]))
-                        <x-danger-button wire:click="openConfirmModal({{ User::STATUS_APPLICATION_REJECTED_BY_NAK }})"
-                            class="flex flex-shrink-0 inline-flex px-4 lg:-mt-0">
-                            {{ __('Reject by NAK') }}
-                        </x-danger-button>
+                    @if (!in_array($applicant->application_status, [\App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_NAK, \App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT]))
                         <x-danger-button
-                            wire:click="openConfirmModal({{ User::STATUS_APPLICATION_REJECTED_BY_APPLICANT }})"
+                            wire:click="openConfirmModal('{{ \App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT() }}')"
                             class="flex flex-shrink-0 inline-flex px-4 lg:-mt-0">
                             {{ __('Reject by applicant') }}
                         </x-danger-button>
-                        @if ($applicant->application_status_id == User::STATUS_APPLICATION_ACCEPTED)
-                            <x-primary-button class="flex flex-shrink-0 inline-flex px-4 -mt-0">
-                                {{ __('Check selection test') }}
-                            </x-primary-button>
-                        @elseif($applicant->application_status_id == User::STATUS_APPLICATION_SUBMITTED)
-                            <x-primary-button wire:click="approveApplication"
-                                class="flex flex-shrink-0 inline-flex px-4 -mt-0">
-                                {{ $nakUniversityId == $universityId && $grade <= 2.5 ? __('Verify to Document') : __('Verify to Selection Test') }}
-                            </x-primary-button>
-                        @elseif (in_array($applicant->application_status_id, [User::STATUS_APPLICATION_INCOMPLETE]))
-                            <x-primary-button class="cursor-not-allowed flex flex-shrink-0 inline-flex px-4 -mt-0"
-                                disabled>
-                                {{ $nakUniversityId == $universityId && $grade <= 2.5 ? __('Verify to Document') : __('Verify to Selection Test') }}
-                            </x-primary-button>
-                        @endif
                     @endif
                 @endif
             </div>

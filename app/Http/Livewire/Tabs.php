@@ -70,7 +70,7 @@ class Tabs extends Component
     public function rejectApplication()
     {
         $this->validate();
-        $this->applicant->application_status_id = $this->selectedStatus;
+        $this->applicant->application_status = $this->selectedStatus;
         $this->applicant->application_reject_reason = $this->applicationRejectReason;
         $this->applicant->save();
         $this->toastNotify(__('Application reject successfully.'), __('Success'), TOAST_SUCCESS);
@@ -100,7 +100,7 @@ class Tabs extends Component
         }
 
         if (is_null($error) && $this->nakUniversityId == $this->universityId && $this->grade <= 2.5) {
-            $this->applicant->application_status_id = USER::STATUS_TEST_TAKEN;
+            $this->applicant->application_status = USER::STATUS_TEST_TAKEN;
             $this->applicant->save();
             Mail::to($this->applicant->email)->bcc(config('mail.supporter.address'))
                 ->send(new ApplicationApproved($this->applicant, is_test_taken: true));
@@ -124,7 +124,7 @@ class Tabs extends Component
 
             if (is_null($error)) {
                 Mail::to($this->applicant->email)->bcc(config('mail.supporter.address'))->send(new ApplicationApproved($this->applicant));
-                $this->applicant->application_status_id = USER::STATUS_APPLICATION_ACCEPTED;
+                $this->applicant->application_status = USER::STATUS_APPLICATION_ACCEPTED;
                 $this->applicant->save();
                 $this->toastNotify(__('Approval mail sent successfully to the applicant!!'), __('Success'), TOAST_SUCCESS);
             }

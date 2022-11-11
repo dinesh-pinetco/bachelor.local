@@ -46,8 +46,8 @@ class Meteor
             if (data_get($responseJson, 'exception')) {
                 Log::error('Meteor fetch-result API response: ', [
                     'requested_url' => $url,
-                    'response'      => $responseJson,
-                    'user'          => $this->user,
+                    'response' => $responseJson,
+                    'user' => $this->user,
                 ]);
 
                 return str_replace('error/', '', html_entity_decode(data_get($responseJson, 'message')));

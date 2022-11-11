@@ -64,11 +64,7 @@ class Statistics extends Component
     {
         $statistics = new StatisticsServices();
         $this->statistics = [
-            'interested'        => $statistics->interested('count'),
-            'approved'          => $statistics->approved('count'),
-            'interviews'        => $statistics->interviews('count'),
-            'competencyCatchUp' => $statistics->competencyCatchUp('count'),
-            'contracts'         => $statistics->contracts('count'),
+            'interested' => $statistics->interested('count'),
         ];
     }
 

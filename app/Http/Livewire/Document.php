@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Document as ModelsDocument;
-use App\Models\User;
 use Livewire\Component;
 
 class Document extends Component
@@ -27,7 +26,7 @@ class Document extends Component
         if (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
             $this->isEdit = true;
         } elseif (auth()->user()->hasRole(ROLE_APPLICANT)) {
-            $this->isEdit = $this->applicant->application_status_id == User::STATUS_APPLICATION_INCOMPLETE;
+            $this->isEdit = $this->applicant->application_status == \App\Enums\ApplicationStatus::REGISTRATION_SUBMITTED;
         }
 
         $this->documents = ModelsDocument::with(['medias' => function ($query) {

@@ -12,7 +12,7 @@ class ResultPolicy
 
     public function create(User $user): bool
     {
-        $applicantStatus = $user->application_status_id;
+        $applicantStatus = $user->application_status;
         $applicationRejectStatus = [User::STATUS_APPLICATION_REJECTED_BY_APPLICANT, User::STATUS_APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
             return false;
@@ -23,7 +23,7 @@ class ResultPolicy
 
     public function update(User $user, Result $result): bool
     {
-        $applicantStatus = $user->application_status_id;
+        $applicantStatus = $user->application_status;
         $applicationRejectStatus = [User::STATUS_APPLICATION_REJECTED_BY_APPLICANT, User::STATUS_APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
             return false;

@@ -33,8 +33,8 @@ class ApplicationApproved extends Mailable
         return $this->subject(__('Your application was accepted').' | '.$this->applicant->courses()->first()->name.'| NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.application-approved-mail', [
-                'link'          => route('selection-test.index'),
-                'name'          => $this->applicant->full_name,
+                'link' => route('selection-test.index'),
+                'name' => $this->applicant->full_name,
                 'is_test_taken' => $this->is_test_taken,
             ]);
     }

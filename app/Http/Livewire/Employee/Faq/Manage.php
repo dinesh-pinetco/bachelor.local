@@ -24,9 +24,9 @@ class Manage extends Component
     public $selectedCoursesSummery;
 
     protected array $rules = [
-        'faq.name'     => ['required'],
+        'faq.name' => ['required'],
         'faq.question' => ['required'],
-        'faq.answer'   => ['required'],
+        'faq.answer' => ['required'],
     ];
 
     public function mount(Faq $faq)

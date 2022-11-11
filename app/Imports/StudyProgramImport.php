@@ -14,8 +14,8 @@ class StudyProgramImport implements ToModel, WithCustomCsvSettings, WithHeadingR
     public function model(array $row)
     {
         StudyProgram::create([
-            'sana_id'   => $row['id'],
-            'name'      => $row['bezeichnung'],
+            'sana_id' => $row['id'],
+            'name' => $row['bezeichnung'],
             'in_active' => $row['inaktiv'],
         ]);
     }
@@ -31,7 +31,7 @@ class StudyProgramImport implements ToModel, WithCustomCsvSettings, WithHeadingR
     {
         return [
             'input_encoding' => 'ISO-8859-1',
-            'delimiter'      => ';',
+            'delimiter' => ';',
         ];
     }
 }

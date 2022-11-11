@@ -27,14 +27,14 @@ class HubspotContactPropertyTest extends TestCase
     public function create_contact_property_on_hubspot()
     {
         $request_data = [
-            'name'        => 'test_property_by_nak',
-            'label'       => 'Test property for NAK',
+            'name' => 'test_property_by_nak',
+            'label' => 'Test property for NAK',
             'description' => 'Test property for NAK',
-            'groupName'   => 'contactinformation',
-            'type'        => 'string',
-            'fieldType'   => 'text',
-            'formField'   => true,
-            'options'     => [],
+            'groupName' => 'contactinformation',
+            'type' => 'string',
+            'fieldType' => 'text',
+            'formField' => true,
+            'options' => [],
         ];
 
         $response = ContactProperty::make()->create($request_data);

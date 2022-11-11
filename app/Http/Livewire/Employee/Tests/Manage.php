@@ -28,13 +28,13 @@ class Manage extends Component
     public $selectedCoursesSummery;
 
     protected array $rules = [
-        'test.name'        => ['required'],
+        'test.name' => ['required'],
         'test.description' => ['required'],
-        'test.type'        => ['required'],
-        'test.duration'    => ['required'],
-        'test.is_active'   => ['required'],
+        'test.type' => ['required'],
+        'test.duration' => ['required'],
+        'test.is_active' => ['required'],
         'test.is_required' => ['required'],
-        'test.link'        => ['required', 'url'],
+        'test.link' => ['required', 'url'],
     ];
 
     /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */

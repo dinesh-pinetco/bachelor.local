@@ -15,20 +15,6 @@
                 @if(auth()->user() && auth()->user()->hasRole(ROLE_APPLICANT))
                     <ul class="flex flex-col space-y-2 sidebar-menu">
                         <li>
-                            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M2 8L3.33333 6.66667M3.33333 6.66667L8 2L12.6667 6.66667M3.33333 6.66667V13.3333C3.33333 13.5101 3.40357 13.6797 3.5286 13.8047C3.65362 13.9298 3.82319 14 4 14H6M12.6667 6.66667L14 8M12.6667 6.66667V13.3333C12.6667 13.5101 12.5964 13.6797 12.4714 13.8047C12.3464 13.9298 12.1768 14 12 14H10M6 14C6.17681 14 6.34638 13.9298 6.4714 13.8047C6.59643 13.6797 6.66667 13.5101 6.66667 13.3333V10.6667C6.66667 10.4899 6.7369 10.3203 6.86193 10.1953C6.98695 10.0702 7.15652 10 7.33333 10H8.66667C8.84348 10 9.01305 10.0702 9.13807 10.1953C9.2631 10.3203 9.33333 10.4899 9.33333 10.6667V13.3333C9.33333 13.5101 9.40357 13.6797 9.5286 13.8047C9.65362 13.9298 9.82319 14 10 14M6 14H10"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Dashboard') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                        <li>
                             <x-jet-nav-link href="{{ route('application.index', ['tab' => 'profile']) }}"
                                             :active="urlContains('profile')"
                                             class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
@@ -47,8 +33,8 @@
                             </x-jet-nav-link>
                         </li>
                         <li>
-                            <x-jet-nav-link href="{{ route('application.index',['tab' => 'career']) }}"
-                                            :active="urlContains('career') || urlContains('motivation') || urlContains('documents')"
+                            <x-jet-nav-link href="{{ route('application.index',['tab' => 'industries']) }}"
+                                            :active="urlContains('industries') || urlContains('motivation') || urlContains('documents')"
                                             class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
                                 <div
                                     class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
