@@ -1,0 +1,14 @@
+{
+    "projectId": "rbn9m8",
+    "baseUrl": "http://nak-application-portal.test",
+    "chromeWebSecurity": false,
+    "retries": 1,
+    "defaultCommandTimeout": 5000,
+    "watchForFileChanges": false,
+    "integrationFolder": "tests/cypress/integration",
+    "pluginsFile": "tests/cypress/plugins/index.js",
+    "videosFolder": "tests/cypress/videos",
+    "supportFile": "tests/cypress/support/index.js",
+    "screenshotsFolder": "tests/cypress/screenshots",
+    "fixturesFolder": "tests/cypress/fixtures"
+}

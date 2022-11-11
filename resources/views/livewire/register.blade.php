@@ -1,0 +1,94 @@
+<div>
+    <form method="POST" action="{{ route('register') }}" id="application_register">
+        @csrf
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 md:grid-flow-col gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
+            <div class="self-end">
+                <x-jet-label class="text-white font-bold required" for="courseId"
+                             value="{{ __('Select course') }}"></x-jet-label>
+                <x-livewire-select id="courseId" name="course_id" model="courseId">
+                    <option value="">{{ __('Choose course of study') }}</option>
+                    @foreach($courses as $course)
+                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @endforeach
+                </x-livewire-select>
+            </div>
+            <input type="hidden" name="course_start_date" value="{{ $courseStartDate }}">
+            <input type="hidden" name="desired_beginning_id" value="{{ $desiredBeginningId }}">
+            <div>
+                <x-jet-label class="text-white font-bold required" for="desiredBeginning"
+                             value="{{ __('Desired start') }}"></x-jet-label>
+                <x-livewire-select id="desiredBeginning" name="desired_beginning" model="desiredBeginning">
+                    <option value="">{{ __('Please select') }}</option>
+                    @foreach($desiredBeginnings as $key => $desiredBeginning)
+                        <option value="{{ $key }}">{{ $desiredBeginning->name }} {{ $desiredBeginning->date->format('Y') }}</option>
+                    @endforeach
+                </x-livewire-select>
+            </div>
+
+            <div wire:ignore>
+                <x-jet-label class="text-white font-bold required" for="name"
+                             value="{{ __('First name') }}"></x-jet-label>
+                <x-jet-input id="first_name" class="block w-full" type="text" name="first_name"
+                             :value="old('first_name')"
+                             placeholder="{{ __('Enter First name') }}"
+                             required
+                             autofocus autocomplete="name"></x-jet-input>
+            </div>
+
+            <div wire:ignore>
+                <x-jet-label class="text-white font-bold required" for="password"
+                             value="{{ __('Last name') }}"></x-jet-label>
+                <x-jet-input id="last_name" class="block w-full" type="text" name="last_name"
+                             :value="old('last_name')"
+                             placeholder="{{ __('Enter last name') }}"></x-jet-input>
+            </div>
+
+            <div wire:ignore>
+                <x-jet-label class="text-white font-bold required" for="email" value="{{ __('E-mail address') }}">
+                </x-jet-label>
+                <x-jet-input id="email" class="block w-full" type="email" name="email" :value="old('email')"
+                             placeholder="{{ __('Enter email address') }}" required></x-jet-input>
+            </div>
+
+            <div wire:ignore>
+                <x-jet-label class="text-white font-bold" for="password_confirmation"
+                             value="{{ __('Phone number') }}"></x-jet-label>
+                <x-jet-input class="block w-full" type="tel" id="phone" name="phone" :value="old('phone')"
+                             placeholder="{{ __('Enter phone number') }}" maxlength="15"></x-jet-input>
+            </div>
+            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                <div class="mt-4">
+                    <x-jet-label for="terms">
+                        <div class="flex items-center">
+                            <x-jet-checkbox name="terms" id="terms"/>
+
+                            <div class="ml-2">
+                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
+                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
+                                ]) !!}
+                            </div>
+                        </div>
+                    </x-jet-label>
+                </div>
+            @endif
+        </div>
+
+        <div class="flex items-center justify-end mt-6 md:mt-10">
+            <x-jet-secondary-button type="submit">
+                {{ __('Start application') }}
+                <svg class="stroke-current ml-4" width="20" height="16" viewBox="0 0 20 16" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L19 8M19 8L12 15M19 8H1" stroke="stroke-current" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </x-jet-secondary-button>
+        </div>
+        <div class="flex items-center justify-end mt-2 md:mt-4">
+            <p>{{ __('Already signed up') }}? <a href="{{ route('login') }}"
+                                                 class="inline-block underline">{{ __('Log in') }}</a></p>
+        </div>
+    </form>
+
+</div>

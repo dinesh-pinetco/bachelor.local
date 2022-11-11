@@ -1,0 +1,21 @@
+{
+    "create": {
+        "name": "Policy",
+        "question": "What is your return policy?",
+        "answer": "We allow returns of all items within 30 days of your order date. Just send us an email with your order number and we will send you a return label.",
+        "courses": [
+            "1",
+            "2"
+        ]
+    },
+    "edit": {
+        "name": "Animals",
+        "question": "Do you test on animals?",
+        "answer": "Animal testing is an issue that we have considered deeply in our mission statement and business practices. We are part of the Leaping Bunny Certification programme, the gold standard for cruelty-free certification.",
+        "courses": [
+            "2",
+            "3",
+            "4"
+        ]
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "create": {
+        "name": "First Exam",
+        "description": "First exam is best exam.",
+        "duration": "40.00",
+        "is_required": "1",
+        "is_active": "1",
+        "link": "https://www.w3.org/Provider/Style/dummy.html",
+        "courses": [
+            "1",
+            "2"
+        ]
+    },
+    "edit": {
+        "name": "Secend Exam",
+        "description": "Secend exam is best exam.",
+        "duration": "50.00",
+        "is_required": "1",
+        "is_active": "1",
+        "link": "https://www.laravelsd.com/",
+        "courses": [
+            "2",
+            "3",
+            "4"
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "create": {
+        "name": "P.G. Dip. in Computer Application",
+        "form_of_study": "V.N.S.G.U",
+        "duration": "55.00",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "is_active": "1"
+    },
+    "edit": {
+        "name": "Integrated Course Master of Rural Studies",
+        "form_of_study": "G.T.U",
+        "duration": "50.00",
+        "description": "Ipsum Lorem is simply dummy text of the printing and typesetting industry.",
+        "is_active": "0"
+    },
+    "clone": {
+        "name": "M. Sc. (Organic Chemistry) Evening"
+    }
+}

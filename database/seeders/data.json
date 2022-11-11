@@ -1,0 +1,79 @@
+[
+    {
+        "name": "tabs",
+        "values": [
+            {
+                "name": "Profil",
+                "description": "",
+                "icon": "",
+                "sort_order": 1,
+                "groups": [
+                    {
+                        "title": "Persönliche Informationen",
+                        "description": "",
+                        "fields": [
+                            {
+                                "type": "file",
+                                "label": "Bewerbungsfoto",
+                                "placeholder": "",
+                                "short_order": 1,
+                                "is_active": 1,
+                                "meta_data": []
+                            },
+                            {
+                                "type": "select",
+                                "label": "Geschlecht",
+                                "placeholder": " Geschlecht auswählen",
+                                "short_order": 2,
+                                "is_active": 1,
+                                "meta_data": []
+                            },
+                            {
+                                "type": "text",
+                                "label": "Vorname",
+                                "placeholder": "",
+                                "short_order": 1,
+                                "is_active": 1,
+                                "meta_data": []
+                            },
+                            {
+                                "type": "file",
+                                "label": "Bewerbungsfoto",
+                                "placeholder": "",
+                                "short_order": 1,
+                                "is_active": 1,
+                                "meta_data": []
+                            },
+                            {
+                                "type": "file",
+                                "label": "Bewerbungsfoto",
+                                "placeholder": "",
+                                "short_order": 1,
+                                "is_active": 1,
+                                "meta_data": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Werdegang",
+                "description": "",
+                "icon": "",
+                "sort_order": 2
+            },
+            {
+                "name": "Motivation",
+                "description": "",
+                "icon": "",
+                "sort_order": 3
+            },
+            {
+                "name": "Dokumente hochladen",
+                "description": "",
+                "icon": "",
+                "sort_order": 4
+            }
+        ]
+    }
+]

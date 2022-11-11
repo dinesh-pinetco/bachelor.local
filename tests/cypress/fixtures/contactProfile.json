@@ -1,0 +1,23 @@
+{
+    "create": {
+        "name": "Jeff Bezos",
+        "email": "jeffbezos@apple.com",
+        "phone": "+85 74125 874 1258",
+        "photo": "resources/images/profile.jpg",
+        "courses": [
+            "1",
+            "2"
+        ]
+    },
+    "edit": {
+        "name": "Mark Zuckerberg",
+        "email": "markzuckerberg@apple.com",
+        "phone": "+41 74174 1258",
+        "photo": "resources/images/profile.jpg",
+        "courses": [
+            "2",
+            "3",
+            "4"
+        ]
+    }
+}

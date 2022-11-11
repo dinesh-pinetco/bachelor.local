@@ -1,0 +1,106 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+/* menu css */
+.sidebar-menu a.active .icon {
+    @apply bg-opacity-20;
+}
+
+@screen lg {
+    .sidebar {
+        display: block !important;
+    }
+}
+
+/* END menu css */
+
+[x-cloak] {
+    display: none;
+}
+
+.tabs a.active {
+    @apply bg-primary text-white;
+}
+
+.register-grediant {
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.69) 75%, rgba(0, 0, 0, 0.7) 76%, rgba(0, 0, 0, 1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.69) 75%, rgba(0, 0, 0, 0.7) 76%, rgba(0, 0, 0, 1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.69) 75%, rgba(0, 0, 0, 0.7) 76%, rgba(0, 0, 0, 1) 100%);
+}
+
+.img-overlay {
+    opacity: 0;
+}
+
+.profile-img:hover .img-overlay {
+    opacity: 1;
+}
+
+/* nice select */
+body .nice-select {
+    @apply float-none border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm text-primary placeholder-gray w-full;
+}
+
+body .nice-select span.current {
+    @apply text-gray block;
+}
+
+body .nice-select:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-image: url("/images/icon/dropdown.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none !important;
+    transform: rotate(0);
+    transform-origin: 0px !important;
+}
+
+body .nice-select.open:after {
+    transform: rotate(180deg);
+    transform-origin: 35% 35% !important;
+}
+
+.nice-select .list {
+    height: 0;
+}
+
+.nice-select.open .list {
+    height: auto;
+    max-height: 400px;
+    overflow: auto;
+}
+
+label {
+    @apply block font-light text-xs text-black mb-2.5;
+}
+
+li > label, .multiple-dropdown-box > label {
+    @apply -mb-0;
+}
+
+.required:after {
+    content: "*";
+    color: red;
+    font-weight: bold;
+}
+
+.checkbox-label > div {
+    display: inline;
+}
+
+.checkbox-label > div > a {
+    @apply text-primary font-semibold;
+}
+
+/*.custom-select {*/
+/*    color: #003A79;*/
+/*}*/
+
+/*.custom-select.placeholder {*/
+/*    color: #C6C7C8;*/
+/*}*/
+
