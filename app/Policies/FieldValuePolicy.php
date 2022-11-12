@@ -25,25 +25,19 @@ class FieldValuePolicy
 
     public function update(User $user, FieldValue $fieldValue): Response|bool
     {
+        $defaultDisableField = ['email', 'course_id', 'desired_beginning_id'];
         $applicantStatus = $user->application_status;
         $applicationRejectStatus = [ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT, ApplicationStatus::APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
             return false;
         }
         if (auth()->user()->hasRole(ROLE_APPLICANT)) {
-            $defaultDisableField = ['email', 'course_id', 'desired_beginning_id'];
-
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {
                 return false;
             } else {
-                return $applicantStatus == User::STATUS_APPLICATION_INCOMPLETE;
+                return $applicantStatus == ApplicationStatus::REGISTRATION_SUBMITTED;
             }
         } elseif (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
-            $defaultDisableField = ['email'];
-            if ($applicantStatus >= User::STATUS_APPLICATION_ACCEPTED) {
-                $defaultDisableField = array_merge($defaultDisableField, ['course_id', 'desired_beginning_id', 'university', 'grade']);
-            }
-
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {
                 return false;
             } else {
