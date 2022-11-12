@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\ApplicationStatus;
 use App\Mail\ApplicationApproved;
 use App\Models\Result;
 use App\Models\Tab;
 use App\Models\Test;
-use App\Models\User;
 use App\Services\Moodle;
 use App\Services\ProgressBar;
 use App\Traits\Livewire\HasModal;
@@ -93,7 +93,7 @@ class Tabs extends Component
         }
 
         if (is_null($error) && $this->grade <= 2.5) {
-            $this->applicant->application_status = USER::STATUS_TEST_TAKEN;
+            $this->applicant->application_status = ApplicationStatus::TEST_TAKEN;
             $this->applicant->save();
             Mail::to($this->applicant->email)->bcc(config('mail.supporter.address'))
                 ->send(new ApplicationApproved($this->applicant, is_test_taken: true));
@@ -117,7 +117,7 @@ class Tabs extends Component
 
             if (is_null($error)) {
                 Mail::to($this->applicant->email)->bcc(config('mail.supporter.address'))->send(new ApplicationApproved($this->applicant));
-                $this->applicant->application_status = USER::STATUS_APPLICATION_ACCEPTED;
+                $this->applicant->application_status = ApplicationStatus::PROFILE_INFORMATION_COMPLETED;
                 $this->applicant->save();
                 $this->toastNotify(__('Approval mail sent successfully to the applicant!!'), __('Success'), TOAST_SUCCESS);
             }

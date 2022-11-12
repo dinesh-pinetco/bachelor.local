@@ -61,6 +61,32 @@ class User extends Authenticatable implements ContractsAuditable
         'competency_catch_up',
     ];
 
+    public function course(): MorphMany
+    {
+        return $this->morphMany(
+            ModelHasCourse::class,
+            'model'
+        );
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::get(function ($value, $attributes) {
+            return collect([$attributes['first_name'], $attributes['last_name']])->filter()->implode(' ');
+        });
+    }
+
+    protected function applicationStatus(): Attribute
+    {
+        return Attribute::set(function ($value, $attributes) {
+            if (! app()->environment('local') && $this->hubspotConfiguration()->exists()) {
+                ApplicantStatusUpdateToHubspotJob::dispatch($this, $value);
+            }
+
+            return $value;
+        });
+    }
+
     public function scopeFilter($query)
     {
         return resolve(UserFilters::class)->apply($query);
@@ -80,9 +106,11 @@ class User extends Authenticatable implements ContractsAuditable
         }
     }
 
-    public function sendPasswordResetNotification($token)
+    public function getEctsPointvalue($identifier)
     {
-        $this->notify(new NotificationsPasswordReset($token, request()->email));
+        return $this->values->filter(function ($item) use ($identifier) {
+            return $item->fields->key == $identifier;
+        })->first()?->value;
     }
 
     public function saveCubiaId()
@@ -112,32 +140,6 @@ class User extends Authenticatable implements ContractsAuditable
         }
     }
 
-    public function course(): MorphMany
-    {
-        return $this->morphMany(
-            ModelHasCourse::class,
-            'model'
-        );
-    }
-
-    protected function fullName(): Attribute
-    {
-        return Attribute::get(function ($value, $attributes) {
-            return collect([$attributes['first_name'], $attributes['last_name']])->filter()->implode(' ');
-        });
-    }
-
-    protected function applicationStatus(): Attribute
-    {
-        return Attribute::set(function ($value, $attributes) {
-            if (! app()->environment('local') && $this->hubspotConfiguration()->exists()) {
-                ApplicantStatusUpdateToHubspotJob::dispatch($this, $value);
-            }
-
-            return $value;
-        });
-    }
-
     public function hubspotConfigurationUpdated()
     {
         $this->load('hubspotConfiguration');
@@ -146,10 +148,8 @@ class User extends Authenticatable implements ContractsAuditable
         }
     }
 
-    public function getEctsPointvalue($identifier)
+    public function sendPasswordResetNotification($token)
     {
-        return $this->values->filter(function ($item) use ($identifier) {
-            return $item->fields->key == $identifier;
-        })->first()?->value;
+        $this->notify(new NotificationsPasswordReset($token, request()->email));
     }
 }

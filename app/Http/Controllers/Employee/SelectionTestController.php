@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee;
 
+use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Result;
 use App\Models\Test;
@@ -18,7 +19,7 @@ class SelectionTestController extends Controller
 
     public function show(User $applicant, Test $selection_test)
     {
-        if ($applicant->application_status < User::STATUS_APPLICATION_REJECTED_BY_NAK) {
+        if (! in_array($applicant->application_status, [ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT, ApplicationStatus::APPLICATION_REJECTED_BY_NAK])) {
             $result = $selection_test->results()->myResults($applicant)
                 ->where('status', Result::STATUS_STARTED)
                 ->where('is_passed', 0)

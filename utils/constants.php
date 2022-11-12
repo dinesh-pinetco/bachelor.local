@@ -1,19 +1,19 @@
 <?php
 
-define('ROLE_SUPER_ADMIN', 'super-admin');
-define('ROLE_ADMIN', 'admin');
-define('ROLE_EMPLOYEE', 'employee');
-define('ROLE_APPLICANT', 'applicant');
+const ROLE_SUPER_ADMIN = 'super-admin';
+const ROLE_ADMIN = 'admin';
+const ROLE_EMPLOYEE = 'employee';
+const ROLE_APPLICANT = 'applicant';
 
 // Toast notification statuses
-define('TOAST_SUCCESS', 'success');
-define('TOAST_ERROR', 'error');
-define('TOAST_INFO', 'info');
-define('TOAST_WARNING', 'warning');
-define('PER_PAGE', 15);
+const TOAST_SUCCESS = 'success';
+const TOAST_ERROR = 'error';
+const TOAST_INFO = 'info';
+const TOAST_WARNING = 'warning';
+const PER_PAGE = 15;
 
-define('BEGINNING_YEAR', 2022);
-define('BEGINNING_MONTH', 5);
-define('PAST_YEAR', 1960);
-define('MAX_YEAR', 2);
-define('FUTURE_YEAR', 3);
+const BEGINNING_YEAR = 2022;
+const BEGINNING_MONTH = 5;
+const PAST_YEAR = 1960;
+const MAX_YEAR = 2;
+const FUTURE_YEAR = 3;

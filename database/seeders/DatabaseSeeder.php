@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(NationalitySeeder::class);
         $this->call(EntranceQualificationSeeder::class);
         $this->call(HealthInsuranceCompanySeeder::class);
+        $this->call(IndustrySeeder::class);
     }
 }

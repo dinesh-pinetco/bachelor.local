@@ -67,6 +67,11 @@ class Field extends Model implements ContractsAuditable
         ];
     }
 
+    public function values(): HasManySyncable
+    {
+        return $this->hasMany(FieldValue::class);
+    }
+
     public function scopeFilter($query)
     {
         return resolve(FieldFilters::class)->apply($query);
@@ -80,10 +85,5 @@ class Field extends Model implements ContractsAuditable
     public function required(): bool
     {
         return $this->is_required;
-    }
-
-    public function values(): HasManySyncable
-    {
-        return $this->hasMany(FieldValue::class);
     }
 }

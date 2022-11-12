@@ -39,6 +39,18 @@ class Course extends Model implements ContractsAuditable
         return $this->belongsToMany(DesiredBeginning::class)->orderBy('month');
     }
 
+    public function statistics(): HasMany
+    {
+        return $this->hasMany(Statistics::class);
+    }
+
+    protected function isActiveLabel(): Attribute
+    {
+        return Attribute::get(function ($value, $attributes) {
+            return $attributes['is_active'] ? __('Active') : __('InActive');
+        });
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -54,17 +66,5 @@ class Course extends Model implements ContractsAuditable
         if ($key && $keyword) {
             return $query->where($key, 'like', "%$keyword%");
         }
-    }
-
-    public function statistics(): HasMany
-    {
-        return $this->hasMany(Statistics::class);
-    }
-
-    protected function isActiveLabel(): Attribute
-    {
-        return Attribute::get(function ($value, $attributes) {
-            return $attributes['is_active'] ? __('Active') : __('InActive');
-        });
     }
 }
