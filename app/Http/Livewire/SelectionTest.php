@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Result;
 use App\Models\University;
-use App\Models\User;
 use Livewire\Component;
 
 class SelectionTest extends Component

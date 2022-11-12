@@ -44,7 +44,7 @@ class Show extends Component
         }
 
         $this->tab = Tab::activeFields($this->applicant->id)->find($this->tabId);
-        $this->isProfile = str_contains($this->tab->slug,'profile');
+        $this->isProfile = str_contains($this->tab->slug, 'profile');
         $this->parentGroups = $this->tab->parent_groups;
         $this->prepareCustomizedGroups($groupId);
     }

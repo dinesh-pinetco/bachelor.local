@@ -9,8 +9,6 @@ use App\Services\Cubia;
 use App\Services\Moodle;
 use Exception;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
 
 class TestController extends Controller
 {
