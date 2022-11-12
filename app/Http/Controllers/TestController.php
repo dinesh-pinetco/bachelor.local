@@ -69,14 +69,4 @@ class TestController extends Controller
             dd($exception);
         }
     }
-
-    public function studySheetForm(User $user)
-    {
-        return Redirect::to(URL::signedRoute('study-sheet', ['user' => $user->id]));
-    }
-
-    public function governmentForm(User $user)
-    {
-        return Redirect::to(URL::signedRoute('government-form', ['user' => $user->id]));
-    }
 }

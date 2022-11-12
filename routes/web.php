@@ -28,10 +28,6 @@ Route::get('/', RegisterController::class)->name('index')->middleware('guest');
 Route::get('moodle', [TestController::class, 'moodle']);
 Route::get('fetch-result', [TestController::class, 'fetchResult']);
 Route::get('test/{slug}/{email?}', [TestController::class, 'testMail']);
-Route::get('test-study-sheet/{user}', [TestController::class, 'studySheetForm']);
-Route::get('test-government-form/{user}', [TestController::class, 'governmentForm']);
-
-Route::view('study-programs', 'study-programs')->name('study-programs');
 
 Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
     Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');

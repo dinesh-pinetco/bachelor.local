@@ -23,7 +23,7 @@ class DesiredBeginningFilter
         $lastDate = $this->course->last_start;
         if (! $lastDate) {
             $lastRaw = $latestDesiredBeginning->first();
-            $lastDate = Carbon::create(null, $lastRaw->month, $lastRaw->day)->addYear(MAX_YEAR);
+            $lastDate = Carbon::create(null, $lastRaw->month, $lastRaw->day)->addYears(MAX_YEAR);
         }
 
         $this->course->desired_beginnings->each(function ($desiredBeginning) use (
