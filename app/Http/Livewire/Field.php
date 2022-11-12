@@ -89,7 +89,6 @@ class Field extends Component
         }
     }
 
-    /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
     public function render()
     {
         return view('livewire.field');

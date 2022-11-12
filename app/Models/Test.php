@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ApplicationStatus;
 use App\Filters\TestFilters;
 use App\Services\Cubia;
 use App\Services\Meteor;
@@ -82,7 +83,7 @@ class Test extends Model implements ContractsAuditable
 
     public function getTestLink($user, $otherParameter = null)
     {
-        if ($user->application_status == USER::STATUS_APPLICATION_ACCEPTED) {
+        if ($user->application_status == ApplicationStatus::PROFILE_INFORMATION_COMPLETED) {
             if ($this['type'] == self::TYPE_MOODLE) {
                 $moodle = (new Moodle($user));
 

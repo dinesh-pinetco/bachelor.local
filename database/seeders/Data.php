@@ -411,7 +411,6 @@ class Data
                         ],
                     ],
                 ],
-
             ],
             [
                 'name' => 'Motivation',

@@ -24,9 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactProfileSeeder::class);
         $this->call(FaqSeeder::class);
         $this->call(TabSeeder::class);
-        $this->call(GroupSeeder::class);
-        $this->call(FieldSeeder::class);
-        $this->call(OptionSeeder::class);
         $this->call(StateSeeder::class);
         $this->call(DistrictSeeder::class);
         $this->call(UniversitySeeder::class);
@@ -34,9 +31,5 @@ class DatabaseSeeder extends Seeder
         $this->call(NationalitySeeder::class);
         $this->call(EntranceQualificationSeeder::class);
         $this->call(HealthInsuranceCompanySeeder::class);
-
-        if (app()->environment('local', 'staging')) {
-            $this->call(UserSeeder::class);
-        }
     }
 }

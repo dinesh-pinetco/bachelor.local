@@ -2,7 +2,7 @@
     <h2 class="mb-5 md:mb-9 text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
         {{ __('Selection test') }}
     </h2>
-    @if (auth()->user()->application_status == \App\Models\User::STATUS_APPLICATION_ACCEPTED)
+    @if (auth()->user()->application_status == \App\Enums\ApplicationStatus::PROFILE_INFORMATION_COMPLETED)
         @foreach ($tests as $test)
             @if ($testLink = $test->getTestLink(auth()->user()))
                 <div class="flex items-center flex-wrap -mx-4">
