@@ -17,3 +17,5 @@ const BEGINNING_MONTH = 5;
 const PAST_YEAR = 1960;
 const MAX_YEAR = 2;
 const FUTURE_YEAR = 3;
+
+const PET_STEP_PROGRESS = 20;

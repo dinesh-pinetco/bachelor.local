@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center mb-5 px-4">
 
-                    <a href="{{ auth()->user()->hasRole(ROLE_APPLICANT)?route('dashboard'):route('employee.dashboard') }}"
+                    <a href="{{ auth()->user()->hasRole(ROLE_APPLICANT)?route('application.index',['tab' => 'profile']):route('employee.dashboard') }}"
                        class="inline-block w-full">
                         <x-jet-application-mark class="block h-9 w-auto"/>
                     </a>

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Document;
 use App\Models\Tab;
+use App\Models\Test;
 use App\Models\User;
 
 class ProgressBar
@@ -20,6 +21,7 @@ class ProgressBar
     public function overAllProgress(): float
     {
         $progressPoints = $this->calculateProgressByTab('profile')
+            + $this->selectionTestsProgress()
             + $this->calculateProgressByTab('motivation')
             + $this->calculateProgressByTab('industries')
             + $this->documentProgress();
@@ -50,7 +52,7 @@ class ProgressBar
 
     private function calculateAverageProcess($points, $achievedPoints): float|int
     {
-        return $points ? round(($achievedPoints * 25) / $points, 2) : ($achievedPoints ? 0 : 25);
+        return $points ? round(($achievedPoints * PET_STEP_PROGRESS) / $points, 2) : ($achievedPoints ? 0 : 25);
     }
 
     public function documentProgress(): float|int
@@ -69,6 +71,24 @@ class ProgressBar
             })
             ->whereHas('courses', function ($query) {
                 $query->whereIn('course_id', $this->applicant->courses()->pluck('courses.id'));
+            })->count();
+
+        return $this->calculateAverageProcess($points, $achievedPoints);
+    }
+
+    public function selectionTestsProgress(): float|int
+    {
+        $this->applicant = is_null($this->applicant_id) ? auth()->user() : (User::find($this->applicant_id) ?? auth()->user());
+        $courses = $this->applicant->courses->pluck('id')->toArray();
+        $points = Test::query()
+            ->matchCourses($courses)
+            ->count();
+
+        $achievedPoints = Test::query()
+            ->matchCourses($courses)
+            ->whereHas('results', function ($q) {
+                $q->where('user_id', $this->applicant->id)
+                    ->where('is_passed', true);
             })->count();
 
         return $this->calculateAverageProcess($points, $achievedPoints);

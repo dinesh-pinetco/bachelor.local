@@ -76,7 +76,7 @@ class RouteServiceProvider extends ServiceProvider
         if ($user->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
             return route('employee.dashboard');
         } elseif ($user->hasRole(ROLE_APPLICANT)) {
-            return route('dashboard');
+            return route('application.index', ['tab' => 'profile']);
         } else {
             return self::HOME;
         }

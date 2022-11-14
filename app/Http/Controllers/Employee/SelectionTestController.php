@@ -20,7 +20,8 @@ class SelectionTestController extends Controller
     public function show(User $applicant, Test $selection_test)
     {
         if (! in_array($applicant->application_status, [ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT, ApplicationStatus::APPLICATION_REJECTED_BY_NAK])) {
-            $result = $selection_test->results()->myResults($applicant)
+            $result = $selection_test->results()
+                ->myResults($applicant)
                 ->where('status', Result::STATUS_STARTED)
                 ->where('is_passed', 0)
                 ->first();

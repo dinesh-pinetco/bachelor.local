@@ -159,6 +159,13 @@
                             </div>
                         @endif
                     @endif
+
+                    @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
+                        <x-primary-button type="button"
+                                          wire:click="submitProfileInformation">
+                            {{ __('Submit data & continue with test') }}
+                        </x-primary-button>
+                    @endif
                 </div>
             </div>
         </div>

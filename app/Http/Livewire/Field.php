@@ -51,6 +51,33 @@ class Field extends Component
         ];
     }
 
+    protected function rules(): array
+    {
+        $validation['fieldValue'] = [];
+
+        if ($this->field->is_required) {
+            $validation['fieldValue'][] = 'required';
+        }
+
+        if ($this->field->type == 'file' && $this->field->key == 'avatar') {
+            // array_push($validation['fieldValue'], 'image');
+            $validation['fieldValue'][] = 'mimes:jpeg,png,jpg';
+            $validation['fieldValue'][] = 'file';
+            $validation['fieldValue'][] = 'max:512';
+        }
+
+        if ($this->field->type == 'email') {
+            $validation['fieldValue'][] = 'email';
+        }
+
+        return $validation;
+    }
+
+    protected function messages(): array
+    {
+        return [];
+    }
+
     public function mount()
     {
         if ($this->field) {
@@ -179,33 +206,6 @@ class Field extends Component
             ucwords(str_replace('_', ' ', $table)))));
 
         return $model->get();
-    }
-
-    protected function rules(): array
-    {
-        $validation['fieldValue'] = [];
-
-        if ($this->field->is_required) {
-            $validation['fieldValue'][] = 'required';
-        }
-
-        if ($this->field->type == 'file' && $this->field->key == 'avatar') {
-            // array_push($validation['fieldValue'], 'image');
-            $validation['fieldValue'][] = 'mimes:jpeg,png,jpg';
-            $validation['fieldValue'][] = 'file';
-            $validation['fieldValue'][] = 'max:512';
-        }
-
-        if ($this->field->type == 'email') {
-            $validation['fieldValue'][] = 'email';
-        }
-
-        return $validation;
-    }
-
-    protected function messages(): array
-    {
-        return [];
     }
 
     private function courseDesiredBeginningUpdate()

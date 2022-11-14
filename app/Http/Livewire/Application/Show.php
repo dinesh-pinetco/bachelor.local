@@ -3,10 +3,16 @@
 namespace App\Http\Livewire\Application;
 
 use App\Enums\ApplicationStatus;
+use App\Mail\ApplicationApproved;
 use App\Models\FieldValue;
 use App\Models\Group;
+use App\Models\Result;
 use App\Models\Tab;
+use App\Models\Test;
+use App\Services\Moodle;
+use App\Services\ProgressBar;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Show extends Component
@@ -143,5 +149,55 @@ class Show extends Component
         $this->applicant->save();
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
         $this->refreshData();
+    }
+
+    public function submitProfileInformation()
+    {
+        $error = null;
+
+        $profileTabProgress = (new ProgressBar($this->applicant->id))->overAllProgress();
+        if ($profileTabProgress != PET_STEP_PROGRESS) {
+            $error = __('Please fill the required field.');
+        }
+
+        if (is_null($error)) {
+            $tests = Test::whereHas('courses', function ($query) {
+                $query->whereIn('course_id', $this->applicant->courses->pluck('id'));
+            })->get();
+
+            foreach ($tests as $test) {
+                if ($test->type == Test::TYPE_MOODLE) {
+                    $error = (new Moodle($this->applicant))->createUser();
+                } elseif ($test->type == Test::TYPE_CUBIA) {
+                    $this->applicant->saveCubiaId();
+                    $this->createInitialResult($test->id);
+                } elseif ($test->type == Test::TYPE_METEOR) {
+                    $this->applicant->saveMeteorId();
+                    $this->createInitialResult($test->id);
+                }
+            }
+
+            Mail::to($this->applicant->email)->bcc(config('mail.supporter.address'))->send(new ApplicationApproved($this->applicant));
+            $this->applicant->application_status = ApplicationStatus::PROFILE_INFORMATION_COMPLETED;
+            $this->applicant->save();
+            $this->toastNotify(__('Approval mail sent successfully to the applicant!!'), __('Success'), TOAST_SUCCESS);
+
+            return redirect()->route('selection-test.index');
+        }
+
+        if ($error) {
+            $this->toastNotify($error, __('Error'), TOAST_ERROR);
+            $this->refreshData();
+        } else {
+            return redirect(request()->header('Referer'));
+        }
+    }
+
+    public function createInitialResult($testId)
+    {
+        Result::updateOrCreate(
+            ['user_id' => $this->applicant->id, 'test_id' => $testId],
+            ['status' => Result::STATUS_NOT_STARTED]
+        );
     }
 }

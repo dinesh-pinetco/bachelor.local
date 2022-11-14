@@ -40,6 +40,25 @@ class Test extends Model implements ContractsAuditable
         ];
     }
 
+    public function results(): HasMany
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    protected function isActiveLabel(): Attribute
+    {
+        return Attribute::get(function ($value, $attributes) {
+            return $attributes['is_active'] ? __('Active') : __('InActive');
+        });
+    }
+
+    protected function isRequiredLabel(): Attribute
+    {
+        return Attribute::get(function ($value, $attributes) {
+            return $attributes['is_required'] ? __('Yes') : __('No');
+        });
+    }
+
     public function scopeFilter($query)
     {
         return resolve(TestFilters::class)->apply($query);
@@ -62,11 +81,6 @@ class Test extends Model implements ContractsAuditable
     public function status($user): array|string|Translator|Application|null
     {
         return __(ucfirst(str_replace('_', ' ', $this->results()->myResults($user)->value('status'))));
-    }
-
-    public function results(): HasMany
-    {
-        return $this->hasMany(Result::class);
     }
 
     public function isPassed($user): array|string|Translator|Application|null
@@ -100,19 +114,5 @@ class Test extends Model implements ContractsAuditable
         }
 
         return null;
-    }
-
-    protected function isActiveLabel(): Attribute
-    {
-        return Attribute::get(function ($value, $attributes) {
-            return $attributes['is_active'] ? __('Active') : __('InActive');
-        });
-    }
-
-    protected function isRequiredLabel(): Attribute
-    {
-        return Attribute::get(function ($value, $attributes) {
-            return $attributes['is_required'] ? __('Yes') : __('No');
-        });
     }
 }
