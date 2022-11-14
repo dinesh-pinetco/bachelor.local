@@ -2,28 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ProgressBar;
+use App\Services\ApplicantRedirection;
 
 class DashboardController extends Controller
 {
-    public ProgressBar $progressBar;
-
-    public function __construct(ProgressBar $progressBar)
-    {
-        $this->progressBar = $progressBar;
-    }
-
     public function __invoke()
     {
-        if (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
-            return redirect(route('employee.dashboard'));
+        if (auth()->user()->hasRole(ROLE_APPLICANT)) {
+
+            return ApplicantRedirection::make(auth()->user())->route();
         }
 
-        $profileProgress = $this->progressBar->calculateProgressByTab('profile');
-        $motivateProgress = $this->progressBar->calculateProgressByTab('motivation');
-        $careerProgress = $this->progressBar->calculateProgressByTab('industries');
-        $documentProgress = $this->progressBar->documentProgress();
-
-        return view('dashboard', compact('profileProgress', 'motivateProgress', 'careerProgress', 'documentProgress'));
+        return redirect(route('employee.dashboard'));
     }
 }
