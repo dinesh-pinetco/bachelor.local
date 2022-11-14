@@ -162,7 +162,8 @@
 
                     @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
                         <x-primary-button type="button"
-                                          wire:click="submitProfileInformation">
+                                          wire:click="submitProfileInformation"
+                                          wire:loading.attr="disabled">
                             {{ __('Submit data & continue with test') }}
                         </x-primary-button>
                     @endif

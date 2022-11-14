@@ -9,7 +9,6 @@ class DashboardController extends Controller
     public function __invoke()
     {
         if (auth()->user()->hasRole(ROLE_APPLICANT)) {
-
             return ApplicantRedirection::make(auth()->user())->route();
         }
 

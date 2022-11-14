@@ -11,7 +11,6 @@ class ApplicantRedirection
 
     public function __construct(private User $applicant)
     {
-
     }
 
     public function route()
@@ -22,6 +21,11 @@ class ApplicantRedirection
     }
 
     public function registration_submitted()
+    {
+        return redirect()->route('application.index', ['tab' => 'profile']);
+    }
+
+    public function application_rejected_by_applicant()
     {
         return redirect()->route('application.index', ['tab' => 'profile']);
     }

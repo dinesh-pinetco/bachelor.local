@@ -5,140 +5,73 @@
             <div class="flex flex-col">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center mb-5 px-4">
-
                     <a href="{{ auth()->user()->hasRole(ROLE_APPLICANT)?route('dashboard'):route('employee.dashboard') }}"
                        class="inline-block w-full">
                         <x-jet-application-mark class="block h-9 w-auto"/>
                     </a>
                 </div>
                 <!-- Navigation Links for Applicant -->
-                @if(auth()->user() && auth()->user()->hasRole(ROLE_APPLICANT))
-                    <ul class="flex flex-col space-y-2 sidebar-menu">
+                @unlessrole(ROLE_APPLICANT)
+                <ul class="flex flex-col space-y-2 sidebar-menu">
+                    <li>
+                        <x-jet-nav-link href="{{ route('employee.dashboard') }}"
+                                        :active="request()->routeIs('employee.dashboard')"
+                                        class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                            <div
+                                class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
+                                <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
+                                    <path
+                                        d="M2 8L3.33333 6.66667M3.33333 6.66667L8 2L12.6667 6.66667M3.33333 6.66667V13.3333C3.33333 13.5101 3.40357 13.6797 3.5286 13.8047C3.65362 13.9298 3.82319 14 4 14H6M12.6667 6.66667L14 8M12.6667 6.66667V13.3333C12.6667 13.5101 12.5964 13.6797 12.4714 13.8047C12.3464 13.9298 12.1768 14 12 14H10M6 14C6.17681 14 6.34638 13.9298 6.4714 13.8047C6.59643 13.6797 6.66667 13.5101 6.66667 13.3333V10.6667C6.66667 10.4899 6.7369 10.3203 6.86193 10.1953C6.98695 10.0702 7.15652 10 7.33333 10H8.66667C8.84348 10 9.01305 10.0702 9.13807 10.1953C9.2631 10.3203 9.33333 10.4899 9.33333 10.6667V13.3333C9.33333 13.5101 9.40357 13.6797 9.5286 13.8047C9.65362 13.9298 9.82319 14 10 14M6 14H10"
+                                        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span>{{ __('Dashboard') }}</span>
+                        </x-jet-nav-link>
+                    </li>
+                    <li>
+                        <x-jet-nav-link href="{{ route('employee.profile') }}"
+                                        :active="request()->routeIs('employee.profile')"
+                                        class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                            <div
+                                class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
+                                <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
+                                    <path
+                                        d="M9.88554 6.55229C10.3856 6.05219 10.6666 5.37391 10.6666 4.66667C10.6666 3.95942 10.3856 3.28115 9.88554 2.78105C9.38544 2.28095 8.70716 2 7.99992 2C7.29267 2 6.6144 2.28095 6.1143 2.78105C5.6142 3.28115 5.33325 3.95942 5.33325 4.66667C5.33325 5.37391 5.6142 6.05219 6.1143 6.55229C6.6144 7.05238 7.29267 7.33333 7.99992 7.33333C8.70716 7.33333 9.38544 7.05238 9.88554 6.55229Z"
+                                        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path
+                                        d="M4.70009 10.7002C5.57526 9.825 6.76224 9.33333 7.99992 9.33333C9.2376 9.33333 10.4246 9.825 11.2998 10.7002C12.1749 11.5753 12.6666 12.7623 12.6666 14H3.33325C3.33325 12.7623 3.82492 11.5753 4.70009 10.7002Z"
+                                        stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span>{{ __('Profile') }}</span>
+                        </x-jet-nav-link>
+                    </li>
+                    @if(auth()->user()->hasAnyRole([ROLE_ADMIN,ROLE_SUPER_ADMIN]))
                         <li>
-                            <x-jet-nav-link href="{{ route('application.index', ['tab' => 'profile']) }}"
-                                            :active="urlContains('profile')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M9.88554 6.55229C10.3856 6.05219 10.6666 5.37391 10.6666 4.66667C10.6666 3.95942 10.3856 3.28115 9.88554 2.78105C9.38544 2.28095 8.70716 2 7.99992 2C7.29267 2 6.6144 2.28095 6.1143 2.78105C5.6142 3.28115 5.33325 3.95942 5.33325 4.66667C5.33325 5.37391 5.6142 6.05219 6.1143 6.55229C6.6144 7.05238 7.29267 7.33333 7.99992 7.33333C8.70716 7.33333 9.38544 7.05238 9.88554 6.55229Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path
-                                            d="M4.70009 10.7002C5.57526 9.825 6.76224 9.33333 7.99992 9.33333C9.2376 9.33333 10.4246 9.825 11.2998 10.7002C12.1749 11.5753 12.6666 12.7623 12.6666 14H3.33325C3.33325 12.7623 3.82492 11.5753 4.70009 10.7002Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Profile') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                        <li>
-                            <x-jet-nav-link href="{{ route('application.index',['tab' => 'industries']) }}"
-                                            :active="urlContains('industries') || urlContains('motivation') || urlContains('documents')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M8.63406 1.95134C8.43473 1.33734 7.56606 1.33734 7.36606 1.95134L6.3534 5.06734C6.30978 5.20111 6.22496 5.31765 6.11108 5.40028C5.9972 5.4829 5.8601 5.52738 5.7194 5.52735H2.4434C1.79806 5.52735 1.52873 6.35401 2.0514 6.73401L4.70206 8.65935C4.81593 8.74212 4.90066 8.85881 4.94414 8.9927C4.98761 9.12659 4.98758 9.2708 4.94406 9.40468L3.93206 12.5207C3.73206 13.1347 4.4354 13.646 4.9574 13.266L7.60806 11.3407C7.72199 11.2579 7.85922 11.2133 8.00006 11.2133C8.14091 11.2133 8.27814 11.2579 8.39206 11.3407L11.0427 13.266C11.5647 13.646 12.2681 13.1353 12.0681 12.5207L11.0561 9.40468C11.0125 9.2708 11.0125 9.12659 11.056 8.9927C11.0995 8.85881 11.1842 8.74212 11.2981 8.65935L13.9487 6.73401C14.4707 6.35401 14.2027 5.52735 13.5567 5.52735H10.2801C10.1395 5.52724 10.0025 5.4827 9.88878 5.40008C9.77503 5.31746 9.69031 5.201 9.64673 5.06734L8.63406 1.95134Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Application') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                        <li>
-                            <x-jet-nav-link href="{{ route('selection-test.index') }}"
-                                            :active="request()->routeIs('selection-test.index')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M5.48533 6C5.85133 5.22333 6.83867 4.66667 8 4.66667C9.47333 4.66667 10.6667 5.562 10.6667 6.66667C10.6667 7.6 9.81467 8.38333 8.66267 8.60467C8.30133 8.674 8 8.96467 8 9.33333M8 11.3333H8.00667M14 8C14 8.78793 13.8448 9.56815 13.5433 10.2961C13.2417 11.0241 12.7998 11.6855 12.2426 12.2426C11.6855 12.7998 11.0241 13.2417 10.2961 13.5433C9.56815 13.8448 8.78793 14 8 14C7.21207 14 6.43185 13.8448 5.7039 13.5433C4.97595 13.2417 4.31451 12.7998 3.75736 12.2426C3.20021 11.6855 2.75825 11.0241 2.45672 10.2961C2.15519 9.56815 2 8.78793 2 8C2 6.4087 2.63214 4.88258 3.75736 3.75736C4.88258 2.63214 6.4087 2 8 2C9.5913 2 11.1174 2.63214 12.2426 3.75736C13.3679 4.88258 14 6.4087 14 8Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Selection tests') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                        <li>
-                            <x-jet-nav-link href="{{ route('faq.index') }}"
-                                            :active="urlContains('support')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M2 5.33333L7.26 8.84C7.47911 8.98618 7.7366 9.06419 8 9.06419C8.2634 9.06419 8.52089 8.98618 8.74 8.84L14 5.33333M3.33333 12.6667H12.6667C13.0203 12.6667 13.3594 12.5262 13.6095 12.2761C13.8595 12.0261 14 11.687 14 11.3333V4.66666C14 4.31304 13.8595 3.9739 13.6095 3.72385C13.3594 3.4738 13.0203 3.33333 12.6667 3.33333H3.33333C2.97971 3.33333 2.64057 3.4738 2.39052 3.72385C2.14048 3.9739 2 4.31304 2 4.66666V11.3333C2 11.687 2.14048 12.0261 2.39052 12.2761C2.64057 12.5262 2.97971 12.6667 3.33333 12.6667Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Support') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                    </ul>
-                @else
-                    <ul class="flex flex-col space-y-2 sidebar-menu">
-                        <li>
-                            <x-jet-nav-link href="{{ route('employee.dashboard') }}"
-                                            :active="request()->routeIs('employee.dashboard')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M2 8L3.33333 6.66667M3.33333 6.66667L8 2L12.6667 6.66667M3.33333 6.66667V13.3333C3.33333 13.5101 3.40357 13.6797 3.5286 13.8047C3.65362 13.9298 3.82319 14 4 14H6M12.6667 6.66667L14 8M12.6667 6.66667V13.3333C12.6667 13.5101 12.5964 13.6797 12.4714 13.8047C12.3464 13.9298 12.1768 14 12 14H10M6 14C6.17681 14 6.34638 13.9298 6.4714 13.8047C6.59643 13.6797 6.66667 13.5101 6.66667 13.3333V10.6667C6.66667 10.4899 6.7369 10.3203 6.86193 10.1953C6.98695 10.0702 7.15652 10 7.33333 10H8.66667C8.84348 10 9.01305 10.0702 9.13807 10.1953C9.2631 10.3203 9.33333 10.4899 9.33333 10.6667V13.3333C9.33333 13.5101 9.40357 13.6797 9.5286 13.8047C9.65362 13.9298 9.82319 14 10 14M6 14H10"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Dashboard') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                        <li>
-                            <x-jet-nav-link href="{{ route('employee.profile') }}"
-                                            :active="request()->routeIs('employee.profile')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M9.88554 6.55229C10.3856 6.05219 10.6666 5.37391 10.6666 4.66667C10.6666 3.95942 10.3856 3.28115 9.88554 2.78105C9.38544 2.28095 8.70716 2 7.99992 2C7.29267 2 6.6144 2.28095 6.1143 2.78105C5.6142 3.28115 5.33325 3.95942 5.33325 4.66667C5.33325 5.37391 5.6142 6.05219 6.1143 6.55229C6.6144 7.05238 7.29267 7.33333 7.99992 7.33333C8.70716 7.33333 9.38544 7.05238 9.88554 6.55229Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path
-                                            d="M4.70009 10.7002C5.57526 9.825 6.76224 9.33333 7.99992 9.33333C9.2376 9.33333 10.4246 9.825 11.2998 10.7002C12.1749 11.5753 12.6666 12.7623 12.6666 14H3.33325C3.33325 12.7623 3.82492 11.5753 4.70009 10.7002Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Profile') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                        @if(auth()->user()->hasAnyRole([ROLE_ADMIN,ROLE_SUPER_ADMIN]))
-                            <li>
-                                <x-jet-nav-link href="{{ route('admin.employees.index') }}"
-                                                :active="request()->routeIs('admin.employee.index')"
-                                                class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                    <div
-                                        class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                        <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 640 512">
-                                            <path
-                                                d="M160 320c53.02 0 96-42.98 96-96c0-53.02-42.98-96-96-96C106.1 128 64 170.1 64 224C64 277 106.1 320 160 320zM160 160c35.29 0 64 28.71 64 64S195.3 288 160 288S96 259.3 96 224S124.7 160 160 160zM192 352H128c-70.69 0-128 57.31-128 128c0 17.67 14.33 32 32 32h256c17.67 0 32-14.33 32-32C320 409.3 262.7 352 192 352zM32 480c0-52.94 43.07-96 96-96h64c52.94 0 96 43.06 96 96H32zM592 0h-384C181.5 0 160 21.53 160 48v32C160 88.84 167.2 96 176 96S192 88.84 192 80v-32C192 39.19 199.2 32 208 32h384C600.8 32 608 39.19 608 48v320c0 8.812-7.172 16-16 16H576v-48C576 309.5 554.5 288 528 288h-96C405.5 288 384 309.5 384 336V384h-32c-8.844 0-16 7.156-16 16S343.2 416 352 416h240C618.5 416 640 394.5 640 368v-320C640 21.53 618.5 0 592 0zM544 384h-128v-48c0-8.812 7.172-16 16-16h96c8.828 0 16 7.188 16 16V384z"/>
-                                        </svg>
-                                    </div>
-                                    <span>{{ __('Employee') }}</span>
-                                </x-jet-nav-link>
-                            </li>
-                        @endif
-                        <li>
-                            <x-jet-nav-link href="{{ route('employee.applicants.index') }}"
-                                            :active="request()->routeIs('employee.applicants.*')"
+                            <x-jet-nav-link href="{{ route('admin.employees.index') }}"
+                                            :active="request()->routeIs('admin.employee.index')"
                                             class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
                                 <div
                                     class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
                                     <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 640 512">
                                         <path
+                                            d="M160 320c53.02 0 96-42.98 96-96c0-53.02-42.98-96-96-96C106.1 128 64 170.1 64 224C64 277 106.1 320 160 320zM160 160c35.29 0 64 28.71 64 64S195.3 288 160 288S96 259.3 96 224S124.7 160 160 160zM192 352H128c-70.69 0-128 57.31-128 128c0 17.67 14.33 32 32 32h256c17.67 0 32-14.33 32-32C320 409.3 262.7 352 192 352zM32 480c0-52.94 43.07-96 96-96h64c52.94 0 96 43.06 96 96H32zM592 0h-384C181.5 0 160 21.53 160 48v32C160 88.84 167.2 96 176 96S192 88.84 192 80v-32C192 39.19 199.2 32 208 32h384C600.8 32 608 39.19 608 48v320c0 8.812-7.172 16-16 16H576v-48C576 309.5 554.5 288 528 288h-96C405.5 288 384 309.5 384 336V384h-32c-8.844 0-16 7.156-16 16S343.2 416 352 416h240C618.5 416 640 394.5 640 368v-320C640 21.53 618.5 0 592 0zM544 384h-128v-48c0-8.812 7.172-16 16-16h96c8.828 0 16 7.188 16 16V384z"/>
+                                    </svg>
+                                </div>
+                                <span>{{ __('Employee') }}</span>
+                            </x-jet-nav-link>
+                        </li>
+                    @endif
+                    <li>
+                        <x-jet-nav-link href="{{ route('employee.applicants.index') }}"
+                                        :active="request()->routeIs('employee.applicants.*')"
+                                        class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                            <div
+                                class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
+                                <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 640 512">
+                                    <path
                                             d="M160 320c53.02 0 96-42.98 96-96c0-53.02-42.98-96-96-96C106.1 128 64 170.1 64 224C64 277 106.1 320 160 320zM160 160c35.29 0 64 28.71 64 64S195.3 288 160 288S96 259.3 96 224S124.7 160 160 160zM192 352H128c-70.69 0-128 57.31-128 128c0 17.67 14.33 32 32 32h256c17.67 0 32-14.33 32-32C320 409.3 262.7 352 192 352zM32 480c0-52.94 43.07-96 96-96h64c52.94 0 96 43.06 96 96H32zM592 0h-384C181.5 0 160 21.53 160 48v32C160 88.84 167.2 96 176 96S192 88.84 192 80v-32C192 39.19 199.2 32 208 32h384C600.8 32 608 39.19 608 48v320c0 8.812-7.172 16-16 16H576v-48C576 309.5 554.5 288 528 288h-96C405.5 288 384 309.5 384 336V384h-32c-8.844 0-16 7.156-16 16S343.2 416 352 416h240C618.5 416 640 394.5 640 368v-320C640 21.53 618.5 0 592 0zM544 384h-128v-48c0-8.812 7.172-16 16-16h96c8.828 0 16 7.188 16 16V384z"/>
                                     </svg>
                                 </div>
@@ -269,9 +202,19 @@
                                 <span>{{ __('Activity Log') }}</span>
                             </x-jet-nav-link>
                         </li>
-                        @endhasrole
-                    </ul>
-                @endif
+                    @endhasrole
+                </ul>
+                @endunlessrole
+
+                @role(ROLE_APPLICANT)
+                @if (!in_array(auth()->user()->application_status, [\App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_NAK, \App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT]))
+                    <x-danger-button
+                        onclick="Livewire.emit('ApplicationReject.modal.toggle', {{ auth()->user() }})">
+                        {{ __('cancel') }}
+                    </x-danger-button>
+                    <livewire:application-reject/>
+                    @endrole
+                    @endrole
             </div>
         </div>
     </div>

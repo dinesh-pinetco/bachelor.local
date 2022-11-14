@@ -22,19 +22,11 @@ class Tabs extends Component
 
     public $applicant = null;
 
-    public $selectedStatus;
-
-    public $applicationRejectReason;
-
     public $nakUniversityId = null;
 
     public $universityId = null;
 
     public $grade = null;
-
-    protected array $rules = [
-        'applicationRejectReason' => ['required'],
-    ];
 
     public function mount()
     {
@@ -52,31 +44,6 @@ class Tabs extends Component
     public function render()
     {
         return view('livewire.tabs');
-    }
-
-    public function openConfirmModal($status)
-    {
-        $this->open();
-        $this->selectedStatus = $status;
-    }
-
-    public function rejectApplication()
-    {
-        $this->validate();
-        $this->applicant->application_status = $this->selectedStatus;
-        $this->applicant->application_reject_reason = $this->applicationRejectReason;
-        $this->applicant->save();
-        $this->toastNotify(__('Application reject successfully.'), __('Success'), TOAST_SUCCESS);
-
-        return redirect(request()->header('Referer'));
-    }
-
-    public function resetRejectApplication()
-    {
-        $this->show = false;
-        $this->resetValidation();
-        $this->selectedStatus = null;
-        $this->applicationRejectReason = null;
     }
 
     public function approveApplication()

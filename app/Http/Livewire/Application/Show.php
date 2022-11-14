@@ -160,7 +160,7 @@ class Show extends Component
             $error = __('Please fill the required field.');
         }
 
-        if (is_null($error)) {
+        if (is_null($error) && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
             $tests = Test::whereHas('courses', function ($query) {
                 $query->whereIn('course_id', $this->applicant->courses->pluck('id'));
             })->get();
@@ -188,8 +188,6 @@ class Show extends Component
         if ($error) {
             $this->toastNotify($error, __('Error'), TOAST_ERROR);
             $this->refreshData();
-        } else {
-            return redirect(request()->header('Referer'));
         }
     }
 

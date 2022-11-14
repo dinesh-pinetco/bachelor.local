@@ -35,13 +35,13 @@ Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.RO
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'role:'.ROLE_APPLICANT])->group(function () {
-    Route::get('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get('dashboard', DashboardController::class)->name('dashboard');
-
+    Route::get('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::prefix('application/{tab:slug}')->name('application.')->group(function () {
         Route::get('/', ApplicationController::class)->name('index');
     });
+    Route::get('documents', DocumentController::class)->name('documents.index');
+    Route::get('selection-test', [SelectionTestController::class, 'index'])->name('selection-test.index');
 
     route::prefix('support')->group(function () {
         Route::get('contact-us', ContactUsController::class)->name('contact-us.index');
@@ -49,11 +49,7 @@ Route::middleware(['auth:sanctum', 'verified', 'role:'.ROLE_APPLICANT])->group(f
 
         Route::get('faq', FaqController::class)->name('faq.index');
     });
-
-    Route::get('documents', DocumentController::class)->name('documents.index');
-    Route::get('selection-test', [SelectionTestController::class, 'index'])->name('selection-test.index');
-
-    Route::get('submit-application', [ApplicationController::class, 'submitApplication'])->name('submit-application');
 });
+
 Route::view('imprint', 'privacy_policy')->name('privacy_policy');
 Route::view('datenschutz', 'data_protection')->name('data_protection');
