@@ -65,4 +65,28 @@
             {{ __('You will be informed as soon as the test results are available') }}
         </span>
     @endif
+
+    @if(auth()->user()->application_status == \App\Enums\ApplicationStatus::TEST_PASSED)
+        <img wire:click="getTestResultPdf" src="{{ asset('images/icon/mail.svg') }}"
+             class="object-contain object-center w-20 h-20 cursor-pointer"
+             alt="mail">
+    @endif
+
+    <x-custom-modal wire:model="show">
+        <div>
+            <div class="space-y-3">
+                <h4 class="text-center text-darkgray text-sm sm:text-base">
+                    {{ __('To complete your application, you still need to do industry, motivation, documents to really apply.') }}?
+                </h4>
+            </div>
+        </div>
+        <x-jet-input-error for="client" class="mt-1"/>
+        <x-slot name="footer">
+            <div class="flex justify-end space-x-2">
+                <x-danger-button data-cy="delete-button" wire:click='testResultRetrievedOn'> {{ __('Got it!') }} </x-danger-button>
+                <x-secondary-button data-cy="cancel-button"
+                                    wire:click="$set('show', false)"> {{ __('Cancel') }} </x-secondary-button>
+            </div>
+        </x-slot>
+    </x-custom-modal>
 </div>

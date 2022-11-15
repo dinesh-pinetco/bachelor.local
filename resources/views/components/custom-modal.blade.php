@@ -44,7 +44,7 @@
          x-transition:leave-end="transform opacity-0 scale-90">
         <div class="flex flex-col items-center justify-center bg-white w-full rounded-md">
             <div class="p-4 flex items-center justify-between flex-wrap w-full border-b border-lightgray">
-                <h4 class="text-primary font-medium tracking-wide">{{ $title }}</h4>
+                <h4 class="text-primary font-medium tracking-wide">{{ isset($title) ? $title : null }}</h4>
                 <a href="javascript:void(0);" @click="show = false"
                    class="text-xl text-primary  flex items-center justify-center rounded-md duration-300 hover:text-lightred">
                     <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">

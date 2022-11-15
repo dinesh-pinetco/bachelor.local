@@ -20,27 +20,32 @@ class ApplicantRedirection
         return $this->{$applicationStatus->value}();
     }
 
-    public function registration_submitted()
+    private function registration_submitted()
     {
         return redirect()->route('application.index', ['tab' => 'profile']);
     }
 
-    public function application_rejected_by_applicant()
+    private function application_rejected_by_applicant()
     {
         return redirect()->route('application.index', ['tab' => 'profile']);
     }
 
-    public function profile_information_completed()
+    private function profile_information_completed()
     {
         return redirect()->route('selection-test.index');
     }
 
-    public function test_taken()
+    private function test_taken()
     {
         return redirect()->route('selection-test.index');
     }
 
-    public function test_passed()
+    private function test_passed()
+    {
+        return redirect()->route('selection-test.index');
+    }
+
+    private function test_result_pdf_retrieved_on()
     {
         return redirect()->route('application.index', ['tab' => 'industries']);
     }

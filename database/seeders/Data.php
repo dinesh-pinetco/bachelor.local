@@ -313,7 +313,7 @@ class Data
                                 'meta_data' => [],
                             ],
                         ],
-                    ]
+                    ],
                 ],
             ],
             [
