@@ -131,6 +131,7 @@ class User extends Authenticatable implements ContractsAuditable
     public function isSelectionTestingMode(): bool
     {
         return in_array($this->application_status, [
+            ApplicationStatus::PROFILE_INFORMATION_COMPLETED,
             ApplicationStatus::TEST_TAKEN,
             ApplicationStatus::TEST_PASSED,
             ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON,

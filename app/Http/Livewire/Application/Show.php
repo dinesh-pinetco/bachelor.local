@@ -107,11 +107,6 @@ class Show extends Component
         $this->parentCustomGroups = collect($parentCustomGroups->groupBy('sort_order'));
     }
 
-    public function render()
-    {
-        return view('livewire.application.show');
-    }
-
     public function appendGroup($groupId)
     {
         $this->refreshData($groupId);
@@ -156,7 +151,7 @@ class Show extends Component
         $error = null;
 
         $profileTabProgress = (new ProgressBar($this->applicant->id))->overAllProgress();
-        if ($profileTabProgress <= PET_STEP_PROGRESS && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
+        if ($profileTabProgress < PET_STEP_PROGRESS && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
             $error = __('Please fill the required field.');
         }
 
@@ -197,5 +192,10 @@ class Show extends Component
             ['user_id' => $this->applicant->id, 'test_id' => $testId],
             ['status' => Result::STATUS_NOT_STARTED]
         );
+    }
+
+    public function render()
+    {
+        return view('livewire.application.show');
     }
 }

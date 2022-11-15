@@ -37,6 +37,11 @@ class ApplicantRedirection
 
     public function test_taken()
     {
+        return redirect()->route('selection-test.index');
+    }
+
+    public function test_passed()
+    {
         return redirect()->route('application.index', ['tab' => 'industries']);
     }
 }
