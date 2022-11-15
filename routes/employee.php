@@ -19,6 +19,7 @@ use App\Http\Controllers\Employee\DashboardController;
 use App\Http\Controllers\Employee\DocumentController;
 use App\Http\Controllers\Employee\FaqController;
 use App\Http\Controllers\Employee\GroupController;
+use App\Http\Controllers\Employee\IndustryController;
 use App\Http\Controllers\Employee\ProfileController;
 use App\Http\Controllers\Employee\SelectionTestController;
 use App\Http\Controllers\Employee\SettingController;
@@ -67,6 +68,9 @@ Route::prefix('settings')->name('settings.')->group(function () {
         Route::get('/clone/{group}', [GroupController::class, 'edit'])->name('clone');
     });
 });
+
+Route::resource('settings/fields/industries/options', IndustryController::class);
+Route::get('settings/fields/industries/options/{option}/clone', [IndustryController::class, 'clone'])->name('options.clone');
 
 Route::prefix('logs')->middleware(['role:'.ROLE_ADMIN])->name('logs.')->group(function () {
     Route::get('/applicants', [ActivityLogController::class, 'applicants'])->name('applicants');

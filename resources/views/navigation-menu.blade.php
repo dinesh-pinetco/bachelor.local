@@ -143,8 +143,8 @@
                         </li>
                         <li>
                             <x-jet-nav-link href="{{ route('employee.settings.fields.index',['tab' => 'profile']) }}"
-                                            :active="request()->routeIs('employee.settings.fields.*')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                                    :active="request()->routeIs('employee.settings.fields.*') || request()->routeIs('employee.options.*')"
+                                    class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
                                 <div
                                     class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
                                     <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
