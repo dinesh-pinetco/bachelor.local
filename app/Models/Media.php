@@ -31,6 +31,10 @@ class Media extends Model implements ContractsAuditable
         'user_id', 'mediable_id', 'mediable_type',
     ];
 
+    protected $casts = [
+        'is_check' => 'boolean',
+    ];
+
     protected array $auditInclude = [
         'name', 'extension',
     ];

@@ -20,6 +20,10 @@ class Course extends Model implements ContractsAuditable
 
     protected $fillable = ['sana_id', 'name', 'description', 'form_of_study', 'first_start', 'last_start', 'is_active', 'lead_time', 'dead_time', 'sort_order'];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     public static function boot()
     {
         parent::boot();

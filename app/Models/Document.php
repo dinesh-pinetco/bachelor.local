@@ -20,6 +20,11 @@ class Document extends Model implements ContractsAuditable
 
     protected $fillable = ['creator_id', 'name', 'description', 'is_required', 'is_active'];
 
+    protected $casts = [
+        'is_required' => 'boolean',
+        'is_active' => 'boolean',
+    ];
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class);

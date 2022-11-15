@@ -14,6 +14,10 @@ class ModelHasCourse extends Model implements ContractsAuditable
 
     protected $dates = ['course_start_date'];
 
+    protected $casts = [
+        'course_start_date' => 'datetime',
+    ];
+
     public function model(): MorphTo
     {
         return $this->morphTo();
