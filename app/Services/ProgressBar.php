@@ -22,6 +22,7 @@ class ProgressBar
     {
         $progressPoints = $this->calculateProgressByTab('profile')
             + $this->selectionTestsProgress()
+            + $this->calculateProgressByTab('industries')
             + $this->calculateProgressByTab('motivation')
             + $this->documentProgress();
 
