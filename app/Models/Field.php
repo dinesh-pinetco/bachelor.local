@@ -46,6 +46,7 @@ class Field extends Model implements ContractsAuditable
     protected $casts = [
         'meta_data' => 'array',
         'is_required' => 'boolean',
+        'is_active' => 'boolean',
     ];
 
     public static function types(): array

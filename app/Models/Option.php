@@ -15,6 +15,10 @@ class Option extends Model implements ContractsAuditable
 
     protected $fillable = ['field_id', 'key', 'value', 'is_active'];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     public function values(): HasMany
     {
         return $this->hasMany(FieldValue::class);

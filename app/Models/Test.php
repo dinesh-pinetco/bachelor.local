@@ -32,6 +32,11 @@ class Test extends Model implements ContractsAuditable
 
     protected $fillable = ['name', 'description', 'type', 'duration', 'link', 'is_required', 'is_active'];
 
+    protected $casts = [
+        'is_required' => 'boolean',
+        'is_active' => 'boolean',
+    ];
+
     public static function types(): array
     {
         return [
