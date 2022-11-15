@@ -128,15 +128,41 @@ class User extends Authenticatable implements ContractsAuditable
         ]);
     }
 
+    public function isSelectionTestingMode(): bool
+    {
+        return in_array($this->application_status, [
+            ApplicationStatus::TEST_TAKEN,
+            ApplicationStatus::TEST_PASSED,
+            ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON,
+            ApplicationStatus::TEST_FAILED,
+            ApplicationStatus::TEST_FAILED_CONFIRM,
+        ]);
+    }
+
     public function saveApplicationStatus()
     {
         $results = Result::myResults($this)
-            ->select(['is_passed', 'user_id'])
+            ->select(['is_passed', 'user_id', 'failed_by_nak'])
             ->get();
 
-        if ($results->count() == $results->where('is_passed', true)->count()) {
-            $this->application_status = \App\Enums\ApplicationStatus::TEST_TAKEN;
+        $totalTests = $results->count();
+        if ($totalTests == $results->where('is_passed', true)->count()) {
+            $this->application_status = \App\Enums\ApplicationStatus::TEST_PASSED;
             $this->save();
+
+            // TODO:pooja
+            // Applicant gets an email
+            // Generate pdf for pass
+            // Show confetti
+        }
+
+        if ($totalTests == $results->where('is_passed', false)->where('failed_by_nak', true)->count()) {
+            $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM;
+            $this->save();
+
+            // TODO:pooja
+            // Applicant gets an email
+            // Generate pdf for pass
         }
     }
 

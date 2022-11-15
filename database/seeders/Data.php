@@ -335,18 +335,6 @@ class Data
                             'description' => '',
                             'fields' => [
                                 [
-                                    'type' => Field::FIELD_SELECT,
-                                    'label' => 'Name der Hochschule',
-                                    'placeholder' => 'Name eingeben',
-                                    'related_option_table' => 'universities',
-                                    'key' => 'university',
-                                    'sort_order' => 1,
-                                    'is_active' => 1,
-                                    'is_required' => 1,
-                                    'options' => [],
-                                    'meta_data' => [],
-                                ],
-                                [
                                     'type' => Field::FIELD_TEXT,
                                     'label' => 'Studiengang eingeben',
                                     'placeholder' => null,

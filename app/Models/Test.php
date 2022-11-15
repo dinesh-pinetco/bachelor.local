@@ -4,15 +4,16 @@ namespace App\Models;
 
 use App\Enums\ApplicationStatus;
 use App\Filters\TestFilters;
-use App\Services\Cubia;
-use App\Services\Meteor;
-use App\Services\Moodle;
+use App\Services\SelectionTests\Cubia;
+use App\Services\SelectionTests\Meteor;
+use App\Services\SelectionTests\Moodle;
 use App\Traits\HasCourses;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
@@ -43,6 +44,11 @@ class Test extends Model implements ContractsAuditable
     public function results(): HasMany
     {
         return $this->hasMany(Result::class);
+    }
+
+    public function result(): HasOne
+    {
+        return $this->hasOne(Result::class);
     }
 
     protected function isActiveLabel(): Attribute

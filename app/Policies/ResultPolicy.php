@@ -25,14 +25,14 @@ class ResultPolicy
     public function update(User $user, Result $result): bool
     {
         $applicantStatus = $user->application_status;
+
         $applicationRejectStatus = [ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT, ApplicationStatus::APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
             return false;
         }
 
         if (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE, ROLE_APPLICANT])) {
-            $applicationRejectStatus = [ApplicationStatus::PROFILE_INFORMATION_COMPLETED];
-            if (in_array($applicantStatus, $applicationRejectStatus)) {
+            if ($user->isSelectionTestingMode()) {
                 return true;
             }
         }

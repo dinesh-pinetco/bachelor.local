@@ -4,9 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\Result;
 use App\Models\Test;
-use App\Services\Cubia;
-use App\Services\Meteor;
-use App\Services\Moodle;
+use App\Services\SelectionTests\Cubia;
+use App\Services\SelectionTests\Meteor;
+use App\Services\SelectionTests\Moodle;
 use Illuminate\Console\Command;
 
 class SyncTestResults extends Command

@@ -160,7 +160,7 @@
                         @endif
                     @endif
 
-                    @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
+                    @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && auth()->user()->application_status == \App\Enums\ApplicationStatus::REGISTRATION_SUBMITTED)
                         <x-primary-button type="button"
                                           wire:click="submitProfileInformation"
                                           wire:loading.attr="disabled">

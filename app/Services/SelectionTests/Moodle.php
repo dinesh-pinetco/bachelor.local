@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\SelectionTests;
 
 use App\Models\Moodle as MoodleModel;
 use App\Models\Result;

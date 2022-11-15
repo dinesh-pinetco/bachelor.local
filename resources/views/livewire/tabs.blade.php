@@ -41,30 +41,20 @@
             @if (auth()->user()->hasRole(ROLE_APPLICANT))
                 <li>
                     <x-jet-nav-link href="{{ route('documents.index') }}" :active="urlContains('documents')"
-                        class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm">
-                        {{ __('Documents') }}
-                    </x-jet-nav-link>
-                </li>
-            @else
-                <li>
-                    <x-jet-nav-link :active="urlContains('documents')"
-                                    href="{{ route('employee.applicants.edit', ['slug' => 'documents', 'applicant' => $applicant]) }}"
                                     class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm">
                         {{ __('Documents') }}
                     </x-jet-nav-link>
                 </li>
-                @if ($nakUniversityId != $universityId || $grade > 2.5)
-                    <li>
-                        <x-jet-nav-link :active="urlContains('selection-test')"
-                                        href="{{ route('employee.selection-tests.index', ['applicant' => $applicant]) }}"
-                                        class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm">
-                            {{ __('Selection Test') }}
-                        </x-jet-nav-link>
-                    </li>
-                @endif
             @endif
 
             @unlessrole(ROLE_APPLICANT)
+            <li>
+                <x-jet-nav-link :active="urlContains('documents')"
+                                href="{{ route('employee.applicants.edit', ['slug' => 'documents', 'applicant' => $applicant]) }}"
+                                class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm">
+                    {{ __('Documents') }}
+                </x-jet-nav-link>
+            </li>
             <li>
                 <x-jet-nav-link :active="urlContains('selection-tests')"
                                 href="{{ route('employee.selection-tests.index', ['applicant' => $applicant]) }}"
@@ -103,23 +93,14 @@
                         </option>
                     @endif
                 @endforeach
-                @if (auth()->user()->hasRole(ROLE_APPLICANT))
-                    <option {{ urlContains('documents') ? 'selected' : '' }}
-                            value="{{ route('documents.index') }}">
-                        {{ __('Documents') }}
-                    </option>
-                @else
-                    <option {{ urlContains('documents') ? 'selected' : '' }}
+                <option {{ urlContains('documents') ? 'selected' : '' }}
                         value="{{ route('employee.applicants.edit', ['slug' => 'documents', 'applicant' => $applicant]) }}">
-                        {{ __('Documents') }}
-                    </option>
-                    @if ($nakUniversityId != $universityId || $grade > 2.5)
-                        <option {{ urlContains('selection-test') ? 'selected' : '' }}
-                            value="{{ route('employee.selection-tests.index', ['applicant' => $applicant]) }}">
-                            {{ __('Selection Test') }}
-                        </option>
-                    @endif
-                @endif
+                    {{ __('Documents') }}
+                </option>
+                <option {{ urlContains('selection-test') ? 'selected' : '' }}
+                        value="{{ route('employee.selection-tests.index', ['applicant' => $applicant]) }}">
+                    {{ __('Selection Test') }}
+                </option>
             </x-livewire-select>
         </div>
     </div>

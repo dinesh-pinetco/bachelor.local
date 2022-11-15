@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TabSeeder::class);
         $this->call(StateSeeder::class);
         $this->call(DistrictSeeder::class);
-        $this->call(UniversitySeeder::class);
         $this->call(FinalExamSeeder::class);
         $this->call(NationalitySeeder::class);
         $this->call(EntranceQualificationSeeder::class);

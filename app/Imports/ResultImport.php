@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\Result;
 use App\Models\Test;
-use App\Services\Cubia;
+use App\Services\SelectionTests\Cubia;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 

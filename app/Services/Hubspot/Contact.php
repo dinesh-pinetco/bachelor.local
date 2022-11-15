@@ -2,8 +2,6 @@
 
 namespace App\Services\Hubspot;
 
-use App\Models\ApplicationStatus;
-use App\Models\University;
 use App\Models\User;
 use App\Traits\Makeable;
 
@@ -27,7 +25,6 @@ class Contact
             'phone',
             'course_id',
             'desired_beginning',
-            'university',
             'Studiengang eingeben',
         ];
     }

@@ -9,8 +9,8 @@ use App\Models\Group;
 use App\Models\Result;
 use App\Models\Tab;
 use App\Models\Test;
-use App\Services\Moodle;
 use App\Services\ProgressBar;
+use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -156,7 +156,7 @@ class Show extends Component
         $error = null;
 
         $profileTabProgress = (new ProgressBar($this->applicant->id))->overAllProgress();
-        if ($profileTabProgress != PET_STEP_PROGRESS) {
+        if ($profileTabProgress <= PET_STEP_PROGRESS && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
             $error = __('Please fill the required field.');
         }
 

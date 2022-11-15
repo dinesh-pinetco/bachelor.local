@@ -15,6 +15,8 @@ class Result extends Model implements ContractsAuditable
 
     const STATUS_STARTED = 'started';
 
+    const STATUS_FAILED = 'failed';
+
     const STATUS_COMPLETED = 'completed';
 
     protected $guarded = [];

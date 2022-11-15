@@ -1,3 +1,3 @@
 <x-app-layout>
-    <livewire:selection-test :tests="$tests" />
+    <livewire:selection-test />
 </x-app-layout>

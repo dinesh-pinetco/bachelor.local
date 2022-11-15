@@ -5,13 +5,11 @@ return [
         'courses',
         'desired_beginnings',
         'nationalities',
-        'universities',
     ],
     'option_tables_key' => [
         'courses' => 'course_id',
         'desired_beginnings' => 'desired_beginning_id',
         'nationalities' => 'country_id',
-        'universities' => 'college_id',
     ],
     'applicants_fields' => [
         'email',

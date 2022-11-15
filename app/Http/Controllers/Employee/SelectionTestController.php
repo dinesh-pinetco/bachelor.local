@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Result;
 use App\Models\Test;
 use App\Models\User;
-use App\Services\Meteor;
-use App\Services\Moodle;
+use App\Services\SelectionTests\Meteor;
+use App\Services\SelectionTests\Moodle;
 
 class SelectionTestController extends Controller
 {
@@ -23,7 +23,7 @@ class SelectionTestController extends Controller
             $result = $selection_test->results()
                 ->myResults($applicant)
                 ->where('status', Result::STATUS_STARTED)
-                ->where('is_passed', 0)
+                ->where('is_passed', false)
                 ->first();
 
             if ($result && ! $result->is_passed && $result->static != Result::STATUS_COMPLETED) {

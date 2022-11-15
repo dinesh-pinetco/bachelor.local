@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\MailTemplate;
 use App\Models\User;
 use App\Notifications\System\ErrorNotification;
-use App\Services\Cubia;
-use App\Services\Moodle;
+use App\Services\SelectionTests\Cubia;
+use App\Services\SelectionTests\Moodle;
 use Exception;
 use Illuminate\Support\Facades\Mail;
 

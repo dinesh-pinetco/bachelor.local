@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Meteor;
 use App\Models\Result;
 use App\Models\Test;
-use App\Services\Meteor as MeteorServices;
+use App\Services\SelectionTests\Meteor as MeteorServices;
 
 class SelectionTestController extends Controller
 {
@@ -24,20 +24,17 @@ class SelectionTestController extends Controller
             }
         }
 
-        $courses = auth()->user()->courses->pluck('id')->toArray();
-
-        $tests = Test::matchCourses($courses)->get();
-
-        return view('selection-test', compact('tests'));
+        return view('selection-test');
     }
 
     public function setResult($user)
     {
         $selectionTest = Test::where('type', Test::TYPE_METEOR)->where('is_active', true)->first();
-
-        $result = $selectionTest->results()->myResults($user)
+        $result = $selectionTest
+            ->results()
+            ->myResults($user)
             ->where('status', Result::STATUS_STARTED)
-            ->where('is_passed', 0)
+            ->where('is_passed', false)
             ->first();
 
         if ($result) {

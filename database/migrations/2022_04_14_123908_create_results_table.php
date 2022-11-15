@@ -21,6 +21,7 @@ class CreateResultsTable extends Migration
             $table->boolean('is_passed')->default(false);
             $table->string('result')->nullable();
             $table->boolean('passed_by_nak')->default(false);
+            $table->boolean('failed_by_nak')->default(false);
             $table->text('meta')->nullable();
             $table->boolean('is_passed_mix')->default(false);
             $table->string('result_mix_link')->nullable();

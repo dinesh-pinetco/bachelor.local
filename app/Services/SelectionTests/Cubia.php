@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\SelectionTests;
 
 use App\Imports\ResultImport;
 use App\Models\User;
