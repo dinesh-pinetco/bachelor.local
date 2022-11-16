@@ -19,10 +19,10 @@ class Field extends Model implements ContractsAuditable
     protected $fillable = ['tab_id', 'group_id', 'type', 'related_option_table', 'label', 'key', 'placeholder', 'sort_order', 'is_active', 'meta_data'];
 
     protected $casts = [
-        'meta_data'   => 'array',
+        'meta_data' => 'array',
         'is_required' => 'boolean',
-        'is_active'   => 'boolean',
-        'field_type'  => FieldType::class
+        'is_active' => 'boolean',
+        'field_type' => FieldType::class,
     ];
 
     public function values(): HasManySyncable

@@ -12,11 +12,7 @@ use ArchTech\Enums\Values;
 #[Meta(ApplicationStatusOrder::class)]
 enum ApplicationStatus: string
 {
-    use InvokableCases;
-    use Names;
-    use Values;
-    use Options;
-    use Metadata;
+    use InvokableCases, Names, Values, Options, Metadata;
 
     #[ApplicationStatusOrder(1)] case REGISTRATION_SUBMITTED = 'registration_submitted';
     #[ApplicationStatusOrder(2)] case PROFILE_INFORMATION_COMPLETED = 'profile_information_completed';
@@ -45,5 +41,10 @@ enum ApplicationStatus: string
         }
 
         return $options->toArray();
+    }
+
+    public function id()
+    {
+        return $this->applicationStatusOrder();
     }
 }
