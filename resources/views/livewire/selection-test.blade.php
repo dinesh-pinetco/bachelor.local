@@ -2,7 +2,7 @@
     <h2 class="mb-5 md:mb-9 text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
         {{ __('Selection test') }}
     </h2>
-    @if (auth()->user()->isSelectionTestingMode())
+    @if ($applicant->isSelectionTestingMode())
         @foreach ($tests as $test)
             <div class="flex items-center flex-wrap -mx-4">
                 <div class="p-4 w-full lg:w-2/5 xl:w-1/3">
@@ -26,30 +26,36 @@
                     <div class="text-primary">
                         <h4 class="mb-4 md:mb-6 text-xl font-medium text-primary">{{ $test->name }}</h4>
                         <p class="mb-3 md:mb-6 max-w-md text-sm md:text-base">{{ $test->description }}</p>
-                        @if ($test->result?->status != \App\Models\Result::STATUS_COMPLETED)
+                        @if (!in_array($test->result?->status,[\App\Models\Result::STATUS_COMPLETED,\App\Models\Result::STATUS_FAILED]))
                             @if ($test->type == \App\Models\Test::TYPE_CUBIA)
                                 <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
-                                               href="{{ $test->getTestLink(auth()->user(),'MIX') }}"
+                                               href="{{ $test->getTestLink($applicant,'MIX') }}"
                                                class="items-center mb-4 xl:mb-0 -mt-0"
                                                target="_blank">
                                     {{ __('To the test of MIX') }}
                                 </x-link-button>
                                 <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
-                                               href="{{ $test->getTestLink(auth()->user(),'IQT') }}"
+                                               href="{{ $test->getTestLink($applicant,'IQT') }}"
                                                class="items-center mb-4 xl:mb-0 -mt-0"
                                                target="_blank">
                                     {{ __('To the test of IQ') }}
                                 </x-link-button>
                             @else
                                 <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
-                                               href="{{ $test->getTestLink(auth()->user()) }}"
+                                               href="{{ $test->getTestLink($applicant) }}"
                                                class="items-center mb-4 xl:mb-0 -mt-0"
                                                target="_blank">
                                     {{ __('To the test') }}
                                 </x-link-button>
                             @endif
-                        @else
-                            <img src="{{ asset('images/icon/check.svg') }}" alt="test_taken">
+                        @endif
+
+                        @if($test->result?->status == \App\Models\Result::STATUS_COMPLETED)
+                            <img src="{{ asset('images/icon/check.svg') }}" alt="test_completed">
+                        @elseif($test->result?->status == \App\Models\Result::STATUS_FAILED)
+                            <x-jet-danger-button type="button">
+                                <img src="{{ asset('images/icon/star.svg') }}" alt="test_failed">
+                            </x-jet-danger-button>
                         @endif
                     </div>
                 </div>
@@ -60,13 +66,13 @@
 
         </div>
     @endif
-    @if(auth()->user()->application_status == \App\Enums\ApplicationStatus::TEST_TAKEN)
+    @if($applicant->application_status == \App\Enums\ApplicationStatus::TEST_TAKEN)
         <span class="text-2xl">
             {{ __('You will be informed as soon as the test results are available') }}
         </span>
     @endif
 
-    @if(auth()->user()->application_status == \App\Enums\ApplicationStatus::TEST_PASSED)
+    @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
         <img wire:click="getTestResultPdf" src="{{ asset('images/icon/mail.svg') }}"
              class="object-contain object-center w-20 h-20 cursor-pointer"
              alt="mail">
@@ -76,14 +82,16 @@
         <div>
             <div class="space-y-3">
                 <h4 class="text-center text-darkgray text-sm sm:text-base">
-                    {{ __('To complete your application, you still need to do industry, motivation, documents to really apply.') }}?
+                    {{ __('To complete your application, you still need to do industry, motivation, documents to really apply.') }}
+                    ?
                 </h4>
             </div>
         </div>
         <x-jet-input-error for="client" class="mt-1"/>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-danger-button data-cy="delete-button" wire:click='testResultRetrievedOn'> {{ __('Got it!') }} </x-danger-button>
+                <x-danger-button data-cy="delete-button"
+                                 wire:click='testResultRetrievedOn'> {{ __('Got it!') }}</x-danger-button>
                 <x-secondary-button data-cy="cancel-button"
                                     wire:click="$set('show', false)"> {{ __('Cancel') }} </x-secondary-button>
             </div>

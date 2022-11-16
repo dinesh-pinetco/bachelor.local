@@ -157,7 +157,12 @@ class Moodle
             $grade = data_get(end($tableData), 'grade.content');
             $status = $grade != '-' ? Result::STATUS_COMPLETED : $result->status;
 
-            $result->update(['status' => $status, 'is_passed' => $grade >= 50, 'result' => $grade, 'meta' => $responseJson]);
+            $result->update([
+                'status'    => $status,
+                'is_passed' => $grade >= 50,
+                'result'    => $grade,
+                'meta'      => $responseJson
+            ]);
 
             $result->user->saveApplicationStatus();
 

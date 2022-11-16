@@ -44,7 +44,10 @@ class SelectionTest extends Component
 
     public function getTestResultPdf()
     {
-        $this->open();
+        if ($this->applicant->application_status == ApplicationStatus::TEST_PASSED){
+            $this->open();
+        }
+
         //TODO:pooja Generated pdf of result
         return Storage::download('sample.pdf');
     }

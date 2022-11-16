@@ -21,6 +21,7 @@ enum ApplicationStatus: string
     case TEST_PASSED = 'test_passed';
     case TEST_FAILED = 'test_failed';
     case TEST_FAILED_CONFIRM = 'test_failed_confirm';
+    case TEST_RESET = 'test_reset';
     case TEST_RESULT_PDF_RETRIEVED_ON = 'test_result_pdf_retrieved_on';
 
     case PERSONAL_DATA_COMPLETED = 'personal_data_completed';

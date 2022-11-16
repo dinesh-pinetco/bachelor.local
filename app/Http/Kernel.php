@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\EnsureIsActivated;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -81,17 +82,18 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => Authenticate::class,
-        'auth.basic' => AuthenticateWithBasicAuth::class,
-        'cache.headers' => SetCacheHeaders::class,
-        'can' => Authorize::class,
-        'guest' => RedirectIfAuthenticated::class,
-        'password.confirm' => RequirePassword::class,
-        'signed' => ValidateSignature::class,
-        'throttle' => ThrottleRequests::class,
-        'verified' => EnsureEmailIsVerified::class,
-        'role' => RoleMiddleware::class,
-        'permission' => PermissionMiddleware::class,
+        'auth'               => Authenticate::class,
+        'auth.basic'         => AuthenticateWithBasicAuth::class,
+        'cache.headers'      => SetCacheHeaders::class,
+        'can'                => Authorize::class,
+        'guest'              => RedirectIfAuthenticated::class,
+        'password.confirm'   => RequirePassword::class,
+        'signed'             => ValidateSignature::class,
+        'throttle'           => ThrottleRequests::class,
+        'verified'           => EnsureEmailIsVerified::class,
+        'role'               => RoleMiddleware::class,
+        'permission'         => PermissionMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
+        'activated'          => EnsureIsActivated::class,
     ];
 }

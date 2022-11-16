@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->mediumText('competency_comment')->nullable();
             $table->mediumText('application_reject_reason')->nullable();
             $table->boolean('is_synced_to_sanna')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

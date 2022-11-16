@@ -41,6 +41,7 @@ class ApplicationReject extends Component
         $this->validate();
         $this->applicant->application_status = ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT;
         $this->applicant->application_reject_reason = $this->applicationRejectReason;
+        $this->applicant->is_active = false;
         $this->applicant->save();
         $this->toastNotify(__('Application reject successfully.'), __('Success'), TOAST_SUCCESS);
 

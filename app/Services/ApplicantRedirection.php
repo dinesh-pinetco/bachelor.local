@@ -45,6 +45,11 @@ class ApplicantRedirection
         return redirect()->route('selection-test.index');
     }
 
+    private function test_failed_confirm()
+    {
+        return redirect()->route('selection-test.index');
+    }
+
     private function test_result_pdf_retrieved_on()
     {
         return redirect()->route('application.index', ['tab' => 'industries']);

@@ -9,6 +9,6 @@ class Statistics extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'desired_beginning_date' => 'datetime',
+        'desired_beginning_date' => 'date',
     ];
 }

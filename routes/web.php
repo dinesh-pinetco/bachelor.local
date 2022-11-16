@@ -29,12 +29,12 @@ Route::get('moodle', [TestController::class, 'moodle']);
 Route::get('fetch-result', [TestController::class, 'fetchResult']);
 Route::get('test/{slug}/{email?}', [TestController::class, 'testMail']);
 
-Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
+Route::prefix('secret')->middleware(['role:' . ROLE_EMPLOYEE . '|' . ROLE_ADMIN . '|' . ROLE_SUPER_ADMIN])->group(function () {
     Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');
     Route::get('preview/backup/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
 });
 
-Route::middleware(['auth:sanctum', 'verified', 'role:'.ROLE_APPLICANT])->group(function () {
+Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:' . ROLE_APPLICANT])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::get('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::prefix('application/{tab:slug}')->name('application.')->group(function () {

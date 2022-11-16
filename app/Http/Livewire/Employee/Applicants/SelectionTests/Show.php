@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Employee\Applicants\SelectionTests;
 
+use App\Enums\ApplicationStatus;
 use App\Models\Result;
 use App\Models\Test;
 use App\Models\User;
@@ -91,6 +92,10 @@ class Show extends Component
                 $response = Http::get($cubiaIQTTestResetURL);
             }
         }
+
+        $this->applicant->application_status = ApplicationStatus::TEST_RESET;
+        $this->applicant->save();
+
         $this->toastNotify(__('Selection test reset successfully.'), __('Success'), TOAST_SUCCESS);
         $this->testRefresh();
     }

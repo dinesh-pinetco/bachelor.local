@@ -46,10 +46,11 @@ class User extends Authenticatable implements ContractsAuditable
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at'   => 'datetime',
         'competency_catch_up' => 'boolean',
-        'is_synced_to_sanna' => 'boolean',
-        'application_status' => ApplicationStatus::class,
+        'is_synced_to_sanna'  => 'boolean',
+        'is_active'           => 'boolean',
+        'application_status'  => ApplicationStatus::class,
     ];
 
     protected $appends = [
@@ -137,13 +138,14 @@ class User extends Authenticatable implements ContractsAuditable
             ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON,
             ApplicationStatus::TEST_FAILED,
             ApplicationStatus::TEST_FAILED_CONFIRM,
+            ApplicationStatus::TEST_RESET,
         ]);
     }
 
     public function saveApplicationStatus()
     {
         $results = Result::myResults($this)
-            ->select(['is_passed', 'user_id', 'failed_by_nak'])
+            ->select(['status', 'is_passed', 'user_id', 'failed_by_nak'])
             ->get();
 
         $totalTests = $results->count();
@@ -156,7 +158,6 @@ class User extends Authenticatable implements ContractsAuditable
             // Generate pdf for pass
             // Show confetti
         }
-
         if ($totalTests == $results->where('is_passed', false)->where('failed_by_nak', true)->count()) {
             $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM;
             $this->save();
