@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Employee\Settings;
 
+use App\Enums\FieldType;
 use App\Models\Field;
 use App\Models\Group;
 use App\Models\Tab;
@@ -24,7 +25,7 @@ class Manage extends Component
 
     public Collection $groups;
 
-    public array $multiInputTypes = [Field::FIELD_CHECKBOX, Field::FIELD_SELECT, Field::FIELD_RADIO];
+    public array $multiInputTypes = [FieldType::FIELD_CHECKBOX->value, FieldType::FIELD_SELECT->value, FieldType::FIELD_RADIO->value];
 
     public bool $isEdit = true;
 

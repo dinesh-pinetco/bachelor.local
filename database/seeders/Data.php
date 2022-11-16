@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\FieldType;
 use App\Models\Field;
 
 class Data
@@ -25,7 +26,7 @@ class Data
                         'description' => '',
                         'fields' => [
                             [
-                                'type' => Field::FIELD_FILE,
+                                'type' => FieldType::FIELD_FILE->value,
                                 'label' => 'Bewerbungsfoto',
                                 'placeholder' => 'Wählen Sie eine Datei',
                                 'key' => 'avatar',
@@ -35,7 +36,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_SELECT,
+                                'type' => FieldType::FIELD_SELECT->value,
                                 'label' => 'Geschlecht',
                                 'placeholder' => 'Geschlecht auswählen',
                                 'key' => 'gender',
@@ -59,7 +60,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEXT,
+                                'type' => FieldType::FIELD_TEXT->value,
                                 'label' => 'Vorname',
                                 'key' => 'first_name',
                                 'placeholder' => 'Nachnamen eingeben',
@@ -69,7 +70,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEXT,
+                                'type' => FieldType::FIELD_TEXT->value,
                                 'label' => 'Nachname',
                                 'key' => 'last_name',
                                 'placeholder' => 'Nachnamen eingeben',
@@ -79,7 +80,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_SELECT,
+                                'type' => FieldType::FIELD_SELECT->value,
                                 'label' => 'Akademischer Grad/Titel',
                                 'placeholder' => 'Akademischer Grad/Titel auswählen',
                                 'key' => 'academic_degree',
@@ -103,7 +104,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_DATE,
+                                'type' => FieldType::FIELD_DATE->value,
                                 'label' => 'Geburtsdatum',
                                 'placeholder' => '',
                                 'key' => 'date_of_birth',
@@ -113,7 +114,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEXT,
+                                'type' => FieldType::FIELD_TEXT->value,
                                 'label' => 'Geburtsort',
                                 'placeholder' => 'Geburtsort eingeben',
                                 'key' => 'place_of_birth',
@@ -123,7 +124,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             // [
-                            //     'type'        => Field::FIELD_TEXT,
+                            //     'type'        => FieldType::FIELD_TEXT->value,
                             //     'label'       => 'Geburtsland',
                             //     'placeholder' => 'Geburtsland eingeben',
                             //     'sort_order'  => 1,
@@ -132,7 +133,7 @@ class Data
                             //     'meta_data'   => [],
                             // ],
                             [
-                                'type' => Field::FIELD_SELECT,
+                                'type' => FieldType::FIELD_SELECT->value,
                                 'label' => 'Geburtsland',
                                 'key' => 'nationality_id',
                                 'placeholder' => 'Geburtsland eingeben',
@@ -144,7 +145,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_SELECT,
+                                'type' => FieldType::FIELD_SELECT->value,
                                 'label' => 'Staatsbürgerschaft (Staat)',
                                 'key' => 'citizenship_id',
                                 'placeholder' => 'Staatsangehörigkeit eingeben (Staat)',
@@ -163,7 +164,7 @@ class Data
                         'description' => '',
                         'fields' => [
                             [
-                                'type' => Field::FIELD_SELECT,
+                                'type' => FieldType::FIELD_SELECT->value,
                                 'label' => 'Gewünschter Studiengang',
                                 'key' => 'course_id',
                                 'placeholder' => 'Gewünschten Studiengang auswählen',
@@ -175,7 +176,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_SELECT,
+                                'type' => FieldType::FIELD_SELECT->value,
                                 'label' => 'Zum gewünschten Studienbeginn',
                                 'key' => 'desired_beginning_id',
                                 'placeholder' => 'Wählen Sie Gewünschter Studienbeginn',
@@ -194,7 +195,7 @@ class Data
                         'description' => '',
                         'fields' => [
                             [
-                                'type' => Field::FIELD_TEXT,
+                                'type' => FieldType::FIELD_TEXT->value,
                                 'label' => 'Straße/Hausnummer',
                                 'placeholder' => 'Straße und Hausnummer eingeben',
                                 'key' => 'street_house_number',
@@ -204,7 +205,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEXT,
+                                'type' => FieldType::FIELD_TEXT->value,
                                 'label' => 'Postleitzahl',
                                 'placeholder' => 'Postleitzahl eingeben',
                                 'key' => 'postal_code',
@@ -214,7 +215,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEXT,
+                                'type' => FieldType::FIELD_TEXT->value,
                                 'label' => 'Standort',
                                 'placeholder' => 'Ort eingeben',
                                 'key' => 'location',
@@ -224,7 +225,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEL,
+                                'type' => FieldType::FIELD_TEL->value,
                                 'label' => 'Telefon',
                                 'placeholder' => 'Telefon eingeben',
                                 'key' => 'phone',
@@ -234,7 +235,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_EMAIL,
+                                'type' => FieldType::FIELD_EMAIL->value,
                                 'label' => 'E-Mail Adresse',
                                 'placeholder' => 'E-Mail Adresse eingeben',
                                 'key' => 'email',
@@ -244,7 +245,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_CHECKBOX,
+                                'type' => FieldType::FIELD_CHECKBOX->value,
                                 'label' => '',
                                 'placeholder' => null,
                                 'key' => 'privacy_policy',
@@ -281,7 +282,7 @@ class Data
                         'add_more_label' => 'weiteren Arbeitgeber hinzufügen',
                         'fields' => [
                             [
-                                'type' => Field::FIELD_SELECT,
+                                'type' => FieldType::FIELD_SELECT->value,
                                 'label' => 'Industry',
                                 'placeholder' => 'Select Industry',
                                 'key' => 'industry',
@@ -332,7 +333,7 @@ class Data
                         'description' => '',
                         'fields' => [
                             [
-                                'type' => Field::FIELD_TEXTAREA,
+                                'type' => FieldType::FIELD_TEXTAREA->value,
                                 'label' => 'Bitte begründen Sie Ihren Studienwunsch.',
                                 'placeholder' => '',
                                 'sort_order' => 1,
@@ -342,7 +343,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEXTAREA,
+                                'type' => FieldType::FIELD_TEXTAREA->value,
                                 'label' => 'Welche Erwartungen haben Sie an das Studium (Inhalte, Studienmotivation, Berufsplanung, zeitlicher und finanzieller Aufwand)?',
                                 'placeholder' => '',
                                 'sort_order' => 1,
@@ -351,7 +352,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => Field::FIELD_TEXTAREA,
+                                'type' => FieldType::FIELD_TEXTAREA->value,
                                 'label' => 'Unterstützt Ihr Arbeitgeber Sie zeitlich und/oder finanziell?',
                                 'placeholder' => '',
                                 'sort_order' => 1,

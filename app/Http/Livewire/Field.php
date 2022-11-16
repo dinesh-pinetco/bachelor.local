@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\FieldType;
 use App\Models\Course;
-use App\Models\Field as FieldModel;
 use App\Models\FieldValue;
 use App\Services\DesiredBeginningFilter;
 use App\Services\Hubspot\Contact;
@@ -87,7 +87,7 @@ class Field extends Component
             $this->field = $this->value->fields()->first();
         }
 
-        if ($this->fieldValue && $this->field->type == FieldModel::FIELD_FILE) {
+        if ($this->fieldValue && $this->field->type == FieldType::FIELD_FILE->value) {
             $this->fieldValue = Storage::url($this->fieldValue);
         }
 

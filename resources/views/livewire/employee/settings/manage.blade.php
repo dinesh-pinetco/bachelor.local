@@ -69,7 +69,7 @@
                                 <x-jet-input-error for="field.type"/>
                             </div>
 
-                            @if ($field->type == Field::FIELD_SELECT)
+                            @if ($field->type == App\Enums\FieldType::FIELD_SELECT->value)
                                 <div>
                                     <x-jet-label for="wantToUseTable" class="block">
                                         {{ __('Do you want to use table to set options?') }}

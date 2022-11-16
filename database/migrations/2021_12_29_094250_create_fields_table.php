@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Field;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +17,7 @@ class CreateFieldsTable extends Migration
             $table->id();
             $table->foreignId('tab_id');
             $table->foreignId('group_id')->nullable();
-            $table->enum('type', Field::types());
+            $table->string('type');
             $table->string('related_option_table')->nullable()->comment('Table name to fetch options for this field');
             $table->string('label')->nullable();
             $table->string('key')->nullable();

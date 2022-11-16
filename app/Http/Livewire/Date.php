@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Field;
+use App\Enums\FieldType;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -34,11 +34,11 @@ class Date extends Component
 
         $fieldValue = $this->applicant->values()->where('group_key', $this->groupKey)->where('field_id', $this->field->id)->first();
 
-        if ($fieldValue && $this->field->type != Field::FIELD_MONTH) {
+        if ($fieldValue && $this->field->type != FieldType::FIELD_MONTH->value) {
             $this->year = data_get(Str::of($fieldValue->value)->explode('-'), '0');
             $this->month = data_get(Str::of($fieldValue->value)->explode('-'), '1');
             $this->day = data_get(Str::of($fieldValue->value)->explode('-'), '2');
-        } elseif ($fieldValue && $this->field->type === Field::FIELD_MONTH) {
+        } elseif ($fieldValue && $this->field->type === FieldType::FIELD_MONTH->value) {
             $this->month = data_get($fieldValue, 'value');
         }
     }
@@ -59,11 +59,11 @@ class Date extends Component
             $this->date = $this->year.'-'.$this->month.'-'.$this->day;
 
             $this->emitUp('date-updated', $this->date);
-        } elseif ($this->field->type === Field::FIELD_MONTH_YEAR && $this->month && $this->year) {
+        } elseif ($this->field->type === FieldType::FIELD_MONTH_YEAR->value && $this->month && $this->year) {
             $this->date = $this->year.'-'.$this->month;
 
             $this->emitUp('date-updated', $this->date);
-        } elseif ($this->field->type === Field::FIELD_MONTH && $this->month) {
+        } elseif ($this->field->type === FieldType::FIELD_MONTH->value && $this->month) {
             $this->date = $this->month;
 
             $this->emitUp('date-updated', $this->date);
