@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Enums\ApplicationStatus;
 use App\Models\FieldValue;
 use App\Models\User;
+use App\Services\ProgressBar;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
@@ -35,7 +36,7 @@ class FieldValuePolicy
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {
                 return false;
             } else {
-                return $applicantStatus == ApplicationStatus::REGISTRATION_SUBMITTED;
+                return (new ProgressBar(auth()->id()))->overAllProgress() != 100;
             }
         } elseif (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {
