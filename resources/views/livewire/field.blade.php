@@ -7,20 +7,20 @@
         </label>
     @endif
 
-    @if ($field->type === App\Enums\FieldType::FIELD_DATE->value)
+    @if ($field->type === App\Enums\FieldType::FIELD_DATE())
         <livewire:date :isEdit="$isEdit" :groupKey="$groupKey" :field="$field" :key="time() . $field->id" :applicant="$applicant" />
         @include('inputs.error-message', [
             'field' => $field,
             'validation_errors' => $validation_errors,
         ])
-    @elseif($field->type === App\Enums\FieldType::FIELD_MONTH->value)
+    @elseif($field->type === App\Enums\FieldType::FIELD_MONTH())
         <livewire:date :isEdit="$isEdit" :groupKey="$groupKey" :field="$field" :key="time() . $field->id" hiddenFields="day,year"
             :applicant="$applicant" />
         @include('inputs.error-message', [
             'field' => $field,
             'validation_errors' => $validation_errors,
         ])
-    @elseif($field->type === App\Enums\FieldType::FIELD_MONTH_YEAR->value)
+    @elseif($field->type === App\Enums\FieldType::FIELD_MONTH_YEAR())
         <livewire:date :isEdit="$isEdit" :groupKey="$groupKey" :field="$field" :key="time() . $field->id" hiddenFields="day"
             :applicant="$applicant" />
         @include('inputs.error-message', [

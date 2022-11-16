@@ -25,7 +25,7 @@ class Manage extends Component
 
     public Collection $groups;
 
-    public array $multiInputTypes = [FieldType::FIELD_CHECKBOX->value, FieldType::FIELD_SELECT->value, FieldType::FIELD_RADIO->value];
+    public array $multiInputTypes = [FieldType::FIELD_CHECKBOX(), FieldType::FIELD_SELECT(), FieldType::FIELD_RADIO()];
 
     public bool $isEdit = true;
 

@@ -87,7 +87,7 @@ class Field extends Component
             $this->field = $this->value->fields()->first();
         }
 
-        if ($this->fieldValue && $this->field->type == FieldType::FIELD_FILE->value) {
+        if ($this->fieldValue && $this->field->type == FieldType::FIELD_FILE()) {
             $this->fieldValue = Storage::url($this->fieldValue);
         }
 

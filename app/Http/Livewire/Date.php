@@ -38,7 +38,7 @@ class Date extends Component
             $this->year = data_get(Str::of($fieldValue->value)->explode('-'), '0');
             $this->month = data_get(Str::of($fieldValue->value)->explode('-'), '1');
             $this->day = data_get(Str::of($fieldValue->value)->explode('-'), '2');
-        } elseif ($fieldValue && $this->field->type === FieldType::FIELD_MONTH->value) {
+        } elseif ($fieldValue && $this->field->type === FieldType::FIELD_MONTH()) {
             $this->month = data_get($fieldValue, 'value');
         }
     }
@@ -59,11 +59,11 @@ class Date extends Component
             $this->date = $this->year.'-'.$this->month.'-'.$this->day;
 
             $this->emitUp('date-updated', $this->date);
-        } elseif ($this->field->type === FieldType::FIELD_MONTH_YEAR->value && $this->month && $this->year) {
+        } elseif ($this->field->type === FieldType::FIELD_MONTH_YEAR() && $this->month && $this->year) {
             $this->date = $this->year.'-'.$this->month;
 
             $this->emitUp('date-updated', $this->date);
-        } elseif ($this->field->type === FieldType::FIELD_MONTH->value && $this->month) {
+        } elseif ($this->field->type === FieldType::FIELD_MONTH() && $this->month) {
             $this->date = $this->month;
 
             $this->emitUp('date-updated', $this->date);
