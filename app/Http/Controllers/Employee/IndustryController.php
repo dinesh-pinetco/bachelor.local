@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Option;
-use Illuminate\Http\Request;
 
 class IndustryController extends Controller
 {
@@ -21,6 +20,7 @@ class IndustryController extends Controller
     public function clone(Option $option)
     {
         $option = $option->replicate();
+
         return view('employee.industries.manage-option', compact('option'));
     }
 }

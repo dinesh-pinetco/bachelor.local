@@ -65,7 +65,7 @@ class Index extends Component
             $fields = $this->tab->fields()->filter()->orderBy('sort_order')->paginate($this->perPage);
             $options = [];
         } else {
-            $fields =  [];
+            $fields = [];
             $options = $this->tab->fields->first()->options()->paginate($this->perPage);
         }
 

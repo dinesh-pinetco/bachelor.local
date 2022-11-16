@@ -17,8 +17,8 @@ class ManageOption extends Component
     public function rules()
     {
         return [
-            'option.key'   => [ 'required', 'min:2', 'max:256', Rule::unique('options', 'key')->ignore($this->option->id)],
-            'option.value' => [ 'required', 'min:2', 'max:256' ],
+            'option.key' => ['required', 'min:2', 'max:256', Rule::unique('options', 'key')->ignore($this->option->id)],
+            'option.value' => ['required', 'min:2', 'max:256'],
         ];
     }
 
@@ -26,7 +26,7 @@ class ManageOption extends Component
     {
         $this->editMode = isset($this->option) && $this->option->exists;
 
-        if (!$this->editMode && !($this->option->key)) {
+        if (! $this->editMode && ! ($this->option->key)) {
             $this->option = new option();
         }
     }

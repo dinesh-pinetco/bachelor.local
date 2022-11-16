@@ -158,10 +158,10 @@ class Moodle
             $status = $grade != '-' ? Result::STATUS_COMPLETED : $result->status;
 
             $result->update([
-                'status'    => $status,
+                'status' => $status,
                 'is_passed' => $grade >= 50,
-                'result'    => $grade,
-                'meta'      => $responseJson
+                'result' => $grade,
+                'meta' => $responseJson,
             ]);
 
             $result->user->saveApplicationStatus();

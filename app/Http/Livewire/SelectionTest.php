@@ -44,7 +44,7 @@ class SelectionTest extends Component
 
     public function getTestResultPdf()
     {
-        if ($this->applicant->application_status == ApplicationStatus::TEST_PASSED){
+        if ($this->applicant->application_status == ApplicationStatus::TEST_PASSED) {
             $this->open();
         }
 

@@ -82,18 +82,18 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'               => Authenticate::class,
-        'auth.basic'         => AuthenticateWithBasicAuth::class,
-        'cache.headers'      => SetCacheHeaders::class,
-        'can'                => Authorize::class,
-        'guest'              => RedirectIfAuthenticated::class,
-        'password.confirm'   => RequirePassword::class,
-        'signed'             => ValidateSignature::class,
-        'throttle'           => ThrottleRequests::class,
-        'verified'           => EnsureEmailIsVerified::class,
-        'role'               => RoleMiddleware::class,
-        'permission'         => PermissionMiddleware::class,
+        'auth' => Authenticate::class,
+        'auth.basic' => AuthenticateWithBasicAuth::class,
+        'cache.headers' => SetCacheHeaders::class,
+        'can' => Authorize::class,
+        'guest' => RedirectIfAuthenticated::class,
+        'password.confirm' => RequirePassword::class,
+        'signed' => ValidateSignature::class,
+        'throttle' => ThrottleRequests::class,
+        'verified' => EnsureEmailIsVerified::class,
+        'role' => RoleMiddleware::class,
+        'permission' => PermissionMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
-        'activated'          => EnsureIsActivated::class,
+        'activated' => EnsureIsActivated::class,
     ];
 }
