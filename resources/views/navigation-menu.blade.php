@@ -225,21 +225,6 @@
                             </x-jet-nav-link>
                         </li>
                         <li>
-                            <x-jet-nav-link href="{{ route('application.index',['tab' => 'industries']) }}"
-                                            :active="urlContains('industries') || urlContains('motivation') || urlContains('documents')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M8.63406 1.95134C8.43473 1.33734 7.56606 1.33734 7.36606 1.95134L6.3534 5.06734C6.30978 5.20111 6.22496 5.31765 6.11108 5.40028C5.9972 5.4829 5.8601 5.52738 5.7194 5.52735H2.4434C1.79806 5.52735 1.52873 6.35401 2.0514 6.73401L4.70206 8.65935C4.81593 8.74212 4.90066 8.85881 4.94414 8.9927C4.98761 9.12659 4.98758 9.2708 4.94406 9.40468L3.93206 12.5207C3.73206 13.1347 4.4354 13.646 4.9574 13.266L7.60806 11.3407C7.72199 11.2579 7.85922 11.2133 8.00006 11.2133C8.14091 11.2133 8.27814 11.2579 8.39206 11.3407L11.0427 13.266C11.5647 13.646 12.2681 13.1353 12.0681 12.5207L11.0561 9.40468C11.0125 9.2708 11.0125 9.12659 11.056 8.9927C11.0995 8.85881 11.1842 8.74212 11.2981 8.65935L13.9487 6.73401C14.4707 6.35401 14.2027 5.52735 13.5567 5.52735H10.2801C10.1395 5.52724 10.0025 5.4827 9.88878 5.40008C9.77503 5.31746 9.69031 5.201 9.64673 5.06734L8.63406 1.95134Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Application') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-                        <li>
                             <x-jet-nav-link href="{{ route('selection-test.index') }}"
                                             :active="request()->routeIs('selection-test.index')"
                                             class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
@@ -252,6 +237,21 @@
                                     </svg>
                                 </div>
                                 <span>{{ __('Selection tests') }}</span>
+                            </x-jet-nav-link>
+                        </li>
+                        <li>
+                            <x-jet-nav-link href="{{ route('application.index',['tab' => 'industries']) }}"
+                                            :active="urlContains('industries') || urlContains('motivation') || urlContains('documents')"
+                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                                <div
+                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
+                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
+                                        <path
+                                            d="M8.63406 1.95134C8.43473 1.33734 7.56606 1.33734 7.36606 1.95134L6.3534 5.06734C6.30978 5.20111 6.22496 5.31765 6.11108 5.40028C5.9972 5.4829 5.8601 5.52738 5.7194 5.52735H2.4434C1.79806 5.52735 1.52873 6.35401 2.0514 6.73401L4.70206 8.65935C4.81593 8.74212 4.90066 8.85881 4.94414 8.9927C4.98761 9.12659 4.98758 9.2708 4.94406 9.40468L3.93206 12.5207C3.73206 13.1347 4.4354 13.646 4.9574 13.266L7.60806 11.3407C7.72199 11.2579 7.85922 11.2133 8.00006 11.2133C8.14091 11.2133 8.27814 11.2579 8.39206 11.3407L11.0427 13.266C11.5647 13.646 12.2681 13.1353 12.0681 12.5207L11.0561 9.40468C11.0125 9.2708 11.0125 9.12659 11.056 8.9927C11.0995 8.85881 11.1842 8.74212 11.2981 8.65935L13.9487 6.73401C14.4707 6.35401 14.2027 5.52735 13.5567 5.52735H10.2801C10.1395 5.52724 10.0025 5.4827 9.88878 5.40008C9.77503 5.31746 9.69031 5.201 9.64673 5.06734L8.63406 1.95134Z"
+                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <span>{{ __('Application') }}</span>
                             </x-jet-nav-link>
                         </li>
                         <li>
@@ -280,7 +280,7 @@
                         </x-danger-button>
                         <livewire:application-reject/>
                         @endrole
-                    @endrole
+                        @endrole
             </div>
         </div>
     </div>
