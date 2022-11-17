@@ -10,7 +10,7 @@ class DesiredBeginningSeeder extends Seeder
     public function run()
     {
         DesiredBeginning::create([
-            'name' => '1. Oktober',
+            'name' => 'Oktober',
             'day' => 1,
             'month' => 10,
         ]);

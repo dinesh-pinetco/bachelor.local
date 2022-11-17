@@ -51,7 +51,7 @@ class Register extends Component
             $selectedCourse = $this->courses->where('id', $this->courseId)->first();
             $this->desiredBeginnings = $this->getDesiredBeginningFilter($selectedCourse);
             $data = $this->desiredBeginnings[$this->desiredBeginning];
-            $month = $data->id == 1 ? 'April' : 'October';
+            $month = convertNumberToMonth($data->month);
             $this->courseStartDate = (new Carbon('first day of '.$month.' '.$data->date->format('Y')))->toDateString();
             $this->desiredBeginningId = $data->id;
         }

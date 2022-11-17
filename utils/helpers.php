@@ -62,3 +62,8 @@ function datetimeFormatForHubspot(Carbon\Carbon $datetime)
 {
     return $datetime->getTimestampMs();
 }
+
+function convertNumberToMonth($number = 1)
+{
+    return date('F', mktime(0, 0, 0, $number, 10));
+}
