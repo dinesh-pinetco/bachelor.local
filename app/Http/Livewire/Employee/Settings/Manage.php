@@ -25,7 +25,7 @@ class Manage extends Component
 
     public Collection $groups;
 
-    public array $multiInputTypes = [];
+    public array $multiInputTypes = ['checkbox', 'select', 'radio'];
 
     public bool $isEdit = true;
 
@@ -86,7 +86,7 @@ class Manage extends Component
 
         $this->tab = $tab;
         $this->groups = Group::where('tab_id', $tab->id)->whereDoesntHave('child')->get();
-        $this->types = Field::types();
+        $this->types = FieldType::values();
     }
 
     private function pushInitialOption()
@@ -131,11 +131,6 @@ class Manage extends Component
         $this->field->related_option_table = null;
         $this->options = [];
         $this->pushInitialOption();
-    }
-
-    public function render()
-    {
-        return view('livewire.employee.settings.manage');
     }
 
     public function updateOptionValue($value, $key)
@@ -193,5 +188,10 @@ class Manage extends Component
         session()->flash('banner', __('Field cloned successfully!'));
 
         $this->redirectToIndex();
+    }
+
+    public function render()
+    {
+        return view('livewire.employee.settings.manage');
     }
 }

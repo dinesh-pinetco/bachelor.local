@@ -1,7 +1,7 @@
 <div>
     <x-data-table.table :model="$applicants" :columns="$columns" :statuses="$statuses"
-                        :selectedStatusesSummery="$selectedStatusesSummery"
                         :applicantsTableFields="$applicantsTableFields"
+                        :authPreferencesFields="$authPreferencesFields"
                         :selectedShowFields="$selectedShowFields">
         <x-slot name="tableAction"></x-slot>
         <x-slot name="head">
@@ -22,7 +22,7 @@
                         ])
                     </a>
                 </th>
-                @if(data_get($authPreferencesFields,'email'))
+                @if(in_array('email', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a wire:click="sort('email')" role="button" href="#">
                             {{ __('Email') }}
@@ -32,7 +32,7 @@
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'created_at'))
+                @if(in_array('created_at', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a wire:click="sort('created_at')" role="button" href="#">
                             {{ __('Created at') }}
@@ -42,21 +42,21 @@
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'course_name'))
+                @if(in_array('course_name', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a role="button" href="#">
                             {{ __('Study course') }}
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'course_start_date'))
+                @if(in_array('course_start_date', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a role="button" href="#">
                             {{ __('Desired beginning') }}
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'application_status_name'))
+                @if(in_array('application_status_name', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a wire:click="sort('application_status')" role="button" href="#">
                             {{ __('Status') }}
@@ -66,14 +66,14 @@
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'ects_point'))
+                @if(in_array('ects_point', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a role="button" href="#">
                             {{ __('ects_point') }}
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'government_form_is_submit'))
+                @if(in_array('government_form_is_submit', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a role="button" href="#">
                             {{ __('government_form_is_submit') }}
@@ -83,7 +83,7 @@
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'study_sheet_is_submit'))
+                @if(in_array('study_sheet_is_submit', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a role="button" href="#">
                             {{ __('study_sheet_is_submit') }}
@@ -93,7 +93,7 @@
                         </a>
                     </th>
                 @endif
-                @if(data_get($authPreferencesFields,'sanna_is_sync'))
+                @if(in_array('sanna_is_sync', $authPreferencesFields))
                     <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">
                         <a role="button" href="#">
                             {{ __('sanna_is_sync') }}
@@ -114,29 +114,29 @@
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $applicant->first_name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $applicant->last_name }}</td>
-                    @if(data_get($authPreferencesFields,'email'))
+                    @if(in_array('email', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $applicant->email }}</td>
                     @endif
-                    @if(data_get($authPreferencesFields,'created_at'))
+                    @if(in_array('created_at', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                             {{ $applicant->created_at->format('d.m.Y') }}
                         </td>
                     @endif
-                    @if(data_get($authPreferencesFields,'course_name'))
+                    @if(in_array('course_name', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->Courses->first()->name) }}</td>
                     @endif
-                    @if(data_get($authPreferencesFields,'course_start_date'))
+                    @if(in_array('course_start_date', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->course->first()?->course_start_date?->format('d.m.Y')) }}</td>
                     @endif
-                    @if(data_get($authPreferencesFields,'application_status_name'))
+                    @if(in_array('application_status_name', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->application_status->value) }}</td>
                     @endif
-                    @if(data_get($authPreferencesFields,'ects_point'))
+                    @if(in_array('ects_point', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                             {{ $applicant->getEctsPointvalue('ects_point') }}
                         </td>
                     @endif
-                    @if(data_get($authPreferencesFields,'government_form_is_submit'))
+                    @if(in_array('government_form_is_submit', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                             @if($applicant->government_form_is_submit?->is_submit)
                                 <x-icons.success/>
@@ -145,7 +145,7 @@
                             @endif
                         </td>
                     @endif
-                    @if(data_get($authPreferencesFields,'study_sheet_is_submit'))
+                    @if(in_array('study_sheet_is_submit', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                             @if($applicant->study_sheet?->is_submit)
                                 <x-icons.success/>
@@ -154,7 +154,7 @@
                             @endif
                         </td>
                     @endif
-                    @if(data_get($authPreferencesFields,'sanna_is_sync'))
+                    @if(in_array('sanna_is_sync', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                             @if($applicant->is_synced_to_sanna)
                                 <x-icons.success/>

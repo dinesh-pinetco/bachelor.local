@@ -31,20 +31,25 @@
             @endif
             @isset($statuses)
                 <div class="w-full lg:w-1/3 px-2 order-2 xl:order-3 mt-4 sm:mt-0 sm:mb-4 lg:mb-0">
-                    <x-multi-select name='selectedStatuses'
-                                    :placeholder="__('Select Status')"
-                                    :options='$statuses'
-                                    :summeryText='$selectedStatusesSummery'
-                                    label="label"/>
+                    <x-multi-select
+                        key="statusMultiSelect"
+                        wire:model="selectedStatuses"
+                        :placeholder="__('Select Status')"
+                        :options="$statuses"
+                        keyBy="id"
+                        labelBy="label"
+                    />
                 </div>
             @endisset
             @isset($applicantsTableFields)
                 <div class="w-full lg:w-1/3 px-2 order-2 xl:order-3 mt-4 sm:mt-0 sm:mb-4 lg:mb-0">
-                    <x-multi-select-for-remaining-fields
-                        name="authPreferencesFields"
+                    <x-multi-select
+                        key="fieldMultiSelect"
+                        wire:model="authPreferencesFields"
                         :placeholder="__('Field dynamic')"
-                        :options='$applicantsTableFields'
-                        :summeryText='$selectedShowFields'
+                        :options="$applicantsTableFields"
+                        keyBy="key"
+                        labelBy="label"
                     />
                 </div>
             @endisset

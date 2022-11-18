@@ -39,51 +39,26 @@ class Index extends Component
 
     public array $selectedStatuses = [];
 
-    public $selectedStatusesSummery;
-
-    public $authPreferencesFields;
+    public array $authPreferencesFields = [];
 
     public $applicantsTableFields;
 
     public $selectedShowFields;
 
-    protected $listeners = ['refresh' => '$refresh'];
+    protected $listeners = ['refresh' => '$refresh', 'multiSelectValueUpdated'];
 
     public function mount()
     {
         $this->statuses = ApplicationStatus::selectionOptions();
 
         $this->authPreferencesFields = $this->getUserPreferenceFields();
-        $this->applicantsTableFields = config('application.applicants_fields');
 
-        $this->selectedFieldsDropdownTitle();
-        $this->syncSelectedOptions();
-    }
-
-    public function updatedAuthPreferencesFields($value, $key)
-    {
-        if (! $value) {
-            $this->authPreferencesFields = Arr::where($this->authPreferencesFields, function ($value) {
-                return $value !== false;
-            });
-        }
-
-        $this->updateSettingsList(array_values($this->authPreferencesFields));
-        $this->selectedFieldsDropdownTitle();
-    }
-
-    public function selectedFieldsDropdownTitle()
-    {
-        if ($this->authPreferencesFields) {
-            $firstValue = key($this->authPreferencesFields);
-            $this->selectedShowFields = __($firstValue);
-
-            if (count($this->authPreferencesFields) > 1) {
-                $this->selectedShowFields .= ' +'.(count($this->authPreferencesFields) - 1);
-            }
-        } else {
-            $this->selectedShowFields = null;
-        }
+        collect(collect(config('application.applicants_fields')))->each(function($applicantsTableField) {
+            $this->applicantsTableFields[] = [
+                'key' => $applicantsTableField,
+                'label' => $applicantsTableField
+            ];
+        });
     }
 
     public function updateSettingsList($fieldsList)
@@ -94,38 +69,21 @@ class Index extends Component
         );
     }
 
+    public function updatedAuthPreferencesFields()
+    {
+        $this->updateSettingsList(array_values($this->authPreferencesFields));
+    }
+
     protected function getUserPreferenceFields()
     {
         $collections = UserPreference::where('user_id', auth()->id())->value('settings');
         $options = [];
 
         foreach ($collections ?? [] as $field) {
-            $options[$field] = $field;
+            $options[] = $field;
         }
 
         return $options;
-    }
-
-    public function updatedSelectedStatuses()
-    {
-        $this->selectedStatuses = Arr::where($this->selectedStatuses, function ($value) {
-            return $value !== false;
-        });
-
-        $this->syncSelectedOptions();
-    }
-
-    public function syncSelectedOptions()
-    {
-        if ($this->statuses && $this->selectedStatuses) {
-            $this->selectedStatusesSummery = $this->statuses->where('id', array_key_first($this->selectedStatuses))->first()->translated_name;
-
-            if (count($this->selectedStatuses) > 1) {
-                $this->selectedStatusesSummery .= ' +'.(count($this->selectedStatuses) - 1);
-            }
-        } else {
-            $this->selectedStatusesSummery = null;
-        }
     }
 
     public function openConfirmModal(User $applicant)
