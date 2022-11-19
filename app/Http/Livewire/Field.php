@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Enums\FieldType;
 use App\Models\Course;
 use App\Models\FieldValue;
+use App\Models\Option;
 use App\Services\DesiredBeginningFilter;
 use App\Services\Hubspot\Contact;
 use App\Services\ModelHelper;
@@ -91,6 +92,11 @@ class Field extends Component
             $this->fieldValue = Storage::url($this->fieldValue);
         }
 
+        if ($this->field && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
+            $selectedValues = Option::whereIn('key', json_decode($this->value->value))->where('field_id', $this->field->id)->get()->pluck('key')->toArray();
+            $this->fieldValue = $this->value ? $selectedValues : [];
+        }
+
         if ($this->field->related_option_table == 'courses'
             || $this->field->related_option_table == 'desired_beginnings'
         ) {
@@ -114,11 +120,6 @@ class Field extends Component
         } catch (Throwable $th) {
             $this->isEdit = false;
         }
-    }
-
-    public function render()
-    {
-        return view('livewire.field');
     }
 
     public function updateDate($date)
@@ -165,7 +166,7 @@ class Field extends Component
             $this->authorizeForUser($this->applicant, 'create', FieldValue::class);
             $this->value = $this->applicant->values()->create([
                 'field_id' => $this->field->id,
-                'value' => $this->fieldValue,
+                'value' => is_array($this->fieldValue) ? json_encode($this->fieldValue) : $this->fieldValue,
                 'group_key' => $this->groupKey,
             ]);
         }
@@ -268,5 +269,10 @@ class Field extends Component
                 }
             }
         }
+    }
+
+    public function render()
+    {
+        return view('livewire.field');
     }
 }

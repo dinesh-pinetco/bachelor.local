@@ -45,7 +45,7 @@ class Index extends Component
 
     public $selectedShowFields;
 
-    protected $listeners = ['refresh' => '$refresh', 'multiSelectValueUpdated'];
+    protected $listeners = ['refresh' => '$refresh'];
 
     public function mount()
     {
@@ -53,7 +53,7 @@ class Index extends Component
 
         $this->authPreferencesFields = $this->getUserPreferenceFields();
 
-        collect(collect(config('application.applicants_fields')))->each(function($applicantsTableField) {
+        collect(config('application.applicants_fields'))->each(function($applicantsTableField) {
             $this->applicantsTableFields[] = [
                 'key' => $applicantsTableField,
                 'label' => $applicantsTableField

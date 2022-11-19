@@ -28,7 +28,7 @@
             this.$watch('value', () => this.setPlaceholder());
         },
         setPlaceholder() {
-            if(this.value.length) {
+            if(this.value && this.value.length) {
                 this.placeholder = this.getLabel(this.options.find(option => this.getKey(option) === (isNaN(this.value[0]) ? this.value[0] : parseInt(this.value[0]))));
 
                 let totalSelected = this.value.length;
