@@ -245,6 +245,7 @@ class Field extends Component
 
     private function attachOptions()
     {
+        
         if ($this->field->related_option_table == 'courses') {
             $this->courseOptions = Course::active()
                 ->where(fn ($q) => $q->whereNull('last_start')->orWhere('last_start', '>', today()))
