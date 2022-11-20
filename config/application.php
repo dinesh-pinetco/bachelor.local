@@ -2,13 +2,13 @@
 
 return [
     'option_tables' => [
-        'courses',
         'desired_beginnings',
+        'courses',
         'nationalities',
     ],
     'option_tables_key' => [
-        'courses' => 'course_id',
         'desired_beginnings' => 'desired_beginning_id',
+        'courses' => 'course_id',
         'nationalities' => 'country_id',
     ],
     'applicants_fields' => [

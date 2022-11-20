@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Filters\CourseFilters;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +21,8 @@ class Course extends Model implements ContractsAuditable
 
     protected $casts = [
         'is_active' => 'boolean',
+        'first_start' => 'date',
+        'last_start' => 'date',
     ];
 
     public static function boot()
@@ -36,11 +37,6 @@ class Course extends Model implements ContractsAuditable
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
-    }
-
-    public function desired_beginnings(): BelongsToMany
-    {
-        return $this->belongsToMany(DesiredBeginning::class)->orderBy('month');
     }
 
     public function statistics(): HasMany

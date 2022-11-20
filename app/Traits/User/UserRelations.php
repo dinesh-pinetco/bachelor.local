@@ -2,8 +2,10 @@
 
 namespace App\Traits\User;
 
+use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Models\Meteor;
+use App\Models\ModelHasCourse;
 use App\Models\Moodle;
 use App\Models\Result;
 use App\Models\UserHubspotConfiguration;
@@ -41,5 +43,23 @@ trait UserRelations
     public function hubspotConfiguration()
     {
         return $this->hasOne(UserHubspotConfiguration::class);
+    }
+
+    public function desiredBeginning()
+    {
+        return $this->hasOne(DesiredBeginning::class)
+            ->latest();
+    }
+
+    public function courses()
+    {
+        return $this->hasManyThrough(
+            ModelHasCourse::class,
+            DesiredBeginning::class,
+            'user_id',
+            'model_id',
+            'id',
+            'id'
+        )->where('model_type', DesiredBeginning::class);
     }
 }

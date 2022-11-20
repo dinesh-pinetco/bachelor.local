@@ -28,7 +28,7 @@
             this.$watch('value', () => this.setPlaceholder());
         },
         setPlaceholder() {
-            if(this.value.length) {
+            if(this.value && this.value.length) {
                 this.placeholder = this.getLabel(this.options.find(option => this.getKey(option) === (isNaN(this.value[0]) ? this.value[0] : parseInt(this.value[0]))));
 
                 let totalSelected = this.value.length;
@@ -94,7 +94,7 @@
             type="button"
             class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
         >
-            <span class="block truncate" x-text="placeholder"></span>
+            <span class="text-primary block truncate" x-text="placeholder"></span>
             <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <!-- Heroicon name: mini/chevron-up-down -->
                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

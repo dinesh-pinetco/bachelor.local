@@ -16,8 +16,6 @@ class CreateModelHasCoursesTable extends Migration
         Schema::create('model_has_courses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('desired_beginning_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->date('course_start_date')->nullable();
             $table->string('model_type');
             $table->unsignedBigInteger('model_id');
             $table->softDeletes();

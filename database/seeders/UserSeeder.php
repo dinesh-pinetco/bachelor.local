@@ -22,9 +22,8 @@ class UserSeeder extends Seeder
             'last_name' => 'Applicant',
             'email' => 'applicant@example.com',
             'application_status' => ApplicationStatus::REGISTRATION_SUBMITTED,
-        ])->assignRole(ROLE_APPLICANT);
-        $user->attachCourseWithDesiredBeginning(1, 1, (new Carbon('first day of October'))->toDateString());
-        (new SyncUserValue($user))();
+        ]);
+        $this->userCreatedProcess($user);
 
         $user = User::factory()->create([
             'first_name' => 'Pooja',
@@ -32,16 +31,20 @@ class UserSeeder extends Seeder
             'email' => 'pooja@example.com',
             'locale' => 'en',
             'application_status' => ApplicationStatus::REGISTRATION_SUBMITTED,
-        ])->assignRole(ROLE_APPLICANT);
-        $user->attachCourseWithDesiredBeginning(1, 1, (new Carbon('first day of October'))->toDateString());
-        (new SyncUserValue($user))();
+        ]);
+        $this->userCreatedProcess($user);
 
         tap(User::factory(50)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
-            $users->each->assignRole(ROLE_APPLICANT);
-            $users->each->attachCourseWithDesiredBeginning(1, 1, (new Carbon('first day of October'))->toDateString());
             $users->each(function ($user) {
-                (new SyncUserValue($user))();
+                $this->userCreatedProcess($user);
             });
         });
+    }
+
+    private function userCreatedProcess(User $user)
+    {
+        $user->assignRole(ROLE_APPLICANT);
+        $user->attachCourseWithDesiredBeginning((new Carbon('first day of October'))->toDateString(), [1]);
+        (new SyncUserValue($user))();
     }
 }

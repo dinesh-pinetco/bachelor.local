@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Enums\FieldType;
 use App\Models\Course;
+use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Services\DesiredBeginningFilter;
 use App\Services\Hubspot\Contact;
@@ -95,14 +96,6 @@ class Field extends Component
             || $this->field->related_option_table == 'desired_beginnings'
         ) {
             $this->attachOptions();
-
-            if ($this->field->related_option_table == 'desired_beginnings') {
-                foreach ($this->desiredBeginningOptions as $key => $desiredBeginningOption) {
-                    if ($desiredBeginningOption->date == $this->applicant->course->first()->course_start_date) {
-                        $this->fieldValue = $key;
-                    }
-                }
-            }
         }
 
         try {
@@ -219,7 +212,7 @@ class Field extends Component
             $fieldValue->save();
         }
 
-        $this->applicant->attachCourseWithDesiredBeginning($this->fieldValue, $desiredBeginningOptions->id,
+        $this->applicant->attachCourseWithDesiredBeginning($this->fieldValue,
             $desiredBeginningOptions->date->toDateString());
 
         return redirect(request()->header('Referer'));
@@ -236,7 +229,7 @@ class Field extends Component
             $fieldValue->save();
         }
 
-        $this->applicant->attachCourseWithDesiredBeginning($course->id, $desiredBeginningOptions->id,
+        $this->applicant->attachCourseWithDesiredBeginning($course->id,
             $desiredBeginningOptions->date->toDateString());
 
         return redirect(request()->header('Referer'));
@@ -245,28 +238,14 @@ class Field extends Component
     private function attachOptions()
     {
         if ($this->field->related_option_table == 'courses') {
-            $this->courseOptions = Course::active()
+            $this->courseOptions = Course::query()
+                ->active()
                 ->where(fn ($q) => $q->whereNull('last_start')->orWhere('last_start', '>', today()))
-                ->get()
-                ->filter(function ($course) {
-                    $filteredDesiredBeginning = (new DesiredBeginningFilter($course))->filter(true);
-                    if ($filteredDesiredBeginning->count()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
+                ->get();
         }
         if ($this->field->related_option_table == 'desired_beginnings') {
-            $course = $this->applicant->course->first();
-            $this->desiredBeginningOptions
-                    = (new DesiredBeginningFilter(Course::find($course->course_id)))->filter(true);
-
-            foreach ($this->desiredBeginningOptions as $key => $desiredBeginning) {
-                if ($course->course_start_date == $desiredBeginning->date->format('Y-m-d')) {
-                    $this->fieldValue = $key;
-                }
-            }
+            $this->desiredBeginningOptions = DesiredBeginning::options();
+            $this->fieldValue = $this->applicant->desiredBeginning?->course_start_date;
         }
     }
 }

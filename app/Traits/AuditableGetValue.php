@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\ApplicationStatus;
 use App\Models\Course;
 use App\Models\DesiredBeginning;
 use App\Models\District;
@@ -16,11 +15,8 @@ use App\Models\HealthInsuranceCompany;
 use App\Models\Nationality;
 use App\Models\Option;
 use App\Models\State;
-use App\Models\StudyProgram;
-use App\Models\StudyType;
 use App\Models\Tab;
 use App\Models\Test;
-use App\Models\University;
 use App\Models\User;
 
 trait AuditableGetValue
@@ -32,12 +28,13 @@ trait AuditableGetValue
 
     private function applicationStatus($key, array $value)
     {
-        $this->foreignKeyCollection->{$key} = ApplicationStatus::whereIn('id', $value)->get();
+        $this->foreignKeyCollection->{$key} = $value;
     }
 
     private function course($key, array $value)
     {
-        $this->foreignKeyCollection->{$key} = Course::whereIn('id', $value)->get();
+        $this->foreignKeyCollection->{$key} = $value;
+//        $this->foreignKeyCollection->{$key} = Course::whereIn('id', $value)->get();
     }
 
     private function desiredBeginning($key, array $value)
@@ -80,11 +77,6 @@ trait AuditableGetValue
         $this->foreignKeyCollection->{$key} = Extension::whereIn('id', $value)->get();
     }
 
-    private function studyProgram($key, array $value)
-    {
-        $this->foreignKeyCollection->{$key} = StudyProgram::whereIn('id', $value)->get();
-    }
-
     private function healthInsuranceCompany($key, array $value)
     {
         $this->foreignKeyCollection->{$key} = HealthInsuranceCompany::whereIn('id', $value)->get();
@@ -105,19 +97,9 @@ trait AuditableGetValue
         $this->foreignKeyCollection->{$key} = District::whereIn('id', $value)->get();
     }
 
-    private function university($key, array $value)
-    {
-        $this->foreignKeyCollection->{$key} = University::whereIn('id', $value)->get();
-    }
-
     private function entranceQualification($key, array $value)
     {
         $this->foreignKeyCollection->{$key} = EntranceQualification::whereIn('id', $value)->get();
-    }
-
-    private function studyType($key, array $value)
-    {
-        $this->foreignKeyCollection->{$key} = StudyType::whereIn('id', $value)->get();
     }
 
     private function finalExam($key, array $value)

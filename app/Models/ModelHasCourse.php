@@ -27,9 +27,4 @@ class ModelHasCourse extends Model implements ContractsAuditable
     {
         return $this->belongsTo(Course::class);
     }
-
-    public function desired_beginning(): BelongsTo
-    {
-        return $this->belongsTo(DesiredBeginning::class);
-    }
 }

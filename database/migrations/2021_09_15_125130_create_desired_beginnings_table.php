@@ -15,9 +15,9 @@ class CreateDesiredBeginningsTable extends Migration
     {
         Schema::create('desired_beginnings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->smallInteger('day');
-            $table->smallInteger('month');
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->date('course_start_date')->nullable();
+            $table->dateTime('archived_at')->nullable();
             $table->timestamps();
         });
     }

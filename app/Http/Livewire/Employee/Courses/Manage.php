@@ -55,7 +55,6 @@ class Manage extends Component
             }
         }
 
-        $this->desiredBeginnings = DesiredBeginning::get();
         $this->course = $course;
 
         $this->course->desired_beginnings->each(function ($desiredBeginning) {

@@ -16,6 +16,7 @@ class ProgressBar
     public function __construct($applicant_id = null)
     {
         $this->applicant_id = $applicant_id;
+        $this->applicant = is_null($this->applicant_id) ? auth()->user() : (User::find($this->applicant_id) ?? auth()->user());
     }
 
     public function overAllProgress(): float
@@ -31,13 +32,11 @@ class ProgressBar
 
     public function calculateProgressByTab($tabSlug): float|int
     {
-        $this->applicant = $this->applicant_id == null ? auth()->user() : (User::find($this->applicant_id) ?? auth()->user());
         $tab = Tab::where('slug', $tabSlug)->first();
-
         $points = $tab->fields->where('is_required')->count();
 
         $achievedPoints = $tab->fields()
-            ->where('is_required', 1)
+            ->where('is_required', true)
             ->whereHas('values', function ($q) {
                 return $q->where('user_id', $this->applicant->id)
                     ->where(function ($q) {
@@ -57,11 +56,11 @@ class ProgressBar
 
     public function documentProgress(): float|int
     {
-        $this->applicant = $this->applicant_id == null ? auth()->user() : (User::find($this->applicant_id) ?? auth()->user());
+        $courseIds = $this->applicant->courses()->pluck('course_id');
         $points = Document::active()
             ->required()
-            ->whereHas('courses', function ($query) {
-                $query->whereIn('course_id', $this->applicant->courses()->pluck('courses.id'));
+            ->whereHas('courses', function ($query) use ($courseIds) {
+                $query->whereIn('course_id', $courseIds);
             })->count();
 
         $achievedPoints = Document::active()
@@ -69,8 +68,8 @@ class ProgressBar
             ->whereHas('medias', function ($q) {
                 $q->where('user_id', $this->applicant->id);
             })
-            ->whereHas('courses', function ($query) {
-                $query->whereIn('course_id', $this->applicant->courses()->pluck('courses.id'));
+            ->whereHas('courses', function ($query) use ($courseIds) {
+                $query->whereIn('course_id', $courseIds);
             })->count();
 
         return $this->calculateAverageProcess($points, $achievedPoints);
@@ -78,8 +77,7 @@ class ProgressBar
 
     public function selectionTestsProgress(): float|int
     {
-        $this->applicant = is_null($this->applicant_id) ? auth()->user() : (User::find($this->applicant_id) ?? auth()->user());
-        $courses = $this->applicant->courses->pluck('id')->toArray();
+        $courses = $this->applicant->courses->pluck('course_id')->toArray();
         $points = Test::query()
             ->matchCourses($courses)
             ->count();

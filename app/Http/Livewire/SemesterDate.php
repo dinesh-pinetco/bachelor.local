@@ -7,8 +7,6 @@ use Livewire\Component;
 
 class SemesterDate extends Component
 {
-    public $semester;
-
     public $year;
 
     public $type;
@@ -19,7 +17,6 @@ class SemesterDate extends Component
     {
         if ($this->value) {
             $this->year = data_get(Str::of($this->value)->explode('-'), '0');
-            $this->semester = data_get(Str::of($this->value)->explode('-'), '1') == '04' ? '1' : '2';
         }
     }
 
@@ -30,12 +27,8 @@ class SemesterDate extends Component
 
     public function buildDate()
     {
-        $date = null;
-        if ($this->semester == 1) {
-            $date = $this->year.'-04-01';
-        } elseif ($this->semester == 2) {
-            $date = $this->year.'-10-01';
-        }
+        //October start date
+        $date = $this->year.'-10-01';
         $this->emitUp('date-updated', $date, $this->type);
     }
 

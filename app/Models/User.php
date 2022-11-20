@@ -6,12 +6,10 @@ use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
-use App\Traits\HasCourses;
 use App\Traits\Mediable;
 use App\Traits\User\UserRelations;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,7 +24,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements ContractsAuditable
 {
     use AuditingAuditable, SoftDeletes, HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, Mediable,
-        HasRoles, UserRelations, HasCourses;
+        HasRoles, UserRelations;
 
     public const GENDER_MALE = 'male';
 
@@ -61,14 +59,6 @@ class User extends Authenticatable implements ContractsAuditable
         'application_status',
         'competency_catch_up',
     ];
-
-    public function course(): MorphMany
-    {
-        return $this->morphMany(
-            ModelHasCourse::class,
-            'model'
-        );
-    }
 
     protected function fullName(): Attribute
     {
@@ -171,5 +161,11 @@ class User extends Authenticatable implements ContractsAuditable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new NotificationsPasswordReset($token, request()->email));
+    }
+
+    public function attachCourseWithDesiredBeginning($desiredBeginning, array $course_ids)
+    {
+        $desiredBeginning = $this->desiredBeginning()->create(['course_start_date' => $desiredBeginning]);
+        $desiredBeginning->courses()->attach($course_ids);
     }
 }

@@ -39,7 +39,7 @@
                                 <div class="mt-1">
                                     <textarea id="description" name="description" wire:model.defer="course.description" placeholder="{{__('Description')}}"
                                               rows="3"
-                                              class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray resize-none shadow-sm"></textarea>
+                                              class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray shadow-sm"></textarea>
                                     <x-jet-input-error for="course.description"/>
                                 </div>
                             </div>

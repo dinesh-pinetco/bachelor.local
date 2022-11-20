@@ -2,17 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\DesiredBeginning;
 use Illuminate\Database\Seeder;
 
 class DesiredBeginningSeeder extends Seeder
 {
     public function run()
     {
-        DesiredBeginning::create([
-            'name' => 'Oktober',
-            'day' => 1,
-            'month' => 10,
-        ]);
     }
 }

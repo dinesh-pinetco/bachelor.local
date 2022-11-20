@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enums\FieldType;
-use App\Models\Field;
 
 class Data
 {
@@ -123,15 +122,6 @@ class Data
                                 'is_required' => 1,
                                 'meta_data' => [],
                             ],
-                            // [
-                            //     'type'        => FieldType::FIELD_TEXT(),
-                            //     'label'       => 'Geburtsland',
-                            //     'placeholder' => 'Geburtsland eingeben',
-                            //     'sort_order'  => 1,
-                            //     'is_active'   => 1,
-                            //     'is_required'   => 1,
-                            //     'meta_data'   => [],
-                            // ],
                             [
                                 'type' => FieldType::FIELD_SELECT(),
                                 'label' => 'Geburtsland',
@@ -165,11 +155,11 @@ class Data
                         'fields' => [
                             [
                                 'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'Gewünschter Studiengang',
-                                'key' => 'course_id',
-                                'placeholder' => 'Gewünschten Studiengang auswählen',
-                                'sort_order' => 1,
-                                'related_option_table' => 'courses',
+                                'label' => 'Zum gewünschten Studienbeginn',
+                                'key' => 'desired_beginning_id',
+                                'placeholder' => 'Wählen Sie Gewünschter Studienbeginn',
+                                'sort_order' => 2,
+                                'related_option_table' => 'desired_beginnings',
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'options' => [],
@@ -177,11 +167,11 @@ class Data
                             ],
                             [
                                 'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'Zum gewünschten Studienbeginn',
-                                'key' => 'desired_beginning_id',
-                                'placeholder' => 'Wählen Sie Gewünschter Studienbeginn',
-                                'sort_order' => 2,
-                                'related_option_table' => 'desired_beginnings',
+                                'label' => 'Gewünschter Studiengang',
+                                'key' => 'course_id',
+                                'placeholder' => 'Gewünschten Studiengang auswählen',
+                                'sort_order' => 1,
+                                'related_option_table' => 'courses',
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'options' => [],

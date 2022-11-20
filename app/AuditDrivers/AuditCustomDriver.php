@@ -131,7 +131,7 @@ class AuditCustomDriver implements AuditDriver
 
     private function foreignKeyGetValue($key, $value)
     {
-        return isset($this->foreignKeyCollection->{$key}) ? ($this->foreignKeyCollection->{$key}->where('id', $value)->first()?->{$this->matchFunctionKey($key)} ?: $value) : $value;
+        return isset($this->foreignKeyCollection->{$key}) ? (collect($this->foreignKeyCollection->{$key})->where('id', $value)->first()?->{$this->matchFunctionKey($key)} ?: $value) : $value;
     }
 
     private function addResultCustomField($auditField, Auditable $model)

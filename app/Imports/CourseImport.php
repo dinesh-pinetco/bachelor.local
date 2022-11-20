@@ -31,7 +31,6 @@ class CourseImport implements ToModel, WithHeadingRow
         ]);
 
         $course->save();
-        $course->desired_beginnings()->sync($this->desiredBeginnings);
 
         return $course;
     }

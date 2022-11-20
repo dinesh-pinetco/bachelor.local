@@ -3,27 +3,46 @@
         @csrf
         <div
             class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 md:grid-flow-col gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
-            <div class="self-end">
-                <x-jet-label class="text-white font-bold required" for="courseId"
-                             value="{{ __('Select course') }}"></x-jet-label>
-                <x-livewire-select id="courseId" name="course_id" model="courseId">
-                    <option value="">{{ __('Choose course of study') }}</option>
-                    @foreach($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->name }}</option>
-                    @endforeach
-                </x-livewire-select>
-            </div>
-            <input type="hidden" name="course_start_date" value="{{ $courseStartDate }}">
-            <input type="hidden" name="desired_beginning_id" value="{{ $desiredBeginningId }}">
             <div>
                 <x-jet-label class="text-white font-bold required" for="desiredBeginning"
                              value="{{ __('Desired start') }}"></x-jet-label>
                 <x-livewire-select id="desiredBeginning" name="desired_beginning" model="desiredBeginning">
                     <option value="">{{ __('Please select') }}</option>
-                    @foreach($desiredBeginnings as $key => $desiredBeginning)
-                        <option value="{{ $key }}">{{ $desiredBeginning->name }} {{ $desiredBeginning->date->format('Y') }}</option>
+                    @foreach($desiredBeginnings as $desiredBeginning)
+                        <option
+                            value="{{ data_get($desiredBeginning,'key') }}">
+                            {{ data_get($desiredBeginning,'title') }}
+                        </option>
                     @endforeach
                 </x-livewire-select>
+            </div>
+
+            <div class="self-end">
+
+                <x-jet-label class="text-white font-bold required" for="courseId"
+                             value="{{ __('Select course') }}"></x-jet-label>
+                <select name="course_ids[]" id="course_ids" wire:model="course_ids" multiple>
+                    <option value="">{{ __('Choose course of study') }}</option>
+                    @foreach($courses as $course)
+                        <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
+                    @endforeach
+                </select>
+                {{--                <x-livewire-select id="course_ids" name="course_ids" model="course_ids"--}}
+                {{--                                   :is-multiselect="true">--}}
+                {{--                    <option value="">{{ __('Choose course of study') }}</option>--}}
+                {{--                    @foreach($courses as $course)--}}
+                {{--                        <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>--}}
+                {{--                    @endforeach--}}
+                {{--                </x-livewire-select>--}}
+
+                {{--<x-multi-select
+                    key="coursesSelection"
+                    wire:model="course_ids"
+                    :placeholder="__('Select course')"
+                    :options="$courses"
+                    keyBy="id"
+                    labelBy="name"
+                />--}}
             </div>
 
             <div wire:ignore>
@@ -74,7 +93,6 @@
                 </div>
             @endif
         </div>
-
         <div class="flex items-center justify-end mt-6 md:mt-10">
             <x-jet-secondary-button type="submit">
                 {{ __('Start application') }}
@@ -86,8 +104,11 @@
             </x-jet-secondary-button>
         </div>
         <div class="flex items-center justify-end mt-2 md:mt-4">
-            <p>{{ __('Already signed up') }}? <a href="{{ route('login') }}"
-                                                 class="inline-block underline">{{ __('Log in') }}</a></p>
+            <p>{{ __('Already signed up') }}?
+                <a href="{{ route('login') }}"
+                   class="inline-block underline">{{ __('Log in') }}
+                </a>
+            </p>
         </div>
     </form>
 

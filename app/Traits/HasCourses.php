@@ -8,13 +8,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasCourses
 {
-    public function attachCourses($courses): static
-    {
-        $this->courses()->sync($courses);
-
-        return $this;
-    }
-
     /**
      * A model may have multiple professions.
      */
@@ -29,8 +22,7 @@ trait HasCourses
         )->whereNull('model_has_courses.deleted_at')->withTimestamps();
     }
 
-    // Course table existing :(
-    public function courseModel()
+    public function modelCourse()
     {
         return $this->morphOne(
             ModelHasCourse::class,
@@ -38,10 +30,11 @@ trait HasCourses
         );
     }
 
-    public function attachCourseWithDesiredBeginning($courseId, $desiredBeginning, $courseStartDate): void
+    public function attachCourses($courses): static
     {
-        $this->courses()->sync([$courseId => ['desired_beginning_id' => $desiredBeginning, 'course_start_date' => $courseStartDate]]);
-        $this->hubspotConfigurationUpdated();
+        $this->courses()->sync($courses);
+
+        return $this;
     }
 
     public function scopeCoursesIn($query, $courseIds = [])
