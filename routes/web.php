@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatabaseBackupController;
@@ -42,6 +43,8 @@ Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:'.ROLE_APPLICA
     });
     Route::get('documents', DocumentController::class)->name('documents.index');
     Route::get('selection-test', [SelectionTestController::class, 'index'])->name('selection-test.index');
+
+    Route::get('companies', [CompanyController::class, 'index'])->name('companies.index');
 
     route::prefix('support')->group(function () {
         Route::get('contact-us', ContactUsController::class)->name('contact-us.index');

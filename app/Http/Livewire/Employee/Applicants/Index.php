@@ -9,6 +9,7 @@ use App\Models\UserPreference;
 use App\Services\Statistics;
 use App\Traits\Livewire\HasModal;
 use App\Traits\Livewire\WithDataTable;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -44,7 +45,7 @@ class Index extends Component
 
     public $selectedShowFields;
 
-    protected $listeners = ['refresh' => '$refresh', 'multiSelectValueUpdated'];
+    protected $listeners = ['refresh' => '$refresh'];
 
     public function mount()
     {
@@ -52,10 +53,10 @@ class Index extends Component
 
         $this->authPreferencesFields = $this->getUserPreferenceFields();
 
-        collect(collect(config('application.applicants_fields')))->each(function ($applicantsTableField) {
+        collect(config('application.applicants_fields'))->each(function($applicantsTableField) {
             $this->applicantsTableFields[] = [
                 'key' => $applicantsTableField,
-                'label' => $applicantsTableField,
+                'label' => $applicantsTableField
             ];
         });
     }

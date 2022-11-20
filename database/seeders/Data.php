@@ -272,7 +272,7 @@ class Data
                         'add_more_label' => 'weiteren Arbeitgeber hinzufügen',
                         'fields' => [
                             [
-                                'type' => FieldType::FIELD_SELECT(),
+                                'type' => FieldType::FIELD_MULTI_SELECT(),
                                 'label' => 'Industry',
                                 'placeholder' => 'Select Industry',
                                 'key' => 'industry',

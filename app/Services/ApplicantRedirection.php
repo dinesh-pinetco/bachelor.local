@@ -22,36 +22,41 @@ class ApplicantRedirection
 
     private function registration_submitted()
     {
-        return redirect()->route('application.index', ['tab' => 'profile']);
+        return to_route('application.index', ['tab' => 'profile']);
     }
 
     private function application_rejected_by_applicant()
     {
-        return redirect()->route('application.index', ['tab' => 'profile']);
+        return to_route('application.index', ['tab' => 'profile']);
     }
 
     private function profile_information_completed()
     {
-        return redirect()->route('selection-test.index');
+        return to_route('selection-test.index');
     }
 
     private function test_taken()
     {
-        return redirect()->route('selection-test.index');
+        return to_route('selection-test.index');
     }
 
     private function test_passed()
     {
-        return redirect()->route('selection-test.index');
+        return to_route('selection-test.index');
     }
 
     private function test_failed_confirm()
     {
-        return redirect()->route('selection-test.index');
+        return to_route('selection-test.index');
     }
 
     private function test_result_pdf_retrieved_on()
     {
-        return redirect()->route('application.index', ['tab' => 'industries']);
+        return to_route('application.index', ['tab' => 'industries']);
+    }
+
+    private function consent_to_company_portal_bulletin_board()
+    {
+        return to_route('companies.index');
     }
 }
