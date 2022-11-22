@@ -4,6 +4,7 @@
     'labelBy' => null,
     'placeholder' => null,
     'value' => [],
+    'wireModel' => $attributes->whereStartsWith('wire:model')->first(),
 ])
 
 @php
@@ -19,12 +20,13 @@
        }
 @endphp
 
-@if(isset($value))
-    @dump($value)
-@endif
 <div x-cloak
      x-data="{
         open: false,
+        value: @entangle($attributes->wire('model')),
+        placeholder: @js($attributes->get('placeholder')),
+        keyBy: @js($keyBy),
+        labelBy: @js($labelBy),
         toggle() {
             if (this.open) {
                 return this.close()
@@ -40,10 +42,41 @@
             this.open = false
 
             focusAfter && focusAfter.focus()
-        }
+        },
+
+        init() {
+            this.setPlaceholder();
+
+            this.$watch('value', () => this.setPlaceholder());
+        },
+
+        setPlaceholder() {
+
+             var tempOptions = {{ Illuminate\Support\Js::from($options) }};
+             var modelValue = Object.values(this.value);
+
+             if(modelValue.length) {
+                    this.placeholder = this.getLabel(tempOptions.find(option => this.getKey(option) === parseInt(modelValue[0])));
+
+                    let totalSelected = modelValue.length;
+
+                    if(totalSelected > 1) {
+                        this.placeholder += ` + ${totalSelected-1} more`;
+                    }
+                }
+
+                console.log('placeholder', @js($attributes->get('placeholder')))
+                console.log('placeholder',this.placeholder)
+        },
+        getKey(option) {
+            return option[this.keyBy];
+        },
+        getLabel(option) {
+            return option[this.labelBy];
+        },
     }"
      x-on:keydown.escape.prevent.stop="close($refs.button)"
-     x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+{{--     x-on:focusin.window="! $refs.panel.contains($event.target) && close()"--}}
      x-id="['multiselect']"
 >
     <div class="relative mt-1">
@@ -57,9 +90,11 @@
             type="button"
             class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
         >
-            <span class="block truncate text-primary">
-                {{ $placeholder }}
-            </span>
+            <span class="block truncate text-primary" x-text="placeholder"></span>
+
+{{--            <span class="block truncate text-primary">--}}
+{{--                {{ $placeholder }}--}}
+{{--            </span>--}}
             <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <!-- Heroicon name: mini/chevron-up-down -->
                 <svg class="h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -81,50 +116,54 @@
             From: "opacity-100"
             To: "opacity-0"
         -->
-        <ul x-ref="panel"
-            x-show="open"
-            x-transition.origin.top.left
-            x-on:click.outside="close($refs.button)"
-            :id="$id('multiselect')"
-            tabindex="-1"
-            role="listbox"
-            aria-labelledby="listbox-label"
-            aria-activedescendant="listbox-option-3"
-            class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            <!--
-              Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
+        <span x-text="open"></span>
+        <div x-data="{}" x-props="{open}">
+            <ul x-ref="panel"
+                x-show="open"
+                x-transition.origin.top.left
+                x-on:click.outside="close($refs.button)"
+                :id="$id('multiselect')"
+                tabindex="-1"
+                role="listbox"
+                aria-labelledby="listbox-label"
+                aria-activedescendant="listbox-option-3"
+                class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <!--
+                  Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
 
-              Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
-            -->
-            @foreach($options as $option)
-                <li class="text-primary relative cursor-default select-none py-2 pl-8 pr-4" id="listbox-option-0"
-                    role="option">
-                    <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
-                    <label for="{{ data_get($option,$keyBy) }}"
-                           class="font-normal block truncate">
-                        {{ data_get($option, $labelBy) }}
-                    </label>
+                  Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
+                -->
+                <span x-text="open"></span>
 
-                    <!--
-                      Checkmark, only display for selected option.
+                @foreach($options as $option)
+                    <li class="text-primary relative cursor-default select-none py-2 pl-8 pr-4" id="listbox-option-0"
+                        role="option">
+                        <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                        <label for="{{ data_get($option,$keyBy) }}"
+                               class="font-normal block truncate">
+                            {{ data_get($option, $labelBy) }}
+                        </label>
 
-                      Highlighted: "text-white", Not Highlighted: "text-indigo-600"
-                    -->
-                    <span class="text-primary absolute inset-y-0 left-0 flex items-center pl-1.5">
-                        <input type="checkbox"
-                               id="{{ data_get($option,$keyBy) }}"
-                               value="{{ data_get($option,$keyBy) }}"
-                               @if($wireModel = $attributes->whereStartsWith('wire:model')->first())
-                                   {{ $attributes->wire('model') }}
-                               @else
-                                   name="{{ $attributes->get('name') }}"
-                               @endif
-                               {{ in_array(data_get($option,$keyBy), $value) ? 'checked' : '' }}
-                               class="h-4 w-4 rounded border-primary-light text-primary focus:ring-primary"
-                        >
-                    </span>
-                </li>
-            @endforeach
-        </ul>
+                        <!--
+                          Checkmark, only display for selected option.
+
+                          Highlighted: "text-white", Not Highlighted: "text-indigo-600"
+                        -->
+                        <span class="text-primary absolute inset-y-0 left-0 flex items-center pl-1.5">
+                            <input type="checkbox"
+                                   id="{{ data_get($option,$keyBy) }}"
+                                   value="{{ data_get($option,$keyBy) }}"
+                                   @if($wireModel = $attributes->whereStartsWith('wire:model')->first())
+                                       {{ $attributes->wire('model') }}
+                                   @else
+                                       name="{{ $attributes->get('name') }}"
+                                   @endif
+                                   {{ in_array(data_get($option,$keyBy), $value) ? 'checked' : '' }}
+                                   class="h-4 w-4 rounded border-primary-light text-primary focus:ring-primary">
+                        </span>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 </div>
