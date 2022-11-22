@@ -51,7 +51,7 @@ class ProgressBar
 
     private function calculateAverageProcess($points, $achievedPoints): float|int
     {
-        return $points ? round(($achievedPoints * PET_STEP_PROGRESS) / $points, 2) : ($achievedPoints ? 0 : 25);
+        return $points ? round(($achievedPoints * PER_STEP_PROGRESS) / $points, 2) : ($achievedPoints ? 0 : 25);
     }
 
     public function documentProgress(): float|int

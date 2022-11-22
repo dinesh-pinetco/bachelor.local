@@ -5,6 +5,7 @@
     'placeholder' => null,
     'value' => [],
     'wireModel' => $attributes->whereStartsWith('wire:model')->first(),
+    'disabled'=> false
 ])
 
 @php
@@ -44,8 +45,9 @@
      x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
      x-id="['multiselect']"
 >
-    <div class="relative mt-1">
+    <div class="relative">
         <button
+            :disabled="{{ $disabled }}"
             x-ref="button"
             x-on:click="toggle()"
             :aria-expanded="open"
@@ -53,9 +55,12 @@
             aria-haspopup="listbox"
             aria-labelledby="listbox-label"
             type="button"
-            class="relative w-full cursor-default text-left h-11 py-2.5 px-4 border border-gray bg-white py-2 pl-3 pr-10 focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
-        >
-            <span class="block truncate text-primary">
+            @class([
+                "text-gray cursor-not-allowed" => $disabled,
+                "text-primary cursor-pointer" => !$disabled,
+                "relative w-full text-left h-11 py-2.5 px-4 border border-gray bg-white py-2 pl-3 pr-10 focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base placeholder-gray"
+                ])>
+            <span class="block truncate">
                 {{ $placeholder }}
             </span>
             <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

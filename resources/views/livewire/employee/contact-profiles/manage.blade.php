@@ -82,7 +82,12 @@
 
                             <div>
                                 <x-jet-label for="name" class="block">{{ __('Assign Course') }}</x-jet-label>
-                                <x-multi-select name='selectedCourses' :placeholder="__('Select course')" :options='$courses' :summeryText='$selectedCoursesSummery' />
+                                <x-multi-select
+                                    name='selectedCourses'
+                                    :placeholder="__('Select course')"
+                                    :options='$courses'
+                                    :summeryText='$selectedCoursesSummery'
+                                />
                                 <x-jet-input-error for="courses"/>
                             </div>
                         </div>

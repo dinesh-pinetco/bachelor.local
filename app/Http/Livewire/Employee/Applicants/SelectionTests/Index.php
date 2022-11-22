@@ -16,9 +16,8 @@ class Index extends Component
 
     public function mount()
     {
-        $courses = $this->applicant->courses->pluck('id')->toArray();
-
-        $this->tests = Test::matchCourses($courses)->get();
+        $this->tests = Test::matchCourses($this->applicant->courses->pluck('course_id'))
+            ->get();
 
         if ($this->applicant->results->count() > 0) {
             $this->isShow = true;

@@ -242,7 +242,7 @@
                             </li>
                         @endif
 
-                        @if(auth()->user()->application_status->id() > \App\Enums\ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id())
+                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id())
                             <li>
                                 <x-jet-nav-link href="{{ route('application.index',['tab' => 'industries']) }}"
                                                 :active="urlContains('industries') || urlContains('motivation') || urlContains('documents')"

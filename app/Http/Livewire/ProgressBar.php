@@ -21,7 +21,7 @@ class ProgressBar extends Component
 
     public function submit()
     {
-        auth()->user()->application_status = ApplicationStatus::CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD;
+        auth()->user()->application_status = ApplicationStatus::PERSONAL_DATA_COMPLETED;
         auth()->user()->save();
 
         return to_route('companies.index');

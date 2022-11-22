@@ -19,4 +19,4 @@ const MAX_YEAR = 5;
 const FUTURE_YEAR = 5;
 const COURSE_STARTING_MONTH = 10;
 
-const PET_STEP_PROGRESS = 20;
+const PER_STEP_PROGRESS = 20;

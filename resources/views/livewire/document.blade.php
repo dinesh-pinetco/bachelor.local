@@ -43,15 +43,17 @@
 
                     <div class="max-w-4xl">
                         <label class="my-4 {{ $isEdit ?  'cursor-pointer' : 'cursor-not-allowed' }} relative">
-                            <livewire:upload-media :key="$document->id" :applicant="$applicant" :extensions="$document->extensions" :tag="$document->name" :id="$document->id" model='document' :isEdit="$isEdit" >
+                            <livewire:upload-media :key="$document->id" :applicant="$applicant"
+                                                   :extensions="$document->extensions" :tag="$document->name"
+                                                   :id="$document->id" model='document' :isEdit="$isEdit"/>
                             <div
                                 class="flex flex-col items-center w-full px-4 py-6 mb-6 text-center border-2 border-dashed rounded md:py-10 lg:py-16 md:mb-10 bg-lightgray border-primary">
                                 <svg class="w-10 h-10 md:w-16 md:h-16 text-primary" viewBox="0 0 60 60" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M20 17.5V37.5C20 38.8261 20.5268 40.0979 21.4645 41.0355C22.4021 41.9732 23.6739 42.5 25 42.5H40M20 17.5V12.5C20 11.1739 20.5268 9.90215 21.4645 8.96447C22.4021 8.02678 23.6739 7.5 25 7.5H36.465C37.128 7.50014 37.7638 7.76363 38.2325 8.2325L49.2675 19.2675C49.7364 19.7362 49.9999 20.372 50 21.035V37.5C50 38.8261 49.4732 40.0979 48.5355 41.0355C47.5979 41.9732 46.3261 42.5 45 42.5H40M20 17.5H15C13.6739 17.5 12.4021 18.0268 11.4645 18.9645C10.5268 19.9021 10 21.1739 10 22.5V47.5C10 48.8261 10.5268 50.0979 11.4645 51.0355C12.4021 51.9732 13.6739 52.5 15 52.5H35C36.3261 52.5 37.5979 51.9732 38.5355 51.0355C39.4732 50.0979 40 48.8261 40 47.5V42.5"
                                         stroke="currentcolor" stroke-width="4" stroke-linecap="round"
-                                        stroke-linejoin="round" />
+                                        stroke-linejoin="round"/>
                                 </svg>
                                 <x-primary-button class="md:mt-6">{{ __('Select file') }}</x-primary-button>
                                 <span class="text-sm md:mt-6">{{ $document->extensions->pluck('extension')->implode(',') ?? '' }}</span>

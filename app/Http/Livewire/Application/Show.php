@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Application;
 
 use App\Enums\ApplicationStatus;
-use App\Mail\ApplicationApproved;
 use App\Models\FieldValue;
 use App\Models\Group;
 use App\Models\Result;
@@ -12,7 +11,6 @@ use App\Models\Test;
 use App\Services\ProgressBar;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Show extends Component
@@ -149,15 +147,14 @@ class Show extends Component
     public function submitProfileInformation()
     {
         $error = null;
-
-        $profileTabProgress = (new ProgressBar($this->applicant->id))->overAllProgress();
-        if ($profileTabProgress < PET_STEP_PROGRESS && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
+        $profileTabProgress = (new ProgressBar($this->applicant->id))->calculateProgressByTab('profile');
+        if ($profileTabProgress < PER_STEP_PROGRESS && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
             $error = __('Please fill the required field.');
         }
 
         if (is_null($error) && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
             $tests = Test::whereHas('courses', function ($query) {
-                $query->whereIn('course_id', $this->applicant->courses->pluck('id'));
+                $query->whereIn('course_id', $this->applicant->courses->pluck('course_id'));
             })->get();
 
             foreach ($tests as $test) {
@@ -172,7 +169,6 @@ class Show extends Component
                 }
             }
 
-            Mail::to($this->applicant->email)->bcc(config('mail.supporter.address'))->send(new ApplicationApproved($this->applicant));
             $this->applicant->application_status = ApplicationStatus::PROFILE_INFORMATION_COMPLETED;
             $this->applicant->save();
             $this->toastNotify(__('Approval mail sent successfully to the applicant!!'), __('Success'), TOAST_SUCCESS);

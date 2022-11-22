@@ -6,7 +6,6 @@ use App\Enums\FieldType;
 use App\Models\Course;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
-use App\Models\Option;
 use App\Services\DesiredBeginningFilter;
 use App\Services\Hubspot\Contact;
 use App\Services\ModelHelper;
@@ -90,9 +89,8 @@ class Field extends Component
             $this->fieldValue = Storage::url($this->fieldValue);
         }
 
-        if ($this->field && is_null($this->field->related_option_table) && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
-            $selectedValues = Option::whereIn('key', json_decode($this->value->value))->where('field_id', $this->field->id)->get()->pluck('key')->toArray();
-            $this->fieldValue = $this->value ? $selectedValues : [];
+        if ($this->field && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
+            $this->fieldValue = json_decode($this->fieldValue) ?? [];
         }
 
         if ($this->field->related_option_table == 'courses'
@@ -240,8 +238,6 @@ class Field extends Component
                 ->active()
                 ->where(fn ($q) => $q->whereNull('last_start')->orWhere('last_start', '>', today()))
                 ->get();
-
-            $this->fieldValue = json_decode($this->fieldValue);
         }
 
         if ($this->field->related_option_table == 'desired_beginnings') {
