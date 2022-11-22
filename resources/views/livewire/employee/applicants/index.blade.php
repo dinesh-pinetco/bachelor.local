@@ -126,7 +126,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->Courses->first()->name) }}</td>
                     @endif
                     @if(in_array('course_start_date', $authPreferencesFields))
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->course->first()?->course_start_date?->format('d.m.Y')) }}</td>
+{{--                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->course->first()?->course_start_date?->format('d.m.Y')) }}</td>--}}
                     @endif
                     @if(in_array('application_status_name', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->application_status->value) }}</td>

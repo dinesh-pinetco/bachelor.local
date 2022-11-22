@@ -18,31 +18,15 @@
             </div>
 
             <div class="self-end">
-
                 <x-jet-label class="text-white font-bold required" for="courseId"
                              value="{{ __('Select course') }}"></x-jet-label>
-                <select name="course_ids[]" id="course_ids" wire:model="course_ids" multiple>
-                    <option value="">{{ __('Choose course of study') }}</option>
-                    @foreach($courses as $course)
-                        <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
-                    @endforeach
-                </select>
-                {{--                <x-livewire-select id="course_ids" name="course_ids" model="course_ids"--}}
-                {{--                                   :is-multiselect="true">--}}
-                {{--                    <option value="">{{ __('Choose course of study') }}</option>--}}
-                {{--                    @foreach($courses as $course)--}}
-                {{--                        <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>--}}
-                {{--                    @endforeach--}}
-                {{--                </x-livewire-select>--}}
-
-                {{--<x-multi-select
-                    key="coursesSelection"
+                <x-multi-select
                     wire:model="course_ids"
                     :placeholder="__('Select course')"
                     :options="$courses"
                     keyBy="id"
                     labelBy="name"
-                />--}}
+                />
             </div>
 
             <div wire:ignore>
@@ -111,5 +95,4 @@
             </p>
         </div>
     </form>
-
 </div>

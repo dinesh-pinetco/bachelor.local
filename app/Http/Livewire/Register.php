@@ -39,8 +39,7 @@ class Register extends Component
                 return CourseAvailability::make($course)
                     ->year(year: $year)
                     ->isAvailable();
-            })
-            ->toArray();
+            })->toArray();
     }
 //    public function updated($value)
 //    {
