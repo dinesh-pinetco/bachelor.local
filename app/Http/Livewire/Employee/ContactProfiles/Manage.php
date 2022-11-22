@@ -6,7 +6,6 @@ use App\Models\ContactProfile;
 use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -28,8 +27,6 @@ class Manage extends Component
 
     public array $selectedCourses = [];
 
-    public $selectedCoursesSummery;
-
     public array $rules = [
         'contactProfile.name' => ['required'],
         'contactProfile.email' => ['required'],
@@ -44,9 +41,7 @@ class Manage extends Component
         }
         $this->contactProfile = $contactProfile;
 
-        $this->contactProfile->courses->each(function ($course) {
-            $this->selectedCourses[$course->id] = $course->id;
-        });
+        $this->selectedCourses = $this->contactProfile->courses->pluck('id')->toArray();
 
         $this->courses = Course::filter()->get();
 
@@ -112,35 +107,11 @@ class Manage extends Component
         $this->contactProfile->deleteProfilePhoto();
     }
 
-    public function updatedSelectedCourses()
-    {
-        $this->selectedCourses = Arr::where($this->selectedCourses, function ($value) {
-            return $value !== false;
-        });
-
-        $this->syncSelectedOptions();
-    }
-
-    public function syncSelectedOptions()
-    {
-        if ($this->courses && $this->selectedCourses) {
-            $this->selectedCoursesSummery = $this->courses->where('id', array_key_first($this->selectedCourses))->first()->name;
-
-            if (count($this->selectedCourses) > 1) {
-                $this->selectedCoursesSummery .= ' +'.(count($this->selectedCourses) - 1);
-            }
-        } else {
-            $this->selectedCoursesSummery = null;
-        }
-    }
-
     public function render()
     {
         request()->merge([
             'search' => $this->search,
         ]);
-
-        $this->syncSelectedOptions();
 
         return view('livewire.employee.contact-profiles.manage');
     }

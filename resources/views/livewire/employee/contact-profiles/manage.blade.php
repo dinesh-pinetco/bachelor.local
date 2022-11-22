@@ -83,10 +83,12 @@
                             <div>
                                 <x-jet-label for="name" class="block">{{ __('Assign Course') }}</x-jet-label>
                                 <x-multi-select
-                                    name='selectedCourses'
+                                    wire:model="selectedCourses"
                                     :placeholder="__('Select course')"
                                     :options='$courses'
-                                    :summeryText='$selectedCoursesSummery'
+                                    :value="$selectedCourses"
+                                    key-by="id"
+                                    label-by="name"
                                 />
                                 <x-jet-input-error for="courses"/>
                             </div>
@@ -101,6 +103,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
