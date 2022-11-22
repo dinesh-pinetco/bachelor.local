@@ -4,9 +4,12 @@
         <div
             class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 md:grid-flow-col gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
             <div>
-                <x-jet-label class="text-white font-bold required" for="desiredBeginning"
+                <x-jet-label class="text-white font-bold required"
+                             for="desired_beginning"
                              value="{{ __('Desired start') }}"></x-jet-label>
-                <x-livewire-select id="desiredBeginning" name="desired_beginning" model="desiredBeginning">
+                <x-livewire-select id="desired_beginning"
+                                   name="desired_beginning"
+                                   model="desired_beginning">
                     <option value="">{{ __('Please select') }}</option>
                     @foreach($desiredBeginnings as $desiredBeginning)
                         <option
@@ -25,7 +28,7 @@
                     wire:model="course_ids"
                     :placeholder="__('Select course')"
                     :options="$courses"
-                    :value="$course_ids"
+                    :value="old('course_ids',$course_ids)"
                     keyBy="id"
                     labelBy="name"
                 />

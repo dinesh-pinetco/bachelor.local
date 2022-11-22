@@ -1,6 +1,7 @@
 @props([
     'name' => null,
     'model' => null,
+    'value' => null,
     'dataCy' => null,
     'shouldSave' => false,
     'isEdit' => true,

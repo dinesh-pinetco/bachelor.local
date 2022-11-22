@@ -30,28 +30,44 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255',
+                function ($attribute, $value, $fail) use ($input) {
+                    $user = User::where('email', $value)
+                        ->with('desiredBeginning')
+                        ->first();
+
+                    if ($user && $this->applicantHasRejectedStatus($user) &&
+                        ($user->desiredBeginning?->course_start_date >= data_get($input, 'desired_beginning'))) {
+                        $fail('The desired beginning is invalid.');
+                    }
+
+                    if ($user && ! $this->applicantHasRejectedStatus($user)) {
+                        $fail('The :attribute has already been taken', ['attribute' => $attribute]);
+                    }
+                }, ],
             'phone' => ['nullable'],
-            'course_ids' => ['required', 'array'],
             'desired_beginning' => ['required', 'date'],
+            'course_ids' => ['required', 'array'],
         ], [], [
             'first_name' => 'Vorname',
             'last_name' => 'Nachname',
             'email' => 'E-Mail Adresse',
             'phone' => 'Phone',
-            'course_ids' => 'Studiengang',
             'desired_beginning' => 'gewünschter Beginn',
+            'course_ids' => 'Studiengang',
         ])->validate();
 
         $password = Str::random('10');
 
-        $user = User::create([
+        $user = User::updateOrCreate([
+            'email' => $input['email'],
+        ], [
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
-            'email' => $input['email'],
             'phone' => $input['phone'],
             'password' => Hash::make($password),
             'application_status' => ApplicationStatus::REGISTRATION_SUBMITTED,
+            'is_active' => true,
         ])->assignRole(ROLE_APPLICANT);
 
         $user->attachCourseWithDesiredBeginning(data_get($input, 'desired_beginning'), data_get($input, 'course_ids'));
@@ -61,5 +77,10 @@ class CreateNewUser implements CreatesNewUsers
         $syncUser();
 
         return $user;
+    }
+
+    private function applicantHasRejectedStatus(User $user): bool
+    {
+        return in_array($user->application_status, [ApplicationStatus::APPLICATION_REJECTED_BY_NAK, ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT]);
     }
 }

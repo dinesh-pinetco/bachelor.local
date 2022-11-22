@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\Course;
 use App\Models\DesiredBeginning;
 use App\Services\CourseAvailability;
-use App\Services\DesiredBeginningFilter;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -17,7 +16,7 @@ class Register extends Component
 
     public $course_ids = [];
 
-    public $desiredBeginning;
+    public $desired_beginning;
 
     public $courseStartDate = null;
 
@@ -26,6 +25,11 @@ class Register extends Component
     public function mount()
     {
         $this->desiredBeginnings = DesiredBeginning::options(onlyFuture: true);
+
+        $this->desired_beginning = old('desired_beginning');
+        if ($this->desired_beginning) {
+            $this->updatedDesiredBeginning($this->desired_beginning);
+        }
     }
 
     public function updatedDesiredBeginning($year)
@@ -40,33 +44,8 @@ class Register extends Component
                     ->year(year: $year)
                     ->isAvailable();
             })->toArray();
-    }
-//    public function updated($value)
-//    {
-//        // If desired beginning change
-//        if ($value == 'desiredBeginning' && $this->desiredBeginning != null) {
-//            $selectedCourse = $this->courses->where('id', $this->courseId)->first();
-//            $this->desiredBeginnings = $this->getDesiredBeginningFilter($selectedCourse);
-//            $data = $this->desiredBeginnings[$this->desiredBeginning];
-//            $month = convertNumberToMonth($data->month);
-//            $this->courseStartDate = (new Carbon('first day of '.$month.' '.$data->date->format('Y')))->toDateString();
-//            $this->desiredBeginningId = $data->id;
-//        }
-//
-//        // If desired beginning change
-//        if ($this->courseId) {
-//            $selectedCourse = $this->courses->where('id', $this->courseId)->first();
-//            $this->desiredBeginnings = $this->getDesiredBeginningFilter($selectedCourse);
-//        } else {
-//            $this->desiredBeginnings = collect();
-//            $this->courseStartDate = null;
-//            $this->desiredBeginningId = null;
-//        }
-//    }
 
-    private function getDesiredBeginningFilter($course)
-    {
-        return (new DesiredBeginningFilter($course))->filter();
+        $this->course_ids = [];
     }
 
     public function render()
