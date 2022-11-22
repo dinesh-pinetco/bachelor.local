@@ -24,6 +24,7 @@
                     wire:model="course_ids"
                     :placeholder="__('Select course')"
                     :options="$courses"
+                    :value="$course_ids"
                     keyBy="id"
                     labelBy="name"
                 />

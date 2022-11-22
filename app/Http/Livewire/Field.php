@@ -238,7 +238,6 @@ class Field extends Component
 
     private function attachOptions()
     {
-        
         if ($this->field->related_option_table == 'courses') {
             $this->courseOptions = Course::query()
                 ->active()
