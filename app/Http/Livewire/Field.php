@@ -41,10 +41,7 @@ class Field extends Component
 
     public bool $isEdit = false;
 
-    protected $listeners
-        = [
-            'date-updated' => 'updateDate',
-        ];
+    protected $listeners = ['date-updated' => 'updateDate'];
 
     public function validationAttributes(): array
     {
@@ -93,7 +90,7 @@ class Field extends Component
             $this->fieldValue = Storage::url($this->fieldValue);
         }
 
-        if ($this->field && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
+        if ($this->field && is_null($this->field->related_option_table) && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
             $selectedValues = Option::whereIn('key', json_decode($this->value->value))->where('field_id', $this->field->id)->get()->pluck('key')->toArray();
             $this->fieldValue = $this->value ? $selectedValues : [];
         }
@@ -142,7 +139,7 @@ class Field extends Component
             $this->fieldValue = $path;
         }
 
-        if ($this->value && $this->value->deleted_at == null) {
+        if ($this->value && is_null($this->value->deleted_at)) {
             if ($this->fieldValue) {
                 $this->authorizeForUser($this->applicant, 'update', $this->value);
 
@@ -243,7 +240,10 @@ class Field extends Component
                 ->active()
                 ->where(fn ($q) => $q->whereNull('last_start')->orWhere('last_start', '>', today()))
                 ->get();
+
+            $this->fieldValue = json_decode($this->fieldValue);
         }
+
         if ($this->field->related_option_table == 'desired_beginnings') {
             $this->desiredBeginningOptions = DesiredBeginning::options();
             $this->fieldValue = $this->applicant->desiredBeginning?->course_start_date;

@@ -112,11 +112,8 @@
                         <input type="checkbox"
                                id="{{ data_get($option,$keyBy) }}"
                                value="{{ data_get($option,$keyBy) }}"
-                               @if($wireModel = $attributes->whereStartsWith('wire:model')->first())
-                                   {{ $attributes->wire('model') }}
-                               @else
-                                   name="{{ $attributes->get('name') }}"
-                               @endif
+                               {{ $attributes->wire('model') }}
+                               name="{{ $attributes->get('name') }}[]"
                                {{ in_array(data_get($option,$keyBy), $value) ? 'checked' : '' }}
                                class="h-4 w-4 rounded border-primary-light text-primary focus:ring-primary">
                     </span>

@@ -166,7 +166,7 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => FieldType::FIELD_SELECT(),
+                                'type' => FieldType::FIELD_MULTI_SELECT(),
                                 'label' => 'Gewünschter Studiengang',
                                 'key' => 'course_id',
                                 'placeholder' => 'Gewünschten Studiengang auswählen',

@@ -21,6 +21,7 @@
                 <x-jet-label class="text-white font-bold required" for="courseId"
                              value="{{ __('Select course') }}"></x-jet-label>
                 <x-multi-select
+                    name="course_ids"
                     wire:model="course_ids"
                     :placeholder="__('Select course')"
                     :options="$courses"

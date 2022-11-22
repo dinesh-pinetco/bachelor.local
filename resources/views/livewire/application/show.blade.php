@@ -39,7 +39,8 @@
                         @php
                             $customGroupKey = $applicant->id . $parentCustomGroupKey . $groupKey;
                         @endphp
-                        <div class="lg:flex mb-10 lg:-mx-4" id="group-key-{{ $customGroupKey }}" wire:key="{{ $customGroupKey }}">
+                        <div class="lg:flex mb-10 lg:-mx-4" id="group-key-{{ $customGroupKey }}"
+                             wire:key="{{ $customGroupKey }}">
                             <div class="w-full lg:w-1/2 lg:px-4 lg:max-w-md mr-auto">
                                 @if ($group->title)
                                     <label class="mb-4 text-xl md:text-3xl font-bold text-primary"
@@ -51,12 +52,14 @@
                                             @forelse ($field->values as $value)
                                                 <div class="value" wire:key="{{ $fieldKey }}">
                                                     <livewire:field :applicant="$applicant" :isEdit="$isEdit"
-                                                        :groupKey="$customGroupKey" :value="$value" :key="time() . $value->id" />
+                                                                    :groupKey="$customGroupKey" :value="$value"
+                                                                    :key="time() . $value->id"/>
                                                 </div>
                                             @empty
                                                 <div class="field" wire:key="{{ $fieldKey }}">
                                                     <livewire:field :applicant="$applicant" :isEdit="$isEdit"
-                                                        :groupKey="$customGroupKey" :field="$field" :key="time() . $field->id" />
+                                                                    :groupKey="$customGroupKey" :field="$field"
+                                                                    :key="time() . $field->id"/>
                                                 </div>
                                             @endforelse
                                         @else

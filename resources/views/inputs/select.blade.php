@@ -1,12 +1,17 @@
 <ul class="flex flex-wrap items-start">
     @if(!is_null($field->related_option_table))
         @if ($field->related_option_table == 'courses')
-            <x-livewire-select :isEdit="$isEdit" :name="$field->related_option_table" model="fieldValue"
-                               shouldSave="true">
-                @foreach($courseOptions as $course)
-                    <option value="{{ $course->id }}">{{ __($course->name) }}</option>
-                @endforeach
-            </x-livewire-select>
+
+            <x-multi-select
+                :name="$field->related_option_table"
+                wire:model="fieldValue"
+                :placeholder="__('Select courses')"
+                :options="$courseOptions"
+                :value="$fieldValue"
+                keyBy="id"
+                labelBy="name"
+            />
+
         @elseif ($field->related_option_table == 'desired_beginnings')
             <x-livewire-select :isEdit="$isEdit" :name="$field->related_option_table" model="fieldValue"
                                shouldSave="true">
