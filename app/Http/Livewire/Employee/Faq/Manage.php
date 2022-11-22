@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Employee\Faq;
 
 use App\Models\Course;
 use App\Models\Faq;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Livewire\Component;
 use OwenIt\Auditing\Events\AuditCustom;
@@ -36,9 +35,7 @@ class Manage extends Component
         }
 
         $this->faq = $faq;
-        $this->faq->courses->each(function ($course) {
-            $this->selectedCourses[$course->id] = $course->id;
-        });
+        $this->selectedCourses = $this->faq->courses->pluck('id')->toArray();
     }
 
     public function submit()
@@ -84,37 +81,12 @@ class Manage extends Component
         }
     }
 
-    public function updatedSelectedCourses()
-    {
-        $this->selectedCourses = Arr::where($this->selectedCourses, function ($value) {
-            return $value !== false;
-        });
-
-        $this->syncSelectedOptions();
-    }
-
-    public function syncSelectedOptions()
-    {
-        if ($this->courses && $this->selectedCourses) {
-            $this->selectedCoursesSummery = $this->courses->where('id', array_key_first($this->selectedCourses))->first()->name;
-
-            if (count($this->selectedCourses) > 1) {
-                $this->selectedCoursesSummery .= ' +'.(count($this->selectedCourses) - 1);
-            }
-        } else {
-            $this->selectedCoursesSummery = null;
-        }
-    }
-
     public function render()
     {
         request()->merge([
             'search' => $this->search,
         ]);
-
         $this->courses = Course::filter()->get();
-
-        $this->syncSelectedOptions();
 
         return view('livewire.employee.faq.manage');
     }

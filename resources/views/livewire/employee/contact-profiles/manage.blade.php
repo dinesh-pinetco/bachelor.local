@@ -90,7 +90,7 @@
                                     key-by="id"
                                     label-by="name"
                                 />
-                                <x-jet-input-error for="courses"/>
+                                <x-jet-input-error for="selectedCourses"/>
                             </div>
                         </div>
                         <div class="py-3 text-right">

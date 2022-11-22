@@ -39,18 +39,23 @@
                             <div>
                                 <x-jet-label for="name"
                                        class="block">{{ __('Assign Course') }}</x-jet-label>
-                                <x-multi-select name='selectedCourses' :placeholder="__('Select course')" :options='$courses' :summeryText='$selectedCoursesSummery' />
-                                <x-jet-input-error for="courses"/>
+                                <x-multi-select
+                                    wire:model="selectedCourses"
+                                    :placeholder="__('Select course')"
+                                    :options='$courses'
+                                    :value="$selectedCourses"
+                                    key-by="id"
+                                    label-by="name"
+                                />
+                                <x-jet-input-error for="selectedCourses"/>
                             </div>
-
                         </div>
                         <div class="py-3 text-right">
                             <x-primary-button type="submit"
-                                    class="inline-flex">
+                                              class="inline-flex">
                                 {{ __('Save') }}
                             </x-primary-button>
                         </div>
-
                     </form>
                 </div>
             </div>
