@@ -53,7 +53,7 @@
             aria-haspopup="listbox"
             aria-labelledby="listbox-label"
             type="button"
-            class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
+            class="relative w-full cursor-default text-left h-11 py-2.5 px-4 border border-gray bg-white py-2 pl-3 pr-10 focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
         >
             <span class="block truncate text-primary">
                 {{ $placeholder }}
@@ -94,7 +94,7 @@
 
               Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
             -->
-            @foreach($options as $option)
+            @forelse($options as $option)
                 <li class="text-primary relative cursor-default select-none py-2 pl-8 pr-4" id="listbox-option-0"
                     role="option">
                     <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
@@ -121,7 +121,13 @@
                                class="h-4 w-4 rounded border-primary-light text-primary focus:ring-primary">
                     </span>
                 </li>
-            @endforeach
+            @empty
+                <li x-on:click="toggle()"
+                    class="text-primary relative cursor-default select-none py-2 pl-8 pr-4" id="listbox-option-0"
+                    role="option">
+                    {{ __('No data found') }}
+                </li>
+            @endforelse
         </ul>
     </div>
 </div>
