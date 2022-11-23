@@ -246,6 +246,7 @@ return [
         'Test' => Test::class,
         'ContactProfile' => ContactProfile::class,
         'DesiredBeginning' => DesiredBeginning::class,
+        'ApplicationStatus' => App\Enums\ApplicationStatus::class
     ],
 
 ];

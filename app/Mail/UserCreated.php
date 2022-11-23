@@ -33,7 +33,7 @@ class UserCreated extends Mailable implements ShouldQueue
      */
     public function build(): static
     {
-        return $this->subject(__('Your access data').' | '.$this->user->courses()?->first()?->name.'| NORDAKADEMIE')
+        return $this->subject(__('Your access data').' | '.$this->user->desiredBeginning->courses()?->first()?->name.'| NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.user-created', [
                 'link' => route('login', ['email' => $this->user->email]),

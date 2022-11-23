@@ -3,32 +3,27 @@
 namespace App\Http\Livewire\Employee\Applicants;
 
 use App\Enums\ApplicationStatus;
+use App\Models\Course;
+use App\Models\DesiredBeginning;
 use App\Models\ModelHasCourse;
 use App\Models\User;
 use App\Models\UserPreference;
 use App\Services\Statistics;
 use App\Traits\Livewire\HasModal;
 use App\Traits\Livewire\WithDataTable;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination, WithDataTable, HasModal;
+    use WithPagination, WithDataTable, HasModal, AuthorizesRequests;
 
     public $filteredBy;
 
-    public $queryString = [
-        'search' => ['except' => ''],
-        'selectedStatuses' => ['except' => ''],
-        'perPage',
-        'sort_by',
-        'sort_type',
-        'filteredBy',
-        'column',
-    ];
-
     public $deletedApplicant;
+
+    public $forcePassedApplicant = [];
 
     public $column = null;
 
@@ -44,10 +39,36 @@ class Index extends Component
 
     public $selectedShowFields;
 
+    public $desiredBeginnings = [];
+
+    public $desiredBeginning = null;
+
+    public $courses = [];
+
+    public $courseOptions = [];
+
+    public $deleteMode = false;
+
+    public $queryString = [
+        'search' => ['except' => ''],
+        'selectedStatuses' => ['except' => ''],
+        'perPage',
+        'sort_by',
+        'sort_type',
+        'filteredBy',
+        'column' => ['except' => ''],
+        'desiredBeginning' => ['except' => ''],
+        'courses' => ['except' => ''],
+    ];
+
     protected $listeners = ['refresh' => '$refresh'];
 
     public function mount()
     {
+        $this->desiredBeginnings = DesiredBeginning::all()->unique('course_start_date');
+
+        $this->courseOptions = Course::all();
+
         $this->statuses = ApplicationStatus::selectionOptions();
 
         $this->authPreferencesFields = $this->getUserPreferenceFields();
@@ -85,7 +106,12 @@ class Index extends Component
         return $options;
     }
 
-    public function openConfirmModal(User $applicant)
+    public function openConfirmModal(User $applicant, $action)
+    {
+        ($action === "delete") ? $this->openConfirmDeleteModal($applicant) : $this->openConfirmPassModal($applicant);
+    }
+
+    public function openConfirmDeleteModal($applicant)
     {
         if (ModelHasCourse::whereCourseId($applicant->id)->exists()) {
             $this->toastNotify(
@@ -94,6 +120,7 @@ class Index extends Component
                 TOAST_ERROR
             );
         } else {
+            $this->deleteMode = true;
             $this->open();
             $this->deletedApplicant = $applicant;
         }
@@ -103,6 +130,23 @@ class Index extends Component
     {
         $this->deletedApplicant->delete();
         $this->reset('show', 'deletedApplicant');
+        $this->render();
+    }
+
+    public function openConfirmPassModal($applicant)
+    {
+        $this->authorize('forcePass', $applicant);
+
+        $this->deleteMode = false;
+        $this->open();
+        $this->forcePassedApplicant = $applicant;
+    }
+
+    public function forcePassApplicant()
+    {
+        // dd($this->forcePassedApplicant);
+
+        $this->reset('show', 'forcePassedApplicant');
         $this->render();
     }
 
@@ -125,7 +169,7 @@ class Index extends Component
 
     public function render()
     {
-        request()->merge($this->only(['sort_by', 'sort_type', 'search', 'selectedStatuses', 'filteredBy']));
+        request()->merge($this->only(['sort_by', 'sort_type', 'search', 'selectedStatuses', 'filteredBy', 'desiredBeginning', 'courses']));
 
         return view('livewire.employee.applicants.index', [
             'applicants' => $this->fetchApplicants(),

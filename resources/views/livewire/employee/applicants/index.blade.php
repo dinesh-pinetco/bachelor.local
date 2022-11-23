@@ -1,5 +1,9 @@
 <div>
-    <x-data-table.table :model="$applicants" :columns="$columns" :statuses="$statuses"
+    <x-data-table.table :model="$applicants"
+                        :columns="$columns"
+                        :courseOptions="$courseOptions"
+                        :desiredBeginnings="$desiredBeginnings"
+                        :statuses="$statuses"
                         :applicantsTableFields="$applicantsTableFields"
                         :authPreferencesFields="$authPreferencesFields"
                         :selectedShowFields="$selectedShowFields">
@@ -123,10 +127,10 @@
                         </td>
                     @endif
                     @if(in_array('course_name', $authPreferencesFields))
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->Courses->first()->name) }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->desiredBeginning->courses?->first()?->name) }}</td>
                     @endif
                     @if(in_array('course_start_date', $authPreferencesFields))
-{{--                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->course->first()?->course_start_date?->format('d.m.Y')) }}</td>--}}
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->desiredBeginning->course_start_date->format('d.m.Y')) }}</td>
                     @endif
                     @if(in_array('application_status_name', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->application_status->value) }}</td>
@@ -164,6 +168,16 @@
                         </td>
                     @endif
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                        @can('forcePass', $applicant)
+                            <span data-cy="delete-button-{{ $applicant->id }}" role="button"
+                                class="text-darkgray hover:text-gray inline-block cursor-pointer"
+                                wire:click="openConfirmModal({{ $applicant->id }}, 'pass')">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current h-4 w-4" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                </svg>
+                            </span>
+                        @endcan
                         <a data-cy="edit-button-{{ $applicant->id }}" role="button"
                            class="text-darkgray hover:text-gray inline-block cursor-pointer"
                            href="{{ route('employee.applicants.edit', ['slug' => 'profile', 'applicant' => $applicant]) }}">
@@ -173,15 +187,15 @@
                                       d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                             </svg>
                         </a>
-                        <a data-cy="delete-button-{{ $applicant->id }}" role="button"
-                           class="text-darkgray hover:text-lightred inline-block cursor-pointer"
-                           wire:click="openConfirmModal({{ $applicant->id }})" href="#">
+                        <span data-cy="delete-button-{{ $applicant->id }}" role="button"
+                            class="text-darkgray hover:text-lightred inline-block cursor-pointer"
+                            wire:click="openConfirmModal({{ $applicant->id }}, 'delete')">
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current h-4 w-4" fill="none"
-                                 viewBox="0 0 24 24" stroke="currentColor">
+                                viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                             </svg>
-                        </a>
+                        </span>
                     </td>
                 </tr>
             @empty
@@ -202,7 +216,7 @@
     </x-data-table.table>
     <x-custom-modal wire:model="show">
         <x-slot name="title">
-            {{ __('Delete Applicant') }}
+            {{ $deleteMode ? __('Delete Applicant') : __('Pass Applicant') }}
         </x-slot>
         <div>
             <div class="space-y-3">
@@ -214,14 +228,14 @@
                     </svg>
                 </p>
                 <h4 class="text-center text-darkgray text-sm sm:text-base">
-                    {{ __('Are you sure you want to remove applicant.') }}?
+                    {{ $deleteMode ? __('Are you sure you want to remove applicant?') : __('Are you sure you want to pass applicant?') }}?
                 </h4>
             </div>
         </div>
         <x-jet-input-error for="client" class="mt-1"/>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-danger-button data-cy="delete-button" wire:click='delete'> {{ __('Yes, Delete it') }}
+                <x-danger-button data-cy="delete-button" wire:click="{{$deleteMode ? 'delete' : 'forcePassApplicant' }}"> {{ $deleteMode ? __('Yes, Delete it') : __('Yes, Pass applicant') }}
                 </x-danger-button>
                 <x-secondary-button data-cy="cancel-button" wire:click="$set('show', false)"> {{ __('Cancel') }}
                 </x-secondary-button>

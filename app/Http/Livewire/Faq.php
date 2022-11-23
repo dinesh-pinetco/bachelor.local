@@ -12,7 +12,7 @@ class Faq extends Component
     public function render()
     {
         $this->faq = ModelsFaq::whereHas('courses', function ($query) {
-            $query->whereIn('course_id', auth()->user()->courses->pluck('id'));
+            $query->whereIn('course_id', auth()->user()->desiredBeginning->courses->pluck('id'));
         })->orderBy('sort_order')->get();
 
         return view('livewire.faq');

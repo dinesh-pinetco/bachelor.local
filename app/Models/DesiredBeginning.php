@@ -12,6 +12,8 @@ class DesiredBeginning extends Model
 {
     use HasCourses;
 
+    protected $dates = ['course_start_date'];
+
     protected $guarded = [];
 
     public static function options($onlyFuture = false): array
