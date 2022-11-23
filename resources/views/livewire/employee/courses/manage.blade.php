@@ -45,13 +45,6 @@
                             </div>
 
                             <div>
-                                <x-jet-label for="name" class="block">{{ __('Assign Course') }}
-                                </x-jet-label>
-                                <x-multi-select name='selectedDesiredBeginnings' :options='$desiredBeginnings' :summeryText='$selectedDesiredBeginningsSummary' placeholder="{{ __('Select start (Summer/Winter)') }}" />
-                                <x-jet-input-error for="selectedDesiredBeginnings" />
-                            </div>
-
-                            <div>
                                 <x-jet-label for="name" class="block required">{{ __('First Start') }}
                                 </x-jet-label>
                                 <livewire:semester-date :value="$course->first_start" type="first_start" />
@@ -83,7 +76,9 @@
 
                             <div>
                                 <x-jet-label for="is_active" class="block required">{{ __('Status') }}</x-jet-label>
-                                <x-livewire-select id="is_active" name="is_active" model="course.is_active"
+                                <x-livewire-select id="is_active"
+                                                   name="is_active"
+                                                   model="course.is_active"
                                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     <option value="">{{ __('Please select') }}</option>
                                     <option value="1">{{ __('Active') }}</option>

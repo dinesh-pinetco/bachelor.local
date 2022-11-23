@@ -70,7 +70,7 @@ class User extends Authenticatable implements ContractsAuditable
     protected function applicationStatus(): Attribute
     {
         return Attribute::set(function ($value, $attributes) {
-            if (! app()->environment('local') && $this->hubspotConfiguration()->exists()) {
+            if (app()->environment('production') && $this->hubspotConfiguration()->exists()) {
                 ApplicantStatusUpdateToHubspotJob::dispatch($this, $value);
             }
 
@@ -167,5 +167,10 @@ class User extends Authenticatable implements ContractsAuditable
     {
         $desiredBeginning = $this->desiredBeginning()->create(['course_start_date' => $desiredBeginning]);
         $desiredBeginning->courses()->attach($course_ids);
+    }
+
+    public function coursesName()
+    {
+        return $this->courses()->with('course')->get()->pluck('course.name');
     }
 }

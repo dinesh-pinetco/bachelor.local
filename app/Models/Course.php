@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Filters\CourseFilters;
+use App\Hubspot\ContactProperty;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 
@@ -31,6 +33,10 @@ class Course extends Model implements ContractsAuditable
 
         self::creating(function ($model) {
             $model->sort_order = self::max('sort_order') + 1;
+        });
+
+        self::created(function (Course $model) {
+            $model->syncOnHubspot();
         });
     }
 
@@ -66,5 +72,26 @@ class Course extends Model implements ContractsAuditable
         if ($key && $keyword) {
             return $query->where($key, 'like', "%$keyword%");
         }
+    }
+
+    public function syncOnHubspot()
+    {
+        $property = ContactProperty::make()
+            ->findByName('master_study_course');
+        $propertyRequest = json_decode(json_encode($property), true);
+
+        $options = Arr::where($propertyRequest['options'], function ($value, $key) {
+            return ($value['label'] !== '') && ($value['value'] !== '') && ($value['label'] != $this->name) && ($value['value'] != $this->id);
+        });
+
+        $propertyRequest['options'] = array_merge($options, [
+            [
+                'label' => $this->name,
+                'value' => $this->id,
+            ],
+        ]);
+
+        ContactProperty::make()
+            ->update('master_study_course', $propertyRequest);
     }
 }

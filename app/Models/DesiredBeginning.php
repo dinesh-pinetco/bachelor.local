@@ -14,6 +14,10 @@ class DesiredBeginning extends Model
 
     protected $guarded = [];
 
+    const TITLE = 'F Y';
+
+    protected $casts = ['course_start_date' => 'date'];
+
     public static function options($onlyFuture = false): array
     {
         $desiredBeginnings = [];
@@ -29,7 +33,7 @@ class DesiredBeginning extends Model
             $nextCourseStarting->copy()->addYears(FUTURE_YEAR));
 
         foreach ($collection as $courseDate) {
-            $desiredBeginnings[] = ['key' => $courseDate->format('Y-m-d'), 'title' => $courseDate->format('F Y')];
+            $desiredBeginnings[] = ['key' => $courseDate->format('Y-m-d'), 'title' => $courseDate->format(self::TITLE)];
         }
 
         return $desiredBeginnings;

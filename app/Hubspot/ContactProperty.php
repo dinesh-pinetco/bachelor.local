@@ -41,4 +41,9 @@ class ContactProperty extends Base
     {
         return $this->service->delete($name)->getData();
     }
+
+    public function update($name, array $request)
+    {
+        return $this->service->update($name, $request)->getData();
+    }
 }

@@ -33,14 +33,6 @@ return [
         'fieldType' => 'phonenumber',
         'options' => [],
     ],
-    'study_course' => [
-        'label' => 'Study Course',
-        'groupName' => 'contactinformation',
-        'description' => 'A contact\'s study course',
-        'type' => 'string',
-        'fieldType' => 'text',
-        'options' => [],
-    ],
     'desired_beginning' => [
         'label' => 'Desired Beginning',
         'groupName' => 'contactinformation',
@@ -49,43 +41,39 @@ return [
         'fieldType' => 'text',
         'options' => [],
     ],
-    'previous_university' => [
-        'label' => 'Previous university',
+    'master_study_course' => [
+        'label' => 'Master Study Course',
         'groupName' => 'contactinformation',
-        'description' => 'A contact\'s previous university',
-        'type' => 'string',
-        'fieldType' => 'text',
-        'options' => [],
-    ],
-    'study_course_of_previous_university' => [
-        'label' => 'Study course of previous university',
-        'groupName' => 'contactinformation',
-        'description' => 'A contact\'s study course of previous university',
-        'type' => 'string',
-        'fieldType' => 'text',
-        'options' => [],
-    ],
-    'application_submitted' => [
-        'label' => 'Application submitted',
-        'groupName' => 'contactinformation',
-        'description' => 'NAK contact\'s application submitted',
+        'description' => 'A contact\'s study course',
         'type' => 'enumeration',
-        'fieldType' => 'booleancheckbox',
+        'fieldType' => 'checkbox',
         'options' => [
             [
-                'label' => 'Yes',
-                'value' => true,
-            ],
-            [
-                'label' => 'No',
-                'value' => false,
+                'label' => '',
+                'value' => '',
             ],
         ],
     ],
-    'application_accepted' => [
-        'label' => 'Application accepted',
+    'registration_submitted' => [
+        'label' => 'Registration submitted',
+        'groupName' => 'contactinformation',
+        'description' => 'NAK contact\'s registration submitted',
+        'type' => 'datetime',
+        'fieldType' => 'date',
+        'options' => [],
+    ],
+    'profile_information_completed' => [
+        'label' => 'Profile information completed',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s application accepted',
+        'type' => 'datetime',
+        'fieldType' => 'date',
+        'options' => [],
+    ],
+    'test_taken' => [
+        'label' => 'Test taken',
+        'groupName' => 'contactinformation',
+        'description' => 'NAK contact\'s test taken',
         'type' => 'enumeration',
         'fieldType' => 'booleancheckbox',
         'options' => [
@@ -99,10 +87,10 @@ return [
             ],
         ],
     ],
-    'test_completed' => [
-        'label' => 'Test completed',
+    'test_passed' => [
+        'label' => 'Test passed',
         'groupName' => 'contactinformation',
-        'description' => 'NAK contact\'s test completed',
+        'description' => 'NAK contact\'s test passed',
         'type' => 'enumeration',
         'fieldType' => 'booleancheckbox',
         'options' => [
@@ -116,29 +104,56 @@ return [
             ],
         ],
     ],
-    'selection_interview_on' => [
-        'label' => 'Selection interview on',
+    'personal_data_completed' => [
+        'label' => 'Personal data completed',
         'groupName' => 'contactinformation',
-        'description' => 'Date this contact\'s selection interview on',
-        'type' => 'datetime',
-        'fieldType' => 'date',
-        'options' => [],
+        'description' => 'NAK contact\'s personal data completed',
+        'type' => 'enumeration',
+        'fieldType' => 'booleancheckbox',
+        'options' => [
+            [
+                'label' => 'Yes',
+                'value' => true,
+            ],
+            [
+                'label' => 'No',
+                'value' => false,
+            ],
+        ],
     ],
-    'contract_sent_on' => [
-        'label' => 'Contract send on',
+    'consent_to_company_portal_bulletin_board' => [
+        'label' => 'Consent to company portal bulletin board',
         'groupName' => 'contactinformation',
-        'description' => 'Date this contact\'s contract send on',
-        'type' => 'datetime',
-        'fieldType' => 'date',
-        'options' => [],
+        'description' => 'NAK contact\'s consent to company portal bulletin board',
+        'type' => 'enumeration',
+        'fieldType' => 'booleancheckbox',
+        'options' => [
+            [
+                'label' => 'Yes',
+                'value' => true,
+            ],
+            [
+                'label' => 'No',
+                'value' => false,
+            ],
+        ],
     ],
-    'contract_returned_on' => [
-        'label' => 'Contract returned',
+    'approved_by_company_for_enrolment' => [
+        'label' => 'Approved by company for enrolment',
         'groupName' => 'contactinformation',
-        'description' => 'Date this contact\'s contract returned',
-        'type' => 'datetime',
-        'fieldType' => 'date',
-        'options' => [],
+        'description' => 'NAK contact\'s approved by company for enrolment',
+        'type' => 'enumeration',
+        'fieldType' => 'booleancheckbox',
+        'options' => [
+            [
+                'label' => 'Yes',
+                'value' => true,
+            ],
+            [
+                'label' => 'No',
+                'value' => false,
+            ],
+        ],
     ],
     'rejected_by_applicant' => [
         'label' => 'Rejected by applicant',

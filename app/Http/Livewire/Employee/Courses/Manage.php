@@ -3,21 +3,11 @@
 namespace App\Http\Livewire\Employee\Courses;
 
 use App\Models\Course;
-use App\Models\DesiredBeginning;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Event;
 use Livewire\Component;
-use OwenIt\Auditing\Events\AuditCustom;
 
 class Manage extends Component
 {
     public Course $course;
-
-    public $desiredBeginnings;
-
-    public array $selectedDesiredBeginnings = [];
-
-    public $selectedDesiredBeginningsSummary;
 
     public string $formMode = 'create';
 
@@ -56,43 +46,16 @@ class Manage extends Component
         }
 
         $this->course = $course;
-
-        $this->course->desired_beginnings->each(function ($desiredBeginning) {
-            $this->selectedDesiredBeginnings[$desiredBeginning->id] = $desiredBeginning->id;
-        });
     }
 
     public function render()
     {
-        $this->desiredBeginnings = DesiredBeginning::get();
-        $this->syncSelectedOptions();
-
         return view('livewire.employee.courses.manage');
-    }
-
-    public function syncSelectedOptions()
-    {
-        if ($this->desiredBeginnings && $this->selectedDesiredBeginnings) {
-            $this->selectedDesiredBeginningsSummary = $this->desiredBeginnings->where('id', array_key_first($this->selectedDesiredBeginnings))->first()->name;
-
-            if (count($this->selectedDesiredBeginnings) > 1) {
-                $this->selectedDesiredBeginningsSummary .= ' +'.(count($this->selectedDesiredBeginnings) - 1);
-            }
-        } else {
-            $this->selectedDesiredBeginningsSummary = null;
-        }
     }
 
     public function submit()
     {
         $this->{$this->formMode}();
-    }
-
-    public function updatedSelectedDesiredBeginnings()
-    {
-        $this->selectedDesiredBeginnings = Arr::where($this->selectedDesiredBeginnings, fn ($value) => $value !== false);
-
-        $this->syncSelectedOptions();
     }
 
     public function updateDate($date, $type)
@@ -106,36 +69,9 @@ class Manage extends Component
 
         $this->course->save();
 
-        $this->syncDesiredBeginnings($this->course);
-
         session()->flash('banner', __('Course created successfully!'));
 
         $this->redirectToIndex();
-    }
-
-    private function syncDesiredBeginnings($course)
-    {
-        $course->auditEvent = $this->formMode == 'edit' ? 'updated' : $this->formMode;
-        $course->isCustomEvent = true;
-
-        $isDirtyDesiredBeginnings = false;
-
-        if (! $course->desired_beginnings->pluck('id')->diff($this->selectedDesiredBeginnings)->isEmpty() || ! collect($this->selectedDesiredBeginnings)->diff($course->desired_beginnings->pluck('id'))->isEmpty()) {
-            $isDirtyDesiredBeginnings = true;
-            $course->auditCustomOld['desired_beginning'] = $course->desired_beginnings->pluck('name')->implode(', ');
-        }
-
-        $course->desired_beginnings()->sync($this->selectedDesiredBeginnings);
-
-        $course->load('desired_beginnings');
-
-        if ($isDirtyDesiredBeginnings) {
-            $course->auditCustomNew['desired_beginning'] = $course->desired_beginnings->pluck('name')->implode(', ');
-        }
-
-        if ($isDirtyDesiredBeginnings) {
-            Event::dispatch(AuditCustom::class, [$course]);
-        }
     }
 
     private function redirectToIndex(): void
@@ -149,10 +85,9 @@ class Manage extends Component
 
         $this->course->save();
 
-        $this->syncDesiredBeginnings($this->course);
-
         session()->flash('banner', __('Course updated successfully!'));
 
+        $this->course->syncOnHubspot();
         $this->redirectToIndex();
     }
 
@@ -163,8 +98,6 @@ class Manage extends Component
         $clonedCourse = $this->course->replicate();
 
         $clonedCourse->push();
-
-        $this->syncDesiredBeginnings($clonedCourse);
 
         session()->flash('banner', __('Course cloned successfully!'));
 
