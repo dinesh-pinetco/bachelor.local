@@ -50,16 +50,4 @@ trait UserRelations
         return $this->hasOne(DesiredBeginning::class)
             ->latest();
     }
-
-    public function courses()
-    {
-        return $this->hasManyThrough(
-            ModelHasCourse::class,
-            DesiredBeginning::class,
-            'user_id',
-            'model_id',
-            'id',
-            'id'
-        )->where('model_type', DesiredBeginning::class);
-    }
 }

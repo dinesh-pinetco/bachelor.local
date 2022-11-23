@@ -6,6 +6,7 @@ use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
+use App\Traits\HasCourses;
 use App\Traits\Mediable;
 use App\Traits\User\UserRelations;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -122,6 +123,11 @@ class User extends Authenticatable implements ContractsAuditable
     public function isSelectionTestingMode(): bool
     {
         return $this->application_status->applicationStatusOrder() >= ApplicationStatus::PROFILE_INFORMATION_COMPLETED->applicationStatusOrder();
+    }
+
+    public function isTestPassed()
+    {
+        return $this->application_status->applicationStatusOrder() >= ApplicationStatus::TEST_FAILED->applicationStatusOrder();
     }
 
     public function saveApplicationStatus()

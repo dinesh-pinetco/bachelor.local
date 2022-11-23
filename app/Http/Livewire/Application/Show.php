@@ -154,7 +154,7 @@ class Show extends Component
 
         if (is_null($error) && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
             $tests = Test::whereHas('courses', function ($query) {
-                $query->whereIn('course_id', $this->applicant->courses->pluck('course_id'));
+                $query->whereIn('course_id', $this->applicant->desiredBeginning->courses->pluck('course_id'));
             })->get();
 
             foreach ($tests as $test) {

@@ -29,6 +29,25 @@
                     </x-livewire-select>
                 </div>
             @endif
+            <div class="w-full sm:w-1/2 lg:w-1/3 px-2 order-4 xl:order-2 mt-4 sm:mt-0">
+                <x-livewire-select data-cy="datatable-column" class="" id="column" name="column"
+                    model="desiredBeginning">
+                    <option value="">{{ __('Select desired beginning') }}</option>
+                    @foreach ($desiredBeginnings as $beginning)
+                        <option value="{{ $beginning->course_start_date }}">{{ $beginning->course_start_date->format('m.d.Y') }}</option>
+                    @endforeach
+                </x-livewire-select>
+            </div>
+            <div class="w-full sm:w-1/2 lg:w-1/3 px-2 order-4 xl:order-2 mt-4 sm:mt-0">
+                <x-multi-select
+                    key="courses"
+                    wire:model="courses"
+                    :placeholder="__('Select courses')"
+                    :options="$courseOptions"
+                    keyBy="id"
+                    labelBy="name"
+                />
+            </div>
             @isset($statuses)
                 <div class="w-full lg:w-1/3 px-2 order-2 xl:order-3 mt-4 sm:mt-0 sm:mb-4 lg:mb-0">
                     <x-multi-select

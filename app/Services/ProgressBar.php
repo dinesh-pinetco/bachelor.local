@@ -56,7 +56,7 @@ class ProgressBar
 
     public function documentProgress(): float|int
     {
-        $courseIds = $this->applicant->courses()->pluck('course_id');
+        $courseIds = $this->applicant->desiredBeginning->courses()->pluck('course_id');
         $points = Document::active()
             ->required()
             ->whereHas('courses', function ($query) use ($courseIds) {
@@ -77,7 +77,7 @@ class ProgressBar
 
     public function selectionTestsProgress(): float|int
     {
-        $courses = $this->applicant->courses->pluck('course_id')->toArray();
+        $courses = $this->applicant->desiredBeginning->courses->pluck('course_id')->toArray();
         $points = Test::query()
             ->matchCourses($courses)
             ->count();
