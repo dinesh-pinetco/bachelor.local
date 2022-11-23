@@ -108,7 +108,7 @@ class Index extends Component
 
     public function openConfirmModal(User $applicant, $action)
     {
-        ($action === "delete") ? $this->openConfirmDeleteModal($applicant) : $this->openConfirmPassModal($applicant);
+        ($action === 'delete') ? $this->openConfirmDeleteModal($applicant) : $this->openConfirmPassModal($applicant);
     }
 
     public function openConfirmDeleteModal($applicant)

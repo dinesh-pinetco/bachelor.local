@@ -31,14 +31,14 @@ class UserFilters extends Filter
 
     public function desiredBeginning($desiredBeginning)
     {
-        $this->builder->whereHas('desiredBeginning', function($query) use ($desiredBeginning) {
+        $this->builder->whereHas('desiredBeginning', function ($query) use ($desiredBeginning) {
             $query->where('course_start_date', $desiredBeginning);
         });
     }
 
     public function courses($courses)
     {
-        $this->builder->whereHas('desiredBeginning.courses', function($query) use($courses) {
+        $this->builder->whereHas('desiredBeginning.courses', function ($query) use ($courses) {
             $query->whereIn('courses.id', $courses);
         });
     }

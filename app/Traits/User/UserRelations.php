@@ -5,7 +5,6 @@ namespace App\Traits\User;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Models\Meteor;
-use App\Models\ModelHasCourse;
 use App\Models\Moodle;
 use App\Models\Result;
 use App\Models\UserHubspotConfiguration;

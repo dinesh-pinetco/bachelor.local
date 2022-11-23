@@ -6,7 +6,6 @@ use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
-use App\Traits\HasCourses;
 use App\Traits\Mediable;
 use App\Traits\User\UserRelations;
 use Illuminate\Database\Eloquent\Casts\Attribute;
