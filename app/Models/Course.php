@@ -76,6 +76,9 @@ class Course extends Model implements ContractsAuditable
 
     public function syncOnHubspot()
     {
+        if (!app()->environment('production')) {
+            return false;
+        }
         $property = ContactProperty::make()
             ->findByName('master_study_course');
         $propertyRequest = json_decode(json_encode($property), true);

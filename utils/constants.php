@@ -14,7 +14,7 @@ const PER_PAGE = 15;
 
 const BEGINNING_YEAR = 2022;
 const BEGINNING_MONTH = 5;
-const PAST_YEAR = 2020;
+const PAST_YEAR = 1960;
 const MAX_YEAR = 5;
 const FUTURE_YEAR = 5;
 const COURSE_STARTING_MONTH = 10;

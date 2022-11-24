@@ -127,7 +127,31 @@
                         </td>
                     @endif
                     @if(in_array('course_name', $authPreferencesFields))
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->desiredBeginning->courses?->first()?->name) }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary relative">
+
+                            @if($applicant->desiredBeginning->courses->count() > 1)
+                                <div class="cursor-pointer"
+                                    x-data="{ tooltip: false }"
+                                    x-on:click="tooltip =! tooltip">
+                                    @foreach ($applicant->desiredBeginning->courses->pluck('name') as $index => $course)
+                                        <div class="">
+                                            <svg class="absolute right-0 top-4" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#003A79"><path d="M6 9l6 6 6-6" stroke="#003A79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                            @if($index < 1)
+                                            {{ $course }}
+                                        </div>
+                                            @else
+                                                <div x-show="tooltip">
+                                                    <span class="truncate">{{ $course }}</span>
+                                                </div>
+                                            @endif
+                                    @endforeach
+                                </div>
+                            @else
+                                <span class="cursor-auto">
+                                    {{ $applicant->desiredBeginning->courses->first()->name }}
+                                </span>
+                            @endif
+                        </td>
                     @endif
                     @if(in_array('course_start_date', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->desiredBeginning->course_start_date->format('d.m.Y')) }}</td>
