@@ -8,6 +8,7 @@ use App\Models\Group;
 use App\Models\Result;
 use App\Models\Tab;
 use App\Models\Test;
+use App\Models\UserConfiguration;
 use App\Services\ProgressBar;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,13 +30,21 @@ class Show extends Component
 
     public bool $isEdit = false;
 
+    public $competency_catch_up = false;
+
+    public $competency_comment = null;
+
     public array $rules = [
-        'applicant.competency_catch_up' => 'required|boolean',
-        'applicant.competency_comment' => 'required|nullable',
+        'competency_catch_up' => 'required|boolean',
+        'competency_comment' => 'required|nullable',
     ];
 
     public function mount()
     {
+        $this->applicant->load('configuration');
+        $this->competency_catch_up = data_get($this->applicant->configuration, 'competency_catch_up', false);
+        $this->competency_comment = $this->applicant->configuration?->competency_comment;
+
         $this->refreshData();
     }
 
@@ -128,20 +137,24 @@ class Show extends Component
 
     public function updated($propertyName)
     {
-        if ($propertyName == 'applicant.competency_comment') {
+        if ($propertyName == 'competency_comment') {
             $this->handleCompetencyCatchUp();
         }
     }
 
     public function handleCompetencyCatchUp()
     {
-        $this->applicant->competency_catch_up = (int) $this->applicant->competency_catch_up;
-        if (! $this->applicant->competency_catch_up) {
-            $this->applicant->competency_comment = null;
-        }
-        $this->applicant->save();
+        UserConfiguration::updateOrCreate(['user_id' => $this->applicant->id], [
+            'competency_catch_up' => $this->competency_catch_up,
+            'competency_comment' => $this->competency_catch_up ? $this->competency_comment : null,
+        ]);
+
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
         $this->refreshData();
+
+        $this->applicant->load('configuration');
+        $this->competency_catch_up = data_get($this->applicant->configuration, 'competency_catch_up', false);
+        $this->competency_comment = $this->applicant->configuration?->competency_comment;
     }
 
     public function submitProfileInformation()

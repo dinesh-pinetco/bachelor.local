@@ -26,8 +26,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('cubia_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->boolean('competency_catch_up')->default(false);
-            $table->mediumText('competency_comment')->nullable();
             $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();

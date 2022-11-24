@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Enums\ApplicationStatus;
 use App\Http\Livewire\Traits\HasModal;
 use App\Models\User;
+use App\Models\UserConfiguration;
 use Livewire\Component;
 
 class ApplicationReject extends Component
@@ -43,8 +44,9 @@ class ApplicationReject extends Component
         $this->applicant->is_active = false;
         $this->applicant->save();
 
-        $this->applicant->configuration()
-            ->updateOrCreate(['application_reject_reason' => $this->applicationRejectReason]);
+        UserConfiguration::updateOrCreate(['user_id' => $this->applicant->id], [
+            'application_reject_reason' => $this->applicationRejectReason,
+        ]);
 
         $this->toastNotify(__('Application reject successfully.'), __('Success'), TOAST_SUCCESS);
 

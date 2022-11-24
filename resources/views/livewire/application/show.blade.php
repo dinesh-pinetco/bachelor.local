@@ -135,7 +135,7 @@
                     @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
                         <div class="flex justify-start items-baseline mb-7">
                             <div class="form-check">
-                                <input wire:model="applicant.competency_catch_up" @if ($isEdit) wire:change="handleCompetencyCatchUp" @else {{ "disabled" }} @endif
+                                <input wire:model="competency_catch_up" @if ($isEdit) wire:change="handleCompetencyCatchUp" @else {{ "disabled" }} @endif
                                     class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none"
                                     type="checkbox">
                                 <label class="form-check-label inline-block text-gray-800" for="flexCheckChecked">
@@ -143,7 +143,7 @@
                                 </label>
                             </div>
                         </div>
-                        @if ($applicant->competency_catch_up)
+                        @if ($competency_catch_up)
                             <div>
                                 <x-jet-label for="label" class="block">
                                     {{ __('Comment') }}
@@ -154,11 +154,11 @@
                                         x-data
                                         x-on:trix-change="$dispatch('input', event.target.value)"
                                         x-ref="trix"
-                                        wire:model.debounce.500ms="applicant.competency_comment"
-                                        wire:key="applicant.competency_comment"
+                                        wire:model.debounce.500ms="competency_comment"
+                                        wire:key="competency_comment"
                                     ></trix-editor>
                                 </div>
-                                <x-jet-input-error for="applicant.competency_comment"/>
+                                <x-jet-input-error for="competency_comment"/>
                             </div>
                         @endif
                     @endif
