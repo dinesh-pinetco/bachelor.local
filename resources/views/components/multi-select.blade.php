@@ -103,7 +103,7 @@
                 <li class="text-primary relative cursor-default select-none py-2 pl-8 pr-4" id="listbox-option-0"
                     role="option">
                     <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
-                    <label for="{{ data_get($option,$keyBy) }}"
+                    <label for="{{ data_get($option,$keyBy).data_get($option, $labelBy) }}"
                            class="font-normal block truncate">
                         {{ data_get($option, $labelBy) }}
                     </label>
@@ -115,7 +115,7 @@
                     -->
                     <span class="text-primary absolute inset-y-0 left-0 flex items-center pl-1.5">
                         <input type="checkbox"
-                               id="{{ data_get($option,$keyBy) }}"
+                               id="{{ data_get($option,$keyBy).data_get($option, $labelBy) }}"
                                value="{{ data_get($option,$keyBy) }}"
                                {{ $attributes->wire('model') }}
                                name="{{ $attributes->get('name') }}[]"

@@ -15,64 +15,85 @@
                             <div>
                                 <x-jet-label for="name" class="block required">{{ __('Name') }}</x-jet-label>
                                 <x-jet-input class="w-full" type="text" name="name" :placeholder="__('Name')"
-                                    wire:model.defer="document.name" id="name"></x-jet-input>
-                                <x-jet-input-error for="document.name" />
+                                             wire:model.defer="document.name" id="name"></x-jet-input>
+                                <x-jet-input-error for="document.name"/>
                             </div>
 
                             <div>
                                 <x-jet-label for="placeholder" class="block">
                                     {{ __('Description') }}
                                 </x-jet-label>
-                                <x-jet-input class="w-full" type="text" name="description" :placeholder="__('Description')"
-                                    wire:model.defer="document.description" id="description"></x-jet-input>
-                                <x-jet-input-error for="document.description" />
+                                <x-jet-input class="w-full" type="text" name="description"
+                                             :placeholder="__('Description')"
+                                             wire:model.defer="document.description" id="description"></x-jet-input>
+                                <x-jet-input-error for="document.description"/>
                             </div>
 
-                           {{-- <div>
-                               <x-jet-label for="extensions" class="block">{{ __('File formats') }}
-                               </x-jet-label>
-                               <div class="mt-1">
-                                   <textarea
-                                       class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray resize-none shadow-sm"
-                                       id="extensions" name="extensions" wire:model.defer="document.extensions"
-                                       rows="3"></textarea>
-                                   <x-jet-input-error for="document.extensions" />
-                               </div>
-                           </div> --}}
+                            {{-- <div>
+                                <x-jet-label for="extensions" class="block">{{ __('File formats') }}
+                                </x-jet-label>
+                                <div class="mt-1">
+                                    <textarea
+                                        class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray resize-none shadow-sm"
+                                        id="extensions" name="extensions" wire:model.defer="document.extensions"
+                                        rows="3"></textarea>
+                                    <x-jet-input-error for="document.extensions" />
+                                </div>
+                            </div> --}}
                             <div>
-                                <x-jet-label for="name" class="block">
+                                <x-jet-label for="extensions" class="block">
                                     {{ __('File formats') }}
                                 </x-jet-label>
-                                <x-multi-select name='selectedExtensions' :placeholder="__('Select extensions')" :options='$extensions' :summeryText='$selectedExtensionsSummery' />
-                                <x-jet-input-error for="extensions" />
+                                <x-multi-select
+                                    id="extensions"
+                                    :key="time() . 'selectedExtensions'"
+                                    wire:model="selectedExtensions"
+                                    :value="$selectedExtensions"
+                                    :placeholder="__('Select extensions')"
+                                    :options='$extensions'
+                                    keyBy="id"
+                                    label-by="name"/>
+                                <x-jet-input-error for="extensions"/>
                             </div>
                             <div>
                                 <x-jet-label for="is_required" class="block required">{{ __('Required') }}
                                 </x-jet-label>
                                 <x-livewire-select id="is_required" name="is_required" model="document.is_required"
-                                    class="w-full">
+                                                   class="w-full">
                                     <option value="">{{ __('Please select') }}</option>
                                     <option value="1">{{ __('Yes') }}</option>
                                     <option value="0">{{ __('No') }}</option>
                                 </x-livewire-select>
-                                <x-jet-input-error for="document.is_required" />
+                                <x-jet-input-error for="document.is_required"/>
                             </div>
                             <div>
                                 <x-jet-label for="is_active" class="block required">{{ __('Status') }}</x-jet-label>
-                                <x-livewire-select id="is_active" name="is_active" model="document.is_active"
+                                <x-livewire-select
+                                    id="is_active"
+                                    name="is_active"
+                                    model="document.is_active"
                                     class="w-full">
                                     <option value="">{{ __('Please select') }}</option>
                                     <option value="1">{{ __('Active') }}</option>
                                     <option value="0">{{ __('InActive') }}</option>
                                 </x-livewire-select>
-                                <x-jet-input-error for="document.is_active" />
+                                <x-jet-input-error for="document.is_active"/>
                             </div>
 
                             <div>
-                                <x-jet-label for="name" class="block">{{ __('Assign Course') }}
+                                <x-jet-label for="courses" class="block">{{ __('Assign Course') }}
                                 </x-jet-label>
-                                <x-multi-select name='selectedCourses' :placeholder="__('Select course')" :options='$courses' :summeryText='$selectedCoursesSummery' />
-                                <x-jet-input-error for="courses" />
+                                <x-multi-select
+                                    id="courses"
+                                    :key="time() . 'courses'"
+                                    wire:model="course_ids"
+                                    :value="$course_ids"
+                                    :placeholder="__('Select course')"
+                                    :options='$courses'
+                                    key-by="id"
+                                    label-by="name"
+                                />
+                                <x-jet-input-error for="courses"/>
                             </div>
                         </div>
                         <div class="py-3 text-right">

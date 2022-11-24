@@ -43,9 +43,14 @@
 
                     <div class="max-w-4xl">
                         <label class="my-4 {{ $isEdit ?  'cursor-pointer' : 'cursor-not-allowed' }} relative">
-                            <livewire:upload-media :key="$document->id" :applicant="$applicant"
-                                                   :extensions="$document->extensions" :tag="$document->name"
-                                                   :id="$document->id" model='document' :isEdit="$isEdit"/>
+                            <livewire:upload-media
+                                :key="$document->id"
+                                :applicant="$applicant"
+                                :extensions="$document->extensions"
+                                :tag="$document->name"
+                                :id="$document->id"
+                                model='document'
+                                :isEdit="$isEdit"/>
                             <div
                                 class="flex flex-col items-center w-full px-4 py-6 mb-6 text-center border-2 border-dashed rounded md:py-10 lg:py-16 md:mb-10 bg-lightgray border-primary">
                                 <svg class="w-10 h-10 md:w-16 md:h-16 text-primary" viewBox="0 0 60 60" fill="none"
@@ -66,7 +71,6 @@
                     <div class="mt-6">
                         <div class="space-y-1">
                             @foreach ($document->medias as $key => $media)
-{{--                                @dd($media)--}}
                                 <livewire:file-list :key="time().$key" :media="$media" :isEdit="$isEdit" showCheckbox="false" >
                             @endforeach
                         </div>

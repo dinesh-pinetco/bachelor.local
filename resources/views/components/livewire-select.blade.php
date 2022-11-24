@@ -5,7 +5,6 @@
     'dataCy' => null,
     'shouldSave' => false,
     'isEdit' => true,
-    'isEdit' => true,
     'isTab' => false,
     'isMultiselect' => false
     ])

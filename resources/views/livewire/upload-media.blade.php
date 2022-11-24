@@ -4,7 +4,7 @@
            multiple
            name="files"
            id="files"
-           {{ $isEdit ?? 'disabled' }}
+           :disabled="{{ !$isEdit }}"
            type="file"
            accept="{{ $extensions->pluck('extension')->implode(',') ?? '' }}" class="absolute inset-0 opacity-0 {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
 

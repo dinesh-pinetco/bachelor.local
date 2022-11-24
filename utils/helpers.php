@@ -67,3 +67,11 @@ function convertNumberToMonth($number = 1)
 {
     return date('F', mktime(0, 0, 0, $number, 10));
 }
+
+function booleanOptions(): array
+{
+    return [
+        ['id' => true, 'label' => __('Active')],
+        ['id' => false, 'label' => __('InActive')],
+    ];
+}

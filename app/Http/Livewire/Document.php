@@ -32,7 +32,7 @@ class Document extends Component
         $this->documents = ModelsDocument::with(['medias' => function ($query) {
             $query->where('user_id', $this->applicant->id);
         }])->whereHas('courses', function ($query) {
-            $query->whereIn('course_id', $this->applicant->desiredBeginning->courses->pluck('course_id'));
+            $query->whereIn('course_id', $this->applicant->courses->pluck('course_id'));
         })->get();
     }
 

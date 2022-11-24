@@ -26,7 +26,7 @@ class SelectionTest extends Component
     {
         return view('livewire.selection-test', [
             'tests' => Test::query()
-                ->matchCourses($this->applicant->desiredBeginning->courses->pluck('course_id')->toArray())
+                ->matchCourses($this->applicant->courses->pluck('course_id')->toArray())
                 ->with(['result' => function ($q) {
                     $q->where('user_id', $this->applicant->id);
                 }])
