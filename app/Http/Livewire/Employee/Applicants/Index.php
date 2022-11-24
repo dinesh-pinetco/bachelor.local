@@ -144,8 +144,6 @@ class Index extends Component
 
     public function forcePassApplicant()
     {
-        // dd($this->forcePassedApplicant);
-
         $this->reset('show', 'forcePassedApplicant');
         $this->render();
     }
@@ -161,6 +159,7 @@ class Index extends Component
                 ->searchByKey($this->column, request('search'))
                 ->filter()
                 ->orderBy('id', 'DESC')
+                ->with(['configuration', 'values.fields', 'desiredBeginning.courses', 'courses'])
                 ->paginate($this->perPage);
         }
 

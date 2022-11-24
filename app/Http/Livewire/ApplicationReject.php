@@ -29,10 +29,10 @@ class ApplicationReject extends Component
     public function toggle(User $applicant)
     {
         $this->show = ! $this->show;
-        $this->applicant = $applicant;
+        $this->applicant = $applicant->load('configuration');
 
         if (in_array($this->applicant->application_status, [ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT, ApplicationStatus::APPLICATION_REJECTED_BY_NAK])) {
-            $this->applicationRejectReason = $this->applicant->application_reject_reason;
+            $this->applicationRejectReason = $this->applicant->configuration?->application_reject_reason;
         }
     }
 
@@ -40,9 +40,12 @@ class ApplicationReject extends Component
     {
         $this->validate();
         $this->applicant->application_status = ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT;
-        $this->applicant->application_reject_reason = $this->applicationRejectReason;
         $this->applicant->is_active = false;
         $this->applicant->save();
+
+        $this->applicant->configuration()
+            ->updateOrCreate(['application_reject_reason' => $this->applicationRejectReason]);
+
         $this->toastNotify(__('Application reject successfully.'), __('Success'), TOAST_SUCCESS);
 
         return redirect(request()->header('Referer'));

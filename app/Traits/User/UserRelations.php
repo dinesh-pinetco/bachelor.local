@@ -8,6 +8,7 @@ use App\Models\Meteor;
 use App\Models\ModelHasCourse;
 use App\Models\Moodle;
 use App\Models\Result;
+use App\Models\UserConfiguration;
 use App\Models\UserHubspotConfiguration;
 use App\Models\UserPreference;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -61,5 +62,10 @@ trait UserRelations
             'id',
             'id'
         )->where('model_type', DesiredBeginning::class);
+    }
+
+    public function configuration(): HasOne
+    {
+        return $this->hasOne(UserConfiguration::class);
     }
 }

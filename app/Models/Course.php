@@ -75,7 +75,7 @@ class Course extends Model implements ContractsAuditable
 
     public function syncOnHubspot()
     {
-        if (!app()->environment('production')) {
+        if (! app()->environment('production')) {
             return false;
         }
         $property = ContactProperty::make()

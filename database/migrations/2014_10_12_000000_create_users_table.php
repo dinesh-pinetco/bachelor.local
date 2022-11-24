@@ -28,8 +28,6 @@ class CreateUsersTable extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->boolean('competency_catch_up')->default(false);
             $table->mediumText('competency_comment')->nullable();
-            $table->mediumText('application_reject_reason')->nullable();
-            $table->boolean('is_synced_to_sanna')->default(false);
             $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();

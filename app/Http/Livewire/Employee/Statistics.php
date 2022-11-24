@@ -44,7 +44,7 @@ class Statistics extends Component
 
         $desiredBeginnings = DesiredBeginning::get();
 
-        $lastDate = Carbon::create(null, $desiredBeginnings->last()->month, $desiredBeginnings->last()->day)->addYear(MAX_YEAR);
+        $lastDate = Carbon::create(null, COURSE_STARTING_MONTH)->addYears(MAX_YEAR);
 
         $desiredBeginnings->each(function ($desiredBeginning) use ($allDesiredBeginnings, $lastDate) {
             $startDate = Carbon::create(BEGINNING_YEAR, $desiredBeginning->month, $desiredBeginning->day);

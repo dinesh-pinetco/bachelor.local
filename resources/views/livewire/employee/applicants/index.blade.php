@@ -184,7 +184,7 @@
                     @endif
                     @if(in_array('sanna_is_sync', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
-                            @if($applicant->is_synced_to_sanna)
+                            @if($applicant->configuration?->is_synced_to_sanna)
                                 <x-icons.success/>
                             @else
                                 <x-icons.cancel/>
