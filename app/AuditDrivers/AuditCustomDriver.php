@@ -74,7 +74,7 @@ class AuditCustomDriver implements AuditDriver
 
     private function filterDynamicField(Auditable $model): array
     {
-        if ($model->fields?->related_option_table) {
+        if (data_get($model->fields, 'related_option_table')) {
             $fields = $model->toAudit();
             $replaceKey = config('application.option_tables_key')[$model->fields->related_option_table] ?? 'value';
             $fields['old_values'] = key_replace($fields['old_values'], 'value', $replaceKey);

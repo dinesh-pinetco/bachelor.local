@@ -20,6 +20,5 @@ return [
         'government_form_is_submit',
         'study_sheet_is_submit',
         'sanna_is_sync',
-        'ects_point',
     ],
 ];

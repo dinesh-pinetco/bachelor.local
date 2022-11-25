@@ -33,6 +33,11 @@ class Result extends Model implements ContractsAuditable
         return $this->belongsTo(Test::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function scopeMyResults($query, User $user = null)
     {
         $user = $user ?? auth()->user();
@@ -40,8 +45,17 @@ class Result extends Model implements ContractsAuditable
         return $query->where('user_id', $user->id);
     }
 
-    public function user(): BelongsTo
+    public function updateTestResult($grade, $result, $meta)
     {
-        return $this->belongsTo(User::class);
+        $is_passed = $grade >= $this->test->passing_limit;
+
+        $this->update([
+            'status' => $is_passed ? self::STATUS_COMPLETED : self::STATUS_FAILED,
+            'is_passed' => $is_passed,
+            'result' => $result,
+            'meta' => $meta,
+        ]);
+
+        $this->user->saveApplicationStatus();
     }
 }

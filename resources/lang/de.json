@@ -721,12 +721,16 @@
     "Your access data For": "Ihre Zugangsdaten für",
     "Field dynamic": "Dynamisches Feld",
     "Desired beginning": "Gewünschter Beginn",
-
     "registration_submitted": "Registration submitted",
     "profile_information_completed": "Profile Information Completed",
     "test_passed": "Test passed",
     "test_result_pdf_retrieved_on": "Test result pdf retrieved on",
     "personal_data_completed": "Personal data completed",
-    "test_failed": "Test failed",
-    "test_failed_confirm": "Test failed confirm"
+    "test_failed": "Test failed (not yet submitted)",
+    "test_failed_confirm": "Test failed (confirmed)",
+    "test_reset": "Test reset",
+    "consent_to_company_portal_bulletin_board": "Consent to company portal bulletin board",
+    "approved_by_company_for_enrolment": "Approved by company for enrolment",
+    "application_rejected_by_applicant": "Application rejected by applicant",
+    "application_rejected_by_nak": "Application rejected by nak"
 }

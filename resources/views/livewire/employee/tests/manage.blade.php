@@ -40,21 +40,33 @@
                                         <option value="{{ $type }}">{{ $type }}</option>
                                     @endforeach
                                 </select>
-                                <x-jet-input-error for="test.type" />
+                                <x-jet-input-error for="test.type"/>
+                            </div>
+
+                            <div>
+                                <x-jet-label for="passing_limit" class="block required">{{ __('Passing Limit') }}
+                                </x-jet-label>
+                                <x-jet-input class="w-full required" type="number"
+                                             name="passing_limit"
+                                             :placeholder="__('Passing Limit')"
+                                             wire:model.defer="test.passing_limit"
+                                             id="passing_limit"></x-jet-input>
+                                <x-jet-input-error for="test.passing_limit"/>
                             </div>
 
                             <div>
                                 <x-jet-label for="duration" class="block required">{{ __('Duration') }}
-                                    ({{ __('Min') }})</x-jet-label>
+                                    ({{ __('Min') }})
+                                </x-jet-label>
                                 <x-livewire-select id="duration" name="duration" model="test.duration"
-                                    class="w-full">
+                                                   class="w-full">
                                     <option value="">{{ __('Select Duration') }}</option>
                                     @for ($i = 10; $i <= 60; $i++)
                                         <option value="{{ number_format($i, 2) }}">{{ $i . ' ' . __('Minute') }}
                                         </option>
                                     @endfor
                                 </x-livewire-select>
-                                <x-jet-input-error for="test.duration" />
+                                <x-jet-input-error for="test.duration"/>
                             </div>
 
                             <div>

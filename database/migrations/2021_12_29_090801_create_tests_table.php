@@ -19,6 +19,7 @@ class CreateTestsTable extends Migration
             $table->string('name', 255);
             $table->text('description')->nullable();
             $table->enum('type', [Test::types()])->default(Test::TYPE_MOODLE);
+            $table->integer('passing_limit')->default(50);
             $table->decimal('duration')->comment('Duration in minutes');
             $table->string('link')->nullable();
             $table->boolean('is_required')->default(false);

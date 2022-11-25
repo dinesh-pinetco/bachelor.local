@@ -33,6 +33,7 @@ class Manage extends Component
         'test.is_active' => ['required'],
         'test.is_required' => ['required'],
         'test.link' => ['required', 'url'],
+        'test.passing_limit' => ['required', 'integer'],
     ];
 
     public function validationAttributes(): array

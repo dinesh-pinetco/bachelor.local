@@ -32,7 +32,7 @@ class Meteor
         return $testUrl;
     }
 
-    public function fetchResult($result)
+    public function fetchResult(Result $result)
     {
         if ($this->naTan) {
             $url = 'https://kern.viq16.com/api/transaction/result_report'.
@@ -54,10 +54,7 @@ class Meteor
             }
 
             $grade = data_get($responseJson, 'viq-3.full');
-
-            $status = $grade != null ? Result::STATUS_COMPLETED : $result->status;
-
-            $result->update(['status' => $status, 'is_passed' => $grade != null, 'result' => data_get($responseJson, 'meta_data.report_url'), 'meta' => json_encode($responseJson)]);
+            $result->updateTestResult($grade, data_get($responseJson, 'meta_data.report_url'), json_encode($responseJson));
 
             return $grade;
         }

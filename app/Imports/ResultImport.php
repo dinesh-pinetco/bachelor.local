@@ -44,7 +44,10 @@ class ResultImport implements ToModel, WithCustomCsvSettings
 
             if ($result && ! is_null($result->result_mix_link) && ! is_null($result->result_iqt_link)) {
                 $isPassed = ($result->is_passed_mix == true && $result->is_passed_iqt == true) ? true : false;
+
                 $result->update(['status' => Result::STATUS_COMPLETED, 'is_passed' => $isPassed]);
+
+                $result->user->saveApplicationStatus();
             }
         }
     }

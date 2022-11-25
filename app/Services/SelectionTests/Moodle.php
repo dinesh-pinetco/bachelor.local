@@ -136,8 +136,9 @@ class Moodle
         }
     }
 
-    public function fetchResult($result)
+    public function fetchResult(Result $result)
     {
+        $result->load('test');
         if ($this->user->moodle) {
             $url = config('services.moodle.base_url').
                 '&wsfunction=gradereport_user_get_grades_table'.
@@ -155,16 +156,8 @@ class Moodle
             $tableData = data_get($responseJson, 'tables.0.tabledata');
 
             $grade = data_get(end($tableData), 'grade.content');
-            $status = $grade != '-' ? Result::STATUS_COMPLETED : $result->status;
 
-            $result->update([
-                'status' => $status,
-                'is_passed' => $grade >= 50,
-                'result' => $grade,
-                'meta' => $responseJson,
-            ]);
-
-            $result->user->saveApplicationStatus();
+            $result->updateTestResult($grade, $grade, $responseJson);
 
             return $grade;
         }

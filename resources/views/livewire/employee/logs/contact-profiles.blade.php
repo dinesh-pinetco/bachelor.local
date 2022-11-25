@@ -49,7 +49,7 @@
                 <tr wire:key="field-{{ $audit->id }}">
                     {{-- @dd($audit->old_values); --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
-                        {{ $audit->created_at->format('d-m-Y') }}</td>
+                        {{ $audit->created_at->format('d.m.Y') }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                         {{ $audit->owner ? $audit->owner->name : '' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $audit->event }}</td>

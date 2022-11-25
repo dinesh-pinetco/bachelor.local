@@ -50,7 +50,7 @@
             @forelse ($audits as $audit)
                 <tr wire:key="field-{{ $audit->id }}">
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
-                        {{ $audit->created_at->format('d-m-Y') }}</td>
+                        {{ $audit->created_at->format('d.m.Y') }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
                         {{ $audit->owner ? $audit->owner->title : '' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $audit->event }}</td>
