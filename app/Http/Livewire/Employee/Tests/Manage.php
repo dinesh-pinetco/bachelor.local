@@ -25,8 +25,6 @@ class Manage extends Component
 
     public array $selectedCourses = [];
 
-    public $selectedCoursesSummery;
-
     protected array $rules = [
         'test.name' => ['required'],
         'test.description' => ['required'],
@@ -37,7 +35,6 @@ class Manage extends Component
         'test.link' => ['required', 'url'],
     ];
 
-    /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
     public function validationAttributes(): array
     {
         return [
@@ -51,11 +48,8 @@ class Manage extends Component
             $this->formMode = 'edit';
         }
 
-        $this->test = $test;
-        $this->test->courses->each(function ($course) {
-            $this->selectedCourses[$course->id] = $course->id;
-        });
         $this->types = Test::types();
+        $this->selectedCourses = $this->test->courses->pluck('id')->toArray();
     }
 
     public function submit(): Redirector|RedirectResponse
@@ -101,21 +95,6 @@ class Manage extends Component
         $this->selectedCourses = Arr::where($this->selectedCourses, function ($value) {
             return $value !== false;
         });
-
-        $this->syncSelectedOptions();
-    }
-
-    public function syncSelectedOptions()
-    {
-        if ($this->courses && $this->selectedCourses) {
-            $this->selectedCoursesSummery = $this->courses->where('id', array_key_first($this->selectedCourses))->first()->name;
-
-            if (count($this->selectedCourses) > 1) {
-                $this->selectedCoursesSummery .= ' +'.(count($this->selectedCourses) - 1);
-            }
-        } else {
-            $this->selectedCoursesSummery = null;
-        }
     }
 
     public function render()
@@ -125,8 +104,6 @@ class Manage extends Component
         ]);
 
         $this->courses = Course::filter()->get();
-
-        $this->syncSelectedOptions();
 
         return view('livewire.employee.tests.manage');
     }

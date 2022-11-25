@@ -59,8 +59,15 @@
 
                             <div>
                                 <x-jet-label for="name" class="block">{{ __('Assign Course') }}</x-jet-label>
-                                <x-multi-select name='selectedCourses' :placeholder="__('Select course')" :options='$courses' :summeryText='$selectedCoursesSummery' />
-                                <x-jet-input-error for="courses" />
+                                <x-multi-select
+                                    wire:model="selectedCourses"
+                                    :placeholder="__('Select course')"
+                                    :options='$courses'
+                                    :value="$selectedCourses"
+                                    key-by="id"
+                                    label-by="name"
+                                />
+                                <x-jet-input-error for="courses"/>
                             </div>
 
                             <div>
@@ -85,14 +92,12 @@
                                 </x-livewire-select>
                                 <x-jet-input-error for="test.is_required" />
                             </div>
-
                             <div>
                                 <x-jet-label for="link" class="block required">{{ __('Link') }}</x-jet-label>
                                 <x-jet-input type="url" name="link" wire:model.defer="test.link" autocomplete="url" :placeholder="__('Link')"
                                     id="link" class="w-full"></x-jet-input>
                                 <x-jet-input-error for="test.link" />
                             </div>
-
                         </div>
                         <div class="py-3 text-right">
                             <x-primary-button type="submit" class="inline-flex">
@@ -103,6 +108,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

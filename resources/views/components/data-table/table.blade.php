@@ -29,49 +29,51 @@
                     </x-livewire-select>
                 </div>
             @endif
-            @if(isset($desiredBeginnings))
+            @if(isset($this->desiredBeginnings))
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-2 order-4 xl:order-2 mt-4 sm:mt-0">
                     <x-livewire-select data-cy="datatable-column" class="" id="column" name="column"
                                        model="desiredBeginning">
                         <option value="">{{ __('Select desired beginning') }}</option>
-                        @foreach ($desiredBeginnings as $beginning)
+                        @foreach ($this->desiredBeginnings as $beginning)
                             <option
                                 value="{{ $beginning->course_start_date }}">{{ $beginning->course_start_date->format('m.d.Y') }}</option>
                         @endforeach
                     </x-livewire-select>
                 </div>
             @endif
-            @if(isset($courseOptions))
+            @if(isset($this->courseOptions))
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-2 order-4 xl:order-2 mt-4 sm:mt-0">
                     <x-multi-select
                         key="courses"
                         wire:model="courses"
                         :placeholder="__('Select courses')"
-                        :options="$courseOptions"
+                        :options="$this->courseOptions"
                         keyBy="id"
                         labelBy="name"
+                        :value="$this->courses"
                     />
                 </div>
             @endif
-            @isset($statuses)
+            @isset($this->statuses)
                 <div class="w-full lg:w-1/3 px-2 order-2 xl:order-3 mt-4 sm:mt-0 sm:mb-4 lg:mb-0">
                     <x-multi-select
                         key="statusMultiSelect"
                         wire:model="selectedStatuses"
                         :placeholder="__('Select Status')"
-                        :options="$statuses"
+                        :options="$this->statuses"
                         keyBy="id"
                         labelBy="label"
+                        :value="$this->selectedStatuses"
                     />
                 </div>
             @endisset
-            @isset($applicantsTableFields)
+            @isset($this->applicantsTableFields)
                 <div class="w-full lg:w-1/3 px-2 order-2 xl:order-3 mt-4 sm:mt-0 sm:mb-4 lg:mb-0">
                     <x-multi-select
                         key="fieldMultiSelect"
                         wire:model="authPreferencesFields"
                         :placeholder="__('Field dynamic')"
-                        :options="$applicantsTableFields"
+                        :options="$this->applicantsTableFields"
                         keyBy="key"
                         labelBy="label"
                     />

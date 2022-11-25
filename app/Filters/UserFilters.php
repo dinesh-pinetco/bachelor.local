@@ -38,8 +38,8 @@ class UserFilters extends Filter
 
     public function courses($courses)
     {
-        $this->builder->whereHas('desiredBeginning.courses', function ($query) use ($courses) {
-            $query->whereIn('courses.id', $courses);
+        $this->builder->whereHas('courses', function ($query) use ($courses) {
+            $query->whereIn('course_id', $courses);
         });
     }
 }

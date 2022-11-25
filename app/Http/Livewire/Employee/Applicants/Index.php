@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Employee\Applicants;
 use App\Enums\ApplicationStatus;
 use App\Models\Course;
 use App\Models\DesiredBeginning;
-use App\Models\ModelHasCourse;
 use App\Models\User;
 use App\Models\UserPreference;
 use App\Services\Statistics;
@@ -35,9 +34,9 @@ class Index extends Component
 
     public array $authPreferencesFields = [];
 
-    public $applicantsTableFields;
-
     public $selectedShowFields;
+
+    public $applicantsTableFields;
 
     public $desiredBeginnings = [];
 
@@ -46,8 +45,6 @@ class Index extends Component
     public $courses = [];
 
     public $courseOptions = [];
-
-    public $deleteMode = false;
 
     public $queryString = [
         'search' => ['except' => ''],
@@ -113,38 +110,14 @@ class Index extends Component
 
     public function openConfirmDeleteModal($applicant)
     {
-        if (ModelHasCourse::whereCourseId($applicant->id)->exists()) {
-            $this->toastNotify(
-                __('Applicant could not be deleted because it is still in use.'),
-                __('Error'),
-                TOAST_ERROR
-            );
-        } else {
-            $this->deleteMode = true;
-            $this->open();
-            $this->deletedApplicant = $applicant;
-        }
+        $this->open();
+        $this->deletedApplicant = $applicant;
     }
 
     public function delete()
     {
         $this->deletedApplicant->delete();
         $this->reset('show', 'deletedApplicant');
-        $this->render();
-    }
-
-    public function openConfirmPassModal($applicant)
-    {
-        $this->authorize('forcePass', $applicant);
-
-        $this->deleteMode = false;
-        $this->open();
-        $this->forcePassedApplicant = $applicant;
-    }
-
-    public function forcePassApplicant()
-    {
-        $this->reset('show', 'forcePassedApplicant');
         $this->render();
     }
 
