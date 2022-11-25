@@ -17,7 +17,7 @@ class ContactUsController extends Controller
             'model',
             [ContactProfile::class],
             function (Builder $query) {
-                $query->where('course_id', auth()->user()->courses()->first()->id);
+                $query->where('course_id', auth()->user()->courses()->first()?->course_id);
             }
         )->first();
 
