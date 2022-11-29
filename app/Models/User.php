@@ -147,8 +147,7 @@ class User extends Authenticatable implements ContractsAuditable
             ->get();
 
         $totalTests = $results->count();
-        // if ($totalTests == $results->where('is_passed', true)->count()) {
-        if (true) {
+        if ($totalTests == $results->where('is_passed', true)->count()) {
             $this->application_status = \App\Enums\ApplicationStatus::TEST_PASSED;
             $this->save();
 
