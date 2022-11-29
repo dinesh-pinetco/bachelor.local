@@ -6,6 +6,9 @@ use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
+use App\Notifications\SelectionTestResult;
+use App\Pdf\SelectionTestNegativeResult;
+use App\Pdf\SelectionTestPositiveResult;
 use App\Traits\Mediable;
 use App\Traits\User\UserRelations;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,6 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -23,8 +27,16 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements ContractsAuditable
 {
-    use AuditingAuditable, SoftDeletes, HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, Mediable,
-        HasRoles, UserRelations;
+    use AuditingAuditable,
+        SoftDeletes,
+        HasApiTokens,
+        HasFactory,
+        HasProfilePhoto,
+        Notifiable,
+        TwoFactorAuthenticatable,
+        Mediable,
+        HasRoles,
+        UserRelations;
 
     public const GENDER_MALE = 'male';
 
@@ -135,13 +147,21 @@ class User extends Authenticatable implements ContractsAuditable
             ->get();
 
         $totalTests = $results->count();
-        if ($totalTests == $results->where('is_passed', true)->count()) {
+        // if ($totalTests == $results->where('is_passed', true)->count()) {
+        if (true) {
             $this->application_status = \App\Enums\ApplicationStatus::TEST_PASSED;
             $this->save();
 
             // TODO:pooja
             // Applicant gets an email
+            $this->notify(new SelectionTestResult($this));
             // Generate pdf for pass
+            UserConfiguration::updateOrCreate(['user_id' => $this->id], [
+                'selection_test_result_passed_pdf_path' => $this->pdfPath(),
+            ]);
+
+            Storage::disk('public')->put($this->pdfPath(), (new SelectionTestPositiveResult($this))->render());
+
             // Show confetti
         }
         if ($totalTests == $results->where('is_passed', false)->where('failed_by_nak', true)->count()) {
@@ -150,7 +170,13 @@ class User extends Authenticatable implements ContractsAuditable
 
             // TODO:pooja
             // Applicant gets an email
+            $this->notify(new SelectionTestResult($this));
             // Generate pdf for pass
+            UserConfiguration::updateOrCreate(['user_id' => $this->id], [
+                'selection_test_result_failed_pdf_path' => $this->pdfPath(),
+            ]);
+
+            Storage::disk('public')->put($this->pdfPath(), (new SelectionTestNegativeResult($this))->download());
         }
     }
 
@@ -176,5 +202,25 @@ class User extends Authenticatable implements ContractsAuditable
     public function coursesName()
     {
         return $this->courses()->with('course')->get()->pluck('course.name');
+    }
+
+    public function pdfName()
+    {
+        return sprintf('%s.pdf', generate_pdf_name_for_applicant_test_result('selection_test_result'));
+    }
+
+    public function savePdf()
+    {
+        Storage::disk('public')->put($this->pdfPath(), $this->downloadPdf());
+    }
+
+    public function pdfPath()
+    {
+        return get_test_result_pdf_folder_path_for_participant($this) . 'pdf/' . $this->pdfName();
+    }
+
+    public function downloadPdf()
+    {
+        return;
     }
 }

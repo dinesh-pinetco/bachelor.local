@@ -46,10 +46,13 @@ class SelectionTest extends Component
     {
         if ($this->applicant->application_status == ApplicationStatus::TEST_PASSED) {
             $this->open();
+            $file = $this->applicant->configuration()->get()->first()->selection_test_result_passed_pdf_path;
+            return response()->download(public_path('/storage/' . $file));
         }
 
         //TODO:pooja Generated pdf of result
-        return Storage::download('sample.pdf');
+        $file = $this->applicant->configuration()->get()->first()->selection_test_result_failed_pdf_path;
+        return response()->download(public_path('/storage/' . $file));
     }
 
     public function testResultRetrievedOn()

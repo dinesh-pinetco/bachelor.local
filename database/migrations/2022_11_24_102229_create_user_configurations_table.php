@@ -20,6 +20,8 @@ return new class extends Migration
             $table->mediumText('competency_comment')->nullable();
             $table->mediumText('application_reject_reason')->nullable();
             $table->boolean('is_synced_to_sanna')->default(false);
+            $table->string('selection_test_result_passed_pdf_path', 2048)->nullable();
+            $table->string('selection_test_result_failed_pdf_path', 2048)->nullable();
             $table->timestamps();
         });
     }
