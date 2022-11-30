@@ -45,6 +45,11 @@ class ApplicantRedirection
         return to_route('selection-test.index');
     }
 
+    private function test_reset()
+    {
+        return to_route('selection-test.index');
+    }
+
     private function test_failed_confirm()
     {
         return to_route('selection-test.index');
@@ -53,6 +58,11 @@ class ApplicantRedirection
     private function test_result_pdf_retrieved_on()
     {
         return to_route('application.index', ['tab' => 'industries']);
+    }
+
+    private function personal_data_completed()
+    {
+        return to_route('companies.index');
     }
 
     private function consent_to_company_portal_bulletin_board()
