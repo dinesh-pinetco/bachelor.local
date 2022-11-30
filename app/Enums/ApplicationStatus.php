@@ -18,8 +18,8 @@ enum ApplicationStatus: string
     #[ApplicationStatusOrder(2)] case PROFILE_INFORMATION_COMPLETED = 'profile_information_completed';
 
     #[ApplicationStatusOrder(3)] case TEST_TAKEN = 'test_taken';
-    #[ApplicationStatusOrder(5)] case TEST_FAILED = 'test_failed';
     #[ApplicationStatusOrder(4)] case TEST_PASSED = 'test_passed';
+    #[ApplicationStatusOrder(5)] case TEST_FAILED = 'test_failed';
     #[ApplicationStatusOrder(6)] case TEST_FAILED_CONFIRM = 'test_failed_confirm';
     #[ApplicationStatusOrder(7)] case TEST_RESET = 'test_reset';
     #[ApplicationStatusOrder(8)] case TEST_RESULT_PDF_RETRIEVED_ON = 'test_result_pdf_retrieved_on';

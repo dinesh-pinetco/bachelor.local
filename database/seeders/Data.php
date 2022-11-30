@@ -246,7 +246,7 @@ class Data
                                 'options' => [
                                     [
                                         'key' => '1',
-                                        'value' => '<div>Ich habe die Datenschutzbestimmungen <a href="https://www.nordakademie.de/datenschutz" class="underline text-blue-600">gelesen</a> und ich bin damit einverstanden.</div>',
+                                        'value' => '<div>Ich habe die Datenschutzbestimmungen <a href="https://www.nordakademie.de/datenschutz" target="_blank" class="underline text-blue-600">gelesen</a> und ich bin damit einverstanden.</div>',
                                     ],
                                 ],
                             ],

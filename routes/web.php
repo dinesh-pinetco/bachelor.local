@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SelectionTestController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\VerifiyApplicantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,8 @@ Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:'.ROLE_APPLICA
         Route::get('faq', FaqController::class)->name('faq.index');
     });
 });
+
+Route::get('/verified/{hash}', [VerifiyApplicantController::class, 'index']);
 
 Route::view('imprint', 'privacy_policy')->name('privacy_policy');
 Route::view('datenschutz', 'data_protection')->name('data_protection');

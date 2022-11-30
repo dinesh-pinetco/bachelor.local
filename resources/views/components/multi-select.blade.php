@@ -14,7 +14,7 @@
            $totalSelected = count($value);
 
            if ($totalSelected > 1) {
-               $placeholder = __(':label + :number more', ['label' => $placeholder, 'number' => $totalSelected - 1]);
+               $placeholder = __(':label + :number mehr', ['label' => $placeholder, 'number' => $totalSelected - 1]);
            }
      }else{
         $placeholder = $placeholder ?? __('--Select--');
@@ -127,7 +127,7 @@
                 <li x-on:click="toggle()"
                     class="text-primary relative cursor-default select-none py-2 pl-8 pr-4" id="listbox-option-0"
                     role="option">
-                    {{ __('No data found') }}
+                    {{ __("No Data Found") }}
                 </li>
             @endforelse
         </ul>

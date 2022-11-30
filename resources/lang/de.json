@@ -732,5 +732,7 @@
     "consent_to_company_portal_bulletin_board": "Consent to company portal bulletin board",
     "approved_by_company_for_enrolment": "Approved by company for enrolment",
     "application_rejected_by_applicant": "Application rejected by applicant",
-    "application_rejected_by_nak": "Application rejected by nak"
+    "application_rejected_by_nak": "Application rejected by nak",
+    "The :attribute has already been taken": "Das :attribute ist bereits vergeben",
+    "Submit data & continue with test": "Daten übermitteln & mit dem Test fortfahren"
 }

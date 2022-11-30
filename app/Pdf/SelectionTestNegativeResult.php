@@ -18,6 +18,7 @@ class SelectionTestNegativeResult extends Pdf
     {
         return [
             'user' => $this->user,
+            'email' => base64_encode($this->user->email),
         ];
     }
 }

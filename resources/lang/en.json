@@ -730,5 +730,6 @@
     "consent_to_company_portal_bulletin_board": "Consent to company portal bulletin board",
     "approved_by_company_for_enrolment": "Approved by company for enrolment",
     "application_rejected_by_applicant": "Application rejected by applicant",
-    "application_rejected_by_nak": "Application rejected by nak"
+    "application_rejected_by_nak": "Application rejected by nak",
+    "Submit data & continue with test": "Submit data & continue with test"
 }

@@ -54,10 +54,10 @@
     </div>
 
     <div class="mt-32 ml-32">
-        <div class="mb-3">{!! DNS1D::getBarcodeHTML("$user->first_name", 'C39') !!}</div>
+        <div style="margin-top: 5%;" class="mb-3">{!! DNS2D::getBarcodeHTML("http://bachelor.nak.test/verified/$email", 'QRCODE',3,3) !!}</div>
     </div>
 
-    <div class="flex text-sm font-light mt-20 mb-20">
+    <div style="margin-top: 5%;" class="flex text-sm font-light mt-20 mb-20">
         <img class="w-20 h-20 ml-14 flex-nowrap"
             src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTvg6oLc3ZWygJ9Vvoc2S7XAFBS1vcZGiYAdbJCGzex4E4STFKZ"
             alt="">

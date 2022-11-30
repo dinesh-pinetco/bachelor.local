@@ -28,7 +28,7 @@ class ContactSupport extends Mailable implements ShouldQueue
      */
     public function build(): static
     {
-        return $this->subject('Support Contact')
+        return $this->subject('Support Kontakt')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.contact-support-mail', [
                 'name' => $this->applicant->full_name,
