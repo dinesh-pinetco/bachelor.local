@@ -30,9 +30,9 @@ Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group
     Route::middleware(['auth:sanctum', 'role:'.ROLE_ADMIN])->post('admin-create', function (Request $request) {
         $validateData = $request->validate([
             'type' => ['required', 'in:admin,employee'],
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'password' => ['required'],
         ]);
 

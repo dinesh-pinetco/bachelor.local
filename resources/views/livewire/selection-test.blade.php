@@ -53,9 +53,7 @@
                         @if($test->result?->status == \App\Models\Result::STATUS_COMPLETED)
                             <img src="{{ asset('images/icon/check.svg') }}" alt="test_completed">
                         @elseif($test->result?->status == \App\Models\Result::STATUS_FAILED)
-                            <x-jet-danger-button type="button">
-                                <img src="{{ asset('images/icon/star.svg') }}" alt="test_failed">
-                            </x-jet-danger-button>
+                            <img src="{{ asset('images/icon/cancel.svg') }}" alt="test_failed">
                         @endif
                     </div>
                 </div>
@@ -83,7 +81,6 @@
             <div class="space-y-3">
                 <h4 class="text-center text-darkgray text-sm sm:text-base">
                     {{ __('To complete your application, you still need to do industry, motivation, documents to really apply.') }}
-                    ?
                 </h4>
             </div>
         </div>

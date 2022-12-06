@@ -731,5 +731,15 @@
     "approved_by_company_for_enrolment": "Approved by company for enrolment",
     "application_rejected_by_applicant": "Application rejected by applicant",
     "application_rejected_by_nak": "Application rejected by nak",
-    "Submit data & continue with test": "Submit data & continue with test"
+    "Submit data & continue with test": "Submit data & continue with test",
+    "The desired beginning is invalid.": "The desired beginning is invalid.",
+    "your account is in-active. contact admin for more information.": "your account is in-active. contact admin for more information.",
+    "Select desired beginning": "Select desired beginning",
+    "Select courses": "Select courses",
+    "Are you sure you want to pass applicant?": "Are you sure you want to pass applicant?",
+    "Pass Applicant": "Pass Applicant",
+    "Yes, Pass applicant": "Yes, Pass applicant",
+    "Are you sure you want to remove applicant?": "Are you sure you want to remove applicant?",
+    "To complete your application, you still need to do industry, motivation, documents to really apply.": "To complete your application, you still need to do industry, motivation, documents to really apply.",
+    "Got it!": "Got it!"
 }

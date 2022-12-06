@@ -47,7 +47,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $fillable = [
         'application_status', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
-        'cubia_id',
+        'cubia_id','is_active',
     ];
 
     protected $hidden = [

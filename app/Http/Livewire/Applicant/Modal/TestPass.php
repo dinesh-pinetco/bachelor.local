@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Applicant\Modal;
 
+use App\Enums\ApplicationStatus;
 use App\Http\Livewire\Traits\HasModal;
 use App\Models\Result;
 use App\Models\User;
@@ -28,10 +29,10 @@ class TestPass extends Component
     {
         // Mark as pass on failed tests
         Result::myResults($this->applicant)
-            ->where('is_passed', false)
             ->update([
                 'is_passed' => true,
                 'passed_by_nak' => true,
+                'status' => Result::STATUS_COMPLETED
             ]);
 
         $this->applicant->saveApplicationStatus();

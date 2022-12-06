@@ -103,7 +103,8 @@ class Field extends Component
             $this->fieldValue = json_decode($this->fieldValue) ?? [];
         }
 
-        if ($this->field->related_option_table == 'courses'
+        if (
+            $this->field->related_option_table == 'courses'
             || $this->field->related_option_table == 'desired_beginnings'
         ) {
             $this->attachOptions();
@@ -201,8 +202,11 @@ class Field extends Component
 
     public function getOptionsByModel($table)
     {
-        $model = ModelHelper::getModelByName(str::singular(str_replace(' ', '',
-            ucwords(str_replace('_', ' ', $table)))));
+        $model = ModelHelper::getModelByName(str::singular(str_replace(
+            ' ',
+            '',
+            ucwords(str_replace('_', ' ', $table))
+        )));
 
         return $model->get();
     }
@@ -218,8 +222,10 @@ class Field extends Component
             $fieldValue->save();
         }
 
-        $this->applicant->attachCourseWithDesiredBeginning($this->fieldValue,
-            $desiredBeginningOptions->date->toDateString());
+        $this->applicant->attachCourseWithDesiredBeginning(
+            $this->fieldValue,
+            $desiredBeginningOptions->date->toDateString()
+        );
 
         return redirect(request()->header('Referer'));
     }
@@ -235,8 +241,10 @@ class Field extends Component
             $fieldValue->save();
         }
 
-        $this->applicant->attachCourseWithDesiredBeginning($course->id,
-            $desiredBeginningOptions->date->toDateString());
+        $this->applicant->attachCourseWithDesiredBeginning(
+            $course->id,
+            $desiredBeginningOptions->date->toDateString()
+        );
 
         return redirect(request()->header('Referer'));
     }

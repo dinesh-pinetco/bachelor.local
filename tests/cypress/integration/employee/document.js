@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import {Pagination} from "../../support/page-object/pagination";
-import {SubmitForm} from "../../support/page-object/submit-form";
+import { Pagination } from "../../support/page-object/pagination";
+import { SubmitForm } from "../../support/page-object/submit-form";
 
 context('Employee for document', () => {
     let employeeCredentials;
@@ -26,8 +26,8 @@ context('Employee for document', () => {
     });
 
     beforeEach(() => {
-        cy.login({email: employeeCredentials.email});
-        cy.visit({route: 'employee.documents.index'});
+        cy.login({ email: employeeCredentials.email });
+        cy.visit({ route: 'employee.documents.index' });
     });
 
     it('Pagination', () => {

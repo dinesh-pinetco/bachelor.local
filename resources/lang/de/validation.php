@@ -111,6 +111,7 @@ return [
     'uploaded' => 'Das :attribute konnte nicht hochgeladen werden.',
     'url' => 'Das :attribute format ist ungültig.',
     'uuid' => 'Das :attribute muss eine gültige UUID sein.',
+    'max_digits' => 'Das :attribute darf nicht größer sein als :max Länge.',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +151,9 @@ return [
         'employer_academic_degrees.*.degree' => 'Grad ',
         'employer_academic_degrees.*.ects_credit_point' => 'ECTS-Kreditpunkte ',
         'employer_academic_degrees.*.graduation_date' => 'Datum des Abschlusses',
+        'field.avatar' => 'Bewerbungsfoto',
+        'field.gender' => 'Geschlecht',
+        'field.first_name' => 'Vorname',
     ],
 
 ];

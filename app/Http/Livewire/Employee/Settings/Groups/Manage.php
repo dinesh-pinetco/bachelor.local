@@ -19,11 +19,11 @@ class Manage extends Component
 
     protected array $rules = [
         'group.parent_id' => ['sometimes'],
-        'group.internal_name' => ['required'],
-        'group.title' => ['sometimes'],
+        'group.internal_name' => ['required','max:100'],
+        'group.title' => ['sometimes','max:100'],
         'group.description' => [],
         'group.can_add_more' => ['nullable'],
-        'group.add_more_label' => ['sometimes'],
+        'group.add_more_label' => ['sometimes','max:100'],
     ];
 
     /** @noinspection PhpArrayShapeAttributeCanBeAddedInspection */
@@ -96,7 +96,7 @@ class Manage extends Component
 
     private function edit()
     {
-        $this->validate(array_merge($this->rules, ['group.internal_name' => ['required', "unique:groups,internal_name,{$this->group->id}"]]));
+        $this->validate(array_merge($this->rules, ['group.internal_name' => ['required','max:100', "unique:groups,internal_name,{$this->group->id}"]]));
 
         $this->group->parent_id = empty($this->group->parent_id) ? null : $this->group->parent_id;
         $this->group->can_add_more = (bool) $this->group->can_add_more;

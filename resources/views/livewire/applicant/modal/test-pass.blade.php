@@ -21,7 +21,8 @@
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
                 <x-danger-button data-cy="delete-button"
-                                 wire:click="markAsPass">
+                                 wire:click="markAsPass"
+                                 wire:loading.class='opacity-80 cursor-wait'>
                     {{ __('Yes, Pass applicant') }}
                 </x-danger-button>
                 <x-secondary-button data-cy="cancel-button"
