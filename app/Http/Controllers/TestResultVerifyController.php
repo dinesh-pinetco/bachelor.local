@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 
-class VerifiyApplicantController extends Controller
+class TestResultVerifyController extends Controller
 {
-    public function index($hash)
+    public function __invoke($hash)
     {
         $user = User::with(
             ['values' => function ($q) {
@@ -17,7 +16,7 @@ class VerifiyApplicantController extends Controller
             }]
         )->where('email', base64_decode($hash))->first();
 
-        if (!$user) {
+        if (! $user) {
             abort(404);
         }
 

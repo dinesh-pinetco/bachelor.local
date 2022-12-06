@@ -19,7 +19,7 @@ function urlContains($string, $url = null)
 
 function get_string_between($string, $start, $end)
 {
-    $string = ' ' . $string;
+    $string = ' '.$string;
     $ini = strpos($string, $start);
     if ($ini == 0) {
         return '';
@@ -39,7 +39,7 @@ function snakeCaseToCamelCase($string, $capitalizeFirstCharacter = false)
 {
     $str = str_replace(' ', '', ucwords(str_replace('_', ' ', $string)));
 
-    if (!$capitalizeFirstCharacter) {
+    if (! $capitalizeFirstCharacter) {
         $str[0] = strtolower($str[0]);
     }
 
@@ -48,7 +48,7 @@ function snakeCaseToCamelCase($string, $capitalizeFirstCharacter = false)
 
 function key_replace($array, $old_key, $new_key)
 {
-    if (!array_key_exists($old_key, $array)) {
+    if (! array_key_exists($old_key, $array)) {
         return $array;
     }
 
@@ -66,14 +66,4 @@ function datetimeFormatForHubspot(Carbon\Carbon $datetime)
 function convertNumberToMonth($number = 1)
 {
     return date('F', mktime(0, 0, 0, $number, 10));
-}
-
-function generate_pdf_name_for_applicant_test_result($user_name)
-{
-    return strtolower(preg_replace('/[^a-zA-Z0-9]/', '_', $user_name . ' ' . time()));
-}
-
-function get_test_result_pdf_folder_path_for_participant(\App\Models\User $user)
-{
-    return "applicants/";
 }

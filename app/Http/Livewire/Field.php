@@ -68,14 +68,14 @@ class Field extends Component
             $validation['fieldValue'][] = 'email';
         }
 
-        if($this->field->key == 'first_name'){
-            $validation['fieldValue'][]='max:512';
-            $validation['fieldValue'][]='alpha';
+        if ($this->field->key == 'first_name') {
+            $validation['fieldValue'][] = 'max:512';
+            $validation['fieldValue'][] = 'alpha';
         }
 
-        if($this->field->key == 'last_name'){
-            $validation['fieldValue'][]='max:512';
-            $validation['fieldValue'][]='alpha';
+        if ($this->field->key == 'last_name') {
+            $validation['fieldValue'][] = 'max:512';
+            $validation['fieldValue'][] = 'alpha';
         }
 
         return $validation;

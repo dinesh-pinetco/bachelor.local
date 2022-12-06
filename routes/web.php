@@ -11,7 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SelectionTestController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\VerifiyApplicantController;
+use App\Http\Controllers\TestResultVerifyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,7 +55,13 @@ Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:'.ROLE_APPLICA
     });
 });
 
-Route::get('/verified/{hash}', [VerifiyApplicantController::class, 'index']);
+Route::get('verified/{hash}', [TestResultVerifyController::class, '__invoke'])->name('applicant.test-result');
 
 Route::view('imprint', 'privacy_policy')->name('privacy_policy');
 Route::view('datenschutz', 'data_protection')->name('data_protection');
+
+Route::get('test-result-pdf/users/{user}', function (App\Models\User $user) {
+    return (new \App\Pdf\SelectionTestFailedResultPdf($user))->render();
+
+    return (new \App\Pdf\SelectionTestPassedResultPdf($user))->render();
+});

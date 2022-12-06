@@ -41,7 +41,7 @@ class CreateNewUser implements CreatesNewUsers
                         $fail('The desired beginning is invalid.');
                     }
 
-                    if ($user && !$this->applicantHasRejectedStatus($user)) {
+                    if ($user && ! $this->applicantHasRejectedStatus($user)) {
                         $fail(__('The :attribute has already been taken'), ['attribute' => $attribute]);
                     }
                 }, ],

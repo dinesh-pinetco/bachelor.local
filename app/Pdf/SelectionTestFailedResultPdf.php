@@ -5,7 +5,7 @@ namespace App\Pdf;
 use App\Models\User;
 use Rjchauhan\LaravelFiner\Pdf\Pdf;
 
-class SelectionTestNegativeResult extends Pdf
+class SelectionTestFailedResultPdf extends Pdf
 {
     protected $user;
 
@@ -18,7 +18,9 @@ class SelectionTestNegativeResult extends Pdf
     {
         return [
             'user' => $this->user,
-            'email' => base64_encode($this->user->email),
+            'qrcode' => base64_encode(\QrCode::format('svg')
+                ->size(200)
+                ->generate(route('applicant.test-result', ['hash' => base64_encode($this->user->email)]))),
         ];
     }
 }

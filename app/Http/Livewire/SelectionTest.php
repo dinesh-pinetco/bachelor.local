@@ -8,7 +8,6 @@ use App\Models\Test;
 use App\Models\User;
 use App\Services\ApplicantRedirection;
 use App\Traits\Livewire\HasModal;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class SelectionTest extends Component
@@ -46,13 +45,11 @@ class SelectionTest extends Component
     {
         if ($this->applicant->application_status == ApplicationStatus::TEST_PASSED) {
             $this->open();
-            $file = $this->applicant->configuration()->get()->first()->selection_test_result_passed_pdf_path;
-            return response()->download(public_path('/storage/' . $file));
+
+            return \Storage::download($this->applicant->configuration->selection_test_result_passed_pdf_path);
         }
 
-        //TODO:pooja Generated pdf of result
-        $file = $this->applicant->configuration()->get()->first()->selection_test_result_failed_pdf_path;
-        return response()->download(public_path('/storage/' . $file));
+        return \Storage::download($this->applicant->configuration->selection_test_result_failed_pdf_path);
     }
 
     public function testResultRetrievedOn()
