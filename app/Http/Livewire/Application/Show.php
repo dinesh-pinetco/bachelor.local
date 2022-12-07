@@ -168,6 +168,7 @@ class Show extends Component
             [
                 'value' => function ($query) {
                     $query->where('user_id', $this->applicant->id);
+                    });
                 }
             ]
         )->where('is_required', true)->get();
