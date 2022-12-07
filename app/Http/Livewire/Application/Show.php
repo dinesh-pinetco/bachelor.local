@@ -48,8 +48,6 @@ class Show extends Component
         $this->applicant->load('configuration');
         $this->competency_catch_up = data_get($this->applicant->configuration, 'competency_catch_up', false);
         $this->competency_comment = $this->applicant->configuration?->competency_comment;
-
-        $this->refreshData();
     }
 
     public function refreshData($groupId = null)
@@ -79,6 +77,9 @@ class Show extends Component
                     $emptyGroup = Group::with(['child', 'fields'])->find($group->id);
                     $group->fields->each(function ($field, $fieldKey) use ($emptyGroup, $i) {
                         $emptyGroup->fields->find($field->id)->setRelation('values', $field->values->slice($i, 1));
+//                        if ($field->key == 'desired_beginning_id'){
+//                            dd($field, $field->values);
+//                        }
                     });
                     $parentCustomGroups->push($emptyGroup);
                 }
@@ -94,7 +95,6 @@ class Show extends Component
                         // check field value is available or not
                         if ((count(array_filter(data_get($child->fields, '*.values.*.value')))) > 0) {
                             $child->fields->each(function ($field, $fieldKey) use ($emptyGroup, $i, $child) {
-                                // dd($field->values);
                                 $emptyGroup->child->find($child->id)->fields->find($field->id)->setRelation('values', $field->values->slice($i, 1));
                             });
                         }
@@ -177,10 +177,10 @@ class Show extends Component
 
         foreach ($profileData as $key => $value) {
             $data->put($value->key, data_get($value, 'value.value'));
-            if (!data_get($value, 'value.value')) {
-                $rules->put("field." . $value->key, 'required');
+            if (! data_get($value, 'value.value')) {
+                $rules->put('field.'.$value->key, 'required');
             }
-            $attributes->put('field.' . $value->key, __($value->label));
+            $attributes->put('field.'.$value->key, __($value->label));
         }
 
         Validator::make($data->toArray(), $rules->toArray(), [], $attributes->toArray())->validate();
@@ -233,6 +233,7 @@ class Show extends Component
     public function render()
     {
         $this->refreshData();
+
         return view('livewire.application.show');
     }
 }

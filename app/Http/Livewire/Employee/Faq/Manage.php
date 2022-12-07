@@ -23,7 +23,7 @@ class Manage extends Component
     public $selectedCoursesSummery;
 
     protected array $rules = [
-        'faq.name' => ['required','max:100'],
+        'faq.name' => ['required', 'max:100'],
         'faq.question' => ['required'],
         'faq.answer' => ['required'],
     ];

@@ -16,8 +16,8 @@ class Manage extends Component
     public string $formMode = 'create';
 
     protected array $rules = [
-        'user.first_name' => ['required','max:100'],
-        'user.last_name' => ['required','max:100'],
+        'user.first_name' => ['required', 'max:100'],
+        'user.last_name' => ['required', 'max:100'],
         'user.email' => ['required', 'unique:users,email:rfc,dns,spoof'],
         'user.phone' => ['nullable', 'numeric'],
     ];

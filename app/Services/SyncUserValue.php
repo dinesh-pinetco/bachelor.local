@@ -24,7 +24,7 @@ class SyncUserValue
 
         $this->fieldInsert('course_id', $this->user->desiredBeginning->courses()->pluck('course_id'));
 
-        $this->fieldInsert('desired_beginning_id', $this->user->desiredBeginning);
+        $this->fieldInsert('desired_beginning_id', $this->user->desiredBeginning->id);
     }
 
     protected function fieldInsert($key, $value): void

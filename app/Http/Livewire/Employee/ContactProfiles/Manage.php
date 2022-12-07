@@ -28,10 +28,10 @@ class Manage extends Component
     public array $selectedCourses = [];
 
     public array $rules = [
-        'contactProfile.name' => ['required','max:100'],
-        'contactProfile.email' => ['required','email:rfc,dns,spoof'],
-        'contactProfile.phone' => ['required','numeric'],
-        'photo' => ['required', 'image','mimes:jpg,jpeg,png'],
+        'contactProfile.name' => ['required', 'max:100'],
+        'contactProfile.email' => ['required', 'email:rfc,dns,spoof'],
+        'contactProfile.phone' => ['required', 'numeric'],
+        'photo' => ['required', 'image', 'mimes:jpg,jpeg,png'],
     ];
 
     public function mount(ContactProfile $contactProfile)
@@ -55,7 +55,7 @@ class Manage extends Component
     {
         $rules = $this->rules;
         if ($this->formMode == 'edit') {
-            $rules['photo'] = ['nullable', 'image','mimes:jpg,jpeg,png'];
+            $rules['photo'] = ['nullable', 'image', 'mimes:jpg,jpeg,png'];
         }
 
         $this->validate($rules);

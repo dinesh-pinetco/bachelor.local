@@ -28,7 +28,7 @@ class Manage extends Component
     public bool $test = true;
 
     protected array $rules = [
-        'document.name' => ['required', 'unique:documents,name','max:100'],
+        'document.name' => ['required', 'unique:documents,name', 'max:100'],
         'document.description' => ['nullable'],
         'document.is_required' => ['required'],
         'document.is_active' => ['required'],
@@ -126,7 +126,7 @@ class Manage extends Component
 
     private function edit()
     {
-        $this->validate(array_merge($this->rules, ['document.name' => ['required','max:100', "unique:documents,name,{$this->document->id}"]]));
+        $this->validate(array_merge($this->rules, ['document.name' => ['required', 'max:100', "unique:documents,name,{$this->document->id}"]]));
 
         $this->document->save();
         $this->syncCourseAndExtensions($this->document);

@@ -6,7 +6,6 @@ use App\Enums\FieldType;
 use App\Models\Course;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
-use App\Services\DesiredBeginningFilter;
 use App\Services\Hubspot\Contact;
 use App\Services\ModelHelper;
 use App\Services\SyncUserValue;
@@ -184,7 +183,7 @@ class Field extends Component
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
 
         if ($this->field->key == 'course_id' && $this->field->related_option_table == 'courses') {
-            $this->courseDesiredBeginningUpdate();
+            $this->coursesUpdated();
         }
     }
 
@@ -211,42 +210,31 @@ class Field extends Component
         return $model->get();
     }
 
-    private function courseDesiredBeginningUpdate()
+    private function coursesUpdated()
     {
-        $desiredBeginningOptions = (new DesiredBeginningFilter(Course::find($this->fieldValue)))->filter(true)->first();
-
-        $fieldValue = $this->applicant->getValueByField('desired_beginning_id');
+        $fieldValue = $this->applicant->getValueByField('course_id');
 
         if ($fieldValue) {
-            $fieldValue->value = $desiredBeginningOptions->id;
+            $fieldValue->value = $this->fieldValue;
             $fieldValue->save();
         }
 
         $this->applicant->attachCourseWithDesiredBeginning(
-            $this->fieldValue,
-            $desiredBeginningOptions->date->toDateString()
+            $this->applicant->desiredBeginning->course_start_date,
+            $this->fieldValue
         );
-
-        return redirect(request()->header('Referer'));
     }
 
     private function desiredBeginningUpdate()
     {
-        $course = $this->applicant->course->first()->course;
-        $desiredBeginningOptions = (new DesiredBeginningFilter($course))->filter(true)[$this->fieldValue];
-
         $fieldValue = $this->applicant->getValueByField('desired_beginning_id');
+
         if ($fieldValue) {
-            $fieldValue->value = $desiredBeginningOptions->id;
-            $fieldValue->save();
+            $desiredBeginning = DesiredBeginning::where('id', $fieldValue->value)
+                ->update(['course_start_date' => $this->fieldValue]);
+
+            //TODO: must reset courses
         }
-
-        $this->applicant->attachCourseWithDesiredBeginning(
-            $course->id,
-            $desiredBeginningOptions->date->toDateString()
-        );
-
-        return redirect(request()->header('Referer'));
     }
 
     private function attachOptions()
@@ -260,7 +248,7 @@ class Field extends Component
 
         if ($this->field->related_option_table == 'desired_beginnings') {
             $this->desiredBeginningOptions = DesiredBeginning::options();
-            $this->fieldValue = $this->applicant->desiredBeginning?->course_start_date;
+            $this->fieldValue = DesiredBeginning::find($this->fieldValue)?->course_start_date?->format('Y-m-d');
         }
     }
 

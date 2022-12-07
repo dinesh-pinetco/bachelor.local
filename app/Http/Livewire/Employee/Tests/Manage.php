@@ -26,15 +26,15 @@ class Manage extends Component
     public array $selectedCourses = [];
 
     protected array $rules = [
-        'test.name'              => ['required'],
-        'test.description'       => ['required'],
-        'test.type'              => ['required'],
-        'test.duration'          => ['required'],
-        'test.is_required'       => ['required'],
-        'test.link'              => ['required', 'url'],
+        'test.name' => ['required'],
+        'test.description' => ['required'],
+        'test.type' => ['required'],
+        'test.duration' => ['required'],
+        'test.is_required' => ['required'],
+        'test.link' => ['required', 'url'],
         'test.has_passing_limit' => ['required', 'boolean'],
-        'test.passing_limit'     => ['required_if:test.has_passing_limit,true', 'nullable', 'numeric'],
-        'test.is_active'         => ['required', 'boolean'],
+        'test.passing_limit' => ['required_if:test.has_passing_limit,true', 'nullable', 'numeric'],
+        'test.is_active' => ['required', 'boolean'],
 
     ];
 

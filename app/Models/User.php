@@ -47,7 +47,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $fillable = [
         'application_status', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
-        'cubia_id','is_active',
+        'cubia_id', 'is_active',
     ];
 
     protected $hidden = [
@@ -187,8 +187,9 @@ class User extends Authenticatable implements ContractsAuditable
 
     public function attachCourseWithDesiredBeginning($desiredBeginning, array $course_ids)
     {
-        $desiredBeginning = $this->desiredBeginning()->create(['course_start_date' => $desiredBeginning]);
-        $desiredBeginning->courses()->attach($course_ids);
+        $desiredBeginning = $this->desiredBeginning()
+            ->updateOrCreate(['course_start_date' => $desiredBeginning]);
+        $desiredBeginning->courses()->sync($course_ids);
     }
 
     public function coursesName()

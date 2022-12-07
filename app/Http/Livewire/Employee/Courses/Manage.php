@@ -12,14 +12,14 @@ class Manage extends Component
     public string $formMode = 'create';
 
     protected array $rules = [
-        'course.sana_id' => ['nullable','numeric','max_digits:10'],
+        'course.sana_id' => ['nullable', 'numeric', 'max_digits:10'],
         'course.name' => ['required', 'unique:courses,name', 'min:5', 'max:50'],
-        'course.form_of_study' => ['required','max:50'],
+        'course.form_of_study' => ['required', 'max:50'],
         'course.description' => ['required'],
         'course.is_active' => ['required'],
         'course.first_start' => ['required', 'date'],
         'course.last_start' => ['nullable', 'date', 'after_or_equal:course.first_start'],
-        'course.lead_time' => ['required', 'numeric', 'gt:course.dead_time','max_digits:10'],
+        'course.lead_time' => ['required', 'numeric', 'gt:course.dead_time', 'max_digits:10'],
         'course.dead_time' => ['required', 'numeric', 'lt:course.lead_time'],
     ];
 
@@ -82,7 +82,7 @@ class Manage extends Component
     private function edit()
     {
         $this->validate(array_merge($this->rules,
-            ['course.name' => ['required',"max:100", "unique:courses,name,{$this->course->id}"]]));
+            ['course.name' => ['required', 'max:100', "unique:courses,name,{$this->course->id}"]]));
 
         $this->course->save();
 

@@ -33,7 +33,7 @@ class Manage extends Component
 
     protected array $rules = [
         'field.group_id' => ['required'],
-        'field.label' => ['nullable', 'unique:fields,label','max:100'],
+        'field.label' => ['nullable', 'unique:fields,label', 'max:100'],
         'field.placeholder' => ['nullable'],
         'field.key' => ['nullable'],
         'field.type' => ['required'],
