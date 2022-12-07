@@ -59,7 +59,7 @@
                                 <div>
                                     <x-jet-label for="passing_limit" class="block required">{{ __('Passing Limit') }}
                                     </x-jet-label>
-                                    <x-jet-input class="w-full required" type="number"
+                                    <x-jet-input class="w-full required" type="text"
                                                  name="passing_limit"
                                                  :placeholder="__('Passing Limit')"
                                                  wire:model.defer="test.passing_limit"
