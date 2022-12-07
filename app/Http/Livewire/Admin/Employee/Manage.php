@@ -18,7 +18,7 @@ class Manage extends Component
     protected array $rules = [
         'user.first_name' => ['required'],
         'user.last_name' => ['required'],
-        'user.email' => ['required', 'unique:users,email'],
+        'user.email' => ['required', 'unique:users,email:rfc,dns,spoof'],
         'user.phone' => ['nullable', 'string'],
     ];
 
@@ -66,7 +66,7 @@ class Manage extends Component
     private function edit()
     {
         $this->validate(array_merge($this->rules, [
-            'user.email' => ['required', 'email:rfc,dns', 'unique:users,email,'.$this->user->id],
+            'user.email' => ['required', 'email:rfc,dns,spoof', 'unique:users,email,'.$this->user->id],
         ]));
 
         $this->user->save();

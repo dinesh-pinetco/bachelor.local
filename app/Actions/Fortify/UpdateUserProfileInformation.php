@@ -36,7 +36,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'pin_code' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'privacy_policy' => ['accepted'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email:rfc,dns,spoof', 'max:255', Rule::unique('users')->ignore($user->id)],
         ];
 
         if (! isset($input['day']) || ! isset($input['month']) || ! isset($input['year'])) {

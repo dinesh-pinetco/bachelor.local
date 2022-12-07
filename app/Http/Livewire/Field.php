@@ -65,7 +65,7 @@ class Field extends Component
         }
 
         if ($this->field->type == 'email') {
-            $validation['fieldValue'][] = 'email';
+            $validation['fieldValue'][] = 'email:rfc,dns,spoof';
         }
 
         if ($this->field->key == 'first_name') {
