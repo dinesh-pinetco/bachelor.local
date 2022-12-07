@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Application;
 
 use App\Enums\ApplicationStatus;
+use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\Group;
 use App\Models\Result;
@@ -12,6 +13,7 @@ use App\Models\UserConfiguration;
 use App\Services\ProgressBar;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class Show extends Component
@@ -33,6 +35,8 @@ class Show extends Component
     public $competency_catch_up = false;
 
     public $competency_comment = null;
+
+    public Field $field;
 
     public array $rules = [
         'competency_catch_up' => 'required|boolean',
@@ -159,8 +163,32 @@ class Show extends Component
 
     public function submitProfileInformation()
     {
+        $profileData = Field::query()
+            ->required()
+            ->whereIn('group_id', $this->parentGroups->pluck('id'))
+            ->with(['value' => function ($query) {
+                $query->where('user_id', $this->applicant->id);
+            }])
+            ->get();
+
+        $rules = collect();
+        $data = collect();
+        $attributes = collect();
+
+        foreach ($profileData as $key => $value) {
+            $data->put($value->key, data_get($value, 'value.value'));
+            if (!data_get($value, 'value.value')) {
+                $rules->put("field." . $value->key, 'required');
+            }
+            $attributes->put('field.' . $value->key, __($value->label));
+        }
+
+        Validator::make($data->toArray(), $rules->toArray(), [], $attributes->toArray())->validate();
+
         $error = null;
+
         $profileTabProgress = (new ProgressBar($this->applicant->id))->calculateProgressByTab('profile');
+
         if ($profileTabProgress < PER_STEP_PROGRESS && $this->applicant->application_status == ApplicationStatus::REGISTRATION_SUBMITTED) {
             $error = __('Please fill the required field.');
         }
@@ -184,7 +212,6 @@ class Show extends Component
 
             $this->applicant->application_status = ApplicationStatus::PROFILE_INFORMATION_COMPLETED;
             $this->applicant->save();
-            $this->toastNotify(__('Approval mail sent successfully to the applicant!!'), __('Success'), TOAST_SUCCESS);
 
             return redirect()->route('selection-test.index');
         }
@@ -205,6 +232,7 @@ class Show extends Component
 
     public function render()
     {
+        $this->refreshData();
         return view('livewire.application.show');
     }
 }

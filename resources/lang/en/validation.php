@@ -123,6 +123,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'max_digits' => 'The :attribute must not be more than :max length.',
 
     /*
     |--------------------------------------------------------------------------

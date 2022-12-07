@@ -9,9 +9,9 @@ class TestResultVerifyController extends Controller
     public function __invoke($hash)
     {
         $user = User::with(
-            ['values' => function ($q) {
-                $q->whereHas('fields', function ($q) {
-                    $q->whereIn('key', ['first_name', 'postal_code', 'location', 'date_of_birth']);
+            ['values' => function ($query) {
+                $query->whereHas('fields', function ($query) {
+                    $query->whereIn('key', ['first_name', 'postal_code', 'location', 'date_of_birth']);
                 })->with('fields');
             }]
         )->where('email', base64_decode($hash))->first();

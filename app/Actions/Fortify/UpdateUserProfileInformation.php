@@ -22,21 +22,21 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     public function update($user, array $input): void
     {
         $rules = [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'academic_title' => ['required', 'string', 'max:255'],
-            'place_of_birth' => ['required', 'string', 'max:255'],
-            'place_of_country' => ['required', 'string', 'max:255'],
-            'citizenship_of_state' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
+            'academic_title' => ['required', 'string', 'max:100'],
+            'place_of_birth' => ['required', 'string', 'max:100'],
+            'place_of_country' => ['required', 'string', 'max:100'],
+            'citizenship_of_state' => ['required', 'string', 'max:100'],
             'gender' => ['required'],
             'course_id' => ['required'],
             'desired_beginning_id' => ['required'],
-            'location' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'pin_code' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string', 'max:100'],
+            'address' => ['required', 'string', 'max:100'],
+            'pin_code' => ['required', 'string', 'max:100'],
+            'phone' => ['required', 'string', 'max:100'],
             'privacy_policy' => ['accepted'],
-            'email' => ['required', 'email:rfc,dns,spoof', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email:rfc,dns,spoof', 'max:100', Rule::unique('users')->ignore($user->id)],
         ];
 
         if (! isset($input['day']) || ! isset($input['month']) || ! isset($input['year'])) {

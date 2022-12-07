@@ -9,6 +9,7 @@ use App\Traits\Field\FieldRelations;
 use App\Traits\HasManySync;
 use App\Traits\SetLatestSortOrder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 
@@ -28,6 +29,11 @@ class Field extends Model implements ContractsAuditable
     public function values(): HasManySyncable
     {
         return $this->hasMany(FieldValue::class);
+    }
+
+    public function value(): HasOne
+    {
+        return $this->hasOne(FieldValue::class);
     }
 
     public function scopeFilter($query)

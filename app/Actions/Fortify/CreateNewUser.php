@@ -30,22 +30,25 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email:rfc,dns,spoof', 'max:255',
+            'email' => [
+                'required', 'string', 'email:rfc,dns,spoof', 'max:255',
                 function ($attribute, $value, $fail) use ($input) {
                     $user = User::where('email', $value)
                         ->with('desiredBeginning')
                         ->first();
 
                     if ($user && $this->applicantHasRejectedStatus($user) &&
-                        ($user->desiredBeginning?->course_start_date >= data_get($input, 'desired_beginning'))) {
-                        $fail('The desired beginning is invalid.');
+                        ($user->desiredBeginning?->course_start_date >= data_get($input, 'desired_beginning'))
+                    ) {
+                        $fail(__('The desired beginning is invalid.'));
                     }
 
-                    if ($user && ! $this->applicantHasRejectedStatus($user)) {
+                    if ($user && !$this->applicantHasRejectedStatus($user)) {
                         $fail(__('The :attribute has already been taken'), ['attribute' => $attribute]);
                     }
-                }, ],
-            'phone' => ['nullable'],
+                },
+            ],
+            'phone' => ['nullable', 'numeric', 'min:9'],
             'desired_beginning' => ['required', 'date'],
             'course_ids' => ['required', 'array'],
         ], [], [
