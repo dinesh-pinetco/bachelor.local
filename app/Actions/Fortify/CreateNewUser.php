@@ -37,8 +37,7 @@ class CreateNewUser implements CreatesNewUsers
                         ->with('desiredBeginning')
                         ->first();
 
-                    if (
-                        $user && $this->applicantHasRejectedStatus($user) &&
+                    if ($user && $this->applicantHasRejectedStatus($user) &&
                         ($user->desiredBeginning?->course_start_date >= data_get($input, 'desired_beginning'))
                     ) {
                         $fail(__('The desired beginning is invalid.'));
@@ -49,7 +48,7 @@ class CreateNewUser implements CreatesNewUsers
                     }
                 },
             ],
-            'phone' => ['nullable', 'numeric'],
+            'phone' => ['nullable', 'numeric', 'min:9'],
             'desired_beginning' => ['required', 'date'],
             'course_ids' => ['required', 'array'],
         ], [], [

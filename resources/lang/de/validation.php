@@ -151,9 +151,6 @@ return [
         'employer_academic_degrees.*.degree' => 'Grad ',
         'employer_academic_degrees.*.ects_credit_point' => 'ECTS-Kreditpunkte ',
         'employer_academic_degrees.*.graduation_date' => 'Datum des Abschlusses',
-        'field.avatar' => 'Bewerbungsfoto',
-        'field.gender' => 'Geschlecht',
-        'field.first_name' => 'Vorname',
     ],
 
 ];

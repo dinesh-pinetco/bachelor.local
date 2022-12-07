@@ -168,21 +168,25 @@ class Show extends Component
             [
                 'value' => function ($query) {
                     $query->where('user_id', $this->applicant->id);
-                    });
                 }
             ]
-        )->where('is_required', true)->get();
+        )->where('is_required', true)
+            ->whereIn('group_id', [\App\Models\Group::where('internal_name', 'Persönliche Informationen')->first()->id,\App\Models\Group::where('internal_name', 'Bewerbung für')->first()->id,\App\Models\Group::where('internal_name', 'Kontaktdetails')->first()->id])
+            ->get();
 
         $rules = collect();
         $data = collect();
+        $attributes = collect();
+
         foreach ($profileData as $key => $value) {
             $data->put($value->key, data_get($value, 'value.value'));
             if (!data_get($value, 'value.value')) {
                 $rules->put("field." . $value->key, 'required');
             }
+            $attributes->put('field.' . $value->key, __($value->label));
         }
-        // dd($rules->toArray());
-        $this->validate($rules->toArray());
+
+        Validator::make($data->toArray(), $rules->toArray(), [], $attributes->toArray())->validate();
 
         $error = null;
 

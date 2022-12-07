@@ -45,9 +45,4 @@ class Group extends Model implements ContractsAuditable
     {
         return resolve(GroupFilters::class)->apply($query);
     }
-
-    public function values()
-    {
-        return $this->hasManyThrough(FieldValue::class, Field::class, 'group_id', 'field_id');
-    }
 }
