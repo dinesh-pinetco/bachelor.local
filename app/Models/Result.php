@@ -47,14 +47,21 @@ class Result extends Model implements ContractsAuditable
 
     public function updateTestResult($grade, $result, $meta)
     {
-        $is_passed = $grade >= $this->test->passing_limit;
+        if ($this->test->has_passing_limit) {
+            $is_passed = $grade >= $this->test->passing_limit;
 
-        $this->update([
-            'status' => $is_passed ? self::STATUS_COMPLETED : self::STATUS_FAILED,
-            'is_passed' => $is_passed,
-            'result' => $result,
-            'meta' => $meta,
-        ]);
+            $this->update([
+                'status' => $is_passed ? self::STATUS_COMPLETED : self::STATUS_FAILED,
+                'is_passed' => $is_passed,
+                'result' => $result,
+                'meta' => $meta,
+            ]);
+        } else {
+            $this->update([
+                'status' => $grade ? self::STATUS_COMPLETED : self::STATUS_FAILED,
+                'is_passed' => $grade,
+            ]);
+        }
 
         $this->user->saveApplicationStatus();
     }

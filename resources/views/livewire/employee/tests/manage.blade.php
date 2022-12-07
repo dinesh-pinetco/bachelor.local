@@ -11,7 +11,6 @@
                 <div class="mt-5 md:mt-0 px-4 w-full lg:w-1/2 xl:w-2/5">
                     <form wire:submit.prevent="submit" id="testForm">
                         <div class="space-y-7">
-
                             <div>
                                 <x-jet-label for="name" class="block required">{{ __('Name') }}</x-jet-label>
                                 <x-jet-input type="text" name="name" wire:model.defer="test.name" id="name" :placeholder="__('Name')"
@@ -44,15 +43,30 @@
                             </div>
 
                             <div>
-                                <x-jet-label for="passing_limit" class="block required">{{ __('Passing Limit') }}
-                                </x-jet-label>
-                                <x-jet-input class="w-full required" type="number"
-                                             name="passing_limit"
-                                             :placeholder="__('Passing Limit')"
-                                             wire:model.defer="test.passing_limit"
-                                             id="passing_limit"></x-jet-input>
-                                <x-jet-input-error for="test.passing_limit"/>
+                                <x-jet-label for="has_passing_limit"
+                                             class="block required">{{ __('Has passing limit') }}</x-jet-label>
+                                <x-livewire-select id="has_passing_limit" name="has_passing_limit"
+                                                   model="test.has_passing_limit"
+                                                   class="w-full">
+                                    <option value="">{{ __('Select type') }}</option>
+                                    <option value="1">{{ __('Yes') }}</option>
+                                    <option value="0">{{ __('No') }}</option>
+                                </x-livewire-select>
+                                <x-jet-input-error for="test.has_passing_limit"/>
                             </div>
+
+                            @if($test->has_passing_limit)
+                                <div>
+                                    <x-jet-label for="passing_limit" class="block required">{{ __('Passing Limit') }}
+                                    </x-jet-label>
+                                    <x-jet-input class="w-full required" type="number"
+                                                 name="passing_limit"
+                                                 :placeholder="__('Passing Limit')"
+                                                 wire:model.defer="test.passing_limit"
+                                                 id="passing_limit"></x-jet-input>
+                                    <x-jet-input-error for="test.passing_limit"/>
+                                </div>
+                            @endif
 
                             <div>
                                 <x-jet-label for="duration" class="block required">{{ __('Duration') }}

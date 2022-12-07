@@ -25,8 +25,8 @@ class ResultImport implements ToModel, WithCustomCsvSettings
         if ($result) {
             $counter = 0;
             foreach ($row as $key => $value) {
-                //                TODO:Below Pass limit remove task provide by client. please check this task
-                //                https://app.clickup.com/t/2zfvpva
+                // TODO:Below Pass limit remove task provide by client. please check this task
+                // https://app.clickup.com/t/2zfvpva
                 if ($key > 2 && $value >= 0 && $row[2] == Cubia::MIX && $key < count($row) - 2) {
                     $counter++;
                 } elseif ($key > 2 && $value >= 0 && $row[2] == Cubia::IQT && $key < count($row) - 2) {
@@ -43,11 +43,9 @@ class ResultImport implements ToModel, WithCustomCsvSettings
             }
 
             if ($result && ! is_null($result->result_mix_link) && ! is_null($result->result_iqt_link)) {
-                $isPassed = ($result->is_passed_mix == true && $result->is_passed_iqt == true) ? true : false;
+                $isPassed = $result->is_passed_mix == true && $result->is_passed_iqt == true;
 
-                $result->update(['status' => Result::STATUS_COMPLETED, 'is_passed' => $isPassed]);
-
-                $result->user->saveApplicationStatus();
+                $result->updateTestResult($isPassed, $isPassed, $isPassed);
             }
         }
     }

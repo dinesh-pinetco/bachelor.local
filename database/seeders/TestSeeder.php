@@ -23,6 +23,8 @@ class TestSeeder extends Seeder
             'is_required' => true,
             'is_active' => true,
             'link' => 'https://auswahltest.nordakademie.de/moodle/webservice/rest/server.php',
+            'has_passing_limit' => true,
+            'passing_limit' => 50,
         ])->attachCourses(Course::pluck('id')->toArray());
 
         Test::create([
@@ -33,6 +35,7 @@ class TestSeeder extends Seeder
             'is_required' => true,
             'is_active' => true,
             'link' => 'https://oasys.cubia.de/oasys-run.asp?customer=NA&ProjectID=0823317458&Test=IQT',
+            'has_passing_limit' => false,
         ])->attachCourses(Course::pluck('id')->toArray());
 
         Test::create([
@@ -43,6 +46,8 @@ class TestSeeder extends Seeder
             'is_required' => true,
             'is_active' => true,
             'link' => 'https://projects.viq16.com/viq',
+            'has_passing_limit' => true,
+            'passing_limit' => 50,
         ])->attachCourses(Course::pluck('id')->toArray());
     }
 }

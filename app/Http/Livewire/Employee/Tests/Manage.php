@@ -30,10 +30,12 @@ class Manage extends Component
         'test.description' => ['required'],
         'test.type' => ['required'],
         'test.duration' => ['required'],
-        'test.is_active' => ['required'],
         'test.is_required' => ['required'],
         'test.link' => ['required', 'url'],
-        'test.passing_limit' => ['required', 'integer'],
+        'test.has_passing_limit' => ['required', 'boolean'],
+        'test.passing_limit' => ['required_if:test.has_passing_limit,true', 'nullable', 'integer'],
+        'test.is_active' => ['required', 'boolean'],
+
     ];
 
     public function validationAttributes(): array
@@ -57,6 +59,9 @@ class Manage extends Component
     {
         $this->validate();
 
+        if (! $this->test->has_passing_limit) {
+            $this->test->passing_limit = null;
+        }
         $this->test->save();
 
         $this->syncCourse($this->test);

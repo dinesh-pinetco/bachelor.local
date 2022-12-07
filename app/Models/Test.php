@@ -30,7 +30,7 @@ class Test extends Model implements ContractsAuditable
 
     const TYPE_METEOR = 'meteor';
 
-    protected $fillable = ['name', 'description', 'type', 'duration', 'link', 'is_required', 'is_active'];
+    protected $fillable = ['name', 'description', 'type', 'duration', 'link', 'is_required', 'is_active', 'has_passing_limit'];
 
     protected $casts = [];
 
