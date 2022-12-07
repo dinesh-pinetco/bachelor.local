@@ -9,7 +9,6 @@ use App\Models\Group;
 use App\Models\Result;
 use App\Models\Tab;
 use App\Models\Test;
-use App\Models\User;
 use App\Models\UserConfiguration;
 use App\Services\ProgressBar;
 use App\Services\SelectionTests\Moodle;
@@ -164,14 +163,12 @@ class Show extends Component
 
     public function submitProfileInformation()
     {
-        $profileData = Field::with(
-            [
-                'value' => function ($query) {
-                    $query->where('user_id', $this->applicant->id);
-                }
-            ]
-        )->where('is_required', true)
-            ->whereIn('group_id', [\App\Models\Group::where('internal_name', 'Persönliche Informationen')->first()->id,\App\Models\Group::where('internal_name', 'Bewerbung für')->first()->id,\App\Models\Group::where('internal_name', 'Kontaktdetails')->first()->id])
+        $profileData = Field::query()
+            ->required()
+            ->whereIn('group_id', $this->parentGroups->pluck('id'))
+            ->with(['value' => function ($query) {
+                $query->where('user_id', $this->applicant->id);
+            }])
             ->get();
 
         $rules = collect();
