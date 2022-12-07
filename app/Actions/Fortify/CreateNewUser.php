@@ -28,10 +28,10 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
             'email' => [
-                'required', 'string', 'email:rfc,dns,spoof', 'max:255',
+                'required', 'string', 'email:rfc,dns,spoof',
                 function ($attribute, $value, $fail) use ($input) {
                     $user = User::where('email', $value)
                         ->with('desiredBeginning')

@@ -31,12 +31,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'gender' => ['required'],
             'course_id' => ['required'],
             'desired_beginning_id' => ['required'],
-            'location' => ['required', 'string', 'max:100'],
-            'address' => ['required', 'string', 'max:100'],
+            'location' => ['required', 'string'],
+            'address' => ['required', 'string'],
             'pin_code' => ['required', 'string', 'max:100'],
-            'phone' => ['required', 'string', 'max:100'],
+            'phone' => ['required', 'string','min:9'],
             'privacy_policy' => ['accepted'],
-            'email' => ['required', 'email:rfc,dns,spoof', 'max:100', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email:rfc,dns,spoof', Rule::unique('users')->ignore($user->id)],
         ];
 
         if (! isset($input['day']) || ! isset($input['month']) || ! isset($input['year'])) {

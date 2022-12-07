@@ -16,10 +16,10 @@ class Manage extends Component
     public string $formMode = 'create';
 
     protected array $rules = [
-        'user.first_name' => ['required'],
-        'user.last_name' => ['required'],
+        'user.first_name' => ['required','max:100'],
+        'user.last_name' => ['required','max:100'],
         'user.email' => ['required', 'unique:users,email:rfc,dns,spoof'],
-        'user.phone' => ['nullable', 'string'],
+        'user.phone' => ['nullable', 'numeric'],
     ];
 
     public function mount(User $user)

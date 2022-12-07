@@ -29,7 +29,7 @@ class Manage extends Component
 
     protected array $rules = [
         'document.name' => ['required', 'unique:documents,name','max:100'],
-        'document.description' => ['nullable','max:100'],
+        'document.description' => ['nullable'],
         'document.is_required' => ['required'],
         'document.is_active' => ['required'],
         'extensions' => ['array', 'min:1'],
