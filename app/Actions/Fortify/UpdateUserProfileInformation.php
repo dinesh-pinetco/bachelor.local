@@ -34,7 +34,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'location' => ['required', 'string'],
             'address' => ['required', 'string'],
             'pin_code' => ['required', 'string', 'max:100'],
-            'phone' => ['required', 'string', 'min:9'],
+            'phone' => ['required', 'phone:DE', 'min:9','max:15'],
             'privacy_policy' => ['accepted'],
             'email' => ['required', 'email:rfc,dns,spoof', Rule::unique('users')->ignore($user->id)],
         ];
