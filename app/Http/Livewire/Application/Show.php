@@ -77,9 +77,6 @@ class Show extends Component
                     $emptyGroup = Group::with(['child', 'fields'])->find($group->id);
                     $group->fields->each(function ($field, $fieldKey) use ($emptyGroup, $i) {
                         $emptyGroup->fields->find($field->id)->setRelation('values', $field->values->slice($i, 1));
-//                        if ($field->key == 'desired_beginning_id'){
-//                            dd($field, $field->values);
-//                        }
                     });
                     $parentCustomGroups->push($emptyGroup);
                 }

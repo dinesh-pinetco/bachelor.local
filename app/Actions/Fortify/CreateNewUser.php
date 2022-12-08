@@ -5,6 +5,7 @@ namespace App\Actions\Fortify;
 use App\Enums\ApplicationStatus;
 use App\Mail\UserCreated;
 use App\Models\User;
+use App\Services\DeleteRejectedApplicationData;
 use App\Services\SyncUserValue;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -62,19 +63,33 @@ class CreateNewUser implements CreatesNewUsers
 
         $password = Str::random('10');
 
-        $user = User::updateOrCreate([
-            'email' => $input['email'],
-        ], [
-            'first_name' => $input['first_name'],
-            'last_name' => $input['last_name'],
-            'phone' => $input['phone'],
-            'password' => Hash::make($password),
-            'application_status' => ApplicationStatus::REGISTRATION_SUBMITTED,
-            'is_active' => true,
-        ])->assignRole(ROLE_APPLICANT);
+        if ($user = User::where('email', $input['email'])->first()) {
+            $user->update([
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name'],
+                'phone' => $input['phone'],
+                'password' => Hash::make($password),
+                'application_status' => ApplicationStatus::REGISTRATION_SUBMITTED,
+                'is_active' => true,
+            ]);
+            $user->assignRole(ROLE_APPLICANT);
 
-        $user->attachCourseWithDesiredBeginning(data_get($input, 'desired_beginning'), data_get($input, 'course_ids'));
+            DeleteRejectedApplicationData::make($user)->delete();
+            $user->fresh();
+        } else {
+            $user = User::create([
+                'email' => $input['email'],
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name'],
+                'phone' => $input['phone'],
+                'password' => Hash::make($password),
+                'application_status' => ApplicationStatus::REGISTRATION_SUBMITTED,
+                'is_active' => true,
+            ])->assignRole(ROLE_APPLICANT);
+        }
+
         Mail::to($user)->send(new UserCreated($user, $password));
+        $user->attachCourseWithDesiredBeginning(data_get($input, 'desired_beginning'), data_get($input, 'course_ids'));
 
         $syncUser = new SyncUserValue($user);
         $syncUser();

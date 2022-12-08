@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('selection_test_result_passed_pdf_path', 2048)->nullable();
             $table->string('selection_test_result_failed_pdf_path', 2048)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
