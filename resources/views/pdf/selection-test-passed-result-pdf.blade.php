@@ -3,7 +3,7 @@
 @section('content')
     @include('pdf._header')
     <div class="flex justify-end text-sm font-light mt-16 mr-28">
-        <p>{{ $pass_pdf_created_at->format('d.F Y') }}</p>
+        <p>Elmshorn, den {{ $pass_pdf_created_at->format('d.F Y') }}</p>
     </div>
 
     <div class="mt-32 ml-32">
@@ -16,7 +16,7 @@
             @endforeach
             an der NORDAKADEMIE, Hochschule der Wirtschaft passt. Wir freuen uns,
             dir daher mitteilen zu können, dass du dich weiter um einen Studienplatz für
-            das {{ $user->desiredBeginning->course_start_date->format('d.m.Y') }}
+            das Jahr {{ $user->desiredBeginning->course_start_date->format('Y') }}
             an der
             NORDAKADEMIE bei einem der ausbildenden Partnerunternehmen bewerben kannst.
         </p>

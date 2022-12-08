@@ -3,17 +3,21 @@
 @section('content')
     @include('pdf._header')
     <div class="flex justify-end text-sm font-light mt-16 mr-28">
-        <p>{{ $fail_pdf_created_at->format('d.F Y') }}</p>
+        <p>Elmshorn, den {{ $fail_pdf_created_at->format('d.F Y') }}</p>
     </div>
 
     <div class="mt-32 ml-32">
         <p class="mt-16">Lieber {{ $user->first_name }},</p>
         <p class="mt-10">leider müssen wir dir nach Auswertung deines Ergebnisses im Auswahlverfahren mitteilen, dass
             du <br>
-            die Anforderungen an Bewerber auf ein Studium der Fachrichtung Betriebswirtschaftslehre zur <br>
+            die Anforderungen an Bewerber auf ein Studium der Fachrichtung
+            @foreach($user->desiredBeginning->courses->pluck('name') as $course)
+                {{ $course.',' }}
+            @endforeach
+            zur <br>
             Zeit (noch) nicht ausreichend erfüllst. Ein erfolgreicher Abschluss des Studiums an der <br>
             NORDAKADEMIE ist daher in deinem Fall eher unwahrscheinlich. Bitte sieh daher für den <br>
-            Studienbeginn Oktober 2022 von Bewerbungen bei Kooperationsunternehmen der Hochschule ab. </p>
+            Studienbeginn {{ $user->desiredBeginning->course_start_date->format('F-Y') }} von Bewerbungen bei Kooperationsunternehmen der Hochschule ab. </p>
         <p class="mt-6">
             Sieh dies auch von einer konstruktiven Seite: Das „negative“ Ergebnis kann dich dazu ermuntern, <br>
             noch einmal über den für dich am besten geeigneten Weg nachzudenken. Vielleicht passt du vom <br>
