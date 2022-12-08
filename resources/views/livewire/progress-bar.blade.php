@@ -35,7 +35,7 @@
     <div>
         <x-custom-modal wire:model="show">
             <x-slot name="title">
-                {{ __('Submit Application') }}
+                {{ __('Submit application') }}
             </x-slot>
             <div>
                 <div class="space-y-3">

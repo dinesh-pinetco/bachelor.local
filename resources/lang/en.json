@@ -741,5 +741,7 @@
     "Yes, Pass applicant": "Yes, Pass applicant",
     "Are you sure you want to remove applicant?": "Are you sure you want to remove applicant?",
     "To complete your application, you still need to do industry, motivation, documents to really apply.": "To complete your application, you still need to do industry, motivation, documents to really apply.",
-    "Got it!": "Got it!"
+    "Got it!": "Got it!",
+    "Are you sure you want to submit this application.": "Are you sure you want to submit this application.",
+    "Yes, submit it": "Yes, submit it"
 }

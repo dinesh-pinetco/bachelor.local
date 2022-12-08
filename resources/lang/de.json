@@ -744,5 +744,7 @@
     "Yes, Pass applicant": "Ja, Antragsteller bestehen",
     "Are you sure you want to remove applicant?": "Sind Sie sicher, dass Sie den Bewerber entfernen möchten?",
     "To complete your application, you still need to do industry, motivation, documents to really apply.": "Um Ihre Bewerbung zu vervollständigen, müssen Sie noch Industrie, Motivation, Dokumente zu tun, um wirklich zu bewerben.",
-    "Got it!": "Ich hab's!"
+    "Got it!": "Ich hab's!",
+    "Are you sure you want to submit this application.": "Sind Sie sicher, dass Sie diese Bewerbung einreichen möchten.",
+    "Yes, submit it": "Ja, übermitteln Sie es"
 }
