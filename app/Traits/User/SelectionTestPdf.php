@@ -14,22 +14,23 @@ trait SelectionTestPdf
     {
         $pdfPath = sprintf('test-results/%s.pdf', Str::kebab(class_basename($this->id.' '.$this->full_name.' passed result')));
 
-        Storage::put($pdfPath, (new SelectionTestPassedResultPdf($this))->download());
-
         UserConfiguration::updateOrCreate(['user_id' => $this->id], [
             'selection_test_result_passed_pdf_path' => $pdfPath,
             'pass_pdf_created_at' => now(),
         ]);
+
+        Storage::put($pdfPath, (new SelectionTestPassedResultPdf($this))->download());
     }
 
     public function saveFailedPdf()
     {
         $pdfPath = sprintf('test-results/%s.pdf', Str::kebab(class_basename($this->id.' '.$this->full_name.' failed result')));
-        Storage::put($pdfPath, (new SelectionTestFailedResultPdf($this))->download());
 
         UserConfiguration::updateOrCreate(['user_id' => $this->id], [
             'selection_test_result_failed_pdf_path' => $pdfPath,
             'fail_pdf_created_at' => now(),
         ]);
+
+        Storage::put($pdfPath, (new SelectionTestFailedResultPdf($this))->download());
     }
 }
