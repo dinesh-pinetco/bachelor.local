@@ -11,9 +11,7 @@
         <p class="mt-10">leider müssen wir dir nach Auswertung deines Ergebnisses im Auswahlverfahren mitteilen, dass
             du <br>
             die Anforderungen an Bewerber auf ein Studium der Fachrichtung
-            @foreach($user->desiredBeginning->courses->pluck('name') as $course)
-                {{ $course.',' }}
-            @endforeach
+            {{ $courses }}
             zur <br>
             Zeit (noch) nicht ausreichend erfüllst. Ein erfolgreicher Abschluss des Studiums an der <br>
             NORDAKADEMIE ist daher in deinem Fall eher unwahrscheinlich. Bitte sieh daher für den <br>
