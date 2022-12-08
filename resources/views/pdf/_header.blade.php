@@ -16,7 +16,7 @@
 </div>
 
 <div>
-    <p>{{ $user->first_name }}  {{ $user->last_name }}</p>
+    <p>{{ $user->full_name }}</p>
     <p>{{ $street_house_number }}</p>
     <p>{{ $postal_code }} , {{ $location }}</p>
 </div>

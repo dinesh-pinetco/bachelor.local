@@ -15,7 +15,7 @@ class UserConfiguration extends Model
 
     protected $guarded = [];
 
-    protected $casts=[
+    protected $casts = [
         'pass_pdf_created_at' => 'datetime',
         'fail_pdf_created_at' => 'datetime',
     ];

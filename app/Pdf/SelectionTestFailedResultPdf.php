@@ -18,7 +18,7 @@ class SelectionTestFailedResultPdf extends Pdf
     {
         return [
             'user' => $this->user,
-            'street_house_number'=>$this->user->values->where('fields.key', 'street_house_number')->value('value'),
+            'street_house_number' => $this->user->values->where('fields.key', 'street_house_number')->value('value'),
             'postal_code' => $this->user->values->where('fields.key', 'postal_code')->value('value'),
             'location' => $this->user->values->where('fields.key', 'location')->value('value'),
             'fail_pdf_created_at' => $this->user->configuration->fail_pdf_created_at,
