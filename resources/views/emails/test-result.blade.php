@@ -7,8 +7,8 @@
                     Auswahltest der
                     NORDAKADEMIE ist ab sooft verfügbar.</p>
                 <p style="line-height: 1.4;margin: 20px 0;">Bitte logge dich unter
-                    <a href="http://bachelor.nak.test/selection-test"
-                        style="text-decoration: underline;color:#003A79;">http://bachelor.nak.test/selection-test</a> ein
+                    <a href="{{ route('selection-test.index') }}"
+                        style="text-decoration: underline;color:#003A79;">{{ route('selection-test.index') }}</a> ein
                     und
                     lade deine Auswertung herunter.
                     Diese Auswertung kannst du dann deiner Bewerbung bei unseren Kooperationsunternehmen beifügen. Du
