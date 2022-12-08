@@ -20,6 +20,7 @@
                 :options="$desiredBeginningOptions"
                 keyBy="id"
                 labelBy="name"
+                :disabled="!$isEdit"
             />
         @else
             <x-multi-select
@@ -30,6 +31,7 @@
                 :options="$this->getOptionsByModel($field->related_option_table)"
                 keyBy="key"
                 labelBy="key"
+                :disabled="!$isEdit"
             />
         @endif
     @else
@@ -41,6 +43,7 @@
             :options="$field->options->toArray()"
             keyBy="key"
             labelBy="value"
+            :disabled="!$isEdit"
         />
     @endif
 </ul>
