@@ -49,7 +49,7 @@ class CreateNewUser implements CreatesNewUsers
                     }
                 },
             ],
-            'phone' => ['nullable', 'phone:DE', 'min:9','max:15'],
+            'phone' => ['nullable', 'phone:DE', 'min:9', 'max:15'],
             'desired_beginning' => ['required', 'date'],
             'course_ids' => ['required', 'array'],
         ], [], [
