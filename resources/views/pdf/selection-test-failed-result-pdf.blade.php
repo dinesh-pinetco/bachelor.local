@@ -3,7 +3,7 @@
 @section('content')
     @include('pdf._header')
     <div class="flex justify-end text-sm font-light mt-16 mr-28">
-        <p>Elmshorn, den 29. September 2022</p>
+        <p>{{ $fail_pdf_created_at->format('d.F Y') }}</p>
     </div>
 
     <div class="mt-32 ml-32">

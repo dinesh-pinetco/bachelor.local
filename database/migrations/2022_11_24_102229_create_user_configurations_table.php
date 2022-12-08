@@ -22,6 +22,8 @@ return new class extends Migration
             $table->boolean('is_synced_to_sanna')->default(false);
             $table->string('selection_test_result_passed_pdf_path', 2048)->nullable();
             $table->string('selection_test_result_failed_pdf_path', 2048)->nullable();
+            $table->date('pass_pdf_created_at')->nullable();
+            $table->date('fail_pdf_created_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

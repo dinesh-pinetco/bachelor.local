@@ -18,6 +18,7 @@ trait SelectionTestPdf
 
         UserConfiguration::updateOrCreate(['user_id' => $this->id], [
             'selection_test_result_passed_pdf_path' => $pdfPath,
+            'pass_pdf_created_at' => now(),
         ]);
     }
 
@@ -28,6 +29,7 @@ trait SelectionTestPdf
 
         UserConfiguration::updateOrCreate(['user_id' => $this->id], [
             'selection_test_result_failed_pdf_path' => $pdfPath,
+            'fail_pdf_created_at' => now(),
         ]);
     }
 }
