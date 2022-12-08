@@ -77,6 +77,12 @@ class Field extends Component
             $validation['fieldValue'][] = 'alpha';
         }
 
+        if($this->field->key == 'phone'){
+            $validation['fieldValue'][] = 'phone:DE';
+            $validation['fieldValue'][] = 'min:9';
+            $validation['fieldValue'][] = 'max:15';
+        }
+
         return $validation;
     }
 
