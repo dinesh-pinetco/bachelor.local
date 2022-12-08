@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\GovernmentFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SelectionTestController;
@@ -30,10 +31,17 @@ Route::get('/', RegisterController::class)->name('index')->middleware('guest');
 Route::get('moodle', [TestController::class, 'moodle']);
 Route::get('fetch-result', [TestController::class, 'fetchResult']);
 Route::get('test/{slug}/{email?}', [TestController::class, 'testMail']);
+Route::get('test-government-form/{user}', [TestController::class, 'governmentForm']);
+Route::view('study-programs', 'study-programs')->name('study-programs');
 
 Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
     Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');
     Route::get('preview/backup/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
+});
+
+Route::middleware(['signed'])->group(function () {
+//    Route::get('/study-sheet/{user}', StudySheetController::class)->name('study-sheet');
+    Route::get('/government-form/{user}', GovernmentFormController::class)->name('government-form');
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:'.ROLE_APPLICANT])->group(function () {
@@ -59,9 +67,3 @@ Route::get('verified/{hash}', [TestResultVerifyController::class, '__invoke'])->
 
 Route::view('imprint', 'privacy_policy')->name('privacy_policy');
 Route::view('datenschutz', 'data_protection')->name('data_protection');
-
-Route::get('test-result-pdf/users/{user}', function (App\Models\User $user) {
-    return (new \App\Pdf\SelectionTestFailedResultPdf($user))->render();
-
-    return (new \App\Pdf\SelectionTestPassedResultPdf($user))->render();
-});

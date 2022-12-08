@@ -9,6 +9,8 @@ use App\Services\SelectionTests\Cubia;
 use App\Services\SelectionTests\Moodle;
 use Exception;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class TestController extends Controller
 {
@@ -66,5 +68,10 @@ class TestController extends Controller
         } catch (Exception $exception) {
             dd($exception);
         }
+    }
+
+    public function governmentForm(User $user)
+    {
+        return Redirect::to(URL::signedRoute('government-form', ['user' => $user->id]));
     }
 }

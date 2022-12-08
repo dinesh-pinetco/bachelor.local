@@ -17,7 +17,7 @@ class SelectionTestFailedResultPdf extends Pdf
     public function data()
     {
         return [
-            'user' => $this->user,
+            'user' => $this->user->load('desiredBeginning.courses'),
             'street_house_number' => $this->user->values->where('fields.key', 'street_house_number')->value('value'),
             'postal_code' => $this->user->values->where('fields.key', 'postal_code')->value('value'),
             'location' => $this->user->values->where('fields.key', 'location')->value('value'),
