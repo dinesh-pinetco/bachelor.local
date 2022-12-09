@@ -743,5 +743,9 @@
     "To complete your application, you still need to do industry, motivation, documents to really apply.": "To complete your application, you still need to do industry, motivation, documents to really apply.",
     "Got it!": "Got it!",
     "Are you sure you want to submit this application.": "Are you sure you want to submit this application.",
-    "Yes, submit it": "Yes, submit it"
+    "Yes, submit it": "Yes, submit it",
+    "Are you sure you want to fail applicant?": "Are you sure you want to fail applicant?",
+    "Fail Applicant": "Fail Applicant",
+    "Yes, Fail applicant": "Yes, Fail applicant",
+    "Failed Confirm": "Failed Confirm"
 }

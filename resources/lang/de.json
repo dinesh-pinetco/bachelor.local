@@ -746,5 +746,9 @@
     "To complete your application, you still need to do industry, motivation, documents to really apply.": "Um Ihre Bewerbung zu vervollständigen, müssen Sie noch Industrie, Motivation, Dokumente zu tun, um wirklich zu bewerben.",
     "Got it!": "Ich hab's!",
     "Are you sure you want to submit this application.": "Sind Sie sicher, dass Sie diese Bewerbung einreichen möchten.",
-    "Yes, submit it": "Ja, übermitteln Sie es"
+    "Yes, submit it": "Ja, übermitteln Sie es",
+    "Are you sure you want to fail applicant?": "Sind Sie sicher, dass Sie als Bewerber durchfallen wollen?",
+    "Fail Applicant": "Fail Antragsteller",
+    "Yes, Fail applicant": "Ja, Antragsteller durchfallen",
+    "Failed Confirm": "Fehlgeschlagen Bestätigen"
 }
