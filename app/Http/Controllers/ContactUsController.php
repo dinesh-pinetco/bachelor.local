@@ -27,7 +27,7 @@ class ContactUsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'message'=>'required',
+            'message' => ['required', 'min:10'],
         ]);
 
         Mail::to($request->email)

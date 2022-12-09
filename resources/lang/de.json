@@ -735,7 +735,7 @@
     "application_rejected_by_nak": "Antrag von nak abgelehnt",
     "The :attribute has already been taken": "Das :attribute ist bereits vergeben",
     "Submit data & continue with test": "Daten übermitteln & mit dem Test fortfahren",
-    "The desired beginning is invalid.": "Der gewünschte Beginn ist ungültig.",
+    "You rejected your application or failed the test. So, you can't apply for the same desired beginning again.": "Sie haben Ihre Bewerbung abgelehnt oder den Test nicht bestanden. Sie können sich also nicht noch einmal für denselben gewünschten Anfang bewerben.",
     "your account is in-active. contact admin for more information.": "Ihr Konto ist inaktiv. Kontaktieren Sie den Admin für weitere Informationen.",
     "Select desired beginning": "Wählen Sie den gewünschten Beginn",
     "Select courses": "Kurse auswählen",

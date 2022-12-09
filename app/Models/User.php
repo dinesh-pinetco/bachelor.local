@@ -134,11 +134,6 @@ class User extends Authenticatable implements ContractsAuditable
         return $this->application_status->applicationStatusOrder() >= ApplicationStatus::PROFILE_INFORMATION_COMPLETED->applicationStatusOrder();
     }
 
-    public function isTestPassed()
-    {
-        return $this->application_status->applicationStatusOrder() >= ApplicationStatus::TEST_FAILED->applicationStatusOrder();
-    }
-
     public function saveApplicationStatus()
     {
         $results = Result::myResults($this)
