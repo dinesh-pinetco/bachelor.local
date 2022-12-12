@@ -22,6 +22,8 @@ use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Result;
+use App\Notifications\Employee\FailedApplicantNotification;
 
 class User extends Authenticatable implements ContractsAuditable
 {
@@ -143,10 +145,17 @@ class User extends Authenticatable implements ContractsAuditable
         $totalTests = $results->count();
         if ($totalTests == $results->where('is_passed', true)->count()) {
             $this->applicantPassedSelectionTest();
-        }
-        if ($totalTests == $results->where('is_passed', false)->where('failed_by_nak', true)->count()) {
+        } elseif ($totalTests == $results->where('is_passed', false)->where('failed_by_nak', true)->count()) {
             $this->applicantFailedSelectionTest();
-        }
+        } elseif (
+            $totalTests == $results
+            ->where('is_passed', false)
+            ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED])
+            ->count() && $results->where('is_passed', false)->isNotEmpty()
+        ) {
+            $user = User::first();
+            $user->notify(new FailedApplicantNotification($this));
+        };
     }
 
     public function applicantPassedSelectionTest()
