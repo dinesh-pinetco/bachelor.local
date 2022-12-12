@@ -73,7 +73,7 @@ class Index extends Component
         collect(config('application.applicants_fields'))->each(function ($applicantsTableField) {
             $this->applicantsTableFields[] = [
                 'key' => $applicantsTableField,
-                'label' => $applicantsTableField,
+                'label' => __($applicantsTableField),
             ];
         });
     }

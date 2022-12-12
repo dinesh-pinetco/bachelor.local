@@ -23,23 +23,14 @@
                                 <x-jet-label for="placeholder" class="block">
                                     {{ __('Description') }}
                                 </x-jet-label>
-                                <x-jet-input class="w-full" type="text" name="description"
-                                             :placeholder="__('Description')"
-                                             wire:model.defer="document.description" id="description"></x-jet-input>
+                                <textarea id="description" name="description"
+                                          wire:model.defer="document.description"
+                                          placeholder="{{__('Description')}}"
+                                          rows="3"
+                                          class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray shadow-sm">
+                                </textarea>
                                 <x-jet-input-error for="document.description"/>
                             </div>
-
-                            {{-- <div>
-                                <x-jet-label for="extensions" class="block">{{ __('File formats') }}
-                                </x-jet-label>
-                                <div class="mt-1">
-                                    <textarea
-                                        class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray resize-none shadow-sm"
-                                        id="extensions" name="extensions" wire:model.defer="document.extensions"
-                                        rows="3"></textarea>
-                                    <x-jet-input-error for="document.extensions" />
-                                </div>
-                            </div> --}}
                             <div>
                                 <x-jet-label for="extensions" class="block">
                                     {{ __('File formats') }}
