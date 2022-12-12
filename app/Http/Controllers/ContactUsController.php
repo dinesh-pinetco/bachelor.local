@@ -26,6 +26,10 @@ class ContactUsController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'message' => ['required', 'min:10'],
+        ]);
+
         Mail::to($request->email)
                 ->bcc(config('mail.supporter.address'))
                 ->send(new ContactSupport($request->message));

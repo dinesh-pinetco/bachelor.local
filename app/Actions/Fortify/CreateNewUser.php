@@ -41,7 +41,7 @@ class CreateNewUser implements CreatesNewUsers
                     if ($user && $this->applicantHasRejectedStatus($user) &&
                         ($user->desiredBeginning?->course_start_date >= data_get($input, 'desired_beginning'))
                     ) {
-                        $fail(__('The desired beginning is invalid.'));
+                        $fail(__('You rejected your application or failed the test. So, you can\'t apply for the same desired beginning again.'));
                     }
 
                     if ($user && ! $this->applicantHasRejectedStatus($user)) {

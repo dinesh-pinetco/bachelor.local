@@ -5,6 +5,10 @@
             <div class="flex items-center justify-center py-8 lg:py-6 xl:py-0"></div>
         </div>
         <div class="flex-grow space-y-4">
+            <x-danger-button
+                wire:click="$emit('Applicant.Modal.TestFail.modal.toggle',{{ $applicant->id }})">
+                {{ __('Failed Confirm') }}
+            </x-danger-button>
             @if ($isShow)
                 @foreach ($tests as $test)
                     <div class="p-4 shadow-md w-full rounded">
@@ -23,3 +27,5 @@
         </div>
     </div>
 </div>
+<livewire:applicant.modal.test-fail/>
+

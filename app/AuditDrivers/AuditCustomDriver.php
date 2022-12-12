@@ -65,7 +65,7 @@ class AuditCustomDriver implements AuditDriver
     {
         $fields = $this->filterDynamicField($model);
 
-        $this->filedKeys = $this->filterOnlyForeignKey(array_merge_recursive($fields['old_values'], $fields['new_values']));
+        $this->filedKeys = $this->filterOnlyForeignKey(array_merge_recursive($fields['old_values'] ?? [], $fields['new_values'] ?? []));
 
         $this->fetchData();
 

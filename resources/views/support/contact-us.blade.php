@@ -17,6 +17,7 @@
                             class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray resize-none shadow-sm"
                             rows="8"></textarea>
                         <input type="hidden" name="email" value="{{ $professor->model->email }}">
+                        <x-jet-input-error for="message" class="mt-2" />
                     </div>
                     <div class="mt-4 md:mt-6">
                         <x-primary-button>

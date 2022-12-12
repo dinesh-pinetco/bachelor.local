@@ -735,7 +735,7 @@
     "application_rejected_by_nak": "Antrag von nak abgelehnt",
     "The :attribute has already been taken": "Das :attribute ist bereits vergeben",
     "Submit data & continue with test": "Daten übermitteln & mit dem Test fortfahren",
-    "The desired beginning is invalid.": "Der gewünschte Beginn ist ungültig.",
+    "You rejected your application or failed the test. So, you can't apply for the same desired beginning again.": "Sie haben Ihre Bewerbung abgelehnt oder den Test nicht bestanden. Sie können sich also nicht noch einmal für denselben gewünschten Anfang bewerben.",
     "your account is in-active. contact admin for more information.": "Ihr Konto ist inaktiv. Kontaktieren Sie den Admin für weitere Informationen.",
     "Select desired beginning": "Wählen Sie den gewünschten Beginn",
     "Select courses": "Kurse auswählen",
@@ -746,5 +746,9 @@
     "To complete your application, you still need to do industry, motivation, documents to really apply.": "Um Ihre Bewerbung zu vervollständigen, müssen Sie noch Industrie, Motivation, Dokumente zu tun, um wirklich zu bewerben.",
     "Got it!": "Ich hab's!",
     "Are you sure you want to submit this application.": "Sind Sie sicher, dass Sie diese Bewerbung einreichen möchten.",
-    "Yes, submit it": "Ja, übermitteln Sie es"
+    "Yes, submit it": "Ja, übermitteln Sie es",
+    "Are you sure you want to fail applicant?": "Sind Sie sicher, dass Sie als Bewerber durchfallen wollen?",
+    "Fail Applicant": "Fail Antragsteller",
+    "Yes, Fail applicant": "Ja, Antragsteller durchfallen",
+    "Failed Confirm": "Fehlgeschlagen Bestätigen"
 }

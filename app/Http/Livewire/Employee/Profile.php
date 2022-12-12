@@ -13,6 +13,7 @@ class Profile extends Component
         'user.first_name' => ['required', 'max:100'],
         'user.last_name' => ['required', 'max:100'],
         'user.phone' => ['required', 'numeric'],
+        'user.locale' => ['required', 'in:de,en'],
         'user.old_password' => ['nullable', 'required_with:user.new_password', 'current_password'],
         'user.new_password' => ['required_with:user.old_password'],
         'user.confirm_password' => ['same:user.new_password'],

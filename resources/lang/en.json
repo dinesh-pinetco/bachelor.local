@@ -732,7 +732,7 @@
     "application_rejected_by_applicant": "Application rejected by applicant",
     "application_rejected_by_nak": "Application rejected by nak",
     "Submit data & continue with test": "Submit data & continue with test",
-    "The desired beginning is invalid.": "The desired beginning is invalid.",
+    "You rejected your application or failed the test. So, you can't apply for the same desired beginning again.": "You rejected your application or failed the test. So, you can't apply for the same desired beginning again.",
     "your account is in-active. contact admin for more information.": "your account is in-active. contact admin for more information.",
     "Select desired beginning": "Select desired beginning",
     "Select courses": "Select courses",
@@ -743,5 +743,9 @@
     "To complete your application, you still need to do industry, motivation, documents to really apply.": "To complete your application, you still need to do industry, motivation, documents to really apply.",
     "Got it!": "Got it!",
     "Are you sure you want to submit this application.": "Are you sure you want to submit this application.",
-    "Yes, submit it": "Yes, submit it"
+    "Yes, submit it": "Yes, submit it",
+    "Are you sure you want to fail applicant?": "Are you sure you want to fail applicant?",
+    "Fail Applicant": "Fail Applicant",
+    "Yes, Fail applicant": "Yes, Fail applicant",
+    "Failed Confirm": "Failed Confirm"
 }

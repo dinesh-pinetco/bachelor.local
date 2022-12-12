@@ -21,6 +21,7 @@ class SelectionTestFailedResultPdf extends Pdf
             'street_house_number' => $this->user->values->where('fields.key', 'street_house_number')->value('value'),
             'postal_code' => $this->user->values->where('fields.key', 'postal_code')->value('value'),
             'location' => $this->user->values->where('fields.key', 'location')->value('value'),
+            'courses' => implode(',', $this->user->desiredBeginning->courses->pluck('name')->toArray()),
             'fail_pdf_created_at' => $this->user->configuration->fail_pdf_created_at,
             'qrcode' => base64_encode(\QrCode::format('svg')
                 ->size(200)

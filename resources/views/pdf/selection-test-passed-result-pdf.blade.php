@@ -11,9 +11,7 @@
         <p class="mt-10">nach Auswertung des Auswahlverfahrens zeigen deine Ergebnisse, dass du von deinen kognitiven
             <br>
             und motivationalen Kompetenzen gut zu den Studienanforderungen der Fachrichtung
-            @foreach($user->desiredBeginning->courses->pluck('name') as $course)
-                {{ $course.',' }}
-            @endforeach
+            {{ $courses }}
             an der NORDAKADEMIE, Hochschule der Wirtschaft passt. Wir freuen uns,
             dir daher mitteilen zu können, dass du dich weiter um einen Studienplatz für
             das Jahr {{ $user->desiredBeginning->course_start_date->format('Y') }}
