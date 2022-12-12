@@ -159,158 +159,56 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'geplanter studiengang',
+                                'type'        => FieldType::FIELD_SELECT(),
+                                'label'       => 'Wie bist Du auf die NORDAKADEMIE aufmerksam geworden?',
                                 'placeholder' => 'Bitte wählen',
-                                'key' => 'academic_degree',
-                                'sort_order' => 1,
-                                'is_active' => 1,
-                                'is_required' => 1,
-                                'options' => [
-                                    [
-                                        'key' => 'Bachelor',
-                                        'value' => 'Bachelor',
-                                    ],
-                                    [
-                                        'key' => 'Master',
-                                        'value' => 'Master',
-                                    ],
-                                    [
-                                        'key' => 'Doktor',
-                                        'value' => 'Doktor',
-                                    ],
-                                ],
-                                'meta_data' => [],
-                            ],
-                            [
-                                'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'Bewerbung für Jahrgang',
-                                'placeholder' => 'Bitte wählen',
-                                'key' => 'bewerbung_fur_jahrgang',
-                                'sort_order' => 1,
-                                'is_active' => 1,
-                                'is_required' => 1,
-                                'options' => [
-                                    [
-                                        'key' => 'Bachelor',
-                                        'value' => 'Bachelor',
-                                    ],
-                                    [
-                                        'key' => 'Master',
-                                        'value' => 'Master',
-                                    ],
-                                    [
-                                        'key' => 'Doktor',
-                                        'value' => 'Doktor',
-                                    ],
-                                ],
-                                'meta_data' => [
-                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.'
+                                'key'         => 'find_from',
+                                'sort_order'  => 1,
+                                'is_active'   => 1,
+                                'is_required' => false,
+                                'options'     => [],
+                                'meta_data'   => [
+                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.',
                                 ],
                             ],
                             [
-                                'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'Wie bist Du auf die NORDAKADEMIE aufmerksam geworden?',
-                                'placeholder' => 'Bitte wählen',
-                                'key' => 'test_1',
-                                'sort_order' => 1,
-                                'is_active' => 1,
-                                'is_required' => 1,
-                                'options' => [
-                                    [
-                                        'key' => 'Bachelor',
-                                        'value' => 'Bachelor',
-                                    ],
-                                    [
-                                        'key' => 'Master',
-                                        'value' => 'Master',
-                                    ],
-                                    [
-                                        'key' => 'Doktor',
-                                        'value' => 'Doktor',
-                                    ],
-                                ],
-                                'meta_data' => [
-                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.'
-                                ],
-                            ],
-                            [
-                                'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'Wie genau? / Durch wen?',
+                                'type'        => FieldType::FIELD_TEXT(),
+                                'label'       => 'Wie genau? / Durch wen?',
                                 'placeholder' => 'Wie genau? / Durch wen?',
-                                'key' => 'test_2',
-                                'sort_order' => 1,
-                                'is_active' => 1,
-                                'is_required' => 1,
-                                'options' => [
-                                    [
-                                        'key' => 'Bachelor',
-                                        'value' => 'Bachelor',
-                                    ],
-                                    [
-                                        'key' => 'Master',
-                                        'value' => 'Master',
-                                    ],
-                                    [
-                                        'key' => 'Doktor',
-                                        'value' => 'Doktor',
-                                    ],
-                                ],
-                                'meta_data' => [
-                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.'
+                                'key'         => 'find_by_whom',
+                                'sort_order'  => 1,
+                                'is_active'   => 1,
+                                'is_required' => false,
+                                'options'     => [],
+                                'meta_data'   => [
+                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.',
                                 ],
                             ],
                             [
-                                'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'An welcher Schule wirst/hast Du Ihre Hochschulzugangsberechtigung erworben?',
+                                'type'        => FieldType::FIELD_SELECT(),
+                                'label'       => 'An welcher Schule wirst/hast Du Ihre Hochschulzugangsberechtigung erworben?',
                                 'placeholder' => 'Bitte wählen',
-                                'key' => 'test_3',
-                                'sort_order' => 1,
-                                'is_active' => 1,
-                                'is_required' => 1,
-                                'options' => [
-                                    [
-                                        'key' => 'Bachelor',
-                                        'value' => 'Bachelor',
-                                    ],
-                                    [
-                                        'key' => 'Master',
-                                        'value' => 'Master',
-                                    ],
-                                    [
-                                        'key' => 'Doktor',
-                                        'value' => 'Doktor',
-                                    ],
-                                ],
-                                'meta_data' => [
-                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.'
+                                'key'         => 'school_qualification',
+                                'sort_order'  => 1,
+                                'is_active'   => 1,
+                                'is_required' => false,
+                                'options'     => [],
+                                'meta_data'   => [
+                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.',
                                 ],
                             ],
                             [
-                                'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'Falls Deine Schule nicht in der Liste vorkommt, nenne diese bitte hier mit Namen, PLZ und Ort',
+                                'type'        => FieldType::FIELD_TEXT(),
+                                'label'       => 'Falls Deine Schule nicht in der Liste vorkommt, nenne diese bitte hier mit Namen, PLZ und Ort',
                                 'placeholder' => 'Falls Deine Schule nicht in der Liste vorkommt, nenne diese bitte hier mit Namen, PLZ und Ort',
-                                'key' => 'test_4',
-                                'sort_order' => 1,
-                                'is_active' => 1,
-                                'is_required' => 1,
-                                'options' => [
-                                    [
-                                        'key' => 'Bachelor',
-                                        'value' => 'Bachelor',
-                                    ],
-                                    [
-                                        'key' => 'Master',
-                                        'value' => 'Master',
-                                    ],
-                                    [
-                                        'key' => 'Doktor',
-                                        'value' => 'Doktor',
-                                    ],
+                                'key'         => 'not_listed_school_name',
+                                'sort_order'  => 1,
+                                'is_active'   => 1,
+                                'is_required' => false,
+                                'options'     => [],
+                                'meta_data'   => [
+                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.',
                                 ],
-                                'meta_data' => [
-                                    'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.'
-                                ]
                             ],
                             [
                                 'type' => FieldType::FIELD_CHECKBOX(),
@@ -329,22 +227,22 @@ class Data
                                 ],
                             ],
                             [
-                                'type' => FieldType::FIELD_CHECKBOX(),
-                                'label' => '',
+                                'type'        => FieldType::FIELD_CHECKBOX(),
+                                'label'       => '',
                                 'placeholder' => null,
-                                'key' => 'terms_and_condition',
-                                'sort_order' => 6,
-                                'is_active' => 1,
+                                'key'         => 'terms_and_condition',
+                                'sort_order'  => 6,
+                                'is_active'   => 1,
                                 'is_required' => 0,
-                                'meta_data' => [],
-                                'options' => [
+                                'meta_data'   => [],
+                                'options'     => [
                                     [
-                                        'key' => '1',
+                                        'key'   => '1',
                                         'value' => 'Hiermit stimme Ich zu, dass die in den Fragebögen und Testverfahren erhobenen Daten neben der Auswertung hinsichtlich Eignung und Passung zu der von mir gewählten Studienrichtung ebenfalls hinsichtlich Eignung und Passung zu weiteren an der NORDAKADEMIE angebotenen Studienrichtungen ausgewertet werden dürfen. (Zusatz zur Datenschutzerklärung)',
                                     ],
                                 ],
                             ],
-                        ]
+                        ],
                     ],
                     [
                         'internal_name' => __('Application for the'),

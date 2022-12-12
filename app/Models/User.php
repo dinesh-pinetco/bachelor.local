@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
+use App\Notifications\Employee\FailedApplicantNotification;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
 use App\Notifications\SelectionTestResult;
 use App\Traits\Mediable;
@@ -22,8 +23,6 @@ use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Result;
-use App\Notifications\Employee\FailedApplicantNotification;
 
 class User extends Authenticatable implements ContractsAuditable
 {
@@ -155,7 +154,7 @@ class User extends Authenticatable implements ContractsAuditable
         ) {
             $user = User::first();
             $user->notify(new FailedApplicantNotification($this));
-        };
+        }
     }
 
     public function applicantPassedSelectionTest()

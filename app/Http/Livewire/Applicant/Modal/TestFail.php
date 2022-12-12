@@ -19,7 +19,7 @@ class TestFail extends Component
 
     public function toggle(User $user)
     {
-        $this->show = !$this->show;
+        $this->show = ! $this->show;
         $this->applicant = $user;
     }
 
