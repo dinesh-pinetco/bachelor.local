@@ -142,18 +142,27 @@ class User extends Authenticatable implements ContractsAuditable
             ->get();
 
         $totalTests = $results->count();
+
+        $updatedStatusResults = $results
+            ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED]);
+
         if ($totalTests == $results->where('is_passed', true)->count()) {
             $this->applicantPassedSelectionTest();
-        } elseif ($totalTests == $results->where('is_passed', false)->where('failed_by_nak', true)->count()) {
-            $this->applicantFailedSelectionTest();
-        } elseif (
-            $totalTests == $results
-            ->where('is_passed', false)
-            ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED])
-            ->count() && $results->where('is_passed', false)->isNotEmpty()
-        ) {
-            $user = User::first();
-            $user->notify(new FailedApplicantNotification($this));
+        } elseif ($updatedStatusResults->count() === $totalTests && $results->where('is_passed', false)->isNotEmpty()) {
+            $failedResultsCount = $updatedStatusResults
+                ->where('is_passed', false)
+                ->where('failed_by_nak', true)
+                ->count();
+
+            if ($totalTests == $failedResultsCount) {
+                $this->applicantFailedSelectionTest();
+                return;
+            } else {
+                $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
+                $user = User::first();
+                $user->notify(new FailedApplicantNotification($this));
+                $this->save();
+            }
         }
     }
 
