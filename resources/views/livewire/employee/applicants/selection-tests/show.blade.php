@@ -11,9 +11,9 @@
                     <p class="text-sm md:text-base">{{ $test->status($applicant) }}</p>
 
                     <x-primary-button type="button"
-                                      wire:click="markAsPassed"
-                                      :disabled="!$isEdit"
-                                      class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                                    wire:click="$emit('Applicant.Modal.MarkAsPassed.modal.toggle',{{ $applicant->id }})"
+                                    :disabled="!$isEdit"
+                                    class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                         {{ __('Mark test as passed') }}
                     </x-primary-button>
                 </div>
@@ -22,9 +22,9 @@
 
                     </p>
                     <x-primary-button type="button"
-                                      wire:click="markAsFailed"
-                                      :disabled="!$isEdit"
-                                      class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                                    wire:click="$emit('Applicant.Modal.MarkAsFailed.modal.toggle',{{ $applicant->id }})"
+                                    :disabled="!$isEdit"
+                                    class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                         {{ __('Mark test as failed') }}
                     </x-primary-button>
                 </div>
@@ -83,13 +83,16 @@
                         <span>{{ $test->isPassed($applicant) }}</span>
                     </p>
                     <x-primary-button type="button"
-                                      wire:click="markAsReset"
-                                      :disabled="!$isEdit"
-                                      class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                                    wire:click="$emit('Applicant.Modal.MarkAsReset.modal.toggle',{{ $applicant->id }})"
+                                    :disabled="!$isEdit"
+                                    class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                         {{ __('Reset') }}
                     </x-primary-button>
                 </div>
             </div>
         </div>
     </div>
+<livewire:applicant.modal.mark-as-passed/>
+<livewire:applicant.modal.mark-as-failed/>
+<livewire:applicant.modal.mark-as-reset/>
 </div>

@@ -439,6 +439,7 @@
     "Show result": "Ergebnis anzeigen",
     "Reset": "Zurücksetzen",
     "Mark test as passed": "Test als bestanden markieren",
+    "Mark test as failed": "Test als fehlgeschlagen markieren",
     "Imprint": "Impressum",
     "Privacy policy": "Datenschutz",
     "Passed": "Bestanden",
@@ -751,5 +752,11 @@
     "Fail Applicant": "Fail Antragsteller",
     "Yes, Fail applicant": "Ja, Antragsteller durchfallen",
     "Failed Confirm": "Fehlgeschlagen Bestätigen",
-    "Notification of failed applicants": "Benachrichtigung über gescheiterte Antragsteller"
+    "Notification of failed applicants": "Benachrichtigung über gescheiterte Antragsteller",
+    "Are you sure you want to mark as passed?": "Sind Sie sicher, dass Sie die Prüfung als bestanden markieren wollen?",
+    "Yes, Mark as passed": "Ja, als bestanden markieren",
+    "Are you sure you want to mark as failed?": "Sind Sie sicher, dass Sie die Prüfung als fehlgeschlagen markieren wollen?",
+    "Reset Applicant Test": "Bewerbertest zurücksetzen",
+    "Are you sure you want to reset applicant test?": "Sind Sie sicher, dass Sie den Bewerbertest zurücksetzen wollen?",
+    "Yes, reset test": "Ja, Reset-Test"
 }

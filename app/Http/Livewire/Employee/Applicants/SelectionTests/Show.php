@@ -26,6 +26,8 @@ class Show extends Component
 
     public bool $isShow = true;
 
+    protected $listeners=['markAsPassed','markAsFailed','markAsReset'];
+
     public function mount()
     {
         $this->result = $this->test->results()?->myResults($this->applicant)?->first();
@@ -39,11 +41,6 @@ class Show extends Component
         } catch (Throwable $th) {
             $this->isEdit = false;
         }
-    }
-
-    public function render()
-    {
-        return view('livewire.employee.applicants.selection-tests.show');
     }
 
     public function markAsPassed()

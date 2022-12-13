@@ -748,5 +748,12 @@
     "Fail Applicant": "Fail Applicant",
     "Yes, Fail applicant": "Yes, Fail applicant",
     "Failed Confirm": "Failed Confirm",
-    "Notification of failed applicants": "Notification of failed applicants"
+    "Notification of failed applicants": "Notification of failed applicants",
+    "Are you sure you want to mark as passed?": "Are you sure you want to mark as passed?",
+    "Yes, Mark as passed": "Yes, Mark as passed",
+    "Mark test as failed": "Mark test as failed",
+    "Are you sure you want to mark as failed?": "Are you sure you want to mark as failed?",
+    "Reset Applicant Test": "Reset Applicant Test",
+    "Are you sure you want to reset applicant test?": "Are you sure you want to reset applicant test?",
+    "Yes, reset test": "Yes, reset test"
 }
