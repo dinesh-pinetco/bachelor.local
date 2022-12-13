@@ -189,6 +189,7 @@ class Data
                                 'label' => 'An welcher Schule wirst/hast Du Ihre Hochschulzugangsberechtigung erworben?',
                                 'placeholder' => 'Bitte wählen',
                                 'key' => 'school_qualification',
+                                'related_option_table' => 'schools',
                                 'sort_order' => 1,
                                 'is_active' => 1,
                                 'is_required' => false,
