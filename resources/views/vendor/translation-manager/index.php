@@ -115,7 +115,6 @@
     </div>
 </header>
 <div class="container-fluid">
-    <p>Warning, translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>
     <div class="alert alert-success success-import" style="display:none;">
         <p>Done importing, processed <strong class="counter">N</strong> items! Reload this page to refresh the groups!</p>
     </div>
@@ -158,32 +157,7 @@
             </div>
         </form>
         <?php endif; ?>
-        <?php if(isset($group)) : ?>
-            <form class="form-inline form-publish" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', $group) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish the translations group '<?php echo $group ?>? This will overwrite existing language files.">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                <button type="submit" class="btn btn-info" data-disable-with="Publishing.." >Publish translations</button>
-                <a href="<?= action('\Barryvdh\TranslationManager\Controller@getIndex') ?>" class="btn btn-default">Back</a>
-            </form>
-        <?php endif; ?>
     </p>
-    <form role="form" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddGroup') ?>">
-        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <div class="form-group">
-            <p>Choose a group to display the group translations. If no groups are visisble, make sure you have run the migrations and imported the translations.</p>
-            <select name="group" id="group" class="form-control group-select">
-                <?php foreach($groups as $key => $value): ?>
-                    <option value="<?php echo $key ?>"<?php echo $key == $group ? ' selected':'' ?>><?php echo $value ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Enter a new group name and start edit translations in that group</label>
-            <input type="text" class="form-control" name="new-group" />
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-default" name="add-group" value="Add and edit keys" />
-        </div>
-    </form>
     <?php if($group): ?>
         <form action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAdd', array($group)) ?>" method="POST"  role="form">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -195,11 +169,7 @@
                 <input type="submit" value="Add keys" class="btn btn-primary">
             </div>
         </form>
-        <div class="row">
-            <div class="col-sm-2">
-                <span class="btn btn-default enable-auto-translate-group">Use Auto Translate</span>
-            </div>
-        </div>
+
         <form class="form-add-locale autotranslate-block-group hidden" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postTranslateMissing') ?>">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="row">
