@@ -41,9 +41,13 @@ class FailedApplicantNotification extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', route('employee.selection-tests.index', $this->user))
-            ->line('Thank you for using our application!');
+            ->subject(trans('mail.failed-applicant.subject'))
+            ->markdown('emails.failed-applicant',[
+                'user'=>$this->user,
+                'name'=>$this->user->full_name,
+                'admin'=> $notifiable->full_name,
+                'url'=> route('employee.selection-tests.index', $this->user),
+            ]);
     }
 
     /**

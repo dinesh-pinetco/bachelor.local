@@ -750,5 +750,6 @@
     "Are you sure you want to fail applicant?": "Sind Sie sicher, dass Sie als Bewerber durchfallen wollen?",
     "Fail Applicant": "Fail Antragsteller",
     "Yes, Fail applicant": "Ja, Antragsteller durchfallen",
-    "Failed Confirm": "Fehlgeschlagen Bestätigen"
+    "Failed Confirm": "Fehlgeschlagen Bestätigen",
+    "Notification of failed applicants": "Benachrichtigung über gescheiterte Antragsteller"
 }

@@ -50,6 +50,11 @@ class ApplicantRedirection
         return to_route('selection-test.index');
     }
 
+    private function test_failed()
+    {
+        return to_route('selection-test.index');
+    }
+
     private function test_failed_confirm()
     {
         return to_route('selection-test.index');

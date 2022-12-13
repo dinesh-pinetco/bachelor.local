@@ -90,6 +90,13 @@ return [
         'paragraph1' => ' Die Bewerbung von :name mit der Bewerbungs-ID :applicant_id ist vollständig abgeschlossen. Der/die Bewerbende kann nun immatrikuliert werden. ',
     ],
 
+    'failed-applicant'=>[
+        'subject' => 'Gescheiterter Antragsteller || NORDAKADEMIE',
+        'welcome'=>'Hallo :admin',
+        'body'=>'die Bewerber :name hat die Auswahltests nicht bestanden. Bitte überprüfe die Auswahltests und bestätige das Bestehen oder Nichtbestehen.',
+        'action' => 'Zu den Testergebnissen',
+    ],
+
     'greetings_1' => 'Patricia Lichtenberg',
     'greetings_2' => 'Office Hamburg',
     'greeting-message' => 'Mit besten Grüßen von der Elbe',

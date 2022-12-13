@@ -25,13 +25,6 @@ class TestFail extends Component
 
     public function confirmFail()
     {
-        Result::myResults($this->applicant)
-            ->update([
-                'is_passed' => false,
-                'failed_by_nak' => true,
-                'status' => Result::STATUS_FAILED,
-            ]);
-
         $this->applicant->applicantFailedSelectionTest();
         $this->emitUp('refresh');
         $this->close();
