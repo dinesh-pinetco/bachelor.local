@@ -1,5 +1,5 @@
 <div class="mb-3">
-    @if ($fieldValue && $errors->isEmpty())
+    @if ($fieldValue)
         <div class="profile-img w-36 h-36 relative">
             <div class="w-full h-full rounded-full overflow-hidden">
                 <img class="w-full h-full object-cover object-center"
@@ -16,7 +16,7 @@
         </a>
     </div>
     @else
-        <div class="h-36 flex flex-col justify-center">
+        <div class="h-36 flex flex-col justify-center" >
             {{-- <x-jet-label>{{ $field->label }}</x-jet-label> --}}
             <label
                 class="w-44 flex flex-col items-center p-2 bg-primary text-white rounded-sm cursor-pointer hover:bg-opacity-90">
