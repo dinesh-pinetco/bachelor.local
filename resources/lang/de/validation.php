@@ -112,8 +112,8 @@ return [
     'url' => 'Das :attribute format ist ungültig.',
     'uuid' => 'Das :attribute muss eine gültige UUID sein.',
     'max_digits' => 'Das :attribute darf nicht größer sein als :max Länge.',
-    'phone' => 'The :attribute field contains an invalid number.',
 
+    'phone' => 'Das Feld :attribute enthält eine ungültige Zahl.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

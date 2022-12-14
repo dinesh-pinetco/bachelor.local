@@ -14,7 +14,7 @@
            $totalSelected = count($value);
 
            if ($totalSelected > 1) {
-               $placeholder = __(':label + :number mehr', ['label' => $placeholder, 'number' => $totalSelected - 1]);
+               $placeholder = __(':label + :number more', ['label' => $placeholder, 'number' => $totalSelected - 1]);
            }
      }else{
         $placeholder = $placeholder ?? __('--Select--');

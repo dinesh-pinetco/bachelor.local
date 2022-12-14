@@ -81,7 +81,7 @@ class Data
                             [
                                 'type' => FieldType::FIELD_TEXT(),
                                 'label' => 'Strasse und Hausnummer',
-                                'key' => 'street_and_house_number',
+                                'key' => 'street_house_number',
                                 'placeholder' => 'Strasse und Hausnummer',
                                 'sort_order' => 1,
                                 'is_active' => 1,
@@ -91,7 +91,7 @@ class Data
                             [
                                 'type' => FieldType::FIELD_TEXT(),
                                 'label' => 'PLZ',
-                                'key' => 'zip',
+                                'key' => 'postal_code',
                                 'placeholder' => 'PLZ',
                                 'sort_order' => 1,
                                 'is_active' => 1,

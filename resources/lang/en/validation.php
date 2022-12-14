@@ -125,6 +125,8 @@ return [
     'uuid' => 'The :attribute must be a valid UUID.',
     'max_digits' => 'The :attribute must not be more than :max length.',
 
+    'phone' => 'The :attribute field contains an invalid number.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -162,7 +164,6 @@ return [
         'employer_academic_degrees.*.degree' => 'Degree ',
         'employer_academic_degrees.*.ects_credit_point' => 'ECTS Credit Points ',
         'employer_academic_degrees.*.graduation_date' => 'Graduation Date ',
-
     ],
 
 ];

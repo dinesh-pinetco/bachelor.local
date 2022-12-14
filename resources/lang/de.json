@@ -755,8 +755,11 @@
     "Notification of failed applicants": "Benachrichtigung über gescheiterte Antragsteller",
     "Are you sure you want to mark as passed?": "Sind Sie sicher, dass Sie die Prüfung als bestanden markieren wollen?",
     "Yes, Mark as passed": "Ja, als bestanden markieren",
+    "Yes, Mark as failed": "Ja, als gescheitert markieren",
     "Are you sure you want to mark as failed?": "Sind Sie sicher, dass Sie die Prüfung als fehlgeschlagen markieren wollen?",
     "Reset Applicant Test": "Bewerbertest zurücksetzen",
     "Are you sure you want to reset applicant test?": "Sind Sie sicher, dass Sie den Bewerbertest zurücksetzen wollen?",
-    "Yes, reset test": "Ja, Reset-Test"
+    "Yes, reset test": "Ja, Reset-Test",
+    "more": "mehr",
+    ":label + :number more": ":label + :number mehr"
 }
