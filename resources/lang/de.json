@@ -761,5 +761,7 @@
     "Are you sure you want to reset applicant test?": "Sind Sie sicher, dass Sie den Bewerbertest zurücksetzen wollen?",
     "Yes, reset test": "Ja, Reset-Test",
     "more": "mehr",
-    ":label + :number more": ":label + :number mehr"
+    ":label + :number more": ":label + :number mehr",
+    "is ready for enrollment": "Einschreibung für vormerken",
+    "Partner companies": "Kooperationsunternehmen"
 }

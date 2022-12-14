@@ -32,6 +32,21 @@
             <h6 class="text-2xl md:text-3xl font-medium text-primary {{ $isProfile ? 'mb-5 md:mb-9' : 'ml-20 md:ml-32 lg:ml-0 my-7 lg:my-10' }}">
                 {{ $tab->description }}
             </h6>
+            @if (!auth()->user()->hasRole(ROLE_APPLICANT))
+                <div class="mt-4 ml-96 md:mt-6">
+                    <x-primary-button type="button"
+                                        :disabled="!$isEdit"
+                                        class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                            {{ __('Something here') }}
+                    </x-primary-button>
+                    <x-primary-button type="button"
+                                        wire:click="$emit('Applicant.Modal.EnrollApplicant.modal.toggle',{{ $applicant->id }})"
+                                        :disabled="!$isEdit"
+                                        class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                            {{ __('Enroll Applicant') }}
+                    </x-primary-button>
+                </div>
+            @endif
             @if (!empty($parentCustomGroups))
                 @foreach ($parentCustomGroups as $parentCustomGroupKey => $parentCustomGroup)
                     @foreach ($parentCustomGroup as $groupKey => $group)
@@ -67,7 +82,7 @@
                                     @foreach ($group->child as $child)
                                         <div class="space-y-8" wire:key="{{ $child->id }}">
                                             @if ($child->title)
-                                            <   label class="mb-3 text-base md:text-lg font-medium text-primary" for="">{{ $child->title }}</>
+                                            <label class="mb-3 text-base md:text-lg font-medium text-primary" for="">{{ $child->title }}</label>
                                             @endif
                                             <div class="mb-7">
                                                 @foreach ($child->fields as $childFieldKey => $childField)
@@ -145,4 +160,6 @@
             </div>
         </div>
     </div>
+<livewire:applicant.modal.enroll-applicant/>
+
 </div>

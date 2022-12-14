@@ -1,4 +1,4 @@
-@props(['id', 'maxWidth'])
+@props(['id', 'maxWidth','width'])
 
 @php
     $id = $id ?? md5($attributes->wire('model'));
@@ -10,6 +10,7 @@
         'xl' => 'sm:max-w-xl',
         '2xl' => 'sm:max-w-2xl',
     ][$maxWidth ?? '2xl'];
+    $width = $width ?? 'w-11/12 md:w-full max-w-lg';
 @endphp
 
 <div
@@ -35,7 +36,7 @@
 
     {{--    <div x-cloak x-show="show" class="fixed inset-0 z-20 flex items-center w-full h-full m-auto {{ $maxWidth }} sm:mx-auto"--}}
     <div x-cloak x-show="show" data-cy="confirmation-model"
-         class="fixed top-1/2 left-1/2 z-50 w-11/12 md:w-full max-w-lg transform -translate-x-1/2 -translate-y-1/2"
+         class="fixed top-1/2 left-1/2 z-50 {{ $width }} transform -translate-x-1/2 -translate-y-1/2"
          x-transition:enter="transition transform ease-in duration-150"
          x-transition:enter-start="transform opacity-0 scale-90"
          x-transition:enter-end="transform opacity-100 scale-100"
