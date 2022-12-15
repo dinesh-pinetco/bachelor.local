@@ -759,5 +759,6 @@
     "Yes, reset test": "Yes, reset test",
     ":label + :number more": ":label + :number more",
     ":name is ready for enrollment": ":Name is ready for enrollment",
-    "Partner companies": "Partner companies"
+    "Partner companies": "Partner companies",
+    ":name failed the test.": ":name failed the test."
 }

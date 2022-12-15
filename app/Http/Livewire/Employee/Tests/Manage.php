@@ -26,7 +26,7 @@ class Manage extends Component
     public array $selectedCourses = [];
 
     protected array $rules = [
-        'test.name' => ['required'],
+        'test.name' => ['required','max:50'],
         'test.description' => ['required'],
         'test.type' => ['required'],
         'test.duration' => ['required'],

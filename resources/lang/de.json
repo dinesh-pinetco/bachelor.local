@@ -763,5 +763,6 @@
     "more": "mehr",
     ":label + :number more": ":label + :number mehr",
     ":name is ready for enrollment": "Einschreibung für :name vormerken",
-    "Partner companies": "Kooperationsunternehmen"
+    "Partner companies": "Kooperationsunternehmen",
+    ":name failed the test.": ":name hat die Auswahltests nicht bestanden."
 }

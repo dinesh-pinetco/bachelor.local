@@ -32,7 +32,7 @@
             <h6 class="text-2xl md:text-3xl font-medium text-primary {{ $isProfile ? 'mb-5 md:mb-9' : 'ml-20 md:ml-32 lg:ml-0 my-7 lg:my-10' }}">
                 {{ $tab->description }}
             </h6>
-            @if (!auth()->user()->hasRole(ROLE_APPLICANT))
+            @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
                 <div class="mt-4 ml-96 md:mt-6">
                     <x-primary-button type="button"
                                         :disabled="!$isEdit"
