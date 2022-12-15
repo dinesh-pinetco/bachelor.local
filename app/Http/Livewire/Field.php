@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Throwable;
@@ -47,6 +48,34 @@ class Field extends Component
             'fieldValue' => $this->field->label,
         ];
     }
+
+    // Just for overwrite file attribute name :D
+    public function uploadErrored($name, $errorsInJson, $isMultiple) {
+        $name = $this->field->label;
+        $this->emit('upload:errored', $name)->self();
+
+        if (is_null($errorsInJson)) {
+            // Handle any translations/custom names
+            $translator = app()->make('translator');
+
+            $attribute = $translator->get("validation.attributes.{$name}");
+            if ($attribute === "validation.attributes.{$name}") $attribute = $name;
+
+            $message = trans('validation.uploaded', ['attribute' => $attribute]);
+            if ($message === 'validation.uploaded') $message = "The {$name} failed to upload.";
+
+            throw ValidationException::withMessages([$name => $message]);
+        }
+
+        $errorsInJson = $isMultiple
+            ? str_ireplace('files', $name, $errorsInJson)
+            : str_ireplace('files.0', $name, $errorsInJson);
+
+        $errors = json_decode($errorsInJson, true)['errors'];
+
+        throw (ValidationException::withMessages($errors));
+    }
+
 
     protected function rules(): array
     {
@@ -86,11 +115,6 @@ class Field extends Component
         return $validation;
     }
 
-    protected function messages(): array
-    {
-        return [];
-    }
-
     public function mount()
     {
         if ($this->field) {
@@ -102,6 +126,10 @@ class Field extends Component
 
         if ($this->fieldValue && $this->field->type == FieldType::FIELD_FILE()) {
             $this->fieldValue = Storage::url($this->fieldValue);
+        }
+
+        if ($this->field->key == 'avatar') {
+            config()->set('livewire.temporary_file_upload.rules', ['required', 'file', 'max:125']);
         }
 
         if ($this->field && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
