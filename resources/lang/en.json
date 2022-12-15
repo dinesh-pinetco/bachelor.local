@@ -758,6 +758,6 @@
     "Are you sure you want to reset applicant test?": "Are you sure you want to reset applicant test?",
     "Yes, reset test": "Yes, reset test",
     ":label + :number more": ":label + :number more",
-    "is ready for enrollment": "is ready for enrollment",
+    ":name is ready for enrollment": ":Name is ready for enrollment",
     "Partner companies": "Partner companies"
 }

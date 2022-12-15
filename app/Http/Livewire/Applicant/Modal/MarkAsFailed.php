@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\Applicant\Modal;
 
-use App\Http\Livewire\Employee\Applicants\SelectionTests\Show;
 use App\Http\Livewire\Traits\HasModal;
-use App\Models\Result;
 use App\Models\User;
 use Livewire\Component;
 

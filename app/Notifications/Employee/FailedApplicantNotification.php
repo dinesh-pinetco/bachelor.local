@@ -42,11 +42,11 @@ class FailedApplicantNotification extends Notification
     {
         return (new MailMessage)
             ->subject(trans('mail.failed-applicant.subject'))
-            ->markdown('emails.failed-applicant',[
-                'user'=>$this->user,
-                'name'=>$this->user->full_name,
-                'admin'=> $notifiable->full_name,
-                'url'=> route('employee.selection-tests.index', $this->user),
+            ->markdown('emails.failed-applicant', [
+                'user' => $this->user,
+                'name' => $this->user->full_name,
+                'admin' => $notifiable->full_name,
+                'url' => route('employee.selection-tests.index', $this->user),
             ]);
     }
 

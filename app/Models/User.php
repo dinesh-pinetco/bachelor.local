@@ -156,6 +156,7 @@ class User extends Authenticatable implements ContractsAuditable
 
             if ($totalTests == $failedResultsCount) {
                 $this->applicantFailedSelectionTest();
+
                 return;
             } else {
                 $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;

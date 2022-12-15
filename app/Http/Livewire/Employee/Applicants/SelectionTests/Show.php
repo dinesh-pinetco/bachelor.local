@@ -26,7 +26,7 @@ class Show extends Component
 
     public bool $isShow = true;
 
-    protected $listeners=['markAsPassed','markAsFailed','markAsReset'];
+    protected $listeners = ['markAsPassed', 'markAsFailed', 'markAsReset'];
 
     public function mount()
     {

@@ -762,6 +762,6 @@
     "Yes, reset test": "Ja, Reset-Test",
     "more": "mehr",
     ":label + :number more": ":label + :number mehr",
-    "is ready for enrollment": "Einschreibung für vormerken",
+    ":name is ready for enrollment": "Einschreibung für :name vormerken",
     "Partner companies": "Kooperationsunternehmen"
 }

@@ -7,7 +7,7 @@ use App\Models\Course;
 use App\Models\User;
 use Livewire\Component;
 
-class EnrollApplicant extends Component
+class Enrollment extends Component
 {
     use HasModal;
 
@@ -28,15 +28,15 @@ class EnrollApplicant extends Component
 
     public function render()
     {
-        return view('livewire.applicant.modal.enroll-applicant');
+        return view('livewire.applicant.modal.enrollment');
     }
 
     public function toggle(User $user)
     {
         $this->show = ! $this->show;
         $this->applicant = $user;
-        $this->date_of_birth=$this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
-        $this->desiredBeginning=$this->applicant?->desiredBeginning->course_start_date->format('F.Y');
+        $this->date_of_birth = $this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
+        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->format('F.Y');
     }
 
     public function enroll(User $user)

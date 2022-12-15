@@ -40,7 +40,7 @@
                             {{ __('Something here') }}
                     </x-primary-button>
                     <x-primary-button type="button"
-                                        wire:click="$emit('Applicant.Modal.EnrollApplicant.modal.toggle',{{ $applicant->id }})"
+                                        wire:click="$emit('Applicant.Modal.Enrollment.modal.toggle',{{ $applicant->id }})"
                                         :disabled="!$isEdit"
                                         class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                             {{ __('Enroll Applicant') }}
@@ -160,6 +160,5 @@
             </div>
         </div>
     </div>
-<livewire:applicant.modal.enroll-applicant/>
-
+        <livewire:applicant.modal.enrollment/>
 </div>
