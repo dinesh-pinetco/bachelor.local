@@ -41,6 +41,6 @@ class Enrollment extends Component
 
     public function enroll(User $user)
     {
-        dd('inside enroll');
+        dd('Waiting from client response');
     }
 }
