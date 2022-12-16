@@ -50,7 +50,8 @@ class Field extends Component
     }
 
     // Just for overwrite file attribute name :D
-    public function uploadErrored($name, $errorsInJson, $isMultiple) {
+    public function uploadErrored($name, $errorsInJson, $isMultiple)
+    {
         $name = $this->field->label;
         $this->emit('upload:errored', $name)->self();
 
@@ -59,10 +60,14 @@ class Field extends Component
             $translator = app()->make('translator');
 
             $attribute = $translator->get("validation.attributes.{$name}");
-            if ($attribute === "validation.attributes.{$name}") $attribute = $name;
+            if ($attribute === "validation.attributes.{$name}") {
+                $attribute = $name;
+            }
 
             $message = trans('validation.uploaded', ['attribute' => $attribute]);
-            if ($message === 'validation.uploaded') $message = "The {$name} failed to upload.";
+            if ($message === 'validation.uploaded') {
+                $message = "The {$name} failed to upload.";
+            }
 
             throw ValidationException::withMessages([$name => $message]);
         }
@@ -75,7 +80,6 @@ class Field extends Component
 
         throw (ValidationException::withMessages($errors));
     }
-
 
     protected function rules(): array
     {

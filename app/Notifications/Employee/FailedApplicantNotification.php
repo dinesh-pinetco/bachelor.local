@@ -41,7 +41,7 @@ class FailedApplicantNotification extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject(__(':name failed the test.',['name' => $this->user?->full_name]))
+            ->subject(__(':name failed the test.', ['name' => $this->user?->full_name]))
             ->markdown('emails.failed-applicant', [
                 'user' => $this->user,
                 'name' => $this->user->full_name,

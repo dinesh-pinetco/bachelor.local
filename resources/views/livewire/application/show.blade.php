@@ -130,14 +130,19 @@
             <div class="lg:flex mb-10 lg:-mx-4">
                 <div class="w-full lg:w-1/2 lg:px-4 lg:max-w-md mr-auto">
                     @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
-                    <div class="flex justify-start items-baseline mb-7">
-                        <div class="form-check">
-                            <input wire:model="competency_catch_up" @if ($isEdit) wire:change="handleCompetencyCatchUp" @else {{ "disabled" }} @endif class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none" type="checkbox">
-                            <label class="form-check-label inline-block text-gray-800" for="flexCheckChecked">
-                                {{ __('Competency catch up') }}
-                            </label>
+                        <div class="flex justify-start items-baseline mb-7">
+                            <div class="form-check">
+                                <input wire:model="competency_catch_up"
+                                       @if ($isEdit) wire:change="handleCompetencyCatchUp" @else
+                                           {{ "disabled" }}
+                                       @endif
+                                       class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none"
+                                       type="checkbox" id="competency_catch_up">
+                                <label class="form-check-label inline-block text-gray-800" for="competency_catch_up">
+                                    {{ __('Competency catch up') }}
+                                </label>
+                            </div>
                         </div>
-                    </div>
                         @if ($competency_catch_up)
                             <div>
                                 <x-jet-label for="label" class="block">
