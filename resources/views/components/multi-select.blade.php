@@ -28,7 +28,7 @@
 
 @endphp
 
-<div x-cloak
+<div x-cloak class="w-full"
      x-data="{
         open: false,
         toggle() {
