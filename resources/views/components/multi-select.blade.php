@@ -5,13 +5,14 @@
 'placeholder' => null,
 'value' => [],
 'wireModel' => $attributes->whereStartsWith('wire:model')->first(),
-'disabled'=> false
+'disabled'=> false,
+'maxHight'
 ])
 @php
     $maxHight = [
-            'h40' => 'max-h-40',
-            'h60' => 'max-h-60',
-        ][$maxHight ?? 'h60'];
+            'h-32' => 'max-h-32',
+            'h-60' => 'max-h-60',
+        ][$maxHight ?? 'h-60'];
 @endphp
 
 @php
