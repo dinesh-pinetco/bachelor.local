@@ -31,6 +31,7 @@
                     :value="old('course_ids',$course_ids)"
                     keyBy="id"
                     labelBy="name"
+                    maxHight="h40"
                 />
             </div>
 
