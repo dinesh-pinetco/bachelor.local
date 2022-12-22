@@ -119,6 +119,8 @@
 @stack('modals')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 @livewireScripts
 </body>
 </html>

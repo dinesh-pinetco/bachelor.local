@@ -59,3 +59,20 @@ $('.group-remove').on('click', function (event) {
         }, 'slow');
     }, 100);
 });
+
+
+
+
+tippy('[data-tippy-content]', {
+    theme: 'light',
+    maxWidth: 300,
+    allowHTML: true,
+    placement: 'top',
+    interactive: true,
+    duration: 800,
+    onMount(instance) {
+        let cont = instance.reference.dataset.tippyContent;
+        instance.setContent(cont);
+    },
+});
+

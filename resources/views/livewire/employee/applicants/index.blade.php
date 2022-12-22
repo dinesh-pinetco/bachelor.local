@@ -109,8 +109,12 @@
         <x-slot name="body">
             @forelse ($applicants as $applicant)
                 <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $applicant->first_name }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $applicant->last_name }}</td>
+                    <td class="px-6 py-4 text-sm text-primary">
+                        <div class="w-40 break-words">{{ $applicant->first_name }}</div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-primary">
+                        <div class="w-40 break-words">{{ $applicant->last_name }}</div>
+                    </td>
                     @if(in_array('email', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ $applicant->email }}</td>
                     @endif
@@ -124,19 +128,25 @@
 
                             @if($applicant->desiredBeginning->courses->count() > 1)
                                 <div class="cursor-pointer"
-                                    x-data="{ tooltip: false }"
-                                    x-on:click="tooltip =! tooltip">
+                                     x-data="{ tooltip: false }"
+                                     x-on:click="tooltip =! tooltip" x-cloak>
                                     @foreach ($applicant->desiredBeginning->courses->pluck('name') as $index => $course)
                                         <div class="">
-                                            <svg class="absolute right-0 top-4" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#003A79"><path d="M6 9l6 6 6-6" stroke="#003A79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                            <svg class="absolute right-0 top-4 transition-all ease-in-out duration-500"
+                                                 :class="tooltip ? 'transform rotate-180' : ''" width="24px"
+                                                 height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg" color="#003A79">
+                                                <path d="M6 9l6 6 6-6" stroke="#003A79" stroke-width="1.5"
+                                                      stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
                                             @if($index < 1)
-                                            {{ $course }}
+                                                {{ $course }}
                                         </div>
-                                            @else
-                                                <div x-show="tooltip">
-                                                    <span class="truncate">{{ $course }}</span>
-                                                </div>
-                                            @endif
+                                        @else
+                                            <div x-show="tooltip">
+                                                <span class="truncate">{{ $course }}</span>
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             @else
@@ -187,17 +197,14 @@
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                         @can('forcePass', $applicant)
                             <span data-cy="test-pass-button-{{ $applicant->id }}" role="button"
+                                  data-tippy-content="{{__('Pass Applicant')}}"
                                   class="text-darkgray hover:text-green-600 inline-block cursor-pointer"
                                   wire:click="$emit('Applicant.Modal.TestPass.modal.toggle',{{ $applicant->id }})">
-{{--                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current h-4 w-4" fill="none"--}}
-{{--                                     viewBox="0 0 24 24" stroke="currentColor">--}}
-{{--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
-{{--                                          d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>--}}
-{{--                                </svg>--}}
-                                <svg class="stroke-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
+                                <svg class="fill-current h-4 w-4" fill="currentcolor" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 384 512">
+                                    <path
+                                        d="M320 64H280h-9.6C263 27.5 230.7 0 192 0s-71 27.5-78.4 64H104 64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64zM80 112v24c0 13.3 10.7 24 24 24h88 88c13.3 0 24-10.7 24-24V112h16c8.8 0 16 7.2 16 16V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V128c0-8.8 7.2-16 16-16H80zm88-32a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM289 267.6c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-89.7 89.7L129 287c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l53.3 53.3c4.5 4.5 10.6 7 17 7s12.5-2.5 17-7L289 267.6z"/>
                                 </svg>
-
                             </span>
                         @endcan
                         <a data-cy="edit-button-{{ $applicant->id }}" role="button"
@@ -210,12 +217,12 @@
                             </svg>
                         </a>
                         <span data-cy="delete-button-{{ $applicant->id }}" role="button"
-                            class="text-darkgray hover:text-lightred inline-block cursor-pointer"
-                            wire:click="openConfirmModal({{ $applicant->id }}, 'delete')">
+                              class="text-darkgray hover:text-lightred inline-block cursor-pointer"
+                              wire:click="openConfirmModal({{ $applicant->id }}, 'delete')">
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current h-4 w-4" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                             </svg>
                         </span>
                     </td>

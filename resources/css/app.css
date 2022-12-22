@@ -96,11 +96,22 @@ li > label, .multiple-dropdown-box > label {
     @apply text-primary font-semibold;
 }
 
-/*.custom-select {*/
-/*    color: #003A79;*/
-/*}*/
+/*tooltip*/
 
-/*.custom-select.placeholder {*/
-/*    color: #C6C7C8;*/
-/*}*/
+.tippy-content {
+    @apply p-0;
+}
 
+.tippy-box[data-theme~='light'] {
+    @apply bg-primary text-sm text-white font-normal p-2;
+}
+
+.tippy-arrow {
+    @apply text-primary;
+}
+
+.tippy-box > .tooltip-inner {
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-all;
+}
