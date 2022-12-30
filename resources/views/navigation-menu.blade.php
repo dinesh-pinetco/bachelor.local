@@ -280,6 +280,7 @@
                     @role(ROLE_APPLICANT)
                     @if (!in_array(auth()->user()->application_status, [\App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_NAK, \App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT]))
                         <x-danger-button class="mx-4 mt-4"
+                                         data-tippy-content="{{__('Cancle / Reject Applicantion')}}"
                                          onclick="Livewire.emit('ApplicationReject.modal.toggle', {{ auth()->user() }})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -288,7 +289,7 @@
                                 <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
                             </svg>
                             <span class="ml-4">
-                                {{ __('cancel') }}
+                                {{ __('cancel / reject') }}
                             </span>
                         </x-danger-button>
                         <livewire:application-reject/>

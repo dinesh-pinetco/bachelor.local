@@ -764,5 +764,7 @@
     ":label + :number more": ":label + :number mehr",
     ":name is ready for enrollment": "Einschreibung für :name vormerken",
     "Partner companies": "Kooperationsunternehmen",
-    ":name failed the test.": ":name hat die Auswahltests nicht bestanden."
+    ":name failed the test.": ":name hat die Auswahltests nicht bestanden.",
+    "Cancle / Reject Applicantion": "Antrag stornieren / ablehnen",
+    "cancel / reject": "stornieren / ablehnen"
 }
