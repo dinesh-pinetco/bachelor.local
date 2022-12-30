@@ -46,18 +46,18 @@
             </div>
 
             <div wire:ignore>
+                <x-jet-label class="text-white font-bold required" for="email" value="{{ __('E-mail address') }}">
+                </x-jet-label>
+                <x-jet-input id="email" class="block w-full" type="email" name="email" :value="old('email')"
+                             placeholder="{{ __('Enter email address') }}" required></x-jet-input>
+            </div>
+
+            <div wire:ignore>
                 <x-jet-label class="text-white font-bold required" for="password"
                              value="{{ __('Last name') }}"></x-jet-label>
                 <x-jet-input id="last_name" class="block w-full" type="text" name="last_name"
                              :value="old('last_name')"
                              placeholder="{{ __('Enter last name') }}"></x-jet-input>
-            </div>
-
-            <div wire:ignore>
-                <x-jet-label class="text-white font-bold required" for="email" value="{{ __('E-mail address') }}">
-                </x-jet-label>
-                <x-jet-input id="email" class="block w-full" type="email" name="email" :value="old('email')"
-                             placeholder="{{ __('Enter email address') }}" required></x-jet-input>
             </div>
 
             <div wire:ignore>
