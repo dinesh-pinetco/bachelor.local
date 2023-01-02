@@ -3,18 +3,20 @@
         class="py-8 pt-4 bg-white" {{-- x-data="window.__controller.dataTableMainController()" x-init="setCallback();" --}}>
 
         <div
-            class="grid @if((isset($this->courseOptions)) || (isset($this->desiredBeginnings)) || @isset($this->applicantsTableFields) || $tableAction )  md:grid-cols-2 xl:grid-cols-4 @else md:grid-cols-2 xl:grid-cols-3 @endif gap-4 mb-4">
-            <div
-                class="flex items-center space-x-2 form-inline w-full order-3 xl:order-1">
-                <x-jet-label class="flex-shrink-0 -mb-0.5" value="{{ __('Per Page') }} :"></x-jet-label>
-                <x-livewire-select data-cy="per-page" model="perPage" class="form-control">
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="25">25</option>
-                </x-livewire-select>
+            class="flex flex-wrap justify-end md:-mx-1 xl:-mx-2 -my-1">
+            <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-3 xl:order-1">
+                <div
+                    class="flex items-center space-x-2 form-inline">
+                    <x-jet-label class="flex-shrink-0 -mb-0.5" value="{{ __('Per Page') }} :"></x-jet-label>
+                    <x-livewire-select data-cy="per-page" model="perPage" class="form-control">
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="25">25</option>
+                    </x-livewire-select>
+                </div>
             </div>
             @if ($columns)
-                <div class="w-full order-4 xl:order-2">
+                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-4 xl:order-2">
                     <x-livewire-select data-cy="datatable-column" class="" id="column" name="column"
                                        model="column">
                         <option value="">{{ __('Please select') }}</option>
@@ -32,7 +34,7 @@
                 </div>
             @endif
             @if(isset($this->desiredBeginnings))
-                <div class="w-full order-4 xl:order-2">
+                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-4 xl:order-2">
                     <x-livewire-select data-cy="datatable-column" class="" id="column" name="column"
                                        model="desiredBeginning">
                         <option value="">{{ __('Select desired beginning') }}</option>
@@ -44,7 +46,7 @@
                 </div>
             @endif
             @if(isset($this->courseOptions))
-                <div class="w-full order-4 xl:order-2">
+                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-4 xl:order-2">
                     <x-multi-select
                         key="courses"
                         wire:model="courses"
@@ -57,7 +59,7 @@
                 </div>
             @endif
             @isset($this->statuses)
-                <div class="w-full order-2 xl:order-3">
+                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
                     <x-multi-select
                         key="statusMultiSelect"
                         wire:model="selectedStatuses"
@@ -70,7 +72,7 @@
                 </div>
             @endisset
             @isset($this->applicantsTableFields)
-                <div class="w-full order-2 xl:order-3">
+                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
                     <x-multi-select
                         key="fieldMultiSelect"
                         wire:model="authPreferencesFields"
@@ -83,16 +85,17 @@
             @endisset
 
             <div
-                class="w-full order-5 xl:order-4 {{ Route::is('employee') || Route::is('employee.applicants*') ? 'xl:mt-0' : 'lg:mt-0' }}">
+                class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-5 xl:order-4 {{ Route::is('employee') || Route::is('employee.applicants*') ? 'xl:mt-0' : 'lg:mt-0' }}">
                 <x-jet-input data-cy="table-search" wire:model="search" class="w-full form-control" type="text"
                              placeholder="{{ __('Search') }}..."></x-jet-input>
             </div>
-            <div data-cy="table-action" class="w-full flex flex-shrink-0 justify-start order-last !mb-0">
+
+            <div data-cy="table-action" class="w-auto px-2 py-1 flex flex-shrink-0 justify-start order-last !mb-0">
                 {{ $tableAction }}
             </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto mt-4">
             <div class="table-responsive">
                 <table class="min-w-full divide-y divide-cool" id="dataTable">
                     <thead>
