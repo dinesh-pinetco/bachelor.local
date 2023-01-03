@@ -5,7 +5,7 @@
         </x-slot>
         <div>
             <div class="space-y-3">
-                <p class="text-center text-red flex justify-center">
+                <p class="text-center text-primary flex justify-center">
                     <svg class="h-12 w-12 stroke-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 512 512">
                         <path
