@@ -68,11 +68,4 @@ trait UserRelations
     {
         return $this->hasOne(UserConfiguration::class);
     }
-
-    public function scopeCoursesIn($query, $courseIds = [])
-    {
-        return $query->whereHas('courses', function ($query) use ($courseIds) {
-            $query->whereIn('course_id', $courseIds);
-        });
-    }
 }

@@ -101,6 +101,13 @@ class User extends Authenticatable implements ContractsAuditable
         }
     }
 
+    public function scopeCoursesIn($query, $courseIds = [])
+    {
+        return $query->whereHas('courses', function ($query) use ($courseIds) {
+            $query->whereIn('course_id', $courseIds);
+        });
+    }
+
     public function getValueByField($fieldKey)
     {
         if ($fieldKey) {
