@@ -1,7 +1,7 @@
 <div>
     <x-custom-modal wire:model="show">
         <x-slot name="title">
-            {{ __('Pass Applicant') }}
+            {{ __('Applicant:') }} {{ $applicant?->full_name }}
         </x-slot>
         <div>
             <div class="space-y-3">
@@ -13,22 +13,21 @@
                     </svg>
                 </p>
                 <h4 class="text-center text-darkgray text-sm sm:text-base">
-                    {{ __('Are you sure you want to pass applicant?') }}
+                    {{ __('You can pass or fail selected applicant') }}
                 </h4>
             </div>
         </div>
         <x-jet-input-error for="client" class="mt-1"/>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-danger-button data-cy="delete-button"
-                                 wire:click="markAsPass"
-                                 wire:loading.class='opacity-80 cursor-wait'>
+                <x-primary-button wire:click="markAsPass"
+                                  wire:loading.class='opacity-80 cursor-wait'>
                     {{ __('Yes, Pass applicant') }}
+                </x-primary-button>
+                <x-danger-button wire:click="markAsFail"
+                                 class="px-4 py-2">
+                    {{ __('No, Fail applicant') }}
                 </x-danger-button>
-                <x-secondary-button data-cy="cancel-button"
-                                    wire:click="$set('show', false)">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
             </div>
         </x-slot>
     </x-custom-modal>

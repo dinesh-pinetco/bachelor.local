@@ -3,20 +3,24 @@
         <div class="flex flex-wrap justify-end md:justify-between gap-4">
             <div class="">
                 <x-jet-input type="month" name="date" class="flex-grow" id="date" wire:model="date"
-                             min="{{ \Carbon\Carbon::create(BEGINNING_YEAR, BEGINNING_MONTH, null)->format('Y-m') }}" max="{{ now()->format('Y-m') }}"></x-jet-input>
+                             min="{{ \Carbon\Carbon::create(BEGINNING_YEAR, BEGINNING_MONTH, null)->format('Y-m') }}"
+                             max="{{ now()->format('Y-m') }}"></x-jet-input>
             </div>
 
             <div class="w-1/2 md:w-auto">
-                <x-livewire-select
-                    name="desired_beginning"
-                    class="flex-grow"
-                    id="desiredBeginning"
-                    model="desiredBeginning">
-                    <option value="" selected>{{ __('Semester Day') }}</option>
-                    @foreach($desiredBeginnings as $key => $selectDesiredBeginning)
-                        <option value="{{ $key }}">{{ $selectDesiredBeginning->name }} {{ $selectDesiredBeginning->date->format('Y') }}</option>
-                    @endforeach
-                </x-livewire-select>
+                <div class="w-full order-4 xl:order-2">
+                    <x-livewire-select
+                        name="desired_beginning"
+                        class="flex-grow"
+                        id="desiredBeginning"
+                        model="desiredBeginning">
+                        <option value="">{{ __('Semester Day') }}</option>
+                        @foreach ($desiredBeginnings as $selectDesiredBeginning)
+                            <option
+                                value="{{ data_get($selectDesiredBeginning,'key') }}">{{ data_get($selectDesiredBeginning,'title') }}</option>
+                        @endforeach
+                    </x-livewire-select>
+                </div>
             </div>
 
             {{-- <div class="">
@@ -63,8 +67,9 @@
             </div>
 
             <div>
-                <x-link-button href="{{ route('employee.applicants.index', ['filteredBy' => 'submitted']) }}">
-                    {{__('Check Document')}}
+                <x-link-button
+                    href="{{ route('employee.applicants.index', ['filteredBy' => \App\Enums\ApplicationStatus::TEST_FAILED()]) }}">
+                    {{__('Check failed tests')}}
                 </x-link-button>
             </div>
         </div>

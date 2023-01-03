@@ -37,5 +37,22 @@ class TestPass extends Component
         $this->applicant->saveApplicationStatus();
         $this->emitUp('refresh');
         $this->close();
+        $this->toastNotify(__('Applicant has been passed successfully.'));
+    }
+
+    public function markAsFail()
+    {
+        // Mark as pass on failed tests
+        Result::myResults($this->applicant)
+            ->update([
+                'is_passed' => false,
+                'failed_by_nak' => true,
+                'status' => Result::STATUS_FAILED,
+            ]);
+
+        $this->applicant->saveApplicationStatus();
+        $this->emitUp('refresh');
+        $this->close();
+        $this->toastNotify(__('Applicant has been failed successfully.'));
     }
 }

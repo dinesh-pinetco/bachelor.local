@@ -19,8 +19,6 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
 {
     public Carbon $date;
 
-    public $desiredBeginningId;
-
     public $desiredBeginningDate;
 
     public ExportStatistics $statistics;
@@ -29,10 +27,9 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
 
     public array $data = [];
 
-    public function __construct($date, $desiredBeginningId, $desiredBeginningDate)
+    public function __construct($date, $desiredBeginningDate)
     {
         $this->date = Carbon::parse("$date-01");
-        $this->desiredBeginningId = $desiredBeginningId;
         $this->desiredBeginningDate = $desiredBeginningDate;
         $this->statistics = (new ExportStatistics($this->desiredBeginningDate));
     }
@@ -77,8 +74,7 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
 
     public function setMiddleRows()
     {
-        $courses = Course::whereRelation('desired_beginnings', 'id', $this->desiredBeginningId)
-            ->where('first_start', '<=', $this->desiredBeginningDate)
+        $courses = Course::where('first_start', '<=', $this->desiredBeginningDate)
             ->where(function ($query) {
                 $query->whereNull('last_start')->orWhere('last_start', '>=', $this->desiredBeginningDate);
             })
@@ -89,25 +85,12 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
             $this->data[] = [
                 $course->name,
                 $this->getValue('totalApplicants', $course->id),
-                $this->getValue('checkedCompetencyCatchUp', $course->id),
                 $this->getValue('rejectedApplicants', $course->id),
 
                 $this->getValue('incompleteApplications', $course->id),
                 $this->getValue('submittedApplications', $course->id),
-                $this->getValue('rejectedApplicationsBeforeSubmittedStage', $course->id),
-                $this->getValue('approvedApplications', $course->id),
-                $this->getValue('rejectedApplicationsBeforeApprovedStage', $course->id),
 
                 $this->getValue('testCompleted', $course->id),
-                $this->getValue('rejectedApplicationsBeforeTestStage', $course->id),
-
-                $this->getValue('completedInterviews', $course->id),
-                $this->getValue('rejectedApplicationsBeforeInterviewStage', $course->id),
-
-                $this->getValue('contractSent', $course->id),
-                $this->getValue('rejectedApplicationsBeforeContractSent', $course->id),
-                $this->getValue('contractReturn', $course->id),
-                $this->getValue('rejectedApplicationsBeforeContractReturn', $course->id),
 
                 $this->getValue('applicationEnroll', $course->id),
             ];
