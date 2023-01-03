@@ -20,7 +20,7 @@
         <x-jet-input-error for="client" class="mt-1"/>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-primary-button wire:click="markAsPass"
+                <x-primary-button wire:click="markAsPass" class="-mt-0"
                                   wire:loading.class='opacity-80 cursor-wait'>
                     {{ __('Yes, Pass applicant') }}
                 </x-primary-button>

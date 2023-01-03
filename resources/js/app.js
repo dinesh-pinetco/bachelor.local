@@ -61,8 +61,6 @@ $('.group-remove').on('click', function (event) {
 });
 
 
-
-
 tippy('[data-tippy-content]', {
     theme: 'light',
     maxWidth: 300,
@@ -70,9 +68,5 @@ tippy('[data-tippy-content]', {
     placement: 'top',
     interactive: true,
     duration: 800,
-    onMount(instance) {
-        let cont = instance.reference.dataset.tippyContent;
-        instance.setContent(cont);
-    },
 });
 
