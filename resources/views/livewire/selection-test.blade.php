@@ -18,21 +18,18 @@
         @foreach ($tests as $test)
             <div class="flex items-center flex-wrap -mx-4">
                 <div class="p-4 w-full md:w-2/5 xl:w-1/3">
-                    <div class="rounded-full">
-                        @if ($test->type == \App\Models\Test::TYPE_MOODLE)
-                            <img src="{{ __('images/icon/flag-usa-light.svg') }}"
-                                 class="object-contain object-center w-20 h-20 md:w-40 md:h-40"
-                                 alt="user">
-                        @elseif($test->type == \App\Models\Test::TYPE_CUBIA)
-                            <img src="{{ __('images/icon/lightbulb-exclamation-on-light.svg') }}"
-                                 class="object-contain object-center w-20 h-20 md:w-40 md:h-40"
-                                 alt="user">
-                        @elseif($test->type == \App\Models\Test::TYPE_METEOR)
-                            <img src="{{ __('images/icon/pen-to-square-light.svg') }}"
-                                 class="object-contain object-center w-20 h-20 md:w-40 md:h-40"
-                                 alt="user">
-                        @endif
-                    </div>
+                    <svg class="h-16 w-16 md:h-20 md:w-20 md:mx-auto stroke-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20 12V5.74853C20 5.5894 19.9368 5.43679 19.8243 5.32426L16.6757 2.17574C16.5632 2.06321 16.4106 2 16.2515 2H4.6C4.26863 2 4 2.26863 4 2.6V21.4C4 21.7314 4.26863 22 4.6 22H11"
+                            stroke="#003A79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 10H16M8 6H12M8 14H11" stroke="#003A79" stroke-width="1.5" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path
+                            d="M17.9543 16.9394L18.9543 15.9394C19.3922 15.5015 20.1022 15.5015 20.5401 15.9394V15.9394C20.978 16.3773 20.978 17.0873 20.5401 17.5252L19.5401 18.5252M17.9543 16.9394L14.9632 19.9305C14.8133 20.0804 14.715 20.2741 14.6823 20.4835L14.4396 22.0399L15.9959 21.7973C16.2054 21.7646 16.3991 21.6662 16.549 21.5163L19.5401 18.5252M17.9543 16.9394L19.5401 18.5252"
+                            stroke="#003A79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 2V5.4C16 5.73137 16.2686 6 16.6 6H20" stroke="#003A79" stroke-width="1.5"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
                 <div class="p-4 w-full md:w-3/5 xl:w-2/3">
                     <div class="text-primary w-full md:max-w-xl">
