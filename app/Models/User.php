@@ -167,6 +167,7 @@ class User extends Authenticatable implements ContractsAuditable
                 return;
             } else {
                 $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
+                // In Progress for send email when applicant get faield in any test
                 $user = User::first();
                 $user->notify(new FailedApplicantNotification($this));
                 $this->save();
