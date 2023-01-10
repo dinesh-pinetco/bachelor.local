@@ -18,7 +18,7 @@ class Manage extends Component
     protected array $rules = [
         'user.first_name' => ['required', 'max:100'],
         'user.last_name' => ['required', 'max:100'],
-        'user.email' => ['required', 'unique:users,email','email::rfc,dns,spoof'],
+        'user.email' => ['required', 'unique:users,email','email:rfc,dns,spoof'],
         'user.phone' => ['nullable', 'phone:DE', 'min:9', 'max:15'],
     ];
 
