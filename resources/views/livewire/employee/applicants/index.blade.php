@@ -125,12 +125,11 @@
                     @endif
                     @if(in_array('course_name', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary relative">
-
-                            @if($applicant->desiredBeginning->courses->count() > 1)
+                            @if($applicant->desiredBeginning?->courses?->count() > 1)
                                 <div class="cursor-pointer"
                                      x-data="{ tooltip: false }"
                                      x-on:click="tooltip =! tooltip" x-cloak>
-                                    @foreach ($applicant->desiredBeginning->courses->pluck('name') as $index => $course)
+                                    @foreach ($applicant->desiredBeginning?->courses?->pluck('name') as $index => $course)
                                         <div class="">
                                             <svg class="absolute right-0 top-4 transition-all ease-in-out duration-500"
                                                  :class="tooltip ? 'transform rotate-180' : ''" width="24px"
@@ -151,13 +150,13 @@
                                 </div>
                             @else
                                 <span class="cursor-auto">
-                                    {{ $applicant->desiredBeginning->courses->first()->name }}
+                                    {{ $applicant->courses?->first()?->name }}
                                 </span>
                             @endif
                         </td>
                     @endif
                     @if(in_array('course_start_date', $authPreferencesFields))
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->desiredBeginning->course_start_date->format('d.m.Y')) }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->desiredBeginning?->course_start_date?->format('d.m.Y')) }}</td>
                     @endif
                     @if(in_array('application_status_name', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">{{ __($applicant->application_status->value) }}</td>

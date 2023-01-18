@@ -64,4 +64,9 @@ return [
             'crm.schemas.contacts.write',
         ],
     ],
+    'nordakademie' => [
+        'baseUrl' => env('NORDAKADEMIE_API_BASE_URL'),
+        'key' => env('NORDAKADEMIE_API_KEY'),
+        'items_per_page' => env('NORDAKADEMIE_ITEMS_PER_PAGE', 10),
+    ],
 ];
