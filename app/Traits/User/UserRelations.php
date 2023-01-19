@@ -2,6 +2,7 @@
 
 namespace App\Traits\User;
 
+use App\Models\ApplicantCompany;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Models\Meteor;
@@ -67,5 +68,10 @@ trait UserRelations
     public function configuration(): HasOne
     {
         return $this->hasOne(UserConfiguration::class);
+    }
+
+    public function companies()
+    {
+        return $this->hasMany(ApplicantCompany::class);
     }
 }

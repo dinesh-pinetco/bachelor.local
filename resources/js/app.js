@@ -15,7 +15,6 @@ require('jquery-nice-select');
     jQuery('select').niceSelect();
 });*/
 
-
 // alpine
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse'

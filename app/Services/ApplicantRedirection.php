@@ -74,4 +74,14 @@ class ApplicantRedirection
     {
         return to_route('companies.index');
     }
+
+    private function applied_to_selected_company()
+    {
+        return to_route('companies.index');
+    }
+
+    private function show_application_on_marketplace()
+    {
+        return to_route('companies.index');
+    }
 }

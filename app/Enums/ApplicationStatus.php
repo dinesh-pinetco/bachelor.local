@@ -29,6 +29,9 @@ enum ApplicationStatus: string
     #[ApplicationStatusOrder(11)] case APPROVED_BY_COMPANY_FOR_ENROLMENT = 'approved_by_company_for_enrolment';
     #[ApplicationStatusOrder(12)] case APPLICATION_REJECTED_BY_APPLICANT = 'application_rejected_by_applicant';
     #[ApplicationStatusOrder(13)] case APPLICATION_REJECTED_BY_NAK = 'application_rejected_by_nak';
+    #[ApplicationStatusOrder(14)] case APPLYING_TO_SELECTED_COMPANY = 'applying_to_selected_company';
+    #[ApplicationStatusOrder(15)] case SHOW_APPLICATION_ON_MARKETPLACE = 'show_application_on_marketplace';
+    #[ApplicationStatusOrder(16)] case APPLIED_TO_SELECTED_COMPANY = 'applied_to_selected_company';
 
     /** Get an associative array of [case name => case value]. */
     public static function selectionOptions(): array
