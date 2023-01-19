@@ -75,6 +75,11 @@ class ApplicantRedirection
         return to_route('companies.index');
     }
 
+    private function applying_to_selected_company()
+    {
+        return to_route('companies.index');
+    }
+
     private function applied_to_selected_company()
     {
         return to_route('companies.index');

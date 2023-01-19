@@ -13,7 +13,7 @@ class ApplicantCompany extends Model
         'user_id',
         'company_id',
         'company_name',
-        'mail_content'
+        'mail_content',
     ];
 
     public function applicant()

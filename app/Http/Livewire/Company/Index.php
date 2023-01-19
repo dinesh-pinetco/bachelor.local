@@ -12,6 +12,7 @@ use Livewire\Component;
 class Index extends Component
 {
     public $companies = [];
+
     public $selectedCompanies = [];
 
     public $mailContent = null;
@@ -19,11 +20,11 @@ class Index extends Component
     public User $user;
 
     protected $rules = [
-        'mailContent' => ['required', 'min:4']
+        'mailContent' => ['required', 'min:4'],
     ];
 
     protected $listeners = [
-        'refresh' => '$refresh'
+        'refresh' => '$refresh',
     ];
 
     public function mount()
@@ -38,7 +39,7 @@ class Index extends Component
     public function selectCompany()
     {
         $this->user->update([
-            'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY()
+            'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
         ]);
 
         $this->fetchCompanies();
@@ -47,7 +48,7 @@ class Index extends Component
     public function showProfileMarketplace()
     {
         $this->user->update([
-            'application_status' => ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE()
+            'application_status' => ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE(),
         ]);
     }
 
@@ -60,13 +61,13 @@ class Index extends Component
     {
         $this->validate();
 
-        if (!count($this->selectedCompanies)) {
-            $this->toastNotify(__('Please select at-least one company') , __('Warning'), TOAST_WARNING);
+        if (! count($this->selectedCompanies)) {
+            $this->toastNotify(__('Please select at-least one company'), __('Warning'), TOAST_WARNING);
         } else {
             foreach ($this->companies as $company) {
                 $this->user->companies()->updateOrCreate([
                     'user_id' => $this->user->id,
-                    'company_id' => $company['id']
+                    'company_id' => $company['id'],
                 ], [
                     'company_name' => $company['name'],
                     'mail_content' => $this->mailContent,
@@ -79,14 +80,14 @@ class Index extends Component
             }
 
             $this->user->update([
-                'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY()
+                'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
             ]);
 
             $this->reset(['selectedCompanies', 'mailContent']);
 
             $this->dispatchBrowserEvent('reset-mail-content');
 
-            $this->toastNotify(__('Successfully applied to selected company.') , __('Success'), TOAST_SUCCESS);
+            $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
             $this->emitSelf('refresh');
         }
