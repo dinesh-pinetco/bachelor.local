@@ -4,7 +4,7 @@
             {{ __(':name is ready for enrollment',['name' => $applicant?->full_name]) }}
         </x-slot>
         <x-slot name="slot">
-            <div class="overflow-hidden bg-white sm:rounded-lg">
+            <div class="bg-white sm:rounded-lg">
                 <div class="px-4 py-5 sm:p-0">
                     <dl class="sm:divide-y sm:divide-lightgray">
 
@@ -51,22 +51,40 @@
 
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
                             <dt class="text-sm font-medium text-gray-500">{{ __('Partner companies') }} <br>
-                                <x-primary-button>
-                                    Click here
+                                <x-primary-button wire:click="syncCompanies" wire:loading.remove wire:target='syncCompanies'>
+                                    {{ __('Sync Companies') }}
+                                </x-primary-button>
+                                <x-primary-button disabled wire:loading wire:target='syncCompanies'>
+                                    {{ __('Syncing...') }}
                                 </x-primary-button>
                             </dt>
                             <dd class="col-span-2">
                                 <select
                                     class="h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
-                                    name="company" id="company">
-                                    <option value="select">select</option>
+                                    wire:model="selectedCompany" id="selectedCompany">
+                                    <option value="">{{ __('Select Partner Company') }}</option>
+                                    @foreach ($companies as $company)
+                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    @endforeach
                                 </select>
+                                <x-jet-input-error for="selectedCompany"/>
                             </dd>
                         </div>
 
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
-                            <dt class="text-sm font-medium text-gray-500">Person name from company</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Name goes here!</dd>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Contact Person from Company') }}</dt>
+                            @if ($selectedCompany)
+                                <x-multi-select
+                                    wire:model='selectedCompanyContacts'
+                                    :options="$companyContacts"
+                                    keyBy="id"
+                                    labelBy="fullName"
+                                    :value='$selectedCompanyContacts'
+                                 />
+                            @else
+                                <dt class="text-sm font-medium text-gray-500">{{ __('Please select partner company') }}</dt>
+                            @endif
+                            <x-jet-input-error for="selectedCompanyContacts"/>
                         </div>
                     </dl>
                 </div>

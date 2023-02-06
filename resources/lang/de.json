@@ -766,5 +766,14 @@
     "Partner companies": "Kooperationsunternehmen",
     ":name failed the test.": ":name hat die Auswahltests nicht bestanden.",
     "Cancle / Reject Applicantion": "Antrag stornieren / ablehnen",
-    "cancel / reject": "stornieren / ablehnen"
+    "cancel / reject": "stornieren / ablehnen",
+    "Sync Companies": "Sync-Firmen",
+    "Syncing...": "Synchronisieren...",
+    "Select Partner Company": "Partnerunternehmen auswählen",
+    "Contact Person from Company": "Kontaktperson des Unternehmens",
+    "Please select partner company": "Bitte wählen Sie ein Partnerunternehmen",
+    "Partner company": "Partnerunternehmen",
+    "Select partner company": "Partnerunternehmen auswählen",
+    "Partner company contacts": "Ansprechpartner des Partnerunternehmens",
+    "Select company contacts": "Firmenkontakte auswählen"
 }

@@ -762,5 +762,14 @@
     "Partner companies": "Partner companies",
     ":name failed the test.": ":name failed the test.",
     "Cancle / Reject Applicantion": "Cancle / Reject Applicantion",
-    "cancel / reject": "cancel / reject"
+    "cancel / reject": "cancel / reject",
+    "Sync Companies": "Sync Companies",
+    "Syncing...": "Syncing...",
+    "Select Partner Company": "Select Partner Company",
+    "Contact Person from Company": "Contact Person from Company",
+    "Please select partner company": "Please select partner company",
+    "Partner company": "Partner company",
+    "Select partner company": "Select partner company",
+    "Partner company contacts": "Partner company contacts",
+    "Select company contacts": "Select company contacts"
 }

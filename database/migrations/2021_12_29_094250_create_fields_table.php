@@ -15,7 +15,7 @@ class CreateFieldsTable extends Migration
     {
         Schema::create('fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tab_id');
+            $table->foreignId('tab_id')->nullable();
             $table->foreignId('group_id')->nullable();
             $table->string('type');
             $table->string('related_option_table')->nullable()->comment('Table name to fetch options for this field');

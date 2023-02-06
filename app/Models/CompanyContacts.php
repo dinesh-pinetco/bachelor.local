@@ -20,4 +20,9 @@ class CompanyContacts extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
 }
