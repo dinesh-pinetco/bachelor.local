@@ -61,7 +61,7 @@ return [
         'action' => 'Zu den Details des Bewerbers',
     ],
 
-    'contract-received' => [
+    'applicant-enrolled' => [
         'subject' => 'Vertrag erhalten',
         'body' => '<br> Ihr Vertrag wurde erfolgreich empfangen.',
         'paragraph1' => '<br> Ihr unterschriebener Vertrag ist heute bei uns eingegangen.',

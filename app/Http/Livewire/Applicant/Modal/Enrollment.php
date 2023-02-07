@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Applicant\Modal;
 
 use App\Http\Livewire\Traits\HasModal;
+use App\Mail\ApplicantEnrolled;
 use App\Models\Company;
 use App\Models\CompanyContacts;
 use App\Models\Course;
@@ -10,6 +11,7 @@ use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\User;
 use App\Services\Companies\Companies;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Enrollment extends Component
@@ -100,19 +102,23 @@ class Enrollment extends Component
     {
         $this->validate();
 
-        FieldValue::updateOrCreate([
+        $company = FieldValue::updateOrCreate([
             'user_id'  => $this->applicant->id,
             'field_id' => $this->partnerCompanyFieldId
         ],[
             'value' => $this->selectedCompany
         ]);
 
-        FieldValue::updateOrCreate([
+        $companyContacts = FieldValue::updateOrCreate([
             'user_id'  => $this->applicant->id,
             'field_id' => $this->partnerCompanyContactFieldId
         ],[
             'value' => json_encode($this->selectedCompanyContacts)
         ]);
+
+        if ($company->wasRecentlyCreated && $companyContacts->wasRecentlyCreated) {
+            Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ApplicantEnrolled($this->applicant));
+        }
 
         $this->close();
     }

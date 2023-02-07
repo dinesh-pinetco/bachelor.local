@@ -5,10 +5,12 @@ namespace App\Traits\User;
 use App\Models\ApplicantCompany;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
+use App\Models\GovernmentForm;
 use App\Models\Meteor;
 use App\Models\ModelHasCourse;
 use App\Models\Moodle;
 use App\Models\Result;
+use App\Models\StudySheet;
 use App\Models\UserConfiguration;
 use App\Models\UserHubspotConfiguration;
 use App\Models\UserPreference;
@@ -73,5 +75,15 @@ trait UserRelations
     public function companies()
     {
         return $this->hasMany(ApplicantCompany::class);
+    }
+
+    public function study_sheet(): HasOne
+    {
+        return $this->hasOne(StudySheet::class);
+    }
+
+    public function government_form(): HasOne
+    {
+        return $this->hasOne(GovernmentForm::class);
     }
 }

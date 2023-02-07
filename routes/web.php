@@ -11,6 +11,7 @@ use App\Http\Controllers\GovernmentFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SelectionTestController;
+use App\Http\Controllers\StudySheetController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestResultVerifyController;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +41,7 @@ Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.RO
 });
 
 Route::middleware(['signed'])->group(function () {
-//    Route::get('/study-sheet/{user}', StudySheetController::class)->name('study-sheet');
+    Route::get('/study-sheet/{user}', StudySheetController::class)->name('study-sheet');
     Route::get('/government-form/{user}', GovernmentFormController::class)->name('government-form');
 });
 

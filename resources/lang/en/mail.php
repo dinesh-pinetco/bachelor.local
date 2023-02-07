@@ -60,7 +60,7 @@ return [
         'paragraph1' => '<br> Now you can review them and approve them for the test.',
         'action' => 'Go to Applicant detail',
     ],
-    'contract-received' => [
+    'applicant-enrolled' => [
         'subject' => 'Contract received',
         'body' => '<br> Your contract received successfully.',
         'paragraph1' => '<br> We received your signed contract today.',
