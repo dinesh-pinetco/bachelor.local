@@ -92,19 +92,18 @@ abstract class ErpService
 
         foreach ($companies as $company) {
             $companyObject = Company::updateOrCreate([
-                'company_id' => $company['id']
-            ],[
-                'name' => $company['name']
+                'company_id' => $company['id'],
+            ], [
+                'name' => $company['name'],
             ]);
 
             foreach ($company['kontakte'] as $companyContact) {
-
                 CompanyContacts::updateOrCreate([
-                'company_id' => $companyObject->id,
-                'contact_id' => $companyContact['personId'],
-                ],[
-                'first_name' => $companyContact['vorname'],
-                'last_name' => $companyContact['nachname']
+                    'company_id' => $companyObject->id,
+                    'contact_id' => $companyContact['personId'],
+                ], [
+                    'first_name' => $companyContact['vorname'],
+                    'last_name' => $companyContact['nachname'],
                 ]);
             }
         }

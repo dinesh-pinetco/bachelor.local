@@ -33,8 +33,8 @@ class ApplicantEnrolled extends Mailable
         return $this->subject(__('Your contract has arrived').' | '.$this->applicant->courses->first()->name.' | NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.applicant-enrolled', [
-                'name'              => $this->applicant->full_name,
-                'studySheetUrl'     => URL::signedRoute('study-sheet', ['user' => $this->applicant->id]),
+                'name' => $this->applicant->full_name,
+                'studySheetUrl' => URL::signedRoute('study-sheet', ['user' => $this->applicant->id]),
                 'governmentFormUrl' => URL::signedRoute('government-form', ['user' => $this->applicant->id]),
             ]);
     }

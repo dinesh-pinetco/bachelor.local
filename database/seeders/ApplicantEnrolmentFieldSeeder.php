@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Field;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ApplicantEnrolmentFieldSeeder extends Seeder
@@ -21,7 +20,7 @@ class ApplicantEnrolmentFieldSeeder extends Seeder
             'label' => __('Partner company'),
             'key' => 'id',
             'placeholder' => __('Select partner company'),
-            'is_required' => true
+            'is_required' => true,
         ]);
 
         Field::create([
@@ -30,7 +29,7 @@ class ApplicantEnrolmentFieldSeeder extends Seeder
             'label' => __('Partner company contacts'),
             'key' => 'id',
             'placeholder' => __('Select company contacts'),
-            'is_required' => true
+            'is_required' => true,
         ]);
     }
 }

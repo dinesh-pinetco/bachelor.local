@@ -36,12 +36,13 @@ class Enrollment extends Component
 
     public $companyContacts = [];
 
-    public int $partnerCompanyFieldId;
-    public int $partnerCompanyContactFieldId;
+    public ?int $partnerCompanyFieldId;
+
+    public ?int $partnerCompanyContactFieldId;
 
     protected $rules = [
-        'selectedCompany'           => ['required', 'exists:companies,id'],
-        'selectedCompanyContacts'   => ['required', 'array'],
+        'selectedCompany' => ['required', 'exists:companies,id'],
+        'selectedCompanyContacts' => ['required', 'array'],
         'selectedCompanyContacts.*' => ['required', 'exists:company_contacts,id'],
     ];
 
@@ -50,8 +51,8 @@ class Enrollment extends Component
         $this->courses = Course::active()->get();
         $this->fetchCompanies();
 
-        $this->partnerCompanyFieldId        = Field::where('label', 'Partner company')->first()->id;
-        $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()->id;
+        $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
+        $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
     }
 
     protected function fetchCompanies()
@@ -103,17 +104,17 @@ class Enrollment extends Component
         $this->validate();
 
         $company = FieldValue::updateOrCreate([
-            'user_id'  => $this->applicant->id,
-            'field_id' => $this->partnerCompanyFieldId
-        ],[
-            'value' => $this->selectedCompany
+            'user_id' => $this->applicant->id,
+            'field_id' => $this->partnerCompanyFieldId,
+        ], [
+            'value' => $this->selectedCompany,
         ]);
 
         $companyContacts = FieldValue::updateOrCreate([
-            'user_id'  => $this->applicant->id,
-            'field_id' => $this->partnerCompanyContactFieldId
-        ],[
-            'value' => json_encode($this->selectedCompanyContacts)
+            'user_id' => $this->applicant->id,
+            'field_id' => $this->partnerCompanyContactFieldId,
+        ], [
+            'value' => json_encode($this->selectedCompanyContacts),
         ]);
 
         if ($company->wasRecentlyCreated && $companyContacts->wasRecentlyCreated) {

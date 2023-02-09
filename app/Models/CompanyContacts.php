@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ class CompanyContacts extends Model
         'company_id',
         'contact_id',
         'first_name',
-        'last_name'
+        'last_name',
     ];
 
     public function company()
@@ -21,8 +22,10 @@ class CompanyContacts extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function getFullNameAttribute()
+    protected function fullName(): Attribute
     {
-        return $this->first_name . " " . $this->last_name;
+        return Attribute::get(function ($value, $attributes) {
+            return collect([$attributes['first_name'], $attributes['last_name']])->filter()->implode(' ');
+        });
     }
 }

@@ -8,6 +8,12 @@
 
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
+            @if (auth()->user()->application_status === ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE)
+                <p>
+                    {{ __('Your profile activated on marketplace.') }}
+                </p>
+            @endif
+
             @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED)
                 <p>
                     {{ __('You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal') }}

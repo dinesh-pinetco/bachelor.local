@@ -26,10 +26,10 @@ class StudySheet extends Model implements ContractsAuditable
     const HEALTH_INSURANCE_OTHER = 1;
 
     protected $casts = [
-        'custom_billing_address'  => 'array',
+        'custom_billing_address' => 'array',
         'custom_delivery_address' => 'array',
-        'is_authorize'            => 'boolean',
-        'is_submit'               => 'boolean',
+        'is_authorize' => 'boolean',
+        'is_submit' => 'boolean',
     ];
 
     public static function payments(): array
