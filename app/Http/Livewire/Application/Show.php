@@ -30,6 +30,8 @@ class Show extends Component
 
     public bool $isProfile = false;
 
+    public bool $isEnrolled = false;
+
     public bool $isEdit = false;
 
     public $competency_catch_up = false;
@@ -62,6 +64,9 @@ class Show extends Component
         $this->isProfile = str_contains($this->tab->slug, 'profile');
         $this->parentGroups = $this->tab->parent_groups;
         $this->prepareCustomizedGroups($groupId);
+
+        $companyField = Field::where('related_option_table', 'company_contacts')->first('id');
+        $this->isEnrolled = FieldValue::where('user_id', $this->applicant->id)->where('field_id', $companyField?->id)->exists();
     }
 
     public function prepareCustomizedGroups($groupId = null)
@@ -174,10 +179,10 @@ class Show extends Component
 
         foreach ($profileData as $key => $value) {
             $data->put($value->key, data_get($value, 'value.value'));
-            if (! data_get($value, 'value.value')) {
-                $rules->put('field.'.$value->key, 'required');
+            if (!data_get($value, 'value.value')) {
+                $rules->put('field.' . $value->key, 'required');
             }
-            $attributes->put('field.'.$value->key, __($value->label));
+            $attributes->put('field.' . $value->key, __($value->label));
         }
 
         Validator::make($data->toArray(), $rules->toArray(), [], $attributes->toArray())->validate();

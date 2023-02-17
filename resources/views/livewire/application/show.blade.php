@@ -33,13 +33,13 @@
                     <h6 class="text-2xl md:text-3xl font-medium text-primary {{ $isProfile ? '' : 'ml-20 md:ml-32 lg:ml-0 my-7 lg:my-10' }}">
                         {{ $tab->description }}
                     </h6>
-                    @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
+                    @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && !$isEnrolled)
                         <div class="flex items-center space-x-4">
-                            <x-primary-button type="button"
-                                              :disabled="!$isEdit"
-                                              class="md:-mt-0 {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
-                                {{ __('Something here') }}
-                            </x-primary-button>
+{{--                            <x-primary-button type="button"--}}
+{{--                                              :disabled="!$isEdit"--}}
+{{--                                              class="md:-mt-0 {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">--}}
+{{--                                {{ __('Something here') }}--}}
+{{--                            </x-primary-button>--}}
                             <x-primary-button type="button"
                                               wire:click="$emit('Applicant.Modal.Enrollment.modal.toggle',{{ $applicant->id }})"
                                               :disabled="!$isEdit"
