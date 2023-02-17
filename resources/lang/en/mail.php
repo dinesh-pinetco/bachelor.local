@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'welcome' => 'Hallo  :name',
+    'welcome' => 'Hello  :name',
 
     'new-user' => [
         'subject' => 'Welcome to the application portal of the Nordakademie!',
