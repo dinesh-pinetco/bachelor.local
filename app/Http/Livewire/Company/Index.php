@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Company;
 
 use App\Enums\ApplicationStatus;
+use App\Models\ApplicantCompany;
 use App\Models\Company;
 use App\Models\User;
 use App\Services\Companies\Companies;
@@ -13,6 +14,7 @@ class Index extends Component
     public $companies = [];
 
     public $selectedCompanies = [];
+    public $appliedCompanies = [];
 
     public $mailContent = null;
 
@@ -41,6 +43,8 @@ class Index extends Component
     public function mount()
     {
         $this->user = auth()->user();
+
+        $this->appliedCompanies = ApplicantCompany::where('user_id',auth()->id())->get();
     }
 
     public function selectCompany()
@@ -54,9 +58,13 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
-        $this->user->update([
-            'application_status' => ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE(),
-        ]);
+        auth()->user()->touch('show_application_on_marketplace_at');
+//        $this->user->update([
+//            'application_status' => ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE(),
+//        ]);
+
+        $this->emitSelf('refresh');
+
     }
 
     protected function fetchCompanies()
@@ -85,12 +93,12 @@ class Index extends Component
     {
         $this->validate();
 
-        foreach ($this->companies as $company) {
+        foreach ($this->selectedCompanies as $key =>  $company) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
-                'company_id' => $company['id'],
+                'company_id' => $key,
             ], [
-                'company_name' => $company['name'],
+                'company_name' => $company,
                 'mail_content' => $this->mailContent,
             ]);
 

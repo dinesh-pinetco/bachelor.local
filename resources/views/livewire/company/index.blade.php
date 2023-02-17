@@ -7,11 +7,7 @@
         </div>
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
-            @if (auth()->user()->application_status === ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE)
-                <p>
-                    {{ __('Your profile activated on marketplace.') }}
-                </p>
-            @elseif (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED)
+            @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED && is_null(auth()->user()->show_application_on_marketplace_at))
                 <p>
                     {{ __('You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal') }}
                 </p>
@@ -29,7 +25,8 @@
                         {{ __('Show my profile directly on marketplace') }}
                     </x-primary-button>
                 </div>
-            @elseif(auth()->user()->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)
+            @endif
+            @if(auth()->user()->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)
                 <div class="flex flex-wrap items-start justify-between gap-5 max-w-4xl h-full">
                     @if ($showTextarea)
                         <div class="flex-grow max-w-2xl sticky -top-5 xl:top-0 py-5 xl:py-0 bg-white">
@@ -47,16 +44,16 @@
                             <div wire:ignore>
                                 <input id="email-content" type="hidden" name="mailContent">
                                 <trix-editor class="prose formatted-content"
-                                            id="trix-editor"
-                                            input="email-content"
-                                            wire:ignore
-                                            wire:key="competency_comment"></trix-editor>
+                                             id="trix-editor"
+                                             input="email-content"
+                                             wire:ignore
+                                             wire:key="competency_comment"></trix-editor>
                             </div>
                             <x-jet-input-error for="mailContent"/>
 
                             <x-primary-button type="button"
-                                            wire:loading.attr="disabled"
-                                            @click="applyToSelectedCompany()">
+                                              wire:loading.attr="disabled"
+                                              @click="applyToSelectedCompany()">
                                 {{ __('Apply to Selected Company') }}
                             </x-primary-button>
                         </div>
@@ -70,7 +67,8 @@
                             </h6>
                             @foreach ($companies as $company)
                                 <div class="flex items-center space-x-2">
-                                    <label class="mb-0 cursor-pointer" for="{{ $company->id }}"> {{ ($company->name) }}</label>
+                                    <label class="mb-0 cursor-pointer"
+                                           for="{{ $company->id }}"> {{ ($company->name) }}</label>
                                     <input
                                         class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
                                         type="checkbox"
@@ -93,9 +91,48 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div>
-                    <x-primary-button wire:click="next">{{ __('Apply now') }}</x-primary-button>
+                </div>
+                <x-primary-button wire:click="next">{{ __('Apply now') }}</x-primary-button>
+            @endif
+            @endif
+
+            @if(!is_null($user->show_application_on_marketplace_at) || auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+
+                <div class="flex-grow max-w-2xl sticky -top-5 xl:top-0 py-5 xl:py-0 bg-white">
+                    @if(auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+                        <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
+                            {{__('Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.')}}
+                        </h6>
+
+                        <h6 class="text-bold-300">Appllied Company :- </h6>
+
+                        @foreach ($appliedCompanies as $key => $appliedCompany)
+                            <div class="flex items-center space-x-2">
+                                        <span>
+                                            {{ $appliedCompany->company_name }}
+                                        </span>
+                                <br/>
+                            </div>
+                        @endforeach
+
                     @endif
+
+                    @if(is_null($user->show_application_on_marketplace_at))
+                        <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
+                            {{__('Additionally, would you like to be listed on the market place so companies can contact you?')}}
+                        </h6>
+
+                        <x-primary-button type="button"
+                                          wire:click="showProfileMarketplace"
+                                          wire:loading.attr="disabled">
+                            {{ __('Yes, get listed') }}
+                        </x-primary-button>
+                    @else
+                        <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
+                            {{__('You are listed on the market place')}}
+                        </h6>
+                    @endif
+                </div>
             @endif
         </div>
     </div>
