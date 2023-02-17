@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('company_id');
             $table->string('name')->nullable();
+            $table->integer('zip_code')->nullable();
             $table->timestamps();
         });
     }

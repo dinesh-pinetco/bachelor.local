@@ -6,15 +6,12 @@
             </h1>
         </div>
 
-
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
             @if (auth()->user()->application_status === ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE)
                 <p>
                     {{ __('Your profile activated on marketplace.') }}
                 </p>
-            @endif
-
-            @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED)
+            @elseif (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED)
                 <p>
                     {{ __('You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal') }}
                 </p>
@@ -34,51 +31,84 @@
                 </div>
             @elseif(auth()->user()->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)
                 <div class="flex flex-wrap items-start justify-between gap-5 max-w-4xl h-full">
-
-                    <div class="flex-grow max-w-2xl sticky -top-5 xl:top-0 py-5 xl:py-0 bg-white">
-                        <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
-                            {{__('Email Content')}}
-                        </h6>
-                        <div wire:ignore>
-                            <input id="email-content" type="hidden" name="mailContent">
-                            <trix-editor class="prose formatted-content"
-                                         id="trix-editor"
-                                         input="email-content"
-                                         wire:ignore
-                                         wire:key="competency_comment"></trix-editor>
-                        </div>
-                        <x-jet-input-error for="mailContent"/>
-
-                        <x-primary-button type="button"
-                                          wire:loading.attr="disabled"
-                                          @click="applyToSelectedCompany()">
-                            {{ __('Apply to Selected Company') }}
-                        </x-primary-button>
-                    </div>
-                    <div class="flex-shrink-0 h-full overflow-y-auto space-y-3 md:space-y-5">
-                        <h6 class="text-lg lg:text-2xl font-medium text-primary">
-                            {{__('Company list')}}
-                        </h6>
-                        @foreach ($companies as $key => $company)
-                            <div class="flex items-center space-x-2">
-                                <input
-                                    class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
-                                    type="checkbox" id="{{ $key }}" wire:model='selectedCompanies.{{ $company['id'] }}'
-                                    value="{{ $company['name'] }}"> <label class="mb-0 cursor-pointer "
-                                                                           for="{{ $key }}"> {{ ($company['name']) }}</label>
+                    @if ($showTextarea)
+                        <div class="flex-grow max-w-2xl sticky -top-5 xl:top-0 py-5 xl:py-0 bg-white">
+                            <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
+                                {{__('Email Content')}}
+                            </h6>
+                            @foreach ($selectedCompanies as $key => $selectedCompany)
+                                <div class="flex items-center space-x-2">
+                                    <span>
+                                        {{ $selectedCompany }}
+                                    </span>
+                                    <br/>
+                                </div>
+                            @endforeach
+                            <div wire:ignore>
+                                <input id="email-content" type="hidden" name="mailContent">
+                                <trix-editor class="prose formatted-content"
+                                            id="trix-editor"
+                                            input="email-content"
+                                            wire:ignore
+                                            wire:key="competency_comment"></trix-editor>
                             </div>
-                        @endforeach
+                            <x-jet-input-error for="mailContent"/>
+
+                            <x-primary-button type="button"
+                                            wire:loading.attr="disabled"
+                                            @click="applyToSelectedCompany()">
+                                {{ __('Apply to Selected Company') }}
+                            </x-primary-button>
+                        </div>
+                    @else
+                        <x-jet-input wire:model='search' placeholder="Search by name"/>
+                        <x-jet-input wire:model='zip_code' placeholder="Search by zip code"/>
+
+                        <div class="flex-shrink-0 h-full overflow-y-auto space-y-3 md:space-y-5">
+                            <h6 class="text-lg lg:text-2xl font-medium text-primary">
+                                {{__('Company list')}}
+                            </h6>
+                            @foreach ($companies as $company)
+                                <div class="flex items-center space-x-2">
+                                    <label class="mb-0 cursor-pointer" for="{{ $company->id }}"> {{ ($company->name) }}</label>
+                                    <input
+                                        class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
+                                        type="checkbox"
+                                        id="{{ $company->id }}"
+                                        wire:model="selectedCompanies.{{ $company->id }}"
+                                        value="{{ $company->name }}">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="flex-shrink-0 h-full overflow-y-auto space-y-3 md:space-y-5">
+                            <h6 class="text-lg lg:text-2xl font-medium text-primary">
+                                {{__('Selected companies')}}
+                            </h6>
+                            @foreach ($selectedCompanies as $key => $selectedCompany)
+                                <div class="flex items-center space-x-2">
+                                    <span>
+                                        {{ $selectedCompany }}
+                                    </span>
+                                    <br/>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                    <x-primary-button wire:click="next">{{ __('Apply now') }}</x-primary-button>
+                    @endif
             @endif
         </div>
     </div>
     <script>
-        let trixEditor = document.getElementById("email-content");
+        let trixEditor;
+
+        window.addEventListener('init-trix-editor', event => {
+            trixEditor = document.getElementById("email-content");
+        })
 
         function applyToSelectedCompany() {
-        @this.set('mailContent', trixEditor.getAttribute('value'));
-        @this.applyToSelectedCompany();
+            @this.set('mailContent', trixEditor.getAttribute('value'));
+            @this.applyToSelectedCompany();
         }
 
         window.addEventListener('reset-mail-content', event => {
