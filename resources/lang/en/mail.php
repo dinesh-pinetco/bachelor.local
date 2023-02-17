@@ -101,7 +101,7 @@ return [
     'greeting-message' => 'With best regards from the Elbe',
     'NORDAKADEMIE University of Applied Sciences' => 'NORDAKADEMIE University of Applied Sciences',
     'Kollner Chaussee 11 25337 EImshorn' => 'Kollner Chaussee 11 25337 EImshorn',
-    'T: +49 (0)4121 4090 - 154' => 'T: +49 (0)4121 4090 - 154',
+    'Telephone: +49 (0)4121 4090 - 154' => 'Telephone: +49 (0)4121 4090 - 154',
     'NORDAKADE MIE gAG University of Applied Sciences, Köllner Chaussee 11, Elmshorn, Schleswig- Holstein 25337, 04121 / 4090 - 0' => 'NORDAKADE MIE gAG University of Applied Sciences, Köllner Chaussee 11, Elmshorn, Schleswig- Holstein 25337, 04121 / 4090 - 0',
     'Get setting rings' => 'Get setting rings',
     'technical-support-message' => 'P.S.: Technical questions can be clarified Monday - Thursday between 8:00 am and 5:00 pm and Friday between 8:00 am and 2:00 pm under Tel: 04121 4090-181 or by e-mail auswahltest@nordakademie.de. If technical problems occur, please contact us immediately.',

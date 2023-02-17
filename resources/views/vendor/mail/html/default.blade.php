@@ -26,7 +26,7 @@
                 <td>
                     <p style="display:inline-block;color:#003A79;line-height: 1.4;margin: 10px 0 0;">
                         {{ __('mail.NORDAKADEMIE University of Applied Sciences') }} <br>
-                        T +49 (0)4121 4090 - 154 <br>
+                        {{ __("Telephone") }}: +49 (0)4121 4090 - 154 <br>
                         <a target="_blank" href="https://www.nordakademie.de/">www.nordakademie.de</a></p>
                 </td>
             </tr>
