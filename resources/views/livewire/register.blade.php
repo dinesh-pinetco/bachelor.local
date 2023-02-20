@@ -84,7 +84,7 @@
             @endif
         </div>
         <div class="flex items-center justify-end mt-6 md:mt-10">
-            <x-jet-secondary-button type="submit">
+            <x-jet-secondary-button type="submit" onclick="this.disabled=true; this.form.submit();" :disabled="true">
                 {{ __('Start application') }}
                 <svg class="stroke-current ml-4" width="20" height="16" viewBox="0 0 20 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
