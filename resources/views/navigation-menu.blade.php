@@ -49,7 +49,7 @@
                     @if(auth()->user()->hasAnyRole([ROLE_ADMIN,ROLE_SUPER_ADMIN]))
                         <li>
                             <x-jet-nav-link href="{{ route('admin.employees.index') }}"
-                                            :active="request()->routeIs('admin.employee.index')"
+                                            :active="request()->routeIs('admin.employees.index')"
                                             class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
                                 <div
                                     class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
