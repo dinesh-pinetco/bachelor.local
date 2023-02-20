@@ -98,6 +98,7 @@
                     class="inline-flex justify-center items-center px-4 py-2 bg-green-500 text-white text-center text-base border font-medium tracking-wide rounded-sm border-green-400 hover:bg-green-600 opacity-80 hover:opacity-100 "
                     data-cy="cancel-button"
                     wire:click="enroll"
+                    wire:loading.class='opacity-80 cursor-wait'
                 >
                     {{ __('Enroll this applicant') }}
                 </button>

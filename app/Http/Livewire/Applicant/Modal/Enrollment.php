@@ -51,8 +51,8 @@ class Enrollment extends Component
         $this->courses = Course::active()->get();
         $this->fetchCompanies();
 
-        $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
-        $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
+        $this->partnerCompanyFieldId = Field::where('related_option_table', 'companies')->first()?->id;
+        $this->partnerCompanyContactFieldId = Field::where('related_option_table', 'company_contacts')->first()?->id;
     }
 
     protected function fetchCompanies()

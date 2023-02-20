@@ -54,6 +54,8 @@ class Index extends Component
         ]);
 
         $this->fetchCompanies();
+
+        $this->emitSelf('refresh');
     }
 
     public function showProfileMarketplace()
