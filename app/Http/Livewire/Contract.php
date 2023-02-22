@@ -9,8 +9,11 @@ use Livewire\Component;
 class Contract extends Component
 {
     public $companies;
+
     public User $applicant;
+
     public $contactCompany;
+
     public $partnerCompanyFieldId;
 
     protected $listeners = ['refreshData'];

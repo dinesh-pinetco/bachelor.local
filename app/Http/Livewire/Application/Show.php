@@ -179,10 +179,10 @@ class Show extends Component
 
         foreach ($profileData as $key => $value) {
             $data->put($value->key, data_get($value, 'value.value'));
-            if (!data_get($value, 'value.value')) {
-                $rules->put('field.' . $value->key, 'required');
+            if (! data_get($value, 'value.value')) {
+                $rules->put('field.'.$value->key, 'required');
             }
-            $attributes->put('field.' . $value->key, __($value->label));
+            $attributes->put('field.'.$value->key, __($value->label));
         }
 
         Validator::make($data->toArray(), $rules->toArray(), [], $attributes->toArray())->validate();
@@ -202,7 +202,9 @@ class Show extends Component
 
             foreach ($tests as $test) {
                 if ($test->type == Test::TYPE_MOODLE) {
-                    $error = (new Moodle($this->applicant))->createUser();
+                    $moodle = (new Moodle($this->applicant));
+                    $moodle->createUser();
+                    $moodle->attachCourseToUser($test);
                 } elseif ($test->type == Test::TYPE_CUBIA) {
                     $this->applicant->saveCubiaId();
                     $this->createInitialResult($test->id);

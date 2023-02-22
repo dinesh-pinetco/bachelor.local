@@ -8,7 +8,9 @@ use Livewire\Component;
 class Company extends Component
 {
     public $companies;
+
     public User $applicant;
+
     public $appliedForCompany = false;
 
     protected $listeners = ['refreshData'];
@@ -25,7 +27,6 @@ class Company extends Component
         }
 
         $this->companies = $this->applicant->companies()->get();
-
     }
 
     public function render()
