@@ -39,13 +39,15 @@
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
                             <dt class="text-sm font-medium text-gray-500">{{ __('Study course') }}</dt>
                             <div class="w-full order-4 xl:order-2 mt-4 sm:mt-0 col-span-2">
-                                <x-multi-select
-                                    :options="$courses"
-                                    keyBy="id"
-                                    labelBy="name"
-                                    :value="[1,2]"
-                                    :disabled="true"
-                                />
+                                <select
+                                    class="h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
+                                    wire:model="applicantCourse" id="applicantCourse">
+                                    <option value="">{{ __('Select Course') }}</option>
+                                    @foreach ($courses as $course)
+                                        <option value="{{ $course->course?->id }}">{{ $course->course?->name }}</option>
+                                    @endforeach
+                                </select>
+                                <x-jet-input-error for="applicantCourse"/>
                             </div>
                         </div>
 
@@ -74,13 +76,14 @@
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
                             <dt class="text-sm font-medium text-gray-500">{{ __('Contact Person from Company') }}</dt>
                             @if ($selectedCompany)
-                                <x-multi-select
-                                    wire:model='selectedCompanyContacts'
-                                    :options="$companyContacts"
-                                    keyBy="id"
-                                    labelBy="fullName"
-                                    :value='$selectedCompanyContacts'
-                                 />
+                                <select
+                                    class="h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
+                                    wire:model="selectedCompanyContacts" id="selectedCompanyContacts">
+                                    <option value="null">{{ __('Select Company Contact') }}</option>
+                                    @foreach ($companyContacts as $companyContact)
+                                        <option value="{{ $companyContact->id }}">{{ $companyContact->fullName }}</option>
+                                    @endforeach
+                                </select>
                             @else
                                 <dt class="text-sm font-medium text-gray-500">{{ __('Please select partner company') }}</dt>
                             @endif

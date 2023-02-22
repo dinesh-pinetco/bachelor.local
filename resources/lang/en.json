@@ -782,5 +782,13 @@
     "Applicant:": "Applicant:",
     "You can pass or fail selected applicant": "You can pass or fail selected applicant",
     "No, Fail applicant": "No, Fail applicant",
-    "Applicant:in has transferred data to the company portal":"Applicant:in has transferred data to the company portal"
+    "Applicant:in has transferred data to the company portal":"Applicant:in has transferred data to the company portal",
+    "Applicant has no active applications": "Applicant has no active applications",
+    "Applicant is listed on market place": "Applicant is listed on market place",
+    "The following companies have contacted the applicant": "The following companies have contacted the applicant",
+    "Enroll course": "Enroll course",
+    "Select Company Contact": "Select Company Contact",
+    "Select Course": "Select Course",
+    "Enroll Applicant": "Enroll Applicant",
+    "Enroll this applicant": "Enroll this applicant"
 }

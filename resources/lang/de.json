@@ -786,5 +786,12 @@
     "Applicant:": "Antragsteller:",
     "You can pass or fail selected applicant": "Sie können ausgewählte Bewerber bestehen oder durchfallen lassen",
     "No, Fail applicant": "Nein, Antragsteller scheitern",
-    "Applicant:in has transferred data to the company portal": "Bewerber:in hat Daten zum Firmenportal übertragen"
+    "Applicant has no active applications": "Der Antragsteller hat keine aktiven Anträge",
+    "Applicant is listed on market place": "Antragsteller ist auf dem Marktplatz gelistet",
+    "The following companies have contacted the applicant": "Die folgenden Unternehmen haben sich an den Antragsteller gewandt",
+    "Enroll course": "Kurs einschreiben",
+    "Select Company Contact": "Firmenkontakt auswählen",
+    "Select Course": "Kurs wählen",
+    "Enroll Applicant": "Antragsteller einschreiben",
+    "Enroll this applicant": "Diesen Bewerber einschreiben"
 }
