@@ -1,5 +1,5 @@
 <x-app-layout>
     <div>
-        <livewire:contract :applicant="$applicant??''" />
+        <livewire:employee.applicants.contract.index :applicant="$applicant??''" />
     </div>
 </x-app-layout>

@@ -22,10 +22,6 @@ class Company extends Component
 
     public function refreshData()
     {
-        if ($this->applicant->application_status == \App\Enums\ApplicationStatus::APPLIED_TO_SELECTED_COMPANY) {
-            $this->appliedForCompany = true;
-        }
-
         $this->companies = $this->applicant->companies()->get();
     }
 

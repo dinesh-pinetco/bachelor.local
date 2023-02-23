@@ -99,7 +99,6 @@ class Index extends Component
         foreach ($collections ?? [] as $field) {
             $options[] = $field;
         }
-
         return $options;
     }
 

@@ -73,14 +73,6 @@ return [
         'government-form-action' => 'Daten für das Statistische Landesamt',
     ],
 
-    'contract-sent' => [
-        'subject' => 'Vertrag erhalten',
-        'body' => '<br> Ihr Vertrag wurde erfolgreich empfangen.',
-        'paragraph1' => '<br> herzlichen Glückwunsch – Sie haben alle Schritte im Auswahlverfahren erfolgreich absolviert! 😊Wir freuen uns, Ihnen heute mitzuteilen, dass wir Ihnen gerne einen Studienplatz ab dem :desiredBeginning im Studiengang :studyCourse anbieten möchten.',
-        'paragraph2' => '<br> Ihren Studienvertrag werden den nächsten Tagen in die Post geben mit der Bitte, diesen schnellstmöglich an uns zurückzusenden.',
-        'paragraph3' => '<br> Wir freuen uns auf Sie!',
-    ],
-
     'contact-us' => [
         'subject' => 'Contact ',
     ],
@@ -95,6 +87,26 @@ return [
         'welcome' => 'Hallo :admin',
         'body' => 'die Bewerber :name hat die Auswahltests nicht bestanden. Bitte überprüfe die Auswahltests und bestätige das Bestehen oder Nichtbestehen.',
         'action' => 'Zu den Testergebnissen',
+    ],
+
+    'contract-sent' => [
+        'subject' => 'Vertrag erhalten',
+        'body' => '<br> Ihr Vertrag wurde erfolgreich empfangen.',
+        'paragraph1' => '<br> herzlichen Glückwunsch – Sie haben alle Schritte im Auswahlverfahren erfolgreich absolviert! 😊Wir freuen uns, Ihnen heute mitzuteilen, dass wir Ihnen gerne einen Studienplatz ab dem :desiredBeginning im Studiengang :studyCourse anbieten möchten.',
+        'paragraph2' => '<br> Ihren Studienvertrag werden den nächsten Tagen in die Post geben mit der Bitte, diesen schnellstmöglich an uns zurückzusenden.',
+        'paragraph3' => '<br> Wir freuen uns auf Sie!',
+    ],
+
+    'contract-received' => [
+        'subject' => 'Vertrag erhalten',
+        'body' => '<br> Ihr Vertrag wurde erfolgreich empfangen.',
+        'paragraph1' => '<br> Ihr unterschriebener Vertrag ist heute bei uns eingegangen.',
+        'paragraph2' => '<br> Nun ist es nur noch ein kleiner Schritt, bis Sie mit Ihrem Studium beginnen können.',
+        'paragraph3' => '<br> Vorbereitend benötigen wir noch zusätzliche Informationen von Ihnen, die Sie uns online übermitteln können. Dort können Sie Ihre Zahlungsdaten oder eine alternative Rechnungsadresse angeben.',
+        'paragraph4' => '<br> Bitte füllen Sie die Bögen schnellstmöglich aus, da Ihre Immatrikulation nur nach ausgefülltem Studienbegleitbogen und der Erfassung der Daten für das Statistische Landesamt durchführbar ist! ',
+        'paragraph5' => '<br> Rechtzeitig vor Studienbeginn erhalten Sie per Post Ihre Zugangsdaten für Ihren NORDAKADEMIE-Account. Über diesen Account erhalten Sie wichtige Informationen, wie z.B. zur ersten Präsenzphase oder Ihren Einschreibeschlüssel für das Selbststudium. ',
+        'study-sheet-action' => 'Studienbegleitbogen',
+        'government-form-action' => 'Daten für das Statistische Landesamt',
     ],
 
     'greetings_1' => 'Anette Rostock',

@@ -96,10 +96,10 @@
             @endif
             @endif
 
-            @if(!is_null($user->show_application_on_marketplace_at) || auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+            @if(!is_null($user->show_application_on_marketplace_at) || auth()->user()->companies()->exists())
 
                 <div class="flex-grow max-w-2xl sticky -top-5 xl:top-0 py-5 xl:py-0 bg-white">
-                    @if(auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+                    @if(auth()->user()->companies()->exists())
                         <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
                             {{__('Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.')}}
                         </h6>

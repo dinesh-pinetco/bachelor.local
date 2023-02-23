@@ -3,6 +3,7 @@
 namespace App\Traits\User;
 
 use App\Models\ApplicantCompany;
+use App\Models\Contract;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Models\GovernmentForm;
@@ -85,5 +86,10 @@ trait UserRelations
     public function government_form(): HasOne
     {
         return $this->hasOne(GovernmentForm::class);
+    }
+
+    public function contract(): HasOne
+    {
+        return $this->hasOne(Contract::class);
     }
 }

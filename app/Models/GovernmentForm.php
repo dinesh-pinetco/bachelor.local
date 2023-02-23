@@ -14,6 +14,10 @@ class GovernmentForm extends Model implements ContractsAuditable
 
     protected $guarded = [];
 
+    protected array $auditInclude = [
+        'value',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

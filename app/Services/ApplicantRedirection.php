@@ -89,4 +89,19 @@ class ApplicantRedirection
     {
         return to_route('companies.index');
     }
+
+    private function enrollment_on()
+    {
+        return to_route('companies.index');
+    }
+
+    private function contract_sent_on()
+    {
+        return to_route('companies.index');
+    }
+
+    private function contract_returned_on()
+    {
+        return to_route('companies.index');
+    }
 }
