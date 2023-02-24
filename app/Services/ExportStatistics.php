@@ -58,7 +58,7 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function incompleteApplications($method)
+    private function registration_submitted($method)
     {
         $applicant = clone $this->applicant;
 
@@ -67,11 +67,11 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function submittedApplications($method)
+    private function profile_information_completed($method)
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status', ApplicationStatus::REGISTRATION_SUBMITTED)
+        return $applicant->where('application_status', ApplicationStatus::PROFILE_INFORMATION_COMPLETED)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -85,17 +85,75 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
+    private function testPassed($method)
+    {
+        $applicant = clone $this->applicant;
+
+        return $applicant->where('application_status', ApplicationStatus::TEST_PASSED)
+            ->coursesIn([$this->courseId])
+            ->{$method}($this->params);
+    }
+
+    private function test_failed($method)
+    {
+        $applicant = clone $this->applicant;
+
+        return $applicant->where('application_status', ApplicationStatus::TEST_FAILED)
+            ->coursesIn([$this->courseId])
+            ->{$method}($this->params);
+    }
+
+    private function test_failed_confirm($method)
+    {
+        $applicant = clone $this->applicant;
+
+        return $applicant->where('application_status', ApplicationStatus::TEST_FAILED_CONFIRM)
+            ->coursesIn([$this->courseId])
+            ->{$method}($this->params);
+    }
+
+    private function test_result_pdf_retrieved_on($method)
+    {
+        $applicant = clone $this->applicant;
+
+        return $applicant->where('application_status', ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON)
+            ->coursesIn([$this->courseId])
+            ->{$method}($this->params);
+    }
+
+    private function personal_data_completed($method)
+    {
+        $applicant = clone $this->applicant;
+
+        return $applicant->where('application_status', ApplicationStatus::PERSONAL_DATA_COMPLETED)
+            ->coursesIn([$this->courseId])
+            ->{$method}($this->params);
+    }
+
+    private function consent_to_company_portal_bulletin_board($method)
+    {
+        $applicant = clone $this->applicant;
+
+        return $applicant->where('application_status', ApplicationStatus::CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD)
+            ->coursesIn([$this->courseId])
+            ->{$method}($this->params);
+    }
+
     private function applicationEnroll($method)
     {
         $applicant = clone $this->applicant;
 
+        return $applicant->where('application_status', ApplicationStatus::ENROLLMENT_ON)
+            ->coursesIn([$this->courseId])
+            ->{$method}($this->params);
+
         return $applicant
-            /*->whereHas('study_sheet', function ($query) {
+            ->whereHas('study_sheet', function ($query) {
                 $query->where('is_submit', 1);
             })
             ->whereHas('government_form', function ($query) {
                 $query->where('is_submit', 1);
-            })*/
+            })
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }

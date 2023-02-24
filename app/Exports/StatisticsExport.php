@@ -53,21 +53,17 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
         $this->data[] = [
             $this->date->format('Y M'),
             'Summe',
-            'ECTS',
             'abgelehnt',
-            'offen',
-            'eingereicht',
-            'abgelehnt',
-            'akzeptiert',
-            'abgelehnt',
-            'absolviert',
-            'abgelehnt',
-            'absolviert',
-            'abgelehnt',
-            'verschickt',
-            'abgel.v.Vertrag',
-            'zuruck',
-            'abgel.n.Vertrag',
+            'Registration submitted',
+            'Personal data entered (Step 1)',
+            'Test taken',
+            'Test passed',
+            'Test failed',
+            'Test failed (confirmed)',
+            'Result-PDF downloaded on',
+            'Data completed after test passed',
+            'Consent to company portal',
+            'Approved by company for enrollment',
             'Summe',
         ];
     }
@@ -87,11 +83,15 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
                 $this->getValue('totalApplicants', $course->id),
                 $this->getValue('rejectedApplicants', $course->id),
 
-                $this->getValue('incompleteApplications', $course->id),
-                $this->getValue('submittedApplications', $course->id),
-
+                $this->getValue('registration_submitted', $course->id),
+                $this->getValue('profile_information_completed', $course->id),
                 $this->getValue('testCompleted', $course->id),
-
+                $this->getValue('testPassed', $course->id),
+                $this->getValue('test_failed', $course->id),
+                $this->getValue('test_failed_confirm', $course->id),
+                $this->getValue('test_result_pdf_retrieved_on', $course->id),
+                $this->getValue('personal_data_completed', $course->id),
+                $this->getValue('consent_to_company_portal_bulletin_board', $course->id),
                 $this->getValue('applicationEnroll', $course->id),
             ];
         }
@@ -135,10 +135,6 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
             array_sum(array_column($this->data, 11)),
             array_sum(array_column($this->data, 12)),
             array_sum(array_column($this->data, 13)),
-            array_sum(array_column($this->data, 14)),
-            array_sum(array_column($this->data, 15)),
-            array_sum(array_column($this->data, 16)),
-            array_sum(array_column($this->data, 17)),
         ];
     }
 
@@ -150,22 +146,19 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
 
                 $sheet->setCellValue('A1', 'Studiengang');
 
-                $sheet->mergeCells('B1:D1');
+                $sheet->mergeCells('B1:C1');
                 $sheet->setCellValue('B1', 'Bewerber insgesamt');
 
-                $sheet->mergeCells('E1:I1');
-                $sheet->setCellValue('E1', 'Bewerbung akzeptieren');
+                $sheet->mergeCells('D1:E1');
+                $sheet->setCellValue('D1', 'Bewerbung akzeptieren');
 
-                $sheet->mergeCells('J1:K1');
-                $sheet->setCellValue('J1', 'Test');
+                $sheet->mergeCells('F1:J1');
+                $sheet->setCellValue('F1', 'Test');
 
-                $sheet->mergeCells('L1:M1');
-                $sheet->setCellValue('L1', 'Gesprch');
+                $sheet->mergeCells('K1:M1');
+                $sheet->setCellValue('K1', 'Gesprch');
 
-                $sheet->mergeCells('N1:Q1');
-                $sheet->setCellValue('N1', 'Vertrag');
-
-                $sheet->setCellValue('R1', 'Immatrikuliert');
+                $sheet->setCellValue('N1', 'Immatrikuliert');
 
                 $styleArray = [
                     'alignment' => [
@@ -173,7 +166,7 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
                     ],
                 ];
 
-                $cellRange = 'A1:R1'; // All headers
+                $cellRange = 'A1:N1'; // All headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
             },
         ];
@@ -184,21 +177,17 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
         return [
             $this->date->format('Y M'),
             'Summe',
-            'ECTS',
             'abgelehnt',
-            'offen',
-            'akzeptiert',
-            'eingereicht',
-            'akzeptiert',
-            'abgelehnt',
-            'absolviert',
-            'abgelehnt',
-            'absolviert',
-            'abgelehnt',
-            'verschickt',
-            'abgel.v.Vertrag',
-            'zurück',
-            'abgel.n.Vertrag',
+            'Registration submitted',
+            'Personal data entered (Step 1)',
+            'Test taken',
+            'Test passed',
+            'Test failed',
+            'Test failed (confirmed)',
+            'Result-PDF downloaded on',
+            'Data completed after test passed',
+            'Consent to company portal',
+            'Approved by company for enrollment',
             'Summe',
         ];
     }
