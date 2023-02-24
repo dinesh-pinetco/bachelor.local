@@ -2,7 +2,7 @@
     <div class="w-full max-w-screen-xl mx-auto -mx-5">
         <div class="flex">
             <h1 class="mb-5 md:mb-9 text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
-                {{ __('Partner Companies') }}
+                {{ __('Partner companies') }}
             </h1>
         </div>
 
@@ -58,8 +58,8 @@
                             </x-primary-button>
                         </div>
                     @else
-                        <x-jet-input wire:model='search' placeholder="Search by name"/>
-                        <x-jet-input wire:model='zip_code' placeholder="Search by zip code"/>
+                        <x-jet-input wire:model='search' placeholder="{{ __('Search by name') }}"/>
+                        <x-jet-input wire:model='zip_code' placeholder="{{ __('Search by zip code') }}"/>
 
                         <div class="flex-shrink-0 h-full overflow-y-auto space-y-3 md:space-y-5">
                             <h6 class="text-lg lg:text-2xl font-medium text-primary">
@@ -104,7 +104,7 @@
                             {{__('Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.')}}
                         </h6>
 
-                        <h6 class="text-bold-300">Appllied Company :- </h6>
+                        <h6 class="text-bold-300">{{ __('Appllied Company') }} :- </h6>
 
                         @foreach ($appliedCompanies as $key => $appliedCompany)
                             <div class="flex items-center space-x-2">

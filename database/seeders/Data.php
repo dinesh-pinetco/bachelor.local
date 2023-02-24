@@ -298,8 +298,8 @@ class Data
                 ],
             ],
             [
-                'name' => 'Industry',
-                'description' => 'Industry Description',
+                'name' => __('Industry'),
+                'description' => __('Industry Description'),
                 'slug' => 'industries',
                 'icon' => 'industry',
                 'sort_order' => 2,
@@ -316,8 +316,8 @@ class Data
                         'fields' => [
                             [
                                 'type' => FieldType::FIELD_MULTI_SELECT(),
-                                'label' => 'Industry',
-                                'placeholder' => 'Select Industry',
+                                'label' => __('Industry'),
+                                'placeholder' => __('Select Industry'),
                                 'key' => 'industry',
                                 'sort_order' => 2,
                                 'is_active' => 1,
@@ -351,7 +351,7 @@ class Data
                 ],
             ],
             [
-                'name' => 'Motivation',
+                'name' => __('Motivation'),
                 'description' => 'Erzählen Sie etwas über sich',
                 'slug' => 'motivation',
                 'icon' => 'motivation',
