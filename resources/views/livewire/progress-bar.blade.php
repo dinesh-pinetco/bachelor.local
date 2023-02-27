@@ -52,7 +52,7 @@
             <x-jet-input-error for="client" class="mt-1"/>
             <x-slot name="footer">
                 <div class="flex justify-end space-x-2">
-                    <x-danger-button data-cy="delete-button" wire:click="submit">
+                    <x-danger-button class="bg-primary border-primary" data-cy="delete-button" wire:click="submit">
                         {{ __('Yes, submit it') }}
                     </x-danger-button>
                     <x-secondary-button data-cy="cancel-button"

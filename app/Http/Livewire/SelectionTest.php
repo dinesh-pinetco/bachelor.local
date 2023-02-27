@@ -44,7 +44,7 @@ class SelectionTest extends Component
     public function getTestResultPdf()
     {
         if ($this->applicant->application_status == ApplicationStatus::TEST_PASSED) {
-            $this->open();
+            return $this->open();
 
             return \Storage::download($this->applicant->configuration->selection_test_result_passed_pdf_path);
         }
