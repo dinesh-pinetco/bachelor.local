@@ -46,10 +46,10 @@ class SelectionTest extends Component
         if ($this->applicant->application_status == ApplicationStatus::TEST_PASSED) {
             return $this->open();
 
-            // return \Storage::download($this->applicant->configuration->selection_test_result_passed_pdf_path);
+            return \Storage::download($this->applicant->configuration->selection_test_result_passed_pdf_path);
         }
 
-        // return \Storage::download($this->applicant->configuration->selection_test_result_failed_pdf_path);
+        return \Storage::download($this->applicant->configuration->selection_test_result_failed_pdf_path);
     }
 
     public function testResultRetrievedOn()
