@@ -13,6 +13,10 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .css('resources/css/nice-select.css', 'public/css')
+    .copy([
+        'resources/js/popper.min.js',
+        'resources/js/tippy-bundle.umd.js'
+    ], 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),

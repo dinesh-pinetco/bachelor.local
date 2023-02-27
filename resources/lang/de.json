@@ -832,5 +832,7 @@
     "enrollment_on": "Immatrikulation_an",
     "contract_sent_on": "vertrag_eingestellt",
     "contract_returned_on": "vertrag_zurückgegeben_am",
-    "Subject Type": "Thema Typ"
+    "Subject Type": "Thema Typ",
+    "Has been hired": "Wurde angestellt",
+    "Here you can see the progress of your application. After filling out all mandatory fields, your application progress is at 100% and a button appears to submit your application. On the way to 100%, your entries are automatically saved so that no data is lost.": "Hier siehts du den Fortschritt deiner Bewerbung. Nach dem Ausfüllen aller Pflichtfelder, ist dein Bewerbungsfortschritt bei 100% und ein Button erscheint, um deine Bewerbung einzureichen. Auf dem Weg zu den 100% werden deine Eingaben automatisch gespeichert, sodass keine Daten verloren gehen"
 }
