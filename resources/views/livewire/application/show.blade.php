@@ -34,7 +34,7 @@
                         {{ $tab->description }}
                     </h6>
                     @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && $isEnrolled)
-                        <div class="flex items-center space-x-2 text-green-500 text-sm ml-72">
+                        <div class="inline-flex text-green-500 text-sm">
                             <svg class="w-3 h-3 fill-current" fill="currentcolor"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path
@@ -43,7 +43,7 @@
                             <p>{{__('Has been hired')}}</p>
                         </div>
                     @endif
-                    @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status != ApplicationStatus::TEST_FAILED && $applicant->application_status != ApplicationStatus::TEST_FAILED_CONFIRM)
+                    @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status != ApplicationStatus::TEST_FAILED && $applicant->application_status != ApplicationStatus::TEST_FAILED_CONFIRM && $isProfile)
                         <div class="flex items-center space-x-4">
                             <x-primary-button type="button"
                                                 wire:click="$emit('Applicant.Modal.Enrollment.modal.toggle',{{ $applicant->id }})"

@@ -830,5 +830,6 @@
     "contract_sent_on": "contract_sent_on",
     "contract_returned_on": "contract_returned_on",
     "Subject Type": "Subject Type",
-    "Has been hired": "Has been hired"
+    "Has been hired": "Has been hired",
+    "Please select at-least one company!": "Please select at-least one company!"
 }

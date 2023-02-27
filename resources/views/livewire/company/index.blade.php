@@ -5,6 +5,7 @@
                 {{ __('Partner companies') }}
             </h1>
         </div>
+        <x-jet-validation-errors class="mb-4" />
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
             @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED && is_null(auth()->user()->show_application_on_marketplace_at))
@@ -73,7 +74,7 @@
                                         class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
                                         type="checkbox"
                                         id="{{ $company->id }}"
-                                        wire:model="selectedCompanies.{{ $company->id }}"
+                                        wire:model="selectedCompanies"
                                         value="{{ $company->name }}">
                                 </div>
                             @endforeach
