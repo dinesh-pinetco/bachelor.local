@@ -22,7 +22,7 @@ class Enrollment extends Component
 
     public $selectedCompany;
 
-    public $selectedCompanyContacts = [];
+    public $selectedCompanyContacts;
 
     public $courses = [];
 
@@ -36,23 +36,28 @@ class Enrollment extends Component
 
     public $companyContacts = [];
 
-    public ?int $partnerCompanyFieldId;
+    public $partnerCompanyFieldId;
 
     public ?int $partnerCompanyContactFieldId;
 
+    public $applicantCourse;
+
+    public $enrollCourse;
+
     protected $rules = [
+        'applicantCourse' => ['required'],
         'selectedCompany' => ['required', 'exists:companies,id'],
-        'selectedCompanyContacts' => ['required', 'array'],
+        'selectedCompanyContacts' => ['required'],
         'selectedCompanyContacts.*' => ['required', 'exists:company_contacts,id'],
     ];
 
     public function mount()
     {
-        $this->courses = Course::active()->get();
         $this->fetchCompanies();
 
         $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
         $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
+        $this->enrollCourse = Field::where('label','Enroll Course')->first()?->id;
     }
 
     protected function fetchCompanies()
@@ -66,11 +71,16 @@ class Enrollment extends Component
         $this->applicant = $user;
         $this->date_of_birth = $this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
         $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->format('F.Y');
+        $this->courses = $this->applicant->courses()->with('course')->get();
 
         $this->selectedCompany = FieldValue::where('field_id', $this->partnerCompanyFieldId)
             ->where('user_id', $this->applicant->id)
             ->first()
             ?->value;
+
+        $this->applicantCourse = FieldValue::where('field_id',$this->enrollCourse)
+            ->where('user_id', $this->applicant->id)
+            ->first()?->value;
 
         if ($this->selectedCompany) {
             $this->companyContacts = CompanyContacts::where('company_id', $this->selectedCompany)->get();
@@ -96,7 +106,7 @@ class Enrollment extends Component
             ? collect($this->companies)->where('id', $value)->first()->contacts
             : [];
 
-        $this->reset('selectedCompanyContacts');
+        $this->selectedCompanyContacts = null;
     }
 
     public function enroll()
@@ -114,7 +124,14 @@ class Enrollment extends Component
             'user_id' => $this->applicant->id,
             'field_id' => $this->partnerCompanyContactFieldId,
         ], [
-            'value' => json_encode($this->selectedCompanyContacts),
+            'value' => $this->selectedCompanyContacts,
+        ]);
+
+        $enrolApplicantCourse = FieldValue::updateOrCreate([
+            'user_id' => $this->applicant->id,
+            'field_id' => $this->enrollCourse,
+        ],[
+            'value' => $this->applicantCourse,
         ]);
 
         if ($company->wasRecentlyCreated && $companyContacts->wasRecentlyCreated) {

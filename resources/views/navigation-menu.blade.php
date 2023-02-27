@@ -314,9 +314,6 @@
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
                             </svg>
-                            <span class="ml-4">
-                                {{ __('cancel / reject') }}
-                            </span>
                         </x-danger-button>
                         <livewire:application-reject/>
                         @endrole

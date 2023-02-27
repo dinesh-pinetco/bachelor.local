@@ -10,6 +10,8 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
     <!-- Styles -->
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/tippy-bundle.umd.js') }}"></script>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/nice-select.css') }}">
 

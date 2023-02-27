@@ -25,7 +25,8 @@
                     {{ __('Yes, Pass applicant') }}
                 </x-primary-button>
                 <x-danger-button wire:click="markAsFail"
-                                 class="px-4 py-2">
+                                 class="px-4 py-2"
+                                 wire:loading.class='opacity-80 cursor-wait'>
                     {{ __('No, Fail applicant') }}
                 </x-danger-button>
             </div>

@@ -13,8 +13,6 @@ class Moodle
 {
     const ROLL_ID = 5;
 
-    const COURSE_ID = 5;
-
     public User $user;
 
     public function __construct(User $user)
@@ -53,18 +51,6 @@ class Moodle
                     'id_number' => $idNumber,
                     'username' => data_get($responseJson, '0.username'),
                 ]);
-
-                $this->user->load('moodle');
-
-                $this->attachCourseToUser();
-
-                $test = Test::where('type', Test::TYPE_MOODLE)->first();
-                if ($test) {
-                    Result::updateOrCreate(
-                        ['user_id' => $this->user->id, 'test_id' => $test->id],
-                        ['status' => Result::STATUS_NOT_STARTED]
-                    );
-                }
             }
         }
     }
@@ -82,15 +68,24 @@ class Moodle
         return iconv('utf-8', 'ascii//TRANSLIT', str_replace(' ', '_', implode('_', [strtolower($this->user['first_name']), strtolower($this->user['last_name']), time()])));
     }
 
-    public function attachCourseToUser(): array|bool|string
+    public function attachCourseToUser(Test $test): array|bool|string
     {
+        $this->user->load('moodle');
+
+        if ($test) {
+            Result::updateOrCreate(
+                ['user_id' => $this->user->id, 'test_id' => $test->id],
+                ['status' => Result::STATUS_NOT_STARTED]
+            );
+        }
+
         if ($this->user->moodle) {
             $url = config('services.moodle.base_url').
                 '&wsfunction=enrol_manual_enrol_users'.
                 '&moodlewsrestformat=json'.
                 '&enrolments[0][roleid]='.self::ROLL_ID.
                 '&enrolments[0][userid]='.data_get($this->user->moodle, 'id').
-                '&enrolments[0][courseid]='.self::COURSE_ID;
+                '&enrolments[0][courseid]='.$test->course_id;
 
             $response = Http::get($url);
             $responseJson = $response->json();
@@ -144,7 +139,7 @@ class Moodle
                 '&wsfunction=gradereport_user_get_grades_table'.
                 '&moodlewsrestformat=json'.
                 '&userid='.data_get($this->user->moodle, 'id').
-                '&courseid='.self::COURSE_ID;
+                '&courseid='.data_get($result->test, 'course_id');
 
             $response = Http::get($url);
             $responseJson = $response->json();

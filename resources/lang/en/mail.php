@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'welcome' => 'Hallo  :name',
+    'welcome' => 'Hello  :name',
 
     'new-user' => [
         'subject' => 'Welcome to the application portal of the Nordakademie!',
@@ -73,11 +73,23 @@ return [
     ],
 
     'contract-sent' => [
-        'subject' => 'Vertrag erhalten',
-        'body' => '<br> Ihr Vertrag wurde erfolgreich empfangen.',
-        'paragraph1' => '<br> herzlichen Glückwunsch – Sie haben alle Schritte im Auswahlverfahren erfolgreich absolviert! 😊Wir freuen uns, Ihnen heute mitzuteilen, dass wir Ihnen gerne einen Studienplatz ab dem :desiredBeginning im Studiengang :studyCourse anbieten möchten.',
-        'paragraph2' => '<br> Ihren Studienvertrag werden den nächsten Tagen in die Post geben mit der Bitte, diesen schnellstmöglich an uns zurückzusenden.',
+        'subject' => 'Contract received',
+        'body' => '<br> Your contract has been successfully received.',
+        'paragraph1' => '<br> Congratulations – You have successfully completed all steps in the selection process! 😊We are pleased to inform you today that we would be pleased to offer you a place on the course from the :desiredBeginning in the study programme :studyCourse would like to offer..',
+        'paragraph2' => '<br> Your study contract will be in the post in the next few days with the request that you return it to us as soon as possible.',
         'paragraph3' => '<br> Wir freuen uns auf Sie!',
+    ],
+
+    'contract-received' => [
+        'subject' => 'Contract received',
+        'body' => '<br> Your contract received successfully.',
+        'paragraph1' => '<br> We received your signed contract today.',
+        'paragraph2' => '<br> Now it is only a small step until you can start your studies. ',
+        'paragraph3' => '<br> In preparation, we still need additional information from you, which you can submit to us online. There you can indicate, for example, whether you want to pay the tuition fees in installments and to which address you would like to receive your study materials.',
+        'paragraph4' => '<br>Please complete the forms as soon as possible, as your enrollment can only be carried out after you have completed the accompanying study form and the data has been collected for the State Statistical Office! ',
+        'paragraph5' => '<br> In good time before the start of your studies, you will receive your access data for your NORDAKADEMIE account by mail. Via this account you will receive important information, e.g. on the first attendance phase or your enrollment key for self-study.',
+        'study-sheet-action' => 'Go to Study Sheet',
+        'government-form-action' => 'Go to Government Form',
     ],
 
     'contact-us' => [

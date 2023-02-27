@@ -16,19 +16,28 @@ class ApplicantEnrolmentFieldSeeder extends Seeder
     {
         Field::create([
             'type' => 'select',
-            'related_option_table' => 'companies',
-            'label' => __('Partner company'),
+            'related_option_table' => 'enroll_course',
+            'label' => 'Enroll Course',
             'key' => 'id',
-            'placeholder' => __('Select partner company'),
+            'placeholder' => 'Select Course',
             'is_required' => true,
         ]);
 
         Field::create([
-            'type' => 'multi_select',
-            'related_option_table' => 'company_contacts',
-            'label' => __('Partner company contacts'),
+            'type' => 'select',
+            'related_option_table' => 'companies',
+            'label' => 'Partner company',
             'key' => 'id',
-            'placeholder' => __('Select company contacts'),
+            'placeholder' => 'Select partner company',
+            'is_required' => true,
+        ]);
+
+        Field::create([
+            'type' => 'select',
+            'related_option_table' => 'company_contacts',
+            'label' => 'Partner company contacts',
+            'key' => 'id',
+            'placeholder' => 'Select company contacts',
             'is_required' => true,
         ]);
     }

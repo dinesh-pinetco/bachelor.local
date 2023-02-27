@@ -22,7 +22,7 @@
                                 <x-jet-label for="description" class="block required">{{ __('Description') }}
                                 </x-jet-label>
                                 <div class="mt-1">
-                                    <textarea id="description" name="description" wire:model.defer="test.description" placeholder="Description"
+                                    <textarea id="description" name="description" wire:model.defer="test.description" placeholder="{{ __('Description') }}"
                                         rows="3"
                                         class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray resize-none shadow-sm"></textarea>
                                     <x-jet-input-error for="test.description" />
@@ -48,7 +48,7 @@
                                 <x-livewire-select id="has_passing_limit" name="has_passing_limit"
                                                    model="test.has_passing_limit"
                                                    class="w-full">
-                                    <option value="">{{ __('Select type') }}</option>
+                                    <option value="">{{ __('Select Type') }}</option>
                                     <option value="1">{{ __('Yes') }}</option>
                                     <option value="0">{{ __('No') }}</option>
                                 </x-livewire-select>

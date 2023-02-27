@@ -6,7 +6,6 @@ use App\Enums\ApplicationStatus;
 use App\Models\ApplicantCompany;
 use App\Models\Company;
 use App\Models\User;
-use App\Services\Companies\Companies;
 use Livewire\Component;
 
 class Index extends Component
@@ -14,12 +13,15 @@ class Index extends Component
     public $companies = [];
 
     public $selectedCompanies = [];
+
     public $appliedCompanies = [];
 
     public $mailContent = null;
 
     public $search = null;
+
     public $industry = null;
+
     public $zip_code = null;
 
     public $showTextarea = false;
@@ -35,16 +37,16 @@ class Index extends Component
     ];
 
     protected $queryString = [
-        'search' => [ 'except' => ''],
-        'zip_code' => [ 'except' => ''],
-        'industry' => [ 'except' => ''],
+        'search' => ['except' => ''],
+        'zip_code' => ['except' => ''],
+        'industry' => ['except' => ''],
     ];
 
     public function mount()
     {
         $this->user = auth()->user();
 
-        $this->appliedCompanies = ApplicantCompany::where('user_id',auth()->id())->get();
+        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->get();
     }
 
     public function selectCompany()
@@ -54,6 +56,8 @@ class Index extends Component
         ]);
 
         $this->fetchCompanies();
+
+        $this->emitSelf('refresh');
     }
 
     public function showProfileMarketplace()
@@ -64,23 +68,22 @@ class Index extends Component
 //        ]);
 
         $this->emitSelf('refresh');
-
     }
 
     protected function fetchCompanies()
     {
-        $this->companies = Company::when($this->search, function($query) {
-            $query->where('name', 'like',  "%$this->search%");
+        $this->companies = Company::when($this->search, function ($query) {
+            $query->where('name', 'like', "%$this->search%");
         })
-        ->when($this->zip_code, function($query) {
-            $query->where('zip_code', 'like',  "$this->zip_code%");
+        ->when($this->zip_code, function ($query) {
+            $query->where('zip_code', 'like', "$this->zip_code%");
         })
         ->get();
     }
 
     public function next()
     {
-        if(!count($this->selectedCompanies)) {
+        if (! count($this->selectedCompanies)) {
             $this->toastNotify(__('Please select at-least one company!'), '', TOAST_INFO);
         } else {
             $this->showTextarea = true;
@@ -93,7 +96,7 @@ class Index extends Component
     {
         $this->validate();
 
-        foreach ($this->selectedCompanies as $key =>  $company) {
+        foreach ($this->selectedCompanies as $key => $company) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
                 'company_id' => $key,

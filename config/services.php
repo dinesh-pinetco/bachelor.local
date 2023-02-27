@@ -40,6 +40,24 @@ return [
     'moodle' => [
         'base_url' => env('MOODLE_BASE_URL').'?wstoken='.env('MOODLE_WSTOKEN'),
         'wstoken' => env('MOODLE_WSTOKEN'),
+        'types' => [
+            'General Knowledge Questions' => [
+                'course_id' => 14,
+                'test_id' => 30,
+            ],
+            'School Grades' => [
+                'course_id' => 15,
+                'test_id' => 33,
+            ],
+            'Math test' => [
+                'course_id' => 12,
+                'test_id' => 21,
+            ],
+            'English test' => [
+                'course_id' => 16,
+                'test_id' => 35,
+            ],
+        ],
     ],
 
     'cubia' => [
