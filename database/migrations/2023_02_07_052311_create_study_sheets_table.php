@@ -17,21 +17,25 @@ class CreateStudySheetsTable extends Migration
         Schema::create('study_sheets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->enum('payment', [StudySheet::payments()])->nullable()->default(StudySheet::PAYMENT_INSTALLMENT);
-            $table->enum('billing_address', [StudySheet::address()])->nullable()->default(StudySheet::ADDRESS_MAIN_ADDRESS);
-            $table->json('custom_billing_address')->nullable();
-            $table->enum('delivery_address', [StudySheet::address()])->nullable()->default(StudySheet::ADDRESS_MAIN_ADDRESS);
-            $table->json('custom_delivery_address')->nullable();
-            $table->boolean('privacy_policy')->nullable()->default(false);
-            $table->integer('health_insurance_type')->comment('1=Private, 2=Legal')->nullable();
+            $table->string('date_of_birth')->nullable();
+            $table->string('place_of_birth')->nullable();
+            $table->string('country_of_birth')->nullable();
+            $table->string('nationality_first')->nullable();
+            $table->string('nationality_second')->nullable();
+            $table->string('student_id_card_photo')->nullable();
+            $table->boolean('have_health_insurance')->nullable()->default(false);
+            $table->boolean('is_health_insurance_private')->nullable()->default(false);
+            $table->integer('health_insurance_company_id')->nullable();
             $table->string('health_insurance_number', 50)->nullable();
-            $table->foreignId('health_insurance_company_id')->nullable();
-            $table->string('health_insurance_company', 100)->nullable();
-            $table->string('account_holder', 50)->nullable()->comment('For SEPA direct debit mandate');
-            $table->string('iban', 30)->nullable()->comment('For SEPA direct debit mandate');
-            $table->string('swift_code', 30)->nullable()->comment('For SEPA direct debit mandate');
+            $table->string('school')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
+            $table->string('street')->nullable();
+            $table->integer('zip')->nullable();
+            $table->string('place')->nullable();
             $table->boolean('is_authorize')->default(false)->nullable()->comment('For SEPA direct debit mandate');
-
+            $table->boolean('privacy_policy')->nullable()->default(false);
             $table->boolean('is_submit')->default(false);
             $table->timestamps();
         });

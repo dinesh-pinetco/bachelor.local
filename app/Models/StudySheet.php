@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 
@@ -54,6 +56,13 @@ class StudySheet extends Model implements ContractsAuditable
             self::ADDRESS_MAIN_ADDRESS,
             self::ADDRESS_CUSTOM_ADDRESS,
         ];
+    }
+
+    protected function studentIdCardPhotoUrl(): Attribute
+    {
+        return Attribute::get(function ($value,$attribute) {
+            return !is_null($attribute['student_id_card_photo']) ? Storage::url($attribute['student_id_card_photo']) : null;
+        });
     }
 
     public function health_insurance_companies(): BelongsTo

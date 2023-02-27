@@ -74,4 +74,9 @@ class TestController extends Controller
     {
         return Redirect::to(URL::signedRoute('government-form', ['user' => $user->id]));
     }
+
+    public function studySheetForm(User $user)
+    {
+        return Redirect::to(URL::signedRoute('study-sheet', ['user' => $user->id]));
+    }
 }

@@ -5,18 +5,20 @@ namespace App\Http\Livewire;
 use App\Mail\GovernmentStudySheetSubmit;
 use App\Models\HealthInsuranceCompany;
 use App\Models\Nationality;
+use App\Models\School;
 use App\Models\StudySheet as StudySheetModel;
 use App\Traits\StudySheetFormValidations;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class StudySheet extends Component
 {
-    use StudySheetFormValidations;
+    use StudySheetFormValidations , WithFileUploads;
 
     public $applicant;
 
@@ -26,58 +28,69 @@ class StudySheet extends Component
 
     public bool $isGermanUser = false;
 
-    public bool $paymentOptionDisabled = false;
-
     private string $paymentOptionDisableCompany = 'CGI';
+
+    public $schools;
+
+    public $nationalities;
+
+    public $healthInsuranceCompanies;
+
+    public $coursesNames;
+
+    public $desiredBeginning;
+
+    public string $firstName;
+
+    public string $lastName;
+
+    public string $email;
 
     public function mount()
     {
-        $countryOfBirth = $this->applicant->getValueByField('nationality_id');
-        if ($countryOfBirth) {
-            $germanCountry = Nationality::where('name', 'Deutschland')->first();
-            $this->isGermanUser = $countryOfBirth->value == $germanCountry->id;
-        }
-
         $this->studySheet = $this->applicant->study_sheet ?? new StudySheetModel();
 
-        if (! $this->applicant->study_sheet) {
-            $this->studySheet->billing_address = 1;
-        }
-
         $this->formAlreadySubmitted = $this->studySheet->is_submit ?? false;
-        $this->paymentOptionDisabled();
+
+        $this->schools = School::get();
+
+        $this->healthInsuranceCompanies = HealthInsuranceCompany::active()->get();
+
+        $this->nationalities = Nationality::orderBy('name')->get();
+
+        $this->coursesNames = $this->applicant->coursesName();
+
+        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->format('F.Y');
+
+        $this->firstName = $this->applicant->first_name;
+
+        $this->lastName = $this->applicant->last_name;
+        $this->email = $this->applicant->email;
     }
 
-    public function getHealthInsuranceCompaniesProperty(): Collection
+    public function updatedStudySheetStudentIdCardPhoto()
     {
-        return HealthInsuranceCompany::active()->get();
+
+        $this->validate([
+            'studySheet.student_id_card_photo'  => ['required', 'mimes:jpg,jpeg,png', 'max:10240'],
+        ],[],[
+            'studySheet.student_id_card_photo' => __('student card photo'),
+        ]);
+        $this->studySheet->student_id_card_photo = $this->studySheet->student_id_card_photo->store('student-id-photo');
+        $this->save();
+    }
+
+    public function deletePhoto()
+    {
+        Storage::delete($this->studySheet->student_id_card_photo);
+        $this->studySheet->student_id_card_photo = null;
+        $this->studySheet->save();
+        $this->emitSelf('refresh');
     }
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-        $this->paymentOptionDisabled();
-
-        $this->studySheet->billing_address = $this->studySheet->billing_address ?: null;
-        $this->studySheet->health_insurance_type = $this->studySheet->health_insurance_type ?: null;
-        $this->studySheet->health_insurance_company_id = $this->studySheet->health_insurance_company_id ?: null;
-
-        if ($this->studySheet->billing_address == StudySheetModel::ADDRESS_MAIN_ADDRESS) {
-            $this->studySheet->custom_billing_address = null;
-        }
-
-        if ($this->studySheet->health_insurance_type == StudySheetModel::HEALTH_INSURANCE_PRIVATE) {
-            $this->validateOnly('health_insurance_number');
-            $this->validateOnly('health_insurance_company_id');
-            $this->validateOnly('health_insurance_company');
-            $this->studySheet->health_insurance_number = null;
-            $this->studySheet->health_insurance_company_id = null;
-            $this->studySheet->health_insurance_company = null;
-        }
-        if ($this->studySheet->health_insurance_company_id != StudySheetModel::HEALTH_INSURANCE_OTHER) {
-            $this->studySheet->health_insurance_company = null;
-        }
-
         $this->save();
     }
 
@@ -109,14 +122,5 @@ class StudySheet extends Component
     public function render(): Factory|View|Application
     {
         return view('livewire.study-sheet');
-    }
-
-    public function paymentOptionDisabled(): void
-    {
-        if ($this->studySheet->billing_address == 2 && data_get($this->studySheet->custom_billing_address, 'name') == $this->paymentOptionDisableCompany) {
-            $this->paymentOptionDisabled = true;
-        } else {
-            $this->paymentOptionDisabled = false;
-        }
     }
 }

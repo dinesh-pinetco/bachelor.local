@@ -778,5 +778,23 @@
     "Select company contacts": "Firmenkontakte auswählen",
     "Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.": "Herzlichen Glückwunsch! Sie haben sich bei den folgenden Unternehmen beworben. Sie können die ausgewählten Unternehmen jederzeit bearbeiten oder weitere hinzufügen,",
     "Additionally, would you like to be listed on the market place so companies can contact you?": "Möchten Sie zusätzlich auf dem Marktplatz aufgeführt werden, damit Unternehmen Sie kontaktieren können?",
-    "Yes, get listed": "Ja, lassen Sie sich eintragen"
+    "Yes, get listed": "Ja, lassen Sie sich eintragen",
+    "Date of Birth": "Geburtsdatum",
+    "Country of birth": "Geburtsland",
+    "Nationality first": "Erste Staatsangehörigkeit",
+    "Nationality second": "Zweite Staatsangehörigkeit",
+    "Student card photo": "Foto des Studentenausweises",
+    "School": "Schule",
+    "Address": "Adresse",
+    "Street": "Straße",
+    "Zip": "Postleitzahl",
+    "Place": "Ort",
+    "Degree": "Grad",
+    "Start of studies": "Beginn des Studiums",
+    "Private health insurance?": "Private Krankenversicherung?",
+    "address supplement": "Adresszusatz",
+    "Do you have information about your health insurance?": "Haben Sie Informationen über Ihre Krankenversicherung Versicherung?",
+    "If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.": "Wenn Ihre Versicherungsdaten für Ihre Krankenkasse vorliegen, geben Sie sie hier ein. Die Einschreibung ist erst möglich, nachdem die Daten zu Ihrem Krankenversicherungsstatus eingegeben und geprüft wurden. Daher sollten Sie diese Daten hier eintragen, sobald sie Ihnen vorliegen.",
+    "When in list": "wenn in Liste"
+
 }
