@@ -165,7 +165,8 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
                 $sheet->setCellValue('N6','=SUM(C6:M6)');
                 $sheet->setCellValue('N7','=SUM(C7:M7)');
                 $sheet->setCellValue('N8','=SUM(C8:M8)');
-                $sheet->setCellValue('N9','=SUM(N3:N8)');
+                $sheet->setCellValue('N9','=SUM(C9:M9)');
+                $sheet->setCellValue('N10','=SUM(C10:M10)');
 
                 $styleArray = [
                     'alignment' => [
