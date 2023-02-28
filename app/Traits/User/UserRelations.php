@@ -73,7 +73,7 @@ trait UserRelations
         return $this->hasOne(UserConfiguration::class);
     }
 
-    public function companies()
+    public function companies(): HasMany
     {
         return $this->hasMany(ApplicantCompany::class);
     }

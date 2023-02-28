@@ -19,7 +19,7 @@ class Index extends Component
     protected $listeners = ['refreshData'];
 
     protected array $rules = [
-        'contract.send_date'    => ['required', 'date','after_or_equal:today'],
+        'contract.send_date' => ['required', 'date', 'after_or_equal:today'],
         'contract.receive_date' => ['nullable', 'date', 'after_or_equal:contract.send_date'],
     ];
 

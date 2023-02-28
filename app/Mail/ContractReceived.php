@@ -3,10 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
@@ -31,10 +28,9 @@ class ContractReceived extends Mailable
         return $this->subject(__('Your contract has arrived').' | '.$this->applicant->courses->first()->name.' | NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.contract-received', [
-                'name'              => $this->applicant->full_name,
-                'studySheetUrl'     => URL::signedRoute('study-sheet', ['user' => $this->applicant->id]),
+                'name' => $this->applicant->full_name,
+                'studySheetUrl' => URL::signedRoute('study-sheet', ['user' => $this->applicant->id]),
                 'governmentFormUrl' => URL::signedRoute('government-form', ['user' => $this->applicant->id]),
             ]);
     }
-
 }

@@ -27,6 +27,8 @@ Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group
     Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
     Route::get('logout', [LoginController::class, 'logout']);
 
+    Route::post('applicants/{user}/companies/{company}/hired', [SannaUserController::class, 'userHired']);
+
     Route::middleware(['auth:sanctum', 'role:'.ROLE_ADMIN])->post('admin-create', function (Request $request) {
         $validateData = $request->validate([
             'type' => ['required', 'in:admin,employee'],
