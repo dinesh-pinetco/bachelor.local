@@ -94,6 +94,6 @@ class UserPolicy
 
     public function forcePass(User $user, User $applicant)
     {
-        return in_array($applicant->application_status->value, [ApplicationStatus::PROFILE_INFORMATION_COMPLETED(), ApplicationStatus::TEST_FAILED(), ApplicationStatus::TEST_FAILED_CONFIRM(), ApplicationStatus::TEST_RESET()]);
+        return in_array($applicant->application_status, [ApplicationStatus::PROFILE_INFORMATION_COMPLETED, ApplicationStatus::TEST_FAILED, ApplicationStatus::TEST_RESET]);
     }
 }
