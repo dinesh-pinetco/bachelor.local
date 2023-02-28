@@ -20,6 +20,10 @@ class DeleteRejectedApplicationData
         $this->user->meteor()->delete();
         $this->user->results()->delete();
         $this->user->media()->delete();
+        $this->user->companies()->delete();
+        $this->user->study_sheet()->delete();
+        $this->user->government_form()->delete();
+        $this->user->contract()->delete();
         $this->user->configuration()->delete();
     }
 }

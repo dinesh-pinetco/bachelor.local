@@ -5,8 +5,8 @@ namespace App\Traits\User;
 use App\Models\UserConfiguration;
 use App\Pdf\SelectionTestFailedResultPdf;
 use App\Pdf\SelectionTestPassedResultPdf;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Storage;
 
 trait SelectionTestPdf
 {
