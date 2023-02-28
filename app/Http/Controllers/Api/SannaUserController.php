@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SannaUserResource;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -95,5 +96,10 @@ class SannaUserController extends Controller
         User::where('id', $request->applicant_id)->update(['is_synced_to_sanna' => true]);
 
         return response()->json(['message' => __('User sync successfully.')]);
+    }
+
+    public function userHired(User $user, Company $company)
+    {
+        dd('Soon...');
     }
 }
