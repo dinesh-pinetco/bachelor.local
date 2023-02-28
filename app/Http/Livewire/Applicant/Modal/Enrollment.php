@@ -6,7 +6,6 @@ use App\Http\Livewire\Traits\HasModal;
 use App\Mail\ApplicantEnrolled;
 use App\Models\Company;
 use App\Models\CompanyContacts;
-use App\Models\Course;
 use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\User;
@@ -57,7 +56,7 @@ class Enrollment extends Component
 
         $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
         $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
-        $this->enrollCourse = Field::where('label','Enroll Course')->first()?->id;
+        $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
     }
 
     protected function fetchCompanies()
@@ -78,7 +77,7 @@ class Enrollment extends Component
             ->first()
             ?->value;
 
-        $this->applicantCourse = FieldValue::where('field_id',$this->enrollCourse)
+        $this->applicantCourse = FieldValue::where('field_id', $this->enrollCourse)
             ->where('user_id', $this->applicant->id)
             ->first()?->value;
 
@@ -130,7 +129,7 @@ class Enrollment extends Component
         $enrolApplicantCourse = FieldValue::updateOrCreate([
             'user_id' => $this->applicant->id,
             'field_id' => $this->enrollCourse,
-        ],[
+        ], [
             'value' => $this->applicantCourse,
         ]);
 

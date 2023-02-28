@@ -14,11 +14,17 @@
             </div>
         @endif
     </div>
+    @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_TAKEN, \App\Enums\ApplicationStatus::TEST_FAILED]))
+        <span class="text-2xl">
+            {{ __('You will be informed as soon as the test results are available') }}
+        </span>
+    @endif
     @if ($applicant->isSelectionTestingMode())
         @foreach ($tests as $test)
             <div class="flex items-center flex-wrap -mx-4">
                 <div class="p-4 w-full md:w-2/5 xl:w-1/3">
-                    <svg class="h-16 w-16 md:h-20 md:w-20 md:mx-auto stroke-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="h-16 w-16 md:h-20 md:w-20 md:mx-auto stroke-current" width="24" height="24"
+                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M20 12V5.74853C20 5.5894 19.9368 5.43679 19.8243 5.32426L16.6757 2.17574C16.5632 2.06321 16.4106 2 16.2515 2H4.6C4.26863 2 4 2.26863 4 2.6V21.4C4 21.7314 4.26863 22 4.6 22H11"
                             stroke="#003A79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -91,11 +97,6 @@
         <div class="flex items-center flex-wrap">
 
         </div>
-    @endif
-    @if($applicant->application_status == \App\Enums\ApplicationStatus::TEST_TAKEN)
-        <span class="text-2xl">
-            {{ __('You will be informed as soon as the test results are available') }}
-        </span>
     @endif
 
 

@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\StudySheet as StudySheetModel;
 use Illuminate\Validation\Rule;
 
 trait StudySheetFormValidations
@@ -18,10 +17,10 @@ trait StudySheetFormValidations
             'studySheet.student_id_card_photo' => ['required'],
             'studySheet.have_health_insurance' => ['nullable'],
             'studySheet.is_health_insurance_private' => ['nullable'],
-            'studySheet.health_insurance_company_id' =>    [Rule::when($this->studySheet->have_health_insurance && !$this->studySheet->is_health_insurance_private,'exists:health_insurance_companies,id')],
-//            'studySheet.health_insurance_company_id' => ['required_if:studySheet.have_health_insurance,1', 'nullable', 'exists:health_insurance_companies,id'],
-            'studySheet.health_insurance_number' => [Rule::when($this->studySheet->have_health_insurance && !$this->studySheet->is_health_insurance_private,['regex:/[A-Z]{1}[0-9]{9}/u', 'min:10', 'max:10'])],
-//            'studySheet.health_insurance_number' => [Rule::requiredIf($this->studySheet->have_health_insurance && !$this->studySheet->is_health_insurance_private),'regex:/[A-Z]{1}[0-9]{9}/u', 'min:10', 'max:10'],
+            'studySheet.health_insurance_company_id' => [Rule::when($this->studySheet->have_health_insurance && ! $this->studySheet->is_health_insurance_private, 'exists:health_insurance_companies,id')],
+            //            'studySheet.health_insurance_company_id' => ['required_if:studySheet.have_health_insurance,1', 'nullable', 'exists:health_insurance_companies,id'],
+            'studySheet.health_insurance_number' => [Rule::when($this->studySheet->have_health_insurance && ! $this->studySheet->is_health_insurance_private, ['regex:/[A-Z]{1}[0-9]{9}/u', 'min:10', 'max:10'])],
+            //            'studySheet.health_insurance_number' => [Rule::requiredIf($this->studySheet->have_health_insurance && !$this->studySheet->is_health_insurance_private),'regex:/[A-Z]{1}[0-9]{9}/u', 'min:10', 'max:10'],
             'studySheet.school' => ['nullable', 'string'],
             'studySheet.phone' => ['required', 'regex:/[0-9]/u'],
             'studySheet.address' => ['required'],
@@ -36,22 +35,22 @@ trait StudySheetFormValidations
     protected function validationAttributes(): array
     {
         return [
-            'studySheet.date_of_birth'                  => __('Date of Birth'),
-            'studySheet.place_of_birth'                 => __('Place of Birth'),
-            'studySheet.country_of_birth'               => __('Country of birth'),
-            'studySheet.nationality_first'              => __('Nationality first'),
-            'studySheet.nationality_second'             => __('Nationality second'),
-            'studySheet.student_id_card_photo'          =>  __('Student card photo'),
-            'studySheet.health_insurance_company_id'    => __('Health insurance company'),
-            'studySheet.health_insurance_number'        => __('Health insurance number'),
-            'studySheet.school'                         => __('School'),
-            'studySheet.phone'                          => __('Phone'),
-            'studySheet.address'                        => __('Address'),
-            'studySheet.street'                         => __('Street'),
-            'studySheet.zip'                            => __('Zip'),
-            'studySheet.place'                          => __('Place'),
-            'studySheet.is_authorize'                   => __('Is authorize'),
-            'studySheet.privacy_policy'                 => __('Privacy Policy'),
+            'studySheet.date_of_birth' => __('Date of Birth'),
+            'studySheet.place_of_birth' => __('Place of Birth'),
+            'studySheet.country_of_birth' => __('Country of birth'),
+            'studySheet.nationality_first' => __('Nationality first'),
+            'studySheet.nationality_second' => __('Nationality second'),
+            'studySheet.student_id_card_photo' => __('Student card photo'),
+            'studySheet.health_insurance_company_id' => __('Health insurance company'),
+            'studySheet.health_insurance_number' => __('Health insurance number'),
+            'studySheet.school' => __('School'),
+            'studySheet.phone' => __('Phone'),
+            'studySheet.address' => __('Address'),
+            'studySheet.street' => __('Street'),
+            'studySheet.zip' => __('Zip'),
+            'studySheet.place' => __('Place'),
+            'studySheet.is_authorize' => __('Is authorize'),
+            'studySheet.privacy_policy' => __('Privacy Policy'),
         ];
     }
 

@@ -70,10 +70,9 @@ class StudySheet extends Component
 
     public function updatedStudySheetStudentIdCardPhoto()
     {
-
         $this->validate([
-            'studySheet.student_id_card_photo'  => ['required', 'mimes:jpg,jpeg,png', 'max:10240'],
-        ],[],[
+            'studySheet.student_id_card_photo' => ['required', 'mimes:jpg,jpeg,png', 'max:10240'],
+        ], [], [
             'studySheet.student_id_card_photo' => __('student card photo'),
         ]);
         $this->studySheet->student_id_card_photo = $this->studySheet->student_id_card_photo->store('student-id-photo');
