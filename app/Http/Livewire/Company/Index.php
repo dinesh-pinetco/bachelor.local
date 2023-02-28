@@ -47,6 +47,10 @@ class Index extends Component
         $this->user = auth()->user();
 
         $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->get();
+
+        $this->mailContent = auth()->user()?->companies()->first()?->mail_content;
+
+        $this->dispatchBrowserEvent('init-trix-editor');
     }
 
     public function selectCompany()
@@ -63,9 +67,6 @@ class Index extends Component
     public function showProfileMarketplace()
     {
         auth()->user()->touch('show_application_on_marketplace_at');
-//        $this->user->update([
-//            'application_status' => ApplicationStatus::SHOW_APPLICATION_ON_MARKETPLACE(),
-//        ]);
 
         $this->emitSelf('refresh');
     }
@@ -96,6 +97,18 @@ class Index extends Component
     {
         $this->validate();
 
+        if(!is_null($this->appliedCompanies)){
+            foreach($this->appliedCompanies as $key => $company) {
+                $this->user->companies()->updateOrCreate([
+                    'user_id' => $this->user->id,
+                    'company_id' => $key,
+                ], [
+                    'company_name' => $company->company_name,
+                    'mail_content' => $this->mailContent,
+                ]);
+            }
+        }
+
         foreach ($this->selectedCompanies as $key => $company) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
@@ -104,24 +117,28 @@ class Index extends Component
                 'company_name' => $company,
                 'mail_content' => $this->mailContent,
             ]);
-
-            // TOD: Send mail to company when email is available in API
-            // Mail::to('shubham@pinetco.com')
-            //     ->bcc(config('mail.supporter.address'))
-            //     ->send(new ApplyToCompanyMail($this->mailContent));
         }
 
         $this->user->update([
             'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
         ]);
 
-        $this->reset(['selectedCompanies', 'mailContent']);
-
-        $this->dispatchBrowserEvent('reset-mail-content');
-
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
-        $this->emitSelf('refresh');
+        $this->dispatchBrowserEvent('refresh-page');
+    }
+
+    public function removeCompany($appliedCompanyId)
+    {
+        if(count($this->user->companies()->get()) <= 1){
+            return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
+        }
+
+       $this->user->companies()->where('id',$appliedCompanyId)->delete();
+
+       $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+
+       $this->emitSelf('refresh');
     }
 
     public function render()

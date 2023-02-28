@@ -852,5 +852,10 @@
     "Do you have information about your health insurance?": "Haben Sie Informationen über Ihre Krankenversicherung Versicherung?",
     "If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.": "Wenn Ihre Versicherungsdaten für Ihre Krankenkasse vorliegen, geben Sie sie hier ein. Die Einschreibung ist erst möglich, nachdem die Daten zu Ihrem Krankenversicherungsstatus eingegeben und geprüft wurden. Daher sollten Sie diese Daten hier eintragen, sobald sie Ihnen vorliegen.",
     "When in list": "wenn in Liste",
-    "Please select at-least one company!": "Bitte wählen Sie mindestens ein Unternehmen aus!"
+    "Please select at-least one company!": "Bitte wählen Sie mindestens ein Unternehmen aus!",
+    "Please complete all required fields.": "Bitte füllen Sie alle erforderlichen Felder aus.",
+    "Warning": "Warnung",
+    "You can't delete all company.": "Sie können nicht das gesamte Unternehmen löschen.",
+    "Company deleted successfully.": "Unternehmen erfolgreich gelöscht.",
+    "You can now select companies and write an optional text that will be displayed to all selected companies.": "Sie können nun Unternehmen auswählen und einen optionalen Text schreiben, der allen ausgewählten Unternehmen angezeigt wird."
 }

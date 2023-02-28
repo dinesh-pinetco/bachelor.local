@@ -5,7 +5,10 @@ namespace App\Http\Livewire\Employee\Applicants\Contract;
 use App\Enums\ApplicationStatus;
 use App\Mail\ContractReceived;
 use App\Mail\ContractSent;
+use App\Models\Company;
 use App\Models\Contract;
+use App\Models\Field;
+use App\Models\FieldValue;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -13,6 +16,12 @@ use Livewire\Component;
 class Index extends Component
 {
     public User $applicant;
+
+    public bool $isEdit = false;
+
+    public $enrollCompany;
+
+    public $partnerCompanyFieldId;
 
     public Contract $contract;
 
@@ -25,6 +34,15 @@ class Index extends Component
 
     public function mount()
     {
+        $this->partnerCompanyFieldId = Field::where('label','Partner company')->with('values')->first()?->id;
+
+        $companyId = FieldValue::where('field_id', $this->partnerCompanyFieldId)
+        ->where('user_id', $this->applicant->id)
+        ->first()
+        ?->value;
+
+        $this->enrollCompany = Company::where('id',$companyId)->first()?->name;
+
         $this->contract = $this->applicant->contract ?? new Contract();
     }
 

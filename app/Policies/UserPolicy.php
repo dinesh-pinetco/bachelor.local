@@ -28,9 +28,9 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user)
     {
-        //
+        return !in_array($user->application_status->value, [ApplicationStatus::TEST_FAILED(), ApplicationStatus::TEST_FAILED_CONFIRM()]);
     }
 
     /**

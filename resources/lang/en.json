@@ -831,5 +831,10 @@
     "contract_returned_on": "contract_returned_on",
     "Subject Type": "Subject Type",
     "Has been hired": "Has been hired",
-    "Please select at-least one company!": "Please select at-least one company!"
+    "Please select at-least one company!": "Please select at-least one company!",
+    "Please complete all required fields.": "Please complete all required fields.",
+    "Warning": "Warning",
+    "You can't delete all company.": "You can't delete all company.",
+    "Company deleted successfully.": "Company deleted successfully.",
+    "You can now select companies and write an optional text that will be displayed to all selected companies.": "You can now select companies and write an optional text that will be displayed to all selected companies."
 }
