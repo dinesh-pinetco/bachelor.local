@@ -9,15 +9,19 @@ use App\Models\Group;
 use App\Models\Result;
 use App\Models\Tab;
 use App\Models\Test;
+use App\Models\User;
 use App\Models\UserConfiguration;
 use App\Services\ProgressBar;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class Show extends Component
 {
+    use AuthorizesRequests;
+
     public $tabId = null;
 
     public $applicant = null;
@@ -64,6 +68,10 @@ class Show extends Component
         $this->isProfile = str_contains($this->tab->slug, 'profile');
         $this->parentGroups = $this->tab->parent_groups;
         $this->prepareCustomizedGroups($groupId);
+
+        if(in_array(auth()->user()->application_status,[ApplicationStatus::TEST_FAILED,ApplicationStatus::TEST_FAILED_CONFIRM]) && !str_contains($this->tab->slug, 'profile')){
+            $this->authorize('view',User::class);
+        }
 
         $companyField = Field::where('related_option_table', 'company_contacts')->first('id');
         $this->isEnrolled = FieldValue::where('user_id', $this->applicant->id)->where('field_id', $companyField?->id)->exists();

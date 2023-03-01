@@ -28,9 +28,9 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user)
     {
-        //
+        return !in_array($user->application_status->value, [ApplicationStatus::TEST_FAILED(), ApplicationStatus::TEST_FAILED_CONFIRM()]);
     }
 
     /**
@@ -94,6 +94,6 @@ class UserPolicy
 
     public function forcePass(User $user, User $applicant)
     {
-        return in_array($applicant->application_status->value, [ApplicationStatus::PROFILE_INFORMATION_COMPLETED(), ApplicationStatus::TEST_FAILED(), ApplicationStatus::TEST_FAILED_CONFIRM(), ApplicationStatus::TEST_RESET()]);
+        return in_array($applicant->application_status, [ApplicationStatus::PROFILE_INFORMATION_COMPLETED, ApplicationStatus::TEST_FAILED, ApplicationStatus::TEST_RESET]);
     }
 }

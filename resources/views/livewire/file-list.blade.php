@@ -14,7 +14,8 @@
         @endif
         <a href="{{ $media->url }}" target="_blank" class="block w-full truncate font-bold">{{ $media->name }}</a>
     </div>
-    <button @if ($isEdit) wire:click.prevent="delete" @endif type="button"
+    <div x-data="{ buttonDisabled: false }">
+    <button x-on:click="buttonDisabled = true" x-bind:disabled="buttonDisabled" @if ($isEdit) wire:click.prevent="delete" @endif type="button"
             class="py-2 flex-shrink-0 inline-block {{ $isEdit ?  'cursor-pointer' : 'cursor-not-allowed' }}">
         <svg class="w-5 h-5 text-red" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -22,4 +23,5 @@
                 stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
+    </div>
 </div>

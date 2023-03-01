@@ -696,6 +696,13 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="mt-4">
+                                @if($errors->any())
+                                    <span class="text-red">{{ __('Please complete all required fields.') }}</span>
+                                @endif
+                            </div>
+
                             <div class="py-3 text-right">
                                 <x-primary-button type="submit" class="">
                                     {{ __('Save') }}

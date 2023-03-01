@@ -8,7 +8,12 @@
             <div class="flex-grow w-1/3 text-primary relative">
                 <div class="lg:flex mb-10 lg:-mx-4">
                     <div class="w-full lg:w-1/2 lg:px-4 lg:max-w-md mr-auto">
-                            <div class="mb-7 value">
+                        <div>
+                            <x-jet-label for="name" value="{{ __('Company name') }}" />
+                                         <x-jet-input id="name" type="text" class="mt-1 block w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}" :disabled="!$isEdit" wire:model="enrollCompany" autofocus />
+                            <x-jet-input-error for="name" class="mt-2" />
+                        </div>
+                            <div class="mb-7 value mt-4">
                                 <x-jet-label for="label" class="block">
                                     {{ __('Contract Send Date') }}
                                 </x-jet-label>
