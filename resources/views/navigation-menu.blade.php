@@ -305,7 +305,7 @@
 
                     @role(ROLE_APPLICANT)
                     @if (!in_array(auth()->user()->application_status, [\App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_NAK, \App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT]))
-                        <x-danger-button class="mx-4 mt-4"
+                        <x-danger-button class=" mr-auto ml-4 mt-4"
                                          data-tippy-content="{{__('Cancle / Reject Applicantion')}}"
                                          onclick="Livewire.emit('ApplicationReject.modal.toggle', {{ auth()->user() }})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
