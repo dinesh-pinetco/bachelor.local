@@ -62,6 +62,7 @@
                                             {{ $selectedCompany }}
                                         </div>
                                     @endforeach
+
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                                     {{__('Company list')}}
                                 </h6>
                                 <div class="max-h-64 md:max-h-full md:h-full overflow-y-auto">
-                                    @foreach ($companies as $company)
+                                    @forelse ($companies as $company)
                                         <div class="flex items-center gap-2 py-1">
                                             <input
                                                 class="m-1 flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
@@ -90,7 +91,9 @@
                                             <label class="mb-0 cursor-pointer text-sm"
                                                    for="{{ $company->id }}"> {{ ($company->name) }}</label>
                                         </div>
-                                    @endforeach
+                                    @empty
+                                        <p class="text-sm text-darkgray">{{__('No Company Found')}}</p>
+                                    @endforelse
                                 </div>
                             </div>
                             <div class="w-full md:w-1/2 flex-shrink-0 h-full overflow-y-auto">
@@ -98,11 +101,13 @@
                                     {{__('Selected companies')}}
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
-                                    @foreach ($selectedCompanies as $key => $selectedCompany)
+                                    @forelse ($selectedCompanies as $key => $selectedCompany)
                                         <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
                                             {{ $selectedCompany }}
                                         </div>
-                                    @endforeach
+                                    @empty
+                                        <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -153,18 +158,22 @@
                         {{ __('Additionally, would you like to be listed on the market place so companies can contact you?') }}
                     </p>
                 </div>
-
-                <x-primary-button type="button"
-                                  wire:click="showProfileMarketplace"
-                                  wire:loading.attr="disabled">
-                    {{ __('Yes, get listed') }}
-                </x-primary-button>
+                <div class="flex flex-wrap items-end gap-4">
+                    <x-primary-button class="h-11" type="button"
+                                      wire:click="showProfileMarketplace"
+                                      wire:loading.attr="disabled">
+                        {{ __('Yes, get listed') }}
+                    </x-primary-button>
+                    <x-secondary-button class="h-11">
+                        {{ __('No, Not listd') }}
+                    </x-secondary-button>
+                </div>
             @endif
 
             @if(!is_null($user->show_application_on_marketplace_at))
                 <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
                 <div class="flex flex-wrap gap-4">
-                    @foreach ($appliedCompanies as $appliedCompany)
+                    @forelse ($appliedCompanies as $appliedCompany)
                         <div class="inline-flex items-center space-x-2 px-4 py-2 bg-primary bg-opacity-10 rounded-sm">
                             <div class="text-xs">
                                 {{ $appliedCompany->company_name }}
@@ -177,7 +186,9 @@
                                 </svg>
                             </button>
                         </div>
-                    @endforeach
+                    @empty
+
+                    @endforelse
                 </div>
                 <div wire:ignore class="w-full max-w-xs sm:max-w-lg xl:max-w-2xl mt-10">
                     <input id="email-content" type="hidden" name="mailContent">

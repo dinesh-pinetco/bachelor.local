@@ -2,6 +2,7 @@
 
     <livewire:tabs :applicant="$applicant??''" />
 
+    @dump($applicant->companies)
     @if($applicant->companies()->exists())
         <div>
             <div>

@@ -857,5 +857,9 @@
     "Warning": "Warnung",
     "You can't delete all company.": "Sie können nicht das gesamte Unternehmen löschen.",
     "Company deleted successfully.": "Unternehmen erfolgreich gelöscht.",
-    "You can now select companies and write an optional text that will be displayed to all selected companies.": "Sie können nun Unternehmen auswählen und einen optionalen Text schreiben, der allen ausgewählten Unternehmen angezeigt wird."
+    "You can now select companies and write an optional text that will be displayed to all selected companies.": "Sie können nun Unternehmen auswählen und einen optionalen Text schreiben, der allen ausgewählten Unternehmen angezeigt wird.",
+    "No, Not listd": "Nein, Nicht aufgelistet",
+    "please select the companies": "Bitte wählen Sie die Unternehmen",
+    "No Company Found": "Kein Unternehmen gefunden"
+
 }
