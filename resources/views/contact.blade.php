@@ -3,7 +3,7 @@
         <h2 class="mb-5 md:mb-9 text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
             {{ __('Support') }}
         </h2>
-        <div class="flex flex-wrap justify-between items-start -mx-4">
+        <div class="flex flex-wrap justify-between items-start -mx-4 ">
             <div class="p-4 w-full order-1 lg:order-0 lg:w-1/2 xl:w-2/5">
                 <form action="{{ route('contact-us.mail') }}" method="POST">
                     @csrf

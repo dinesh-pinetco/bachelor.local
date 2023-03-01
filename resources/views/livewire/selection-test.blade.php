@@ -7,7 +7,7 @@
             </h2>
             @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
                 <div wire:click="getTestResultPdf"
-                     class="ml-8 px-4 py-2 flex items-center justify-center text-black bg-gray-400 hover:bg-gray-500 rounded-md cursor-pointer">
+                     class="ml-8 px-4 py-2 flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
                     <svg class="h-4 w-4 stroke-current" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 5.71432L8 11.7143L14 5.71432H10.2857V0.857178H5.71429V5.71432H2Z" fill="currentColor"/>
                         <rect y="14.0002" width="16" height="1.14286" fill="currentColor"/>

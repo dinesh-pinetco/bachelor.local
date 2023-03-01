@@ -1,6 +1,5 @@
 <div>
-    <div class="w-full max-w-screen-xl mx-auto">
-
+    <div class="w-full max-w-screen-xl mx-auto lg:pl-40 2xl:pl-64">
         <div x-data="{ active: 1 }" class="space-y-4">
             @forelse ($faq as $value)
                 <div x-data="{

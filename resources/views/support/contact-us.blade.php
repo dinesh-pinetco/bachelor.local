@@ -1,6 +1,6 @@
 <x-app-layout>
     @include('support.tabs')
-    <div class="max-w-screen-xl w-full mx-auto">
+    <div class="max-w-screen-xl w-full mx-auto lg:pl-40 2xl:pl-64">
         @if (session('message'))
             <div class="mb-4 font-medium text-sm md:text-base text-primary">
                 {{ session('message') }}
