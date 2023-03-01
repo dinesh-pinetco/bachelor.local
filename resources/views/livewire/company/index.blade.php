@@ -113,7 +113,7 @@
 
         <div class="flex-grow max-w-4xl">
             @if(is_null($user->show_application_on_marketplace_at) && auth()->user()->companies()->exists())
-                <div class="inline-flex justify-center space-x-4 text-white p-4 bg-green rounded-sm mx-auto mb-5">
+                <div class="inline-flex justify-center space-x-4 text-white p-4 bg-darkgreen rounded-sm mx-auto mb-5">
                     <svg class="text-white stroke-current w-6 h-6 flex-shrink-0" width="44" height="44"
                          viewBox="0 0 44 44"
                          fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +166,7 @@
                 <div class="flex flex-wrap gap-4">
                     @foreach ($appliedCompanies as $appliedCompany)
                         <div class="inline-flex items-center space-x-2 px-4 py-2 bg-primary bg-opacity-10 rounded-sm">
-                            <div class="text-sm">
+                            <div class="text-xs">
                                 {{ $appliedCompany->company_name }}
                             </div>
                             <button wire:click="removeCompany({{ $appliedCompany->id }})" class="ml-2 text-red">
