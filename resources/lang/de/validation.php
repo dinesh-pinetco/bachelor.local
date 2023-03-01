@@ -151,7 +151,6 @@ return [
         'employer_academic_degrees.*.course_name' => 'Name des Kurses ',
         'employer_academic_degrees.*.degree' => 'Grad ',
         'employer_academic_degrees.*.ects_credit_point' => 'ECTS-Kreditpunkte ',
-        'employer_academic_degrees.*.graduation_date' => 'Datum des Abschlusses',
-    ],
-
+        'employer_academic_degrees.*.graduation_date' => 'Datum des Abschlusses'
+    ]
 ];
