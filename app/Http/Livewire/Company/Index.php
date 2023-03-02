@@ -71,6 +71,13 @@ class Index extends Component
         $this->emitSelf('refresh');
     }
 
+    public function updatedSelectedCompanies()
+    {
+        $this->selectedCompanies = collect($this->selectedCompanies)->filter(function($selectedCompany) {
+            return $selectedCompany;
+        });
+    }
+
     protected function fetchCompanies()
     {
         $this->companies = Company::when($this->search, function ($query) {
@@ -109,10 +116,10 @@ class Index extends Component
             }
         }
 
-        foreach ($this->selectedCompanies as $company) {
+        foreach ($this->selectedCompanies as $companyKey => $companyName) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
-                'company_id' => $company,
+                'company_id' => $companyKey,
             ], [
                 'mail_content' => $this->mailContent,
             ]);
