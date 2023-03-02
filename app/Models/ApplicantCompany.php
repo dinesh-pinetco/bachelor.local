@@ -13,11 +13,11 @@ class ApplicantCompany extends Model
         'user_id',
         'company_id',
         'mail_content',
-        'is_contact_by_company',
+        'company_contacted_at',
         'hired_at',
     ];
 
-    protected $casts = ['is_contact_by_company' => 'bool', 'hired_at' => 'datetime'];
+    protected $casts = ['company_contacted_at' => 'datetime', 'hired_at' => 'datetime'];
 
     public function applicant()
     {

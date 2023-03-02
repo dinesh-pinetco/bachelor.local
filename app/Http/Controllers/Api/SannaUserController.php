@@ -96,7 +96,7 @@ class SannaUserController extends Controller
             ApplicantCompany::create([
                 'user_id' => $user->id,
                 'company_id' => $company->id,
-                'is_contact_by_company' => true,
+                'company_contacted_at' => now(),
                 'hired_at' => now(),
             ]);
         }
