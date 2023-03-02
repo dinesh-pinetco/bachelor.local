@@ -46,7 +46,7 @@ class Index extends Component
     {
         $this->user = auth()->user();
 
-        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->get();
+        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->with('company')->get();
 
         $this->mailContent = auth()->user()?->companies()->first()?->mail_content;
 
@@ -97,11 +97,11 @@ class Index extends Component
     {
         $this->validate();
 
-        if(!is_null($this->appliedCompanies)){
-            foreach($this->appliedCompanies as $key => $company) {
+        if (! is_null($this->appliedCompanies)) {
+            foreach ($this->appliedCompanies as $company) {
                 $this->user->companies()->updateOrCreate([
                     'user_id' => $this->user->id,
-                    'company_id' => $key,
+                    'company_id' => $company->company_id,
                 ], [
                     'company_name' => $company->company_name,
                     'mail_content' => $this->mailContent,
@@ -109,12 +109,11 @@ class Index extends Component
             }
         }
 
-        foreach ($this->selectedCompanies as $key => $company) {
+        foreach ($this->selectedCompanies as $company) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
-                'company_id' => $key,
+                'company_id' => $company,
             ], [
-                'company_name' => $company,
                 'mail_content' => $this->mailContent,
             ]);
         }
@@ -130,15 +129,15 @@ class Index extends Component
 
     public function removeCompany($appliedCompanyId)
     {
-        if(count($this->user->companies()->get()) <= 1){
+        if (count($this->user->companies()->get()) <= 1) {
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
-       $this->user->companies()->where('id',$appliedCompanyId)->delete();
+        $this->user->companies()->where('id', $appliedCompanyId)->delete();
 
-       $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+        $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
 
-       $this->emitSelf('refresh');
+        $this->emitSelf('refresh');
     }
 
     public function render()

@@ -1,7 +1,7 @@
 <div class="max-w-screen-xl mx-auto">
     <livewire:tabs :applicant="$applicant" />
     @if($applicant->application_status == \App\Enums\ApplicationStatus::ENROLLMENT_ON || $applicant->application_status == \App\Enums\ApplicationStatus::CONTRACT_SENT_ON || $applicant->application_status == \App\Enums\ApplicationStatus::CONTRACT_RETURNED_ON)
-        <div class="flex flex-wrap relative">
+        <div class="flex flex-wrap relative mt-5 md:mt-0">
             <div class="hidden lg:block flex-shrink-0 w-20 md:w-32 lg:w-40 2xl:w-64">
                 <div class="flex items-center justify-center py-8 lg:py-6 xl:py-0"></div>
             </div>
@@ -22,7 +22,7 @@
                                         class="w-full" type="date" wire:model="contract.send_date">
                                     </x-jet-input>
                                     @if($contract->send_date)
-                                        <button wire:click="removeContractDate('send_date')" class="ml-2">
+                                        <button wire:click="removeContractDate('send_date')" class="ml-2 hover:text-red">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -43,7 +43,7 @@
                                         class="w-full" type="date" wire:model="contract.receive_date">
                                     </x-jet-input>
                                     @if($contract->receive_date)
-                                        <button wire:click="removeContractDate('receive_date')" class="ml-2">
+                                        <button wire:click="removeContractDate('receive_date')" class="ml-2 hover:text-red">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"

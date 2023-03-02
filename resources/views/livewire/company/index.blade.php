@@ -87,7 +87,7 @@
                                                 type="checkbox"
                                                 id="{{ $company->id }}"
                                                 wire:model="selectedCompanies"
-                                                value="{{ $company->name }}">
+                                                value="{{ $company->id }}">
                                             <label class="mb-0 cursor-pointer text-sm"
                                                    for="{{ $company->id }}"> {{ ($company->name) }}</label>
                                         </div>
@@ -135,7 +135,7 @@
                 <div class="flex flex-wrap gap-2">
                     @foreach ($appliedCompanies as $appliedCompany)
                         <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm" id="company">
-                            {{ $appliedCompany->company_name }}
+                            {{ $appliedCompany->company->name }}
                         </div>
                     @endforeach
                 </div>
@@ -176,7 +176,7 @@
                     @foreach ($appliedCompanies as $appliedCompany)
                         <div class="inline-flex items-center space-x-2 px-4 py-2 bg-primary bg-opacity-10 rounded-sm">
                             <div class="text-xs">
-                                {{ $appliedCompany->company_name }}
+                                {{ $appliedCompany->company->name }}
                             </div>
                             <button wire:click="removeCompany({{ $appliedCompany->id }})" class="ml-2 text-red">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

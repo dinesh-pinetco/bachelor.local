@@ -12,12 +12,20 @@ class ApplicantCompany extends Model
     protected $fillable = [
         'user_id',
         'company_id',
-        'company_name',
         'mail_content',
+        'company_contacted_at',
+        'hired_at',
     ];
+
+    protected $casts = ['company_contacted_at' => 'datetime', 'hired_at' => 'datetime'];
 
     public function applicant()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

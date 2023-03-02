@@ -23,11 +23,10 @@ Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
     Route::get('sanna-users', [SannaUserController::class, 'index']);
-    Route::get('sanna-users/interview-on', [SannaUserController::class, 'interviewOn']);
     Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
     Route::get('logout', [LoginController::class, 'logout']);
 
-    Route::post('applicants/{user}/companies/{company}/hired', [SannaUserController::class, 'userHired']);
+    Route::post('companies/{company:sanna_id}/applicants/{user}/hired', [SannaUserController::class, 'userHired']);
 
     Route::middleware(['auth:sanctum', 'role:'.ROLE_ADMIN])->post('admin-create', function (Request $request) {
         $validateData = $request->validate([

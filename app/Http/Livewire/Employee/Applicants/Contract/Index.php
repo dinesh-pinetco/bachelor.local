@@ -34,14 +34,14 @@ class Index extends Component
 
     public function mount()
     {
-        $this->partnerCompanyFieldId = Field::where('label','Partner company')->with('values')->first()?->id;
+        $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->with('values')->first()?->id;
 
         $companyId = FieldValue::where('field_id', $this->partnerCompanyFieldId)
         ->where('user_id', $this->applicant->id)
         ->first()
         ?->value;
 
-        $this->enrollCompany = Company::where('id',$companyId)->first()?->name;
+        $this->enrollCompany = Company::where('id', $companyId)->first()?->name;
 
         $this->contract = $this->applicant->contract ?? new Contract();
     }

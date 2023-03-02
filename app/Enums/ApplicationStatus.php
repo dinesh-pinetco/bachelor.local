@@ -25,16 +25,14 @@ enum ApplicationStatus: string
     #[ApplicationStatusOrder(8)] case TEST_RESULT_PDF_RETRIEVED_ON = 'test_result_pdf_retrieved_on';
 
     #[ApplicationStatusOrder(9)] case PERSONAL_DATA_COMPLETED = 'personal_data_completed';
-    #[ApplicationStatusOrder(10)] case CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD = 'consent_to_company_portal_bulletin_board';
-    #[ApplicationStatusOrder(11)] case APPROVED_BY_COMPANY_FOR_ENROLMENT = 'approved_by_company_for_enrolment';
-    #[ApplicationStatusOrder(12)] case APPLICATION_REJECTED_BY_APPLICANT = 'application_rejected_by_applicant';
-    #[ApplicationStatusOrder(13)] case APPLICATION_REJECTED_BY_NAK = 'application_rejected_by_nak';
-    #[ApplicationStatusOrder(14)] case APPLYING_TO_SELECTED_COMPANY = 'applying_to_selected_company';
-    #[ApplicationStatusOrder(15)] case SHOW_APPLICATION_ON_MARKETPLACE = 'show_application_on_marketplace';
-    #[ApplicationStatusOrder(16)] case APPLIED_TO_SELECTED_COMPANY = 'applied_to_selected_company';
-    #[ApplicationStatusOrder(18)] case ENROLLMENT_ON = 'enrollment_on';
-    #[ApplicationStatusOrder(19)] case CONTRACT_SENT_ON = 'contract_sent_on';
-    #[ApplicationStatusOrder(20)] case CONTRACT_RETURNED_ON = 'contract_returned_on';
+    #[ApplicationStatusOrder(10)] case APPLICATION_REJECTED_BY_APPLICANT = 'application_rejected_by_applicant';
+    #[ApplicationStatusOrder(11)] case APPLICATION_REJECTED_BY_NAK = 'application_rejected_by_nak';
+
+    #[ApplicationStatusOrder(12)] case APPLYING_TO_SELECTED_COMPANY = 'applying_to_selected_company';
+    #[ApplicationStatusOrder(13)] case APPLIED_TO_SELECTED_COMPANY = 'applied_to_selected_company';
+    #[ApplicationStatusOrder(14)] case ENROLLMENT_ON = 'enrollment_on';
+    #[ApplicationStatusOrder(15)] case CONTRACT_SENT_ON = 'contract_sent_on';
+    #[ApplicationStatusOrder(16)] case CONTRACT_RETURNED_ON = 'contract_returned_on';
 
     /** Get an associative array of [case name => case value]. */
     public static function selectionOptions(): array

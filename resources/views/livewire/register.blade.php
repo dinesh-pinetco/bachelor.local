@@ -2,7 +2,7 @@
     <form method="POST" action="{{ route('register') }}" id="application_register">
         @csrf
         <div
-            class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 md:grid-flow-col gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
+            class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
             <div>
                 <x-jet-label class="text-white font-bold required"
                              for="desired_beginning"
@@ -19,7 +19,22 @@
                     @endforeach
                 </x-livewire-select>
             </div>
-
+            <div wire:ignore>
+                <x-jet-label class="text-white font-bold required" for="name"
+                             value="{{ __('First name') }}"></x-jet-label>
+                <x-jet-input id="first_name" class="block w-full" type="text" name="first_name"
+                             :value="old('first_name')"
+                             placeholder="{{ __('Enter First name') }}"
+                             required
+                             autofocus autocomplete="name"></x-jet-input>
+            </div>
+            <div wire:ignore>
+                <x-jet-label class="text-white font-bold required" for="password"
+                             value="{{ __('Last name') }}"></x-jet-label>
+                <x-jet-input id="last_name" class="block w-full" type="text" name="last_name"
+                             :value="old('last_name')"
+                             placeholder="{{ __('Enter last name') }}"></x-jet-input>
+            </div>
             <div class="self-end">
                 <x-jet-label class="text-white font-bold required" for="courseId"
                              value="{{ __('Select course') }}"></x-jet-label>
@@ -34,32 +49,12 @@
                     maxHight="h-32"
                 />
             </div>
-
-            <div wire:ignore>
-                <x-jet-label class="text-white font-bold required" for="name"
-                             value="{{ __('First name') }}"></x-jet-label>
-                <x-jet-input id="first_name" class="block w-full" type="text" name="first_name"
-                             :value="old('first_name')"
-                             placeholder="{{ __('Enter First name') }}"
-                             required
-                             autofocus autocomplete="name"></x-jet-input>
-            </div>
-
             <div wire:ignore>
                 <x-jet-label class="text-white font-bold required" for="email" value="{{ __('E-mail address') }}">
                 </x-jet-label>
                 <x-jet-input id="email" class="block w-full" type="email" name="email" :value="old('email')"
                              placeholder="{{ __('Enter email address') }}" required></x-jet-input>
             </div>
-
-            <div wire:ignore>
-                <x-jet-label class="text-white font-bold required" for="password"
-                             value="{{ __('Last name') }}"></x-jet-label>
-                <x-jet-input id="last_name" class="block w-full" type="text" name="last_name"
-                             :value="old('last_name')"
-                             placeholder="{{ __('Enter last name') }}"></x-jet-input>
-            </div>
-
             <div wire:ignore>
                 <x-jet-label class="text-white font-bold" for="password_confirmation"
                              value="{{ __('Phone number') }}"></x-jet-label>

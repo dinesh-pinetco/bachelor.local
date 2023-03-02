@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        return !in_array($user->application_status->value, [ApplicationStatus::TEST_FAILED(), ApplicationStatus::TEST_FAILED_CONFIRM()]);
+        return ! in_array($user->application_status->value, [ApplicationStatus::TEST_FAILED(), ApplicationStatus::TEST_FAILED_CONFIRM()]);
     }
 
     /**
