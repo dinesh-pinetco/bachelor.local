@@ -137,3 +137,15 @@ li > label, .multiple-dropdown-box > label {
 .popover {
     max-width: none;
 }
+
+#trix-toolbar-1 .trix-button-row {
+    justify-content: flex-start;
+}
+
+#trix-toolbar-1 .trix-button--icon {
+    font-size: 12px !important;
+}
+
+#trix-toolbar-1 .trix-button-group-spacer {
+    flex-grow: unset;
+}

@@ -37,7 +37,7 @@
                                 <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
                                     {{__('Email Content')}}
                                 </h6>
-                                <div class="w-full max-w-xs sm:max-w-lg xl:max-w-2xl" wire:ignore>
+                                <div class="w-full sm:max-w-lg xl:max-w-2xl" wire:ignore>
                                     <input id="email-content" type="hidden" name="mailContent">
                                     <trix-editor class="prose formatted-content"
                                                  id="trix-editor"
@@ -190,7 +190,7 @@
 
                     @endforelse
                 </div>
-                <div wire:ignore class="w-full max-w-xs sm:max-w-lg xl:max-w-2xl mt-10">
+                <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
                     <input id="email-content" type="hidden" name="mailContent">
                     <trix-editor class="prose formatted-content"
                                  id="trix-editor"
