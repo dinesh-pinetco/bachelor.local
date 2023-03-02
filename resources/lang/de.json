@@ -858,8 +858,10 @@
     "You can't delete all company.": "Sie können nicht das gesamte Unternehmen löschen.",
     "Company deleted successfully.": "Unternehmen erfolgreich gelöscht.",
     "You can now select companies and write an optional text that will be displayed to all selected companies.": "Sie können nun Unternehmen auswählen und einen optionalen Text schreiben, der allen ausgewählten Unternehmen angezeigt wird.",
-    "No, Not listd": "Nein, Nicht aufgelistet",
+    "No, Not listed": "Nein, Nicht aufgeführt",
     "please select the companies": "Bitte wählen Sie die Unternehmen",
-    "No Company Found": "Kein Unternehmen gefunden"
-
+    "No Company Found": "Kein Unternehmen gefunden",
+    "Congratulations! You have completed all steps of your application": "Herzlichen Glückwunsch! Sie haben alle Schritte Ihrer Bewerbung abgeschlossen",
+    "Do you want to transfer your data to the company portal to increase your chances?": "Möchten Sie Ihre Daten in das Unternehmensportal übertragen, um Ihre Chancen zu erhöhen?",
+    "You will be informed as soon as the test results are available": "Sie werden informiert, sobald die Testergebnisse vorliegen."
 }
