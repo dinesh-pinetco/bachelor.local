@@ -16,7 +16,6 @@ class SannaUserResource extends JsonResource
         $this->user = $this;
 
         return [
-            'companies_' => SannaUserCompanyResource::collection($this->whenLoaded('companies')),
             'person' => [
                 'bewerber_id' => $this->id,
                 'vorname' => $this->getValueByIdentifier('first_name'),
@@ -104,8 +103,7 @@ class SannaUserResource extends JsonResource
                 'krankenversichertennummer' => $this->study_sheet?->health_insurance_number,
                 'krankenversicherung' => $this->study_sheet?->health_insurance_companies?->sana_id,
             ],
-            'sepaMandat' => SannaUserSepaResource::make($this->whenLoaded('study_sheet')),
-            'companies' => SannaUserCompanyResource::collection($this->whenLoaded('companies'))
+            'companies' => SannaUserCompanyResource::collection($this->whenLoaded('companies')),
         ];
     }
 

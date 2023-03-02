@@ -18,6 +18,7 @@ class SannaUserController extends Controller
         $size = request()->get('size') ?? 15;
 
         $users = User::query()
+            ->role(ROLE_APPLICANT)
             ->whereHas('configuration', function ($query) {
                 $query->where('is_synced_to_sanna', false);
             })
@@ -64,7 +65,7 @@ class SannaUserController extends Controller
                         'last_exam_third_course',
                     ]);
                 },
-                'companies.company'
+                'companies.company',
             ])
             ->paginate($size)
             ->withQueryString();

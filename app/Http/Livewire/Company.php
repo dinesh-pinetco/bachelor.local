@@ -21,7 +21,7 @@ class Company extends Component
     {
         $this->refreshData();
 
-        $this->contactedCompanies = $this->applicant->companies->filter(function($company) {
+        $this->contactedCompanies = $this->applicant->companies->filter(function ($company) {
             return $company->company_contacted_at;
         });
     }

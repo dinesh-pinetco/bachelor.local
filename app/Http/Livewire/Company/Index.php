@@ -110,7 +110,6 @@ class Index extends Component
         }
 
         foreach ($this->selectedCompanies as $company) {
-
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
                 'company_id' => $company,

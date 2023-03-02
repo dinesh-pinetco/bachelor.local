@@ -17,7 +17,7 @@ class SannaUserCompanyResource extends JsonResource
         return [
             'company_id' => $this->company->sanna_id,
             'mail_content' => $this->mail_content,
-            'hired_at' => $this->hired_at?->toDateTimeString()
+            'hired_at' => $this->hired_at,
         ];
     }
 }
