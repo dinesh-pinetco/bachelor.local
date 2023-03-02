@@ -19,7 +19,7 @@
     </div>
 
     @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_TAKEN, \App\Enums\ApplicationStatus::TEST_FAILED]))
-        <div class="inline-flex justify-center space-x-4 text-primary p-4 bg-secondary rounded-sm mx-auto">
+        <div class="md:w-max flex justify-center space-x-4 text-primary p-4 bg-secondary rounded-sm mr-auto lg:ml-40 2xl:ml-64">
             <svg class="text-priamry full-current w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
                 <path
