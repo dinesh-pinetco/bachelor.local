@@ -93,7 +93,7 @@ class Field extends Component
             // array_push($validation['fieldValue'], 'image');
             $validation['fieldValue'][] = 'mimes:jpeg,png,jpg';
             $validation['fieldValue'][] = 'file';
-            $validation['fieldValue'][] = 'max:512';
+            $validation['fieldValue'][] = 'max:1000';
         }
 
         if ($this->field->type == 'email') {

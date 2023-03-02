@@ -863,5 +863,7 @@
     "No Company Found": "Kein Unternehmen gefunden",
     "Congratulations! You have completed all steps of your application": "Herzlichen Glückwunsch! Sie haben alle Schritte Ihrer Bewerbung abgeschlossen",
     "Do you want to transfer your data to the company portal to increase your chances?": "Möchten Sie Ihre Daten in das Unternehmensportal übertragen, um Ihre Chancen zu erhöhen?",
-    "You will be informed as soon as the test results are available": "Sie werden informiert, sobald die Testergebnisse vorliegen."
+    "You will be informed as soon as the test results are available": "Sie werden informiert, sobald die Testergebnisse vorliegen.",
+    "The file is required": "Die Datei ist erforderlich",
+    "The file size must not be greater than :max": "Die Dateigröße darf nicht größer sein als :max"
 }
