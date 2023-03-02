@@ -149,4 +149,24 @@
         border-top-right-radius: 2px;
         border-bottom-right-radius: 2px;
     }
+
+    table tbody tr {
+        position: relative;
+    }
+
+    table tbody tr td {
+        position: relative;
+        z-index: 2;
+    }
+
+    table tbody tr::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        border: 1px solid #C6C7C8;
+    }
 </style>
