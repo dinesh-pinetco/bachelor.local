@@ -55,9 +55,9 @@ class UploadMedia extends Component
 
         try {
             $this->validate($rules,[
-                    'files.*.required' => 'The file is required',
-                    'files.*.max' => 'The file size must not be greater than :max',
-                ], [
+                'files.*.required' => __('The file is required'),
+                'files.*.max' => __('The file size must not be greater than :max'),
+            ], [
                     'files.*' => __('Files'),
                 ]);
 
