@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('company_id');
             $table->longText('mail_content')->nullable();
 
-            $table->boolean('is_contact_by_company')->default(false);
+            $table->timestamp('company_contacted_at')->nullable();
 
             $table->timestamp('hired_at')->nullable();
             $table->timestamps();

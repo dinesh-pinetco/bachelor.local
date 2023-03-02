@@ -16,6 +16,7 @@
                 </div>
             </div>
             @if ($columns)
+
                 <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-4 xl:order-2">
                     <x-livewire-select data-cy="datatable-column" class="" id="column" name="column"
                                        model="column">
@@ -26,7 +27,8 @@
                             @elseif ($value == 'owner')
                                 <option value="{{ $value }}">{{ __('Subject') }}</option>
                             @else
-                                <option value="{{ $value }}">{{ __(ucfirst(str_replace('_', ' ', $value))) }}
+                                <option value="{{ $value }}">
+                                    {{ __(ucfirst(str_replace('_', ' ', $value))) }}
                                 </option>
                             @endif
                         @endforeach
