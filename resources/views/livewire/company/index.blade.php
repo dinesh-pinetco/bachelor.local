@@ -86,8 +86,8 @@
                                                 class="m-1 flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
                                                 type="checkbox"
                                                 id="{{ $company->id }}"
-                                                wire:model="selectedCompanies"
-                                                value="{{ $company->id }}">
+                                                wire:model="selectedCompanies.{{ $company->id }}"
+                                                value="{{ $company->name }}">
                                             <label class="mb-0 cursor-pointer text-sm"
                                                    for="{{ $company->id }}"> {{ ($company->name) }}</label>
                                         </div>
