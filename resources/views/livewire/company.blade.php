@@ -4,7 +4,7 @@
 
     @if($applicant->companies()->exists())
         <div class="lg:pl-40 2xl:pl-64 mt-5 md:mt-0">
-            <div>
+            <div class="space-y-6">
                 <div class="flex items-center space-x-4">
                     <svg class="w-9 h-9 flex-shrink-0" width="35px" height="35px" stroke-width="1.5" viewBox="0 0 24 24"
                          fill="none"
@@ -16,17 +16,19 @@
                         class="text-lg lg:text-2xl font-medium text-primary mb-2">{{ __("Applicant has transferred data to the company portal") }}</span>
                 </div>
                 @if($applicant->show_application_on_marketplace_at != null)
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-4 pl-12">
                         <img src="{{ asset('images/icon/cancel.svg') }}" alt="transfer-data"/>
                         <p>{{ __('Applicant has no active applications') }}</p>
                     </div>
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-4 pl-12">
                         <img src="{{ asset('images/icon/check.svg') }}" alt="transfer-data"/>
                         <p>{{ __('Applicant is listed on market place') }}</p>
                     </div>
-                    <div>
+                    <div class="pl-12">
                         <p>{{ __('The following companies have contacted the applicant') }}</p>
-                        <li>{{__('Company goes here')}}</li>
+                        <div class="my-6 text-primary">
+                            <li>{{__('Company goes here')}}</li>
+                        </div>
                     </div>
             </div>
             @else
