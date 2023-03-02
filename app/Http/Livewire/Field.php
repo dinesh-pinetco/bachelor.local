@@ -112,9 +112,22 @@ class Field extends Component
 
         if ($this->field->key == 'phone') {
             $validation['fieldValue'][] = 'phone:DE';
+            // $validation['fieldValue'][] = 'numeric';
             $validation['fieldValue'][] = 'min:9';
             $validation['fieldValue'][] = 'max:15';
         }
+
+        // if ($this->field->key == 'postal_code') {
+        //     $validation['fieldValue'][] = 'numeric';
+        // }
+
+        // if($this->field->key == 'location'){
+        //     $validation['fieldValue'][] = 'alpha';
+        // }
+
+        // if($this->field->key == 'country'){
+        //     $validation['fieldValue'][] = 'alpha';
+        // }
 
         return $validation;
     }

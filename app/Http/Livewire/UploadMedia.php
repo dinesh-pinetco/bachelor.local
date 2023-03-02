@@ -50,11 +50,17 @@ class UploadMedia extends Component
             return ltrim($v, '.');
         }, $this->extensions->pluck('extension')->toArray()));
         $rules = array_merge($rules, [
-            'files.*' => ['required', 'file', 'max:15360', 'mimes:'.$extensionsString],
+            'files.*' => ['required', 'file', 'max:13360', 'mimes:'.$extensionsString],
         ]);
 
         try {
-            $this->validate($rules);
+            $this->validate($rules,[
+                    'files.*.required' => 'The file is required',
+                    'files.*.max' => 'The file size must not be greater than :max',
+                ], [
+                    'files.*' => __('Files'),
+                ]);
+
             foreach ($this->files as $file) {
                 $media = Media::make('documents', $this->applicant, $this->tag)
                     ->model($this->model)

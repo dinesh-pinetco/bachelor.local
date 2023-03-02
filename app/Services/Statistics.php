@@ -31,8 +31,8 @@ class Statistics
 
     public function test_failed($method)
     {
-        return $this->userFilter(ApplicationStatus::TEST_FAILED)
-            ->{$method}($this->params);
+        return $this->userFilter(ApplicationStatus::TEST_FAILED_CONFIRM)
+            ->{$method}($this->params)->all();
     }
 
     private function userFilter($status)
