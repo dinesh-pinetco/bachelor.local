@@ -46,7 +46,7 @@ class Index extends Component
     {
         $this->user = auth()->user();
 
-        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->get();
+        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->with('company')->get();
 
         $this->mailContent = auth()->user()?->companies()->first()?->mail_content;
 
@@ -98,10 +98,10 @@ class Index extends Component
         $this->validate();
 
         if (! is_null($this->appliedCompanies)) {
-            foreach ($this->appliedCompanies as $key => $company) {
+            foreach ($this->appliedCompanies as $company) {
                 $this->user->companies()->updateOrCreate([
                     'user_id' => $this->user->id,
-                    'sanna_id' => $key,
+                    'company_id' => $company->company_id,
                 ], [
                     'company_name' => $company->company_name,
                     'mail_content' => $this->mailContent,
@@ -109,12 +109,12 @@ class Index extends Component
             }
         }
 
-        foreach ($this->selectedCompanies as $key => $company) {
+        foreach ($this->selectedCompanies as $company) {
+
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
-                'sanna_id' => $key,
+                'company_id' => $company,
             ], [
-                'company_name' => $company,
                 'mail_content' => $this->mailContent,
             ]);
         }
