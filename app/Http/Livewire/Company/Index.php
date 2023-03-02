@@ -97,11 +97,11 @@ class Index extends Component
     {
         $this->validate();
 
-        if(!is_null($this->appliedCompanies)){
-            foreach($this->appliedCompanies as $key => $company) {
+        if (! is_null($this->appliedCompanies)) {
+            foreach ($this->appliedCompanies as $key => $company) {
                 $this->user->companies()->updateOrCreate([
                     'user_id' => $this->user->id,
-                    'company_id' => $key,
+                    'sanna_id' => $key,
                 ], [
                     'company_name' => $company->company_name,
                     'mail_content' => $this->mailContent,
@@ -112,7 +112,7 @@ class Index extends Component
         foreach ($this->selectedCompanies as $key => $company) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
-                'company_id' => $key,
+                'sanna_id' => $key,
             ], [
                 'company_name' => $company,
                 'mail_content' => $this->mailContent,
@@ -130,15 +130,15 @@ class Index extends Component
 
     public function removeCompany($appliedCompanyId)
     {
-        if(count($this->user->companies()->get()) <= 1){
+        if (count($this->user->companies()->get()) <= 1) {
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
-       $this->user->companies()->where('id',$appliedCompanyId)->delete();
+        $this->user->companies()->where('id', $appliedCompanyId)->delete();
 
-       $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+        $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
 
-       $this->emitSelf('refresh');
+        $this->emitSelf('refresh');
     }
 
     public function render()

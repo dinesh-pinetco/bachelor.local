@@ -8,7 +8,7 @@ class DocumentController extends Controller
 {
     public function __invoke()
     {
-        $this->authorize('view',User::class);
+        $this->authorize('view', User::class);
 
         return view('application.documents');
     }

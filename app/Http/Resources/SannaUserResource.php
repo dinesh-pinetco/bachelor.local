@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use App\Models\Nationality;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class SannaUserResource extends JsonResource
 {
@@ -17,6 +16,7 @@ class SannaUserResource extends JsonResource
         $this->user = $this;
 
         return [
+            'companies_' => SannaUserCompanyResource::collection($this->whenLoaded('companies')),
             'person' => [
                 'bewerber_id' => $this->id,
                 'vorname' => $this->getValueByIdentifier('first_name'),
@@ -90,13 +90,13 @@ class SannaUserResource extends JsonResource
             ],
             'vertrag_verschickt_am' => $this->contract?->send_date,
             'vertrag_zurueck_am' => $this->contract?->receive_date,
-            'studienbeginn' => $this->course()->first()->course_start_date,
-            'bild' => base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))),
+            'studienbeginn' => $this->desiredBeginning->course_start_date,
+            'bild' => $this->study_sheet?->student_id_card_photo_url ? base64_encode(file_get_contents($this->study_sheet?->student_id_card_photo_url)) : null,
             'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
             'datenschutzerklaerung_datenweitergabe_medienlieferanten' => filter_var($this->study_sheet?->privacyPolicy, FILTER_VALIDATE_BOOLEAN),
             //            'ratenzahlung'                                            => filter_var($this->study_sheet->payment, FILTER_VALIDATE_BOOLEAN),
             'geburtsland' => $this->getValueByIdentifier('nationality_id'),
-            'studiengangId' => $this->course()->first()->course->sana_id,
+            'studiengangId' => $this->courses()->first()->course->sana_id,
             'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
             'ist_kompetenznachholer' => $this->competency_catch_up,
             'krankenversicherung' => [
@@ -105,6 +105,7 @@ class SannaUserResource extends JsonResource
                 'krankenversicherung' => $this->study_sheet?->health_insurance_companies?->sana_id,
             ],
             'sepaMandat' => SannaUserSepaResource::make($this->whenLoaded('study_sheet')),
+            'companies' => SannaUserCompanyResource::collection($this->whenLoaded('companies'))
         ];
     }
 

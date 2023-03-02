@@ -69,8 +69,8 @@ class Show extends Component
         $this->parentGroups = $this->tab->parent_groups;
         $this->prepareCustomizedGroups($groupId);
 
-        if(in_array(auth()->user()->application_status,[ApplicationStatus::TEST_FAILED,ApplicationStatus::TEST_FAILED_CONFIRM]) && !str_contains($this->tab->slug, 'profile')){
-            $this->authorize('view',User::class);
+        if (in_array(auth()->user()->application_status, [ApplicationStatus::TEST_FAILED, ApplicationStatus::TEST_FAILED_CONFIRM]) && ! str_contains($this->tab->slug, 'profile')) {
+            $this->authorize('view', User::class);
         }
 
         $companyField = Field::where('related_option_table', 'company_contacts')->first('id');

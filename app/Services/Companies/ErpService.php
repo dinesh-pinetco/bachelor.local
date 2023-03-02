@@ -92,7 +92,7 @@ abstract class ErpService
 
         foreach ($companies as $company) {
             $companyObject = Company::updateOrCreate([
-                'company_id' => $company['id'],
+                'sanna_id' => $company['id'],
             ], [
                 'name' => $company['name'],
             ]);

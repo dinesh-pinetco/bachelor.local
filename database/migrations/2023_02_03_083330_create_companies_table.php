@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('company_id');
+            $table->string('sanna_id');
             $table->string('name')->nullable();
             $table->integer('zip_code')->nullable();
             $table->timestamps();

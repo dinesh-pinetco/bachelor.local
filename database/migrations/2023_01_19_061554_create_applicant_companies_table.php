@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('applicant_companies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('company_id');
-            $table->string('company_name');
-            $table->longText('mail_content');
+            $table->foreignId('company_id');
+            $table->longText('mail_content')->nullable();
+
+            $table->boolean('is_contact_by_company')->default(false);
+
+            $table->timestamp('hired_at')->nullable();
             $table->timestamps();
         });
     }
