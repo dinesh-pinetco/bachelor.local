@@ -16,7 +16,7 @@ class Document extends Model implements ContractsAuditable
 {
     use AuditingAuditable, HasCourses, DocumentScopes;
 
-    const SEARCHABLE_FIELDS = ['name', 'description'];
+    const SEARCHABLE_FIELDS = ['name'];
 
     protected $fillable = ['creator_id', 'name', 'description', 'is_required', 'is_active'];
 

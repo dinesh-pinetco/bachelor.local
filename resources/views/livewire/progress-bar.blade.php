@@ -31,7 +31,7 @@
     </div>
 
     <div>
-        <x-custom-modal wire:model="show">
+        <x-custom-modal width="w-2/5" wire:model="show">
             <x-slot name="title">
                 {{ __('Submit application') }}
             </x-slot>
@@ -45,19 +45,22 @@
                         </svg>
                     </p>
                     <h4 class="text-center text-darkgray text-sm sm:text-base">
-                        {{ __('Are you sure you want to submit this application.') }}?
+                        {{ __('Congratulations! You have completed all steps of your application') }}
+                    </h4>
+                     <h4 class="text-center text-darkgray text-sm sm:text-base">
+                        {{ __('Do you want to transfer your data to the company portal to increase your chances?') }}
                     </h4>
                 </div>
             </div>
             <x-jet-input-error for="client" class="mt-1"/>
             <x-slot name="footer">
-                <div class="flex justify-end space-x-2">
-                    <x-danger-button class="bg-primary border-primary" data-cy="delete-button" wire:click="submit">
-                        {{ __('Yes, submit it') }}
+                <div class="flex justify-center space-x-4 mt-7">
+                    <x-danger-button class="bg-primary border-primary px-4 py-2.5 lg:px-5 lg:py-3" data-cy="delete-button" wire:click="submit">
+                        {{ __('Yes') }}
                     </x-danger-button>
                     <x-secondary-button data-cy="cancel-button"
                                         wire:click="$set('show', false)">
-                        {{ __('Cancel') }}
+                        {{ __('No') }}
                     </x-secondary-button>
                 </div>
             </x-slot>

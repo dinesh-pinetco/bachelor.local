@@ -836,5 +836,8 @@
     "Warning": "Warning",
     "You can't delete all company.": "You can't delete all company.",
     "Company deleted successfully.": "Company deleted successfully.",
-    "You can now select companies and write an optional text that will be displayed to all selected companies.": "You can now select companies and write an optional text that will be displayed to all selected companies."
+    "You can now select companies and write an optional text that will be displayed to all selected companies.": "You can now select companies and write an optional text that will be displayed to all selected companies.",
+    "Congratulations! You have completed all steps of your application" : "Congratulations! You have completed all steps of your application",
+    "Do you want to transfer your data to the company portal to increase your chances?": "Do you want to transfer your data to the company portal to increase your chances?",
+    "You will be informed as soon as the test results are available": "You will be informed as soon as the test results are available"
 }

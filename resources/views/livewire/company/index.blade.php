@@ -165,7 +165,7 @@
                         {{ __('Yes, get listed') }}
                     </x-primary-button>
                     <x-secondary-button class="h-11">
-                        {{ __('No, Not listd') }}
+                        {{ __('No, Not listed') }}
                     </x-secondary-button>
                 </div>
             @endif
@@ -173,7 +173,7 @@
             @if(!is_null($user->show_application_on_marketplace_at))
                 <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
                 <div class="flex flex-wrap gap-4">
-                    @forelse ($appliedCompanies as $appliedCompany)
+                    @foreach ($appliedCompanies as $appliedCompany)
                         <div class="inline-flex items-center space-x-2 px-4 py-2 bg-primary bg-opacity-10 rounded-sm">
                             <div class="text-xs">
                                 {{ $appliedCompany->company->name }}
@@ -186,9 +186,7 @@
                                 </svg>
                             </button>
                         </div>
-                    @empty
-
-                    @endforelse
+                    @endforeach
                 </div>
                 <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
                     <input id="email-content" type="hidden" name="mailContent">

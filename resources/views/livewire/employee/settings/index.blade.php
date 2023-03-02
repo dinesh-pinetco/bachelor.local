@@ -218,8 +218,8 @@
         </div>
         <x-jet-input-error for="client" class="mt-1" />
         <x-slot name="footer">
-            <div class="flex justify-end space-x-2">
-                <x-danger-button wire:click='delete'> {{ __('Yes, Delete it') }} </x-danger-button>
+            <div class="flex justify-end space-x-2" x-data="{ buttonDisabled: false }">
+                <x-danger-button wire:click='delete' x-on:click="buttonDisabled = true" x-bind:disabled="buttonDisabled"> {{ __('Yes, Delete it') }} </x-danger-button>
                 <x-secondary-button wire:click="$set('show', false)"> {{ __('Cancel') }} </x-secondary-button>
             </div>
         </x-slot>
