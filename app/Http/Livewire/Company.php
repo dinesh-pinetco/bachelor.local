@@ -13,11 +13,17 @@ class Company extends Component
 
     public $appliedForCompany = false;
 
+    public $contactedCompanies = [];
+
     protected $listeners = ['refreshData'];
 
     public function mount()
     {
         $this->refreshData();
+
+        $this->contactedCompanies = $this->applicant->companies->filter(function($company) {
+            return $company->company_contacted_at;
+        });
     }
 
     public function refreshData()

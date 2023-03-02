@@ -24,12 +24,6 @@
                         <img src="{{ asset('images/icon/check.svg') }}" alt="transfer-data"/>
                         <p>{{ __('Applicant is listed on market place') }}</p>
                     </div>
-                    <div class="pl-12">
-                        <p>{{ __('The following companies have contacted the applicant') }}</p>
-                        <div class="my-6 text-primary">
-                            <li>{{__('Company goes here')}}</li>
-                        </div>
-                    </div>
             </div>
             @else
                 <div class="mt-4 pl-12">
@@ -53,6 +47,17 @@
                             </svg>
                         @endif
                         <p>{{ __("listed on market place") }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if (count($contactedCompanies))
+                <div class="pl-12">
+                    <p>{{ __('The following companies have contacted the applicant') }}</p>
+                    <div class="my-6 text-primary">
+                        @foreach ($contactedCompanies as $contactedCompany)
+                            <li>{{ $contactedCompany->company_name }}</li>
+                        @endforeach
                     </div>
                 </div>
             @endif
