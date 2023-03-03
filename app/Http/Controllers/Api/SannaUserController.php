@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SannaUserResource;
 use App\Models\ApplicantCompany;
@@ -19,6 +20,7 @@ class SannaUserController extends Controller
 
         $users = User::query()
             ->role(ROLE_APPLICANT)
+            ->where('application_status', ApplicationStatus::CONTRACT_RETURNED_ON)
             ->whereHas('configuration', function ($query) {
                 $query->where('is_synced_to_sanna', false);
             })

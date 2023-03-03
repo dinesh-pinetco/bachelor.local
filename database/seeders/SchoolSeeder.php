@@ -15,6 +15,6 @@ class SchoolSeeder extends Seeder
      */
     public function run()
     {
-        Excel::import(new SchoolImport(), public_path('csv/schule.csv'));
+        Excel::import(new SchoolImport(), public_path('csv/Schools.csv'));
     }
 }
