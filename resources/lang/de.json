@@ -824,7 +824,7 @@
     "Applicant has been failed successfully." : "Der Antragsteller wurde erfolgreich abgelehnt.",
     "Successfully applied to selected company.": "Erfolgreiche Bewerbung bei ausgewähltem Unternehmen.",
     "Check failed tests": "Fehlgeschlagene Tests prüfen",
-    "Has passing limit": "Hat Überschreitungsgrenze",
+    "Has passing limit?": "Hat Bestehensgrenze?",
     "Language": "Sprache",
     "applying_to_selected_company": "Anwendung_auf_ausgewähltes_Unternehmen",
     "show_application_on_marketplace": "Bewerbung_auf_dem_Marktplatz_zeigen",

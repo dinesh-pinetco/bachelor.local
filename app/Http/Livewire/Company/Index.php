@@ -73,7 +73,7 @@ class Index extends Component
 
     public function updatedSelectedCompanies()
     {
-        $this->selectedCompanies = collect($this->selectedCompanies)->filter(function($selectedCompany) {
+        $this->selectedCompanies = collect($this->selectedCompanies)->filter(function ($selectedCompany) {
             return $selectedCompany;
         });
     }

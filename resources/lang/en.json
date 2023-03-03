@@ -821,7 +821,7 @@
     "Applicant has been failed successfully.": "Applicant has been failed successfully.",
     "Successfully applied to selected company.": "Successfully applied to selected company.",
     "Check failed tests": "Check failed tests",
-    "Has passing limit": "Has passing limit",
+    "Has passing limit?": "Has passing limit",
     "Language": "Language",
     "applying_to_selected_company": "applying_to_selected_company",
     "show_application_on_marketplace": "show_application_on_marketplace",

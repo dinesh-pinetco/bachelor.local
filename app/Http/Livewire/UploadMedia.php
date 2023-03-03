@@ -54,12 +54,12 @@ class UploadMedia extends Component
         ]);
 
         try {
-            $this->validate($rules,[
+            $this->validate($rules, [
                 'files.*.required' => __('The file is required'),
                 'files.*.max' => __('The file size must not be greater than :max'),
             ], [
-                    'files.*' => __('Files'),
-                ]);
+                'files.*' => __('Files'),
+            ]);
 
             foreach ($this->files as $file) {
                 $media = Media::make('documents', $this->applicant, $this->tag)

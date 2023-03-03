@@ -44,7 +44,7 @@
 
                             <div>
                                 <x-jet-label for="has_passing_limit"
-                                             class="block required">{{ __('Has passing limit') }}</x-jet-label>
+                                             class="block required">{{ __('Has passing limit?') }}</x-jet-label>
                                 <x-livewire-select id="has_passing_limit" name="has_passing_limit"
                                                    model="test.has_passing_limit"
                                                    class="w-full">
