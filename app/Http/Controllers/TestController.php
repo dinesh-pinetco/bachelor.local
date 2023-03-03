@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\MailTemplate;
+use App\Models\GovernmentForm;
+use App\Models\StudySheet;
 use App\Models\User;
 use App\Notifications\System\ErrorNotification;
 use App\Services\SelectionTests\Cubia;
@@ -78,5 +80,19 @@ class TestController extends Controller
     public function studySheetForm(User $user)
     {
         return Redirect::to(URL::signedRoute('study-sheet', ['user' => $user->id]));
+    }
+
+    public function seedStudySheet(User $user)
+    {
+        StudySheet::factory()->create(['user_id' => $user->id]);
+
+        return response()->json(['message' => 'success']);
+    }
+
+    public function seedGovernmentForm(User $user)
+    {
+        GovernmentForm::factory()->create(['user_id' => $user->id]);
+
+        return response()->json(['message' => 'success']);
     }
 }

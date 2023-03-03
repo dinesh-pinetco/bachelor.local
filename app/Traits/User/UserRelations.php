@@ -80,12 +80,12 @@ trait UserRelations
 
     public function study_sheet(): HasOne
     {
-        return $this->hasOne(StudySheet::class);
+        return $this->hasOne(StudySheet::class)->latest();
     }
 
     public function government_form(): HasOne
     {
-        return $this->hasOne(GovernmentForm::class);
+        return $this->hasOne(GovernmentForm::class)->latest();
     }
 
     public function contract(): HasOne

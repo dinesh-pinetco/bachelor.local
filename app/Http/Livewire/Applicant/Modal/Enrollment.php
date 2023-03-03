@@ -137,7 +137,10 @@ class Enrollment extends Component
             Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ApplicantEnrolled($this->applicant));
         }
 
+        $this->emitUp('refresh');
         $this->close();
+
+        $this->toastNotify(__('Applicant has been enrolled successfully.'));
     }
 
     public function render()

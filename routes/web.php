@@ -34,10 +34,12 @@ Route::get('fetch-result', [TestController::class, 'fetchResult']);
 Route::get('test/{slug}/{email?}', [TestController::class, 'testMail']);
 Route::get('test-government-form/{user}', [TestController::class, 'governmentForm']);
 Route::get('test-study-sheet/{user}', [TestController::class, 'studySheetForm']);
+Route::get('fake/study-sheet/{user}', [TestController::class, 'seedStudySheet']);
+Route::get('fake/government-form/{user}', [TestController::class, 'seedGovernmentForm']);
 
 Route::view('study-programs', 'study-programs')->name('study-programs');
 
-Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
+Route::prefix('secret')->middleware(['role:' . ROLE_EMPLOYEE . '|' . ROLE_ADMIN . '|' . ROLE_SUPER_ADMIN])->group(function () {
     Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');
     Route::get('preview/backup/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
 });
@@ -70,3 +72,7 @@ Route::get('verified/{hash}', [TestResultVerifyController::class, '__invoke'])->
 
 Route::view('imprint', 'privacy_policy')->name('privacy_policy');
 Route::view('datenschutz', 'data_protection')->name('data_protection');
+
+Route::get('management-sheet-pdf/{user}', function (\App\Models\User $user) {
+    return (new \App\Pdf\ManagementSheetPdf($user))->render();
+});

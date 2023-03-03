@@ -24,6 +24,7 @@ class SannaUserResource extends JsonResource
                 'geburtstag' => $this->getValueByIdentifier('date_of_birth'),
                 'geburtsort' => $this->getValueByIdentifier('place_of_birth'),
                 'geschlecht' => $this->getValueByIdentifier('gender'),
+                'Kompetenznachholung' => $this->configuration?->competency_catch_up,
             ],
             'adresse' => $this->getAddress('1'),
             'rechnungsadresse' => $this->getAddress('3'),

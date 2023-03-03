@@ -16,6 +16,7 @@ class UserConfiguration extends Model
     protected $guarded = [];
 
     protected $casts = [
+        'competency_catch_up' => 'bool',
         'pass_pdf_created_at' => 'datetime',
         'fail_pdf_created_at' => 'datetime',
     ];
