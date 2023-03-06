@@ -21,57 +21,54 @@
                         <td>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Studiengang')}}:</td>
-                                <td>{{__('Wirtschaftsingenieurwesen')}}
+                                <td>{{ $course }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Beginn des Studiums')}}:</td>
-                                <td>{{__('01.10.2023')}}
+                                <td>{{ $desiredBeginning }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Vorname')}}:</td>
-                                <td>{{__('Max')}}
+                                <td>{{ $user->first_name }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Nachname')}}:</td>
-                                <td>{{__('Musterfrau')}}
+                                <td>{{ $user->last_name }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('geboren am')}}:</td>
-                                <td>{{__('01.01.2003')}}
+                                <td>{{ $date_of_birth }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('geboren in')}}:</td>
-                                <td>{{__('Testcity, Deutschland')}}
+                                <td>{{ $user->study_sheet?->country_of_birth }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Nationalität')}}:</td>
-                                <td>{{__('deutsch')}}
+                                <td>{{ $user->government_form?->country->name }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Telefon')}}:</td>
-                                <td>{{__('034533333333 3333333')}}
+                                <td>{{ $phone ?? '-' }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Adresse')}}:</td>
-                                <td>Teststraße 19<br/>
-                                    12345 Testcity<br/>
-                                    Deutschland
-                                </td>
+                                <td>{{ $user->study_sheet?->address }}</td>
                             </tr>
                         </td>
                     </table>
                 </td>
                 <td align="right">
-                    <img style="display:inline-block;height:150px;width:120px;margin-right:50px;object-fit: contain;"
-                         src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTvg6oLc3ZWygJ9Vvoc2S7XAFBS1vcZGiYAdbJCGzex4E4STFKZ"
+                    <img style="display:inline-block;height:120px;width:120px;margin-right:50px;object-fit: contain;"
+                         src="{{ $profilePhoto }}"
                          alt="Bild des Studierenden">
                 </td>
             </tr>
@@ -136,7 +133,7 @@ gesetzlichen Aufbewahrungsfristen gelöscht.')}}
         <tr>
             <td style="width: 40%;">
                 <p style="display: inline-block;">{{__('Datum')}}</p>
-                <p style="display: inline-block;margin-left: 20px;">15.12.2022</p>
+                <p style="display: inline-block;margin-left: 20px;">{{ now()->format('d.m.Y') }}</p>
             </td>
             <td style="width: 60%;">
                 <p style="display: inline-block;">{{__('Unterschrift')}}</p>
