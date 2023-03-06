@@ -2,7 +2,7 @@
     <form method="POST" action="{{ route('register') }}" id="application_register">
         @csrf
         <div
-            class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
             <div>
                 <x-jet-label class="text-white font-bold required"
                              for="desired_beginning"
