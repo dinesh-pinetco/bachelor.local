@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Field;
 use App\Models\Nationality;
+use App\Models\Tab;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class ApplicantToCompanyResource extends JsonResource
 {
@@ -44,7 +45,11 @@ class ApplicantToCompanyResource extends JsonResource
             'studiengangId' => $this->courses()->first()->course->sana_id,
             'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
             'Kompetenznachholung' => $this->configuration?->competency_catch_up,
-            'companies' => SannaUserCompanyResource::collection($this->whenLoaded('companies')),
+            'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
+            'documents' => ApplicantDocumentResource::collection($this->documents),
+            'selection-tests' => SelectionTestResultResource::collection($this->results),
+            'show_application_on_marketplace_at' => $this->show_application_on_marketplace_at,
+            'companies' => SannaUserCompanyResource::collection($this->companies),
         ];
     }
 
@@ -109,5 +114,12 @@ class ApplicantToCompanyResource extends JsonResource
         $key = 'sana_id';
 
         return $object != null ? $object->{$key} : null;
+    }
+
+    private function filterFieldData(string $string)
+    {
+        return collect($this->values)
+            ->whereIn('field_id', Field::where('tab_id', Tab::where('slug', $string)->value('id'))->pluck('id'))
+            ->values();
     }
 }

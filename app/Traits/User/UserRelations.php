@@ -5,8 +5,10 @@ namespace App\Traits\User;
 use App\Models\ApplicantCompany;
 use App\Models\Contract;
 use App\Models\DesiredBeginning;
+use App\Models\Document;
 use App\Models\FieldValue;
 use App\Models\GovernmentForm;
+use App\Models\Media;
 use App\Models\Meteor;
 use App\Models\ModelHasCourse;
 use App\Models\Moodle;
@@ -91,5 +93,11 @@ trait UserRelations
     public function contract(): HasOne
     {
         return $this->hasOne(Contract::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Media::class)
+            ->where('mediable_type', Document::class);
     }
 }

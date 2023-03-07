@@ -49,7 +49,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $fillable = [
         'application_status', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
-        'cubia_id', 'is_active', 'locale',
+        'cubia_id', 'is_active', 'locale', 'show_application_on_marketplace_at'
     ];
 
     protected $hidden = [
@@ -58,6 +58,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'show_application_on_marketplace_at' => 'datetime',
         'competency_catch_up' => 'boolean',
         'is_active' => 'boolean',
         'application_status' => ApplicationStatus::class,

@@ -89,6 +89,8 @@ class SannaUserController extends Controller
                 'values',
                 'values.fields',
                 'companies.company',
+                'results.test',
+                'documents',
             ])
             ->paginate($size)
             ->withQueryString();
