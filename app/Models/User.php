@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
-use App\Notifications\Employee\FailedApplicantNotification;
+use App\Mail\GovernmentStudySheetSubmit;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
 use App\Notifications\SelectionTestResult;
 use App\Traits\Mediable;
@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -212,6 +213,15 @@ class User extends Authenticatable implements ContractsAuditable
         $desiredBeginning = $this->desiredBeginning()
             ->updateOrCreate(['course_start_date' => $desiredBeginning]);
         $desiredBeginning->courses()->sync($course_ids);
+    }
+
+    public function enrollApplicant()
+    {
+        if ($this->application_status->id() < ApplicationStatus::ENROLLMENT_ON && $this->applicant->government_form?->is_submit && $this->applicant->study_sheet?->is_submit) {
+            Mail::to(config('mail.supporter.address'))->send(new GovernmentStudySheetSubmit($this));
+            $this->application_status = ApplicationStatus::ENROLLMENT_ON;
+            $this->save();
+        }
     }
 
     public function coursesName()

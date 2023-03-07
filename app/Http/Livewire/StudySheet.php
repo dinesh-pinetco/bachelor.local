@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Mail\GovernmentStudySheetSubmit;
 use App\Models\HealthInsuranceCompany;
 use App\Models\Nationality;
 use App\Models\School;
@@ -11,7 +10,6 @@ use App\Traits\StudySheetFormValidations;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -111,9 +109,7 @@ class StudySheet extends Component
 
         $this->applicant->load(['government_form', 'study_sheet']);
 
-        if ($this->applicant->government_form?->is_submit && $this->applicant->study_sheet?->is_submit) {
-            Mail::to(config('mail.supporter.address'))->send(new GovernmentStudySheetSubmit($this->applicant));
-        }
+        $this->applicant->enrollApplicant();
 
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
     }

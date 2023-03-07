@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Enums\ApplicationStatus;
-use App\Mail\GovernmentStudySheetSubmit;
 use App\Models\CourseOfStudy;
 use App\Models\District;
 use App\Models\EntranceQualification;
@@ -17,7 +15,6 @@ use App\Models\University;
 use App\Models\User;
 use App\Traits\GovernmentFormValidations;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -244,12 +241,7 @@ class GovernmentForm extends Component
         $this->governmentForm->save();
         $this->applicant->load(['government_form', 'study_sheet']);
 
-        if ($this->applicant->government_form?->is_submit && $this->applicant->study_sheet?->is_submit) {
-            Mail::to(config('mail.supporter.address'))->send(new GovernmentStudySheetSubmit($this->applicant));
-            $this->applicant->application_status = ApplicationStatus::ENROLLMENT_ON;
-            $this->applicant->save();
-        }
-
+        $this->applicant->enrollApplicant();
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
     }
 
