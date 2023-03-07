@@ -18,7 +18,7 @@ class ApplicantController extends Controller
         if ($slug == 'documents') {
             return view('application.documents', ['applicant' => $applicant, 'tab' => $slug]);
         } elseif ($slug == 'companies') {
-            return view('application.companys', ['applicant' => $applicant, 'tab' => $slug]);
+            return view('application.companies', ['applicant' => $applicant, 'tab' => $slug]);
         } elseif ($slug == 'contracts') {
             return view('application.contracts', ['applicant' => $applicant, 'tab' => $slug]);
         } else {
