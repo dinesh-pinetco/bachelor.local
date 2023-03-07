@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApplicantToCompanyResource;
 use App\Http\Resources\SannaUserResource;
 use App\Models\ApplicantCompany;
 use App\Models\Company;
@@ -74,6 +75,25 @@ class SannaUserController extends Controller
             ->withQueryString();
 
         return SannaUserResource::collection($users);
+    }
+
+    public function transferApplicantToCompany()
+    {
+        $size = request()->get('size') ?? 15;
+
+        $users = User::query()
+            ->role(ROLE_APPLICANT)
+            ->where('application_status', ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+            ->with([
+                'courses',
+                'values',
+                'values.fields',
+                'companies.company',
+            ])
+            ->paginate($size)
+            ->withQueryString();
+
+        return ApplicantToCompanyResource::collection($users);
     }
 
     public function userSync(Request $request): JsonResponse
