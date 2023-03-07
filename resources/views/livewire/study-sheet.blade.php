@@ -165,21 +165,34 @@
                                                            class="mt-2 text-red"/>
                                     </div>
 
-                                    <input type="checkbox" wire:model="studySheet.have_health_insurance"
-                                           id="do_you_health_insurance">
-                                    <label
-                                        for="do_you_health_insurance">{{__('Do you have information about your health insurance?')}}</label>
-                                    <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
-                                        {{ __('If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.') }}
-                                    </p>
+                                    <div class="mb-7">
+                                        <div class="flex form-check flex space-x-4">
+                                            <input wire:model="studySheet.have_health_insurance"
+                                                   id="do_you_health_insurance"
+                                                   class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none"
+                                                   type="checkbox">
+                                            <label class="form-check-label inline-block text-gray-800"
+                                                   for="do_you_health_insurance">
+                                                {{ __('If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.') }}
+                                            </label>
+                                        </div>
+                                    </div>
 
 
                                     @if($studySheet->have_health_insurance)
 
-                                        <input type="checkbox" wire:model="studySheet.is_health_insurance_private"
-                                               id="is_health_insurance_private">
-                                        <label
-                                            for="is_health_insurance_private">{{ __('Private health insurance?') }}</label>
+                                        <div class="mb-7">
+                                            <div class="flex items-center form-check flex space-x-4">
+                                                <input wire:model="studySheet.is_health_insurance_private"
+                                                       id="is_health_insurance_private"
+                                                       class="flex-shrink-0 w-5 h-5 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none"
+                                                       type="checkbox">
+                                                <label class="form-check-label inline-block text-gray-800 mb-0"
+                                                       for="is_health_insurance_private">
+                                                    {{ __('Private health insurance?') }}
+                                                </label>
+                                            </div>
+                                        </div>
                                         @if(!$studySheet->is_health_insurance_private)
                                             <div>
                                                 <x-jet-label for="is_active" class="block required">
