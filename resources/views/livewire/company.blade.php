@@ -2,7 +2,7 @@
 
     <livewire:tabs :applicant="$applicant??''"/>
 
-    @if($applicant->companies()->exists())
+    @if($applicant->application_status->id() >= \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id())
         <div class="lg:pl-40 2xl:pl-64 mt-5 md:mt-0">
             <div class="space-y-6">
                 <div class="flex items-center space-x-4">
@@ -18,7 +18,11 @@
 
                 <div class="mt-4 pl-12">
                     <div class="flex items-center space-x-4">
-                        <img src="{{ asset('images/icon/check.svg') }}" alt="transfer-data"/>
+                        @if($applicant->companies()->exists())
+                            <img src="{{ asset('images/icon/check.svg') }}" alt="transfer-data"/>
+                        @else
+                            <img src="{{ asset('images/icon/cancel.svg') }}" alt="transfer-data"/>
+                        @endif
                         <p>{{ __("Active application to the following companies") }}:</p>
                     </div>
                     <div class="pl-12 my-6 text-primary">

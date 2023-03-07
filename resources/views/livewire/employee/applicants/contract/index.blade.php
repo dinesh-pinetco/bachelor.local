@@ -60,7 +60,7 @@
             </div>
         </div>
     @else
-        <div>
+        <div class="lg:pl-40 2xl:pl-64 mt-5 md:mt-0">
             {{ __('Applicant not submit study-sheet and government-form') }}
         </div>
     @endif
