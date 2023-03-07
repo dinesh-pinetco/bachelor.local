@@ -65,6 +65,6 @@ class GovernmentFormFactory extends Factory
             'last_exam_third_course_id' => $this->faker->numerify, // ['nullable'],
             'is_last_exam_pass' => $this->faker->boolean, // ['required'],
             'last_exam_grade' => '2.8', // ['regex:/[0-9]{1}.[0-9]{1}/u'
-            ];
+        ];
     }
 }

@@ -39,7 +39,7 @@ Route::get('fake/government-form/{user}', [TestController::class, 'seedGovernmen
 
 Route::view('study-programs', 'study-programs')->name('study-programs');
 
-Route::prefix('secret')->middleware(['role:' . ROLE_EMPLOYEE . '|' . ROLE_ADMIN . '|' . ROLE_SUPER_ADMIN])->group(function () {
+Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
     Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');
     Route::get('preview/backup/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
 });
@@ -73,6 +73,6 @@ Route::get('verified/{hash}', [TestResultVerifyController::class, '__invoke'])->
 Route::view('imprint', 'privacy_policy')->name('privacy_policy');
 Route::view('datenschutz', 'data_protection')->name('data_protection');
 
-Route::get('management-sheet-pdf/{user}', function (\App\Models\User $user) {
+Route::get('management-sheet-pdf/{user}', function (App\Models\User $user) {
     return (new \App\Pdf\ManagementSheetPdf($user))->render();
 });

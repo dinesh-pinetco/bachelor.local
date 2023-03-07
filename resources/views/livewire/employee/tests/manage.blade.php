@@ -30,9 +30,9 @@
                             </div>
 
                             <div>
-                                <x-jet-label for="type" class="block required">{{ __('Type') }}</x-jet-label>
+                                <x-jet-label for="type" class="block required">{{ __('Test Type') }}</x-jet-label>
                                 <select
-                                    class="w-full py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                    class="capitalize w-full py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
                                     id="type" name="type" wire:model="test.type">
                                     <option value=""> {{ __('Select Type') }}</option>
                                     @foreach ($types as $type)
@@ -117,12 +117,6 @@
                                     <option value="0">{{ __('No') }}</option>
                                 </x-livewire-select>
                                 <x-jet-input-error for="test.is_required" />
-                            </div>
-                            <div>
-                                <x-jet-label for="link" class="block required">{{ __('Link') }}</x-jet-label>
-                                <x-jet-input type="url" name="link" wire:model.defer="test.link" autocomplete="url" :placeholder="__('Link')"
-                                    id="link" class="w-full"></x-jet-input>
-                                <x-jet-input-error for="test.link" />
                             </div>
                         </div>
                         <div class="py-3 text-right">

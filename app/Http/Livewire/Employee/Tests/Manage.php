@@ -31,7 +31,6 @@ class Manage extends Component
         'test.type' => ['required'],
         'test.duration' => ['required'],
         'test.is_required' => ['required'],
-        'test.link' => ['required', 'url'],
         'test.has_passing_limit' => ['required', 'boolean'],
         'test.passing_limit' => ['required_if:test.has_passing_limit,true', 'nullable', 'numeric'],
         'test.is_active' => ['required', 'boolean'],
