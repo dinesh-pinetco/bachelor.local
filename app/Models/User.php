@@ -110,6 +110,15 @@ class User extends Authenticatable implements ContractsAuditable
         });
     }
 
+    public function scopeHasConsentToCompanyPortalBulletinBoard($query)
+    {
+        return $query->whereIn('application_status', [
+            ApplicationStatus::APPLIED_ON_MARKETPLACE,
+            ApplicationStatus::APPLYING_TO_SELECTED_COMPANY,
+            ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
+        ]);
+    }
+
     public function getValueByField($fieldKey)
     {
         if ($fieldKey) {

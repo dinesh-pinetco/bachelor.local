@@ -83,16 +83,16 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
                 $this->getValue('totalApplicants', $course->id),
                 $this->getValue('rejectedApplicants', $course->id),
 
-                $this->getValue('registration_submitted', $course->id),
-                $this->getValue('profile_information_completed', $course->id),
+                $this->getValue('registrationSubmitted', $course->id),
+                $this->getValue('profileInformationCompleted', $course->id),
                 $this->getValue('testCompleted', $course->id),
                 $this->getValue('testPassed', $course->id),
-                $this->getValue('test_failed', $course->id),
-                $this->getValue('test_failed_confirm', $course->id),
-                $this->getValue('test_result_pdf_retrieved_on', $course->id),
-                $this->getValue('personal_data_completed', $course->id),
-                $this->getValue('consent_to_company_portal_bulletin_board', $course->id),
-                $this->getValue('applicationEnroll', $course->id),
+                $this->getValue('testFailed', $course->id),
+                $this->getValue('testFailedConfirm', $course->id),
+                $this->getValue('testResultPdfRetrievedOn', $course->id),
+                $this->getValue('personalDataCompleted', $course->id),
+                $this->getValue('consentToCompanyPortalBulletinBoard', $course->id),
+                $this->getValue('approvedByCompanyForEnrollment', $course->id),
             ];
         }
     }
