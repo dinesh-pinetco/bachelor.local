@@ -69,7 +69,7 @@ class Enrollment extends Component
         $this->show = ! $this->show;
         $this->applicant = $user;
         $this->date_of_birth = $this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
-        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->format('F.Y');
+        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F.Y');
         $this->courses = $this->applicant->courses()->with('course')->get();
 
         $this->selectedCompany = FieldValue::where('field_id', $this->partnerCompanyFieldId)
@@ -126,7 +126,7 @@ class Enrollment extends Component
             'value' => $this->selectedCompanyContacts,
         ]);
 
-        $enrolApplicantCourse = FieldValue::updateOrCreate([
+        $enrollApplicantCourse = FieldValue::updateOrCreate([
             'user_id' => $this->applicant->id,
             'field_id' => $this->enrollCourse,
         ], [

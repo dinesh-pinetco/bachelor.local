@@ -218,7 +218,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     public function enrollApplicant()
     {
-        if ($this->application_status->id() < ApplicationStatus::ENROLLMENT_ON && $this->applicant->government_form?->is_submit && $this->applicant->study_sheet?->is_submit) {
+        if ($this->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id() && $this->government_form?->is_submit == true && $this->study_sheet?->is_submit == true) {
             Mail::to(config('mail.supporter.address'))->send(new GovernmentStudySheetSubmit($this));
             $this->application_status = ApplicationStatus::ENROLLMENT_ON;
             $this->save();

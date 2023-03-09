@@ -15,6 +15,10 @@ class GovernmentForm extends Model implements ContractsAuditable
 
     protected $guarded = [];
 
+    protected $casts = [
+        'is_submit' => 'boolean',
+    ];
+
     protected array $auditInclude = [
         'value',
     ];

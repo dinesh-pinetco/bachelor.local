@@ -841,5 +841,10 @@
     "Do you want to transfer your data to the company portal to increase your chances?": "Do you want to transfer your data to the company portal to increase your chances?",
     "You will be informed as soon as the test results are available": "You will be informed as soon as the test results are available",
     "The file is required": "The file is required",
-    "The file size must not be greater than :max": "The file size must not be greater than :max"
+    "The file size must not be greater than :max": "The file size must not be greater than :max",
+    "Applicant has been enrolled successfully.": "Applicant has been enrolled successfully.",
+    "You have sent your application to the marketplace.": "You have sent your application to the marketplace.",
+    "You have applied to the marketplace.": "You have applied to the marketplace.",
+    "English": "English",
+    "German": "German"
 }

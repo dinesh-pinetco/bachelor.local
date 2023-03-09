@@ -64,12 +64,12 @@ return [
     'applicant-enrolled' => [
         'subject' => 'Vertrag erhalten',
         'body' => '<br> Ihr Vertrag wurde erfolgreich empfangen.',
-        'paragraph1' => '<br> Ihr unterschriebener Vertrag ist heute bei uns eingegangen.',
+        'paragraph1' => '<br> Deine Einstellung durch ein Unternehmen wurde heute bestätigt.',
         'paragraph2' => '<br> Nun ist es nur noch ein kleiner Schritt, bis Sie mit Ihrem Studium beginnen können.',
         'paragraph3' => '<br> Vorbereitend benötigen wir noch zusätzliche Informationen von Ihnen, die Sie uns online übermitteln können. Dort können Sie Ihre Zahlungsdaten oder eine alternative Rechnungsadresse angeben.',
         'paragraph4' => '<br> Bitte füllen Sie die Bögen schnellstmöglich aus, da Ihre Immatrikulation nur nach ausgefülltem Studienbegleitbogen und der Erfassung der Daten für das Statistische Landesamt durchführbar ist! ',
         'paragraph5' => '<br> Rechtzeitig vor Studienbeginn erhalten Sie per Post Ihre Zugangsdaten für Ihren NORDAKADEMIE-Account. Über diesen Account erhalten Sie wichtige Informationen, wie z.B. zur ersten Präsenzphase oder Ihren Einschreibeschlüssel für das Selbststudium. ',
-        'study-sheet-action' => 'Studienbegleitbogen',
+        'study-sheet-action' => 'Verwaltungsbogen',
         'government-form-action' => 'Daten für das Statistische Landesamt',
     ],
 

@@ -64,9 +64,22 @@ class Index extends Component
         $this->emitSelf('refresh');
     }
 
+    public function directShowProfileOnMarketPlace()
+    {
+         $this->user->update([
+            'application_status' => ApplicationStatus::APPLIED_ON_MARKETPLACE(),
+        ]);
+
+        auth()->user()->touch('show_application_on_marketplace_at');
+
+        $this->emitSelf('refresh');
+    }
+
     public function showProfileMarketplace()
     {
         auth()->user()->touch('show_application_on_marketplace_at');
+
+        $this->toastNotify(__('You have sent your application to the marketplace.'), __('Success'), TOAST_SUCCESS);
 
         $this->emitSelf('refresh');
     }

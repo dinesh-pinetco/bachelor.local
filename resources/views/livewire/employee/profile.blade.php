@@ -71,4 +71,10 @@
             </div>
         </form>
     </div>
+    <script>
+        window.addEventListener('refresh-page', event => {
+            location.reload();
+        })
+    </script>
 </div>
+

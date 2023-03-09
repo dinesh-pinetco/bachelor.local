@@ -104,4 +104,9 @@ class ApplicantRedirection
     {
         return to_route('companies.index');
     }
+
+    private function applied_on_marketplace()
+    {
+        return to_route('companies.index');
+    }
 }

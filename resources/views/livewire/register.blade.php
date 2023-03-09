@@ -88,10 +88,10 @@
                 </svg>
             </x-jet-secondary-button>
         </div>
-        <div class="flex items-center justify-end mt-2 md:mt-4">
+        <div class="flex items-center justify-end mt-2 md:mt-4 pb-1">
             <p>{{ __('Already signed up') }}?
                 <a href="{{ route('login') }}"
-                   class="inline-block underline">{{ __('Log in') }}
+                   class="inline-block underline hover:text-primary">{{ __('Log in') }}
                 </a>
             </p>
         </div>
