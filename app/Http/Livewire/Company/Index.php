@@ -66,7 +66,7 @@ class Index extends Component
 
     public function directShowProfileOnMarketPlace()
     {
-         $this->user->update([
+        $this->user->update([
             'application_status' => ApplicationStatus::APPLIED_ON_MARKETPLACE(),
         ]);
 
