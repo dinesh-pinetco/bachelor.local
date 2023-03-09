@@ -84,6 +84,13 @@ class Index extends Component
         $this->emitSelf('refresh');
     }
 
+    public function DoNotShowProfileMarketplace()
+    {
+        auth()->user()->touch('reject_marketplace_application_at');
+
+        $this->emitSelf('refresh');
+    }
+
     public function updatedSelectedCompanies()
     {
         $this->selectedCompanies = collect($this->selectedCompanies)->filter(function ($selectedCompany) {
