@@ -2,11 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Course;
+use App\Models\Field;
+use App\Models\FieldValue;
 use App\Models\HealthInsuranceCompany;
 use App\Models\Nationality;
 use App\Models\School;
 use App\Models\StudySheet as StudySheetModel;
 use App\Traits\StudySheetFormValidations;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -34,7 +38,7 @@ class StudySheet extends Component
 
     public $healthInsuranceCompanies;
 
-    public $coursesNames;
+    public $courseName;
 
     public $desiredBeginning;
 
@@ -43,6 +47,8 @@ class StudySheet extends Component
     public string $lastName;
 
     public string $email;
+
+    public $dateOfBirth;
 
     public function mount()
     {
@@ -56,7 +62,9 @@ class StudySheet extends Component
 
         $this->nationalities = Nationality::orderBy('name')->get();
 
-        $this->coursesNames = $this->applicant->coursesName();
+        $this->courseName = Course::where('id',$this->applicant->getValueByField('enroll_course')?->value)->first()?->name;
+
+        $this->dateOfBirth  = $this->applicant->getValueByField('date_of_birth')?->value;
 
         $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F.Y');
 

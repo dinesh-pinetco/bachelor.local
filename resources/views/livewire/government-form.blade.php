@@ -394,7 +394,7 @@
                                         <x-jet-input-error for="governmentForm.is_previous_another_university" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block required">
+                                        <x-jet-label for="is_active" class="block">
                                             {{ __('Previous university') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"

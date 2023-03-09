@@ -18,7 +18,7 @@ class ApplicantEnrolmentFieldSeeder extends Seeder
             'type' => 'select',
             'related_option_table' => 'enroll_course',
             'label' => 'Enroll Course',
-            'key' => 'id',
+            'key' => 'enroll_course',
             'placeholder' => 'Select Course',
             'is_required' => true,
         ]);
@@ -27,7 +27,7 @@ class ApplicantEnrolmentFieldSeeder extends Seeder
             'type' => 'select',
             'related_option_table' => 'companies',
             'label' => 'Partner company',
-            'key' => 'id',
+            'key' => 'enroll_company',
             'placeholder' => 'Select partner company',
             'is_required' => true,
         ]);
@@ -36,7 +36,7 @@ class ApplicantEnrolmentFieldSeeder extends Seeder
             'type' => 'select',
             'related_option_table' => 'company_contacts',
             'label' => 'Partner company contacts',
-            'key' => 'id',
+            'key' => 'enroll_company_contact',
             'placeholder' => 'Select company contacts',
             'is_required' => true,
         ]);

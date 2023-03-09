@@ -168,7 +168,7 @@
                     @endif
                     @if(in_array('government_form_is_submit', $authPreferencesFields))
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
-                            @if($applicant->government_form_is_submit?->is_submit)
+                            @if($applicant->government_form?->is_submit)
                                 <x-icons.success/>
                             @else
                                 <x-icons.cancel/>

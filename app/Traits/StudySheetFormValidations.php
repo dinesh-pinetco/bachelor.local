@@ -9,7 +9,6 @@ trait StudySheetFormValidations
     protected function rules(): array
     {
         return [
-            'studySheet.date_of_birth' => ['required', 'date'],
             'studySheet.place_of_birth' => ['required'],
             'studySheet.country_of_birth' => ['required'],
             'studySheet.nationality_first' => ['required'],
@@ -23,11 +22,11 @@ trait StudySheetFormValidations
             //            'studySheet.health_insurance_number' => [Rule::requiredIf($this->studySheet->have_health_insurance && !$this->studySheet->is_health_insurance_private),'regex:/[A-Z]{1}[0-9]{9}/u', 'min:10', 'max:10'],
             'studySheet.school' => ['nullable', 'string'],
             'studySheet.phone' => ['required', 'regex:/[0-9]/u'],
-            'studySheet.address' => ['required'],
+            'studySheet.address' => ['nullable'],
             'studySheet.street' => ['required'],
             'studySheet.zip' => ['required'],
             'studySheet.place' => ['required'],
-            'studySheet.is_authorize' => ['required', 'accepted'],
+            'studySheet.secondary_language' => ['nullable'],
             'studySheet.privacy_policy' => ['required', 'accepted'],
         ];
     }
@@ -49,7 +48,6 @@ trait StudySheetFormValidations
             'studySheet.street' => __('Street'),
             'studySheet.zip' => __('Zip'),
             'studySheet.place' => __('Place'),
-            'studySheet.is_authorize' => __('Is authorize'),
             'studySheet.privacy_policy' => __('Privacy Policy'),
         ];
     }

@@ -33,7 +33,7 @@ class CreateStudySheetsTable extends Migration
             $table->string('street')->nullable();
             $table->integer('zip')->nullable();
             $table->string('place')->nullable();
-            $table->boolean('is_authorize')->default(false)->nullable()->comment('For SEPA direct debit mandate');
+            $table->string('secondary_language')->nullable();
             $table->boolean('privacy_policy')->nullable()->default(false);
             $table->boolean('is_submit')->default(false);
             $table->timestamps();

@@ -25,6 +25,7 @@ enum ApplicationStatus: string
     #[ApplicationStatusOrder(8)] case TEST_RESULT_PDF_RETRIEVED_ON = 'test_result_pdf_retrieved_on';
 
     #[ApplicationStatusOrder(9)] case PERSONAL_DATA_COMPLETED = 'personal_data_completed';
+    #[ApplicationStatusOrder(9)] case APPLIED_ON_MARKETPLACE = 'applied_on_marketplace';
 
     #[ApplicationStatusOrder(10)] case APPLICATION_REJECTED_BY_APPLICANT = 'application_rejected_by_applicant';
     #[ApplicationStatusOrder(11)] case APPLICATION_REJECTED_BY_NAK = 'application_rejected_by_nak';
@@ -43,7 +44,9 @@ enum ApplicationStatus: string
 
         $options = collect();
         foreach (array_column($cases, 'value', 'name') as $key => $option) {
-            $options->push(['id' => $key, 'label' => __($option)]);
+            if ($key != 'APPLICATION_REJECTED_BY_NAK') {
+                $options->push(['id' => $key, 'label' => __($option)]);
+            }
         }
 
         return $options->toArray();
