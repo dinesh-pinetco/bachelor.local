@@ -10,6 +10,8 @@ class TestRedirectController extends Controller
     {
         $this->authorize('perform', $test);
 
-        return redirect()->away($test->getTestLink(auth()->user()));
+        $test->getTestLink(auth()->user());
+
+        return redirect()->away('https://auswahltest.nordakademie.de/moodle/course/view.php?id='.$test->course_id);
     }
 }
