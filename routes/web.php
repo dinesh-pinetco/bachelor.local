@@ -66,6 +66,8 @@ Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:'.ROLE_APPLICA
 
         Route::get('faq', FaqController::class)->name('faq.index');
     });
+
+    Route::get('tests/{test}/redirect', \App\Http\Controllers\TestRedirectController::class)->name('tests.redirect');
 });
 
 Route::get('verified/{hash}', [TestResultVerifyController::class, '__invoke'])->name('applicant.test-result');
