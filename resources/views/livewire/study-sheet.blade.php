@@ -16,14 +16,14 @@
                             <div class="space-y-10">
                                 <div class="space-y-4">
                                     <div>
-                                        <x-jet-label for="coursesNames" class="block required">
+                                        <x-jet-label for="courseName" class="block required">
                                             {{ __('Degree') }}
                                         </x-jet-label>
                                         <x-jet-input class="w-full text-gray cursor-not-allowed" type="text"
                                                      disabled="true"
-                                                     wire:model.lazy="coursesNames"
-                                                     id="coursesNames" min="10"
-                                                     max="10"></x-jet-input>
+                                                     wire:model.lazy="courseName"
+                                                     id="courseName"
+                                        ></x-jet-input>
                                     </div>
                                     <div>
                                         <x-jet-label for="desiredBeginning" class="block required">
@@ -32,8 +32,7 @@
                                         <x-jet-input class="w-full cursor-not-allowed" type="text"
                                                      disabled="true"
                                                      wire:model.lazy="desiredBeginning"
-                                                     id="desiredBeginning" min="10"
-                                                     max="10"></x-jet-input>
+                                                     id="desiredBeginning"></x-jet-input>
                                     </div>
                                     <div>
                                         <x-jet-label for="firstName" class="block required">
@@ -42,8 +41,8 @@
                                         <x-jet-input class="w-full cursor-not-allowed" type="text"
                                                      disabled="true"
                                                      wire:model.lazy="firstName"
-                                                     id="firstName" min="10"
-                                                     max="10"></x-jet-input>
+                                                     id="firstName"
+                                        ></x-jet-input>
                                     </div>
 
                                     <div>
@@ -53,17 +52,18 @@
                                         <x-jet-input class="w-full cursor-not-allowed" type="text"
                                                      disabled="true"
                                                      wire:model.lazy="lastName"
-                                                     id="lastName" min="10"
-                                                     max="10"></x-jet-input>
+                                                     id="lastName"
+                                        ></x-jet-input>
                                     </div>
                                     <div>
                                         <x-jet-label for="date_of_birth" class="block required">
                                             {{ __('Date of Birth') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full " type="date"
+                                        <x-jet-input class="w-full cursor-not-allowed" type="text"
+                                                     disabled="true"
                                                      :placeholder="__('Date of Birth')"
-                                                     wire:model.lazy="studySheet.date_of_birth"
-                                                     id="date_of_birth" min="10"
+                                                     wire:model.lazy="dateOfBirth"
+                                                     id="date_of_birth"
                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.date_of_birth"/>
                                     </div>
@@ -75,7 +75,7 @@
                                                      :placeholder="__('place of birth')"
                                                      wire:model.lazy="studySheet.place_of_birth"
                                                      id="place_of_birth"
-                                                     max="10"></x-jet-input>
+                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.place_of_birth"/>
                                     </div>
                                     <div>
@@ -86,7 +86,7 @@
                                                      :placeholder="__('Country of birth')"
                                                      wire:model.lazy="studySheet.country_of_birth"
                                                      id="country_of_birth"
-                                                     max="10"></x-jet-input>
+                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.country_of_birth"/>
                                     </div>
                                     <div>
@@ -221,8 +221,8 @@
                                                 <x-jet-input class="w-full" type="text"
                                                              :placeholder="__('Enter health insurance number')"
                                                              wire:model.lazy="studySheet.health_insurance_number"
-                                                             id="health_insurance_number" min="10"
-                                                             max="10"></x-jet-input>
+                                                             id="health_insurance_number"
+                                                ></x-jet-input>
                                                 <x-jet-input-error for="studySheet.health_insurance_number"/>
 
                                             </div>
@@ -276,7 +276,7 @@
                                     </div>
                                     <div>
                                         <x-jet-label for="address"
-                                                     class="block required">
+                                                     class="block">
                                             {{ __('address supplement') }}
                                         </x-jet-label>
                                         <x-jet-input
@@ -330,20 +330,46 @@
                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.place"/>
                                     </div>
+                                    <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
+                                        {{ __('If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.') }}
+                                    </p>
+
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('Spanish and French can be taken as beginners (no previous knowledge) or as advanced (2-3 years previous knowledge). Based on a placement test, homogeneous teaching groups are formed according to individual language skills.') }}
+
+                                    <div>
+                                        <x-jet-label for="secondary_language" class="block">
+                                            {{ __('Please choose your 2nd foreign language') }}
+                                        </x-jet-label>
+                                        <x-livewire-select id="secondary_language" name="secondary_language"
+                                                           model="studySheet.secondary_language"
+                                                           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value=""> {{ __('Please select a language') }}</option>
+                                            <option value="fr">{{__('Französisch')}}</option>
+                                            <option value="es">{{__('Spanisch')}}</option>
+                                        </x-livewire-select>
+                                    </div>
+
+                                    <h6 class="mb-5 md:mb-9 text-primary text-xl font-medium leading-tight">
+                                        {{ __('Alumni Network Nordakademiker e.V.') }}</h6>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('Ein Studium an der NORDAKADEMIE verbindet nicht nur für die Studienzeit, sondern auch nach dem Abschluss. Als Mitglied der offiziellen Alumni-Organisation der NORDAKADEMIE, dem Nordakademiker e. V., heißt es miteinander in Verbindung bleiben, um gemeinsam zu wachsen und voneinander zu lernen. Der Verein wurde bereits 1993 von Studierenden gegründet und steht seitdem in engem Kontakt zu seiner Hochschule. Der Nordakademiker e. V. bietet neben einem Netzwerk aus weltweit 3.000 Alumni und Studierenden der NORDAKADEMIE ein breites Spektrum attraktiver Leistungen über Expertenvorträge, Zugang zu Fachzeitschriften oder Mentoring- Programmen - nicht nur für Alumni sondern beitragsfrei auch für aktiv Studierende.') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('Your consent is required for us to transfer your contact data to the alumni network Nordakademiker e. V. (Köllner Chaussee 11, 25337 Elmshorn) and for Nordakademiker e. V. to use the contact data for the purposes described below (Art. 6 Para. 1 lit. a DSGVO). Your consent is required for us to transfer your contact data to the alumni network Nordakademiker e. V. (Köllner Chaussee 11, 25337 Elmshorn) and for Nordakademiker e. V. to use the contact data for the purposes described below (Art. 6 para. 1 lit. a DSGVO).') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('The subject of the transmission are the following personal data: First and last name, address, e-mail address and the study number') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('The alumni network Nordakademiker e. V. uses the personal data mentioned for the following purposes: To provide information about the alumni network Nordakademiker e. V. as well as its members, especially about events (e.g. professional events or company visits etc.) or other actions relevant to you.') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        <span>{{ __('Consent to the specific use described above is voluntary and, if granted, may be given to NORDAKADEMIE at any time under the link') }} </span><a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black">https://nordakademiker.de/privacy/</a> <span>{{ __('freely revocable without giving reasons with effect for the future.') }}</span>
+                                    </p>
+
 
                                     <div class="">
-                                        <div class="flex form-check flex space-x-4">
-                                            <input wire:model.lazy="studySheet.is_authorize"
-                                                   id="studySheet.is_authorize"
-                                                   class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none"
-                                                   type="checkbox">
-                                            <label class="form-check-label inline-block text-gray-800"
-                                                   for="studySheet.is_authorize">
-                                                {{ __('study sheet is authorize') }}
-                                            </label>
-                                        </div>
-                                        <x-jet-input-error for="studySheet.is_authorize"/>
-                                    </div>
 
                                     <div class="mb-7">
                                         <div class="flex form-check flex space-x-4">
@@ -353,7 +379,7 @@
                                                    type="checkbox">
                                             <label class="form-check-label inline-block text-gray-800"
                                                    for="studySheet.privacy_policy">
-                                                {{ __('study sheet privacy policy') }}
+                                                <span>{{ __('I agree that NORDAKADEMIE may transfer my contact details to the alumni network Nordakademiker e. V. as described above and that Nordakademiker e. V. may use the contact details for the purposes described. General information on data protection can be found at') }}</span> <a href="https://www.nordakademie.de/datenschutz/" class="text-primary underline font-black">https://www.nordakademie.de/datenschutz/</a> <span>{{ __('bzw.') }}</span> <a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black"> https://nordakademiker.de/privacy/</a>
                                             </label>
                                         </div>
                                         <x-jet-input-error for="studySheet.privacy_policy"/>

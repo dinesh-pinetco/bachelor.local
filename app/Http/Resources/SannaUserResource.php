@@ -104,6 +104,7 @@ class SannaUserResource extends JsonResource
                 'krankenversichertennummer' => $this->study_sheet?->health_insurance_number,
                 'krankenversicherung' => $this->study_sheet?->health_insurance_companies?->sana_id,
             ],
+            'verwaltungsbogen' => $this->study_sheet?->secondary_language,
             'companies' => SannaUserCompanyResource::collection($this->whenLoaded('companies')),
         ];
     }
