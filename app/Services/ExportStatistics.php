@@ -98,7 +98,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status', ApplicationStatus::TEST_FAILED)
+        return $applicant->whereIn('application_status', [ApplicationStatus::TEST_FAILED, ApplicationStatus::TEST_RESET])
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
@@ -144,16 +144,6 @@ class ExportStatistics
         $applicant = clone $this->applicant;
 
         return $applicant->where('application_status', ApplicationStatus::ENROLLMENT_ON)
-            ->coursesIn([$this->courseId])
-            ->{$method}($this->params);
-
-        return $applicant
-            ->whereHas('study_sheet', function ($query) {
-                $query->where('is_submit', 1);
-            })
-            ->whereHas('government_form', function ($query) {
-                $query->where('is_submit', 1);
-            })
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
