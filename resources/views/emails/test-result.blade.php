@@ -2,7 +2,7 @@
     @component('mail::table')
         <tr align="left" style="padding: 2%;background: white;font-size: 12px;">
             <td style="color: black;">
-                <p style="line-height: 1.4;margin-top: 5%;">Lieber {{ $user->first_name }}, <br><br>
+                <p style="line-height: 1.4;margin-top: 5%;">Moin {{ $user->first_name }}, <br><br>
                     die Auswertung deiner Ergebnisse für dem
                     Auswahltest der
                     NORDAKADEMIE ist ab sofort verfügbar.</p>
