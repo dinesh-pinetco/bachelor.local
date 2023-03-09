@@ -326,7 +326,7 @@
                                             type="text"
                                             :placeholder="__('Place')"
                                             wire:model.lazy="studySheet.place"
-                                            id="zip"
+                                            id="place"
                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.place"/>
                                     </div>

@@ -22,8 +22,7 @@
                     Auswertung
                     sicherstellen können.
                 </p>
-                <p style="line-height: 1.4;margin: 20px 0;">Mit freundlichen Grüßen</p>
-                <br>
+                <span style="font-size:16px;padding-top:20px;display:block;">Mit freundlichen Grüßen</span>
             </td>
         </tr>
     @endcomponent

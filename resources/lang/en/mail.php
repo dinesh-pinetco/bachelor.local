@@ -101,13 +101,6 @@ return [
         'paragraph1' => ' The application of :name with the application ID :applicant_id is complete. The applicant can now be enrolled. ',
     ],
 
-    'failed-applicant' => [
-        'subject' => 'Failed Applicant || NORDAKADEMIE',
-        'welcome' => 'Hello :admin',
-        'body' => 'The :name has failed the selection tests. Please review the selection tests and confirm pass or fail.',
-        'action' => 'Go to test-result',
-    ],
-
     'greetings_1' => 'Anette Rostock',
     'greetings_2' => 'Firmenbetreuung',
     'greeting-message' => 'With best regards from the Elbe',
