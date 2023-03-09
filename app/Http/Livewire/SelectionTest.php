@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Enums\ApplicationStatus;
-use App\Models\Result;
 use App\Models\Test;
 use App\Models\User;
 use App\Services\ApplicantRedirection;
@@ -32,14 +31,6 @@ class SelectionTest extends Component
                 }])
                 ->get(),
         ]);
-    }
-
-    public function startTest($testId)
-    {
-        Result::updateOrCreate(
-            ['user_id' => $this->applicant->id, 'test_id' => $testId],
-            ['status' => Result::STATUS_STARTED]
-        );
     }
 
     public function getTestResultPdf()

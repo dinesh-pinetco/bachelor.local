@@ -87,21 +87,21 @@
                                         @endif
                                         @if (!in_array($test->result?->status,[\App\Models\Result::STATUS_COMPLETED,\App\Models\Result::STATUS_FAILED]))
                                             @if ($test->type == \App\Models\Test::TYPE_CUBIA)
-                                                <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
+                                                <x-link-button :active="true"
                                                                href="{{ $test->getTestLink($applicant,'MIX') }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test of MIX') }}
                                                 </x-link-button>
-                                                <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
+                                                <x-link-button :active="true"
                                                                href="{{ $test->getTestLink($applicant,'IQT') }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test of IQ') }}
                                                 </x-link-button>
                                             @else
-                                                <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
-                                                               href="{{ $test->getTestLink($applicant) }}"
+                                                <x-link-button :active="true"
+                                                               href="{{ route('tests.redirect', $test) }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test') }}
@@ -139,8 +139,6 @@
             <div class="flex justify-end space-x-2">
                 <x-danger-button class="bg-primary border-primary" data-cy="delete-button"
                                  wire:click='testResultRetrievedOn'> {{ __('Got it!') }}</x-danger-button>
-                <x-secondary-button data-cy="cancel-button"
-                                    wire:click="$set('show', false)"> {{ __('Cancel') }} </x-secondary-button>
             </div>
         </x-slot>
     </x-custom-modal>

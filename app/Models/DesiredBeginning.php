@@ -35,7 +35,7 @@ class DesiredBeginning extends Model
             $nextCourseStarting->copy()->addYears(FUTURE_YEAR));
 
         foreach ($collection as $courseDate) {
-            $desiredBeginnings[] = ['key' => $courseDate->format('Y-m-d'), 'title' => $courseDate->format(self::TITLE)];
+            $desiredBeginnings[] = ['key' => $courseDate->translatedFormat('Y-m-d'), 'title' => $courseDate->translatedFormat(self::TITLE)];
         }
 
         return $desiredBeginnings;

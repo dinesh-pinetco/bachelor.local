@@ -82,10 +82,10 @@ class Show extends Component
             $this->result->result = null;
             $this->result->save();
             if ($this->result->test->type == Test::TYPE_CUBIA) {
-                $cubiaMIXTestResetURL = (new Cubia())->generateTestUrl($this->result->user, 'MIX', true);
+                $cubiaMIXTestResetURL = (new Cubia($this->result->user))->generateTestUrl('MIX', true);
                 $response = Http::get($cubiaMIXTestResetURL);
 
-                $cubiaIQTTestResetURL = (new Cubia())->generateTestUrl($this->result->user, 'IQT', true);
+                $cubiaIQTTestResetURL = (new Cubia($this->result->user))->generateTestUrl('IQT', true);
                 $response = Http::get($cubiaIQTTestResetURL);
             }
         }

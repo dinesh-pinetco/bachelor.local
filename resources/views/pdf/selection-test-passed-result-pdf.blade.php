@@ -6,7 +6,7 @@
         <tr>
             <td align="right">
                 <p style="font-size: 14px;margin-right: 52px;">Elmshorn,
-                    den {{ $pass_pdf_created_at->format('d.F Y') }}</p>
+                    den {{ $pass_pdf_created_at->translatedFormat('d F Y') }}</p>
             </td>
         </tr>
         <tr>

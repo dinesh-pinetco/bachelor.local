@@ -36,7 +36,7 @@ class Data
                             ],
                             [
                                 'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'anrede',
+                                'label' => 'Anrede',
                                 'placeholder' => 'Bitte wählen',
                                 'key' => 'gender',
                                 'sort_order' => 2,

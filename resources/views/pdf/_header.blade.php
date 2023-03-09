@@ -12,7 +12,7 @@
                 <p style="font-size: 10px;color: #646464;">NORDAKADEMIE | Köllner Chaussee 11 | 25337 Elmshorn</p>
                 <p style="margin-bottom: -8px;">{{ $user->full_name }}</p>
                 <p style="margin-bottom: -8px;">{{ $street_house_number }}</p>
-                <p>{{ $postal_code }} , {{ $location }}</p>
+                <p>{{ $postal_code }}, {{ $location }}</p>
             </td>
             <td style="font-size: 11px;color: #646464;width: 42%;">
                 <p class="flex-nowrap mr-24">NORDAKADEMIE Hochschule der Wirtschaft <br>

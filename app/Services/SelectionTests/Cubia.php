@@ -17,9 +17,13 @@ class Cubia
 
     public User $user;
 
-    public function generateTestUrl(User $user, $test = 'IQT', $wantToReset = false): string
+    public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    public function generateTestUrl($test = 'MIX', $wantToReset = false): string
+    {
         $testUrl = '';
 
         if ($this->user->cubia_id) {

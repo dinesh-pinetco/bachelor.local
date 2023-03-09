@@ -58,7 +58,7 @@ class StudySheet extends Component
 
         $this->coursesNames = $this->applicant->coursesName();
 
-        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->format('F.Y');
+        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F.Y');
 
         $this->firstName = $this->applicant->first_name;
 
