@@ -18,7 +18,7 @@ class FaqSeeder extends Seeder
         Faq::create([
             'name' => 'Fortschrittsbalken',
             'question' => 'Was bedeutet der Fortschrittsbalken?',
-            'answer' => 'Der Fortschrittsbalken zeigt an, ob alle relevanten Informationen zu den einzelnen Unterkategorien angegeben worden sind. Steht er noch nicht auf 100 %, fehlen noch Informationen.',
+            'answer' => 'Der Fortschrittsbalken zeigt an, ob alle relevanten Informationen zu den einzelnen Unterkategorien angegeben worden sind. Steht er noch nicht auf 100%, fehlen noch Informationen.',
         ])->attachCourses(Course::pluck('id')->toArray());
 
         Faq::create([

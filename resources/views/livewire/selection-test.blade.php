@@ -139,8 +139,6 @@
             <div class="flex justify-end space-x-2">
                 <x-danger-button class="bg-primary border-primary" data-cy="delete-button"
                                  wire:click='testResultRetrievedOn'> {{ __('Got it!') }}</x-danger-button>
-                <x-secondary-button data-cy="cancel-button"
-                                    wire:click="$set('show', false)"> {{ __('Cancel') }} </x-secondary-button>
             </div>
         </x-slot>
     </x-custom-modal>

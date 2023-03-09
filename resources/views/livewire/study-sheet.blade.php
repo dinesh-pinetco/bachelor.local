@@ -69,10 +69,10 @@
                                     </div>
                                     <div>
                                         <x-jet-label for="place_of_birth" class="block required">
-                                            {{ __('place of birth ') }}
+                                            {{ __('place of birth') }}
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="text"
-                                                     :placeholder="__('place of birth ')"
+                                                     :placeholder="__('place of birth')"
                                                      wire:model.lazy="studySheet.place_of_birth"
                                                      id="place_of_birth"
                                                      max="10"></x-jet-input>
@@ -173,10 +173,13 @@
                                                    type="checkbox">
                                             <label class="form-check-label inline-block text-gray-800"
                                                    for="do_you_health_insurance">
-                                                {{ __('If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.') }}
+                                                {{ __('Do you have information about your health insurance?') }}
                                             </label>
                                         </div>
                                     </div>
+                                    <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
+                                        {{ __('If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.') }}
+                                    </p>
 
 
                                     @if($studySheet->have_health_insurance)
@@ -273,7 +276,7 @@
                                     </div>
                                     <div>
                                         <x-jet-label for="address"
-                                                     class="block">
+                                                     class="block required">
                                             {{ __('address supplement') }}
                                         </x-jet-label>
                                         <x-jet-input

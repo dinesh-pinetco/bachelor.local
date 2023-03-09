@@ -2,10 +2,10 @@
     @component('mail::table')
         <tr align="left" style="padding: 2%;background: white;font-size: 12px;">
             <td style="color: black;">
-                <p style="line-height: 1.4;margin-top: 5%;">Lieber {{ $user->full_name }}, <br><br>
-                    die Auswertung deiner Ergebnisse fur dem
+                <p style="line-height: 1.4;margin-top: 5%;">Lieber {{ $user->first_name }}, <br><br>
+                    die Auswertung deiner Ergebnisse für dem
                     Auswahltest der
-                    NORDAKADEMIE ist ab sooft verfügbar.</p>
+                    NORDAKADEMIE ist ab sofort verfügbar.</p>
                 <p style="line-height: 1.4;margin: 20px 0;">Bitte logge dich unter
                     <a href="{{ route('selection-test.index') }}"
                         style="text-decoration: underline;color:#003A79;">{{ route('selection-test.index') }}</a> ein
@@ -23,7 +23,6 @@
                     sicherstellen können.
                 </p>
                 <p style="line-height: 1.4;margin: 20px 0;">Mit freundlichen Grüßen</p>
-                <p style="line-height: 1.4;margin-top: 20px;">Das Auswahltestportal der NORDAKADEMIE</p>
                 <br>
             </td>
         </tr>

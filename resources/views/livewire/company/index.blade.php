@@ -130,7 +130,7 @@
                         {{__('Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.')}}
                     </p>
                 </div>
-                <h6 class="text-lg lg:text-2xl font-medium text-primary mb-2">{{ __('Appllied Company') }} :- </h6>
+                <h6 class="text-lg lg:text-2xl font-medium text-primary mb-2">{{ __('Appllied Company') }}: </h6>
 
                 <div class="flex flex-wrap gap-2">
                     @foreach ($appliedCompanies as $appliedCompany)
@@ -162,10 +162,10 @@
                     <x-primary-button class="h-11" type="button"
                                       wire:click="showProfileMarketplace"
                                       wire:loading.attr="disabled">
-                        {{ __('Yes, get listed') }}
+                        {{ __('Yes') }}
                     </x-primary-button>
                     <x-secondary-button class="h-11">
-                        {{ __('No, Not listed') }}
+                        {{ __('No') }}
                     </x-secondary-button>
                 </div>
             @endif
