@@ -5,7 +5,7 @@
                 {{__('Hello,') }} {{ auth()->user()->full_name }}!
             </h1>
             <h6 class="text-base md:text-xl font-medium text-primary">
-                {{__('Your next steps')}}
+                {{__('Excel Export')}}
             </h6>
         </div>
         <livewire:employee.statistics />

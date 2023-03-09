@@ -5,7 +5,7 @@
                 {{__('Hello,') }} {{ auth()->user()->full_name }}!
             </h1>
             <h6 class="text-base md:text-xl font-medium text-primary">
-                {{__('Your next steps')}}
+                {{__('Excel Export')}}
             </h6>
         </div>
         <div class="my-2 -mx-2 sm:-mx-6 md:-mx-4 xl:-mx-0 flex flex-wrap justify-between mx-auto">
