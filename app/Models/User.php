@@ -49,7 +49,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $fillable = [
         'application_status', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
-        'cubia_id', 'is_active', 'locale',
+        'cubia_id', 'is_active', 'locale', 'show_application_on_marketplace_at',
     ];
 
     protected $hidden = [
@@ -58,6 +58,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'show_application_on_marketplace_at' => 'datetime',
         'competency_catch_up' => 'boolean',
         'is_active' => 'boolean',
         'application_status' => ApplicationStatus::class,
@@ -217,7 +218,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     public function enrollApplicant()
     {
-        if ($this->application_status->id() < ApplicationStatus::ENROLLMENT_ON && $this->applicant->government_form?->is_submit && $this->applicant->study_sheet?->is_submit) {
+        if ($this->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id() && $this->government_form?->is_submit == true && $this->study_sheet?->is_submit == true) {
             Mail::to(config('mail.supporter.address'))->send(new GovernmentStudySheetSubmit($this));
             $this->application_status = ApplicationStatus::ENROLLMENT_ON;
             $this->save();

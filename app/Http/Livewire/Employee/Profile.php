@@ -41,5 +41,7 @@ class Profile extends Component
         $this->user->save();
 
         $this->toastNotify(__('Profile updated successfully!'), __('Success'), TOAST_SUCCESS);
+
+        $this->dispatchBrowserEvent('refresh-page');
     }
 }

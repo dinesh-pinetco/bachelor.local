@@ -24,7 +24,6 @@ class SannaUserResource extends JsonResource
                 'geburtstag' => $this->getValueByIdentifier('date_of_birth'),
                 'geburtsort' => $this->getValueByIdentifier('place_of_birth'),
                 'geschlecht' => $this->getValueByIdentifier('gender'),
-                'Kompetenznachholung' => $this->configuration?->competency_catch_up,
             ],
             'adresse' => $this->getAddress('1'),
             'rechnungsadresse' => $this->getAddress('3'),
@@ -98,7 +97,7 @@ class SannaUserResource extends JsonResource
             'geburtsland' => $this->getValueByIdentifier('nationality_id'),
             'studiengangId' => $this->courses()->first()->course->sana_id,
             'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
-            'ist_kompetenznachholer' => $this->competency_catch_up,
+            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
             'krankenversicherung' => [
                 'art_der_krankenversicherung' => $this->study_sheet?->health_insurance_type == '1' ? 'gesetzlich' : 'privat',
                 'krankenversichertennummer' => $this->study_sheet?->health_insurance_number,

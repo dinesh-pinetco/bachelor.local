@@ -87,21 +87,21 @@
                                         @endif
                                         @if (!in_array($test->result?->status,[\App\Models\Result::STATUS_COMPLETED,\App\Models\Result::STATUS_FAILED]))
                                             @if ($test->type == \App\Models\Test::TYPE_CUBIA)
-                                                <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
+                                                <x-link-button :active="true"
                                                                href="{{ $test->getTestLink($applicant,'MIX') }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test of MIX') }}
                                                 </x-link-button>
-                                                <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
+                                                <x-link-button :active="true"
                                                                href="{{ $test->getTestLink($applicant,'IQT') }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test of IQ') }}
                                                 </x-link-button>
                                             @else
-                                                <x-link-button :active="true" wire:click="startTest({{ $test->id }})"
-                                                               href="{{ $test->getTestLink($applicant) }}"
+                                                <x-link-button :active="true"
+                                                               href="{{ route('tests.redirect', $test) }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test') }}

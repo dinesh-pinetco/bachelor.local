@@ -31,7 +31,7 @@ class Data
                                 'key' => 'avatar',
                                 'sort_order' => 1,
                                 'is_active' => 1,
-                                'is_required' => 1,
+                                'is_required' => 0,
                                 'meta_data' => [],
                             ],
                             [

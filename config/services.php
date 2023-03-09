@@ -39,6 +39,7 @@ return [
 
     'moodle' => [
         'base_url' => env('MOODLE_BASE_URL').'?wstoken='.env('MOODLE_WSTOKEN'),
+        'test_view_url' => 'https://auswahltest.nordakademie.de/moodle/course/view.php',
         'wstoken' => env('MOODLE_WSTOKEN'),
         'types' => [
             'General Knowledge Questions' => [

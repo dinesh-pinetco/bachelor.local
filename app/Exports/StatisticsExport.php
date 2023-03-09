@@ -95,7 +95,6 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
                 $this->getValue('applicationEnroll', $course->id),
             ];
         }
-        // dd($this->data);
     }
 
     public function getStatisticsInDb($courseId)
@@ -167,8 +166,7 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
                 $sheet->setCellValue('N7', '=SUM(C7:M7)');
                 $sheet->setCellValue('N8', '=SUM(C8:M8)');
                 $sheet->setCellValue('N9', '=SUM(C9:M9)');
-                $sheet->setCellValue('N10', '=SUM(C10:M10)');
-                $sheet->setCellValue('N11', '=SUM(N3:N10)');
+                $sheet->setCellValue('N10', '=SUM(N3:N9)');
 
                 $styleArray = [
                     'alignment' => [

@@ -134,7 +134,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status', ApplicationStatus::CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD)
+        return $applicant->where('application_status', ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }

@@ -1,6 +1,6 @@
 <div class="max-w-screen-xl mx-auto">
     <livewire:tabs :applicant="$applicant" />
-    @if($applicant->application_status == \App\Enums\ApplicationStatus::ENROLLMENT_ON || $applicant->application_status == \App\Enums\ApplicationStatus::CONTRACT_SENT_ON || $applicant->application_status == \App\Enums\ApplicationStatus::CONTRACT_RETURNED_ON)
+    @if($applicant->application_status->id() >= \App\Enums\ApplicationStatus::ENROLLMENT_ON->id())
         <div class="flex flex-wrap relative mt-5 md:mt-0">
             <div class="hidden lg:block flex-shrink-0 w-20 md:w-32 lg:w-40 2xl:w-64">
                 <div class="flex items-center justify-center py-8 lg:py-6 xl:py-0"></div>

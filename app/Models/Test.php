@@ -105,20 +105,20 @@ class Test extends Model implements ContractsAuditable
 
     public function getTestLink($user, $otherParameter = null)
     {
-        if ($user->application_status == ApplicationStatus::PROFILE_INFORMATION_COMPLETED) {
-            if ($this['type'] == self::TYPE_MOODLE) {
-                $moodle = (new Moodle($user));
+        if ($user->application_status !== ApplicationStatus::PROFILE_INFORMATION_COMPLETED) {
+            return null;
+        }
 
-                return $moodle->generateTestUrl();
-            } elseif ($this['type'] == self::TYPE_CUBIA) {
-                $cubia = (new Cubia());
+        if ($this['type'] == self::TYPE_MOODLE) {
+            return (new Moodle($user))->generateTestUrl();
+        }
 
-                return $cubia->generateTestUrl($user, $otherParameter ?? 'MIX');
-            } elseif ($this['type'] == self::TYPE_METEOR) {
-                $meteor = (new Meteor($user));
+        if ($this['type'] == self::TYPE_CUBIA) {
+            return (new Cubia($user))->generateTestUrl($otherParameter);
+        }
 
-                return $meteor->generateTestUrl();
-            }
+        if ($this['type'] == self::TYPE_METEOR) {
+            return (new Meteor($user))->generateTestUrl();
         }
 
         return null;
