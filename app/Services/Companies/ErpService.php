@@ -24,12 +24,9 @@ abstract class ErpService
     public function __construct()
     {
         $this->collection = collect();
-        $this->itemsPerPage = config('services.nordakademie.items_per_page');
 
         $this->params = [
             'apikey' => config('services.nordakademie.key'),
-            'page' => 1,
-            'itemsPerPage' => $this->itemsPerPage,
         ];
     }
 
