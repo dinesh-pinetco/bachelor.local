@@ -10,7 +10,7 @@ class Profile extends Component
     public User $user;
 
     protected array $rules = [
-        'user.first_name' => ['required', 'max:100'],
+        'user.first_name' => ['required', 'alpha', 'max:100'],
         'user.last_name' => ['required', 'max:100'],
         'user.phone' => ['required', 'numeric'],
         'user.locale' => ['required', 'in:de,en'],
