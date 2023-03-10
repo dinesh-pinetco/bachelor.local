@@ -220,7 +220,7 @@
             @endif
 
             @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
-                <h2>You have applied to marketplace</h2>
+                <p class="text-primary">You have applied to marketplace</p>
             @endif
         </div>
     </div>

@@ -55,7 +55,7 @@
         </div>
     @else
         <div class="lg:pl-40 2xl:pl-64 mt-5 md:mt-0">
-            <p>{{ __("Applicant have not applied to the company") }}</p>
+            <p class="text-primary">{{ __("Applicant have not applied to the company.") }}</p>
         </div>
     @endif
 </div>

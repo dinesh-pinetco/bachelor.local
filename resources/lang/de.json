@@ -783,7 +783,7 @@
     "Applicant has transferred data to the company portal": "Antragsteller hat Daten an das Unternehmensportal übermittelt",
     "Active application to the following": "Aktive Bewerbung bei folgenden Stellen",
     "listed on market place": "auf dem Marktplatz gelistet",
-    "Applicant have not applied to the company": "Der Antragsteller hat sich nicht bei dem Unternehmen beworben",
+    "Applicant have not applied to the company.": "Der Antragsteller hat sich nicht bei dem Unternehmen beworben.",
     "Applicant:": "Antragsteller:",
     "You can pass or fail selected applicant": "Sie können ausgewählte Bewerber bestehen oder durchfallen lassen",
     "No, Fail applicant": "Nein, Antragsteller scheitern",
@@ -816,7 +816,7 @@
     "Apply to Selected Company": "Bei ausgewähltem Unternehmen bewerben",
     "Appllied Company": "Beworben bei",
     "You are listed on the market place": "Sie sind auf dem Marktplatz gelistet",
-    "Applicant not submit study-sheet and government-form": "Bewerber:in hat den Verwaltungsbogen und den Fragebogen des statistischen Landesamtes noch nicht ausgefüllt",
+    "Applicant not submit study-sheet and government-form.": "Bewerber:in hat den Verwaltungsbogen und den Fragebogen des statistischen Landesamtes noch nicht ausgefüllt.",
     "Companies": "Unternehmen",
     "Selection test reset successfully.": "Auswahltest erfolgreich zurückgesetzt.",
     "Selection test failed successfully.": "Der Auswahltest wurde erfolgreich abgeschlossen.",
@@ -830,10 +830,11 @@
     "Language": "Sprache",
     "applying_to_selected_company": "Anwendung auf ausgewähltes Unternehmen",
     "show_application_on_marketplace": "Bewerbung auf dem Marktplatz zeigen",
-    "applied_to_selected_company": "angewandt auf ausgewähltes Unternehmen",
+    "applied_to_selected_company": "Angewandt auf ausgewähltes Unternehmen",
     "enrollment_on": "Zur Immatrikulation freigegeben",
     "contract_sent_on": "Vertrag zurück am",
     "contract_returned_on": "vertrag zurückgegeben am",
+    "applied_on_marketplace": "Auf dem Marktplatz angewendet",
     "Subject Type": "Thema Typ",
     "Has been hired": "Wurde angestellt",
     "Here you can see the progress of your application. After filling out all mandatory fields, your application progress is at 100% and a button appears to submit your application. On the way to 100%, your entries are automatically saved so that no data is lost.": "Hier sieht du den Fortschritt deiner Bewerbung. Nach dem Ausfüllen aller Pflichtfelder, ist dein Bewerbungsfortschritt bei 100% und ein Button erscheint, um deine Bewerbung einzureichen. Auf dem Weg zu den 100% werden deine Eingaben automatisch gespeichert, sodass keine Daten verloren gehen.",
@@ -886,5 +887,6 @@
     "bzw.": "bzw.",
     "Please choose your 2nd foreign language": "Bitte wähle Deine 2. Fremdsprache",
     "Please select a language": "Bitte wählen Sie eine Sprache",
-    "You have opted out to show your profile on marketplace.": "Sie haben sich gegen die Anzeige Ihres Profils auf dem Marktplatz entschieden."
+    "You have opted out to show your profile on marketplace.": "Sie haben sich gegen die Anzeige Ihres Profils auf dem Marktplatz entschieden.",
+    "Applicant have not fill personal data.": "Der Antragsteller hat keine persönlichen Daten eingegeben."
 }

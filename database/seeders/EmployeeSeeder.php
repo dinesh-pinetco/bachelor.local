@@ -18,7 +18,7 @@ class EmployeeSeeder extends Seeder
             ->hasPreference()
             ->create([
                 'first_name' => 'Anna',
-                'last_name' => 'Anna Zeidler ',
+                'last_name' => 'Zeidler',
                 'email' => 'a.zeidler@pinetco.com',
             ])
         ->assignRole(ROLE_EMPLOYEE);

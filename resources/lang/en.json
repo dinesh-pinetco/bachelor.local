@@ -780,7 +780,7 @@
     "Applicant has transferred data to the company portal": "Applicant has transferred data to the company portal",
     "Active application to the following": "Active application to the following",
     "listed on market place": "listed on market place",
-    "Applicant have not applied to the company": "Applicant have not applied to the company",
+    "Applicant have not applied to the company.": "Applicant have not applied to the company.",
     "Applicant:": "Applicant:",
     "You can pass or fail selected applicant": "You can pass or fail selected applicant",
     "No, Fail applicant": "No, Fail applicant",
@@ -814,7 +814,7 @@
     "Apply to Selected Company": "Apply to Selected Company",
     "Appllied Company": "Appllied Company",
     "You are listed on the market place": "You are listed on the market place",
-    "Applicant not submit study-sheet and government-form": "Applicant not submit study-sheet and government-form",
+    "Applicant not submit study-sheet and government-form.": "Applicant not submit study-sheet and government-form.",
     "Companies": "Companies",
     "Selection test reset successfully.": "Selection test reset successfully.",
     "Selection test failed successfully.": "Selection test failed successfully.",
@@ -849,5 +849,6 @@
     "You have applied to the marketplace.": "You have applied to the marketplace.",
     "English": "English",
     "German": "German",
-    "You have opted out to show your profile on marketplace.": "You have opted out to show your profile on marketplace."
+    "You have opted out to show your profile on marketplace.": "You have opted out to show your profile on marketplace.",
+    "Applicant have not fill personal data.": "Applicant have not fill personal data."
 }

@@ -61,7 +61,7 @@
         </div>
     @else
         <div class="lg:pl-40 2xl:pl-64 mt-5 md:mt-0">
-            {{ __('Applicant not submit study-sheet and government-form') }}
+            <p class="text-primary">{{ __('Applicant not submit study-sheet and government-form.') }}</p>
         </div>
     @endif
 </div>
