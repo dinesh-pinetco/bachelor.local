@@ -7,7 +7,7 @@
         <tr>
             <td align="right">
                 <p style="font-size: 14px;margin-right: 52px;">Elmshorn,
-                    den {{ $fail_pdf_created_at->format('d.F Y') }}</p>
+                    den {{ $fail_pdf_created_at->translatedFormat('d.F Y') }}</p>
             </td>
         </tr>
 
@@ -22,7 +22,7 @@
                     zur
                     Zeit (noch) nicht ausreichend erfüllst. Ein erfolgreicher Abschluss des Studiums an der
                     NORDAKADEMIE ist daher in deinem Fall eher unwahrscheinlich. Bitte sieh daher für den
-                    Studienbeginn {{ $user->desiredBeginning->course_start_date->format('F-Y') }} von Bewerbungen bei
+                    Studienbeginn {{ $user->desiredBeginning->course_start_date->translatedFormat('F-Y') }} von Bewerbungen bei
                     Kooperationsunternehmen der Hochschule ab. </p>
                 <p style="font-size: 14px;margin-right: 52px;">
                     Sieh dies auch von einer konstruktiven Seite: Das „negative“ Ergebnis kann dich dazu ermuntern,
