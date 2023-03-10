@@ -16,7 +16,7 @@ class TestSeeder extends Seeder
     public function run()
     {
         foreach (config('services.moodle.types') as $name => $test) {
-            $this->createMoodleTest(__($name), data_get($test, 'course_id'));
+            $this->createMoodleTest(__($name), $test);
         }
 
         Test::create([
@@ -41,18 +41,18 @@ class TestSeeder extends Seeder
         ])->attachCourses(Course::pluck('id')->toArray());
     }
 
-    public function createMoodleTest($name, $course_id)
+    public function createMoodleTest($name, $test)
     {
         Test::create([
             'name' => 'Moodle: '.$name,
-            'course_id' => $course_id,
+            'course_id' => data_get($test, 'course_id'),
             'type' => Test::TYPE_MOODLE,
             'description' => __('Entrance Examination is the mode for getting admission into various undergraduate, post graduate and professional degree courses. Basically entrance examination is common at higher level of education which is conducted by educational institutes and colleges.'),
             'duration' => '60.00',
             'is_required' => true,
             'is_active' => true,
             'has_passing_limit' => true,
-            'passing_limit' => 50,
+            'passing_limit' => data_get($test, 'passing_score'),
         ])->attachCourses(Course::pluck('id')->toArray());
     }
 }

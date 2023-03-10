@@ -45,18 +45,22 @@ return [
             'General Knowledge Questions' => [
                 'course_id' => 14,
                 'test_id' => 30,
+                'passing_score' => 25,
             ],
             'School Grades' => [
                 'course_id' => 15,
                 'test_id' => 33,
+                'passing_score' => 25,
             ],
             'Math test' => [
                 'course_id' => 12,
                 'test_id' => 21,
+                'passing_score' => 50,
             ],
             'English test' => [
                 'course_id' => 16,
                 'test_id' => 35,
+                'passing_score' => 50,
             ],
         ],
     ],
