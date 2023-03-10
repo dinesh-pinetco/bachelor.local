@@ -20,7 +20,7 @@
                     {{ $courses }}
                     an der NORDAKADEMIE, Hochschule der Wirtschaft passt. Wir freuen uns,
                     dir daher mitteilen zu können, dass du dich weiter um einen Studienplatz für
-                    das Jahr {{ $user->desiredBeginning->course_start_date->format('Y') }}
+                    das Jahr {{ $user->desiredBeginning->course_start_date->translatedFormat('Y') }}
                     an der
                     NORDAKADEMIE bei einem der ausbildenden Partnerunternehmen bewerben kannst.
                 </p>
