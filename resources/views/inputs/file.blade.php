@@ -28,7 +28,7 @@
                     {{ $isEdit ? '' : 'disabled' }} class="hidden" accept="image/jpeg, image/jpg, image/png"
                     required="{{ $field->required() }}">
             </label>
-            <h6 class="text-xs mt-2 font-light">JPG, max 512kb</h6>
+            <h6 class="text-xs mt-2 font-light">JPG, max 1MB</h6>
         <x-jet-input-error for="photo" class="mt-2" />
         <x-jet-input-error for="{{$this->field->label}}" class="mt-2" />
     </div>
