@@ -33,7 +33,7 @@ return [
         'fieldType' => 'phonenumber',
         'options' => [],
     ],
-    'desired_beginning' => [
+    'bachelor_desired_beginning' => [
         'label' => 'Desired Beginning',
         'groupName' => 'contactinformation',
         'description' => 'A contact\'s desired beginning',
@@ -41,7 +41,7 @@ return [
         'fieldType' => 'text',
         'options' => [],
     ],
-    'master_study_course' => [
+    'bachelor_master_study_course' => [
         'label' => 'Master Study Course',
         'groupName' => 'contactinformation',
         'description' => 'A contact\'s study course',
@@ -54,7 +54,7 @@ return [
             ],
         ],
     ],
-    'registration_submitted' => [
+    'bachelor_registration_submitted' => [
         'label' => 'Registration submitted',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s registration submitted',
@@ -62,7 +62,7 @@ return [
         'fieldType' => 'date',
         'options' => [],
     ],
-    'profile_information_completed' => [
+    'bachelor_profile_information_completed' => [
         'label' => 'Profile information completed',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s application accepted',
@@ -70,7 +70,7 @@ return [
         'fieldType' => 'date',
         'options' => [],
     ],
-    'test_taken' => [
+    'bachelor_test_taken' => [
         'label' => 'Test taken',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s test taken',
@@ -87,7 +87,7 @@ return [
             ],
         ],
     ],
-    'test_passed' => [
+    'bachelor_test_passed' => [
         'label' => 'Test passed',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s test passed',
@@ -104,7 +104,7 @@ return [
             ],
         ],
     ],
-    'personal_data_completed' => [
+    'bachelor_personal_data_completed' => [
         'label' => 'Personal data completed',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s personal data completed',
@@ -121,7 +121,7 @@ return [
             ],
         ],
     ],
-    'consent_to_company_portal_bulletin_board' => [
+    'bachelor_consent_to_company_portal_bulletin_board' => [
         'label' => 'Consent to company portal bulletin board',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s consent to company portal bulletin board',
@@ -138,7 +138,7 @@ return [
             ],
         ],
     ],
-    'approved_by_company_for_enrolment' => [
+    'bachelor_approved_by_company_for_enrolment' => [
         'label' => 'Approved by company for enrolment',
         'groupName' => 'contactinformation',
         'description' => 'NAK contact\'s approved by company for enrolment',
@@ -155,27 +155,10 @@ return [
             ],
         ],
     ],
-    'rejected_by_applicant' => [
+    'bachelor_rejected_by_applicant' => [
         'label' => 'Rejected by applicant',
         'groupName' => 'contactinformation',
         'description' => 'A contact\'s rejected application',
-        'type' => 'enumeration',
-        'fieldType' => 'booleancheckbox',
-        'options' => [
-            [
-                'label' => 'Yes',
-                'value' => true,
-            ],
-            [
-                'label' => 'No',
-                'value' => false,
-            ],
-        ],
-    ],
-    'rejected_by_nak' => [
-        'label' => 'Rejected by NAK',
-        'groupName' => 'contactinformation',
-        'description' => 'A contact\'s application rejected by NAK',
         'type' => 'enumeration',
         'fieldType' => 'booleancheckbox',
         'options' => [
