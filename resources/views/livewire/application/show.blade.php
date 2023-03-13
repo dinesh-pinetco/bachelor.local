@@ -31,7 +31,7 @@
             <div class="flex-grow w-1/3 text-primary relative">
                 <div class="md:flex items-center justify-between {{ $isProfile ? 'my-7 lg:my-10' : '' }}">
                     <h6 class="text-2xl md:text-3xl font-medium text-primary {{ $isProfile ? '' : 'ml-20 md:ml-32 lg:ml-0 my-7 lg:my-10' }}">
-                        {{ $tab->description }}
+                        {{ __($tab->description) }}
                     </h6>
                     <div class="flex items-center space-x-4 flex-shrink-0">
                         @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && $isEnrolled)

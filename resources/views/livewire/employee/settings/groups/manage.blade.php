@@ -3,8 +3,8 @@
         <div>
             <div class="-mx-4">
                 <div class="px-4 mb-7 md:mb-12 lg:mb-16">
-                    <h3 class="text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">{{ ucfirst($formMode) }} {{ $tab->name }}
-                        Group</h3>
+                    <h3 class="text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">{{ __(ucfirst($formMode)) }} {{ __($tab->name) }}
+                        {{ __('Group') }}</h3>
                     <p class="mt-2 text-sm text-darkgray">
                         {{ __('This information will be displayed publicly so be careful what you share.') }}
                     </p>

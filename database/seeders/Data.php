@@ -298,8 +298,8 @@ class Data
                 ],
             ],
             [
-                'name' => __('Industry'),
-                'description' => __('Industry Description'),
+                'name' => 'Industry',
+                'description' => 'Industry Description',
                 'slug' => 'industries',
                 'icon' => 'industry',
                 'sort_order' => 2,

@@ -25,7 +25,7 @@
         <x-livewire-select isTab=true>
             @foreach($tabs as $tabData)
                 <option {{ $tabData->is($tab) ? 'selected' : '' }}
-                    value="{{ route('employee.settings.groups.index',['tab' => $tabData->slug ]) }}">{{ $tabData->name }}
+                    value="{{ route('employee.settings.groups.index',['tab' => $tabData->slug ]) }}">{{ __($tabData->name) }}
                 </option>
             @endforeach
         </x-livewire-select>

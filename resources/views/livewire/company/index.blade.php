@@ -62,7 +62,6 @@
                                             {{ $selectedCompany }}
                                         </div>
                                     @endforeach
-
                                 </div>
                             </div>
                         </div>
@@ -79,7 +78,7 @@
                                 <h6 class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">
                                     {{__('Company list')}}
                                 </h6>
-                                <div class="max-h-64 md:max-h-full md:h-full overflow-y-auto">
+                                <div class="max-h-64 overflow-y-auto">
                                     @forelse ($companies as $company)
                                         <div class="flex items-center gap-2 py-1">
                                             <input
@@ -185,7 +184,19 @@
                         {{ !is_null($user->show_application_on_marketplace_at) ? __('You have applied to the marketplace.') : __('You have opted out to show your profile on marketplace.')}}
                     </p>
                 </div>
-                <div class="flex flex-wrap gap-4">
+
+                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
+                    <x-multi-select
+                        wire:model="selectedCompanies"
+                        :placeholder="__('Select Partner Company')"
+                        :options='$companies'
+                        :value="$selectedCompanies"
+                        key-by="id"
+                        label-by="name"
+                    />
+                </div>
+
+                <div class="flex flex-wrap gap-4 mt-4">
                     @foreach ($appliedCompanies as $appliedCompany)
                         <div class="inline-flex items-center space-x-2 px-4 py-2 bg-primary bg-opacity-10 rounded-sm">
                             <div class="text-xs">

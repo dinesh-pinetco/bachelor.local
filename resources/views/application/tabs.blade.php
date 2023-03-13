@@ -18,11 +18,12 @@
             @foreach($tabs as $tab)
                 <li>
                     @role(ROLE_APPLICANT)
+                        @dd('here')
                         <x-jet-nav-link href="{{ route('application.index', ['tab' => $tab->slug]) }}"
                                         :active="urlContains($tab->slug)"
                                         class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm"
                         >
-                            {{ $tab->name }}
+                            {{ __($tab->name) }}
                         </x-jet-nav-link>
                     @elserole
                         <x-jet-nav-link
@@ -30,7 +31,7 @@
                             :active="urlContains($tab->slug)"
                             class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm"
                         >
-                            {{ $tab->name }}
+                            {{ __($tab->name) }}
                         </x-jet-nav-link>
                     @endrole
                 </li>

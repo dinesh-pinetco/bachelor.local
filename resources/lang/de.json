@@ -801,9 +801,9 @@
     "School Grades": "Schulnoten",
     "Math test": "Mathe-Test",
     "English test": "Englisch-Test",
-    "Industry": "Industrie",
-    "Industry Description": "Industrie Beschreibung",
-    "Select Industry": "Industrie auswählen",
+    "Industry": "Branche",
+    "Industry Description": "Branche Beschreibung",
+    "Select Industry": "Branche auswählen",
     "You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal": "Du kannst dich entweder aktiv bei ausgewählten Unternehmen bewerben oder auf dem Bewerbermarktplatz gelistet werden.",
     "Apply directly to selected company": "Direkt bei Unternehmen bewerben",
     "Show my profile directly on marketplace": "Mein Profil nur auf dem Marktplatz anzeigen",
@@ -837,7 +837,7 @@
     "applied_on_marketplace": "Auf dem Marktplatz angewendet",
     "Subject Type": "Thema Typ",
     "Has been hired": "Wurde angestellt",
-    "Here you can see the progress of your application. After filling out all mandatory fields, your application progress is at 100% and a button appears to submit your application. On the way to 100%, your entries are automatically saved so that no data is lost.": "Hier sieht du den Fortschritt deiner Bewerbung. Nach dem Ausfüllen aller Pflichtfelder, ist dein Bewerbungsfortschritt bei 100% und ein Button erscheint, um deine Bewerbung einzureichen. Auf dem Weg zu den 100% werden deine Eingaben automatisch gespeichert, sodass keine Daten verloren gehen.",
+    "Here you can see the progress of your application. After filling out all mandatory fields, your application progress is at 100% and a button appears to submit your application. On the way to 100%, your entries are automatically saved so that no data is lost.": "Hier siehst du den Fortschritt deiner Bewerbung. Nach dem Ausfüllen aller Pflichtfelder, ist dein Bewerbungsfortschritt bei 100% und ein Button erscheint, um deine Bewerbung einzureichen. Auf dem Weg zu den 100% werden deine Eingaben automatisch gespeichert, sodass keine Daten verloren gehen.",
     "Date of Birth": "Geburtsdatum",
     "Country of birth": "Geburtsland",
     "Nationality first": "Erste Staatsangehörigkeit",
@@ -889,5 +889,9 @@
     "Please select a language": "Bitte wählen Sie eine Sprache",
     "You have opted out to show your profile on marketplace.": "Sie haben sich gegen die Anzeige Ihres Profils auf dem Marktplatz entschieden.",
     "Applicant have not fill personal data.": "Der Antragsteller hat keine persönlichen Daten eingegeben.",
-    "You can't access it.": "Sie können nicht darauf zugreifen."
+    "You can't access it.": "Sie können nicht darauf zugreifen.",
+    "Password Updated Successfully.": "Passwort erfolgreich aktualisiert.",
+    "Create Industry Option": "Option Branche erstellen",
+    "Industry Option": "Option Branche",
+    "Edit": "Bearbeiten"
 }

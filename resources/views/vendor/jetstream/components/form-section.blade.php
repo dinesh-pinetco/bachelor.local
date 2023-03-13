@@ -7,6 +7,10 @@
             <div class="">
                 {{ $form }}
             </div>
+
+            <div class="">
+                {{ $actions }}
+            </div>
         </div>
     </form>
 </div>
