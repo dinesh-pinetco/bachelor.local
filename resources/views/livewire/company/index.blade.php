@@ -187,8 +187,8 @@
 
                 <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
                     <x-multi-select
-                        wire:model="selectedCompanies"
-                        :placeholder="__('Select Partner Company')"
+                        wire:model="selectedCourses"
+                        :placeholder="__('Select course')"
                         :options='$companies'
                         :value="$selectedCompanies"
                         key-by="id"
