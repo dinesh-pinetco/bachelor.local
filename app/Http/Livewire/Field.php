@@ -93,7 +93,7 @@ class Field extends Component
             // array_push($validation['fieldValue'], 'image');
             $validation['fieldValue'][] = 'mimes:jpeg,png,jpg';
             $validation['fieldValue'][] = 'file';
-            $validation['fieldValue'][] = 'max:1000';
+            $validation['fieldValue'][] = 'max:1024';
         }
 
         if ($this->field->type == 'email') {
@@ -117,17 +117,21 @@ class Field extends Component
             $validation['fieldValue'][] = 'max:15';
         }
 
-        // if ($this->field->key == 'postal_code') {
-        //     $validation['fieldValue'][] = 'numeric';
-        // }
+        if ($this->field->key == 'street_house_number') {
+            $validation['fieldValue'][] = 'alpha';
+        }
 
-        // if($this->field->key == 'location'){
-        //     $validation['fieldValue'][] = 'alpha';
-        // }
+        if ($this->field->key == 'postal_code') {
+            $validation['fieldValue'][] = 'numeric';
+        }
 
-        // if($this->field->key == 'country'){
-        //     $validation['fieldValue'][] = 'alpha';
-        // }
+        if($this->field->key == 'location'){
+            $validation['fieldValue'][] = 'alpha';
+        }
+
+        if($this->field->key == 'country'){
+            $validation['fieldValue'][] = 'alpha';
+        }
 
         return $validation;
     }
