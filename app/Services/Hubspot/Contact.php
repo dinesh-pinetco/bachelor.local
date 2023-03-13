@@ -2,6 +2,7 @@
 
 namespace App\Services\Hubspot;
 
+use App\Enums\ApplicationStatus;
 use App\Models\DesiredBeginning;
 use App\Models\User;
 use App\Traits\Makeable;
@@ -63,7 +64,12 @@ class Contact
 
     private function consentToCompanyPortalBulletinBoard()
     {
-        return $this->user->hasConsentToCompanyPortalBulletinBoard()
+        return $this->user->audits
+            ->whereIn('new_values.application_status', [
+                ApplicationStatus::APPLIED_ON_MARKETPLACE(),
+                ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
+                ApplicationStatus::APPLIED_TO_SELECTED_COMPANY()
+            ])
             ->isNotEmpty();
     }
 
