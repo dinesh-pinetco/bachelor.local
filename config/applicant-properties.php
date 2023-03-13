@@ -41,10 +41,10 @@ return [
         'fieldType' => 'text',
         'options' => [],
     ],
-    'bachelor_master_study_course' => [
-        'label' => 'Master Study Course',
+    'bachelor_study_courses' => [
+        'label' => 'Study Courses',
         'groupName' => 'nak_bachelor',
-        'description' => 'A contact\'s study course',
+        'description' => 'A contact\'s study courses',
         'type' => 'enumeration',
         'fieldType' => 'checkbox',
         'options' => [
