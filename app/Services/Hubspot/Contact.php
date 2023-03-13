@@ -38,17 +38,16 @@ class Contact
             'firstname' => $this->user->first_name,
             'lastname' => $this->user->last_name,
             'phone' => $this->user->phone,
-
-            'bachelor_desired_beginning' => $this->desired_beginning(),
-            'bachelor_master_study_course' => $this->study_courses(),
-            'bachelor_registration_submitted' => $this->updatedStatusDataTime('registration_submitted'),
-            'bachelor_profile_information_completed' => $this->updatedStatusDataTime('profile_information_completed'),
-            'bachelor_test_taken' => $this->getBooleanValueOfStatus('test_taken'),
-            'bachelor_test_passed' => $this->getBooleanValueOfStatus('test_passed'),
-            'bachelor_personal_data_completed' => $this->getBooleanValueOfStatus('personal_data_completed'),
-            'bachelor_consent_to_company_portal_bulletin_board' => $this->consentToCompanyPortalBulletinBoard(),
-            'bachelor_approved_by_company_for_enrolment' => $this->getBooleanValueOfStatus('enrollment_on'),
-            'bachelor_rejected_by_applicant' => $this->getBooleanValueOfStatus('rejected_by_applicant'),
+            BACHELOR_DESIRED_BEGINNING => $this->desired_beginning(),
+            BACHELOR_STUDY_COURSES => $this->study_courses(),
+            BACHELOR_REGISTRATION_SUBMITTED => $this->updatedStatusDataTime('registration_submitted'),
+            BACHELOR_PROFILE_INFORMATION_COMPLETED => $this->updatedStatusDataTime('profile_information_completed'),
+            BACHELOR_TEST_TAKEN => $this->getBooleanValueOfStatus('test_taken'),
+            BACHELOR_TEST_PASSED => $this->getBooleanValueOfStatus('test_passed'),
+            BACHELOR_PERSONAL_DATA_COMPLETED => $this->getBooleanValueOfStatus('personal_data_completed'),
+            BACHELOR_CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD => $this->consentToCompanyPortalBulletinBoard(),
+            BACHELOR_APPROVED_BY_COMPANY_FOR_ENROLMENT => $this->getBooleanValueOfStatus('enrollment_on'),
+            BACHELOR_REJECTED_BY_APPLICANT => $this->getBooleanValueOfStatus('rejected_by_applicant'),
         ];
     }
 
@@ -68,7 +67,7 @@ class Contact
             ->whereIn('new_values.application_status', [
                 ApplicationStatus::APPLIED_ON_MARKETPLACE(),
                 ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
-                ApplicationStatus::APPLIED_TO_SELECTED_COMPANY()
+                ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
             ])
             ->isNotEmpty();
     }

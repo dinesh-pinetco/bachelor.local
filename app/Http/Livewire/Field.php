@@ -125,11 +125,11 @@ class Field extends Component
             $validation['fieldValue'][] = 'numeric';
         }
 
-        if($this->field->key == 'location'){
+        if ($this->field->key == 'location') {
             $validation['fieldValue'][] = 'alpha';
         }
 
-        if($this->field->key == 'country'){
+        if ($this->field->key == 'country') {
             $validation['fieldValue'][] = 'alpha';
         }
 

@@ -55,7 +55,7 @@ class Index extends Component
 
     public function selectCompany()
     {
-        if(!$this->showAccessDeniedMessage()){
+        if (! $this->showAccessDeniedMessage()) {
             return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
         }
 
@@ -70,7 +70,7 @@ class Index extends Component
 
     public function directShowProfileOnMarketPlace()
     {
-        if(!$this->showAccessDeniedMessage()){
+        if (! $this->showAccessDeniedMessage()) {
             return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
         }
 
@@ -121,7 +121,7 @@ class Index extends Component
     {
         if ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY) {
             return false;
-        }elseif ($this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE){
+        } elseif ($this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE) {
             return false;
         }
 

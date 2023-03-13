@@ -79,7 +79,7 @@ class Course extends Model implements ContractsAuditable
             return false;
         }
         $property = ContactProperty::make()
-            ->findByName('bachelor_study_courses');
+            ->findByName(BACHELOR_STUDY_COURSES);
         $propertyRequest = json_decode(json_encode($property), true);
 
         $options = Arr::where($propertyRequest['options'], function ($value, $key) {
@@ -94,6 +94,6 @@ class Course extends Model implements ContractsAuditable
         ]);
 
         ContactProperty::make()
-            ->update('bachelor_study_courses', $propertyRequest);
+            ->update(BACHELOR_STUDY_COURSES, $propertyRequest);
     }
 }
