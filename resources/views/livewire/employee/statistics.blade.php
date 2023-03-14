@@ -46,16 +46,9 @@
     <div class="my-2 flex flex-wrap lg:flex-nowrap lg:space-x-4 mx-auto">
         <div class="w-full lg:w-1/2 border border-lightgray p-6 space-y-4 rounded-md">
             <div class="flex">
-                <h6 class="text-darkgray">{{ __('Interested') }}: </h6>
-                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'interested']) }}"
-                   class="text-primary pl-1">{{ data_get($statistics, 'interested') }}
-                </a>
-            </div>
-
-            <div class="flex">
-                <h6 class="text-darkgray">{{ __('Applications') }}: </h6>
-                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'approved']) }}"
-                   class="text-primary pl-1">{{ data_get($statistics, 'approved') }}
+                <h6 class="text-darkgray">{{ __('Application incomplete') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'applicationIncomplete']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'applicationIncomplete') }}
                 </a>
             </div>
 
@@ -76,9 +69,16 @@
 
         <div class="w-full lg:w-1/2 border border-lightgray p-6 space-y-4 rounded-md mt-4 lg:mt-0">
             <div class="flex">
-                <h6 class="text-darkgray">{{ __('Interviews') }}: </h6>
-                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'testCompleted']) }}"
-                   class="text-primary pl-1">{{ data_get($statistics, 'interviews') }}
+                <h6 class="text-darkgray">{{ __('Submitted') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'submitted']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'submitted') }}
+                </a>
+            </div>
+
+            <div class="flex">
+                <h6 class="text-darkgray">{{ __('Test passed') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'testPassed']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'testPassed') }}
                 </a>
             </div>
 
