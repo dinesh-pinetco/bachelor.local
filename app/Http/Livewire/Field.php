@@ -118,7 +118,7 @@ class Field extends Component
         }
 
         if ($this->field->key == 'street_house_number') {
-            $validation['fieldValue'][] = 'alpha';
+            $validation['fieldValue'][] = 'string';
         }
 
         if ($this->field->key == 'postal_code') {
@@ -126,7 +126,7 @@ class Field extends Component
         }
 
         if ($this->field->key == 'location') {
-            $validation['fieldValue'][] = 'alpha';
+            $validation['fieldValue'][] = 'string';
         }
 
         if ($this->field->key == 'country') {
