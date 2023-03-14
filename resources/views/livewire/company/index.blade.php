@@ -7,7 +7,7 @@
         </div>
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
-            @if (auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id() && is_null(auth()->user()->show_application_on_marketplace_at))
+            @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED && is_null(auth()->user()->show_application_on_marketplace_at))
                 <p>
                     {{ __('You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal') }}
                 </p>
