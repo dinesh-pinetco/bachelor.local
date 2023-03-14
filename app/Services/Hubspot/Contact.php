@@ -2,6 +2,7 @@
 
 namespace App\Services\Hubspot;
 
+use App\Enums\ApplicationStatus;
 use App\Models\DesiredBeginning;
 use App\Models\User;
 use App\Traits\Makeable;
@@ -37,17 +38,16 @@ class Contact
             'firstname' => $this->user->first_name,
             'lastname' => $this->user->last_name,
             'phone' => $this->user->phone,
-            'desired_beginning' => $this->desired_beginning(),
-            'master_study_course' => $this->study_courses(),
-            'registration_submitted' => $this->updatedStatusDataTime('registration_submitted'),
-            'profile_information_completed' => $this->updatedStatusDataTime('profile_information_completed'),
-            'test_taken' => $this->getBooleanValueOfStatus('test_taken'),
-            'test_passed' => $this->getBooleanValueOfStatus('test_passed'),
-            'personal_data_completed' => $this->getBooleanValueOfStatus('personal_data_completed'),
-            'consent_to_company_portal_bulletin_board' => $this->getBooleanValueOfStatus('consent_to_company_portal_bulletin_board'),
-            'approved_by_company_for_enrolment' => $this->getBooleanValueOfStatus('approved_by_company_for_enrolment'),
-            'rejected_by_applicant' => $this->getBooleanValueOfStatus('rejected_by_applicant'),
-            'rejected_by_nak' => $this->getBooleanValueOfStatus('rejected_by_nak'),
+            BACHELOR_DESIRED_BEGINNING => $this->desired_beginning(),
+            BACHELOR_STUDY_COURSES => $this->study_courses(),
+            BACHELOR_REGISTRATION_SUBMITTED => $this->updatedStatusDataTime('registration_submitted'),
+            BACHELOR_PROFILE_INFORMATION_COMPLETED => $this->updatedStatusDataTime('profile_information_completed'),
+            BACHELOR_TEST_TAKEN => $this->getBooleanValueOfStatus('test_taken'),
+            BACHELOR_TEST_PASSED => $this->getBooleanValueOfStatus('test_passed'),
+            BACHELOR_PERSONAL_DATA_COMPLETED => $this->getBooleanValueOfStatus('personal_data_completed'),
+            BACHELOR_CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD => $this->consentToCompanyPortalBulletinBoard(),
+            BACHELOR_APPROVED_BY_COMPANY_FOR_ENROLMENT => $this->getBooleanValueOfStatus('enrollment_on'),
+            BACHELOR_REJECTED_BY_APPLICANT => $this->getBooleanValueOfStatus('rejected_by_applicant'),
         ];
     }
 
@@ -59,6 +59,17 @@ class Contact
     private function desired_beginning()
     {
         return $this->user->desiredBeginning->course_start_date->format(DesiredBeginning::TITLE);
+    }
+
+    private function consentToCompanyPortalBulletinBoard()
+    {
+        return $this->user->audits
+            ->whereIn('new_values.application_status', [
+                ApplicationStatus::APPLIED_ON_MARKETPLACE(),
+                ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
+                ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
+            ])
+            ->isNotEmpty();
     }
 
     private function getBooleanValueOfStatus($status)

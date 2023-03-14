@@ -62,7 +62,6 @@
                                             {{ $selectedCompany }}
                                         </div>
                                     @endforeach
-
                                 </div>
                             </div>
                         </div>
@@ -79,7 +78,7 @@
                                 <h6 class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">
                                     {{__('Company list')}}
                                 </h6>
-                                <div class="max-h-64 md:max-h-full md:h-full overflow-y-auto">
+                                <div class="max-h-64 overflow-y-auto">
                                     @forelse ($companies as $company)
                                         <div class="flex items-center gap-2 py-1">
                                             <input
@@ -117,7 +116,7 @@
         @endif
 
         <div class="flex-grow max-w-4xl">
-            @if(is_null($user->show_application_on_marketplace_at) && auth()->user()->companies()->exists())
+            @if((is_null($user->show_application_on_marketplace_at) && is_null($user->reject_marketplace_application_at)) && auth()->user()->companies()->exists())
                 <div class="inline-flex justify-center space-x-4 text-white p-4 bg-darkgreen rounded-sm mx-auto mb-5">
                     <svg class="text-white stroke-current w-6 h-6 flex-shrink-0" width="44" height="44"
                          viewBox="0 0 44 44"
@@ -164,13 +163,13 @@
                                       wire:loading.attr="disabled">
                         {{ __('Yes') }}
                     </x-primary-button>
-                    <x-secondary-button class="h-11">
+                    <x-secondary-button class="h-11" wire:click="DoNotShowProfileMarketplace" wire:loading.attr="disabled">
                         {{ __('No') }}
                     </x-secondary-button>
                 </div>
             @endif
 
-            @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+            @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
                 <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
                 <div class="flex justify-start space-x-4 text-white p-4 bg-darkgreen rounded-sm mr-auto mb-5">
                     <svg class="text-white stroke-current w-6 h-6 flex-shrink-0" width="44" height="44"
@@ -180,11 +179,24 @@
                             d="M16.5 22L20.1667 25.6667L27.5 18.3333M38.5 22C38.5 24.1668 38.0732 26.3124 37.244 28.3143C36.4148 30.3161 35.1994 32.1351 33.6673 33.6673C32.1351 35.1994 30.3161 36.4148 28.3143 37.244C26.3124 38.0732 24.1668 38.5 22 38.5C19.8332 38.5 17.6876 38.0732 15.6857 37.244C13.6839 36.4148 11.8649 35.1994 10.3327 33.6673C8.80057 32.1351 7.58519 30.3161 6.75599 28.3143C5.92678 26.3124 5.5 24.1668 5.5 22C5.5 17.6239 7.23839 13.4271 10.3327 10.3327C13.4271 7.23839 17.6239 5.5 22 5.5C26.3761 5.5 30.5729 7.23839 33.6673 10.3327C36.7616 13.4271 38.5 17.6239 38.5 22Z"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+
                     <p class="text-sm">
-                        {{__('You have applied to the marketplace.')}}
+                        {{ !is_null($user->show_application_on_marketplace_at) ? __('You have applied to the marketplace.') : __('You have opted out to show your profile on marketplace.')}}
                     </p>
                 </div>
-                <div class="flex flex-wrap gap-4">
+
+                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
+                    <x-multi-select
+                        wire:model="selectedCourses"
+                        :placeholder="__('Select course')"
+                        :options='$companies'
+                        :value="$selectedCompanies"
+                        key-by="id"
+                        label-by="name"
+                    />
+                </div>
+
+                <div class="flex flex-wrap gap-4 mt-4">
                     @foreach ($appliedCompanies as $appliedCompany)
                         <div class="inline-flex items-center space-x-2 px-4 py-2 bg-primary bg-opacity-10 rounded-sm">
                             <div class="text-xs">
@@ -219,7 +231,7 @@
             @endif
 
             @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
-                <h2>You have applied to marketplace</h2>
+                <p class="text-primary">You have applied to marketplace</p>
             @endif
         </div>
     </div>

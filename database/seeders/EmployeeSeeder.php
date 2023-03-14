@@ -18,7 +18,7 @@ class EmployeeSeeder extends Seeder
             ->hasPreference()
             ->create([
                 'first_name' => 'Anna',
-                'last_name' => 'Anna Zeidler ',
+                'last_name' => 'Zeidler',
                 'email' => 'a.zeidler@pinetco.com',
             ])
         ->assignRole(ROLE_EMPLOYEE);
@@ -33,9 +33,9 @@ class EmployeeSeeder extends Seeder
         ->assignRole(ROLE_EMPLOYEE);
 
         User::factory()->create([
-            'first_name' => 'Patricia',
-            'last_name' => 'Lichtenberg',
-            'email' => 'patricia.lichtenberg@nordakademie.de',
+            'first_name' => 'Ulf',
+            'last_name' => 'Wohlers',
+            'email' => 'ulf.wohlers@nordakademie.de',
         ])->assignRole(ROLE_EMPLOYEE);
     }
 }

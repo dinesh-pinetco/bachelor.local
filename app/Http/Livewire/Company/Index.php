@@ -46,8 +46,6 @@ class Index extends Component
     {
         $this->user = auth()->user();
 
-        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->with('company')->get();
-
         $this->mailContent = auth()->user()?->companies()->first()?->mail_content;
 
         $this->dispatchBrowserEvent('init-trix-editor');
@@ -55,6 +53,10 @@ class Index extends Component
 
     public function selectCompany()
     {
+        if (! $this->showAccessDeniedMessage()) {
+            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
+        }
+
         $this->user->update([
             'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
         ]);
@@ -66,7 +68,11 @@ class Index extends Component
 
     public function directShowProfileOnMarketPlace()
     {
-         $this->user->update([
+        if (! $this->showAccessDeniedMessage()) {
+            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
+        }
+
+        $this->user->update([
             'application_status' => ApplicationStatus::APPLIED_ON_MARKETPLACE(),
         ]);
 
@@ -84,11 +90,23 @@ class Index extends Component
         $this->emitSelf('refresh');
     }
 
+    public function DoNotShowProfileMarketplace()
+    {
+        auth()->user()->touch('reject_marketplace_application_at');
+
+        $this->emitSelf('refresh');
+    }
+
     public function updatedSelectedCompanies()
     {
         $this->selectedCompanies = collect($this->selectedCompanies)->filter(function ($selectedCompany) {
             return $selectedCompany;
         });
+    }
+
+    protected function fetchAppliedCompanies()
+    {
+        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->with('company')->get();
     }
 
     protected function fetchCompanies()
@@ -100,6 +118,17 @@ class Index extends Component
             $query->where('zip_code', 'like', "$this->zip_code%");
         })
         ->get();
+    }
+
+    public function showAccessDeniedMessage()
+    {
+        if ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY) {
+            return false;
+        } elseif ($this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE) {
+            return false;
+        }
+
+        return true;
     }
 
     public function next()
@@ -162,9 +191,9 @@ class Index extends Component
 
     public function render()
     {
-        if ($this->user->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY) {
-            $this->fetchCompanies();
-        }
+        $this->fetchCompanies();
+
+        $this->fetchAppliedCompanies();
 
         return view('livewire.company.index');
     }

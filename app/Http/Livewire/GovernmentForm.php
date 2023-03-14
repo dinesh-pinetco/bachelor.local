@@ -238,7 +238,7 @@ class GovernmentForm extends Component
         $this->validate($this->rules());
         $this->governmentForm->is_submit = true;
         $this->governmentForm->user_id = $this->applicant->id;
-        $this->governmentForm->last_exam_grade = str_replace(',','.',$this->governmentForm->last_exam_grade);
+        $this->governmentForm->last_exam_grade = str_replace(',', '.', $this->governmentForm->last_exam_grade);
         $this->governmentForm->save();
         $this->applicant->load(['government_form', 'study_sheet']);
 

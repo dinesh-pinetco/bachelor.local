@@ -88,13 +88,13 @@
                                         @if (!in_array($test->result?->status,[\App\Models\Result::STATUS_COMPLETED,\App\Models\Result::STATUS_FAILED]))
                                             @if ($test->type == \App\Models\Test::TYPE_CUBIA)
                                                 <x-link-button :active="true"
-                                                               href="{{ $test->getTestLink($applicant,'MIX') }}"
+                                                               href="{{ route('tests.redirect', [$test, 'type' => 'MIX']) }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test of MIX') }}
                                                 </x-link-button>
                                                 <x-link-button :active="true"
-                                                               href="{{ $test->getTestLink($applicant,'IQT') }}"
+                                                               href="{{ route('tests.redirect', [$test, 'type' => 'IQT']) }}"
                                                                class="items-center -mt-0"
                                                                target="_blank">
                                                     {{ __('To the test of IQ') }}

@@ -25,5 +25,6 @@ class DeleteRejectedApplicationData
         $this->user->government_form()->delete();
         $this->user->contract()->delete();
         $this->user->configuration()->delete();
+        $this->user->audits()->delete();
     }
 }

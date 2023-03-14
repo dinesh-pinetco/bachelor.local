@@ -110,6 +110,15 @@ class User extends Authenticatable implements ContractsAuditable
         });
     }
 
+    public function scopeHasConsentToCompanyPortalBulletinBoard($query)
+    {
+        return $query->whereIn('application_status', [
+            ApplicationStatus::APPLIED_ON_MARKETPLACE,
+            ApplicationStatus::APPLYING_TO_SELECTED_COMPANY,
+            ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
+        ]);
+    }
+
     public function getValueByField($fieldKey)
     {
         if ($fieldKey) {
@@ -170,10 +179,6 @@ class User extends Authenticatable implements ContractsAuditable
             } else {
                 $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
                 $this->save();
-
-                // In Progress for send email when applicant get failed in any test
-                // $user = User::first();
-                // $user->notify(new FailedApplicantNotification($this));
             }
         }
     }

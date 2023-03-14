@@ -25,6 +25,10 @@
                         </div>
                     </div>
                 @endforeach
+            @else
+                <div>
+                    <p class="text-primary">{{ __('Applicant have not fill personal data.') }}</p>
+                </div>
             @endif
         </div>
     </div>

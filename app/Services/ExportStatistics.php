@@ -58,7 +58,7 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function registration_submitted($method)
+    private function registrationSubmitted($method)
     {
         $applicant = clone $this->applicant;
 
@@ -67,7 +67,7 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function profile_information_completed($method)
+    private function profileInformationCompleted($method)
     {
         $applicant = clone $this->applicant;
 
@@ -94,16 +94,16 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function test_failed($method)
+    private function testFailed($method)
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status', ApplicationStatus::TEST_FAILED)
+        return $applicant->whereIn('application_status', [ApplicationStatus::TEST_FAILED, ApplicationStatus::TEST_RESET])
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
 
-    private function test_failed_confirm($method)
+    private function testFailedConfirm($method)
     {
         $applicant = clone $this->applicant;
 
@@ -112,7 +112,7 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function test_result_pdf_retrieved_on($method)
+    private function testResultPdfRetrievedOn($method)
     {
         $applicant = clone $this->applicant;
 
@@ -121,7 +121,7 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function personal_data_completed($method)
+    private function personalDataCompleted($method)
     {
         $applicant = clone $this->applicant;
 
@@ -130,30 +130,23 @@ class ExportStatistics
             ->{$method}($this->params);
     }
 
-    private function consent_to_company_portal_bulletin_board($method)
+    private function consentToCompanyPortalBulletinBoard($method)
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status', ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+        return $applicant->hasConsentToCompanyPortalBulletinBoard()
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
 
-    private function applicationEnroll($method)
+    private function approvedByCompanyForEnrollment($method)
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status', ApplicationStatus::ENROLLMENT_ON)
-            ->coursesIn([$this->courseId])
-            ->{$method}($this->params);
-
-        return $applicant
-            ->whereHas('study_sheet', function ($query) {
-                $query->where('is_submit', 1);
-            })
-            ->whereHas('government_form', function ($query) {
-                $query->where('is_submit', 1);
-            })
+        return $applicant->whereIn('application_status', [
+            ApplicationStatus::ENROLLMENT_ON,
+            ApplicationStatus::CONTRACT_SENT_ON,
+            ApplicationStatus::CONTRACT_RETURNED_ON, ])
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }

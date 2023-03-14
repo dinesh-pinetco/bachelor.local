@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -25,6 +26,7 @@ class UpdateUserPassword implements UpdatesUserPasswords
         Validator::make($input, [
             'current_password' => ['required', 'string'],
             'password' => $this->passwordRules(),
+            'password_confirmation' => ['required']
         ])->after(function ($validator) use ($user, $input) {
             if (! isset($input['current_password']) || ! Hash::check($input['current_password'], $user->password)) {
                 $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
@@ -34,5 +36,9 @@ class UpdateUserPassword implements UpdatesUserPasswords
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
+
+        session()->forget('password_hash_web');
+
+        Auth::guard('web')->login($user);
     }
 }

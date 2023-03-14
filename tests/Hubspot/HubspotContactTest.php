@@ -91,4 +91,29 @@ class HubspotContactTest extends TestCase
 
         $this->assertTrue(data_get($response, 'deleted'));
     }
+
+    /** @test  */
+    public function applicant_sync_data_to_hubspot()
+    {
+        $applicantDetailForHubspot = [
+            'email' => 'nak@testing.com',
+            'firstname' => 'NAK',
+            'lastname' => 'Testcases',
+            'phone' => null,
+            'bachelor_desired_beginning' => 'October 2023',
+            'bachelor_study_courses' => '1;2;3',
+            'bachelor_registration_submitted' => 1678440162000,
+            'bachelor_profile_information_completed' => 1678440316000,
+            'bachelor_test_taken' => false,
+            'bachelor_test_passed' => true,
+            'bachelor_personal_data_completed' => true,
+            'bachelor_consent_to_company_portal_bulletin_board' => true,
+            'bachelor_approved_by_company_for_enrolment' => false,
+            'bachelor_rejected_by_applicant' => false,
+        ];
+
+        $hubspotContact = Contact::make()->updateOrCreate($applicantDetailForHubspot['email'], $applicantDetailForHubspot);
+
+        dd($hubspotContact);
+    }
 }

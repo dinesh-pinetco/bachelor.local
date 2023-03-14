@@ -23,7 +23,7 @@
         <x-livewire-select isTab=true>
             @foreach (Tab::orderBy('sort_order', 'ASC')->get() as $tab)
                 <option {{ $tab->is(request()->route('tab')) ? 'selected' : '' }}
-                    value="{{ route('employee.settings.fields.index', ['tab' => $tab->slug]) }}">{{ $tab->name }}
+                    value="{{ route('employee.settings.fields.index', ['tab' => $tab->slug]) }}">{{ __($tab->name) }}
                 </option>
             @endforeach
         </x-livewire-select>
