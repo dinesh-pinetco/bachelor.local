@@ -43,12 +43,25 @@ class Enrollment extends Component
 
     public $enrollCourse;
 
-    protected $rules = [
-        'applicantCourse' => ['required'],
-        'selectedCompany' => ['required', 'exists:companies,id'],
-        'selectedCompanyContacts' => ['required'],
-        'selectedCompanyContacts.*' => ['required', 'exists:company_contacts,id'],
-    ];
+    public $enrolledOutsideSystem = false;
+
+    protected function rules()
+    {
+        $rules = [
+            'applicantCourse'         => ['required'],
+            'selectedCompanyContacts' => ['required'],
+        ];
+
+        $rules = array_merge($this->enrolledOutsideSystem ? [
+            'selectedCompany'         => ['required', 'alpha', 'min:1', 'max:255'],
+            'selectedCompanyContacts' => ['required', 'alpha', 'min:1', 'max:255'],
+        ] : [
+            'selectedCompany'           => ['required', 'exists:companies,id'],
+            'selectedCompanyContacts.*' => ['required', 'exists:company_contacts,id'],
+        ], $rules);
+
+        return $rules;
+    }
 
     public function mount()
     {
@@ -68,9 +81,11 @@ class Enrollment extends Component
     {
         $this->show = ! $this->show;
         $this->applicant = $user;
+        $this->applicant->load('configuration');
         $this->date_of_birth = $this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
         $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F.Y');
         $this->courses = $this->applicant->courses()->with('course')->get();
+        $this->enrolledOutsideSystem  = $this->applicant->configuration->is_enrolled_outside_system;
 
         $this->selectedCompany = FieldValue::where('field_id', $this->partnerCompanyFieldId)
             ->where('user_id', $this->applicant->id)
@@ -84,10 +99,10 @@ class Enrollment extends Component
         if ($this->selectedCompany) {
             $this->companyContacts = CompanyContacts::where('company_id', $this->selectedCompany)->get();
 
-            $this->selectedCompanyContacts = json_decode(FieldValue::where('field_id', $this->partnerCompanyContactFieldId)
+            $this->selectedCompanyContacts = FieldValue::where('field_id', $this->partnerCompanyContactFieldId)
                 ->where('user_id', $this->applicant->id)
                 ->first()
-                ?->value);
+                ?->value;
         }
     }
 
@@ -101,16 +116,34 @@ class Enrollment extends Component
 
     public function updatedSelectedCompany($value)
     {
-        $this->companyContacts = $value
-            ? collect($this->companies)->where('id', $value)->first()->contacts
-            : [];
+        if (!$this->enrolledOutsideSystem) {
+            $this->companyContacts = $value
+                ? collect($this->companies)->where('id', $value)->first()->contacts
+                : [];
 
-        $this->selectedCompanyContacts = null;
+            $this->selectedCompanyContacts = null;
+        }
+    }
+
+    public function updatedEnrolledOutsideSystem($value)
+    {
+        $this->reset(['selectedCompanyContacts', 'selectedCompany']);
     }
 
     public function enroll()
     {
         $this->validate();
+
+        $this->applicant->configuration()->update([
+            'is_enrolled_outside_system' => $this->enrolledOutsideSystem
+        ]);
+
+        $enrollApplicantCourse = FieldValue::updateOrCreate([
+            'user_id' => $this->applicant->id,
+            'field_id' => $this->enrollCourse,
+        ], [
+            'value' => $this->applicantCourse,
+        ]);
 
         $company = FieldValue::updateOrCreate([
             'user_id' => $this->applicant->id,
@@ -124,13 +157,6 @@ class Enrollment extends Component
             'field_id' => $this->partnerCompanyContactFieldId,
         ], [
             'value' => $this->selectedCompanyContacts,
-        ]);
-
-        $enrollApplicantCourse = FieldValue::updateOrCreate([
-            'user_id' => $this->applicant->id,
-            'field_id' => $this->enrollCourse,
-        ], [
-            'value' => $this->applicantCourse,
         ]);
 
         if ($company->wasRecentlyCreated && $companyContacts->wasRecentlyCreated) {
