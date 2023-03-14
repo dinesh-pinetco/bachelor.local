@@ -67,7 +67,7 @@ Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:'.ROLE_APPLICA
         Route::get('faq', FaqController::class)->name('faq.index');
     });
 
-    Route::get('update-password',function(){
+    Route::get('update-password', function () {
         return view('livewire.application.update-password');
     })->name('update-password');
 
