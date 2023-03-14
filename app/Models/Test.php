@@ -105,7 +105,7 @@ class Test extends Model implements ContractsAuditable
 
     public function getTestLink($user, $otherParameter = null)
     {
-        if ($user->application_status !== ApplicationStatus::PROFILE_INFORMATION_COMPLETED) {
+        if (! in_array($user->application_status, [ApplicationStatus::PROFILE_INFORMATION_COMPLETED, ApplicationStatus::TEST_RESET])) {
             return null;
         }
 
