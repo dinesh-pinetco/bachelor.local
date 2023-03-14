@@ -2,7 +2,7 @@
     <tr>
         <td align="right">
             <img style="display:block;height:32px;margin-top:10px;margin-right: 52px;"
-                 src="{{ asset('images/logo.png') }}"
+                 src="{{ public_path('images/logo.png') }}"
                  alt="logo">
         </td>
     </tr>
