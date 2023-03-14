@@ -102,12 +102,12 @@ class Field extends Component
 
         if ($this->field->key == 'first_name') {
             $validation['fieldValue'][] = 'max:512';
-            $validation['fieldValue'][] = 'alpha';
+            $validation['fieldValue'][] = 'string';
         }
 
         if ($this->field->key == 'last_name') {
             $validation['fieldValue'][] = 'max:512';
-            $validation['fieldValue'][] = 'alpha';
+            $validation['fieldValue'][] = 'string';
         }
 
         if ($this->field->key == 'phone') {
