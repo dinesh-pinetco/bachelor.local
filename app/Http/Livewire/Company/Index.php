@@ -49,6 +49,9 @@ class Index extends Component
         $this->mailContent = auth()->user()?->companies()->first()?->mail_content;
 
         $this->dispatchBrowserEvent('init-trix-editor');
+
+        $this->selectedCompanies = auth()->user()->companies()->pluck('company_id')->toArray();
+
     }
 
     public function selectCompany()
@@ -101,7 +104,7 @@ class Index extends Component
     {
         $this->selectedCompanies = collect($this->selectedCompanies)->filter(function ($selectedCompany) {
             return $selectedCompany;
-        });
+        })->toArray();
     }
 
     protected function fetchAppliedCompanies()
@@ -118,6 +121,7 @@ class Index extends Component
             $query->where('zip_code', 'like', "$this->zip_code%");
         })
         ->get();
+
     }
 
     public function showAccessDeniedMessage()
@@ -152,16 +156,15 @@ class Index extends Component
                     'user_id' => $this->user->id,
                     'company_id' => $company->company_id,
                 ], [
-                    'company_name' => $company->company_name,
                     'mail_content' => $this->mailContent,
                 ]);
             }
         }
 
-        foreach ($this->selectedCompanies as $companyKey => $companyName) {
+        foreach ($this->selectedCompanies as $companyId) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
-                'company_id' => $companyKey,
+                'company_id' => $companyId,
             ], [
                 'mail_content' => $this->mailContent,
             ]);

@@ -57,9 +57,8 @@
                                     {{__('Selected companies')}}
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
-                                    @foreach ($selectedCompanies as $key => $selectedCompany)
-                                        <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
-                                            {{ $selectedCompany }}
+                                    @forelse ($companies->whereIn('id', $selectedCompanies) as $selectedCompany)                                        <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
+                                            {{ $selectedCompany->name }}
                                         </div>
                                     @endforeach
                                 </div>
@@ -86,7 +85,7 @@
                                                 type="checkbox"
                                                 id="{{ $company->id }}"
                                                 wire:model="selectedCompanies.{{ $company->id }}"
-                                                value="{{ $company->name }}">
+                                                value="{{ $company->id }}">
                                             <label class="mb-0 cursor-pointer text-sm"
                                                    for="{{ $company->id }}"> {{ ($company->name) }}</label>
                                         </div>
@@ -100,9 +99,9 @@
                                     {{__('Selected companies')}}
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
-                                    @forelse ($selectedCompanies as $key => $selectedCompany)
+                                    @forelse ($companies->whereIn('id', $selectedCompanies) as $selectedCompany)
                                         <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
-                                            {{ $selectedCompany }}
+                                            {{ $selectedCompany->name }}
                                         </div>
                                     @empty
                                         <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>
@@ -199,11 +198,12 @@
                     </p>
                 </div>
 
-                <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
+                <div class="w-96 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
                     <x-multi-select
-                        wire:model="selectedCourses"
-                        :placeholder="__('Select course')"
-                        :options='$companies'
+                        name="company"
+                        wire:model="selectedCompanies"
+                        :placeholder="__('Select Company')"
+                        :options="$companies"
                         :value="$selectedCompanies"
                         key-by="id"
                         label-by="name"
