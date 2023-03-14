@@ -109,6 +109,11 @@ class Test extends Model implements ContractsAuditable
             return null;
         }
 
+        Result::updateOrCreate(
+            ['user_id' => $user->id, 'test_id' => $this->id],
+            ['status' => Result::STATUS_STARTED]
+        );
+
         if ($this['type'] == self::TYPE_MOODLE) {
             return (new Moodle($user))->generateTestUrl();
         }

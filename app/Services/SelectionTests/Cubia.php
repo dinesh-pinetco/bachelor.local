@@ -15,9 +15,9 @@ class Cubia
 
     const IQT = '2';
 
-    public User $user;
+    public null|User $user;
 
-    public function __construct(User $user)
+    public function __construct(User $user = null)
     {
         $this->user = $user;
     }

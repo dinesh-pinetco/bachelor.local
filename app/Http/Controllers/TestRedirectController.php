@@ -10,10 +10,6 @@ class TestRedirectController extends Controller
     {
         $this->authorize('perform', $test);
 
-        $generatedUrl = $test->type == Test::TYPE_MOODLE
-            ? config('services.moodle.test_view_url').'?id='.$test->course_id
-            : $test->getTestLink(auth()->user());
-
-        return redirect()->away($generatedUrl);
+        return redirect()->away($test->getTestLink(auth()->user(), request('type')));
     }
 }
