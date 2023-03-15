@@ -198,7 +198,7 @@
                     </p>
                 </div>
 
-                <div class="w-96 md:px-1 xl:px-2 py-1 order-2 xl:order-3">
+                <div class="w-full md:px-1 xl:px-2 py-1 order-2 xl:order-3">
                     <x-multi-select
                         name="company"
                         wire:model="selectedCompanies"

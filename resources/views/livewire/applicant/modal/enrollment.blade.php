@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
-                            <dt class="text-sm font-medium text-gray-500">{{ __('Is enrolled ouside system?') }}</dt>
+                            <dt class="text-sm font-medium text-gray-500">{{ __('Is enrolled outside system?') }}</dt>
                             <input type="checkbox" wire:model="enrolledOutsideSystem">
                         </div>
 

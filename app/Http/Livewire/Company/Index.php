@@ -50,8 +50,7 @@ class Index extends Component
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
-        $this->selectedCompanies = auth()->user()->companies()->pluck('company_id')->toArray();
-
+        $this->selectedCompanies();
     }
 
     public function selectCompany()
@@ -97,7 +96,14 @@ class Index extends Component
     {
         auth()->user()->touch('reject_marketplace_application_at');
 
+        $this->selectedCompanies();
+
         $this->emitSelf('refresh');
+    }
+
+    public function selectedCompanies()
+    {
+        $this->selectedCompanies = auth()->user()->companies()->pluck('company_id')->toArray();
     }
 
     public function updatedSelectedCompanies()
@@ -176,7 +182,7 @@ class Index extends Component
 
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
-        $this->dispatchBrowserEvent('refresh-page');
+        $this->emitSelf('refresh');
     }
 
     public function removeCompany($appliedCompanyId)
@@ -189,7 +195,7 @@ class Index extends Component
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
 
-        $this->emitSelf('refresh');
+        $this->selectedCompanies();
     }
 
     public function render()
