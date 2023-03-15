@@ -3,6 +3,10 @@
 @section('content')
     @include('pdf._header')
 
+    @php
+        Carbon\Carbon::setlocale($user->locale);
+    @endphp
+
     <table style="margin-left: auto; margin-right: auto;" width="550">
         <tr>
             <td align="right">
