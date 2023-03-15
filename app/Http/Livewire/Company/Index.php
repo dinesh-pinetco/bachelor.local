@@ -184,14 +184,15 @@ class Index extends Component
     public function removeCompany($appliedCompanyId)
     {
         if (count($this->user->companies()->get()) <= 1) {
+            $this->selectedCompanies();
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
-        $this->user->companies()->where('id', $appliedCompanyId)->delete();
-
-        $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+        $this->user->companies()->where('company_id', $appliedCompanyId)->delete();
 
         $this->selectedCompanies();
+
+        $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
     }
 
     public function render()

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10c0b3481f26dd778715c27ffc5905f9",
+    "content-hash": "4ca374a9d8dfccdf0fbc669a5fd5cc53",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -4268,6 +4268,69 @@
                 }
             ],
             "time": "2022-07-30T15:51:26+00:00"
+        },
+        {
+            "name": "poojajadav/hasmanysync",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PoojaJadav/hasmanysync.git",
+                "reference": "e05509318a5139aa88a1faa894f43ae6c5647299"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PoojaJadav/hasmanysync/zipball/e05509318a5139aa88a1faa894f43ae6c5647299",
+                "reference": "e05509318a5139aa88a1faa894f43ae6c5647299",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5|~6|~7|~8|~9",
+                "php": "^7.2|^8.1",
+                "symfony/http-kernel": "^5.0|^6.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^7.0|^8.0|^9.0",
+                "laravel/helpers": "^1.5",
+                "mockery/mockery": "^1.1",
+                "orchestra/testbench": "~3|~4|~5|~6",
+                "phpunit/phpunit": "^9.0",
+                "sempro/phpunit-pretty-print": "^1.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Poojajadav\\Hasmanysync\\HasManySyncServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Poojajadav\\Hasmanysync\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pooja Jadav",
+                    "email": "contact2pooja36@gmail.com"
+                }
+            ],
+            "description": "This trait can be sync data for hasmany relationship.",
+            "homepage": "https://github.com/PoojaJadav",
+            "keywords": [
+                "hasmanysync",
+                "sync"
+            ],
+            "support": {
+                "issues": "https://github.com/PoojaJadav/hasmanysync/issues",
+                "source": "https://github.com/PoojaJadav/hasmanysync/tree/main"
+            },
+            "time": "2022-04-11T06:28:49+00:00"
         },
         {
             "name": "pragmarx/google2fa",
