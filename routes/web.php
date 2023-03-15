@@ -41,7 +41,7 @@ Route::view('study-programs', 'study-programs')->name('study-programs');
 
 Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
     Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');
-    Route::get('preview/backup/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
+    Route::get('preview/backup/{path}/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
 });
 
 Route::middleware(['signed'])->group(function () {

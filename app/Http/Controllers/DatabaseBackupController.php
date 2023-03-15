@@ -13,32 +13,29 @@ class DatabaseBackupController extends Controller
 
     protected string $path;
 
+    protected string $disk;
+
     public function __construct()
     {
         $this->linkExpiry = now()->addMinutes(5);
         $this->path = Str::slug(config('app.name'));
+        $this->disk = config('backup.backup.destination.disks');
     }
 
     public function index()
     {
         $returningFiles = collect();
 
-        $files = [];
-
-        if (app()->environment(['staging', 'local'])) {
-            $files = Storage::disk(config('filesystems.default'))->allFiles($this->path);
-        } elseif (app()->environment('production')) {
-            $files = Storage::disk(config('filesystems.default'))->allFiles($this->path);
-        }
+        $files = Storage::disk($this->disk)->allFiles($this->path);
 
         foreach ($files as $file) {
-            $filename = last(explode('/', $file));
+            [$path, $filename] = explode('/', $file);
 
             $returningFiles->push([
                 'name' => $filename,
-                'size' => round(Storage::size($file) / 1024000, 2),
-                'url' => route('preview.backup', $filename),
-                'lastModified' => Carbon::createFromTimestamp(Storage::lastModified($file)),
+                'size' => round(Storage::disk($this->disk)->size($file) / 1024000, 2),
+                'url' => route('preview.backup', [$path, $filename]),
+                'lastModified' => Carbon::createFromTimestamp(Storage::disk($this->disk)->lastModified($file)),
             ]);
         }
 
@@ -54,19 +51,8 @@ class DatabaseBackupController extends Controller
         return back()->with('success', 'Backup created successfully!');
     }
 
-    public function preview($file)
+    public function preview($path, $filename)
     {
-        $this->linkExpiry = now()->addMinutes(5);
-
-        return redirect($this->getTemporaryUrl($this->path.'/'.$file));
-    }
-
-    protected function getTemporaryUrl($path): string
-    {
-        if (config('filesystems.default') === 's3') {
-            return Storage::temporaryUrl($path, $this->linkExpiry);
-        }
-
-        return Storage::url($path);
+        return Storage::disk($this->disk)->download("$path/$filename");
     }
 }

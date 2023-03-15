@@ -127,7 +127,6 @@ class Index extends Component
             $query->where('zip_code', 'like', "$this->zip_code%");
         })
         ->get();
-
     }
 
     public function showAccessDeniedMessage()
