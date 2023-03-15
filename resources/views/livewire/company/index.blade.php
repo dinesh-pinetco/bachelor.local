@@ -198,7 +198,7 @@
                     </p>
                 </div>
 
-                <div class="w-full md:px-1 xl:px-2 py-1 order-2 xl:order-3">
+                <div class="w-full max-w-md">
                     <x-multi-select
                         name="company"
                         wire:model="selectedCompanies"
@@ -216,7 +216,7 @@
                             <div class="text-xs">
                                 {{ $appliedCompany->company->name }}
                             </div>
-                            <button wire:click="removeCompany({{ $appliedCompany->id }})" class="ml-2 text-red">
+                            <button wire:click="removeCompany({{ $appliedCompany->company_id }})" class="ml-2 text-red">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"

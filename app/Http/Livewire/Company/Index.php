@@ -108,9 +108,22 @@ class Index extends Component
 
     public function updatedSelectedCompanies()
     {
-        $this->selectedCompanies = collect($this->selectedCompanies)->filter(function ($selectedCompany) {
-            return $selectedCompany;
-        })->toArray();
+        $companiesToBeDeleted = array_diff(collect($this->appliedCompanies)->pluck('company_id')?->toArray(), $this->selectedCompanies);
+
+        if (count($companiesToBeDeleted)) {
+            $this->removeCompany(array_first($companiesToBeDeleted));
+        } else {
+            $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
+
+            $this->user->companies()->updateOrCreate([
+                'user_id' => $this->user->id,
+                'company_id' => array_first($companiesToBeAdded),
+            ], [
+                'mail_content' => $this->mailContent,
+            ]);
+
+            $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
+        }
     }
 
     protected function fetchAppliedCompanies()
@@ -131,13 +144,7 @@ class Index extends Component
 
     public function showAccessDeniedMessage()
     {
-        if ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY) {
-            return false;
-        } elseif ($this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE) {
-            return false;
-        }
-
-        return true;
+        return !($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY || $this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE);
     }
 
     public function next()
@@ -154,17 +161,6 @@ class Index extends Component
     public function applyToSelectedCompany()
     {
         $this->validate();
-
-        if (! is_null($this->appliedCompanies)) {
-            foreach ($this->appliedCompanies as $company) {
-                $this->user->companies()->updateOrCreate([
-                    'user_id' => $this->user->id,
-                    'company_id' => $company->company_id,
-                ], [
-                    'mail_content' => $this->mailContent,
-                ]);
-            }
-        }
 
         foreach ($this->selectedCompanies as $companyId) {
             $this->user->companies()->updateOrCreate([
@@ -187,14 +183,15 @@ class Index extends Component
     public function removeCompany($appliedCompanyId)
     {
         if (count($this->user->companies()->get()) <= 1) {
+            $this->selectedCompanies();
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
-        $this->user->companies()->where('id', $appliedCompanyId)->delete();
-
-        $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+        $this->user->companies()->where('company_id', $appliedCompanyId)->delete();
 
         $this->selectedCompanies();
+
+        $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
     }
 
     public function render()

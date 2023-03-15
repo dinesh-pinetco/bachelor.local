@@ -22,6 +22,7 @@
         "maatwebsite/excel": "^3.1",
         "owen-it/laravel-auditing": "^13.0",
         "pda/pheanstalk": "^4.0",
+        "poojajadav/hasmanysync": "dev-main",
         "predis/predis": "^1.1",
         "propaganistas/laravel-phone": "^4.4",
         "rjchauhan/laravel-finer": "^8.3",
