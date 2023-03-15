@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Company;
 
 use App\Enums\ApplicationStatus;
-use App\Models\ApplicantCompany;
 use App\Models\Company;
 use App\Models\User;
 use Livewire\Component;
@@ -30,6 +29,8 @@ class Index extends Component
 
     public bool $isAppliedToCompany = true;
 
+    public $applicantCompany = [];
+
     protected $rules = [
         'mailContent' => ['required', 'min:4'],
     ];
@@ -48,11 +49,13 @@ class Index extends Component
     {
         $this->user = auth()->user();
 
-        $this->mailContent = auth()->user()?->companies()->first()?->mail_content;
+        $this->mailContent = $this->user?->companies()->first()?->mail_content;
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
         $this->selectedCompanies();
+
+        $this->applicantCompany = $this->user->companies;
 
         $this->isAppliedToCompany = $this->user->companies()->exists();
     }
@@ -82,7 +85,7 @@ class Index extends Component
             'application_status' => ApplicationStatus::APPLIED_ON_MARKETPLACE(),
         ]);
 
-        auth()->user()->touch('show_application_on_marketplace_at');
+        $this->user->touch('show_application_on_marketplace_at');
 
         $this->selectedCompanies();
 
@@ -91,7 +94,7 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
-        auth()->user()->touch('show_application_on_marketplace_at');
+        $this->user->touch('show_application_on_marketplace_at');
 
         $this->toastNotify(__('You have sent your application to the marketplace.'), __('Success'), TOAST_SUCCESS);
 
@@ -100,7 +103,7 @@ class Index extends Component
 
     public function DoNotShowProfileMarketplace()
     {
-        auth()->user()->touch('reject_marketplace_application_at');
+        $this->user->touch('reject_marketplace_application_at');
 
         $this->selectedCompanies();
 
@@ -109,7 +112,7 @@ class Index extends Component
 
     public function selectedCompanies()
     {
-        $this->selectedCompanies = auth()->user()->companies()->pluck('company_id')->toArray();
+        $this->selectedCompanies = $this->user->companies()->pluck('company_id')->toArray();
     }
 
     public function updatedSelectedCompanies()
@@ -136,7 +139,7 @@ class Index extends Component
 
     protected function fetchAppliedCompanies()
     {
-        $this->appliedCompanies = ApplicantCompany::where('user_id', auth()->id())->with('company')->get();
+        $this->appliedCompanies = $this->user->companies()->with('company')->get();
     }
 
     protected function fetchCompanies()
