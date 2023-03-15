@@ -120,7 +120,9 @@ return [
             /*
              * The disk names on which the backups will be stored.
              */
-            'disks' => env('BACKUP_DISK', 'local'),
+            'disks' => [
+                env('BACKUP_DISK', 'local')
+            ],
         ],
 
         /*

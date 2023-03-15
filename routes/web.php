@@ -4,7 +4,6 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GovernmentFormController;
@@ -38,11 +37,6 @@ Route::get('fake/study-sheet/{user}', [TestController::class, 'seedStudySheet'])
 Route::get('fake/government-form/{user}', [TestController::class, 'seedGovernmentForm']);
 
 Route::view('study-programs', 'study-programs')->name('study-programs');
-
-Route::prefix('secret')->middleware(['role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN])->group(function () {
-    Route::resource('backups', DatabaseBackupController::class)->only('index', 'show', 'create');
-    Route::get('preview/backup/{path}/{file}', [DatabaseBackupController::class, 'preview'])->name('preview.backup');
-});
 
 Route::middleware(['signed'])->group(function () {
     Route::get('/study-sheet/{user}', StudySheetController::class)->name('study-sheet');
