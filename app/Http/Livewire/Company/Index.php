@@ -110,22 +110,20 @@ class Index extends Component
     {
         $companiesToBeDeleted = array_diff(collect($this->appliedCompanies)->pluck('company_id')?->toArray(), $this->selectedCompanies);
 
-        foreach ($companiesToBeDeleted as $companyId) {
-            $this->user->companies()->where('company_id', $companyId)->delete();
-        }
+        if (count($companiesToBeDeleted)) {
+            $this->removeCompany(array_first($companiesToBeDeleted));
+        } else {
+            $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
 
-        $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
-
-        foreach ($companiesToBeAdded as $companyId) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
-                'company_id' => $companyId,
+                'company_id' => array_first($companiesToBeAdded),
             ], [
                 'mail_content' => $this->mailContent,
             ]);
-        }
 
-        $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
+            $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
+        }
     }
 
     protected function fetchAppliedCompanies()
