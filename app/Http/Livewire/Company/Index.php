@@ -28,6 +28,8 @@ class Index extends Component
 
     public User $user;
 
+    public bool $isAppliedToCompany = true;
+
     protected $rules = [
         'mailContent' => ['required', 'min:4'],
     ];
@@ -51,6 +53,8 @@ class Index extends Component
         $this->dispatchBrowserEvent('init-trix-editor');
 
         $this->selectedCompanies();
+
+        $this->isAppliedToCompany = $this->user->companies()->exists();
     }
 
     public function selectCompany()
@@ -80,6 +84,8 @@ class Index extends Component
 
         auth()->user()->touch('show_application_on_marketplace_at');
 
+        $this->selectedCompanies();
+
         $this->emitSelf('refresh');
     }
 
@@ -108,21 +114,23 @@ class Index extends Component
 
     public function updatedSelectedCompanies()
     {
-        $companiesToBeDeleted = array_diff(collect($this->appliedCompanies)->pluck('company_id')?->toArray(), $this->selectedCompanies);
+        if($this->isAppliedToCompany){
+            $companiesToBeDeleted = array_diff(collect($this->appliedCompanies)->pluck('company_id')?->toArray(), $this->selectedCompanies);
 
-        if (count($companiesToBeDeleted)) {
-            $this->removeCompany(array_first($companiesToBeDeleted));
-        } else {
-            $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
+            if (count($companiesToBeDeleted)) {
+                $this->removeCompany(array_first($companiesToBeDeleted));
+            } else {
+                $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
 
-            $this->user->companies()->updateOrCreate([
-                'user_id' => $this->user->id,
-                'company_id' => array_first($companiesToBeAdded),
-            ], [
-                'mail_content' => $this->mailContent,
-            ]);
+                $this->user->companies()->updateOrCreate([
+                    'user_id' => $this->user->id,
+                    'company_id' => array_first($companiesToBeAdded),
+                ], [
+                    'mail_content' => $this->mailContent,
+                ]);
 
-            $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
+                $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
+            }
         }
     }
 
@@ -174,6 +182,10 @@ class Index extends Component
         $this->user->update([
             'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
         ]);
+
+        $this->isAppliedToCompany = true;
+
+        $this->selectedCompanies();
 
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
