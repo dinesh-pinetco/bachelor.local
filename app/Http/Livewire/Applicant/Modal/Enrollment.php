@@ -48,15 +48,15 @@ class Enrollment extends Component
     protected function rules()
     {
         $rules = [
-            'applicantCourse'         => ['required'],
+            'applicantCourse' => ['required'],
             'selectedCompanyContacts' => ['required'],
         ];
 
         $rules = array_merge($this->enrolledOutsideSystem ? [
-            'selectedCompany'         => ['required', 'alpha', 'min:1', 'max:255'],
+            'selectedCompany' => ['required', 'alpha', 'min:1', 'max:255'],
             'selectedCompanyContacts' => ['required', 'alpha', 'min:1', 'max:255'],
         ] : [
-            'selectedCompany'           => ['required', 'exists:companies,id'],
+            'selectedCompany' => ['required', 'exists:companies,id'],
             'selectedCompanyContacts.*' => ['required', 'exists:company_contacts,id'],
         ], $rules);
 
@@ -85,7 +85,7 @@ class Enrollment extends Component
         $this->date_of_birth = $this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
         $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F.Y');
         $this->courses = $this->applicant->courses()->with('course')->get();
-        $this->enrolledOutsideSystem  = $this->applicant->configuration->is_enrolled_outside_system;
+        $this->enrolledOutsideSystem = $this->applicant->configuration->is_enrolled_outside_system;
 
         $this->selectedCompany = FieldValue::where('field_id', $this->partnerCompanyFieldId)
             ->where('user_id', $this->applicant->id)
@@ -116,7 +116,7 @@ class Enrollment extends Component
 
     public function updatedSelectedCompany($value)
     {
-        if (!$this->enrolledOutsideSystem) {
+        if (! $this->enrolledOutsideSystem) {
             $this->companyContacts = $value
                 ? collect($this->companies)->where('id', $value)->first()->contacts
                 : [];
@@ -135,7 +135,7 @@ class Enrollment extends Component
         $this->validate();
 
         $this->applicant->configuration()->update([
-            'is_enrolled_outside_system' => $this->enrolledOutsideSystem
+            'is_enrolled_outside_system' => $this->enrolledOutsideSystem,
         ]);
 
         $enrollApplicantCourse = FieldValue::updateOrCreate([

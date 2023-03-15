@@ -1,12 +1,6 @@
 <?php
 
 use Spatie\Backup\Notifications\Notifiable;
-use Spatie\Backup\Notifications\Notifications\BackupHasFailed;
-use Spatie\Backup\Notifications\Notifications\BackupWasSuccessful;
-use Spatie\Backup\Notifications\Notifications\CleanupHasFailed;
-use Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful;
-use Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound;
-use Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound;
 use Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy;
 use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays;
 use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
@@ -127,7 +121,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                env('BACKUP_DISK', 'public'),
+                env('BACKUP_DISK'),
             ],
         ],
 
@@ -162,12 +156,12 @@ return [
     'notifications' => [
 
         'notifications' => [
-            BackupHasFailed::class => ['slack'],
-            UnhealthyBackupWasFound::class => ['slack'],
-            CleanupHasFailed::class => ['slack'],
-            BackupWasSuccessful::class => ['slack'],
-            HealthyBackupWasFound::class => ['slack'],
-            CleanupWasSuccessful::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => ['slack'],
         ],
 
         /*
@@ -177,7 +171,7 @@ return [
         'notifiable' => Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            'to' => null,
 
             'from' => [
                 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
