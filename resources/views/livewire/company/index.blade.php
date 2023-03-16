@@ -264,9 +264,5 @@
     @this.set('mailContent', trixEditor.getAttribute('value'));
     @this.applyToSelectedCompany();
     }
-
-    window.addEventListener('refresh-page', event => {
-        location.reload();
-    })
 </script>
 </div>
