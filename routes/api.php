@@ -24,7 +24,7 @@ Route::post('login', [LoginController::class, 'login']);
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
     Route::get('sanna-users', [SannaUserController::class, 'index']);
     Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
-    Route::get('logout', [LoginController::class, 'logout']);
+    Route::post('logout', [LoginController::class, 'logout']);
 
     Route::get('transfer-applicant-data/companies', [SannaUserController::class, 'transferApplicantToCompany']);
 
