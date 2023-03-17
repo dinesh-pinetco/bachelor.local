@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApplicantApplyToCompanyController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\SannaUserController;
 use App\Models\User;
@@ -23,12 +24,14 @@ Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
     Route::get('sanna-users', [SannaUserController::class, 'index']);
+    Route::get('sanna-users/{user}', [SannaUserController::class, 'show']);
     Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
+
+    Route::get('transfer-applicant-data/companies', [ApplicantApplyToCompanyController::class, 'index']);
+    Route::get('transfer-applicant-data/companies/{user}', [ApplicantApplyToCompanyController::class, 'show']);
+    Route::post('companies/{company:sanna_id}/applicants/{user}/hired', [ApplicantApplyToCompanyController::class, 'userHired']);
+
     Route::post('logout', [LoginController::class, 'logout']);
-
-    Route::get('transfer-applicant-data/companies', [SannaUserController::class, 'transferApplicantToCompany']);
-
-    Route::post('companies/{company:sanna_id}/applicants/{user}/hired', [SannaUserController::class, 'userHired']);
 
     Route::middleware(['auth:sanctum', 'role:'.ROLE_ADMIN])->post('admin-create', function (Request $request) {
         $validateData = $request->validate([

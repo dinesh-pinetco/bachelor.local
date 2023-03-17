@@ -6,6 +6,7 @@ use App\Models\Field;
 use App\Models\Nationality;
 use App\Models\Tab;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicantToCompanyResource extends JsonResource
 {

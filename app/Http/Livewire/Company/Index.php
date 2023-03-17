@@ -117,7 +117,7 @@ class Index extends Component
 
     public function updatedSelectedCompanies()
     {
-        if($this->isAppliedToCompany){
+        if ($this->isAppliedToCompany) {
             $companiesToBeDeleted = array_diff(collect($this->appliedCompanies)->pluck('company_id')?->toArray(), $this->selectedCompanies);
 
             if (count($companiesToBeDeleted)) {
@@ -155,7 +155,7 @@ class Index extends Component
 
     public function showAccessDeniedMessage()
     {
-        return !($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY || $this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE);
+        return ! ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY || $this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE);
     }
 
     public function next()
@@ -199,6 +199,7 @@ class Index extends Component
     {
         if (count($this->user->companies()->get()) <= 1) {
             $this->selectedCompanies();
+
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
