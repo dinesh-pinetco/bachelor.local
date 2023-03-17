@@ -203,7 +203,7 @@ class Index extends Component
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
-        $this->user->companies()->where('company_id', $appliedCompanyId)->delete();
+        $this->user->companies()->where('company_id', $appliedCompanyId)->first()->delete();
 
         $this->selectedCompanies();
 

@@ -11,6 +11,7 @@ use App\Notifications\SelectionTestResult;
 use App\Traits\Mediable;
 use App\Traits\User\SelectionTestPdf;
 use App\Traits\User\UserRelations;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -72,6 +73,24 @@ class User extends Authenticatable implements ContractsAuditable
         'application_status',
         'competency_catch_up',
     ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        self::created(function ($model){
+            $model->last_data_updated_at = Carbon::now();
+        });
+
+        self::updating(function ($model){
+            $model->last_data_updated_at = Carbon::now();
+        });
+
+        self::deleted(function ($model){
+            $model->last_data_updated_at = Carbon::now();
+            $model->save();
+        });
+    }
 
     protected function fullName(): Attribute
     {

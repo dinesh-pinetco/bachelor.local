@@ -10,7 +10,7 @@
     <x-slot name="form">
         <div class="col-span-6 sm:col-span-4 mt-4">
             <x-jet-label class="required" for="current_password" value="{{ __('Current Password') }}" />
-            <x-jet-input id="current_password" type="password" class="mt-1 block w-full" wire:model.defer="state.current_password" autocomplete="current-password" />
+            <x-jet-input id="current_password" type="password" class="mt-1 block w-full" autofocus wire:model.defer="state.current_password" autocomplete="current-password" />
             <x-jet-input-error for="current_password" class="mt-2" />
         </div>
 
