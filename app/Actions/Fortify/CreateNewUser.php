@@ -34,9 +34,15 @@ class CreateNewUser implements CreatesNewUsers
             'email' => [
                 'required', 'string', 'email:rfc,dns,spoof',
                 function ($attribute, $value, $fail) use ($input) {
-                    $user = User::where('email', $value)
+                    $user = User::query()
+                        ->where('email', $value)
                         ->with('desiredBeginning')
+                        ->withTrashed()
                         ->first();
+
+                    if ($user && ! $user->hasRole(ROLE_APPLICANT)) {
+                        $fail(__('The :attribute has already been taken.', ['attribute' => $attribute]));
+                    }
 
                     if ($user && $this->applicantHasRejectedStatus($user) &&
                         ($user->desiredBeginning?->course_start_date >= data_get($input, 'desired_beginning'))
