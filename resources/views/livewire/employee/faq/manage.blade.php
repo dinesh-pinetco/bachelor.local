@@ -10,7 +10,7 @@
                 </div>
                 <div class="mt-5 md:mt-0 px-4 w-full lg:w-1/2 xl:w-2/5">
                     <form wire:submit.prevent="submit" id="faqForm">
-                        <div class="space-y-8">
+                        <div class="space-y-8 overflow-y-auto">
 
                             <div>
                                 <x-jet-label for="name"
