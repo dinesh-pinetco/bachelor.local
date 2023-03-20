@@ -4,10 +4,8 @@ namespace App\Traits;
 
 trait UpdateData
 {
-    protected static function boot(): void
+    public static function bootUpdateData(): void
     {
-        parent::boot();
-
         self::created(function ($model) {
             $model->user->touch('last_data_updated_at');
         });

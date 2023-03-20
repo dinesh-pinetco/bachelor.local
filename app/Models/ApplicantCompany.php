@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\UpdateData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ApplicantCompany extends Model
 {
-    use HasFactory;
+    use HasFactory, UpdateData;
 
     protected $fillable = [
         'user_id',
@@ -18,23 +19,6 @@ class ApplicantCompany extends Model
     ];
 
     protected $casts = ['company_contacted_at' => 'datetime', 'hired_at' => 'datetime'];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        self::created(function ($model) {
-            $model->user->touch('last_data_updated_at');
-        });
-
-        self::updated(function ($model) {
-            $model->user->touch('last_data_updated_at');
-        });
-
-        self::deleted(function ($model) {
-            $model->user->touch('last_data_updated_at');
-        });
-    }
 
     public function user()
     {
