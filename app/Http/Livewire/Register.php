@@ -22,11 +22,18 @@ class Register extends Component
 
     public $desiredBeginningId = null;
 
+    /**
+     * @var true
+     */
+    public bool $isMountRender = false;
+
     public function mount()
     {
+        $this->isMountRender = true;
         $this->desiredBeginnings = DesiredBeginning::options(onlyFuture: true);
 
         $this->desired_beginning = old('desired_beginning');
+        $this->course_ids = old('course_ids', []);
         if ($this->desired_beginning) {
             $this->updatedDesiredBeginning($this->desired_beginning);
         }
@@ -45,7 +52,11 @@ class Register extends Component
                     ->isAvailable();
             })->toArray();
 
-        $this->course_ids = [];
+        if (!$this->isMountRender) {
+            $this->course_ids = [];
+        } else {
+            $this->isMountRender = false;
+        }
     }
 
     public function render()

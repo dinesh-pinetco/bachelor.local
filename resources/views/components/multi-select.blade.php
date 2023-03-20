@@ -14,7 +14,6 @@
             'h-60' => 'max-h-60',
         ][$maxHight ?? 'h-60'];
 @endphp
-
 @php
     if ($value && count($value)) {
            $placeholder = data_get(collect($options)->whereIn($keyBy, $value)->first(), $labelBy);
