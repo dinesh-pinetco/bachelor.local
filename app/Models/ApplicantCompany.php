@@ -19,7 +19,24 @@ class ApplicantCompany extends Model
 
     protected $casts = ['company_contacted_at' => 'datetime', 'hired_at' => 'datetime'];
 
-    public function applicant()
+    public static function boot()
+    {
+        parent::boot();
+
+        self::created(function ($model) {
+            $model->user->touch('last_data_updated_at');
+        });
+
+        self::updated(function ($model) {
+            $model->user->touch('last_data_updated_at');
+        });
+
+        self::deleted(function ($model) {
+            $model->user->touch('last_data_updated_at');
+        });
+    }
+
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

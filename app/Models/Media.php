@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Media\MediaHelpers;
+use App\Traits\UpdateData;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +14,7 @@ use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 
 class Media extends Model implements ContractsAuditable
 {
-    use AuditingAuditable, MediaHelpers;
+    use AuditingAuditable, MediaHelpers, UpdateData;
 
     public const TAG_CURRICULUM_VITAE = 'curriculum_vitae';
 

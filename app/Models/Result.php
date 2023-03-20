@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UpdateData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
@@ -9,7 +10,7 @@ use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 
 class Result extends Model implements ContractsAuditable
 {
-    use AuditingAuditable;
+    use AuditingAuditable, UpdateData;
 
     const STATUS_NOT_STARTED = 'not_started';
 

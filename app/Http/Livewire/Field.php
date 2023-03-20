@@ -213,7 +213,8 @@ class Field extends Component
                     $syncUser->updateUserValue($this->field->key, $this->fieldValue);
                 }
             } else {
-                $this->value->delete();
+                $this->value->value = $this->fieldValue;
+                $this->value->save();
             }
         } else {
             $this->authorizeForUser($this->applicant, 'create', FieldValue::class);
