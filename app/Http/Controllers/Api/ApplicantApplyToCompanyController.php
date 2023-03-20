@@ -26,6 +26,7 @@ class ApplicantApplyToCompanyController extends Controller
                 'results.test',
                 'documents',
             ])
+            ->filter()
             ->paginate($size)
             ->withQueryString();
 
