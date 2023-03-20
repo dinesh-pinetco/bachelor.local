@@ -7,7 +7,7 @@ use Rjchauhan\LaravelFiner\Filter\Filter;
 
 class UserFilters extends Filter
 {
-    protected $filters = ['search', 'sort_by', 'selectedStatuses', 'desiredBeginning', 'courses', 'postalCode', 'location', 'listedmaketplace'];
+    protected $filters = ['search', 'sort_by', 'selectedStatuses', 'desiredBeginning', 'courses', 'postalCode', 'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter'];
 
     public function search($keyword)
     {
@@ -45,6 +45,16 @@ class UserFilters extends Filter
         $this->builder->whereHas('values', function (\Illuminate\Database\Eloquent\Builder $query) use ($locationKey, $keyword) {
             $query->where('field_id', $locationKey)->where('value', 'like', "%$keyword%");
         });
+    }
+
+    public function lastChangedBefore($timestamps)
+    {
+        $this->builder->where('last_data_updated_at', '>=', $timestamps);
+    }
+
+    public function lastChangedAfter($timestamps)
+    {
+        $this->builder->where('last_data_updated_at', '<=', $timestamps);
     }
 
     public function sort_by($column)
