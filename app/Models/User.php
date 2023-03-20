@@ -78,15 +78,15 @@ class User extends Authenticatable implements ContractsAuditable
     {
         parent::boot();
 
-        self::created(function ($model){
+        self::created(function ($model) {
             $model->last_data_updated_at = Carbon::now();
         });
 
-        self::updating(function ($model){
+        self::updating(function ($model) {
             $model->last_data_updated_at = Carbon::now();
         });
 
-        self::deleted(function ($model){
+        self::deleted(function ($model) {
             $model->last_data_updated_at = Carbon::now();
             $model->save();
         });
