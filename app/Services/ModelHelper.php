@@ -7,8 +7,6 @@ class ModelHelper
     /**
      * Get model instance.
      *
-     * @param $modelName
-     * @param $id
      * @return mixed
      */
     public static function getModel($modelName, $id)
@@ -19,7 +17,6 @@ class ModelHelper
     /**
      * Model registration.
      *
-     * @param $modelName
      * @return mixed
      */
     private function registeredModels($modelName)
@@ -30,7 +27,6 @@ class ModelHelper
     /**
      * Get model instance.
      *
-     * @param $modelName
      * @param $id
      * @return mixed
      */
@@ -42,8 +38,6 @@ class ModelHelper
     /**
      * Get model instance.
      *
-     * @param $modelName
-     * @param $id
      * @return mixed
      */
     public static function getModelFromName($modelName, $id)
@@ -54,7 +48,6 @@ class ModelHelper
     /**
      * Model registration.
      *
-     * @param $model
      * @return mixed
      */
     private function registeredModelsFromName($model)
@@ -65,7 +58,6 @@ class ModelHelper
     /**
      * Get model query.
      *
-     * @param $modelName
      * @return mixed
      */
     public static function getQuery($modelName)

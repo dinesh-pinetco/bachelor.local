@@ -52,7 +52,7 @@ class Register extends Component
                     ->isAvailable();
             })->toArray();
 
-        if (!$this->isMountRender) {
+        if (! $this->isMountRender) {
             $this->course_ids = [];
         } else {
             $this->isMountRender = false;

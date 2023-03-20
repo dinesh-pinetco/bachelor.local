@@ -30,18 +30,16 @@ class UserFilters extends Filter
 
     public function listedmaketplace($value)
     {
-        if ($value == 'yes') {
-            logger('true martket place ', ['value' => $value]);
-            $this->builder->whereNotNull('show_application_on_marketplace_at');
-        } elseif ($value == 'no') {
-            logger('false martket place ');
-            $this->builder->whereNotNull('reject_marketplace_application_at');
-        }
+        $this->builder->when($value == 'yes', function ($q) {
+            $q->whereNotNull('show_application_on_marketplace_at');
+        })->when($value == 'no', function ($q) {
+            $q->whereNotNull('reject_marketplace_application_at');
+        });
     }
 
     public function location($keyword)
     {
-        $locationKey = Field::where('key', 'location')->first()?->id;
+        $locationKey = Field::where('key', 'location')->value('id');
         $this->builder->whereHas('values', function (\Illuminate\Database\Eloquent\Builder $query) use ($locationKey, $keyword) {
             $query->where('field_id', $locationKey)->where('value', 'like', "%$keyword%");
         });
