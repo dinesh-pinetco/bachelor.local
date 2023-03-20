@@ -27,7 +27,6 @@ class CreateUsersTable extends Migration
             $table->string('cubia_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->boolean('is_active')->default(true);
-            $table->timestamp('last_data_updated_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
