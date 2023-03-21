@@ -899,5 +899,6 @@
     "Select Company": "Unternehmen auswählen",
     "You have applied to marketplace.": "Sie haben sich bei marketplace beworben.",
     "Contract send date deleted successfully.": "Vertragssendedatum erfolgreich gelöscht.",
-    "Contract received date deleted successfully.": "Vertragseingangsdatum erfolgreich gelöscht."
+    "Contract received date deleted successfully.": "Vertragseingangsdatum erfolgreich gelöscht.",
+    "Loading...": "Laden..."
 }

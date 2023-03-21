@@ -139,15 +139,12 @@
                                     </div>
                                     @if ($group->can_add_more && $isEdit)
                                         @if ($loop->first != $loop->last || !$loop->first)
-                                            <x-danger-button class="group-remove" group_key="{{ $customGroupKey }}"
-                                                             wire:click="removeGroup({{ $customGroupKey }})"
-                                                             wire:loading.attr="disabled">
+                                            <x-danger-button class="group-remove" group_key="{{ $customGroupKey }}" wire:click="removeGroup({{ $customGroupKey }})">
                                                 {{ __('Remove') }}
                                             </x-danger-button>
                                         @endif
                                         @if ($loop->last)
-                                            <x-primary-button wire:click="appendGroup({{ $group->id }})"
-                                                              wire:loading.attr="disabled">
+                                            <x-primary-button wire:click="appendGroup({{ $group->id }})">
                                                 {{ $group->add_more_label ?? __('Add More') }}
                                             </x-primary-button>
                                         @endif
@@ -199,8 +196,7 @@
                         @endif
 
                         @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && auth()->user()->application_status == \App\Enums\ApplicationStatus::REGISTRATION_SUBMITTED)
-                            <x-primary-button type="button" wire:click="submitProfileInformation"
-                                              wire:loading.attr="disabled">
+                            <x-primary-button type="button" wire:click="submitProfileInformation">
                                 {{ __('Submit data & continue with test') }}
                             </x-primary-button>
                         @endif
