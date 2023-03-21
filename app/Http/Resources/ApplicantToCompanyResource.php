@@ -23,8 +23,8 @@ class ApplicantToCompanyResource extends JsonResource
             'last_change' => $this->last_data_updated_at,
             'anonymisiert' => true, // need to add checkbox in user profile
             'testlaufBestanden' => $this->hasExamPassed(),
-            //            'barCode' => $this->testResultBarcode(),
-            //            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
+            'barCode' => $this->testResultBarcode(),
+            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
             'person' => [
                 'vorname' => $this->getValueByIdentifier('first_name'),
                 'nachname' => $this->getValueByIdentifier('last_name'),
