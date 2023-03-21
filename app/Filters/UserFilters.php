@@ -8,7 +8,9 @@ use Rjchauhan\LaravelFiner\Filter\Filter;
 class UserFilters extends Filter
 {
     protected $filters = ['search', 'vorname', 'sort_by', 'selectedStatuses', 'desiredBeginning',
-        'bewerbungenJahr', 'courses', 'postalCode', 'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter'];
+        'bewerbungenJahr', 'courses', 'postalCode',
+        'isAnonymisiert',
+        'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter', ];
 
     public function search($keyword)
     {
@@ -33,9 +35,18 @@ class UserFilters extends Filter
 
     public function postalCode($keyword)
     {
-        $postalKey = Field::where('key', 'postal_code')->first()?->id;
+        $postalKey = Field::where('key', 'postal_code')->value('id');
         $this->builder->whereHas('values', function (\Illuminate\Database\Eloquent\Builder $query) use ($postalKey, $keyword) {
             $query->where('field_id', $postalKey)->where('value', 'like', "%$keyword%");
+        });
+    }
+
+    public function isAnonymisiert($data)
+    {
+        $anonymousKeyId = Field::where('key', 'is_anonymous')->value('id');
+        $this->builder->whereHas('values', function (\Illuminate\Database\Eloquent\Builder $query) use ($anonymousKeyId, $data) {
+            $query->where('field_id', $anonymousKeyId)
+                ->where('value', $data);
         });
     }
 

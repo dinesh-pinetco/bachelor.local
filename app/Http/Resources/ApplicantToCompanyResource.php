@@ -21,7 +21,7 @@ class ApplicantToCompanyResource extends JsonResource
         return [
             'bewerber_id' => $this->id,
             'last_change' => $this->last_data_updated_at,
-            'anonymisiert' => true, // need to add checkbox in user profile
+            'anonymisiert' => $this->getValueByIdentifier('is_anonymous'),
             'testlaufBestanden' => $this->hasExamPassed(),
             'barCode' => $this->testResultBarcode(),
             'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
