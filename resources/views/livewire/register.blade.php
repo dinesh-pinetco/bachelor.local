@@ -79,13 +79,16 @@
             @endif
         </div>
         <div class="flex items-center justify-end mt-6 md:mt-10">
-            <x-jet-secondary-button type="submit" onclick="this.disabled=true; this.form.submit();">
+            <x-jet-secondary-button id="myButton" class="relative" type="submit" onclick="this.disabled=true; this.form.submit();">
                 {{ __('Start application') }}
                 <svg class="stroke-current ml-4" width="20" height="16" viewBox="0 0 20 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 1L19 8M19 8L12 15M19 8H1" stroke="stroke-current" stroke-width="2"
                           stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
+                <div id="loader" class="">
+                    <span class="absolute inset-0 flex items-center justify-center bg-primary text-white">{{ __('Loading...') }}</span>
+                </div>
             </x-jet-secondary-button>
         </div>
         <div class="flex items-center justify-end mt-2 md:mt-4 pb-1">

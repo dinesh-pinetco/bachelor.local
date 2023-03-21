@@ -12,16 +12,11 @@
                     {{ __('You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal') }}
                 </p>
                 <div>
-                    <x-primary-button type="button"
-                                      wire:click="selectCompany"
-                                      wire:loading.attr="disabled"
-                                      class="mr-2">
+                    <x-primary-button type="button" wire:click="selectCompany" class="mr-2">
                         {{ __('Apply directly to selected company') }}
                     </x-primary-button>
 
-                    <x-primary-button type="button"
-                                      wire:click="directShowProfileOnMarketPlace"
-                                      wire:loading.attr="disabled">
+                    <x-primary-button type="button" wire:click="directShowProfileOnMarketPlace">
                         {{ __('Show my profile directly on marketplace') }}
                     </x-primary-button>
                 </div>
@@ -46,9 +41,7 @@
                                                  wire:key="competency_comment"></trix-editor>
                                 </div>
                                 <x-jet-input-error for="mailContent"/>
-                                <x-primary-button type="button"
-                                                  wire:loading.attr="disabled"
-                                                  @click="applyToSelectedCompany()">
+                                <x-primary-button type="button" @click="applyToSelectedCompany()">
                                     {{ __('Apply to Selected Company') }}
                                 </x-primary-button>
                             </div>
@@ -171,9 +164,7 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap items-end gap-4">
-                    <x-primary-button class="h-11" type="button"
-                                      wire:click="showProfileMarketplace"
-                                      wire:loading.attr="disabled">
+                    <x-primary-button class="h-11" type="button" wire:click="showProfileMarketplace">
                         {{ __('Yes') }}
                     </x-primary-button>
                     <x-secondary-button class="h-11" wire:click="DoNotShowProfileMarketplace" wire:loading.attr="disabled">
@@ -237,9 +228,7 @@
                 </div>
                 <x-jet-input-error for="mailContent"/>
 
-                <x-primary-button id="submit" type="button"
-                                  wire:loading.attr="disabled"
-                                  @click="applyToSelectedCompany()">
+                <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
                     {{ __('Apply to Selected Company') }}
                 </x-primary-button>
             @endif

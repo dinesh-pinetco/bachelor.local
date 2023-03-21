@@ -62,7 +62,7 @@
                         <x-jet-input-error for="user.confirm_password" class="mt-2"/>
                     </div>
                     <div class="text-right">
-                        <button type="submit"
+                        <button type="submit" wire:loading.attr="disabled" wire:loading.class="cursor-wait"
                                 class="inline-block px-4 py-2 -mt-0 bg-primary border border-transparent rounded-sm font-semibold text-base text-white hover:bg-opacity-90 focus:outline-none focus:bg-opacity-90 disabled:opacity-25 transition mt-4 duration-150 ease-in-out">
                             {{__('Save')}}
                         </button>

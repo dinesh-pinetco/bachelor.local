@@ -51,7 +51,7 @@
                                      autocomplete="current-password"/>
                     </div>
                     <div class="flex my-4 md:my-8">
-                        <x-primary-button class="flex items-center text-xs font-medium -mt-0">
+                        <x-primary-button id="myButton" class="flex items-center text-xs font-medium -mt-0 relative" onclick="this.disabled=true; this.form.submit();">
                             {{ __('Log in') }}
                             <svg class="stroke-current ml-4" width="25" height="24" viewBox="0 0 25 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -59,6 +59,9 @@
                                     d="M13.5 8L17.5 12M17.5 12L13.5 16M17.5 12L3.5 12M8.5 8V7C8.5 6.20435 8.81607 5.44129 9.37868 4.87868C9.94129 4.31607 10.7044 4 11.5 4H18.5C19.2956 4 20.0587 4.31607 20.6213 4.87868C21.1839 5.44129 21.5 6.20435 21.5 7V17C21.5 17.7956 21.1839 18.5587 20.6213 19.1213C20.0587 19.6839 19.2956 20 18.5 20H11.5C10.7044 20 9.94129 19.6839 9.37868 19.1213C8.81607 18.5587 8.5 17.7956 8.5 17V16"
                                     stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
+                            <div id="loader" class="">
+                                <span class="absolute inset-0 flex items-center justify-center bg-primary text-white">{{ __('Loading...') }}</span>
+                            </div>
                         </x-primary-button>
                     </div>
 

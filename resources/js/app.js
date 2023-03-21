@@ -59,6 +59,9 @@ $('.group-remove').on('click', function (event) {
     }, 100);
 });
 
+$('#myButton').on('click', function (event){
+    $(this).addClass('active');
+});
 
 tippy('[data-tippy-content]', {
     theme: 'light',

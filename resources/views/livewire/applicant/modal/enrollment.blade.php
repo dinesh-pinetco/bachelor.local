@@ -130,9 +130,7 @@
                 >
                     {{ __('Enroll this applicant') }}
                 </button>
-                <x-danger-button data-cy="delete-button"
-                                 wire:click="$set('show', false)"
-                                 wire:loading.class='opacity-80 cursor-wait'>
+                <x-danger-button data-cy="delete-button" wire:click="$set('show', false)">
                     {{ __('Cancel') }}
                 </x-danger-button>
             </div>

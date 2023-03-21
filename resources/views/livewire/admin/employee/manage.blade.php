@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="py-3 text-right">
-                            <x-primary-button type="submit" class="" wire:loading.attr="disabled" wire:loading.class='opacity-80 cursor-wait'>
+                            <x-primary-button type="submit" class="">
                                 {{ __('Save') }}
                             </x-primary-button>
                         </div>

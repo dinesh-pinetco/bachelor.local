@@ -20,13 +20,10 @@
         <x-jet-input-error for="client" class="mt-1"/>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-danger-button data-cy="delete-button"
-                                    wire:click="failed"
-                                 wire:loading.class='opacity-80 cursor-wait'>
+                <x-danger-button data-cy="delete-button" wire:click="failed">
                     {{ __('Yes, Mark as failed') }}
                 </x-danger-button>
-                <x-secondary-button data-cy="cancel-button"
-                                    wire:click="$set('show', false)">
+                <x-secondary-button data-cy="cancel-button" wire:click="$set('show', false)">
                     {{ __('Cancel') }}
                 </x-secondary-button>
             </div>

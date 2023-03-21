@@ -149,3 +149,10 @@ li > label, .multiple-dropdown-box > label {
 #trix-toolbar-1 .trix-button-group-spacer {
     flex-grow: unset;
 }
+
+#myButton #loader{
+    display: none;
+}
+#myButton.active #loader{
+    display: flex;
+}
