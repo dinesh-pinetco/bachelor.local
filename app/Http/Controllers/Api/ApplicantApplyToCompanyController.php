@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ApplicationRejectionValidate;
+use App\Http\Requests\CreateApplicationRejectionRequest;
 use App\Http\Resources\ApplicantToCompanyResource;
 use App\Models\User;
 
@@ -51,7 +51,7 @@ class ApplicantApplyToCompanyController extends Controller
         return ApplicantToCompanyResource::make($user);
     }
 
-    public function applicantRejection(ApplicationRejectionValidate $request, User $user)
+    public function applicantRejection(CreateApplicationRejectionRequest $request, User $user)
     {
         $request->persist($user);
 
