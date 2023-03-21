@@ -66,4 +66,19 @@ class Result extends Model implements ContractsAuditable
 
         $this->user->saveApplicationStatus();
     }
+
+    public function isMoodleTest(): bool
+    {
+        return $this->test->type == Test::TYPE_MOODLE;
+    }
+
+    public function isCubiaTest(): bool
+    {
+        return $this->test->type == Test::TYPE_CUBIA;
+    }
+
+    public function isMeteoTest(): bool
+    {
+        return $this->test->type == Test::TYPE_METEOR;
+    }
 }

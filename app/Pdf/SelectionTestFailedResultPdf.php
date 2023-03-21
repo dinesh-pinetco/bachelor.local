@@ -23,9 +23,7 @@ class SelectionTestFailedResultPdf extends Pdf
             'location' => $this->user->values->where('fields.key', 'location')->value('value'),
             'courses' => implode(',', $this->user->desiredBeginning->courses->pluck('name')->toArray()),
             'fail_pdf_created_at' => $this->user->configuration->fail_pdf_created_at,
-            'qrcode' => base64_encode(\QrCode::format('svg')
-                ->size(200)
-                ->generate(route('applicant.test-result', ['hash' => base64_encode($this->user->email)]))),
+            'qrcode' => $this->user->testResultBarcode(),
         ];
     }
 }

@@ -110,14 +110,17 @@ class User extends Authenticatable implements ContractsAuditable
         });
     }
 
-    public function isExamPassed(): bool
+    public function hasExamPassed(): bool
     {
-        $totalTests = $this->results->count();
-        return (
-            ($this->application_status->id() == 4) ||
-            ($this->application_status->id() <= 9) ||
-            ($this->application_status == ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON && $totalTests == $this->results()->where('is_passed', true)->count())
-        );
+        $this->load('results');
+        $statusId = $this->application_status->id();
+        $resultsCount = $this->results->count();
+        $passedResultsCount = $this->results->where('is_passed', true)->count();
+
+        return
+            $statusId == 4 ||
+            $statusId >= 9 ||
+            ($statusId == ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON && $resultsCount == $passedResultsCount);
     }
 
     public function scopeFilter($query)
@@ -262,5 +265,12 @@ class User extends Authenticatable implements ContractsAuditable
     public function coursesName()
     {
         return $this->courses()->with('course')->get()->pluck('course.name');
+    }
+
+    public function testResultBarcode()
+    {
+        return base64_encode(\QrCode::format('svg')
+            ->size(200)
+            ->generate(route('applicant.test-result', ['hash' => base64_encode($this->email)])));
     }
 }

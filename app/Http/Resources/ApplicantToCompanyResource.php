@@ -21,16 +21,16 @@ class ApplicantToCompanyResource extends JsonResource
         return [
             'bewerber_id' => $this->id,
             'last_change' => $this->last_data_updated_at,
-            'anonymisiert' => 'true', // need to add checkbox in user profile
-            "testlaufBestanden" => $this->isExamPassed(),
-            'barCode' => 'Test Basecode', // exam barcode
-            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
+            'anonymisiert' => true, // need to add checkbox in user profile
+            'testlaufBestanden' => $this->hasExamPassed(),
+            //            'barCode' => $this->testResultBarcode(),
+            //            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
             'person' => [
                 'vorname' => $this->getValueByIdentifier('first_name'),
                 'nachname' => $this->getValueByIdentifier('last_name'),
                 'akademischer_grad' => $this->getValueByIdentifier('academic_degree'),
                 'geburtstag' => $this->getValueByIdentifier('date_of_birth'),
-//                'geburtsort' => $this->getValueByIdentifier('place_of_birth'),
+                //                'geburtsort' => $this->getValueByIdentifier('place_of_birth'),
                 'geschlecht' => $this->getValueByIdentifier('gender'),
             ],
             'adresse' => $this->getAddress('1'),
@@ -48,17 +48,15 @@ class ApplicantToCompanyResource extends JsonResource
             'show_application_on_marketplace_at' => $this->show_application_on_marketplace_at,
             'bewerbungen' => SannaUserCompanyResource::collection($this->companies),
 
-
-
             //TODO:-  all followting Field is not in the client sample json
-//            'rechnungsadresse' => $this->getAddress('3'),
-//            'lieferadresse' => $this->getAddress('4'),
-//            'studienbeginn' => $this->desiredBeginning->course_start_date,
-//            'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
-//            'geburtsland' => $this->getValueByIdentifier('nationality_id'),
-//            'studiengangId' => $this->courses()->first()->course->sana_id,
-//            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
-//            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
+            //            'rechnungsadresse' => $this->getAddress('3'),
+            //            'lieferadresse' => $this->getAddress('4'),
+            //            'studienbeginn' => $this->desiredBeginning->course_start_date,
+            //            'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
+            //            'geburtsland' => $this->getValueByIdentifier('nationality_id'),
+            //            'studiengangId' => $this->courses()->first()->course->sana_id,
+            //            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
+            //            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
         ];
     }
 
