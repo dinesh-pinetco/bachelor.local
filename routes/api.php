@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', [LoginController::class, 'login']);
+Route::post('platform/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
     Route::get('sanna-users', [SannaUserController::class, 'index']);
@@ -30,6 +30,14 @@ Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group
     Route::get('/platform/firmenportal/bewerber', [ApplicantApplyToCompanyController::class, 'index']);
     Route::get('/platform/firmenportal/bewerber/{user}', [ApplicantApplyToCompanyController::class, 'show']);
     Route::put('/platform/firmenportal/bewerber/{user}', [ApplicantApplyToCompanyController::class, 'applicantRejection']);
+
+    // /platform/firmenportal/bewerbung
+    // /platform/firmenportal/test
+    // /platform/firmenportal/testablauf
+    // /platform/firmenportal/testablauf/{id}
+    // /platform/firmenportal/testergebnis/iqt
+    // /platform/firmenportal/testablauf/vid
+    // /platform/firmenportal/testtan
 
     Route::post('logout', [LoginController::class, 'logout']);
 

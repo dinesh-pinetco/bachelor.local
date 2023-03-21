@@ -34,20 +34,22 @@ class SelectionTestResultResource extends JsonResource
             $meta_iqt = json_decode($this->meta_iqt);
             $meta_mix = json_decode($this->meta_mix);
 
-            return $data + [
+            return array_merge($data, [
+                'result' => sprintf('%s / %s', data_get($meta_iqt, 3), data_get($meta_mix, 3)),
                 'tan' => $this->result,
                 'result_mix_link' => $this->when($this->is_passed_mix, $this->result_mix_link),
                 'result_iqt_link' => $this->when($this->is_passed_iqt, $this->result_iqt_link),
                 'bindungMix' => data_get($meta_mix, 3),
                 'leistungMix' => data_get($meta_mix, 4),
                 'machtMix' => data_get($meta_mix, 5),
+
                 'gesamtIqt' => data_get($meta_iqt, 3),
                 'spracheIqt' => data_get($meta_iqt, 4),
                 'merkfaehigkeitIqt' => data_get($meta_iqt, 5),
                 'logikIqt' => data_get($meta_iqt, 6),
                 'rechnenIqt' => data_get($meta_iqt, 7),
                 'technikIqt' => data_get($meta_iqt, 8),
-            ];
+            ]);
         }
 
         return $data;

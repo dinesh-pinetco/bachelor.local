@@ -24,6 +24,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
+use Plank\Metable\Metable;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements ContractsAuditable
@@ -39,6 +40,7 @@ class User extends Authenticatable implements ContractsAuditable
         HasRoles,
         UserRelations,
         SelectionTestPdf;
+    use Metable;
 
     public const GENDER_MALE = 'male';
 

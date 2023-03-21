@@ -39,6 +39,11 @@ class Course extends Model implements ContractsAuditable
         });
     }
 
+    public static function findSannaId($id)
+    {
+        return self::whereId($id)->value('sana_id');
+    }
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
