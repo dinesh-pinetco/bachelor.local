@@ -159,6 +159,8 @@ class Enrollment extends Component
             'value' => $this->selectedCompanyContacts,
         ]);
 
+        $this->applicant->setMeta('enrollment_at', now());
+
         if ($company->wasRecentlyCreated && $companyContacts->wasRecentlyCreated) {
             Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ApplicantEnrolled($this->applicant));
         }

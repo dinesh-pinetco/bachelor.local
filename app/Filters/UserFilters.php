@@ -8,7 +8,7 @@ use Rjchauhan\LaravelFiner\Filter\Filter;
 class UserFilters extends Filter
 {
     protected $filters = ['search', 'vorname', 'sort_by', 'selectedStatuses', 'desiredBeginning',
-        'bewerbungenJahr', 'courses', 'postalCode', 'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter'];
+        'bewerbungenJahr', 'courses', 'postalCode', 'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter', ];
 
     public function search($keyword)
     {

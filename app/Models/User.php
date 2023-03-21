@@ -215,6 +215,10 @@ class User extends Authenticatable implements ContractsAuditable
                 $this->save();
             }
         }
+
+        if ($totalTests == $updatedStatusResults->count() && ! ($this->hasMeta('test_completed_at'))) {
+            $this->setMeta('test_completed_at', now());
+        }
     }
 
     public function applicantPassedSelectionTest()
