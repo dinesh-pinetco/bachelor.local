@@ -110,6 +110,16 @@ class User extends Authenticatable implements ContractsAuditable
         });
     }
 
+    public function isExamPassed(): bool
+    {
+        $totalTests = $this->results->count();
+        return (
+            ($this->application_status->id() == 4) ||
+            ($this->application_status->id() <= 9) ||
+            ($this->application_status == ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON && $totalTests == $this->results()->where('is_passed', true)->count())
+        );
+    }
+
     public function scopeFilter($query)
     {
         return resolve(UserFilters::class)->apply($query);

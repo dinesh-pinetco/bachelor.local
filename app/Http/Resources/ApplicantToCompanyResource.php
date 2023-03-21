@@ -19,18 +19,21 @@ class ApplicantToCompanyResource extends JsonResource
         $this->user = $this;
 
         return [
+            'bewerber_id' => $this->id,
+            'last_change' => $this->last_data_updated_at,
+            'anonymisiert' => 'true', // need to add checkbox in user profile
+            "testlaufBestanden" => $this->isExamPassed(),
+            'barCode' => 'Test Basecode', // exam barcode
+            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
             'person' => [
-                'bewerber_id' => $this->id,
                 'vorname' => $this->getValueByIdentifier('first_name'),
                 'nachname' => $this->getValueByIdentifier('last_name'),
                 'akademischer_grad' => $this->getValueByIdentifier('academic_degree'),
                 'geburtstag' => $this->getValueByIdentifier('date_of_birth'),
-                'geburtsort' => $this->getValueByIdentifier('place_of_birth'),
+//                'geburtsort' => $this->getValueByIdentifier('place_of_birth'),
                 'geschlecht' => $this->getValueByIdentifier('gender'),
             ],
             'adresse' => $this->getAddress('1'),
-            'rechnungsadresse' => $this->getAddress('3'),
-            'lieferadresse' => $this->getAddress('4'),
             'telefonnummer' => [
                 'typ' => 2,
                 'telefonnummer' => $this->getValueByIdentifier('phone'),
@@ -39,18 +42,23 @@ class ApplicantToCompanyResource extends JsonResource
                 'typ' => 1,
                 'e_mail' => $this->getValueByIdentifier('email'),
             ],
-            'studienbeginn' => $this->desiredBeginning->course_start_date,
-            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
-            'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
-            'geburtsland' => $this->getValueByIdentifier('nationality_id'),
-            'studiengangId' => $this->courses()->first()->course->sana_id,
-            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
-            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
             'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
             'documents' => ApplicantDocumentResource::collection($this->documents),
             'selection-tests' => SelectionTestResultResource::collection($this->results),
             'show_application_on_marketplace_at' => $this->show_application_on_marketplace_at,
-            'companies' => SannaUserCompanyResource::collection($this->companies),
+            'bewerbungen' => SannaUserCompanyResource::collection($this->companies),
+
+
+
+            //TODO:-  all followting Field is not in the client sample json
+//            'rechnungsadresse' => $this->getAddress('3'),
+//            'lieferadresse' => $this->getAddress('4'),
+//            'studienbeginn' => $this->desiredBeginning->course_start_date,
+//            'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
+//            'geburtsland' => $this->getValueByIdentifier('nationality_id'),
+//            'studiengangId' => $this->courses()->first()->course->sana_id,
+//            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
+//            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
         ];
     }
 
