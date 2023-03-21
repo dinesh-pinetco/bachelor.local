@@ -113,7 +113,7 @@ class User extends Authenticatable implements ContractsAuditable
     public function hasExamPassed(): bool
     {
         $this->load('results');
-        $statusId = $this->application_status->id();
+        $statusId = $this->application_status?->id();
         $resultsCount = $this->results->count();
         $passedResultsCount = $this->results->where('is_passed', true)->count();
 

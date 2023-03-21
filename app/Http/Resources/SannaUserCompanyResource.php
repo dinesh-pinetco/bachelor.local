@@ -17,7 +17,7 @@ class SannaUserCompanyResource extends JsonResource
         return [
 
             //            TODO:- make it dynamic
-            'unternehmenId' => $this->company->sanna_id,
+            'unternehmenId' => $this->company?->sanna_id,
             'datenfreigabe' => true,
             'ablehnung' => true,
             'studiengangId' => 0,

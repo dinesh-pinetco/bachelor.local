@@ -18,9 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('company_id');
             $table->longText('mail_content')->nullable();
-
             $table->timestamp('company_contacted_at')->nullable();
-
             $table->timestamp('hired_at')->nullable();
             $table->timestamps();
         });

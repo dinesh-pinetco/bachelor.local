@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApplicationRejectionValidate;
 use App\Http\Resources\ApplicantToCompanyResource;
+use App\Models\ApplicantCompany;
 use App\Models\User;
 
 class ApplicantApplyToCompanyController extends Controller
@@ -50,19 +52,35 @@ class ApplicantApplyToCompanyController extends Controller
         return ApplicantToCompanyResource::make($user);
     }
 
-    public function applicantRejection(User $user)
+    /**
+     * applicant rejected by company .
+     * ablehnung boolean
+     * bewerberId User
+     * unternehmenId Company
+     * @return userresouece json
+     */
+    public function applicantRejection(ApplicationRejectionValidate $request, User $user)
     {
-        //Request:
-        //{
-        //  "ablehnung": true,
-        //  "bewerberId": 0,
-        //  "unternehmenId": 0
-        //}
+        $applicantCompany = ApplicantCompany::where('user_id', request()->bewerberId)->where('company_id', request()->unternehmenId);
+        if ($applicantCompany->exists()) {
+            $applicantCompany->touch('company_rejected_at');
+        } else {
+            ApplicantCompany::create([
+                'user_id' => request()->bewerberId,
+                'company_id' => request()->unternehmenId,
+                'company_rejected_at' => now(),
+            ]);
+        }
 
-        //en:{
-        //  "rejection": true,
-        //  "applicantId": 0,
-        //  "companyId": 0
-        //}
+        $user->load([
+            'courses',
+            'values',
+            'values.fields',
+            'companies.company',
+            'results.test',
+            'documents',
+        ]);
+
+        return ApplicantToCompanyResource::make($user);
     }
 }

@@ -18,7 +18,7 @@ class ApplicantCompany extends Model
         'hired_at',
     ];
 
-    protected $casts = ['company_contacted_at' => 'datetime', 'hired_at' => 'datetime'];
+    protected $casts = ['company_contacted_at' => 'datetime', 'hired_at' => 'datetime', 'company_rejected_at' => 'datetime'];
 
     public function user()
     {
