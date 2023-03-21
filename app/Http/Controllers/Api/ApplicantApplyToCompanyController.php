@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApplicantToCompanyResource;
-use App\Models\ApplicantCompany;
-use App\Models\Company;
 use App\Models\User;
 
 class ApplicantApplyToCompanyController extends Controller
@@ -52,21 +50,19 @@ class ApplicantApplyToCompanyController extends Controller
         return ApplicantToCompanyResource::make($user);
     }
 
-    public function userHired(Company $company, User $user)
+    public function applicantRejection(User $user)
     {
-        $userContactedToCompany = $user->companies()->where('company_id', $company->id)->latest()->first();
+        //Request:
+        //{
+        //  "ablehnung": true,
+        //  "bewerberId": 0,
+        //  "unternehmenId": 0
+        //}
 
-        if ($userContactedToCompany) {
-            $userContactedToCompany->update(['hired_at' => now()]);
-        } else {
-            ApplicantCompany::create([
-                'user_id' => $user->id,
-                'company_id' => $company->id,
-                'company_contacted_at' => now(),
-                'hired_at' => now(),
-            ]);
-        }
-
-        return response()->json(['message' => __('User hired successfully.')]);
+        //en:{
+        //  "rejection": true,
+        //  "applicantId": 0,
+        //  "companyId": 0
+        //}
     }
 }
