@@ -12,7 +12,6 @@ abstract class SlackNotification extends Notification
 
     protected string $level = 'info';
 
-    /** @var string */
     protected string $content;
 
     public static function make(...$arguments): static
@@ -22,9 +21,6 @@ abstract class SlackNotification extends Notification
 
     /**
      * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
      */
     public function via(mixed $notifiable): array
     {

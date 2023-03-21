@@ -10,7 +10,6 @@ use Throwable;
 
 class ErrorNotification extends SlackNotification
 {
-    /** @var Request */
     public Request $request;
 
     /** @var User|null */
@@ -20,12 +19,9 @@ class ErrorNotification extends SlackNotification
 
     protected string $level = 'error';
 
-    /** @var Throwable */
     private Throwable $exception;
 
     /**
-     * @param  Throwable  $exception
-     * @param  Request  $request
      * @param  Authenticatable  $user
      */
     public function __construct(Throwable $exception, Request $request, Authenticatable $user = null)

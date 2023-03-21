@@ -74,9 +74,6 @@ class HasManySyncable extends HasMany
 
     /**
      * Cast the given keys to integers if they are numeric and string otherwise.
-     *
-     * @param  array  $keys
-     * @return array
      */
     protected function castKeys(array $keys): array
     {
@@ -87,9 +84,6 @@ class HasManySyncable extends HasMany
 
     /**
      * Cast the given key to an integer if it is numeric.
-     *
-     * @param  mixed  $key
-     * @return string|int
      */
     protected function castKey(mixed $key): string|int
     {

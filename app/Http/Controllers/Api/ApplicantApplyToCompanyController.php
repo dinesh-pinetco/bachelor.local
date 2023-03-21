@@ -17,6 +17,7 @@ class ApplicantApplyToCompanyController extends Controller
 
         $users = User::query()
             ->role(ROLE_APPLICANT)
+            ->filter()
             ->where('application_status', ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
             ->with([
                 'courses',
@@ -26,7 +27,6 @@ class ApplicantApplyToCompanyController extends Controller
                 'results.test',
                 'documents',
             ])
-            ->filter()
             ->paginate($size)
             ->withQueryString();
 
