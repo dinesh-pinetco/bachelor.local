@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UpdateData;
+use App\Traits\UserDataUpdate;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,7 @@ class UserConfiguration extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use UpdateData;
+    use UserDataUpdate;
 
     protected $guarded = [];
 

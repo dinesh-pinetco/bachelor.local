@@ -2,9 +2,9 @@
 
 namespace App\Traits;
 
-trait UpdateData
+trait UserDataUpdate
 {
-    public static function bootUpdateData(): void
+    public static function bootUserDataUpdate(): void
     {
         self::created(function ($model) {
             $model->user->touch('last_data_updated_at');

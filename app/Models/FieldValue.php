@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UpdateData;
+use App\Traits\UserDataUpdate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +11,7 @@ use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 
 class FieldValue extends Model implements ContractsAuditable
 {
-    use AuditingAuditable, SoftDeletes, UpdateData;
+    use AuditingAuditable, SoftDeletes, UserDataUpdate;
 
     protected $fillable = ['user_id', 'field_id', 'option_id', 'value', 'group_key'];
 

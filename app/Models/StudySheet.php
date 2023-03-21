@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\UpdateData;
+use App\Traits\UserDataUpdate;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,7 @@ use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 
 class StudySheet extends Model implements ContractsAuditable
 {
-    use HasFactory, AuditingAuditable, UpdateData;
+    use HasFactory, AuditingAuditable, UserDataUpdate;
 
     const PAYMENT_INSTALLMENT = 1;
 

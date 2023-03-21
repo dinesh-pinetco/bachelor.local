@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\UpdateData;
+use App\Traits\UserDataUpdate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ApplicantCompany extends Model
 {
-    use HasFactory, UpdateData;
+    use HasFactory, UserDataUpdate;
 
     protected $fillable = [
         'user_id',
