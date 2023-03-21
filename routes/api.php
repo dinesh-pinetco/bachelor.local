@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\ApplicantApplyToCompanyController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\PartnerCompanyController;
 use App\Http\Controllers\Api\SannaUserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,9 +27,9 @@ Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group
     Route::get('sanna-users/{user}', [SannaUserController::class, 'show']);
     Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
 
-    Route::get('/platform/firmenportal/bewerber', [ApplicantApplyToCompanyController::class, 'index']);
-    Route::get('/platform/firmenportal/bewerber/{user}', [ApplicantApplyToCompanyController::class, 'show']);
-    Route::put('/platform/firmenportal/bewerber/{user}', [ApplicantApplyToCompanyController::class, 'applicantRejection']);
+    Route::get('/platform/firmenportal/bewerber', [PartnerCompanyController::class, 'index']);
+    Route::get('/platform/firmenportal/bewerber/{user}', [PartnerCompanyController::class, 'show']);
+    Route::put('/platform/firmenportal/bewerber/{user}', [PartnerCompanyController::class, 'applicantRejection']);
 
     // /platform/firmenportal/bewerbung
     // /platform/firmenportal/test

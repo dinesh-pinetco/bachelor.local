@@ -14,6 +14,11 @@ class Company extends Model
         'name',
     ];
 
+    public static function findFromSannaId(mixed $unternehmenId)
+    {
+        return self::where('sanna_id', $unternehmenId)->first();
+    }
+
     public function contacts()
     {
         return $this->hasMany(CompanyContacts::class);

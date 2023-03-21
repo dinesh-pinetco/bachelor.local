@@ -8,7 +8,7 @@ use App\Http\Requests\CreateApplicationRejectionRequest;
 use App\Http\Resources\ApplicantToCompanyResource;
 use App\Models\User;
 
-class ApplicantApplyToCompanyController extends Controller
+class PartnerCompanyController extends Controller
 {
     public function index()
     {
@@ -19,14 +19,7 @@ class ApplicantApplyToCompanyController extends Controller
             ->role(ROLE_APPLICANT)
             ->filter()
             ->where('application_status', ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
-            ->with([
-                'courses',
-                'values',
-                'values.fields',
-                'companies.company',
-                'results.test',
-                'documents',
-            ]);
+            ->with($this->loadRelationships());
 
         if ($hasPagination) {
             $users = $users->paginate($size);
@@ -39,14 +32,7 @@ class ApplicantApplyToCompanyController extends Controller
 
     public function show(User $user)
     {
-        $user->load([
-            'courses',
-            'values',
-            'values.fields',
-            'companies.company',
-            'results.test',
-            'documents',
-        ]);
+        $user->load($this->loadRelationships());
 
         return ApplicantToCompanyResource::make($user);
     }
@@ -55,15 +41,20 @@ class ApplicantApplyToCompanyController extends Controller
     {
         $request->persist($user);
 
-        $user->load([
+        $user->load($this->loadRelationships());
+
+        return ApplicantToCompanyResource::make($user);
+    }
+
+    private function loadRelationships(): array
+    {
+        return [
             'courses',
             'values',
             'values.fields',
             'companies.company',
             'results.test',
             'documents',
-        ]);
-
-        return ApplicantToCompanyResource::make($user);
+        ];
     }
 }

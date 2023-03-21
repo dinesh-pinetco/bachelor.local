@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,9 +34,11 @@ class CreateApplicationRejectionRequest extends FormRequest
 
     public function persist(User $user)
     {
+        $company = Company::findFromSannaId($this->unternehmenId);
+
         $user->companies()->updateOrCreate([
             'user_id' => $this->bewerberId,
-            'company_id' => $this->unternehmenId,
+            'company_id' => $company->id,
         ], ['company_rejected_at' => now()]);
     }
 }
