@@ -48,7 +48,7 @@ class ApplicantToCompanyResource extends JsonResource
             'show_application_on_marketplace_at' => $this->show_application_on_marketplace_at,
             'bewerbungen' => SannaUserCompanyResource::collection($this->companies),
 
-            //TODO:-  all followting Field is not in the client sample json
+            //TODO:-  all following Fields are not in the client sample json
             //            'rechnungsadresse' => $this->getAddress('3'),
             //            'lieferadresse' => $this->getAddress('4'),
             //            'studienbeginn' => $this->desiredBeginning->course_start_date,
