@@ -116,6 +116,10 @@ class Test extends Model implements ContractsAuditable
         $result->status = Result::STATUS_STARTED;
         $result->save();
 
+        if (! ($user->hasMeta('test_started_at'))) {
+            $user->setMeta('test_started_at', now());
+        }
+
         if ($this['type'] == self::TYPE_MOODLE) {
             return (new Moodle($user))->generateTestUrl();
         }
