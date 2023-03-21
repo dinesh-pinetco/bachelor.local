@@ -233,6 +233,22 @@ class Data
                                 'type' => FieldType::FIELD_CHECKBOX(),
                                 'label' => '',
                                 'placeholder' => null,
+                                'key' => 'is_anonymous',
+                                'sort_order' => 7,
+                                'is_active' => true,
+                                'is_required' => false,
+                                'meta_data' => [],
+                                'options' => [
+                                    [
+                                        'key' => '1',
+                                        'value' => 'anonymisiert',
+                                    ],
+                                ],
+                            ],
+                            [
+                                'type' => FieldType::FIELD_CHECKBOX(),
+                                'label' => '',
+                                'placeholder' => null,
                                 'key' => 'privacy_policy',
                                 'sort_order' => 6,
                                 'is_active' => 1,
