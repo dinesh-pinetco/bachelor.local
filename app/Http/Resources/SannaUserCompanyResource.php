@@ -16,7 +16,7 @@ class SannaUserCompanyResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'unternehmenId' => $this->company->sanna_id,
+            'unternehmenId' => $this->company?->sanna_id,
             'datenfreigabe' => $this->created_at,
             'ablehnung' => true,
             'studiengangId' => Course::findSannaId($this->user->getValueByField('enroll_course')?->value),

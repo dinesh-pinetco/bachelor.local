@@ -39,8 +39,8 @@ class User extends Authenticatable implements ContractsAuditable
         Mediable,
         HasRoles,
         UserRelations,
-        SelectionTestPdf;
-    use Metable;
+        SelectionTestPdf,
+        Metable;
 
     public const GENDER_MALE = 'male';
 
