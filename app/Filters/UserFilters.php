@@ -43,18 +43,20 @@ class UserFilters extends Filter
 
     public function isAnonymisiert($data)
     {
+        $value = ($data == API_PARAM_FOR_TRUE) ? true : (($data == API_PARAM_FOR_FALSE) ? false : null);
+
         $anonymousKeyId = Field::where('key', 'is_anonymous')->value('id');
-        $this->builder->whereHas('values', function (\Illuminate\Database\Eloquent\Builder $query) use ($anonymousKeyId, $data) {
+        $this->builder->whereHas('values', function (\Illuminate\Database\Eloquent\Builder $query) use ($anonymousKeyId, $value) {
             $query->where('field_id', $anonymousKeyId)
-                ->where('value', $data);
+                ->where('value', $value);
         });
     }
 
     public function listedmaketplace($value)
     {
-        $this->builder->when($value == 'yes', function ($q) {
+        $this->builder->when($value == API_PARAM_FOR_TRUE, function ($q) {
             $q->whereNotNull('show_application_on_marketplace_at');
-        })->when($value == 'no', function ($q) {
+        })->when($value == API_PARAM_FOR_FALSE, function ($q) {
             $q->whereNotNull('reject_marketplace_application_at');
         });
     }
