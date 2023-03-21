@@ -13,7 +13,8 @@ class ApplicantApplyToCompanyController extends Controller
 {
     public function index()
     {
-        $size = request()->get('size') ?? 15;
+        $size = request()->get('itemsPerPage') ?? 15;
+        $hasPagination = request()->get('pagination') == 'true';
 
         $users = User::query()
             ->role(ROLE_APPLICANT)
@@ -26,9 +27,13 @@ class ApplicantApplyToCompanyController extends Controller
                 'companies.company',
                 'results.test',
                 'documents',
-            ])
-            ->paginate($size)
-            ->withQueryString();
+            ]);
+
+        if ($hasPagination) {
+            $users = $users->paginate($size);
+        } else {
+            $users = $users->get();
+        }
 
         return ApplicantToCompanyResource::collection($users);
     }

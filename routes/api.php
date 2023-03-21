@@ -27,7 +27,7 @@ Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group
     Route::get('sanna-users/{user}', [SannaUserController::class, 'show']);
     Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
 
-    Route::get('transfer-applicant-data/companies', [ApplicantApplyToCompanyController::class, 'index']);
+    Route::get('/platform/firmenportal/bewerber', [ApplicantApplyToCompanyController::class, 'index']);
     Route::get('transfer-applicant-data/companies/{user}', [ApplicantApplyToCompanyController::class, 'show']);
     Route::post('companies/{company:sanna_id}/applicants/{user}/hired', [ApplicantApplyToCompanyController::class, 'userHired']);
 

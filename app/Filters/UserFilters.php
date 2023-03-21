@@ -7,7 +7,8 @@ use Rjchauhan\LaravelFiner\Filter\Filter;
 
 class UserFilters extends Filter
 {
-    protected $filters = ['search', 'sort_by', 'selectedStatuses', 'desiredBeginning', 'courses', 'postalCode', 'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter'];
+    protected $filters = ['search', 'vorname', 'sort_by', 'selectedStatuses', 'desiredBeginning',
+        'bewerbungenJahr', 'courses', 'postalCode', 'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter'];
 
     public function search($keyword)
     {
@@ -18,6 +19,16 @@ class UserFilters extends Filter
                 // ->orWhere('status', 'like', "%$keyword%")
                 ->orWhere('phone', 'like', "%$keyword%");
         });
+    }
+
+    public function vorname($keyword)
+    {
+        $this->builder->where('first_name', 'like', "%$keyword%");
+    }
+
+    public function nachname($keyword)
+    {
+        $this->builder->where('last_name', 'like', "%$keyword%");
     }
 
     public function postalCode($keyword)
@@ -66,6 +77,13 @@ class UserFilters extends Filter
     }
 
     public function desiredBeginning($desiredBeginning)
+    {
+        $this->builder->whereHas('desiredBeginning', function ($query) use ($desiredBeginning) {
+            $query->where('course_start_date', $desiredBeginning);
+        });
+    }
+
+    public function bewerbungenJahr($desiredBeginning)
     {
         $this->builder->whereHas('desiredBeginning', function ($query) use ($desiredBeginning) {
             $query->where('course_start_date', $desiredBeginning);
