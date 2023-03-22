@@ -67,3 +67,14 @@ function convertNumberToMonth($number = 1)
 {
     return date('F', mktime(0, 0, 0, $number, 10));
 }
+
+
+function translateColumnName($column) {
+    if ($column == 'vorname') {
+        return 'first_name';
+    } else if ($column == 'nachname') {
+        return 'last_name';
+    } else {
+        return false;
+    }
+}

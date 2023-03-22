@@ -25,7 +25,7 @@ class ApplicantCompanyResource extends JsonResource
             'studiengangId' => Course::findSannaId($this->user->getValueByField('enroll_course')?->value),
             'studienbeginn' => $this->user->desiredBeginning->course_start_date,
             'eingestellt_am' => $this->user->getMeta('enrollment_at'),
-            'betreuer_id' => $companyContact->company_id == $this->company_id ? $this->user->getValueByField('enroll_company_contact')?->value : null,
+            'betreuer_id' => $companyContact?->company_id == $this?->company_id ? $this->user->getValueByField('enroll_company_contact')?->value : null,
         ];
     }
 }

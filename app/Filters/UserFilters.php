@@ -7,10 +7,22 @@ use Rjchauhan\LaravelFiner\Filter\Filter;
 
 class UserFilters extends Filter
 {
-    protected $filters = ['search', 'vorname', 'sort_by', 'selectedStatuses', 'desiredBeginning',
-        'bewerbungenJahr', 'courses', 'postalCode',
+    protected $filters = [
+        'search',
+        'vorname',
+        'nachname',
+        'sort_by',
+        'selectedStatuses',
+        'desiredBeginning',
+        'bewerbungenJahr',
+        'courses',
+        'postalCode',
         'isAnonymisiert',
-        'location', 'listedmaketplace', 'lastChangedBefore', 'lastChangedAfter', ];
+        'location',
+        'listedmaketplace',
+        'lastChangedBefore',
+        'lastChangedAfter',
+    ];
 
     public function search($keyword)
     {
@@ -81,7 +93,10 @@ class UserFilters extends Filter
 
     public function sort_by($column)
     {
-        $this->builder->orderBy($column, request('sort_type', 'asc'));
+        $translatedColumn = translateColumnName($column);
+        if ($translatedColumn) {
+            $this->builder->orderBy($translatedColumn, request('sort_type', 'asc'));
+        }
     }
 
     public function selectedStatuses($column)
