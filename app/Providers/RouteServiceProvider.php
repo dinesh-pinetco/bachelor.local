@@ -43,12 +43,12 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware(['web', 'auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])
+            Route::middleware(['web', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])
                 ->prefix('employee')
                 ->name('employee.')
                 ->group(base_path('routes/employee.php'));
 
-            Route::middleware(['web', 'auth:sanctum', 'role:'.ROLE_ADMIN])
+            Route::middleware(['web', 'role:'.ROLE_ADMIN])
                 ->prefix('admin')
                 ->name('admin.')
                 ->group(base_path('routes/admin.php'));

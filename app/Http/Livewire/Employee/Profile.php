@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Employee;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Profile extends Component
@@ -39,6 +40,10 @@ class Profile extends Component
         unset($this->user->confirm_password);
 
         $this->user->save();
+
+        session()->forget('password_hash_web');
+
+        Auth::guard('web')->login($this->user);
 
         $this->toastNotify(__('Profile updated successfully!'), __('Success'), TOAST_SUCCESS);
     }
