@@ -27,7 +27,7 @@ class SyncUserValue
         $this->fieldInsert('desired_beginning_id', $this->user->desiredBeginning->id);
     }
 
-    protected function fieldInsert($key, $value): void
+    public function fieldInsert($key, $value): void
     {
         if ($field = Field::where('key', $key)->first()) {
             $this->user->values()->create([
