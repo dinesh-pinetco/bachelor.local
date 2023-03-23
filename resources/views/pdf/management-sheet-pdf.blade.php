@@ -1,6 +1,9 @@
 @extends('laravel-finer::pdf.layout')
 
 @section('content')
+    @php
+        Carbon\Carbon::setlocale($user->locale);
+    @endphp
     <table style="margin-left: auto;margin-top:-20px; margin-right: auto;" width="550">
         <tr>
             <td align="right">
@@ -61,7 +64,10 @@
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Adresse')}}:</td>
-                                <td>{{ $user->study_sheet?->address }}</td>
+                                <td>{{ $street }}<br>
+                                    {{ $zip . ' ' . $address }}<br>
+                                    {{ $place }}<br>
+                                </td>
                             </tr>
                         </td>
                     </table>
@@ -77,7 +83,7 @@
     <table>
         <tr valign="top" style="font-size: 12px;">
             <td style="width: 23%;">{{__('Zweite Fremdsprache')}}:</td>
-            <td>{{__('Spanisch')}}
+            <td>{{ $secondary_language }}
             </td>
         </tr>
         <tr valign="top" style="font-size: 12px;">
@@ -90,11 +96,7 @@ gebildet. ')}}
         </tr>
         <tr valign="top" style="font-size: 12px;">
             <td style="font-size: 12px;width:23%;">{{__('Kooperationsunternehmen')}}:</td>
-            <td style="font-size: 12px;">Nordakademie<br/>
-                Reginald Testuser<br/>
-                Teststraße 123 <br/>
-                12345 Testcity
-            </td>
+            <td style="font-size: 12px;">{{ $company->name }}</td>
         </tr>
     </table>
     <table style="margin-top: 15px;border:1px solid #D9D9D9;background: #EEEEEE;">

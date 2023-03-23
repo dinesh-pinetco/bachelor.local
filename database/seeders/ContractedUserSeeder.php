@@ -18,76 +18,88 @@ class ContractedUserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::factory()->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]);
+        $users = tap(User::factory(50)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
+            $users->each(function ($user) {
+                PartnerCompanyUserSeeder::userCreatedProcess($user);
+            });
+        });
 
-        PartnerCompanyUserSeeder::userCreatedProcess($user);
+        PartnerCompanyUserSeeder::userCreatedProcess($users);
 
-        PartnerCompanyUserSeeder::submitProfile($user);
+        PartnerCompanyUserSeeder::submitProfile($users);
 
-        PartnerCompanyUserSeeder::selectionTestPassed($user);
+        PartnerCompanyUserSeeder::selectionTestPassed($users);
 
-        PartnerCompanyUserSeeder::testResultRetrievedOn($user);
+        PartnerCompanyUserSeeder::testResultRetrievedOn($users);
 
-        PartnerCompanyUserSeeder::industriesFilled($user);
+        PartnerCompanyUserSeeder::industriesFilled($users);
 
-        PartnerCompanyUserSeeder::motivationFilled($user);
+        PartnerCompanyUserSeeder::motivationFilled($users);
 
-        PartnerCompanyUserSeeder::documentFilled($user);
+        PartnerCompanyUserSeeder::documentFilled($users);
 
-        PartnerCompanyUserSeeder::personalDataCompleted($user);
+        PartnerCompanyUserSeeder::personalDataCompleted($users);
 
-        PartnerCompanyUserSeeder::directApplyToCompany($user);
+        PartnerCompanyUserSeeder::directApplyToCompany($users);
 
-        PartnerCompanyUserSeeder::appliedToCompany($user);
+        PartnerCompanyUserSeeder::appliedToCompany($users);
 
-        $this->enrollUser($user);
+        $this->enrollUser($users);
 
-        $this->submitStudySheet($user);
+        $this->submitStudySheet($users);
 
-        $this->submitGovernmentForm($user);
+        $this->submitGovernmentForm($users);
 
-        $this->contract($user);
+        $this->contract($users);
     }
 
-    public function enrollUser(User $user)
+    public function enrollUser(User $users)
     {
-        $syncUser = (new SyncUserValue($user));
-        $syncUser->fieldInsert('enroll_course', 1);
-        $syncUser->fieldInsert('enroll_company', 6);
-        $syncUser->fieldInsert('enroll_company_contact', 18);
+        foreach ($users as $user) {
+            $syncUser = (new SyncUserValue($user));
+            $syncUser->fieldInsert('enroll_course', 1);
+            $syncUser->fieldInsert('enroll_company', 6);
+            $syncUser->fieldInsert('enroll_company_contact', 18);
 
-        $user->setMeta('enrollment_at', now());
+            $user->setMeta('enrollment_at', now());
+        }
     }
 
-    public function submitStudySheet(User $user)
+    public function submitStudySheet(User $users)
     {
-        $user->study_sheet()->save(StudySheet::factory()->create([
-            'user_id' => $user->id,
-            'is_submit' => true,
-        ]));
+        foreach ($users as $user) {
+            $user->study_sheet()->save(StudySheet::factory()->create([
+                'user_id' => $user->id,
+                'is_submit' => true,
+            ]));
+        }
     }
 
-    public function submitGovernmentForm(User $user)
+    public function submitGovernmentForm(User $users)
     {
-        $user->government_form()->save(GovernmentForm::factory()->create([
-            'user_id' => $user->id,
-            'is_submit' => true,
-        ]));
+       foreach ($users as $user) {
+            $user->government_form()->save(GovernmentForm::factory()->create([
+                'user_id' => $user->id,
+                'is_submit' => true,
+            ]));
 
-        $user->update(['application_status' => ApplicationStatus::ENROLLMENT_ON()]);
+            $user->update(['application_status' => ApplicationStatus::ENROLLMENT_ON()]);
+       }
     }
 
-    public function contract(User $user)
+    public function contract(User $users)
     {
-        $user->contract()->create([
-            'user_id' => $user->id,
-            'send_date' => '2023-03-23',
-            'receive_date' => '2023-03-25',
-        ]);
+       foreach ($users as $user) {
+            $user->contract()->create([
+                'user_id' => $user->id,
+                'send_date' => '2023-03-23',
+                'receive_date' => '2023-03-25',
+            ]);
 
-        $user->application_status = ApplicationStatus::CONTRACT_SENT_ON;
-        $user->application_status = ApplicationStatus::CONTRACT_RETURNED_ON;
+            $user->application_status = ApplicationStatus::CONTRACT_SENT_ON;
+            $user->application_status = ApplicationStatus::CONTRACT_RETURNED_ON;
 
-        $user->save();
+            $user->save();
+       }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Pdf;
 
+use App\Models\Company;
 use App\Models\Course;
 use App\Models\Field;
 use App\Models\FieldValue;
@@ -32,6 +33,12 @@ class ManagementSheetPdf extends Pdf
             'date_of_birth' => date_create_from_format('Y-m-d', $this->user->values->where('fields.key', 'date_of_birth')->value('value'))->format('d.m.Y'),
             'profilePhoto' => $this->user->study_sheet?->studentIdCardPhotoUrl,
             'phone' => $this->user->study_sheet?->phone,
+            'street' => $this->user->study_sheet?->street,
+            'zip' => $this->user->study_sheet?->zip,
+            'address' => $this->user->study_sheet?->address,
+            'place' => $this->user->study_sheet?->place,
+            'company' => Company::where('id',$this->user->values->where('fields.key', 'enroll_company')->value('value'))->get()->first(),
+            'secondary_language' => $this->user->study_sheet?->secondary_language,
         ];
     }
 }
