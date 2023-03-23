@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Enums\ApplicationStatus;
 use App\Models\Result;
 use App\Models\User;
+use App\Services\SyncUserValue;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class TestFailedUserSeeder extends Seeder
@@ -16,13 +18,13 @@ class TestFailedUserSeeder extends Seeder
      */
     public function run()
     {
-        $users = tap(User::factory(50)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
+        $users = tap(User::factory(2)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
             $users->each(function ($user) {
-                PartnerCompanyUserSeeder::userCreatedProcess($user);
+                $user->assignRole(ROLE_APPLICANT);
+                $user->attachCourseWithDesiredBeginning((new Carbon('first day of October'))->toDateString(), [1]);
+                (new SyncUserValue($user))();
             });
         });
-
-        PartnerCompanyUserSeeder::userCreatedProcess($users);
 
         PartnerCompanyuserSeeder::submitProfile($users);
 
@@ -31,7 +33,7 @@ class TestFailedUserSeeder extends Seeder
         $this->testFailedConfirmed($users);
     }
 
-    public function selectionTestFailed(User $users)
+    public function selectionTestFailed($users)
     {
         foreach ($users as $user) {
             for ($testId = 1; $testId <= 4; $testId++) {
@@ -73,7 +75,7 @@ class TestFailedUserSeeder extends Seeder
         }
     }
 
-    public function testFailedConfirmed(User $users)
+    public function testFailedConfirmed($users)
     {
         foreach ($users as $user) {
             $user->update(['application_status' => ApplicationStatus::TEST_FAILED_CONFIRM()]);

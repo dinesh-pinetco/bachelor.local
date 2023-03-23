@@ -15,9 +15,11 @@ class PartnerCompanyUserSeeder extends Seeder
 {
     public function run()
     {
-        $users = tap(User::factory(50)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
+        $users = tap(User::factory(2)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
             $users->each(function ($user) {
-                $this->userCreatedProcess($user);
+                $user->assignRole(ROLE_APPLICANT);
+                $user->attachCourseWithDesiredBeginning((new Carbon('first day of October'))->toDateString(), [1]);
+                (new SyncUserValue($user))();
             });
         });
 
@@ -40,7 +42,7 @@ class PartnerCompanyUserSeeder extends Seeder
         $this->appliedToCompany($users);
     }
 
-    public static function submitProfile(User $users)
+    public static function submitProfile($users)
     {
         foreach ($users as $user) {
             $syncUser = (new SyncUserValue($user));
@@ -64,7 +66,7 @@ class PartnerCompanyUserSeeder extends Seeder
         }
     }
 
-    public static function selectionTestPassed(User $users)
+    public static function selectionTestPassed($users)
     {
         foreach ($users as $user) {
             for ($testId = 1; $testId <= 4; $testId++) {
@@ -107,14 +109,14 @@ class PartnerCompanyUserSeeder extends Seeder
         }
     }
 
-    public static function testResultRetrievedOn(User $users)
+    public static function testResultRetrievedOn($users)
     {
         foreach ($users as $user) {
             $user->update(['application_status' => ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON()]);
         }
     }
 
-    public static function industriesFilled(User $users)
+    public static function industriesFilled($users)
     {
         foreach ($users as $user) {
             $syncUser = (new SyncUserValue($user));
@@ -122,7 +124,7 @@ class PartnerCompanyUserSeeder extends Seeder
         }
     }
 
-    public static function motivationFilled(User $users)
+    public static function motivationFilled($users)
     {
         foreach ($users as $user) {
             $user->values()->create([
@@ -145,7 +147,7 @@ class PartnerCompanyUserSeeder extends Seeder
         }
     }
 
-    public static function documentFilled(User $users)
+    public static function documentFilled($users)
     {
         foreach ($users as $user) {
             $file = public_path('sample.pdf');
@@ -178,21 +180,21 @@ class PartnerCompanyUserSeeder extends Seeder
         }
     }
 
-    public static function personalDataCompleted(User $users)
+    public static function personalDataCompleted($users)
     {
         foreach ($users as $user) {
             $user->update(['application_status' => ApplicationStatus::PERSONAL_DATA_COMPLETED()]);
         }
     }
 
-    public static function directApplyToCompany(User $users)
+    public static function directApplyToCompany($users)
     {
         foreach ($users as $user) {
             $user->update(['application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY()]);
         }
     }
 
-    public static function appliedToCompany(User $users)
+    public static function appliedToCompany($users)
     {
        foreach ($users as $user) {
             $user->companies()->create([
@@ -211,12 +213,5 @@ class PartnerCompanyUserSeeder extends Seeder
 
             $user->update(['application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY()]);
        }
-    }
-
-    public static function userCreatedProcess(User $user)
-    {
-        $user->assignRole(ROLE_APPLICANT);
-        $user->attachCourseWithDesiredBeginning((new Carbon('first day of October'))->toDateString(), [1]);
-        (new SyncUserValue($user))();
     }
 }

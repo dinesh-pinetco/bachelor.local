@@ -7,6 +7,7 @@ use App\Models\GovernmentForm;
 use App\Models\StudySheet;
 use App\Models\User;
 use App\Services\SyncUserValue;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class ContractedUserSeeder extends Seeder
@@ -18,13 +19,13 @@ class ContractedUserSeeder extends Seeder
      */
     public function run()
     {
-        $users = tap(User::factory(50)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
+        $users = tap(User::factory(2)->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]), function ($users) {
             $users->each(function ($user) {
-                PartnerCompanyUserSeeder::userCreatedProcess($user);
+                $user->assignRole(ROLE_APPLICANT);
+                $user->attachCourseWithDesiredBeginning((new Carbon('first day of October'))->toDateString(), [1]);
+                (new SyncUserValue($user))();
             });
         });
-
-        PartnerCompanyUserSeeder::userCreatedProcess($users);
 
         PartnerCompanyUserSeeder::submitProfile($users);
 
@@ -53,7 +54,7 @@ class ContractedUserSeeder extends Seeder
         $this->contract($users);
     }
 
-    public function enrollUser(User $users)
+    public function enrollUser($users)
     {
         foreach ($users as $user) {
             $syncUser = (new SyncUserValue($user));
@@ -65,7 +66,7 @@ class ContractedUserSeeder extends Seeder
         }
     }
 
-    public function submitStudySheet(User $users)
+    public function submitStudySheet($users)
     {
         foreach ($users as $user) {
             $user->study_sheet()->save(StudySheet::factory()->create([
@@ -75,7 +76,7 @@ class ContractedUserSeeder extends Seeder
         }
     }
 
-    public function submitGovernmentForm(User $users)
+    public function submitGovernmentForm($users)
     {
        foreach ($users as $user) {
             $user->government_form()->save(GovernmentForm::factory()->create([
@@ -87,7 +88,7 @@ class ContractedUserSeeder extends Seeder
        }
     }
 
-    public function contract(User $users)
+    public function contract($users)
     {
        foreach ($users as $user) {
             $user->contract()->create([
