@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\SyncUserValue;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class ContractedUserSeeder extends Seeder
 {
@@ -83,6 +84,8 @@ class ContractedUserSeeder extends Seeder
                 'user_id' => $user->id,
                 'is_submit' => true,
             ]));
+
+            Storage::putFileAs('student-id-photo', asset('images/facebook.png'), 'facebook.png');
 
             $user->update(['application_status' => ApplicationStatus::ENROLLMENT_ON()]);
        }

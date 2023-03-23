@@ -51,10 +51,10 @@ class PartnerCompanyUserSeeder extends Seeder
             $syncUser->fieldInsert('gender', 'mr');
             $syncUser->fieldInsert('first_name', $user->first_name);
             $syncUser->fieldInsert('last_name', $user->last_name);
-            $syncUser->fieldInsert('street_house_number', 'Test');
+            $syncUser->fieldInsert('street_house_number', 'C-8393 first street');
             $syncUser->fieldInsert('postal_code', '123456');
-            $syncUser->fieldInsert('location', 'Test');
-            $syncUser->fieldInsert('country', 'Test');
+            $syncUser->fieldInsert('location', 'TestLocation');
+            $syncUser->fieldInsert('country', 'TestCountry');
             $syncUser->fieldInsert('email', $user->emails);
             $syncUser->fieldInsert('email_repetition', $user->email);
             $syncUser->fieldInsert('phone', $user->phone ?? '1234567890');
@@ -105,7 +105,6 @@ class PartnerCompanyUserSeeder extends Seeder
             ]);
 
             $user->update(['application_status' => ApplicationStatus::TEST_PASSED()]);
-            $user->savePassedPdf();
         }
     }
 

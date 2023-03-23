@@ -20,9 +20,9 @@ class StudySheetFactory extends Factory
             'date_of_birth' => $this->faker->date,
             'place_of_birth' => $this->faker->city,
             'country_of_birth' => $this->faker->country,
-            'nationality_first' => $this->faker->text,
-            'nationality_second' => $this->faker->text,
-            'student_id_card_photo' => $this->faker->filePath(),
+            'nationality_first' => $this->faker->country,
+            'nationality_second' => $this->faker->country,
+            'student_id_card_photo' => 'student-id-photo/facebook.png',
             'have_health_insurance' => $this->faker->boolean,
             'is_health_insurance_private' => $this->faker->boolean,
             'health_insurance_company_id' => $this->faker->numerify,
@@ -34,6 +34,7 @@ class StudySheetFactory extends Factory
             'zip' => $this->faker->numberBetween(111, 999),
             'place' => $this->faker->city,
             'privacy_policy' => $this->faker->boolean,
+            'secondary_language' => $this->faker->randomElement(['fr', 'es']),
         ];
     }
 }
