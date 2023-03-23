@@ -33,7 +33,6 @@ class StudySheetFactory extends Factory
             'street' => $this->faker->streetAddress,
             'zip' => $this->faker->numberBetween(111, 999),
             'place' => $this->faker->city,
-            'is_authorize' => $this->faker->boolean,
             'privacy_policy' => $this->faker->boolean,
         ];
     }

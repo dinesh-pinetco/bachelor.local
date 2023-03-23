@@ -83,7 +83,7 @@
                                 <dt class="text-sm font-medium text-gray-500">{{ __('Contact Person from Company') }}</dt>
                                 @if ($selectedCompany)
                                     <select
-                                        class="h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
+                                        class="col-span-2 h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
                                         wire:model="selectedCompanyContacts" id="selectedCompanyContacts">
                                         <option value="null">{{ __('Select Company Contact') }}</option>
                                         @foreach ($companyContacts as $companyContact)
@@ -91,7 +91,7 @@
                                         @endforeach
                                     </select>
                                 @else
-                                    <dt class="text-sm font-medium text-gray-500">{{ __('Please select partner company') }}</dt>
+                                    <p class="col-span-2 text-sm font-medium text-gray-500">{{ __('Please select partner company') }}</p>
                                 @endif
                                 <x-jet-input-error for="selectedCompanyContacts"/>
                             </div>

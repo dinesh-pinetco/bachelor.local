@@ -5,12 +5,9 @@ namespace Database\Seeders;
 use App\Enums\ApplicationStatus;
 use App\Models\Result;
 use App\Models\User;
-use App\Services\SyncUserValue;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
-class ApplicantFailedSeeder extends Seeder
+class TestFailedUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,43 +18,23 @@ class ApplicantFailedSeeder extends Seeder
     {
         $user = User::factory()->create(['application_status' => ApplicationStatus::REGISTRATION_SUBMITTED]);
 
-        $this->userCreatedProcess($user);
+        PartnerCompanyUserSeeder::userCreatedProcess($user);
 
         PartnerCompanyUserSeeder::submitProfile($user);
 
         $this->selectionTestFailed($user);
+
+        $this->testFailedConfirmed($user);
     }
-
-    // public function submitProfile(User $user)
-    // {
-    //     // $syncUser = (new SyncUserValue($user));
-    //     // $syncUser->fieldInsert('avatar','profile/facebook.png');
-    //     // Storage::putFileAs('profile',asset('images/facebook.png'),'facebook.png');
-    //     // $syncUser->fieldInsert('gender','mr');
-    //     // $syncUser->fieldInsert('first_name',$user->first_name);
-    //     // $syncUser->fieldInsert('last_name',$user->last_name);
-    //     // $syncUser->fieldInsert('street_house_number','Test');
-    //     // $syncUser->fieldInsert('postal_code','123456');
-    //     // $syncUser->fieldInsert('location','Test');
-    //     // $syncUser->fieldInsert('country','Test');
-    //     // $syncUser->fieldInsert('email',$user->emails);
-    //     // $syncUser->fieldInsert('email_repetition',$user->email);
-    //     // $syncUser->fieldInsert('phone',$user->phone ?? '1234567890');
-    //     // $syncUser->fieldInsert('date_of_birth','1998-1-26');
-    //     // $syncUser->fieldInsert('privacy_policy','1');
-
-    //     // $user->application_status = ApplicationStatus::PROFILE_INFORMATION_COMPLETED;
-    //     // $user->save();
-    // }
 
     public function selectionTestFailed(User $user)
     {
-        for ($i = 1; $i <= 4; $i++) {
+        for ($testId = 1; $testId <= 4; $testId++) {
             Result::factory()->create([
                 'user_id' => $user->id,
-                'status' => Result::STATUS_COMPLETED,
+                'status' => Result::STATUS_FAILED,
                 'is_passed' => true,
-                'test_id' => $i,
+                'test_id' => $testId,
             ]);
         }
 
@@ -87,13 +64,12 @@ class ApplicantFailedSeeder extends Seeder
             'completed_at' => now(),
         ]);
 
-        $user->saveApplicationStatus();
+        $user->update(['application_status' => ApplicationStatus::TEST_PASSED()]);
     }
 
-    private function userCreatedProcess(User $user)
+    public function testFailedConfirmed(User $user)
     {
-        $user->assignRole(ROLE_APPLICANT);
-        $user->attachCourseWithDesiredBeginning((new Carbon('first day of October'))->toDateString(), [1]);
-        (new SyncUserValue($user))();
+        $user->update(['application_status' => ApplicationStatus::TEST_FAILED_CONFIRM()]);
+        $user->saveFailedPdf();
     }
 }

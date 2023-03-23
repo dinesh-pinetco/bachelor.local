@@ -25,7 +25,7 @@ class PartnerCompanyUserSeeder extends Seeder
 
         $this->testResultRetrievedOn($user);
 
-        $this->industiesFilled($user);
+        $this->industriesFilled($user);
 
         $this->motivationFilled($user);
 
@@ -97,16 +97,16 @@ class PartnerCompanyUserSeeder extends Seeder
             'completed_at' => now(),
         ]);
 
-        $user->saveApplicationStatus();
+        $user->update(['application_status' => ApplicationStatus::TEST_PASSED()]);
+        $user->savePassedPdf();
     }
 
     public static function testResultRetrievedOn(User $user)
     {
-        $user->application_status = ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON;
-        $user->save();
+        $user->update(['application_status' => ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON()]);
     }
 
-    public static function industiesFilled(User $user)
+    public static function industriesFilled(User $user)
     {
         $syncUser = (new SyncUserValue($user));
         $syncUser->fieldInsert('industry', json_encode(['nader_group']));
@@ -193,7 +193,7 @@ class PartnerCompanyUserSeeder extends Seeder
         $user->update(['application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY()]);
     }
 
-    private function userCreatedProcess(User $user)
+    public static function userCreatedProcess(User $user)
     {
         $user->assignRole(ROLE_APPLICANT);
         $user->attachCourseWithDesiredBeginning((new Carbon('first day of October'))->toDateString(), [1]);

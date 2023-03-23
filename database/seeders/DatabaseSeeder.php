@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HealthInsuranceCompanySeeder::class);
         $this->call(ApplicantEnrolmentFieldSeeder::class);
         $this->call(PartnerCompanyUserSeeder::class);
-        $this->call(ApplicantFailedSeeder::class);
+        $this->call(TestFailedUserSeeder::class);
+        $this->call(ContractedUserSeeder::class);
     }
 }
