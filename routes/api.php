@@ -39,7 +39,7 @@ Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group
     // /platform/firmenportal/testablauf/vid
     // /platform/firmenportal/testtan
 
-    Route::post('logout', [LoginController::class, 'logout']);
+    Route::post('platform/logout', [LoginController::class, 'logout']);
 
     Route::middleware(['auth:sanctum', 'role:'.ROLE_ADMIN])->post('admin-create', function (Request $request) {
         $validateData = $request->validate([

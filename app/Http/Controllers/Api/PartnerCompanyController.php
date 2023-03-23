@@ -13,7 +13,7 @@ class PartnerCompanyController extends Controller
     public function index()
     {
         $size = request()->get('itemsPerPage') ?? 15;
-        $hasPagination = request()->get('pagination') == 'true';
+        $hasPagination = request()->boolean('pagination');
 
         $users = User::query()
             ->role(ROLE_APPLICANT)
