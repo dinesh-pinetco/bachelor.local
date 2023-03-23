@@ -79,7 +79,7 @@ class PartnerCompanyUserSeeder extends Seeder
             'result' => '1481-306525',
             'meta' => '1',
             'result_mix_link' => 'https://oasys.cubia.de/oasys?WCI=oasys&WTD=DeletedPDF_8343847384734873893434',
-            'meta_mix' => '[1873,384743,1,"29,0","46,0","11,0","wjudjk5kdf","https:\Woasys.cubi.deVoasys.asp?WCI=assys&WTD=DeletedPDF_8343847384734873893434"]',
+            'meta_mix' => json_encode([1873,384743,1,"29,0","46,0","11,0","wjudjk5kdf","https:\Woasys.cubi.deVoasys.asp?WCI=assys&WTD=DeletedPDF_8343847384734873893434"]),
             'result_iqt_link' => 'https://oasys.cubia.de/oasys?WCI=oasys&WTD=DeletedPDF_78484749489388383',
             'meta_iqt' => '[1873,384743,2,"27,4","3,1","76,8","21,2","87,1","44,7","wjEhyfi7ge","https:\Woasys.cubi.deVoasys.asp?WTD=DeletedPDF_78484749489388383"]',
             'started_at' => now(),
