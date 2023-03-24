@@ -44,10 +44,11 @@ class PartnerCompanyUserSeeder extends Seeder
 
     public static function submitProfile($users)
     {
+        \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/public/profile/sample-profile-picture.jpg'));
+
         foreach ($users as $user) {
             $syncUser = (new SyncUserValue($user));
-            $syncUser->fieldInsert('avatar', 'profile/facebook.png');
-            Storage::putFileAs('profile', asset('images/facebook.png'), 'facebook.png');
+            $syncUser->fieldInsert('avatar', 'profile/sample-profile-picture.jpg');
             $syncUser->fieldInsert('gender', 'mr');
             $syncUser->fieldInsert('first_name', $user->first_name);
             $syncUser->fieldInsert('last_name', $user->last_name);
