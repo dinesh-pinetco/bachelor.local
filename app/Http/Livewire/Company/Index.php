@@ -175,16 +175,13 @@ class Index extends Component
     {
         $this->validate();
 
-        foreach ($this->selectedCompanies as $companyId) {
-            if($companyId != null)
-            {
+        foreach (array_filter($this->selectedCompanies) as $companyId) {
                 $this->user->companies()->updateOrCreate([
                     'user_id' => $this->user->id,
                     'company_id' => $companyId,
                 ], [
                     'mail_content' => $this->mailContent,
                 ]);
-            }
         }
 
         $this->user->update([
