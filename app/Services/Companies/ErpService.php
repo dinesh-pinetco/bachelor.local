@@ -92,6 +92,8 @@ abstract class ErpService
                 'sanna_id' => $company['id'],
             ], [
                 'name' => $company['name'],
+                'zip_code' => $company['plz'] ?? '',
+                'meta' => json_encode($company),
             ]);
 
             foreach ($company['kontakte'] as $companyContact) {

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('sanna_id');
             $table->string('name')->nullable();
-            $table->integer('zip_code')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }
