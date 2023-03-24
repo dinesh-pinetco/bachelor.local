@@ -55,7 +55,7 @@ class Show extends Component
         $this->competency_catch_up = data_get($this->applicant->configuration, 'competency_catch_up', false);
         $this->competency_comment = $this->applicant->configuration?->competency_comment;
     }
-
+q
     public function refreshData($groupId = null)
     {
         if (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {

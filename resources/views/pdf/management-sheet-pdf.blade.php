@@ -96,7 +96,10 @@ gebildet. ')}}
         </tr>
         <tr valign="top" style="font-size: 12px;">
             <td style="font-size: 12px;width:23%;">{{__('Kooperationsunternehmen')}}:</td>
-            <td style="font-size: 12px;">{{ $company->name }}</td>
+            <td style="font-size: 12px;">{{ $company?->name }} <br>
+                    {{ json_decode($company_address)?->strasse }} <br>
+                    {{  $company?->zip_code . ' ' . json_decode($company_address)?->ort  }} <br>
+            </td>
         </tr>
     </table>
     <table style="margin-top: 15px;border:1px solid #D9D9D9;background: #EEEEEE;">
