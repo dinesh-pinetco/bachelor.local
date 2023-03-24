@@ -41,6 +41,7 @@ class TestFailedUserSeeder extends Seeder
                     'user_id' => $user->id,
                     'status' => Result::STATUS_FAILED,
                     'is_passed' => true,
+                    'result' => rand(40,50),
                     'test_id' => $testId,
                 ]);
             }

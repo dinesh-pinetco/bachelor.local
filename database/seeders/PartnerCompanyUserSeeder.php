@@ -74,6 +74,7 @@ class PartnerCompanyUserSeeder extends Seeder
                     'user_id' => $user->id,
                     'status' => Result::STATUS_COMPLETED,
                     'is_passed' => true,
+                    'result' => rand(80,90),
                     'test_id' => $testId,
                 ]);
             }
