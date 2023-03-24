@@ -79,7 +79,6 @@ class TestFailedUserSeeder extends Seeder
     {
         foreach ($users as $user) {
             $user->update(['application_status' => ApplicationStatus::TEST_FAILED_CONFIRM()]);
-            $user->saveFailedPdf();
         }
     }
 }

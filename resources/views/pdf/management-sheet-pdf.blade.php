@@ -54,7 +54,7 @@
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Nationalität')}}:</td>
-                                <td>{{ $user->government_form?->country->name }}
+                                <td>{{ $nationality }}
                                 </td>
                             </tr>
                             <tr valign="top" style="font-size: 12px;">
@@ -65,8 +65,8 @@
                             <tr valign="top" style="font-size: 12px;">
                                 <td style="padding-right: 35px;">{{__('Adresse')}}:</td>
                                 <td>{{ $street }}<br>
-                                    {{ $zip . ' ' . $address }}<br>
-                                    {{ $place }}<br>
+                                    {{ $zip . ' ' . $place }}<br>
+                                    {{ $country }}<br>
                                 </td>
                             </tr>
                         </td>
