@@ -70,6 +70,9 @@ class ContractedUserSeeder extends Seeder
     public function submitStudySheet($users)
     {
         foreach ($users as $user) {
+
+            \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/public/student-id-photo/sample-profile-picture.jpg'));
+
             $user->study_sheet()->save(StudySheet::factory()->create([
                 'user_id' => $user->id,
                 'is_submit' => true,
@@ -84,8 +87,6 @@ class ContractedUserSeeder extends Seeder
                 'user_id' => $user->id,
                 'is_submit' => true,
             ]));
-
-            \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/public/profile/sample-profile-picture.jpg'));
 
             $user->update(['application_status' => ApplicationStatus::ENROLLMENT_ON()]);
        }
