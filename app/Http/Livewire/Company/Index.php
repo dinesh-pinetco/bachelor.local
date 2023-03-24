@@ -135,6 +135,8 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
+
+        // $this->reset('selectedCompanies');
     }
 
     protected function fetchAppliedCompanies()
@@ -174,12 +176,15 @@ class Index extends Component
         $this->validate();
 
         foreach ($this->selectedCompanies as $companyId) {
-            $this->user->companies()->updateOrCreate([
-                'user_id' => $this->user->id,
-                'company_id' => $companyId,
-            ], [
-                'mail_content' => $this->mailContent,
-            ]);
+            if($companyId != null)
+            {
+                $this->user->companies()->updateOrCreate([
+                    'user_id' => $this->user->id,
+                    'company_id' => $companyId,
+                ], [
+                    'mail_content' => $this->mailContent,
+                ]);
+            }
         }
 
         $this->user->update([
