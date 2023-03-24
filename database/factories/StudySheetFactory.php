@@ -22,7 +22,7 @@ class StudySheetFactory extends Factory
             'country_of_birth' => $this->faker->country,
             'nationality_first' => $this->faker->country,
             'nationality_second' => $this->faker->country,
-            'student_id_card_photo' => 'student-id-photo/facebook.png',
+            'student_id_card_photo' => 'student-id-photo/sample-profile-picture.jpg',
             'have_health_insurance' => $this->faker->boolean,
             'is_health_insurance_private' => $this->faker->boolean,
             'health_insurance_company_id' => $this->faker->numerify,

@@ -85,7 +85,7 @@ class ContractedUserSeeder extends Seeder
                 'is_submit' => true,
             ]));
 
-            Storage::putFileAs('student-id-photo', asset('images/facebook.png'), 'facebook.png');
+            \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/public/profile/sample-profile-picture.jpg'));
 
             $user->update(['application_status' => ApplicationStatus::ENROLLMENT_ON()]);
        }

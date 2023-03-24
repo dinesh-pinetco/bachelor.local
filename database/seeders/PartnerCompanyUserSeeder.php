@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Services\SyncUserValue;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class PartnerCompanyUserSeeder extends Seeder
 {
@@ -150,9 +149,7 @@ class PartnerCompanyUserSeeder extends Seeder
     public static function documentFilled($users)
     {
         foreach ($users as $user) {
-            $file = public_path('sample.pdf');
-
-            Storage::putFileAs('documents', $file, 'sample.pdf');
+            \File::copy(public_path('sample.pdf'), storage_path('app/public/documents/sample.pdf'));
 
             Media::create([
                 'user_id' => $user->id,
