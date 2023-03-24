@@ -95,7 +95,7 @@ class ApplicantToCompanyResource extends JsonResource
                 'ort' => $this->getValueByIdentifier('location'),
                 'adresszusatz' => '',
                 'abweichender_empfaenger' => '',
-                'land' => '',
+                'land' => $this->getValueByIdentifier('country'),
             ];
         } elseif ($type == 3) {
             if ($this->user->study_sheet?->billing_address == 1) {
