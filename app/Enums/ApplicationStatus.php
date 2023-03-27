@@ -34,8 +34,8 @@ enum ApplicationStatus: string
     #[ApplicationStatusOrder(13)] case APPLIED_TO_SELECTED_COMPANY = 'applied_to_selected_company';
 
     #[ApplicationStatusOrder(14)] case ENROLLMENT_ON = 'enrollment_on';
-    #[ApplicationStatusOrder(15)] case CONTRACT_SENT_ON = 'contract_sent_on';
-    #[ApplicationStatusOrder(16)] case CONTRACT_RETURNED_ON = 'contract_returned_on';
+    #[ApplicationStatusOrder(15)] case CONTRACT_RETURNED_ON = 'contract_returned_on'; //Applicant return signed PDF
+    #[ApplicationStatusOrder(16)] case CONTRACT_SENT_ON = 'contract_sent_on'; //NAK return PDF
 
     /** Get an associative array of [case name => case value]. */
     public static function selectionOptions(): array
