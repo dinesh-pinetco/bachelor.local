@@ -118,6 +118,7 @@ class Index extends Component
     {
         $this->deletedApplicant->delete();
         $this->reset('show', 'deletedApplicant');
+        $this->toastNotify(__('Applicant deleted successfully.'), __('Success'), TOAST_SUCCESS);
         $this->render();
     }
 

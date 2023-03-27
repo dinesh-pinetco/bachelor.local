@@ -41,10 +41,7 @@
                         <img class="h-16 w-16" src="{{ asset('images/icon/congratulation.png') }}" alt="congratulations">
                     </p>
                     <h4 class="text-center text-darkgray text-sm sm:text-base">
-                        {{ __('Congratulations! You have completed all steps of your application') }}
-                    </h4>
-                     <h4 class="text-center text-darkgray text-sm sm:text-base">
-                        {{ __('Do you want to transfer your data to the company portal to increase your chances?') }}
+                        {{ __('Congratulations! You have completed all steps of your application. Do you want to transfer your data to the company portal to increase your chances?') }}
                     </h4>
                 </div>
             </div>

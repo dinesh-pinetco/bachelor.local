@@ -14,7 +14,7 @@
             @if ($isShow)
                 @foreach ($tests as $test)
                     <div class="p-4 shadow-md w-full rounded">
-                        <h4 class="mb-4 md:mb-6 text-xl font-bold text-primary">{{ $test->name }}</h4>
+                        <h4 class="mb-4 md:mb-6 text-xl font-bold text-primary">{{ __($test->name) }}</h4>
                         <div class="flex items-center justify-between flex-wrap">
                             <p class="text-sm md:text-base">{{ $test->status($applicant) }}</p>
                             <x-link-button :active="true"

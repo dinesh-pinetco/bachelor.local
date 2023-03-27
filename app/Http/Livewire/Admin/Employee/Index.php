@@ -29,7 +29,7 @@ class Index extends Component
     public function delete()
     {
         $this->deletedUser->delete();
-        $this->toastNotify(__('User deleted successfully.'), __('Success'), TOAST_ERROR);
+        $this->toastNotify(__('User deleted successfully.'), __('Success'), TOAST_SUCCESS);
         $this->reset('show', 'deletedUser');
         $this->emitSelf('refresh');
     }

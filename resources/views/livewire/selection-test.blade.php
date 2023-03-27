@@ -7,12 +7,12 @@
             </h2>
             @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
                 <div wire:click="getTestResultPdf"
-                     class="ml-8 px-4 py-2 flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
+                     class="ml-8 px-8 py-3 flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
                     <svg class="h-4 w-4 stroke-current" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 5.71432L8 11.7143L14 5.71432H10.2857V0.857178H5.71429V5.71432H2Z" fill="currentColor"/>
                         <rect y="14.0002" width="16" height="1.14286" fill="currentColor"/>
                     </svg>
-                    <p class="ml-2 text-sm">{{__('Download')}}</p>
+                    <p class="ml-4 text-sm">{{__('Download')}}</p>
                 </div>
             @endif
         </div>
@@ -64,7 +64,7 @@
                         <div class="p-4 w-full md:w-3/5 xl:w-2/3">
                             <div class="text-primary w-full md:max-w-xl">
                                 <div class="mb-4 md:mb-6 flex flex-wrap items-center justify-between gap-4">
-                                    <h4 class="text-lg md:text-xl font-medium text-primary">{{ $test->name }}</h4>
+                                    <h4 class="text-lg md:text-xl font-medium text-primary">{{ __($test->name) }}</h4>
                                     <div class="flex flex-shrink-0 items-center justify-end ml-auto space-x-4">
                                         @if(in_array($test->result?->status,[\App\Models\Result::STATUS_COMPLETED,\App\Models\Result::STATUS_FAILED] ))
                                             <div class="flex items-center space-x-2 text-green-500 text-sm">

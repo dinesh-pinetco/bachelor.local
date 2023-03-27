@@ -807,7 +807,7 @@
     "Select Industry": "Branche auswählen",
     "You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal": "Du kannst dich entweder aktiv bei ausgewählten Unternehmen bewerben oder auf dem Bewerbermarktplatz gelistet werden.",
     "Apply directly to selected company": "Direkt bei Unternehmen bewerben",
-    "Show my profile directly on marketplace": "Mein Profil nur auf dem Marktplatz anzeigen",
+    "Show my profile directly on marketplace": "Mein Profil auf dem Marktplatz anzeigen",
     "Search by name": "Suche nach Name",
     "Search by zip code": "Suche nach Postleitzahl",
     "Company list": "Liste der Unternehmen",
@@ -865,9 +865,7 @@
     "No, Not listed": "Nein, Nicht aufgeführt",
     "please select the companies": "Bitte wählen Sie die Unternehmen",
     "No Company Found": "Kein Unternehmen gefunden",
-    "Congratulations! You have completed all steps of your application": "Herzlichen Glückwunsch! Du hast alle Schritte deiner Bewerbung abgeschlossen. Möchtest Du deine Daten in das Firmenportal übertragen, um deine Chancen auf einen Studienplatz zu erhöhen?",
-    "Do you want to transfer your data to the company portal to increase your chances?": "Möchten Sie Ihre Daten in das Unternehmensportal übertragen, um Ihre Chancen zu erhöhen?",
-    "You will be informed as soon as the test results are available": "Sie werden informiert, sobald die Testergebnisse vorliegen.",
+    "Congratulations! You have completed all steps of your application. Do you want to transfer your data to the company portal to increase your chances?": "Herzlichen Glückwunsch! Du hast alle Schritte deiner Bewerbung abgeschlossen. Möchtest Du deine Daten in das Firmenportal übertragen, um deine Chancen auf einen Studienplatz zu erhöhen?",
     "The file is required": "Die Datei ist erforderlich",
     "The file size must not be greater than :max": "Die Dateigröße darf nicht größer sein als :max",
     "Applicant has been enrolled successfully.": "Der Antragsteller wurde erfolgreich eingeschrieben.",
@@ -900,5 +898,8 @@
     "You have applied to marketplace.": "Sie haben sich bei marketplace beworben.",
     "Contract send date deleted successfully.": "Vertragssendedatum erfolgreich gelöscht.",
     "Contract received date deleted successfully.": "Vertragseingangsdatum erfolgreich gelöscht.",
-    "Loading...": "Laden..."
+    "Loading...": "Laden...",
+    "Cubia": "Motivationtest",
+    "Meteor16": "Persönlichkeitstest",
+    "Applicant deleted successfully.": "Bewerber:in erfolgreich gelöscht."
 }
