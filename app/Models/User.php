@@ -190,37 +190,53 @@ class User extends Authenticatable implements ContractsAuditable
         return $this->application_status->applicationStatusOrder() >= ApplicationStatus::PROFILE_INFORMATION_COMPLETED->applicationStatusOrder();
     }
 
-    public function saveApplicationStatus()
+    public function updateApplicationStatusForTestResult()
     {
+        if ($this->application_status->id() > ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id()) {
+            return;
+        }
+
         $results = Result::myResults($this)
-            ->select(['status', 'is_passed', 'user_id', 'failed_by_nak'])
+            ->join('tests', 'tests.id', '=', 'results.test_id')
+            ->select(['tests.category', 'results.status', 'results.is_passed', 'results.user_id', 'results.failed_by_nak'])
             ->get();
 
-        $totalTests = $results->count();
+        $firstCategoryResults = $results->where('category', Test::FIRST_CATEGORY);
+        $secondCategoryResults = $results->where('category', Test::SECOND_CATEGORY);
 
         $updatedStatusResults = $results
             ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED]);
 
-        if ($totalTests == $results->where('is_passed', true)->count()) {
+        // Passed in exam
+        if ($firstCategoryResults->where('is_passed', true)->count()
+            && $secondCategoryResults->where('is_passed', true)->count()) {
             $this->applicantPassedSelectionTest();
-        } elseif ($updatedStatusResults->count() === $totalTests && $results->where('is_passed', false)->isNotEmpty()) {
-            $failedResultsCount = $updatedStatusResults
-                ->where('is_passed', false)
-                ->where('failed_by_nak', true)
-                ->count();
 
-            if ($totalTests == $failedResultsCount) {
-                $this->applicantFailedSelectionTest();
-
-                return;
-            } else {
-                $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
-                $this->save();
-            }
+            $this->setMeta('test_completed_at', now());
+            return;
         }
 
-        if ($totalTests == $updatedStatusResults->count() && ! ($this->hasMeta('test_completed_at'))) {
-            $this->setMeta('test_completed_at', now());
+        // Failed in exam
+        if (($updatedStatusResults->count() === $results->count())
+            && ($firstCategoryResults->where('is_passed', true)->isEmpty()
+                || $secondCategoryResults->where('is_passed', true)->isEmpty())) {
+
+            $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
+            $this->save();
+
+//            $failedResultsCount = $updatedStatusResults
+//                ->where('is_passed', false)
+//                ->where('failed_by_nak', true)
+//                ->count();
+//
+//            if ($totalTests == $failedResultsCount) {
+//                $this->applicantFailedSelectionTest();
+//
+//                return;
+//            } else {
+//                $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
+//                $this->save();
+//            }
         }
     }
 

@@ -67,7 +67,7 @@ class Result extends Model implements ContractsAuditable
             ]);
         }
 
-        $this->user->saveApplicationStatus();
+        $this->user->updateApplicationStatusForTestResult();
     }
 
     public function isMoodleTest(): bool

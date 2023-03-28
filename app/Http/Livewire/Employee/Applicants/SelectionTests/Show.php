@@ -52,7 +52,7 @@ class Show extends Component
             $this->result->failed_by_nak = false;
             $this->result->save();
         }
-        $this->applicant->saveApplicationStatus();
+        $this->applicant->updateApplicationStatusForTestResult();
 
         $this->toastNotify(__('Selection test passed successfully.'), __('Success'), TOAST_SUCCESS);
         $this->testRefresh();
@@ -67,7 +67,7 @@ class Show extends Component
             $this->result->save();
         }
 
-        $this->applicant->saveApplicationStatus();
+        $this->applicant->updateApplicationStatusForTestResult();
         $this->toastNotify(__('Selection test failed successfully.'), __('Success'), TOAST_SUCCESS);
         $this->testRefresh();
     }

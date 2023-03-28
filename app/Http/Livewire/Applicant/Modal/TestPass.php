@@ -28,13 +28,14 @@ class TestPass extends Component
     {
         // Mark as pass on failed tests
         Result::myResults($this->applicant)
+            ->whereNotIn('status', [Result::STATUS_FAILED, Result::STATUS_COMPLETED])
             ->update([
                 'is_passed' => true,
                 'passed_by_nak' => true,
                 'status' => Result::STATUS_COMPLETED,
             ]);
 
-        $this->applicant->saveApplicationStatus();
+        $this->applicant->updateApplicationStatusForTestResult();
         $this->emitUp('refresh');
         $this->close();
         $this->toastNotify(__('Applicant has been passed successfully.'));
@@ -44,13 +45,14 @@ class TestPass extends Component
     {
         // Mark as pass on failed tests
         Result::myResults($this->applicant)
+            ->whereNotIn('status', [Result::STATUS_FAILED, Result::STATUS_COMPLETED])
             ->update([
                 'is_passed' => false,
                 'failed_by_nak' => true,
                 'status' => Result::STATUS_FAILED,
             ]);
 
-        $this->applicant->saveApplicationStatus();
+        $this->applicant->updateApplicationStatusForTestResult();
         $this->emitUp('refresh');
         $this->close();
         $this->toastNotify(__('Applicant has been failed successfully.'));

@@ -82,6 +82,16 @@ class Test extends Model implements ContractsAuditable
         return resolve(TestFilters::class)->apply($query);
     }
 
+    public function scopeFirstCategory($query)
+    {
+        return $query->where('category', self::FIRST_CATEGORY);
+    }
+
+    public function scopeSecondCategory($query)
+    {
+        return $query->where('category', self::SECOND_CATEGORY);
+    }
+
     public function scopeMatchCourses($query, $courses)
     {
         return $query->whereHas('courses', function ($q) use ($courses) {

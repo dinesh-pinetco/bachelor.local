@@ -41,6 +41,6 @@ class SelectionTestController extends Controller
             (new MeteorServices($user))->fetchResult($result);
         }
 
-        $user->saveApplicationStatus();
+        $user->updateApplicationStatusForTestResult();
     }
 }
