@@ -27,6 +27,7 @@ class Index extends Component
     public function delete()
     {
         $this->deletedTest->delete();
+        $this->toastNotify(__('Test deleted successfully!'), __('Success'), TOAST_SUCCESS);
         $this->reset('show', 'deletedTest');
         $this->render();
     }

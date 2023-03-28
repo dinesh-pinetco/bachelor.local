@@ -79,7 +79,7 @@ class Manage extends Component
 
         $this->document->save();
         $this->syncCourseAndExtensions($this->document);
-        session()->flash('banner', __('Document created successfully!'));
+        $this->toastNotify(__('Document created successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }
@@ -131,7 +131,7 @@ class Manage extends Component
         $this->document->save();
         $this->syncCourseAndExtensions($this->document);
 
-        session()->flash('banner', __('Document updated successfully!'));
+        $this->toastNotify(__('Document updated successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }
@@ -145,7 +145,7 @@ class Manage extends Component
         $clonedDocument->push();
         $this->syncCourseAndExtensions($clonedDocument);
 
-        session()->flash('banner', __('Document cloned successfully!'));
+        $this->toastNotify(__('Document cloned successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }

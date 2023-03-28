@@ -9,7 +9,7 @@
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
             @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED && is_null(auth()->user()->show_application_on_marketplace_at))
                 <p>
-                    {{ __('You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal') }}
+                    {{ __('You can actively apply to selected companies and/or be listed on the applicant marketplace. If you would like to use both options, first click on "Apply directly to companies".') }}
                 </p>
                 <div>
                     <x-primary-button type="button" wire:click="selectCompany" class="mr-2">

@@ -158,6 +158,7 @@
     "The provided password does not match your current password.": "Das angegebene Passwort stimmt nicht mit Ihrem aktuellen Passwort überein.",
     "Profile photo": "Profil-Foto",
     "Contact Profile created successfully!": "Kontakt Profil erfolgreich erstellt!",
+    "Contact Profile updated successfully!": "Kontakt Profil erfolgreich aktualisiert!",
     "Contact Profile": "Kontakt Profil",
     "Course of study could not be deleted because it is still in use.": "Der Studiengang konnte nicht gelöscht werden, da er noch in Verwendung ist.",
     "Error": "Fehler",
@@ -168,7 +169,10 @@
     "Document created successfully!": "Dokument erfolgreich erstellt!",
     "Document updated successfully!": "Dokument erfolgreich aktualisiert!",
     "Document cloned successfully!": "Dokument erfolgreich geklont!",
+    "Employee created successfully!": "Mitarbeiter erfolgreich erstellt!",
+    "Employee updated successfully!": "Mitarbeiter erfolgreich aktualisiert!",
     "Faq created successfully!": "Faq erfolgreich erstellt!",
+    "Faq deleted successfully!": "Faq erfolgreich gelöscht!",
     "Group created successfully!": "Gruppe erfolgreich erstellt!",
     "Group updated successfully!": "Gruppe erfolgreich aktualisiert!",
     "Field could not be deleted because it is still in use.": "Feld konnte nicht gelöscht werden, da es noch in Gebrauch ist.",
@@ -178,6 +182,7 @@
     "Field cloned successfully!": "Feld erfolgreich geklont!",
     "Please fill existing key and value.": "Bitte vorhandenen Schlüssel und Wert ausfüllen.",
     "Test created successfully!": "Test erfolgreich erstellt!",
+    "Test deleted successfully!": "Test erfolgreich gelöscht!",
     "Active": "Aktiv",
     "InActive": "inaktiv",
     "Required": "Pflichtfeld?",
@@ -805,7 +810,7 @@
     "Industry": "Branche",
     "Industry Description": "Branche Beschreibung",
     "Select Industry": "Branche auswählen",
-    "You can either actively apply to selected companies with the previously entered data or be listed on the marketplace of the company portal": "Du kannst dich entweder aktiv bei ausgewählten Unternehmen bewerben oder auf dem Bewerbermarktplatz gelistet werden.",
+    "You can actively apply to selected companies and/or be listed on the applicant marketplace. If you would like to use both options, first click on \"Apply directly to companies\".": "Du kannst dich aktiv bei ausgewählten Unternehmen bewerben und/oder auf dem Bewerbermarktplatz gelistet werden. Wenn du beide Möglichkeiten nutzen möchtest, klicke zunächst auf \"Direkt bei Unternehmen bewerben\"",
     "Apply directly to selected company": "Direkt bei Unternehmen bewerben",
     "Show my profile directly on marketplace": "Mein Profil auf dem Marktplatz anzeigen",
     "Search by name": "Suche nach Name",
@@ -906,5 +911,6 @@
     "Moodle: Fragen zum Allgemeinwissen": "Fragen zum Allgemeinwissen",
     "Moodle: Schulnoten": "Schulnoten",
     "Moodle: Mathe-Test": "Mathe-Test",
-    "Moodle: Englisch-Test": "Englisch-Test"
+    "Moodle: Englisch-Test": "Englisch-Test",
+    "Here you can download your result": "Hier können Sie Ihr Ergebnis herunterladen"
 }

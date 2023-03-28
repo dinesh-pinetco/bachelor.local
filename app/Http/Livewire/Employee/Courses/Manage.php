@@ -69,7 +69,8 @@ class Manage extends Component
 
         $this->course->save();
 
-        session()->flash('banner', __('Course created successfully!'));
+        $this->toastNotify(__('Course created successfully!'), __('Success'), TOAST_SUCCESS);
+
 
         $this->redirectToIndex();
     }
@@ -86,7 +87,7 @@ class Manage extends Component
 
         $this->course->save();
 
-        session()->flash('banner', __('Course updated successfully!'));
+        $this->toastNotify(__('Course updated successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->course->syncOnHubspot();
         $this->redirectToIndex();
@@ -100,7 +101,7 @@ class Manage extends Component
 
         $clonedCourse->push();
 
-        session()->flash('banner', __('Course cloned successfully!'));
+        $this->toastNotify(__('Course cloned successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }

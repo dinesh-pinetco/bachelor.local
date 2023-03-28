@@ -53,7 +53,7 @@ class Manage extends Component
 
         Mail::to($employee)->send(new EmployeeCreated($employee, $password));
 
-        session()->flash('banner', __('user created successfully!'));
+        $this->toastNotify(__('Employee created successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }
@@ -71,7 +71,8 @@ class Manage extends Component
 
         $this->user->save();
 
-        session()->flash('banner', __('user updated successfully!'));
+        $this->toastNotify(__('Employee updated successfully!'), __('Success'), TOAST_SUCCESS);
+
 
         $this->redirectToIndex();
     }

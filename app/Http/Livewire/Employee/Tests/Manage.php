@@ -65,7 +65,7 @@ class Manage extends Component
 
         $this->syncCourse($this->test);
 
-        session()->flash('banner', __('Test created successfully!'));
+        $this->toastNotify(__('Test created successfully!'), __('Success'), TOAST_SUCCESS);
 
         return redirect()->route('employee.tests.index');
     }

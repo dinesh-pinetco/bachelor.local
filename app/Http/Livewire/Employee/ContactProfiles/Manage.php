@@ -72,7 +72,7 @@ class Manage extends Component
             $this->contactProfile->updateProfilePhoto($this->photo);
         }
 
-        session()->flash('banner', __('Contact Profile created successfully!'));
+        $this->toastNotify(__('Contact Profile created successfully!'), __('Success'), TOAST_SUCCESS);
 
         return redirect()->route('employee.contact-profiles.index');
     }

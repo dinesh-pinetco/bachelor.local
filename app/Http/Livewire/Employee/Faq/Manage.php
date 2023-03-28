@@ -51,7 +51,7 @@ class Manage extends Component
 
         $this->syncCourse($this->faq);
 
-        session()->flash('banner', __('Faq created successfully!'));
+        $this->toastNotify(__('Faq created successfully!'), __('Success'), TOAST_SUCCESS);
 
         redirect()->route('employee.faq.index');
     }

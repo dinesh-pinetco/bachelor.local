@@ -286,22 +286,6 @@
                         @endif
 
                         <li>
-                            <x-jet-nav-link href="{{ route('faq.index') }}"
-                                            :active="urlContains('support')"
-                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                <div
-                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
-                                        <path
-                                            d="M2 5.33333L7.26 8.84C7.47911 8.98618 7.7366 9.06419 8 9.06419C8.2634 9.06419 8.52089 8.98618 8.74 8.84L14 5.33333M3.33333 12.6667H12.6667C13.0203 12.6667 13.3594 12.5262 13.6095 12.2761C13.8595 12.0261 14 11.687 14 11.3333V4.66666C14 4.31304 13.8595 3.9739 13.6095 3.72385C13.3594 3.4738 13.0203 3.33333 12.6667 3.33333H3.33333C2.97971 3.33333 2.64057 3.4738 2.39052 3.72385C2.14048 3.9739 2 4.31304 2 4.66666V11.3333C2 11.687 2.14048 12.0261 2.39052 12.2761C2.64057 12.5262 2.97971 12.6667 3.33333 12.6667Z"
-                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <span>{{ __('Support') }}</span>
-                            </x-jet-nav-link>
-                        </li>
-
-                        <li>
                             <x-jet-nav-link href="{{ route('update-password') }}"
                                             :active="urlContains('update-password')"
                                             class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
@@ -320,6 +304,24 @@
                     @endunlessrole
 
                     @role(ROLE_APPLICANT)
+                    <ul>
+                        <li>
+                            <x-jet-nav-link href="{{ route('faq.index') }}"
+                                            :active="urlContains('support')"
+                                            class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                                <div
+                                    class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
+                                    <svg viewBox="0 0 16 16" fill="none" class="w-5 h-5">
+                                        <path
+                                            d="M2 5.33333L7.26 8.84C7.47911 8.98618 7.7366 9.06419 8 9.06419C8.2634 9.06419 8.52089 8.98618 8.74 8.84L14 5.33333M3.33333 12.6667H12.6667C13.0203 12.6667 13.3594 12.5262 13.6095 12.2761C13.8595 12.0261 14 11.687 14 11.3333V4.66666C14 4.31304 13.8595 3.9739 13.6095 3.72385C13.3594 3.4738 13.0203 3.33333 12.6667 3.33333H3.33333C2.97971 3.33333 2.64057 3.4738 2.39052 3.72385C2.14048 3.9739 2 4.31304 2 4.66666V11.3333C2 11.687 2.14048 12.0261 2.39052 12.2761C2.64057 12.5262 2.97971 12.6667 3.33333 12.6667Z"
+                                            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <span>{{ __('Support') }}</span>
+                            </x-jet-nav-link>
+                        </li>
+                    </ul>
+
                     @if (!in_array(auth()->user()->application_status, [\App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_NAK, \App\Enums\ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT]))
                         <x-danger-button class=" mr-auto ml-4 mt-4"
                                          data-tippy-content="{{__('Cancle / Reject Applicantion')}}"

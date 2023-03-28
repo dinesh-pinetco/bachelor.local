@@ -147,7 +147,7 @@ class Manage extends Component
         $this->field->save();
         $this->saveOptions();
 
-        session()->flash('banner', __('Field created successfully!'));
+        $this->toastNotify(__('Field created successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }
@@ -174,7 +174,7 @@ class Manage extends Component
         $this->field->save();
         $this->saveOptions();
 
-        session()->flash('banner', __('Field updated successfully!'));
+        $this->toastNotify(__('Field updated successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }
@@ -185,7 +185,7 @@ class Manage extends Component
 
         $this->field->replicate()->push();
 
-        session()->flash('banner', __('Field cloned successfully!'));
+        $this->toastNotify(__('Field cloned successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }

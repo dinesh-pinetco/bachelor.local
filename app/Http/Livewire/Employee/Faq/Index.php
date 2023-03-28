@@ -23,6 +23,7 @@ class Index extends Component
     public function delete()
     {
         $this->deletedFaq->delete();
+        $this->toastNotify(__('Faq deleted successfully!'), __('Success'), TOAST_SUCCESS);
         $this->reset('show', 'deletedFaq');
         $this->render();
     }
