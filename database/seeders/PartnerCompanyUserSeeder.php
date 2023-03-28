@@ -114,7 +114,6 @@ class PartnerCompanyUserSeeder extends Seeder
     public static function testResultRetrievedOn($users)
     {
         foreach ($users as $user) {
-
             $pdfPath = sprintf('test-results/%s.pdf', Str::kebab(class_basename($user->id.' '.$user->full_name.' passed result')));
 
             UserConfiguration::updateOrCreate(['user_id' => $user->id], [

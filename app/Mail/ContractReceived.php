@@ -27,7 +27,7 @@ class ContractReceived extends Mailable
 
         $enrollCourse = $this->applicant->getValueByField('enroll_course');
 
-        $this->course = Course::where('id',$this->applicant->getEctsPointvalue('enroll_course'))->first();
+        $this->course = Course::where('id', $this->applicant->getEctsPointvalue('enroll_course'))->first();
     }
 
     public function build()

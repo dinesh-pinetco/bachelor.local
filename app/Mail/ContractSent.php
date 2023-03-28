@@ -24,7 +24,7 @@ class ContractSent extends Mailable
     {
         $this->applicant = $applicant;
 
-        $this->course = Course::where('id',$this->applicant->getEctsPointvalue('enroll_course'))->first();
+        $this->course = Course::where('id', $this->applicant->getEctsPointvalue('enroll_course'))->first();
     }
 
     public function build()

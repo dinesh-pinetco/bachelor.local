@@ -7,8 +7,6 @@ use App\Mail\ContractReceived;
 use App\Mail\ContractSent;
 use App\Models\Company;
 use App\Models\Contract;
-use App\Models\Field;
-use App\Models\FieldValue;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -34,7 +32,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->enrollCompany = Company::where('id',$this->applicant->getEctsPointvalue('enroll_company'))->first()?->name;
+        $this->enrollCompany = Company::where('id', $this->applicant->getEctsPointvalue('enroll_company'))->first()?->name;
 
         $this->contract = $this->applicant->contract ?? new Contract();
     }
