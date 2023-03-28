@@ -5,9 +5,11 @@ namespace Database\Seeders;
 use App\Enums\ApplicationStatus;
 use App\Models\Result;
 use App\Models\User;
+use App\Models\UserConfiguration;
 use App\Services\SyncUserValue;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class TestFailedUserSeeder extends Seeder
 {
@@ -79,6 +81,14 @@ class TestFailedUserSeeder extends Seeder
     public function testFailedConfirmed($users)
     {
         foreach ($users as $user) {
+
+            $pdfPath = sprintf('test-results/%s.pdf', Str::kebab(class_basename($user->id.' '.$user->full_name.' passed result')));
+
+            UserConfiguration::updateOrCreate(['user_id' => $user->id], [
+                'selection_test_result_failed_pdf_path' => $pdfPath,
+                'fail_pdf_created_at' => now(),
+            ]);
+
             $user->update(['application_status' => ApplicationStatus::TEST_FAILED_CONFIRM()]);
         }
     }
