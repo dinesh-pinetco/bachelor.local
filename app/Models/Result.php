@@ -26,8 +26,6 @@ class Result extends Model implements ContractsAuditable
     protected $casts = [
         'is_passed' => 'boolean',
         'passed_by_nak' => 'boolean',
-        'is_passed_mix' => 'boolean',
-        'is_passed_iqt' => 'boolean',
     ];
 
     public function test(): BelongsTo

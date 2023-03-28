@@ -213,6 +213,7 @@ class User extends Authenticatable implements ContractsAuditable
             $this->applicantPassedSelectionTest();
 
             $this->setMeta('test_completed_at', now());
+
             return;
         }
 
@@ -220,7 +221,6 @@ class User extends Authenticatable implements ContractsAuditable
         if (($updatedStatusResults->count() === $results->count())
             && ($firstCategoryResults->where('is_passed', true)->isEmpty()
                 || $secondCategoryResults->where('is_passed', true)->isEmpty())) {
-
             $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
             $this->save();
 

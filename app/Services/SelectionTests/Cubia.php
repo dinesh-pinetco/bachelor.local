@@ -22,8 +22,9 @@ class Cubia
         $this->user = $user;
     }
 
-    public function generateTestUrl($test = 'MIX', $wantToReset = false): string
+    public function generateTestUrl($test = self::MIX, $wantToReset = false): string
     {
+        $test = self::MIX == $test ? 'MIX' : 'IQT';
         $testUrl = '';
 
         if ($this->user->cubia_id) {
@@ -37,12 +38,13 @@ class Cubia
     public function fetchResult(): void
     {
         try {
-            $fileName = 'result-'.time().'.csv';
-            $url = 'https://secure.cubia.de/oasys/nordakademie/NA-'.Carbon::now()->format('m-Y').'.txt';
-            Storage::put($fileName, file_get_contents($url));
+            $fileName = 'result-1679999087.csv';
+//            $fileName = 'result-'.time().'.csv';
+//            $url = 'https://secure.cubia.de/oasys/nordakademie/NA-'.Carbon::now()->format('m-Y').'.txt';
+//            Storage::put($fileName, file_get_contents($url));
 
             Excel::import(new ResultImport(), $fileName);
-            Storage::delete($fileName);
+//            Storage::delete($fileName);
         } catch (Throwable $th) {
             //throw $th;
         }

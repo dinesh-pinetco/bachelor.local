@@ -31,8 +31,8 @@ class SelectionTestResultResource extends JsonResource
     private function appendCubiaDetail($data)
     {
         if ($this->isCubiaTest()) {
-            $meta_iqt = json_decode($this->meta_iqt);
-            $meta_mix = json_decode($this->meta_mix);
+            $meta_iqt = json_decode($this->meta);
+            $meta_mix = json_decode($this->meta);
 
             return array_merge($data, [
                 'result' => sprintf('%s / %s', data_get($meta_iqt, 3), data_get($meta_mix, 4)),

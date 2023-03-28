@@ -10,6 +10,6 @@ class TestRedirectController extends Controller
     {
         $this->authorize('perform', $test);
 
-        return redirect()->away($test->getTestLink(auth()->user(), request('type')));
+        return redirect()->away($test->getTestLink(auth()->user()));
     }
 }

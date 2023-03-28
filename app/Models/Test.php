@@ -123,7 +123,7 @@ class Test extends Model implements ContractsAuditable
         return $this->results()->myResults($user);
     }
 
-    public function getTestLink($user, $otherParameter = null)
+    public function getTestLink($user)
     {
         if (! in_array($user->application_status, [ApplicationStatus::PROFILE_INFORMATION_COMPLETED, ApplicationStatus::TEST_RESET])) {
             return null;
@@ -145,7 +145,7 @@ class Test extends Model implements ContractsAuditable
         }
 
         if ($this['type'] == self::TYPE_CUBIA) {
-            return (new Cubia($user))->generateTestUrl($otherParameter);
+            return (new Cubia($user))->generateTestUrl($this->course_id);
         }
 
         if ($this['type'] == self::TYPE_METEOR) {

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Course;
 use App\Models\Test;
+use App\Services\SelectionTests\Cubia;
 use Illuminate\Database\Seeder;
 
 class TestSeeder extends Seeder
@@ -20,13 +21,27 @@ class TestSeeder extends Seeder
         }
 
         Test::create([
-            'name' => 'Cubia',
+            'name' => 'Cubia: MIX',
             'type' => Test::TYPE_CUBIA,
             'description' => __('A final examination, annual, exam, final interview, or simply final, is a test given to students at the end of a course of study or training. Although the term can be used in the context of physical training, it most often occurs in the academic world.'),
             'duration' => '60.00',
             'is_required' => true,
             'is_active' => true,
-            'has_passing_limit' => false,
+            'has_passing_limit' => true,
+            'passing_limit' => 60,
+            'course_id' => Cubia::MIX,
+        ])->attachCourses(Course::pluck('id')->toArray());
+
+        Test::create([
+            'name' => 'Cubia: IQT',
+            'type' => Test::TYPE_CUBIA,
+            'description' => __('A final examination, annual, exam, final interview, or simply final, is a test given to students at the end of a course of study or training. Although the term can be used in the context of physical training, it most often occurs in the academic world.'),
+            'duration' => '60.00',
+            'is_required' => true,
+            'is_active' => true,
+            'has_passing_limit' => true,
+            'passing_limit' => 55,
+            'course_id' => Cubia::IQT,
         ])->attachCourses(Course::pluck('id')->toArray());
 
         Test::create([

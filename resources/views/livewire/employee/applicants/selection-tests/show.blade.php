@@ -34,17 +34,15 @@
 
                         @php
                             $result=$test->getResult($applicant)->first();
+                            $meta = json_decode($result->meta, true);
                         @endphp
 
                         @if ($test->type == \App\Models\Test::TYPE_MOODLE && $result->result)
                             <span>{{ $result->result }}</span>
                         @elseif($test->type == \App\Models\Test::TYPE_CUBIA && $result->result)
-                            <span>{{ $result->result }}</span>
-                            @if ($result->result_mix_link||$result->result_iqt_link)
-                                <span>(</span>
-                                @if ($result->result_mix_link)
-                                    <span>@lang('MIX'):</span>
-                                    <a href="{{ $result->result_mix_link }}" target="_blank" download
+                            <span>{{ data_get($meta, 0) }} - {{ data_get($meta, 1) }}</span>
+                            <span>
+                                    <a href="{{ $result->result }}" target="_blank" download
                                        class="w-6 lg:w-8 h-6 lg:h-8 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-full">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none"
@@ -53,22 +51,7 @@
                                                   d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
                                         </svg>
                                     </a>
-                                @endif
-
-                                @if ($result->result_iqt_link)
-                                    <span>@lang('IQT'):</span>
-                                    <a href="{{ $result->result_iqt_link }}" target="_blank" download
-                                       class="w-6 lg:w-8 h-6 lg:h-8 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-full">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
-                                        </svg>
-                                    </a>
-                                @endif
-                                <span>)</span>
-                            @endif
+                                </span>
                         @elseif($test->type == \App\Models\Test::TYPE_METEOR && $result->result)
                             <a href="{{ $result->result }}" target="_blank" download
                                class="w-6 lg:w-8 h-6 lg:h-8 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-full">

@@ -17,36 +17,18 @@ class ResultImport implements ToModel, WithCustomCsvSettings
         $row = array_values(array_filter($row));
         $index = count($row) - 2;
         $cubiaUserId = data_get($row, $index);
+        $testType = data_get($row, 2);
+
         $result = Result::where('status', Result::STATUS_STARTED)
             ->whereRelation('user', 'cubia_id', $cubiaUserId)
-            ->whereRelation('test', 'type', Test::TYPE_CUBIA)
+            ->whereHas('test', function ($q) use ($testType) {
+                $q->where('type', Test::TYPE_CUBIA)
+                    ->where('course_id', $testType == Cubia::MIX ? Cubia::MIX : Cubia::IQT);
+            })
             ->first();
 
         if ($result) {
-            $counter = 0;
-            foreach ($row as $key => $value) {
-                // TODO:Below Pass limit remove task provide by client. please check this task
-                // https://app.clickup.com/t/2zfvpva
-                if ($key > 2 && $value >= 0 && $row[2] == Cubia::MIX && $key < count($row) - 2) {
-                    $counter++;
-                } elseif ($key > 2 && $value >= 0 && $row[2] == Cubia::IQT && $key < count($row) - 2) {
-                    $counter++;
-                }
-            }
-
-            $isPassed = ($counter == (count($row) - 5)) ? true : false;
-
-            if ($result && $row[2] == Cubia::MIX) {
-                $result->update(['is_passed_mix' => $isPassed, 'result' => $row[0].'-'.$row[1], 'result_mix_link' => end($row), 'meta_mix' => $row]);
-            } elseif ($result && $row[2] == Cubia::IQT) {
-                $result->update(['is_passed_iqt' => $isPassed, 'result' => $row[0].'-'.$row[1], 'result_iqt_link' => end($row), 'meta_iqt' => $row]);
-            }
-
-            if ($result && ! is_null($result->result_mix_link) && ! is_null($result->result_iqt_link)) {
-                $isPassed = $result->is_passed_mix == true && $result->is_passed_iqt == true;
-
-                $result->updateTestResult($isPassed, $isPassed, $isPassed);
-            }
+            $result->updateTestResult(data_get($row, 2), end($row), json_encode($row));
         }
     }
 

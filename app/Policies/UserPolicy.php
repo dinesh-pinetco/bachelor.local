@@ -86,7 +86,7 @@ class UserPolicy
         return in_array($applicant->application_status, [
             ApplicationStatus::PROFILE_INFORMATION_COMPLETED,
             ApplicationStatus::TEST_TAKEN,
-            ApplicationStatus::TEST_RESET
+            ApplicationStatus::TEST_RESET,
         ]);
     }
 }
