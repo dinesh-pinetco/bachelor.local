@@ -223,20 +223,6 @@ class User extends Authenticatable implements ContractsAuditable
                 || $secondCategoryResults->where('is_passed', true)->isEmpty())) {
             $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
             $this->save();
-
-//            $failedResultsCount = $updatedStatusResults
-//                ->where('is_passed', false)
-//                ->where('failed_by_nak', true)
-//                ->count();
-//
-//            if ($totalTests == $failedResultsCount) {
-//                $this->applicantFailedSelectionTest();
-//
-//                return;
-//            } else {
-//                $this->application_status = \App\Enums\ApplicationStatus::TEST_FAILED;
-//                $this->save();
-//            }
         }
     }
 
