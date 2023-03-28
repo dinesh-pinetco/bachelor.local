@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Enums\ApplicationStatus;
 use App\Filters\UserFilters;
 use App\Jobs\ApplicantStatusUpdateToHubspotJob;
+use App\Mail\ContractPdfSend;
 use App\Mail\GovernmentStudySheetSubmit;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
 use App\Notifications\SelectionTestResult;
 use App\Traits\Mediable;
 use App\Traits\User\SelectionTestPdf;
+use App\Traits\User\ContractPdf;
 use App\Traits\User\UserRelations;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -40,7 +42,8 @@ class User extends Authenticatable implements ContractsAuditable
         HasRoles,
         UserRelations,
         SelectionTestPdf,
-        Metable;
+        Metable,
+        ContractPdf;
 
     public const GENDER_MALE = 'male';
 
@@ -264,6 +267,11 @@ class User extends Authenticatable implements ContractsAuditable
         if ($this->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id() && $this->government_form?->is_submit == true && $this->study_sheet?->is_submit == true) {
             Mail::to(config('mail.supporter.address'))->send(new GovernmentStudySheetSubmit($this));
             $this->application_status = ApplicationStatus::ENROLLMENT_ON;
+
+            $this->saveContractPdf();
+
+            Mail::to($this)->send(new ContractPdfSend($this));
+
             $this->save();
         }
     }

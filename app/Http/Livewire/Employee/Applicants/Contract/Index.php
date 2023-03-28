@@ -28,20 +28,13 @@ class Index extends Component
     protected $listeners = ['refreshData'];
 
     protected array $rules = [
-        'contract.send_date' => ['required', 'date', 'after_or_equal:today'],
-        'contract.receive_date' => ['nullable', 'date', 'after_or_equal:contract.send_date'],
+        'contract.receive_date' => ['required', 'date', 'after_or_equal:today'],
+        'contract.send_date' => ['nullable', 'date', 'after_or_equal:contract.receive_date'],
     ];
 
     public function mount()
     {
-        $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->with('values')->first()?->id;
-
-        $companyId = FieldValue::where('field_id', $this->partnerCompanyFieldId)
-        ->where('user_id', $this->applicant->id)
-        ->first()
-        ?->value;
-
-        $this->enrollCompany = Company::where('id', $companyId)->first()?->name;
+        $this->enrollCompany = Company::where('id',$this->applicant->getEctsPointvalue('enroll_company'))->first()?->name;
 
         $this->contract = $this->applicant->contract ?? new Contract();
     }
@@ -77,11 +70,11 @@ class Index extends Component
             $this->contract->save();
         }
 
-        if ($this->contract->send_date !== null && $this->contract->receive_date == null) {
-            $this->applicant->application_status = ApplicationStatus::CONTRACT_SENT_ON;
-            Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ContractSent($this->applicant));
-        } elseif ($this->contract->send_date !== null && $this->contract->receive_date !== null) {
+        if ($this->contract->receive_date !== null && $this->contract->send_date == null) {
             $this->applicant->application_status = ApplicationStatus::CONTRACT_RETURNED_ON;
+            Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ContractSent($this->applicant));
+        } elseif ($this->contract->receive_date !== null && $this->contract->send_date !== null) {
+            $this->applicant->application_status = ApplicationStatus::CONTRACT_SENT_ON;
             Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ContractReceived($this->applicant));
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Course;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,6 +14,8 @@ class ContractReceived extends Mailable
 
     public $applicant;
 
+    public $course;
+
     /**
      * Create a new message instance.
      *
@@ -21,11 +24,15 @@ class ContractReceived extends Mailable
     public function __construct($applicant)
     {
         $this->applicant = $applicant;
+
+        $enrollCourse = $this->applicant->getValueByField('enroll_course');
+
+        $this->course = Course::where('id',$this->applicant->getEctsPointvalue('enroll_course'))->first();
     }
 
     public function build()
     {
-        return $this->subject(__('Your contract has arrived').' | '.$this->applicant->courses->first()->name.' | NORDAKADEMIE')
+        return $this->subject(__('Your contract has arrived').' | '.$this->course->name.' | NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.contract-received', [
                 'name' => $this->applicant->full_name,

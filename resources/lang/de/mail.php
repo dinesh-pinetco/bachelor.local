@@ -102,6 +102,10 @@ return [
         'government-form-action' => 'Daten für das Statistische Landesamt',
     ],
 
+    'contract-pdf' => [
+        'paragraph1' => '<br> Laden Sie Ihren Vertrag aus dem Anhang herunter. </br>',
+    ],
+
     'greetings_1' => 'Anette Rostock',
     'greetings_2' => 'Firmenbetreuung',
     'greeting-message' => 'Mit besten Grüßen von der Elbe',

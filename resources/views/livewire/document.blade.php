@@ -15,10 +15,19 @@
         </div>
 
         <div class="relative flex-grow w-1/3 text-primary">
-            <div class="w-full">
+            <div class="w-full flex flex-wrap items-center justify-end md:justify-between">
                 <h3 class="ml-20 text-2xl md:ml-32 lg:ml-0 my-7 lg:my-10 md:text-3xl">
                     {{ __('Please upload your documents') }}</h3>
+                    @if(auth()->user()->hasRole(ROLE_APPLICANT))
+                        <a class="w-10 h-10 mb-5 md:my-0 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm" href="application/motivation">
+                            <svg  class="w-4 h-4 stroke-current text-white flex-shrink-0" width="25" height="25" viewBox="0 0 24 24" stroke-width="2.50" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentcolor">
+                                <path d="M21 12H3m0 0l8.5-8.5M3 12l8.5 8.5" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </a>
+                @endif
             </div>
+
+
 
             @foreach ($documents as $document)
                 <div class="mb-10 text-primary lg:mb-16">

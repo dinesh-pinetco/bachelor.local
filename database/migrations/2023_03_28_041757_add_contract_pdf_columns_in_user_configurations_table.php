@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('last_data_updated_at')->after('reject_marketplace_application_at')->nullable();
+        Schema::table('user_configurations', function (Blueprint $table) {
+            $table->string('contract_pdf_path', 2048)->nullable();
+            $table->date('contract_pdf_created_at')->nullable();
         });
     }
 
@@ -25,8 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->dropColumn('last_data_updated_at');
+        Schema::table('user_configurations', function (Blueprint $table) {
+            $table->dropColumn('contract_pdf_path');
+            $table->dropColumn('contract_pdf_created_at');
         });
     }
 };

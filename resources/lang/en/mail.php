@@ -101,6 +101,10 @@ return [
         'paragraph1' => ' The application of :name with the application ID :applicant_id is complete. The applicant can now be enrolled. ',
     ],
 
+    'contract-pdf' => [
+        'paragraph1' => '<br> Download your contract from the attachment. </br>',
+    ],
+
     'greetings_1' => 'Anette Rostock',
     'greetings_2' => 'Firmenbetreuung',
     'greeting-message' => 'With best regards from the Elbe',
