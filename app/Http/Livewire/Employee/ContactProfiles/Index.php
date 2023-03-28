@@ -23,6 +23,7 @@ class Index extends Component
     public function delete()
     {
         $this->deletedContactProfile->delete();
+        $this->toastNotify(__('Contact deleted successfully!'), __('Success'), TOAST_SUCCESS);
         $this->reset('show', 'deletedContactProfile');
         $this->render();
     }

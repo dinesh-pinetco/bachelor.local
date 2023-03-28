@@ -84,7 +84,7 @@ class Manage extends Component
         $this->group->can_add_more = (bool) $this->group->can_add_more;
         $this->group->save();
 
-        session()->flash('banner', __('Group created successfully!'));
+        $this->toastNotify(__('Group created successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }
@@ -103,7 +103,7 @@ class Manage extends Component
 
         $this->group->save();
 
-        session()->flash('banner', __('Group updated successfully!'));
+        $this->toastNotify(__('Group updated successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->redirectToIndex();
     }

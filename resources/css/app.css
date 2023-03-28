@@ -116,24 +116,6 @@ li > label, .multiple-dropdown-box > label {
     word-break: break-all;
 }
 
-.tippy-content {
-    @apply p-0;
-}
-
-.tippy-box[data-theme~='light'] {
-    @apply bg-primary text-sm text-white font-normal px-4 py-2;
-}
-
-.tippy-arrow {
-    @apply text-primary;
-}
-
-.tippy-box > .tooltip-inner {
-    max-width: 100%;
-    white-space: normal;
-    wordBreak: break-all;
-}
-
 .popover {
     max-width: none;
 }
@@ -155,4 +137,10 @@ li > label, .multiple-dropdown-box > label {
 }
 #myButton.active #loader{
     display: flex;
+}
+
+#download-result .tooltip-inner {
+    max-width: 300px;
+    white-space: normal;
+    word-break: break-all;
 }
