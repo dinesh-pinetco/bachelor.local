@@ -30,9 +30,19 @@ class Test extends Model implements ContractsAuditable
 
     const TYPE_METEOR = 'meteor';
 
+    const FIRST_CATEGORY = 'first';
+
+    const SECOND_CATEGORY = 'second';
+
     protected $fillable = ['name', 'description', 'type', 'duration', 'link', 'is_required', 'is_active', 'has_passing_limit'];
 
-    protected $casts = [];
+    public static function categories(): array
+    {
+        return [
+            self::FIRST_CATEGORY,
+            self::SECOND_CATEGORY,
+        ];
+    }
 
     public static function types(): array
     {

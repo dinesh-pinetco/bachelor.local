@@ -74,7 +74,7 @@ class PartnerCompanyUserSeeder extends Seeder
                     'user_id' => $user->id,
                     'status' => Result::STATUS_COMPLETED,
                     'is_passed' => true,
-                    'result' => rand(80,90),
+                    'result' => rand(80, 90),
                     'test_id' => $testId,
                 ]);
             }
@@ -194,7 +194,7 @@ class PartnerCompanyUserSeeder extends Seeder
 
     public static function appliedToCompany($users)
     {
-       foreach ($users as $user) {
+        foreach ($users as $user) {
             $user->companies()->create([
                 'user_id' => $user->id,
                 'company_id' => 1,
@@ -210,6 +210,6 @@ class PartnerCompanyUserSeeder extends Seeder
             $user->touch('show_application_on_marketplace_at');
 
             $user->update(['application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY()]);
-       }
+        }
     }
 }

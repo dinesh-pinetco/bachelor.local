@@ -37,10 +37,10 @@ class ManagementSheetPdf extends Pdf
             'street' => $this->user->study_sheet?->street,
             'zip' => $this->user->study_sheet?->zip,
             'place' => $this->user->study_sheet?->place,
-            'country' => $this->user->values->where('fields.key','country')->values('value')->first()->value,
-            'company' => Company::where('id',$this->user->values->where('fields.key', 'enroll_company')->value('value'))->get()->first(),
+            'country' => $this->user->values->where('fields.key', 'country')->values('value')->first()->value,
+            'company' => Company::where('id', $this->user->values->where('fields.key', 'enroll_company')->value('value'))->get()->first(),
             'secondary_language' => $this->user->study_sheet?->secondary_language == 'fr' ? 'Französisch' : 'Spanisch',
-            'company_address' =>Company::where('id',$this->user->values->where('fields.key', 'enroll_company')->value('value'))->get()->first()->meta,
+            'company_address' => Company::where('id', $this->user->values->where('fields.key', 'enroll_company')->value('value'))->get()->first()->meta,
         ];
     }
 }

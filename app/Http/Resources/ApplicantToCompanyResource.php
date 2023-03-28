@@ -24,7 +24,7 @@ class ApplicantToCompanyResource extends JsonResource
             'anonymisiert' => (bool) $this->getValueByIdentifier('is_anonymous'),
             'testlaufBestanden' => $this->hasExamPassed(),
             'barCode' => $this->testResultBarcode(),
-//            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
+            //            'bild' => $this->getValueByIdentifier('avatar') ? base64_encode(file_get_contents(Storage::url($this->getValueByIdentifier('avatar')))) : null,
             'bild' => $this->getValueByIdentifier('avatar') ? Storage::url($this->getValueByIdentifier('avatar')) : null,
             'person' => [
                 'vorname' => $this->getValueByIdentifier('first_name'),

@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Services\SyncUserValue;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class ContractedUserSeeder extends Seeder
 {
@@ -70,7 +69,6 @@ class ContractedUserSeeder extends Seeder
     public function submitStudySheet($users)
     {
         foreach ($users as $user) {
-
             \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/public/student-id-photo/sample-profile-picture.jpg'));
 
             $user->study_sheet()->save(StudySheet::factory()->create([
@@ -82,19 +80,19 @@ class ContractedUserSeeder extends Seeder
 
     public function submitGovernmentForm($users)
     {
-       foreach ($users as $user) {
+        foreach ($users as $user) {
             $user->government_form()->save(GovernmentForm::factory()->create([
                 'user_id' => $user->id,
                 'is_submit' => true,
             ]));
 
             $user->update(['application_status' => ApplicationStatus::ENROLLMENT_ON()]);
-       }
+        }
     }
 
     public function contract($users)
     {
-       foreach ($users as $user) {
+        foreach ($users as $user) {
             $user->contract()->create([
                 'user_id' => $user->id,
                 'send_date' => '2023-03-23',
@@ -105,6 +103,6 @@ class ContractedUserSeeder extends Seeder
             $user->application_status = ApplicationStatus::CONTRACT_RETURNED_ON;
 
             $user->save();
-       }
+        }
     }
 }
