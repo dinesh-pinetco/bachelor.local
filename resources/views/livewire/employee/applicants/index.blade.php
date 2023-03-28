@@ -194,7 +194,7 @@
                         </td>
                     @endif
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                        @can('forcePass', $applicant)
+                        @can('updateSelectionTestStatus', $applicant)
                             <span data-cy="test-pass-button-{{ $applicant->id }}" role="button"
                                   data-tippy-content="{{__('Pass Applicant')}}"
                                   class="text-darkgray hover:text-green-600 inline-block cursor-pointer"

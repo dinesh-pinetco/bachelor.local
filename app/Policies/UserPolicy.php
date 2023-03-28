@@ -81,8 +81,12 @@ class UserPolicy
         //
     }
 
-    public function forcePass(User $user, User $applicant)
+    public function updateSelectionTestStatus(User $user, User $applicant)
     {
-        return in_array($applicant->application_status, [ApplicationStatus::PROFILE_INFORMATION_COMPLETED, ApplicationStatus::TEST_FAILED, ApplicationStatus::TEST_RESET]);
+        return in_array($applicant->application_status, [
+            ApplicationStatus::PROFILE_INFORMATION_COMPLETED,
+            ApplicationStatus::TEST_TAKEN,
+            ApplicationStatus::TEST_RESET
+        ]);
     }
 }
