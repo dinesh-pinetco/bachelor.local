@@ -210,7 +210,9 @@ class User extends Authenticatable implements ContractsAuditable
         // Passed in exam
         if ($firstCategoryResults->where('is_passed', true)->count()
             && $secondCategoryResults->where('is_passed', true)->count()) {
-            $this->applicantPassedSelectionTest();
+            if(! $this->hasMeta('test_completed_at')){
+                $this->applicantPassedSelectionTest();
+            }
 
             $this->setMeta('test_completed_at', now());
 

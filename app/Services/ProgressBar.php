@@ -78,16 +78,25 @@ class ProgressBar
     public function selectionTestsProgress(): float|int
     {
         $courses = $this->applicant->courses->pluck('course_id')->toArray();
-        $points = Test::query()
-            ->matchCourses($courses)
-            ->count();
+        $points = count(Test::categories());
 
-        $achievedPoints = Test::query()
+        $firstCategoryPoint = Test::query()
+            ->where('category',Test::FIRST_CATEGORY)
             ->matchCourses($courses)
-            ->whereHas('results', function ($q) {
+            ->whereHas('results', function ($q){
                 $q->where('user_id', $this->applicant->id)
                     ->where('is_passed', true);
-            })->count();
+            })->exists();
+
+        $secondCategoryPoint = Test::query()
+            ->where('category',Test::SECOND_CATEGORY)
+            ->matchCourses($courses)
+            ->whereHas('results', function ($q){
+                $q->where('user_id', $this->applicant->id)
+                    ->where('is_passed', true);
+            })->exists();
+
+        $achievedPoints= (intval($firstCategoryPoint) + intval($secondCategoryPoint));
 
         return $this->calculateAverageProcess($points, $achievedPoints);
     }

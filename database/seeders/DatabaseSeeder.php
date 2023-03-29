@@ -37,11 +37,11 @@ class DatabaseSeeder extends Seeder
         $this->call(HealthInsuranceCompanySeeder::class);
         $this->call(ApplicantEnrolmentFieldSeeder::class);
 
-        if (app()->environment('local')) {
-            $this->call(PartnerCompanyUserSeeder::class);
-            $this->call(TestFailedUserSeeder::class);
-            $this->call(ContractedUserSeeder::class);
-        }
+        // if (app()->environment('local')) {
+        //     $this->call(PartnerCompanyUserSeeder::class);
+        //     $this->call(TestFailedUserSeeder::class);
+        //     $this->call(ContractedUserSeeder::class);
+        // }
 
         Artisan::call('company:sync');
     }

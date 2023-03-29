@@ -68,6 +68,7 @@ class TestSeeder extends Seeder
             'is_active' => true,
             'has_passing_limit' => true,
             'passing_limit' => data_get($test, 'passing_score'),
+            'category' => data_get($test, 'category'),
         ])->attachCourses(Course::pluck('id')->toArray());
     }
 }
