@@ -59,7 +59,19 @@
                     </div>
                 </div>
             @endif
+
+            @if (count($rejectedCompanies))
+                <div class="pl-12 my-6">
+                    <p class="font-bold">{{ __('The following companies have rejected the applicant') }}</p>
+                    <div class="pl-12 my-6 text-primary">
+                        @foreach ($rejectedCompanies as $contactedCompany)
+                            <li>{{ $contactedCompany->company->name }}</li>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
+
     @else
         <div class="lg:pl-40 2xl:pl-64 mt-5 md:mt-0">
             <p class="text-primary">{{ __("Applicant have not applied to the company.") }}</p>

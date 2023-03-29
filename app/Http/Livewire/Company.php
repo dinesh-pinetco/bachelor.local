@@ -15,6 +15,8 @@ class Company extends Component
 
     public $contactedCompanies = [];
 
+    public $rejectedCompanies = [];
+
     protected $listeners = ['refreshData'];
 
     public function mount()
@@ -23,6 +25,10 @@ class Company extends Component
 
         $this->contactedCompanies = $this->applicant->companies->filter(function ($company) {
             return $company->company_contacted_at;
+        });
+
+        $this->rejectedCompanies = $this->applicant->companies->filter(function ($company) {
+            return $company->company_rejected_at;
         });
     }
 
