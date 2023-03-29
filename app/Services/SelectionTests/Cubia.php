@@ -38,15 +38,15 @@ class Cubia
     public function fetchResult(): void
     {
         try {
-            $fileName = 'result-1679999087.csv';
-//            $fileName = 'result-'.time().'.csv';
-//            $url = 'https://secure.cubia.de/oasys/nordakademie/NA-'.Carbon::now()->format('m-Y').'.txt';
-//            Storage::put($fileName, file_get_contents($url));
+            // $fileName = 'result-1679999087.csv';
+           $fileName = 'result-'.time().'.csv';
+           $url = 'https://secure.cubia.de/oasys/nordakademie/NA-'.Carbon::now()->format('m-Y').'.txt';
+           Storage::put($fileName, file_get_contents($url));
 
             Excel::import(new ResultImport(), $fileName);
-//            Storage::delete($fileName);
+           Storage::delete($fileName);
         } catch (Throwable $th) {
-            //throw $th;
+            throw $th;
         }
     }
 }
