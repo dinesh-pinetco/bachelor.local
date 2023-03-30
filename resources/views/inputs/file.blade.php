@@ -3,7 +3,7 @@
         <div class="profile-img w-36 h-36 relative">
             <div class="w-full h-full rounded-full overflow-hidden">
                 <img class="w-full h-full object-cover object-center"
-                     src="{{ $fieldValue instanceof \Illuminate\Http\UploadedFile ? $fieldValue->temporaryUrl() : $fieldValue }}"
+                     src="{{ $fieldValue instanceof \Illuminate\Http\UploadedFile ? $fieldValue->temporaryUrl() : route('storage.url', ['path' => $fieldValue]) }}"
                      alt="{{ $field->label }}">
             </div>
             <a href="javascript:void(0);"

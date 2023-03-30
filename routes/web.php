@@ -10,6 +10,7 @@ use App\Http\Controllers\GovernmentFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SelectionTestController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\StudySheetController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestResultVerifyController;
@@ -76,3 +77,7 @@ Route::view('datenschutz', 'data_protection')->name('data_protection');
 Route::get('management-sheet-pdf/{user}', function (App\Models\User $user) {
     return (new \App\Pdf\ManagementSheetPdf($user))->render();
 });
+
+Route::get('files/{media}', [MediaController::class, 'show'])->middleware('auth:sanctum')->name('media.url');
+Route::get('storage/file', [MediaController::class, 'getStorageFile'])->middleware('auth:sanctum')->name('storage.url');
+

@@ -63,7 +63,7 @@ class StudySheet extends Model implements ContractsAuditable
     protected function studentIdCardPhotoUrl(): Attribute
     {
         return Attribute::get(function ($value, $attribute) {
-            return $attribute['student_id_card_photo'] ? Storage::url($attribute['student_id_card_photo']) : null;
+            return ! is_null($attribute['student_id_card_photo']) ? route('storage.url', ['path' => $attribute['student_id_card_photo']]) : null;
         });
     }
 
