@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateApplicationRejectionRequest;
-use App\Http\Resources\ApplicantToCompanyResource;
+use App\Http\Resources\ApplicationResource;
 use App\Models\User;
 
-class PartnerCompanyController extends Controller
+class ApplicationController extends Controller
 {
     public function index()
     {
@@ -27,14 +27,14 @@ class PartnerCompanyController extends Controller
             $users = $users->get();
         }
 
-        return ApplicantToCompanyResource::collection($users);
+        return ApplicationResource::collection($users);
     }
 
     public function show(User $user)
     {
         $user->load($this->loadRelationships());
 
-        return ApplicantToCompanyResource::make($user);
+        return ApplicationResource::make($user);
     }
 
     public function applicantRejection(CreateApplicationRejectionRequest $request, User $user)
@@ -43,7 +43,7 @@ class PartnerCompanyController extends Controller
 
         $user->load($this->loadRelationships());
 
-        return ApplicantToCompanyResource::make($user);
+        return ApplicationResource::make($user);
     }
 
     private function loadRelationships(): array
