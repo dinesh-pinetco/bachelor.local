@@ -217,25 +217,35 @@
                         </div>
                     @endforeach
                 </div>
-                <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
-                    <input id="email-content" type="hidden" name="mailContent">
-                    <trix-editor class="prose formatted-content"
-                                 id="trix-editor"
-                                 input="email-content"
-                                 wire:ignore
-                                 wire:key="competency_comment"
-                                 wire:model="mailContent"></trix-editor>
-                </div>
-                <x-jet-input-error for="mailContent"/>
+                    <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
+                        <input id="email-content" type="hidden" name="mailContent">
+                        <trix-editor class="prose formatted-content"
+                                     id="trix-editor"
+                                     input="email-content"
+                                     wire:ignore
+                                     wire:key="competency_comment"
+                                     wire:model="mailContent"></trix-editor>
+                    </div>
+                    <x-jet-input-error for="mailContent"/>
 
-                <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
-                    {{ __('Apply to Selected Company') }}
-                </x-primary-button>
-            @endif
+                    <div class="flex items-start space-x-2 mt-5">
+                        <input
+                            wire:model="is_see_test_results"
+                            type="checkbox"
+                            class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
+                        <span class="checkbox-label flex-grow">
+                            {{ __('Selected companies can see the test results') }}
+                        </span>
 
-            @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
-                <p class="text-primary">{{ __('You have applied to marketplace.') }}</p>
-            @endif
+                    </div>
+                    <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
+                        {{ __('Apply to Selected Company') }}
+                    </x-primary-button>
+                @endif
+
+                @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
+                    <p class="text-primary">{{ __('You have applied to marketplace.') }}</p>
+                @endif
 
         </div>
     </div>

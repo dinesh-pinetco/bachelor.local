@@ -6,7 +6,6 @@ use App\Models\Field;
 use App\Models\Nationality;
 use App\Models\Tab;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class ApplicationResource extends JsonResource
 {
@@ -46,8 +45,8 @@ class ApplicationResource extends JsonResource
                 'martkplatzfreigabe_am' => $this->show_application_on_marketplace_at,
                 'datenfreigabe' => true, // Application allowed all companies to see the test results of him if true
                 'studiengaengeIds' => [
-                    'studiengangId' => 'sannaId'
-                ] // selected courses
+                    'studiengangId' => 'sannaId',
+                ], // selected courses
             ],
 
             'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),

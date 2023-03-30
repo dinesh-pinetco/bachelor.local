@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('industries', function (Blueprint $table) {
             $table->id();
             $table->string('sana_id');
-            $table->string('name')->nullable();
-            $table->string('zip_code')->nullable();
-            $table->json('meta')->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('industries');
     }
 };

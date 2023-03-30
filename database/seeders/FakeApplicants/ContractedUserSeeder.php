@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\FakeApplicants;
 
 use App\Enums\ApplicationStatus;
 use App\Models\GovernmentForm;

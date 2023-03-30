@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StudyProgramSeeder::class);
         $this->call(FinalExamSeeder::class);
         $this->call(NationalitySeeder::class);
+        $this->call(IndustrySeeder::class);
         $this->call(EntranceQualificationSeeder::class);
         $this->call(HealthInsuranceCompanySeeder::class);
         $this->call(ApplicantEnrolmentFieldSeeder::class);

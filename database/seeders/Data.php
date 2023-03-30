@@ -233,22 +233,6 @@ class Data
                                 'type' => FieldType::FIELD_CHECKBOX(),
                                 'label' => '',
                                 'placeholder' => null,
-                                'key' => 'is_anonymous',
-                                'sort_order' => 7,
-                                'is_active' => true,
-                                'is_required' => false,
-                                'meta_data' => [],
-                                'options' => [
-                                    [
-                                        'key' => '1',
-                                        'value' => 'anonymisiert',
-                                    ],
-                                ],
-                            ],
-                            [
-                                'type' => FieldType::FIELD_CHECKBOX(),
-                                'label' => '',
-                                'placeholder' => null,
                                 'key' => 'privacy_policy',
                                 'sort_order' => 6,
                                 'is_active' => 1,
@@ -336,30 +320,10 @@ class Data
                                 'placeholder' => __('Select Industry'),
                                 'key' => 'industry',
                                 'sort_order' => 2,
+                                'related_option_table' => 'industries',
                                 'is_active' => 1,
                                 'is_required' => 1,
-                                'options' => [
-                                    [
-                                        'key' => 'nader_group',
-                                        'value' => 'Nader Group',
-                                    ],
-                                    [
-                                        'key' => 'zemlak_hills',
-                                        'value' => 'Zemlak-Hills',
-                                    ],
-                                    [
-                                        'key' => 'hamill_vandervort',
-                                        'value' => 'Hamill-Vandervort',
-                                    ],
-                                    [
-                                        'key' => 'stiedemann_lehner',
-                                        'value' => 'Stiedemann-Lehner',
-                                    ],
-                                    [
-                                        'key' => 'collier_roob_and_hudson',
-                                        'value' => 'Collier, Roob and Hudsont',
-                                    ],
-                                ],
+                                'options' => [],
                                 'meta_data' => [],
                             ],
                         ],

@@ -10,13 +10,13 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sanna_id',
+        'sana_id',
         'name',
     ];
 
     public static function findFromSannaId(mixed $unternehmenId)
     {
-        return self::where('sanna_id', $unternehmenId)->first();
+        return self::where('sana_id', $unternehmenId)->first();
     }
 
     public function contacts()

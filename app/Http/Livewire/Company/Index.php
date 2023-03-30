@@ -17,6 +17,8 @@ class Index extends Component
 
     public $mailContent = null;
 
+    public $is_see_test_results = false;
+
     public $search = null;
 
     public $industry = null;
@@ -50,6 +52,7 @@ class Index extends Component
         $this->user = auth()->user();
 
         $this->mailContent = $this->user?->companies()->first()?->mail_content;
+        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results;
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
@@ -181,6 +184,7 @@ class Index extends Component
                 'company_id' => $companyId,
             ], [
                 'mail_content' => $this->mailContent,
+                'is_see_test_results' => $this->is_see_test_results,
             ]);
         }
 
