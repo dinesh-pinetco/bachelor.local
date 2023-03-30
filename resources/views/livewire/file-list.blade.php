@@ -12,7 +12,7 @@
                 </label>
             </div>
         @endif
-        <a href="{{ $media->url }}" target="_blank" class="block w-full truncate font-bold">{{ $media->name }}</a>
+        <a href="{{ route('media.url', $media) }}"  target="_blank" class="block w-full truncate font-bold">{{ $media->name }}</a>
     </div>
     <div x-data="{ buttonDisabled: false }">
     <button x-on:click="buttonDisabled = true" x-bind:disabled="buttonDisabled" @if ($isEdit) wire:click.prevent="delete" @endif type="button"
