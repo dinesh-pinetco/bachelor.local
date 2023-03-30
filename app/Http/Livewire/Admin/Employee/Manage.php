@@ -73,7 +73,6 @@ class Manage extends Component
 
         $this->toastNotify(__('Employee updated successfully!'), __('Success'), TOAST_SUCCESS);
 
-
         $this->redirectToIndex();
     }
 }

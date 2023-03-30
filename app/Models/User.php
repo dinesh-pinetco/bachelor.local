@@ -208,11 +208,10 @@ class User extends Authenticatable implements ContractsAuditable
             ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED]);
 
         // Passed in exam
-        if ($firstCategoryResults->where('is_passed', true)->count()
-            && $secondCategoryResults->where('is_passed', true)->count()) {
-            if(! $this->hasMeta('test_completed_at')){
-                $this->applicantPassedSelectionTest();
-            }
+        if (($updatedStatusResults->count() === $results->count())
+            && ($firstCategoryResults->where('is_passed', true)->count()
+                && $secondCategoryResults->where('is_passed', true)->count()) && ! $this->hasMeta('test_completed_at')) {
+            $this->applicantPassedSelectionTest();
 
             $this->setMeta('test_completed_at', now());
 

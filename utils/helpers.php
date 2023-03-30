@@ -83,3 +83,21 @@ function setBoolValueForAPI($value)
 {
     return $value == 'true' ? 1 : 0;
 }
+
+function number_format_locale($number, $decimals = 2, $locale = 'en')
+{
+    $locales = [
+        'de' => [
+            'decimal_point' => ',',
+            'thousands_sep' => '.',
+        ],
+        'en' => [
+            'decimal_point' => '.',
+            'thousands_sep' => ',',
+        ],
+    ];
+
+    $locale = $locales[$locale];
+
+    return number_format($number, $decimals, $locale['decimal_point'], $locale['thousands_sep']);
+}

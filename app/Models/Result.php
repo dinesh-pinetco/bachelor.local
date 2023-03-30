@@ -48,7 +48,7 @@ class Result extends Model implements ContractsAuditable
     public function updateTestResult($grade, $result, $meta)
     {
         if ($this->test->has_passing_limit) {
-            $is_passed = $grade >= $this->test->passing_limit;
+            $is_passed = intval(number_format_locale(floatval($grade), '2')) >= $this->test->passing_limit;
 
             $this->update([
                 'status' => $is_passed ? self::STATUS_COMPLETED : self::STATUS_FAILED,

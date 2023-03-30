@@ -81,22 +81,22 @@ class ProgressBar
         $points = count(Test::categories());
 
         $firstCategoryPoint = Test::query()
-            ->where('category',Test::FIRST_CATEGORY)
+            ->where('category', Test::FIRST_CATEGORY)
             ->matchCourses($courses)
-            ->whereHas('results', function ($q){
+            ->whereHas('results', function ($q) {
                 $q->where('user_id', $this->applicant->id)
                     ->where('is_passed', true);
             })->exists();
 
         $secondCategoryPoint = Test::query()
-            ->where('category',Test::SECOND_CATEGORY)
+            ->where('category', Test::SECOND_CATEGORY)
             ->matchCourses($courses)
-            ->whereHas('results', function ($q){
+            ->whereHas('results', function ($q) {
                 $q->where('user_id', $this->applicant->id)
                     ->where('is_passed', true);
             })->exists();
 
-        $achievedPoints= (intval($firstCategoryPoint) + intval($secondCategoryPoint));
+        $achievedPoints = (intval($firstCategoryPoint) + intval($secondCategoryPoint));
 
         return $this->calculateAverageProcess($points, $achievedPoints);
     }

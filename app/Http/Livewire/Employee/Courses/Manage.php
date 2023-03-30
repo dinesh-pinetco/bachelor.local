@@ -71,7 +71,6 @@ class Manage extends Component
 
         $this->toastNotify(__('Course created successfully!'), __('Success'), TOAST_SUCCESS);
 
-
         $this->redirectToIndex();
     }
 
