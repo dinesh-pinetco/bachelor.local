@@ -8,7 +8,7 @@ use App\Services\SelectionTests\Cubia;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
-class ResultImport implements ToModel, WithCustomCsvSettings
+class CubiaResultImport implements ToModel, WithCustomCsvSettings
 {
     protected $delimiter;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\FakeApplicants;
+namespace Database\Seeders;
 
 use App\Enums\ApplicationStatus;
 use App\Models\GovernmentForm;
@@ -10,7 +10,7 @@ use App\Services\SyncUserValue;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class ContractedUserSeeder extends Seeder
+class _ContractedUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -27,23 +27,23 @@ class ContractedUserSeeder extends Seeder
             });
         });
 
-        PartnerCompanyUserSeeder::submitProfile($users);
+        _PartnerCompanyUserSeeder::submitProfile($users);
 
-        PartnerCompanyUserSeeder::selectionTestPassed($users);
+        _PartnerCompanyUserSeeder::selectionTestPassed($users);
 
-        PartnerCompanyUserSeeder::testResultRetrievedOn($users);
+        _PartnerCompanyUserSeeder::testResultRetrievedOn($users);
 
-        PartnerCompanyUserSeeder::industriesFilled($users);
+        _PartnerCompanyUserSeeder::industriesFilled($users);
 
-        PartnerCompanyUserSeeder::motivationFilled($users);
+        _PartnerCompanyUserSeeder::motivationFilled($users);
 
-        PartnerCompanyUserSeeder::documentFilled($users);
+        _PartnerCompanyUserSeeder::documentFilled($users);
 
-        PartnerCompanyUserSeeder::personalDataCompleted($users);
+        _PartnerCompanyUserSeeder::personalDataCompleted($users);
 
-        PartnerCompanyUserSeeder::directApplyToCompany($users);
+        _PartnerCompanyUserSeeder::directApplyToCompany($users);
 
-        PartnerCompanyUserSeeder::appliedToCompany($users);
+        _PartnerCompanyUserSeeder::appliedToCompany($users);
 
         $this->enrollUser($users);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\FakeApplicants;
+namespace Database\Seeders;
 
 use App\Enums\ApplicationStatus;
 use App\Models\Result;
@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class TestFailedUserSeeder extends Seeder
+class _TestFailedUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -28,7 +28,7 @@ class TestFailedUserSeeder extends Seeder
             });
         });
 
-        PartnerCompanyuserSeeder::submitProfile($users);
+        _PartnerCompanyUserSeeder::submitProfile($users);
 
         $this->selectionTestFailed($users);
 

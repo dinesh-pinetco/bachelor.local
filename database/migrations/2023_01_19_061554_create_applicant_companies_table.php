@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('company_id');
             $table->longText('mail_content')->nullable();
             $table->timestamp('company_contacted_at')->nullable();
+            $table->boolean('is_see_test_results')->default(false);
             $table->timestamp('hired_at')->nullable();
             $table->timestamps();
         });

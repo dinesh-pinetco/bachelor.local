@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Services\SelectionTests\Cubia;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SelectionTestResultResource extends JsonResource
@@ -15,9 +16,10 @@ class SelectionTestResultResource extends JsonResource
     public function toArray($request)
     {
         $data = [
+            'id' => $this->test->id,
             'name' => $this->test->name,
-            'is_passed' => $this->is_passed,
-            'result' => $this->result,
+            'ergebnis' => $this->result,
+            'bestanden' => $this->is_passed,
             'zeitVon' => $this->started_at,
             'zeitBis' => $this->completed_at,
         ];
@@ -31,14 +33,23 @@ class SelectionTestResultResource extends JsonResource
     private function appendCubiaDetail($data)
     {
         if ($this->isCubiaTest()) {
-            $meta_iqt = json_decode($this->meta);
-            $meta_mix = json_decode($this->meta);
+            $meta_mix = [];
+            $meta_iqt = [];
+            $ergebnis = null;
+
+            if ($this->course_id == Cubia::MIX) {
+                $meta_mix = $this->meta;
+                $ergebnis = data_get($meta_mix, 4);
+            } else {
+                $meta_iqt = $this->meta;
+                $ergebnis = data_get($meta_iqt, 3);
+            }
 
             return array_merge($data, [
-                'result' => sprintf('%s / %s', data_get($meta_iqt, 3), data_get($meta_mix, 4)),
-                'tan' => $this->result,
-                'result_mix_link' => $this->when($this->is_passed_mix, $this->result_mix_link),
-                'result_iqt_link' => $this->when($this->is_passed_iqt, $this->result_iqt_link),
+                'ergebnis' => $ergebnis,
+                'tan' => sprintf('%s - %s', data_get($this->meta, 0), data_get($this->meta, 1)),
+                'ergebnis_link' => $this->result,
+
                 'bindungMix' => data_get($meta_mix, 3),
                 'leistungMix' => data_get($meta_mix, 4),
                 'machtMix' => data_get($meta_mix, 5),
@@ -58,10 +69,8 @@ class SelectionTestResultResource extends JsonResource
     private function appendMeteoDetail(array $data)
     {
         if ($this->isMeteoTest()) {
-            $meta = json_decode($this->meta);
-
             return $data + [
-                'typenindikator' => data_get($meta, 'viq-3.full'),
+                'typenindikator' => data_get($this->meta, 'viq-3.full'),
             ];
         }
 

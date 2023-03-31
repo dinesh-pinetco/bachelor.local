@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Course;
 use App\Models\Field;
 use App\Models\Nationality;
 use App\Models\Tab;
@@ -23,8 +24,8 @@ class ApplicationResource extends JsonResource
             'anonymisiert' => (bool) $this->getValueByIdentifier('is_anonymous'),
             'testlaufBestanden' => $this->hasExamPassed(),
             'bild' => $this->getValueByIdentifier('avatar')
-                    ? base64_encode(file_get_contents(route('storage.url', ['path' => $this->getValueByIdentifier('avatar')])))
-                    : null,
+                ? base64_encode(file_get_contents(route('storage.url', ['path' => $this->getValueByIdentifier('avatar')])))
+                : null,
             'person' => [
                 'vorname' => $this->getValueByIdentifier('first_name'),
                 'nachname' => $this->getValueByIdentifier('last_name'),
@@ -43,16 +44,19 @@ class ApplicationResource extends JsonResource
             ],
             'marktplatz' => [
                 'martkplatzfreigabe_am' => $this->show_application_on_marketplace_at,
-                'datenfreigabe' => true, // Application allowed all companies to see the test results of him if true
-                'studiengaengeIds' => [
-                    'studiengangId' => 'sannaId',
-                ], // selected courses
+                'datenfreigabe' => $this->show_test_result_on_marketplace,
+                'studiengaengeIds' => $this->selectedCourses(),
+                'tags' => [],
+                'ort' => $this->getValueByIdentifier('location'),
+                'branche' => ApplicantIndustryResource::collection($this->industries()),
+                'studienbeginn' => $this->desiredBeginning->course_start_date,
+                'motivationschreiben' => $this->marketplace_motivation_text,
+                'dokumente' => ApplicantDocumentResource::collection($this->documents),
             ],
-
-            'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
-            'documents' => ApplicantDocumentResource::collection($this->documents),
+            'testergebnisse' => SelectionTestResultResource::collection($this->results),
             'bewerbungen' => ApplicantCompanyResource::collection($this->companies),
-            'selection-tests' => SelectionTestResultResource::collection($this->results),
+
+            //            'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
         ];
     }
 
@@ -61,7 +65,7 @@ class ApplicationResource extends JsonResource
         $fieldValue = $this->user->values->filter(function ($item) use ($identifier) {
             return $item->fields->key == $identifier;
         })->first();
-        $value = $fieldValue == null ? '' : $fieldValue->value;
+        $value = $fieldValue ? $fieldValue->value : null;
         if ($identifier == 'nationality_id') {
             return Nationality::where('id', $value)->value('name');
         }
@@ -124,5 +128,13 @@ class ApplicationResource extends JsonResource
         return collect($this->values)
             ->whereIn('field_id', Field::where('tab_id', Tab::where('slug', $string)->value('id'))->pluck('id'))
             ->values();
+    }
+
+    private function selectedCourses()
+    {
+        return Course::whereIn('id', $this->courses->pluck('course_id'))
+            ->pluck('sana_id')->map(function ($id) {
+                return ['studiengangId' => $id];
+            })->toArray();
     }
 }

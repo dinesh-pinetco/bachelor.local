@@ -104,6 +104,20 @@ class User extends Authenticatable implements ContractsAuditable
         });
     }
 
+    protected function showTestResultOnMarketplace(): Attribute
+    {
+        return Attribute::get(function ($value, $attributes) {
+            return $this->companies()->value('is_see_test_results');
+        });
+    }
+
+    protected function marketplaceMotivationText(): Attribute
+    {
+        return Attribute::get(function ($value, $attributes) {
+            return $this->companies()->value('mail_content');
+        });
+    }
+
     protected function applicationStatus(): Attribute
     {
         return Attribute::set(function ($value, $attributes) {
@@ -289,5 +303,11 @@ class User extends Authenticatable implements ContractsAuditable
         return base64_encode(\QrCode::format('svg')
             ->size(200)
             ->generate(route('applicant.test-result', ['hash' => base64_encode($this->email)])));
+    }
+
+    public function industries()
+    {
+        return Industry::whereIn('id', json_decode($this->values()->where('field_id', Field::where('key', 'industry')->value('id'))->value('value')))
+            ->get();
     }
 }

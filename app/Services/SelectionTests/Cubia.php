@@ -2,7 +2,7 @@
 
 namespace App\Services\SelectionTests;
 
-use App\Imports\ResultImport;
+use App\Imports\CubiaResultImport;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -43,7 +43,7 @@ class Cubia
             $url = 'https://secure.cubia.de/oasys/nordakademie/NA-'.Carbon::now()->format('m-Y').'.txt';
             Storage::put($fileName, file_get_contents($url));
 
-            Excel::import(new ResultImport(), $fileName);
+            Excel::import(new CubiaResultImport(), $fileName);
             Storage::delete($fileName);
         } catch (Throwable $th) {
             throw $th;

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ApplicantDocumentResource extends JsonResource
+class ApplicantIndustryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,9 @@ class ApplicantDocumentResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->tag,
-            'file' => base64_encode(file_get_contents(route('storage.url', ['path' => $this->url]))),
+            'id' => $this->id,
+            'sANNA_id' => $this->sana_id,
+            'name' => $this->name,
         ];
     }
 }
