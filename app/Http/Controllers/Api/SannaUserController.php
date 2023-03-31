@@ -123,11 +123,11 @@ class SannaUserController extends Controller
     public function userSync(Request $request): JsonResponse
     {
         $request->validate([
-            'applicant_id' => 'required|exists:users,id',
+            'bewerberId' => 'required|exists:users,id',
         ]);
 
         UserConfiguration::updateOrCreate(
-            ['user_id' => $request->applicant_id],
+            ['user_id' => $request->bewerberId],
             ['is_synced_to_sanna' => true]);
 
         return response()->json(['message' => __('User sync successfully.')]);
