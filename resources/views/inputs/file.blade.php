@@ -23,9 +23,6 @@
             <label
                 class="w-44 flex flex-col items-center p-2 bg-primary text-white rounded-sm cursor-pointer hover:bg-opacity-90">
                 <span class="text-base leading-normal">{{ __('Select a file') }}</span>
-                @if (! $field->is_required)
-                    <span class="text-xs text-darkgray">{{ __("(Optional)") }}</span>
-                @endif
                 <input wire:model="fieldValue" type="file" name="photo" id="{{ $field->id }}"
                     {{ $isEdit ? '' : 'disabled' }} class="hidden" accept="image/jpeg, image/jpg, image/png"
                     required="{{ $field->required() }}">
