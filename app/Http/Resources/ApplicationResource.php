@@ -72,9 +72,9 @@ class ApplicationResource extends JsonResource
 
         if ($identifier == 'gender') {
             $genders = [
-                'male' => 1,
-                'female' => 2,
-                'other' => 3,
+                'mr' => 1,
+                'ms' => 2,
+                'mrs' => 3,
             ];
 
             return data_get($genders, $value);
