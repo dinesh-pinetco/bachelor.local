@@ -36,7 +36,7 @@ class SannaUserResource extends JsonResource
                 'typ' => 1,
                 'e_mail' => $this->getValueByIdentifier('email'),
             ],
-            'daten_statistisches_landesamt' => ! $this->government_form ? [] : [
+            'daten_statistisches_landesamt' => !$this->government_form ? [] : [
                 'staatsangehoerigkeit_1' => $this->getValue($this->government_form->country),
                 'staatsangehoerigkeit_2' => $this->getValue($this->government_form->second_country),
 
@@ -96,19 +96,24 @@ class SannaUserResource extends JsonResource
                     ? base64_encode(file_get_contents(route('storage.url', ['path' => $this->getValueByIdentifier('avatar')])))
                     : null),
             'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
-            'datenschutzerklaerung_datenweitergabe_medienlieferanten' => filter_var($this->study_sheet?->privacyPolicy, FILTER_VALIDATE_BOOLEAN),
-            //            'ratenzahlung'                                            => filter_var($this->study_sheet->payment, FILTER_VALIDATE_BOOLEAN),
+            'datenschutzerklaerung_alumni' => filter_var($this->getValueByIdentifier('terms_and_condition'), FILTER_VALIDATE_BOOLEAN),
             'geburtsland' => $this->getValueByIdentifier('nationality_id'),
             'studiengangId' => $this->courses()->first()->course->sana_id,
-            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
-            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
             'krankenversicherung' => [
                 'art_der_krankenversicherung' => $this->study_sheet?->health_insurance_type == '1' ? 'gesetzlich' : 'privat',
                 'krankenversichertennummer' => $this->study_sheet?->health_insurance_number,
                 'krankenversicherung' => $this->study_sheet?->health_insurance_companies?->sana_id,
             ],
-            'verwaltungsbogen' => $this->study_sheet?->secondary_language,
-            'companies' => ApplicantCompanyResource::collection($this->whenLoaded('companies')),
+            'firmaId' => $this->getValueByIdentifier('enroll_company'),
+            'betreuerId' => $this->getValueByIdentifier('enroll_company_contact'),
+            'fremdsprache' => $this->study_sheet?->secondary_language,
+l
+//            'datenschutzerklaerung_datenweitergabe_medienlieferanten' => filter_var($this->study_sheet?->privacyPolicy, FILTER_VALIDATE_BOOLEAN),
+            //            'ratenzahlung'                                            => filter_var($this->study_sheet->payment, FILTER_VALIDATE_BOOLEAN),
+//            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
+//            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
+//            'verwaltungsbogen' => $this->study_sheet?->secondary_language,
+//            'companies' => ApplicantCompanyResource::collection($this->whenLoaded('companies')),
         ];
     }
 
