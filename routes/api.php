@@ -24,8 +24,8 @@ Route::post('platform/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
     Route::get('/platform/sanna-users', [SannaUserController::class, 'index']);
-    Route::get('sanna-users/{user}', [SannaUserController::class, 'show']);
-    Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
+    Route::get('/platform/sanna-users/{user}', [SannaUserController::class, 'show']);
+    Route::post('/platform/sanna-sync', [SannaUserController::class, 'userSync']);
 
     Route::get('/platform/firmenportal/bewerber', [ApplicationController::class, 'index']);
     Route::get('/platform/firmenportal/bewerber/{user}', [ApplicationController::class, 'show']);
