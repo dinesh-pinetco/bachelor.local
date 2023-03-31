@@ -36,6 +36,11 @@
                 <h6 class="text-2xl md:text-3xl font-medium text-primary {{ $isProfile ? '' : 'ml-20 md:ml-32 lg:ml-0 my-7 lg:my-10' }}">
                     {{ __($tab->description) }}
                 </h6>
+                @if($isProfile && auth()->user()->hasRole(ROLE_APPLICANT))
+                <p class="text-xl md:text-xl text-primary">
+                    {{ __("Please fill out mandatory fields marked with a *") }}
+                </p>
+                @endif
                 <div class="flex items-center space-x-4 flex-shrink-0">
                     @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && $isEnrolled)
                     <div class="inline-flex items-center gap-2 text-green-500 text-sm mt-4 md:mt-0">
@@ -74,6 +79,11 @@
                             </a>
                         </div>
                         @else
+                        <div>
+                            <a class="text-primary" href="{{ route('companies.index') }}">
+                               {{ __("Skip") }}
+                            </a>
+                        </div>
                         <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm" href="motivation">
                             <svg class="w-4 h-4 stroke-current text-white flex-shrink-0" width="25" height="25" viewBox="0 0 24 24" stroke-width="2.50" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentcolor">
                                 <path d="M3 12h18m0 0l-8.5-8.5M21 12l-8.5 8.5" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"></path>

@@ -9,15 +9,14 @@
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
             @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED && is_null(auth()->user()->show_application_on_marketplace_at))
                 <p>
-                    {{ __('You can actively apply to selected companies and/or be listed on the applicant marketplace. If you would like to use both options, first click on "Apply directly to companies".') }}
+                    {{ __("You've almost made it, now all you have to do is choose one or more partner companies where you would like to apply for a position as a dual student.") }}
+                </p>
+                <p class="mt-4">
+                    {{ __("You can also unlock yourself for our applicant marketplace. This will make you visible to ALL companies, so that they can approach you if necessary (no guarantee, so make sure to apply yourself):") }}
                 </p>
                 <div>
                     <x-primary-button type="button" wire:click="selectCompany" class="mr-2">
                         {{ __('Apply directly to selected company') }}
-                    </x-primary-button>
-
-                    <x-primary-button type="button" wire:click="directShowProfileOnMarketPlace">
-                        {{ __('Show my profile directly on marketplace') }}
                     </x-primary-button>
                 </div>
             @endif
@@ -41,6 +40,16 @@
                                                  wire:key="competency_comment"></trix-editor>
                                 </div>
                                 <x-jet-input-error for="mailContent"/>
+                                <div class="flex items-start space-x-2 mt-5">
+                                    <input
+                                        wire:model="is_see_test_results"
+                                        type="checkbox"
+                                        class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
+                                    <span class="checkbox-label flex-grow">
+                                        {{ __('Selected companies can see the test results') }}
+                                    </span>
+
+                                </div>
                                 <x-primary-button type="button" @click="applyToSelectedCompany()">
                                     {{ __('Apply to Selected Company') }}
                                 </x-primary-button>

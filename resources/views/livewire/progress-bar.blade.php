@@ -41,7 +41,13 @@
                         <img class="h-16 w-16" src="{{ asset('images/icon/congratulation.png') }}" alt="congratulations">
                     </p>
                     <h4 class="text-center text-darkgray text-sm sm:text-base">
-                        {{ __('Congratulations! You have completed all steps of your application. Do you want to transfer your data to the company portal to increase your chances?') }}
+                        {{ __('Congratulations! You have entered all data in the application process.') }}
+                    </h4>
+                    <h4 class="text-center text-darkgray text-sm sm:text-base">
+                        {{ __('In the next step you can select and mark the companies you want to apply to.') }}
+                    </h4>
+                    <h4 class="text-center text-darkgray text-sm sm:text-base">
+                        {{ __('You can also activate your data for all our partner companies to view, as this increases your chances of a dual study place even further.') }}
                     </h4>
                 </div>
             </div>

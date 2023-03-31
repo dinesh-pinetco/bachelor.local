@@ -332,7 +332,7 @@ class Data
             ],
             [
                 'name' => __('Motivation'),
-                'description' => 'Erzählen Sie etwas über sich',
+                'description' => 'Tell me something about you.',
                 'slug' => 'motivation',
                 'icon' => 'motivation',
                 'sort_order' => 3,

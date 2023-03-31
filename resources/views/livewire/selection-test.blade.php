@@ -5,6 +5,11 @@
             <h2 class="text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
                 {{ __('Selection test') }}
             </h2>
+            @if($applicant->application_status == \App\Enums\ApplicationStatus::PROFILE_INFORMATION_COMPLETED)
+                <p class="text-primary text-sm">
+                    {{ __("Welcome to the selection test. This consists of several sections and is not an insurmountable challenge for you. Stay calm and take two quiet hours for it. No preparation is necessary.") }}
+                </p>
+            @endif
             @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
                 <div wire:click="getTestResultPdf" id="download-result" data-tippy-content="{{__('Here you can download your result')}}"
                      class="ml-8 px-8 py-3 flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
@@ -13,6 +18,9 @@
                         <rect y="14.0002" width="16" height="1.14286" fill="currentColor"/>
                     </svg>
                     <p class="ml-4 text-base">{{__('Download')}}</p>
+                </div>
+                <div>
+                    <p class="text-primary">{{ __('The result of your selection test is now available for download. Please use the document when you apply to our partner companies in the next step.') }}</p>
                 </div>
             @endif
         </div>
@@ -114,7 +122,10 @@
         <div>
             <div class="space-y-3">
                 <h4 class="text-center text-darkgray text-sm sm:text-base">
-                    {{ __('To complete your application, you still need to do industry, motivation, documents to really apply.') }}
+                    {{ __('In the next step, you can now select the companies you want to apply to.') }}
+                </h4>
+                <h4 class="text-center text-darkgray text-sm sm:text-base">
+                    {{ __('However, you can also upload other documents and information and make your data visible to all our partner companies on our "Applicant Marketplace" (recommended).') }}
                 </h4>
             </div>
         </div>
