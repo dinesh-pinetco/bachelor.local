@@ -16,7 +16,8 @@ class ApplicantDocumentResource extends JsonResource
     {
         return [
             'name' => $this->tag,
-            'file' => base64_encode(file_get_contents(route('storage.url', ['path' => $this->url]))),
+            'file' => 'SSL issue',
+//            'file' => base64_encode(file_get_contents(route('storage.url', ['path' => $this->url]))),
         ];
     }
 }
