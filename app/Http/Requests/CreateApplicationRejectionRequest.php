@@ -36,9 +36,10 @@ class CreateApplicationRejectionRequest extends FormRequest
     {
         $company = Company::findFromSannaId($this->unternehmenId);
 
-        $user->companies()->updateOrCreate([
+        return $user->companies()->updateOrCreate([
             'user_id' => $this->bewerberId,
             'company_id' => $company->id,
         ], ['company_rejected_at' => now()]);
+
     }
 }

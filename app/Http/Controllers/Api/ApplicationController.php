@@ -40,11 +40,9 @@ class ApplicationController extends Controller
 
     public function applicantRejection(CreateApplicationRejectionRequest $request, User $user)
     {
-        $request->persist($user);
+        $applicantCompany = $request->persist($user);
 
-        $user->load($this->loadRelationships());
-
-        return SannaRejectedUserResource::make($user);
+        return SannaRejectedUserResource::make($applicantCompany->load('user'));
     }
 
     private function loadRelationships(): array

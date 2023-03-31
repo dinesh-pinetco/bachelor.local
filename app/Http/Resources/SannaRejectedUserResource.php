@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\CompanyContacts;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SannaRejectedUserResource extends JsonResource
@@ -16,16 +17,23 @@ class SannaRejectedUserResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+
+    //TODO:
     public function toArray($request)
     {
-        $this->user = $this;
+        $applicantCompany = $this->load('user');
+
+        $fieldValue = $applicantCompany->user->values->filter(function ($item) {
+            return $item->fields->key == 'enroll_company_contact';
+        })->first();
+        $value = $fieldValue ? $fieldValue->value : null;
 
         return [
-            'bewerber_id' => $this->id,
+            'bewerber_id' => $this->user_id,
             'unternehmenId' => $this->company?->sana_id,
-            'ablehnung' => $this->is_rejected,
-            'eingestellt_am' => $this->getMeta('enrollment_at'),
-            'betreuer_id' => $this->sANNAIdOfEnrollCompanyContact(),
+            'ablehnung' => (bool) $this->company_rejected_at,
+            'eingestellt_am' => $applicantCompany->user->getMeta('enrollment_at'),
+            'betreuer_id' => CompanyContacts::where('id', $value)->value('sana_id'),
         ];
     }
 }
