@@ -34,6 +34,9 @@
                 'isEdit' => $isEdit,
                 'name' => $field->key,
             ])
+            @if (! $field->is_required)
+                <span class="text-xs">{{ __("(Optional)") }}</span>
+            @endif
             <x-jet-input-error for="fieldValue" />
         @else
             <span class="font-medium text-sm text-red-500">

@@ -35,6 +35,6 @@ class ContractPdfSend extends Mailable
                 'name' => $this->user->full_name,
                 'applicant_id' => $this->user->id,
             ])
-            ->attach(storage_path('app/public/'.$this->user->configuration->contract_pdf_path));
+            ->attach(storage_path('app/'.$this->user->configuration->contract_pdf_path));
     }
 }
