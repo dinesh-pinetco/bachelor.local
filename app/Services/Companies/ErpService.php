@@ -99,7 +99,7 @@ abstract class ErpService
             foreach ($company['kontakte'] as $companyContact) {
                 CompanyContacts::updateOrCreate([
                     'company_id' => $companyObject->id,
-                    'contact_id' => $companyContact['personId'],
+                    'sana_id' => $companyContact['personId'],
                 ], [
                     'first_name' => $companyContact['vorname'],
                     'last_name' => $companyContact['nachname'],

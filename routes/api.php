@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('platform/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
-    Route::get('sanna-users', [SannaUserController::class, 'index']);
+    Route::get('/platform/sanna-users', [SannaUserController::class, 'index']);
     Route::get('sanna-users/{user}', [SannaUserController::class, 'show']);
     Route::post('sanna-sync', [SannaUserController::class, 'userSync']);
 

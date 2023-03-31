@@ -18,7 +18,7 @@ class SannaUserController extends Controller
 
         $users = User::query()
             ->role(ROLE_APPLICANT)
-            ->where('application_status', ApplicationStatus::CONTRACT_RETURNED_ON)
+            ->where('application_status', ApplicationStatus::CONTRACT_SENT_ON)
             ->whereHas('configuration', function ($query) {
                 $query->where('is_synced_to_sanna', false);
             })

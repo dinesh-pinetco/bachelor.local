@@ -2,14 +2,12 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Course;
-use App\Models\Field;
-use App\Models\Nationality;
-use App\Models\Tab;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ApplicationResource extends JsonResource
 {
+    use _ApplicantHelper;
+
     private $user;
 
     private $mainAddress;
@@ -58,83 +56,5 @@ class ApplicationResource extends JsonResource
 
             //            'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
         ];
-    }
-
-    private function getValueByIdentifier($identifier)
-    {
-        $fieldValue = $this->user->values->filter(function ($item) use ($identifier) {
-            return $item->fields->key == $identifier;
-        })->first();
-        $value = $fieldValue ? $fieldValue->value : null;
-        if ($identifier == 'nationality_id') {
-            return Nationality::where('id', $value)->value('name');
-        }
-
-        if ($identifier == 'gender') {
-            $genders = [
-                'mr' => 1,
-                'ms' => 2,
-                'mrs' => 3,
-            ];
-
-            return data_get($genders, $value);
-        }
-
-        return $value;
-    }
-
-    private function getAddress($type): array
-    {
-        $address = [];
-        if ($type == 1) {
-            $address = $this->mainAddress = [
-                'typ' => 1,
-                'strasse_und_hausnummer' => $this->getValueByIdentifier('street_house_number'),
-                'postleitzahl' => $this->getValueByIdentifier('postal_code'),
-                'ort' => $this->getValueByIdentifier('location'),
-                'adresszusatz' => '',
-                'abweichender_empfaenger' => '',
-                'land' => $this->getValueByIdentifier('country'),
-            ];
-        } elseif ($type == 3) {
-            if ($this->user->study_sheet?->billing_address == 1) {
-                $address = $this->mainAddress;
-                $address['typ'] = 3;
-            } elseif ($this->user->study_sheet?->billing_address) {
-                $address = [
-                    'typ' => 3,
-                    'strasse_und_hausnummer' => $this->user->study_sheet->custom_billing_address['address'],
-                    'postleitzahl' => $this->user->study_sheet->custom_billing_address['postal_code'],
-                    'ort' => $this->user->study_sheet->custom_billing_address['location'],
-                    'adresszusatz' => $this->user->study_sheet->custom_billing_address['address_suffix'],
-                    'abweichender_empfaenger' => $this->user->study_sheet->custom_billing_address['name'],
-                    'land' => $this->user->study_sheet->custom_billing_address['country'],
-                ];
-            }
-        }
-
-        return $address;
-    }
-
-    private function getValue($object)
-    {
-        $key = 'sana_id';
-
-        return $object != null ? $object->{$key} : null;
-    }
-
-    private function filterFieldData(string $string)
-    {
-        return collect($this->values)
-            ->whereIn('field_id', Field::where('tab_id', Tab::where('slug', $string)->value('id'))->pluck('id'))
-            ->values();
-    }
-
-    private function selectedCourses()
-    {
-        return Course::whereIn('id', $this->courses->pluck('course_id'))
-            ->pluck('sana_id')->map(function ($id) {
-                return ['studiengangId' => $id];
-            })->toArray();
     }
 }

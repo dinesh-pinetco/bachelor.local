@@ -24,7 +24,7 @@ trait StudySheetFormValidations
             'studySheet.phone' => ['required', 'regex:/[0-9]/u'],
             'studySheet.address' => ['nullable'],
             'studySheet.street' => ['required'],
-            'studySheet.zip' => ['required'],
+            'studySheet.zip' => ['required', 'integer'],
             'studySheet.place' => ['required'],
             'studySheet.secondary_language' => ['nullable'],
             'studySheet.privacy_policy' => ['required', 'accepted'],

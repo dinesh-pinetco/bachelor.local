@@ -79,12 +79,8 @@
                             </a>
                         </div>
                         @else
-                        <div>
-                            <a class="text-primary" href="{{ route('companies.index') }}">
-                               {{ __("Skip") }}
-                            </a>
-                        </div>
-                        <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm" href="motivation">
+                        <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm"
+                           href="motivation">
                             <svg class="w-4 h-4 stroke-current text-white flex-shrink-0" width="25" height="25" viewBox="0 0 24 24" stroke-width="2.50" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentcolor">
                                 <path d="M3 12h18m0 0l-8.5-8.5M21 12l-8.5 8.5" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>

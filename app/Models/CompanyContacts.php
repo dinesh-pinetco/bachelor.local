@@ -12,7 +12,7 @@ class CompanyContacts extends Model
 
     protected $fillable = [
         'company_id',
-        'contact_id',
+        'sana_id',
         'first_name',
         'last_name',
     ];

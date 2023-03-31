@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Nationality;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SannaUserResource extends JsonResource
 {
+    use _ApplicantHelper;
+
     private $user;
 
     private $mainAddress;
@@ -104,95 +105,10 @@ class SannaUserResource extends JsonResource
                 'krankenversichertennummer' => $this->study_sheet?->health_insurance_number,
                 'krankenversicherung' => $this->study_sheet?->health_insurance_companies?->sana_id,
             ],
-            'firmaId' => $this->getValueByIdentifier('enroll_company'),
-            'betreuerId' => $this->getValueByIdentifier('enroll_company_contact'),
+            'firmaId' => $this->sANNAIdOfEnrollCompany(),
+            'betreuerId' => $this->sANNAIdOfEnrollCompanyContact(),
             'fremdsprache' => $this->study_sheet?->secondary_language,
-            l,
-            //            'datenschutzerklaerung_datenweitergabe_medienlieferanten' => filter_var($this->study_sheet?->privacyPolicy, FILTER_VALIDATE_BOOLEAN),
-            //            'ratenzahlung'                                            => filter_var($this->study_sheet->payment, FILTER_VALIDATE_BOOLEAN),
-            //            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
-            //            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
-            //            'verwaltungsbogen' => $this->study_sheet?->secondary_language,
-            //            'companies' => ApplicantCompanyResource::collection($this->whenLoaded('companies')),
+
         ];
-    }
-
-    private function getValueByIdentifier($identifier)
-    {
-        $fieldValue = $this->user->values->filter(function ($item) use ($identifier) {
-            return $item->fields->key == $identifier;
-        })->first();
-        $value = $fieldValue == null ? '' : $fieldValue->value;
-        if ($identifier == 'nationality_id') {
-            return Nationality::where('id', $value)->value('name');
-        }
-
-        if ($identifier == 'gender') {
-            $genders = [
-                'mr' => 1,
-                'ms' => 2,
-                'mrs' => 3,
-            ];
-
-            return data_get($genders, $value);
-        }
-
-        return $value;
-    }
-
-    private function getAddress($type): array
-    {
-        $address = [];
-        if ($type == 1) {
-            $address = $this->mainAddress = [
-                'typ' => 1,
-                'strasse_und_hausnummer' => $this->getValueByIdentifier('street_house_number'),
-                'postleitzahl' => $this->getValueByIdentifier('postal_code'),
-                'ort' => $this->getValueByIdentifier('location'),
-                'adresszusatz' => '',
-                'abweichender_empfaenger' => '',
-                'land' => '',
-            ];
-        } elseif ($type == 3) {
-            if ($this->user->study_sheet?->billing_address == 1) {
-                $address = $this->mainAddress;
-                $address['typ'] = 3;
-            } elseif ($this->user->study_sheet?->billing_address) {
-                $address = [
-                    'typ' => 3,
-                    'strasse_und_hausnummer' => $this->user->study_sheet->custom_billing_address['address'],
-                    'postleitzahl' => $this->user->study_sheet->custom_billing_address['postal_code'],
-                    'ort' => $this->user->study_sheet->custom_billing_address['location'],
-                    'adresszusatz' => $this->user->study_sheet->custom_billing_address['address_suffix'],
-                    'abweichender_empfaenger' => $this->user->study_sheet->custom_billing_address['name'],
-                    'land' => $this->user->study_sheet->custom_billing_address['country'],
-                ];
-            }
-        }
-        /*elseif ($type == 4) {
-            if ($this->user->study_sheet->delivery_address == 1) {
-                $address = $this->mainAddress;
-                $address['typ'] = 4;
-            } else {
-                $address = [
-                    'typ'                     => 4,
-                    'strasse_und_hausnummer'  => $this->user->study_sheet->custom_delivery_address['address'],
-                    'postleitzahl'            => $this->user->study_sheet->custom_delivery_address['postal_code'],
-                    'ort'                     => $this->user->study_sheet->custom_delivery_address['location'],
-                    'adresszusatz'            => $this->user->study_sheet->custom_delivery_address['address_suffix'],
-                    'abweichender_empfaenger' => $this->user->study_sheet->custom_delivery_address['name'],
-                    'land'                    => $this->user->study_sheet->custom_delivery_address['country'],
-                ];
-            }
-        }*/
-
-        return $address;
-    }
-
-    private function getValue($object)
-    {
-        $key = 'sana_id';
-
-        return $object != null ? $object->{$key} : null;
     }
 }
