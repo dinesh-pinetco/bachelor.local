@@ -6,6 +6,7 @@ use App\Enums\ApplicationStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateApplicationRejectionRequest;
 use App\Http\Resources\ApplicationResource;
+use App\Http\Resources\SannaRejectedUserResource;
 use App\Models\User;
 
 class ApplicationController extends Controller
@@ -43,7 +44,7 @@ class ApplicationController extends Controller
 
         $user->load($this->loadRelationships());
 
-        return ApplicationResource::make($user);
+        return SannaRejectedUserResource::make($user);
     }
 
     private function loadRelationships(): array
