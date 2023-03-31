@@ -37,6 +37,13 @@ class Manage extends Component
 
     ];
 
+    protected function messages()
+    {
+        return [
+            'test.passing_limit' => 'Die Bestehensgrenze muss eine Zahl sein.',
+        ];
+    }
+
     public function validationAttributes(): array
     {
         return [
