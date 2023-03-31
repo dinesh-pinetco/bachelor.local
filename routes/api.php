@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ApplicationController;
+use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\SannaUserController;
 use App\Models\User;
 use Illuminate\Http\Request;

@@ -6,7 +6,6 @@ use App\Models\Field;
 use App\Models\Nationality;
 use App\Models\Tab;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class ApplicationResource extends JsonResource
 {
@@ -23,7 +22,6 @@ class ApplicationResource extends JsonResource
             'last_changed' => $this->last_data_updated_at,
             'anonymisiert' => (bool) $this->getValueByIdentifier('is_anonymous'),
             'testlaufBestanden' => $this->hasExamPassed(),
-            'barCode' => $this->testResultBarcode(),
             'bild' => $this->getValueByIdentifier('avatar')
                     ? base64_encode(file_get_contents(route('storage.url', ['path' => $this->getValueByIdentifier('avatar')])))
                     : null,
@@ -32,7 +30,6 @@ class ApplicationResource extends JsonResource
                 'nachname' => $this->getValueByIdentifier('last_name'),
                 'akademischer_grad' => $this->getValueByIdentifier('academic_degree'),
                 'geburtstag' => $this->getValueByIdentifier('date_of_birth'),
-                //                'geburtsort' => $this->getValueByIdentifier('place_of_birth'),
                 'geschlecht' => $this->getValueByIdentifier('gender'),
             ],
             'adresse' => $this->getAddress('1'),
@@ -44,21 +41,18 @@ class ApplicationResource extends JsonResource
                 'typ' => 1,
                 'e_mail' => $this->getValueByIdentifier('email'),
             ],
+            'marktplatz' => [
+                'martkplatzfreigabe_am' => $this->show_application_on_marketplace_at,
+                'datenfreigabe' => true, // Application allowed all companies to see the test results of him if true
+                'studiengaengeIds' => [
+                    'studiengangId' => 'sannaId',
+                ], // selected courses
+            ],
+
             'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
             'documents' => ApplicantDocumentResource::collection($this->documents),
-            'selection-tests' => SelectionTestResultResource::collection($this->results),
-            'show_application_on_marketplace_at' => $this->show_application_on_marketplace_at,
             'bewerbungen' => ApplicantCompanyResource::collection($this->companies),
-
-            //TODO:-  all following Fields are not in the client sample json
-            //            'rechnungsadresse' => $this->getAddress('3'),
-            //            'lieferadresse' => $this->getAddress('4'),
-            //            'studienbeginn' => $this->desiredBeginning->course_start_date,
-            //            'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
-            //            'geburtsland' => $this->getValueByIdentifier('nationality_id'),
-            //            'studiengangId' => $this->courses()->first()->course->sana_id,
-            //            'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
-            //            'Kompetenznachholung' => $this->configuration?->competency_catch_up,
+            'selection-tests' => SelectionTestResultResource::collection($this->results),
         ];
     }
 

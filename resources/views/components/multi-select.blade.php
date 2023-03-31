@@ -72,7 +72,7 @@
         <span class="block truncate">
             {{ $placeholder }}
         </span>
-        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <!-- Heroicon name: mini/chevron-up-down -->
             <svg class="h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                  fill="currentColor" aria-hidden="true">

@@ -27,7 +27,7 @@ class CreateApplicationRejectionRequest extends FormRequest
     {
         return [
             'bewerberId' => ['required', 'exists:users,id'],
-            'unternehmenId' => ['required', 'exists:companies,sanna_id'],
+            'unternehmenId' => ['required', 'exists:companies,sana_id'],
             'ablehnung' => ['required', 'boolean'],
         ];
     }

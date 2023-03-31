@@ -19,7 +19,7 @@ class ApplicantCompanyResource extends JsonResource
         $companyContact = CompanyContacts::find($this->user->getValueByField('enroll_company_contact')?->value);
 
         return [
-            'unternehmenId' => $this->company?->sanna_id,
+            'unternehmenId' => $this->company?->sana_id,
             'datenfreigabe' => $this->created_at,
             'ablehnung' => $this->is_rejected,
             'studiengangId' => Course::findSannaId($this->user->getValueByField('enroll_course')?->value),

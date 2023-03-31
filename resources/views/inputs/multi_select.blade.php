@@ -23,14 +23,17 @@
                 :disabled="!$isEdit"
             />
         @else
+            @php
+            $placeholder = !is_null($field->placeholder)?__($field->placeholder): __('Select') . ' ' . __(ucfirst(str_replace('_', ' ', $field->related_option_table)));
+            @endphp
             <x-multi-select
                 :value="$fieldValue"
                 :key="time()"
                 wire:model="fieldValue"
-                :placeholder="!is_null($field->placeholder)?__($field->placeholder): __('Select') . ' ' . __(ucfirst(str_replace('_', ' ', $field->related_option_table)))"
+                :placeholder="$placeholder"
                 :options="$this->getOptionsByModel($field->related_option_table)"
-                keyBy="key"
-                labelBy="key"
+                keyBy="id"
+                labelBy="name"
                 :disabled="!$isEdit"
             />
         @endif
