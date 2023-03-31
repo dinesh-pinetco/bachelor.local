@@ -53,7 +53,7 @@ class ApplicationResource extends JsonResource
                 'motivationschreiben' => $this->marketplace_motivation_text,
                 'dokumente' => ApplicantDocumentResource::collection($this->documents),
             ],
-            'testergebnisse' => SelectionTestResultResource::collection($this->results),
+            'testergebnisse' => SelectionTestResultResource::collection($this->show_test_result_on_marketplace ? $this->results : []),
             'bewerbungen' => ApplicantCompanyResource::collection($this->companies),
 
             //            'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
