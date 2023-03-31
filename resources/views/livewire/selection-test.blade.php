@@ -1,34 +1,42 @@
 <div class="max-w-screen-xl w-full mx-auto">
     <div class="flex mb-5 md:mb-9">
         <div class="hidden lg:block flex-shrink-0 w-20 md:w-32 lg:w-40 2xl:w-64"></div>
-        <div class="w-full flex items-center justify-between">
-            <h2 class="text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
-                {{ __('Selection test') }}
-            </h2>
+        <div class="w-full flex items-start flex-col">
+            <div class="flex flex-wrap items-center justify-between">
+                <h2 class="text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight pr-3 pb-2">
+                    {{ __('Selection test') }}
+                </h2>
+                @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
+                    <div wire:click="getTestResultPdf" id="download-result"
+                         data-tippy-content="{{__('Here you can download your result')}}"
+                         class="px-8 py-3 flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
+                        <svg class="h-5 w-5 stroke-current" width="16" height="16" viewBox="0 0 16 16"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 5.71432L8 11.7143L14 5.71432H10.2857V0.857178H5.71429V5.71432H2Z"
+                                  fill="currentColor"/>
+                            <rect y="14.0002" width="16" height="1.14286" fill="currentColor"/>
+                        </svg>
+                        <p class="ml-4 lg:text-lg text-base font-semibold">{{__('Download')}}</p>
+                    </div>
+                    <div class="w-full mt-3">
+                        <p class="text-primary">{{ __('The result of your selection test is now available for download. Please use the document when you apply to our partner companies in the next step.') }}</p>
+                    </div>
+                @endif
+            </div>
             @if($applicant->application_status == \App\Enums\ApplicationStatus::PROFILE_INFORMATION_COMPLETED)
                 <p class="text-primary text-sm">
                     {{ __("Welcome to the selection test. This consists of several sections and is not an insurmountable challenge for you. Stay calm and take two quiet hours for it. No preparation is necessary.") }}
                 </p>
             @endif
-            @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
-                <div wire:click="getTestResultPdf" id="download-result" data-tippy-content="{{__('Here you can download your result')}}"
-                     class="ml-8 px-8 py-3 flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
-                    <svg class="h-4 w-4 stroke-current" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 5.71432L8 11.7143L14 5.71432H10.2857V0.857178H5.71429V5.71432H2Z" fill="currentColor"/>
-                        <rect y="14.0002" width="16" height="1.14286" fill="currentColor"/>
-                    </svg>
-                    <p class="ml-4 text-base">{{__('Download')}}</p>
-                </div>
-                <div>
-                    <p class="text-primary">{{ __('The result of your selection test is now available for download. Please use the document when you apply to our partner companies in the next step.') }}</p>
-                </div>
-            @endif
+
         </div>
     </div>
 
     @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_TAKEN, \App\Enums\ApplicationStatus::TEST_FAILED]))
-        <div class="md:w-max flex justify-center space-x-4 text-primary p-4 bg-secondary rounded-sm mr-auto lg:ml-40 2xl:ml-64">
-            <svg class="text-priamry full-current w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+        <div
+            class="md:w-max flex justify-center space-x-4 text-primary p-4 bg-secondary rounded-sm mr-auto lg:ml-40 2xl:ml-64">
+            <svg class="text-priamry full-current w-5 h-5" width="24" height="24" viewBox="0 0 24 24"
+                 fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C10.4178 20 8.87104 19.5308 7.55544 18.6518C6.23985 17.7727 5.21447 16.5233 4.60897 15.0615C4.00347 13.5997 3.84504 11.9911 4.15372 10.4393C4.4624 8.88743 5.22433 7.46197 6.34315 6.34315C7.46197 5.22433 8.88743 4.4624 10.4393 4.15372C11.9911 3.84504 13.5997 4.00346 15.0615 4.60896C16.5233 5.21447 17.7727 6.23984 18.6518 7.55544C19.5308 8.87103 20 10.4177 20 12C20 14.1217 19.1572 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z"
@@ -94,12 +102,12 @@
                                             </div>
                                         @endif
                                         @if (!in_array($test->result?->status,[\App\Models\Result::STATUS_COMPLETED,\App\Models\Result::STATUS_FAILED]))
-                                                <x-link-button :active="true"
-                                                               href="{{ route('tests.redirect', $test) }}"
-                                                               class="items-center -mt-0"
-                                                               target="_blank">
-                                                    {{ __('To the test') }}
-                                                </x-link-button>
+                                            <x-link-button :active="true"
+                                                           href="{{ route('tests.redirect', $test) }}"
+                                                           class="items-center -mt-0"
+                                                           target="_blank">
+                                                {{ __('To the test') }}
+                                            </x-link-button>
                                         @endif
 
                                     </div>

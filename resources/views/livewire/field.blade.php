@@ -4,6 +4,9 @@
             @if ($field->is_required)
                 <span class="text-red font-bold"> &nbsp;*</span>
             @endif
+            @if (! $field->is_required)
+                <span class="text-xs text-darkgray">{{ __("(Optional)") }}</span>
+            @endif
         </label>
     @endif
 
@@ -35,7 +38,7 @@
                 'name' => $field->key,
             ])
             @if (! $field->is_required)
-                <span class="text-xs">{{ __("(Optional)") }}</span>
+                <span class="text-xs text-darkgray">{{ __("(Optional)") }}</span>
             @endif
             <x-jet-input-error for="fieldValue" />
         @else

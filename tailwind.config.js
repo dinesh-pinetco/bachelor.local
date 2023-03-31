@@ -21,11 +21,11 @@ module.exports = {
             colors: {
                 'primary': '#003A79',
                 'primary-light': '#AFB1CE',
-                'darkgray': '#707173',
                 'secondary': '#E4E4E7',
                 'secondary-light': '#D4D4D8',
-                'gray': '#C6C7C8',
                 'lightgray': '#EDEFF0',
+                'gray': '#C6C7C8',
+                'darkgray': '#707173',
                 'red' : '#FF0000',
                 'lightred': '#F05555',
                 'darkgreen':'#059669',
