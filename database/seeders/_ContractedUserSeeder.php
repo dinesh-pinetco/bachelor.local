@@ -99,7 +99,6 @@ class _ContractedUserSeeder extends Seeder
                 'receive_date' => '2023-03-25',
             ]);
 
-            $user->application_status = ApplicationStatus::CONTRACT_SENT_ON;
             $user->application_status = ApplicationStatus::CONTRACT_RETURNED_ON;
 
             $user->save();

@@ -58,7 +58,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "utils/helpers.php"
+            "utils/helpers.php",
+            "tests/Utilities/helpers.php"
         ]
     },
     "scripts": {

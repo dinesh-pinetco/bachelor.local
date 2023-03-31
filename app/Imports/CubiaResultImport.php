@@ -28,7 +28,7 @@ class CubiaResultImport implements ToModel, WithCustomCsvSettings
             ->first();
 
         if ($result) {
-            $result->updateTestResult(data_get($row, 2), end($row), json_encode($row));
+            $result->updateTestResult(data_get($row, 3), end($row), $row);
         }
     }
 

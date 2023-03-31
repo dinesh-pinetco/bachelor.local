@@ -54,7 +54,7 @@ class Meteor
             }
 
             $grade = data_get($responseJson, 'viq-3.full');
-            $result->updateTestResult($grade, data_get($responseJson, 'meta_data.report_url'), json_encode($responseJson));
+            $result->updateTestResult((bool) $grade, data_get($responseJson, 'meta_data.report_url'), json_encode($responseJson));
 
             return $grade;
         }

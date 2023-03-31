@@ -20,7 +20,7 @@ class ApplicantCompanyResource extends JsonResource
 
         return [
             'unternehmenId' => $this->company?->sana_id,
-            'datenfreigabe' => $this->created_at,
+            'datenfreigabe' => $this->is_see_test_results,
             'ablehnung' => $this->is_rejected,
             'studiengangId' => Course::findSannaId($this->user->getValueByField('enroll_course')?->value),
             'studienbeginn' => $this->user->desiredBeginning->course_start_date,

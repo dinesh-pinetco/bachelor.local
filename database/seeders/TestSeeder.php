@@ -51,8 +51,8 @@ class TestSeeder extends Seeder
             'duration' => '30.00',
             'is_required' => true,
             'is_active' => true,
-            'has_passing_limit' => true,
-            'passing_limit' => 50,
+            'has_passing_limit' => false,
+            'passing_limit' => null,
         ])->attachCourses(Course::pluck('id')->toArray());
     }
 

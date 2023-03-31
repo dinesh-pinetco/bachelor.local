@@ -62,6 +62,8 @@ class Result extends Model implements ContractsAuditable
             $this->update([
                 'status' => $grade ? self::STATUS_COMPLETED : self::STATUS_FAILED,
                 'is_passed' => $grade,
+                'result' => $result,
+                'meta' => $meta,
                 'completed_at' => now(),
             ]);
         }
