@@ -20,22 +20,30 @@ class DesiredBeginning extends Model
 
     protected $casts = ['course_start_date' => 'date'];
 
-    public static function options($onlyFuture = false): array
+    public static function options(): array
     {
         $desiredBeginnings = [];
-        if (now()->month > COURSE_STARTING_MONTH) {
-            $nextCourseStarting = Carbon::parse()->addYear()->startOfMonth()->month(COURSE_STARTING_MONTH);
-        } else {
-            $nextCourseStarting = Carbon::parse()->startOfMonth()->month(COURSE_STARTING_MONTH);
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+        $showNextYear = false;
+        $nextCourseStarting = Carbon::create($currentYear, COURSE_STARTING_MONTH, 1);
+
+        if ($currentMonth >= 6 || $currentMonth < 1) {
+            // Current year and next year
+            $showNextYear = true;
         }
 
-        $collection = CarbonPeriod::create(
-            $nextCourseStarting,
-            '1 year',
-            $nextCourseStarting->copy()->addYears(FUTURE_YEAR));
+        $endDate = $showNextYear ? Carbon::create($currentYear + 1, 12, 31) : Carbon::create($currentYear, 12, 31);
+
+        $collection = CarbonPeriod::create($nextCourseStarting, '1 year', $endDate);
 
         foreach ($collection as $courseDate) {
-            $desiredBeginnings[] = ['key' => $courseDate->translatedFormat('Y-m-d'), 'title' => $courseDate->translatedFormat(self::TITLE)];
+            if ($showNextYear || $courseDate->year === $currentYear) {
+                $desiredBeginnings[] = [
+                    'key' => $courseDate->format('Y-m-d'),
+                    'title' => $courseDate->translatedFormat(self::TITLE),
+                ];
+            }
         }
 
         return $desiredBeginnings;

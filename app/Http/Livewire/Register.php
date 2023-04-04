@@ -30,7 +30,7 @@ class Register extends Component
     public function mount()
     {
         $this->isMountRender = true;
-        $this->desiredBeginnings = DesiredBeginning::options(onlyFuture: true);
+        $this->desiredBeginnings = DesiredBeginning::options();
 
         $this->desired_beginning = old('desired_beginning');
         $this->course_ids = old('course_ids', []);

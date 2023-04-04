@@ -40,6 +40,5 @@ class CreateApplicationRejectionRequest extends FormRequest
             'user_id' => $this->bewerberId,
             'company_id' => $company->id,
         ], ['company_rejected_at' => now()]);
-
     }
 }
