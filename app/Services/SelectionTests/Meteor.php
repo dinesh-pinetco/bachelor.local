@@ -17,9 +17,10 @@ class Meteor
 
     public function __construct(User $user)
     {
-        $this->user = $user;
+        $this->user = $user->load('meteor');
         $this->naTan = $this->user->meteor->na_tan;
-        $this->f = '%7B%22naTan%22%3A%22%7B'.$this->naTan.'%7D%22%7D';
+
+        $this->f = sprintf('{"naTan":"{%s}"}', $this->naTan);
     }
 
     public function generateTestUrl(): string

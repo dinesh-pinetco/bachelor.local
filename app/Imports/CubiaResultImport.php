@@ -28,7 +28,9 @@ class CubiaResultImport implements ToModel, WithCustomCsvSettings
             ->first();
 
         if ($result) {
-            $result->updateTestResult(data_get($row, 3), end($row), $row);
+            $grade = $testType == Cubia::MIX ? data_get($row, 4) : data_get($row, 3);
+
+            $result->updateTestResult($grade, end($row), $row);
         }
     }
 
