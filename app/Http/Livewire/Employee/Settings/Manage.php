@@ -25,7 +25,7 @@ class Manage extends Component
 
     public Collection $groups;
 
-    public array $multiInputTypes = ['checkbox', 'select', 'radio'];
+    public array $multiInputTypes = ['checkbox', 'select', 'radio', 'multi_select'];
 
     public bool $isEdit = true;
 
@@ -67,7 +67,7 @@ class Manage extends Component
 
     public function mount(Tab $tab, Field $field)
     {
-        $this->multiInputTypes = [FieldType::FIELD_CHECKBOX(), FieldType::FIELD_SELECT(), FieldType::FIELD_RADIO()];
+        $this->multiInputTypes = [FieldType::FIELD_CHECKBOX(), FieldType::FIELD_SELECT(), FieldType::FIELD_RADIO(), FieldType::FIELD_MULTI_SELECT()];
         $this->wantToUseTable = (bool) $this->field->related_option_table;
 
         if ($field->exists) {
