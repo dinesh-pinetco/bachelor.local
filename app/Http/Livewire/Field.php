@@ -6,6 +6,7 @@ use App\Enums\FieldType;
 use App\Models\Course;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
+use App\Models\School;
 use App\Services\Hubspot\Contact;
 use App\Services\ModelHelper;
 use App\Services\SyncUserValue;
@@ -256,6 +257,14 @@ class Field extends Component
 
     public function getOptionsByModel($table)
     {
+        if ($this->field->key == 'school_qualification') {
+            $cityId = $this->applicant->getValueByField('city');
+
+            $model = School::where('city_id', $cityId?->value)->orderBy('name');
+
+            return $model->get();
+        }
+
         $model = ModelHelper::getModelByName(str::singular(str_replace(
             ' ',
             '',

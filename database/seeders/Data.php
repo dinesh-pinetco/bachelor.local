@@ -202,6 +202,19 @@ class Data
                                     'text' => 'Es ist das jahr einzugeben in dem das Stadium aufgenommen werdensoll, also aktuell 2023.',
                                 ],
                             ],
+
+                            [
+                                'type' => FieldType::FIELD_SELECT(),
+                                'label' => 'Stadt auswählen',
+                                'placeholder' => 'Bitte wählen',
+                                'key' => 'city',
+                                'related_option_table' => 'cities',
+                                'sort_order' => 1,
+                                'is_active' => 1,
+                                'is_required' => false,
+                                'options' => [],
+                            ],
+
                             [
                                 'type' => FieldType::FIELD_SELECT(),
                                 'label' => 'An welcher Schule wirst/hast Du Ihre Hochschulzugangsberechtigung erworben?',

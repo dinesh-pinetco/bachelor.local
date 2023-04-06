@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\City;
 use App\Models\School;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
@@ -13,12 +14,13 @@ class SchoolImport implements ToModel, WithCustomCsvSettings, WithHeadingRow
 
     public function model(array $row)
     {
+        $schoolsCity = City::updateOrCreate(['name' => $row['stadt']]);
+
         School::create([
-            'sana_id' => $row['id'],
-            'name' => $row['name'],
-            'strasse' => $row['strasse'],
-            'plz' => $row['plz'],
-            'ort' => $row['ort'],
+            'name' => $row['name_der_schule'],
+            'strasse' => $row['adresszeile_strasse_u_hausnr'],
+            'plz' => $row['postleitzahl'],
+            'city_id' => $schoolsCity->id,
         ]);
     }
 
