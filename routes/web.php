@@ -78,5 +78,9 @@ Route::get('management-sheet-pdf/{user}', function (App\Models\User $user) {
     return (new \App\Pdf\ManagementSheetPdf($user))->render();
 });
 
+Route::get('study-contract-pdf/{user}', function (App\Models\User $user) {
+    return (new App\Pdf\StudyContractPdf($user))->render();
+});
+
 Route::get('files/{media}', [MediaController::class, 'show'])->middleware('auth:sanctum')->name('media.url');
 Route::get('storage/file', [MediaController::class, 'getStorageFile'])->middleware('auth:sanctum')->name('storage.url');

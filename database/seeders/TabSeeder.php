@@ -22,7 +22,7 @@ class TabSeeder extends Seeder
         DB::beginTransaction();
         try {
             foreach ($tabsData as $tabData) {
-                $tab = Tab::create(Arr::only($tabData, ['name', 'description', 'slug', 'icon', 'sort_order', 'meta_data']));
+                $tab = Tab::create(Arr::only($tabData, ['name', 'description', 'slug', 'icon', 'sort_order', 'meta_data','is_progress_countable']));
                 $this->groupInsertRecursive(Arr::get($tabData, 'groups', []), $tab);
                 $this->fieldInsert(Arr::get($tabData, 'fields', []), null, $tab);
             }

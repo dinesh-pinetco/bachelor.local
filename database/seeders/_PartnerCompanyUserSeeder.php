@@ -44,7 +44,7 @@ class _PartnerCompanyUserSeeder extends Seeder
 
     public static function submitProfile($users)
     {
-        \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/public/profile/sample-profile-picture.jpg'));
+        \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/profile/sample-profile-picture.jpg'));
 
         foreach ($users as $user) {
             $syncUser = (new SyncUserValue($user));

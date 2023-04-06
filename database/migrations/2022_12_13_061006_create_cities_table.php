@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('schools', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('sana_id')->default(0);
-            $table->string('name');
-            $table->text('strasse')->nullable();
-            $table->text('plz')->nullable();
-            $table->unsignedBigInteger('city_id')->nullable();
+            $table->string('name')->nullable();
             $table->timestamps();
-
-            $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schools');
+        Schema::dropIfExists('cities');
     }
 };

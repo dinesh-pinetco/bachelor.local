@@ -112,7 +112,7 @@
                                             <x-jet-label for="key{{ $key }}" class="block">
                                                 {{ __('Key') }}
                                             </x-jet-label>
-                                            <x-jet-input  class="w-full" type="text"
+                                            <x-jet-input class="w-full" type="text"
                                                          wire:model="options.{{ $key }}.key"
                                                          :disabled="!$isEdit"
                                                          id="key{{ $key }}">
@@ -124,14 +124,12 @@
                                                 {{ __('Value') }}
                                             </x-jet-label>
                                              <div wire:ignore>
-                                                <trix-editor
-                                                    class="prose formatted-content"
+                                                <textarea
+                                                class="w-full border border-gray focus:border-primary-light ring-4 ring-transparent focus:ring-4 focus:ring-primary focus:ring-opacity-20 outline-none rounded-sm focus:shadow-sm text-primary placeholder-gray resize-none shadow-sm"
                                                     x-data
-                                                    x-on:trix-change="$dispatch('input', event.target.value)"
-                                                    x-ref="trix"
                                                     wire:model.debounce.500ms="options.{{ $key }}.value"
                                                     wire:key="options.{{ $key }}.value"
-                                                ></trix-editor>
+                                                ></textarea>
                                             </div>
                                             <x-jet-input-error for="options.{{ $key }}.value"/>
                                         </div>
