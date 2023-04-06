@@ -15,6 +15,7 @@ class Data
                 'slug' => 'profile',
                 'icon' => 'profile',
                 'sort_order' => 1,
+                'is_progress_countable' => true,
                 'meta_data' => [
                     'button_text' => 'speichern',
                 ],
@@ -44,15 +45,15 @@ class Data
                                 'is_required' => 1,
                                 'options' => [
                                     [
-                                        'key' => 'mr',
+                                        'key' => 1,
                                         'value' => 'Herr',
                                     ],
                                     [
-                                        'key' => 'mrs',
+                                        'key' => 3,
                                         'value' => 'divers',
                                     ],
                                     [
-                                        'key' => 'ms',
+                                        'key' => 2,
                                         'value' => 'Frau',
                                     ],
                                 ],
@@ -316,6 +317,7 @@ class Data
                 'slug' => 'industries',
                 'icon' => 'industry',
                 'sort_order' => 2,
+                'is_progress_countable' => false,
                 'meta_data' => [
                     'button_text' => 'Speichern und weiter',
                 ],
@@ -349,6 +351,7 @@ class Data
                 'slug' => 'motivation',
                 'icon' => 'motivation',
                 'sort_order' => 3,
+                'is_progress_countable' => false,
                 'meta_data' => [
                     'button_text' => 'Speichern und weiter',
                 ],
