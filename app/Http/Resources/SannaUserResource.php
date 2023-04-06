@@ -92,10 +92,10 @@ class SannaUserResource extends JsonResource
             'vertrag_zurueck_am' => $this->contract?->receive_date,
             'studienbeginn' => $this->desiredBeginning->course_start_date,
             'bild' => 'SSL issue',
-//            'bild' => $this->study_sheet?->student_id_card_photo_url
-//                ? base64_encode(file_get_contents($this->study_sheet?->student_id_card_photo_url))
+//            'bild' => $this->study_sheet?->student_id_card_photo
+//                ? get_base64_from_local_storage_file($this->study_sheet?->student_id_card_photo)
 //                : ($this->getValueByIdentifier('avatar')
-//                    ? base64_encode(file_get_contents(route('storage.url', ['path' => $this->getValueByIdentifier('avatar')])))
+//                    ? get_base64_from_local_storage_file($this->getValueByIdentifier('avatar'))
 //                    : null),
             'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
             'datenschutzerklaerung_alumni' => filter_var($this->getValueByIdentifier('terms_and_condition'), FILTER_VALIDATE_BOOLEAN),

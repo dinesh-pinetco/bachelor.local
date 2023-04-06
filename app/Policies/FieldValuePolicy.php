@@ -36,7 +36,7 @@ class FieldValuePolicy
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {
                 return false;
             } else {
-                return (new ProgressBar(auth()->id()))->overAllProgress() != 100;
+                return ! $fieldValue->is_process_countable_field || (new ProgressBar(auth()->id()))->overAllProgress() != 100;
             }
         } elseif (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {

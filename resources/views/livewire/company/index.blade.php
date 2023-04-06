@@ -27,7 +27,7 @@
                     @if ($showTextarea)
                         <div
                             class="flex flex-wrap xl:flex-nowrap w-full gap-10 xl:gap-6">
-                            <div class="w-full xl:w-2/3 flex-shrink-0 h-full overflow-y-auto">
+                            <div class="w-full xl:w-2/3 flex-shrink-0 h-full overflow-y-auto px-2 -mx-2">
                                 <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
                                     {{__('Email Content')}}
                                 </h6>
@@ -59,7 +59,8 @@
                                     {{__('Selected companies')}}
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
-                                    @forelse ($companies->whereIn('id', $selectedCompanies) as $selectedCompany)                                        <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
+                                    @forelse ($companies->whereIn('id', $selectedCompanies) as $selectedCompany)
+                                        <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
                                             {{ $selectedCompany->name }}
                                         </div>
                                     @endforeach

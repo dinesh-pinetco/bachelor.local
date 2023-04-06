@@ -22,9 +22,11 @@ class ApplicationResource extends JsonResource
             'anonymisiert' => (bool) $this->getValueByIdentifier('is_anonymous'),
             'testlaufBestanden' => $this->hasExamPassed(),
             'bild' => 'SSL issue',
-//            'bild' => $this->getValueByIdentifier('avatar')
-//                ? base64_encode(file_get_contents(route('storage.url', ['path' => $this->getValueByIdentifier('avatar')])))
-//                : null,
+            //            'bild' => $this->study_sheet?->student_id_card_photo
+            //                ? get_base64_from_local_storage_file($this->study_sheet?->student_id_card_photo)
+            //                : ($this->getValueByIdentifier('avatar')
+            //                    ? get_base64_from_local_storage_file($this->getValueByIdentifier('avatar'))
+            //                    : null),
             'person' => [
                 'vorname' => $this->getValueByIdentifier('first_name'),
                 'nachname' => $this->getValueByIdentifier('last_name'),

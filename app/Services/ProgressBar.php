@@ -21,11 +21,12 @@ class ProgressBar
 
     public function overAllProgress(): float
     {
+        //Client wants only progress bar on profile and tests
         $progressPoints = $this->calculateProgressByTab('profile')
-            + $this->selectionTestsProgress()
-            + $this->calculateProgressByTab('industries')
-            + $this->calculateProgressByTab('motivation')
-            + $this->documentProgress();
+            + $this->selectionTestsProgress();
+//            + $this->calculateProgressByTab('industries')
+//            + $this->calculateProgressByTab('motivation')
+//            + $this->documentProgress();
 
         return round($progressPoints);
     }

@@ -17,6 +17,7 @@ class Tab extends Model implements ContractsAuditable
 
     protected $casts = [
         'meta_data' => 'array',
+        'is_progress_countable' => 'boolean',
     ];
 
     public function groups(): HasMany

@@ -34,13 +34,12 @@
 
                         @php
                             $result=$test->getResult($applicant)->first();
-                            $meta = json_decode($result->meta, true);
                         @endphp
 
                         @if ($test->type == \App\Models\Test::TYPE_MOODLE && $result->result)
                             <span>{{ $result->result }}</span>
                         @elseif($test->type == \App\Models\Test::TYPE_CUBIA && $result->result)
-                            <span>{{ data_get($meta, 0) }} - {{ data_get($meta, 1) }}</span>
+                            <span>{{ data_get($result->meta, 0) }} - {{ data_get($result->meta, 1) }}</span>
                             <span>
                                     <a href="{{ $result->result }}" target="_blank" download
                                        class="w-6 lg:w-8 h-6 lg:h-8 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-full">

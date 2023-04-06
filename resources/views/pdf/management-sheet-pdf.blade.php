@@ -74,7 +74,7 @@
                 </td>
                 <td align="right">
                     <img style="display:inline-block;height:120px;width:120px;margin-right:50px;object-fit: contain;"
-                         src="{{ $profilePhoto }}"
+                         src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('app/'.$profilePhoto))) }}"
                          alt="Bild des Studierenden">
                 </td>
             </tr>

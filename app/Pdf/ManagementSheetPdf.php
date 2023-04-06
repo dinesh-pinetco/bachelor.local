@@ -24,15 +24,15 @@ class ManagementSheetPdf extends Pdf
             'desiredBeginning' => $this->user->desiredBeginning->course_start_date->format('d.m.Y'),
             'date_of_birth' => date_create_from_format('Y-m-d', $this->user->values->where('fields.key', 'date_of_birth')->value('value'))->format('d.m.Y'),
             'nationality' => $this->user->values->where('fields.key', 'country')->value('value'),
-            'profilePhoto' => $this->user->study_sheet?->studentIdCardPhotoUrl,
+            'profilePhoto' => $this->user->study_sheet?->student_id_card_photo,
             'phone' => $this->user->study_sheet?->phone,
             'street' => $this->user->study_sheet?->street,
             'zip' => $this->user->study_sheet?->zip,
             'place' => $this->user->study_sheet?->place,
-            'country' => $this->user->values->where('fields.key', 'country')->values('value')->first()->value,
+            'country' => $this->user->values->where('fields.key', 'country')->values('value')->first()?->value,
             'company' => Company::where('id', $this->user->getEctsPointvalue('enroll_company'))->first(),
             'secondary_language' => $this->user->study_sheet?->secondary_language == 'fr' ? 'Französisch' : 'Spanisch',
-            'company_address' => Company::where('id', $this->user->getEctsPointvalue('enroll_company'))->first()->meta,
+            'company_address' => Company::where('id', $this->user->getEctsPointvalue('enroll_company'))->first()?->meta,
         ];
     }
 }

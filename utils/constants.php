@@ -19,7 +19,7 @@ const MAX_YEAR = 5;
 const FUTURE_YEAR = 5;
 const COURSE_STARTING_MONTH = 10;
 
-const PER_STEP_PROGRESS = 20;
+const PER_STEP_PROGRESS = 50;
 
 const BACHELOR_DESIRED_BEGINNING = 'bachelor_desired_beginning';
 const BACHELOR_STUDY_COURSES = 'bachelor_study_courses';
