@@ -47,21 +47,6 @@ trait _ApplicantHelper
                 'abweichender_empfaenger' => '',
                 'land' => $this->getValueByIdentifier('country'),
             ];
-        } elseif ($type == 3) {
-            if ($this->user->study_sheet?->billing_address == 1) {
-                $address = $this->mainAddress;
-                $address['typ'] = 3;
-            } elseif ($this->user->study_sheet?->billing_address) {
-                $address = [
-                    'typ' => 3,
-                    'strasse_und_hausnummer' => $this->user->study_sheet->custom_billing_address['address'],
-                    'postleitzahl' => $this->user->study_sheet->custom_billing_address['postal_code'],
-                    'ort' => $this->user->study_sheet->custom_billing_address['location'],
-                    'adresszusatz' => $this->user->study_sheet->custom_billing_address['address_suffix'],
-                    'abweichender_empfaenger' => $this->user->study_sheet->custom_billing_address['name'],
-                    'land' => $this->user->study_sheet->custom_billing_address['country'],
-                ];
-            }
         }
 
         return $address;

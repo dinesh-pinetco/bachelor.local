@@ -9,6 +9,7 @@
                 @endforeach
             </x-livewire-select>
         @elseif ($field->key == 'school_qualification')
+
             <x-livewire-select :isEdit="$isEdit" :name="$field->related_option_table" model="fieldValue"
                 shouldSave="true">
                 <option selected value=""> {{ !is_null($field->placeholder)?__($field->placeholder): __('Select') . ' ' . __(ucfirst(str_replace('_', ' ', $field->related_option_table)))}}</option>

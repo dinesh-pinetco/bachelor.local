@@ -27,8 +27,6 @@ class SannaUserResource extends JsonResource
                 'geschlecht' => $this->getValueByIdentifier('gender'),
             ],
             'adresse' => $this->getAddress('1'),
-            'rechnungsadresse' => $this->getAddress('3'),
-            'lieferadresse' => $this->getAddress('4'),
             'telefonnummer' => [
                 'typ' => 2,
                 'telefonnummer' => $this->getValueByIdentifier('phone'),
@@ -92,11 +90,11 @@ class SannaUserResource extends JsonResource
             'vertrag_zurueck_am' => $this->contract?->receive_date,
             'studienbeginn' => $this->desiredBeginning->course_start_date,
             'bild' => 'SSL issue',
-//            'bild' => $this->study_sheet?->student_id_card_photo
-//                ? get_base64_from_local_storage_file($this->study_sheet?->student_id_card_photo)
-//                : ($this->getValueByIdentifier('avatar')
-//                    ? get_base64_from_local_storage_file($this->getValueByIdentifier('avatar'))
-//                    : null),
+            //            'bild' => $this->study_sheet?->student_id_card_photo
+            //                ? get_base64_from_local_storage_file($this->study_sheet?->student_id_card_photo)
+            //                : ($this->getValueByIdentifier('avatar')
+            //                    ? get_base64_from_local_storage_file($this->getValueByIdentifier('avatar'))
+            //                    : null),
             'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
             'datenschutzerklaerung_alumni' => filter_var($this->getValueByIdentifier('terms_and_condition'), FILTER_VALIDATE_BOOLEAN),
             'geburtsland' => $this->getValueByIdentifier('nationality_id'),

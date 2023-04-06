@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Services\SelectionTests\Cubia;
+use App\Models\Result;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SelectionTestResultResource extends JsonResource
@@ -33,21 +33,16 @@ class SelectionTestResultResource extends JsonResource
     private function appendCubiaDetail($data)
     {
         if ($this->isCubiaTest()) {
-            $meta_mix = [];
-            $meta_iqt = [];
-            $ergebnis = null;
+            $cubia_mix = $this;
+            $cubia_iqt = Result::where('test_id', 6)->where('user_id', $this->user_id)->first();
 
-            if ($this->course_id == Cubia::MIX) {
-                $meta_mix = $this->meta;
-                $ergebnis = data_get($meta_mix, 4);
-            } else {
-                $meta_iqt = $this->meta;
-                $ergebnis = data_get($meta_iqt, 3);
-            }
+            $meta_mix = $cubia_mix->meta;
+            $meta_iqt = $cubia_iqt?->meta;
+            $ergebnis = null;
 
             return array_merge($data, [
                 'ergebnis' => $ergebnis,
-                'tan' => sprintf('%s - %s', data_get($this->meta, 0), data_get($this->meta, 1)),
+                'tan' => sprintf('%s - %s', data_get($meta_mix, 0), data_get($meta_mix, 1)),
                 'ergebnis_link' => $this->result,
 
                 'bindungMix' => data_get($meta_mix, 3),
