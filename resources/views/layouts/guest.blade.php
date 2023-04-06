@@ -11,9 +11,13 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/intlTelInput.min.css') }}" />
+
     @livewireStyles
+
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    @stack('styles')
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -51,6 +55,8 @@
     <a class="cursor-pointer px-2 text-primary hover:text-primary-light"
        href="{{route('data_protection')}}">{{__('Privacy policy')}}</a>
 </div>
+@stack('scripts')
+<script src="{{ asset('plugins/intlTelInput.min.js') }}"></script>
 @livewireScripts
 </body>
 </html>

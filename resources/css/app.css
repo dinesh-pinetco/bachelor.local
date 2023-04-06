@@ -144,3 +144,24 @@ li > label, .multiple-dropdown-box > label {
     white-space: normal;
     word-break: break-all;
 }
+
+.iti__flag {background-image: url("/images/vendor/intl-tel-input/build/flags.png") !important;}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .iti__flag {background-image: url("/images/vendor/intl-tel-input/build/flags@2x.png") !important;}
+}
+
+
+
+.iti__country.iti__highlight{
+    @apply text-primary;
+}
+.tel-input .iti--separate-dial-code .iti__selected-dial-code{
+    @apply text-primary;
+}
+.tel-input .iti__country{
+    @apply text-black;
+}
+.tel-input .iti__dial-code {
+    @apply text-darkgray;
+}

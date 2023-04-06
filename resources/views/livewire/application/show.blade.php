@@ -249,12 +249,17 @@
                             @endif
                         @endif
 
-                        @if($errors->any())
-                            <span class="text-red">{{ __('Please complete all required fields.') }}</span>
+                        @if(!$profileProgress)
+                            <span class="text-primary text-sm">{{ __('Please fill in all required fields before submitting the form') }}</span>
                         @endif
 
                         @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && auth()->user()->application_status == \App\Enums\ApplicationStatus::REGISTRATION_SUBMITTED)
-                            <x-primary-button type="button" wire:click="submitProfileInformation">
+                            <x-primary-button type="button" wire:click="submitProfileInformation"
+                                              :disabled="!$profileProgress"
+                                @class([
+                                    'bg-opacity-50 cursor-not-allowed' => !$profileProgress,
+                                ])
+                            >
                                 {{ __('Submit data & continue with test') }}
                             </x-primary-button>
                         @endif

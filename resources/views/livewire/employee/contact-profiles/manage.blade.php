@@ -75,8 +75,13 @@
                             <div>
                                 <x-jet-label for="phone"
                                              class="block required">{{ __('Phone') }}</x-jet-label>
-                                <x-jet-input type="text" name="phone" wire:model.defer="contactProfile.phone" id="phone" :placeholder="__('Phone')"
-                                             class="w-full"></x-jet-input>
+                                    <div wire:ignore>
+                                        <input class="w-full tel-input h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                               type="text"
+                                               id="numberValue"
+                                               placeholder="{{ __('Enter phone number') }}"
+                                        />
+                                    </div>
                                 <x-jet-input-error for="contactProfile.phone"/>
                             </div>
 
@@ -104,4 +109,27 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            let PhoneNumber = null;
+
+            @if($contactProfile?->phone)
+            let telValue = "{{ $contactProfile?->phone }}";
+            document.getElementById('numberValue').value =  "+" + telValue;
+            @endif
+
+                window.onload = function() {
+                const input = document.querySelector(".tel-input");
+                PhoneNumber = intlTelInput(input, {
+                    separateDialCode: true,
+                    preferredCountries:["de"],
+                    utilsScript : "{{ asset('plugins/utils.js') }}",
+                });
+
+                input.addEventListener("change", (event) => {
+                    @this.set('contactProfile.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
+                });
+            };
+        </script>
+    @endpush
 </div>

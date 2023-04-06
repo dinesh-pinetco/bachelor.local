@@ -12,6 +12,7 @@ use App\Models\Test;
 use App\Models\User;
 use App\Models\UserConfiguration;
 use App\Services\ProgressBar;
+use App\Services\ProgressBar as ProgressInfo;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -43,17 +44,22 @@ class Show extends Component
     public $competency_comment = null;
 
     public Field $field;
+    public $profileProgress;
 
     public array $rules = [
         'competency_catch_up' => 'required|boolean',
         'competency_comment' => 'required|nullable',
     ];
 
+    protected  $listeners = ['profileProgressComplete'];
+
     public function mount()
     {
         $this->applicant->load('configuration');
         $this->competency_catch_up = data_get($this->applicant->configuration, 'competency_catch_up', false);
         $this->competency_comment = $this->applicant->configuration?->competency_comment;
+        $profileTabProgress = (new \App\Services\ProgressBar(auth()->id()))->calculateProgressByTab('profile');
+        $this->profileProgress = $profileTabProgress == PER_STEP_PROGRESS;
     }
 
     public function refreshData($groupId = null)
@@ -231,6 +237,7 @@ class Show extends Component
         if ($error) {
             $this->toastNotify($error, __('Error'), TOAST_ERROR);
             $this->refreshData();
+            $this->emit('initialiseTelInput');
         }
     }
 
@@ -240,6 +247,11 @@ class Show extends Component
             ['user_id' => $this->applicant->id, 'test_id' => $testId],
             ['status' => Result::STATUS_NOT_STARTED]
         );
+    }
+
+    public function profileProgressComplete()
+    {
+        $this->profileProgress = true;
     }
 
     public function render()

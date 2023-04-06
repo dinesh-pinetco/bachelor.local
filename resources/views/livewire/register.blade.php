@@ -1,5 +1,5 @@
 <div>
-    <form method="POST" action="{{ route('register') }}" id="application_register">
+    <form method="POST" action="{{ route('register') }}" id="application_register" onsubmit="submitForm()">
         @csrf
         <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-y-8 xl:gap-x-10 place-content-end">
@@ -55,7 +55,7 @@
                 <x-jet-input id="email" class="block w-full" type="email" name="email" :value="old('email')"
                              placeholder="{{ __('Enter email address') }}" required></x-jet-input>
             </div>
-            <div wire:ignore>
+            <div class="tel-input" wire:ignore>
                 <x-jet-label class="text-white font-bold" for="password_confirmation"
                              value="{{ __('Phone number') }}"></x-jet-label>
                 <x-jet-input class="block w-full" type="tel" id="phone" name="phone" :value="old('phone')"
@@ -78,17 +78,30 @@
                 </div>
             @endif
         </div>
+{{--        <div class="flex items-center justify-end mt-6 md:mt-10">--}}
+{{--            <x-jet-secondary-button id="myButton" class="relative" type="submit" onclick="this.disabled=true; this.form.submit();">--}}
+{{--                {{ __('Start application') }}--}}
+{{--                <svg class="stroke-current ml-4" width="20" height="16" viewBox="0 0 20 16" fill="none"--}}
+{{--                     xmlns="http://www.w3.org/2000/svg">--}}
+{{--                    <path d="M12 1L19 8M19 8L12 15M19 8H1" stroke="stroke-current" stroke-width="2"--}}
+{{--                          stroke-linecap="round" stroke-linejoin="round"/>--}}
+{{--                </svg>--}}
+{{--                <div id="loader" class="">--}}
+{{--                    <span class="absolute inset-0 flex items-center justify-center bg-primary text-white">{{ __('Loading...') }}</span>--}}
+{{--                </div>--}}
+{{--            </x-jet-secondary-button>--}}
+{{--        </div>--}}
         <div class="flex items-center justify-end mt-6 md:mt-10">
-            <x-jet-secondary-button id="myButton" class="relative" type="submit" onclick="this.disabled=true; this.form.submit();">
+            <x-jet-secondary-button type="button" onclick="submitForm()">
                 {{ __('Start application') }}
                 <svg class="stroke-current ml-4" width="20" height="16" viewBox="0 0 20 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 1L19 8M19 8L12 15M19 8H1" stroke="stroke-current" stroke-width="2"
                           stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <div id="loader" class="">
-                    <span class="absolute inset-0 flex items-center justify-center bg-primary text-white">{{ __('Loading...') }}</span>
-                </div>
+{{--                <div id="loader" class="">--}}
+{{--                    <span class="absolute inset-0 flex items-center justify-center bg-primary text-white">{{ __('Loading...') }}</span>--}}
+{{--                </div>--}}
             </x-jet-secondary-button>
         </div>
         <div class="flex items-center justify-end mt-2 md:mt-4 pb-1">
@@ -99,4 +112,30 @@
             </p>
         </div>
     </form>
+
+
+    @push('scripts')
+        <script src="{{ asset('plugins/intlTelInput.min.js') }}"> </script>
+        <script>
+            let PhoneNumber = null;
+
+            window.onload = function() {
+                const input = document.querySelector("#phone");
+                PhoneNumber = intlTelInput(input, {
+                    separateDialCode: true,
+                    preferredCountries:["de"],
+                    utilsScript : "{{ asset('plugins/utils.js') }}",
+                });
+
+            };
+
+            function submitForm() {
+                PhoneNumber = PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164);
+                document.getElementById('phone').value= PhoneNumber;
+
+                document.querySelector("#application_register").submit();
+            }
+
+        </script>
+    @endpush
 </div>

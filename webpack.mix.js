@@ -17,6 +17,11 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/js/popper.min.js',
         'resources/js/tippy-bundle.umd.js'
     ], 'public/js')
+    .copy([
+        'node_modules/intl-tel-input/build/js/intlTelInput.min.js',
+        'node_modules/intl-tel-input/build/js/utils.js',
+        'node_modules/intl-tel-input/build/css/intlTelInput.min.css'
+    ], 'public/plugins')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
