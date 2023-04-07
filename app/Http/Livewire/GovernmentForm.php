@@ -162,6 +162,26 @@ class GovernmentForm extends Component
 
     public function updated($propertyName)
     {
+        if (in_array($propertyName,
+            ['governmentForm.previous_residence_country_id', 'governmentForm.previous_residence_state_id',
+                'governmentForm.previous_residence_district_id', ])
+        ) {
+            $this->refreshPreviousResidenceCountryData($propertyName);
+        }
+
+        if (in_array($propertyName,
+            ['governmentForm.current_residence_country_id', 'governmentForm.current_residence_state_id',
+                'governmentForm.current_residence_district_id', ])
+        ) {
+            $this->refreshCurrentResidenceCountryData($propertyName);
+        }
+
+        if (in_array($propertyName, ['governmentForm.graduation_country_id', 'governmentForm.graduation_state_id',
+            'governmentForm.graduation_district_id', ])
+        ) {
+            $this->refreshGraduationCountryData($propertyName);
+        }
+
         $this->validateOnly('governmentForm.country_id');
 
         if ($propertyName == 'governmentForm.previous_residence_district_id') {
@@ -190,25 +210,6 @@ class GovernmentForm extends Component
         }
 
         $this->validateOnly($propertyName);
-        if (in_array($propertyName,
-            ['governmentForm.previous_residence_country_id', 'governmentForm.previous_residence_state_id',
-                'governmentForm.previous_residence_district_id', ])
-        ) {
-            $this->refreshPreviousResidenceCountryData($propertyName);
-        }
-
-        if (in_array($propertyName,
-            ['governmentForm.current_residence_country_id', 'governmentForm.current_residence_state_id',
-                'governmentForm.current_residence_district_id', ])
-        ) {
-            $this->refreshCurrentResidenceCountryData($propertyName);
-        }
-
-        if (in_array($propertyName, ['governmentForm.graduation_country_id', 'governmentForm.graduation_state_id',
-            'governmentForm.graduation_district_id', ])
-        ) {
-            $this->refreshGraduationCountryData($propertyName);
-        }
 
         $fieldName = explode('.', $propertyName)[1];
 

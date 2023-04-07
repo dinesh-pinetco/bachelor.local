@@ -73,7 +73,7 @@
                                         <x-jet-input-error for="governmentForm.previous_residence_country_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block required">
+                                        <x-jet-label for="is_active" class="block">
                                             {{ __('State of residence prior to commencement of studies, if abroad please do not select and enter a state') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
