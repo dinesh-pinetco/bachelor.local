@@ -41,13 +41,20 @@ class Field extends Component
 
     public bool $isEdit = false;
 
-    protected $listeners = ['date-updated' => 'updateDate'];
+    protected $listeners = ['date-updated' => 'updateDate', 'cityFieldValueChanged'];
 
     public function validationAttributes(): array
     {
         return [
             'fieldValue' => $this->field->label,
         ];
+    }
+
+    public function cityFieldValueChanged()
+    {
+        if ($this->field->related_option_table) {
+            $this->getOptionsByModel($this->field->related_option_table);
+        }
     }
 
     // Just for overwrite file attribute name :D
@@ -190,6 +197,10 @@ class Field extends Component
             $this->desiredBeginningUpdate();
         } else {
             $this->save();
+        }
+
+        if ($this->field->key == 'city') {
+            $this->emit('cityFieldValueChanged');
         }
     }
 
