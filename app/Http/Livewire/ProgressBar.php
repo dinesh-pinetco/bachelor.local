@@ -19,11 +19,9 @@ class ProgressBar extends Component
         $this->overAllProgress = (new ProgressInfo())->overAllProgress();
         $profileTabProgress = (new \App\Services\ProgressBar(auth()->id()))->calculateProgressByTab('profile');
 
-        if ($profileTabProgress == PER_STEP_PROGRESS){
-            $this->emitTo('application.show','profileProgressComplete');
+        if ($profileTabProgress == PER_STEP_PROGRESS) {
+            $this->emitTo('application.show', 'profileProgressComplete');
         }
-
-
     }
 
     public function submit()

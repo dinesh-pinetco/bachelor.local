@@ -12,7 +12,6 @@ use App\Models\Test;
 use App\Models\User;
 use App\Models\UserConfiguration;
 use App\Services\ProgressBar;
-use App\Services\ProgressBar as ProgressInfo;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -44,6 +43,7 @@ class Show extends Component
     public $competency_comment = null;
 
     public Field $field;
+
     public $profileProgress;
 
     public array $rules = [
@@ -51,7 +51,7 @@ class Show extends Component
         'competency_comment' => 'required|nullable',
     ];
 
-    protected  $listeners = ['profileProgressComplete'];
+    protected $listeners = ['profileProgressComplete'];
 
     public function mount()
     {

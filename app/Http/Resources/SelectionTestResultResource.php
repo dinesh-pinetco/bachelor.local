@@ -3,10 +3,21 @@
 namespace App\Http\Resources;
 
 use App\Models\Result;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SelectionTestResultResource extends JsonResource
 {
+    public static function collection($resource)
+    {
+        $resource = $resource->whereNotIn('test_id',[6]);
+        return tap(new AnonymousResourceCollection($resource, static::class), function ($collection) {
+            if (property_exists(static::class, 'preserveKeys')) {
+                $collection->preserveKeys = (new static([]))->preserveKeys === true;
+            }
+        });
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -41,7 +52,8 @@ class SelectionTestResultResource extends JsonResource
             $ergebnis = null;
 
             return array_merge($data, [
-                'ergebnis' => $ergebnis,
+                'name' => 'Cubia',
+                'ergebnis' => sprintf('%s / %s', data_get($meta_mix, 4), data_get($meta_iqt, 3)),
                 'tan' => sprintf('%s - %s', data_get($meta_mix, 0), data_get($meta_mix, 1)),
                 'ergebnis_link' => $this->result,
 

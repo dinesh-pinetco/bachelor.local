@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use App\Enums\FieldType;
 
-use function Ramsey\Uuid\v1;
-
 class Data
 {
     public static function getTabTableData()
@@ -529,7 +527,7 @@ class Data
                                     [
                                         'key' => 'zuversichtlich',
                                         'value' => 'zuversichtlich',
-                                    ]
+                                    ],
                                 ],
                             ],
                             [
