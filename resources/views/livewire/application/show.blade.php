@@ -68,7 +68,7 @@
                     @if(auth()->user()->hasRole(ROLE_APPLICANT) && !$isProfile)
                         <div>
                             <div class="flex items-center justify-end space-x-2 mb-5 md:mb-0">
-                                @if(!urlContains('industries'))
+                                @if($tab?->slug != 'industries')
                                     <div>
                                         <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm"
                                            href="industries">
