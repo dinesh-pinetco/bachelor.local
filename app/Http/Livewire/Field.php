@@ -162,8 +162,12 @@ class Field extends Component
             config()->set('livewire.temporary_file_upload.rules', ['required', 'file', 'max:125']);
         }
 
-        if ($this->field && in_array($this->field->type, [FieldType::FIELD_MULTI_SELECT(), FieldType::FIELD_CHECKBOX()])) {
+        if ($this->field && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
             $this->fieldValue = json_decode($this->fieldValue) ?? [];
+        }
+
+        if ($this->field && $this->field->type === FieldType::FIELD_CHECKBOX()) {
+            $this->fieldValue = (array) json_decode($this->fieldValue) ?? [];
         }
 
         if (
@@ -196,6 +200,13 @@ class Field extends Component
         if ($this->field->key == 'desired_beginning_id' && $this->field->related_option_table == 'desired_beginnings') {
             $this->desiredBeginningUpdate();
         } else {
+            if($this->field->key == 'characteristics' && (count($this->fieldValue) > 10)){
+                $this->fieldValue = array_slice($this->fieldValue,0,-1);
+                $this->toastNotify(__('Maximum of 10 characteristics allowed.'),'', TOAST_INFO);
+                return;
+            }elseif($this->field->key == 'characteristics' && (count($this->fieldValue) == 0)){
+                $this->fieldValue = [];
+            }
             $this->save();
         }
 

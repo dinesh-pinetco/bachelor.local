@@ -69,7 +69,7 @@ class _ContractedUserSeeder extends Seeder
     public function submitStudySheet($users)
     {
         foreach ($users as $user) {
-            \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/public/student-id-photo/sample-profile-picture.jpg'));
+            \File::copy(public_path('images/sample-profile-picture.jpg'), storage_path('app/student-id-photo/sample-profile-picture.jpg'));
 
             $user->study_sheet()->save(StudySheet::factory()->create([
                 'user_id' => $user->id,
