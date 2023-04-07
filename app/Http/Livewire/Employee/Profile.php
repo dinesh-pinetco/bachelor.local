@@ -13,7 +13,7 @@ class Profile extends Component
     protected array $rules = [
         'user.first_name' => ['required', 'alpha', 'max:100'],
         'user.last_name' => ['required', 'max:100'],
-        'user.phone' => ['required', 'numeric'],
+        'user.phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:9'],
         'user.locale' => ['required', 'in:de,en'],
         'user.old_password' => ['nullable', 'required_with:user.new_password', 'current_password'],
         'user.new_password' => ['required_with:user.old_password'],

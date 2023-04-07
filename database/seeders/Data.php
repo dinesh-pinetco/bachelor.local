@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Enums\FieldType;
 
+use function Ramsey\Uuid\v1;
+
 class Data
 {
     public static function getTabTableData()
@@ -372,13 +374,163 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => FieldType::FIELD_TEXTAREA(),
+                                'type' => FieldType::FIELD_CHECKBOX(),
                                 'label' => 'Welche Erwartungen haben Sie an das Studium (Inhalte, Studienmotivation, Berufsplanung, zeitlicher und finanzieller Aufwand)?',
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
+                                'options' => [
+                                    [
+                                        'key' => 'analytisch',
+                                        'value' => 'analytisch',
+                                    ],
+                                    [
+                                        'key' => 'belastbar',
+                                        'value' => 'belastbar',
+                                    ],
+                                    [
+                                        'key' => 'durchsetzungsfähig',
+                                        'value' => 'durchsetzungsfähig',
+                                    ],
+                                    [
+                                        'key' => 'ehrlich',
+                                        'value' => 'ehrlich',
+                                    ],
+                                    [
+                                        'key' => 'empathisch',
+                                        'value' => 'empathisch',
+                                    ],
+                                    [
+                                        'key' => 'fair',
+                                        'value' => 'fair',
+                                    ],
+                                    [
+                                        'key' => 'flexibel',
+                                        'value' => 'flexibel',
+                                    ],
+                                    [
+                                        'key' => 'geduldig',
+                                        'value' => 'geduldig',
+                                    ],
+                                    [
+                                        'key' => 'gewissenhaft',
+                                        'value' => 'gewissenhaft',
+                                    ],
+                                    [
+                                        'key' => 'hilfsbereit',
+                                        'value' => 'hilfsbereit',
+                                    ],
+                                    [
+                                        'key' => 'innovativ',
+                                        'value' => 'innovativ',
+                                    ],
+                                    [
+                                        'key' => 'kommunikativ',
+                                        'value' => 'kommunikativ',
+                                    ],
+                                    [
+                                        'key' => 'konfliktfähig',
+                                        'value' => 'konfliktfähig',
+                                    ],
+                                    [
+                                        'key' => 'kreativ',
+                                        'value' => 'kreativ',
+                                    ],
+                                    [
+                                        'key' => 'leistungsbereit',
+                                        'value' => 'leistungsbereit',
+                                    ],
+                                    [
+                                        'key' => 'lernbereit',
+                                        'value' => 'lernbereit',
+                                    ],
+                                    [
+                                        'key' => 'loyal',
+                                        'value' => 'loyal',
+                                    ],
+                                    [
+                                        'key' => 'mobil',
+                                        'value' => 'mobil',
+                                    ],
+                                    [
+                                        'key' => 'motiviert',
+                                        'value' => 'motiviert',
+                                    ],
+                                    [
+                                        'key' => 'offen',
+                                        'value' => 'offen',
+                                    ],
+                                    [
+                                        'key' => 'optimistisch',
+                                        'value' => 'optimistisch',
+                                    ],
+                                    [
+                                        'key' => 'organisiert',
+                                        'value' => 'organisiert',
+                                    ],
+                                    [
+                                        'key' => 'proaktiv',
+                                        'value' => 'proaktiv',
+                                    ],
+                                    [
+                                        'key' => 'resilient / widerstandsfähig',
+                                        'value' => 'resilient / widerstandsfähig',
+                                    ],
+                                    [
+                                        'key' => 'selbstbewusst',
+                                        'value' => 'selbstbewusst',
+                                    ],
+                                    [
+                                        'key' => 'selbststandig',
+                                        'value' => 'selbststandig',
+                                    ],
+                                    [
+                                        'key' => 'sorgfältig',
+                                        'value' => 'sorgfältig',
+                                    ],
+                                    [
+                                        'key' => 'sozial',
+                                        'value' => 'sozial',
+                                    ],
+                                    [
+                                        'key' => 'sportlich',
+                                        'value' => 'sportlich',
+                                    ],
+                                    [
+                                        'key' => 'stabil',
+                                        'value' => 'stabil',
+                                    ],
+                                    [
+                                        'key' => 'strukturiert',
+                                        'value' => 'strukturiert',
+                                    ],
+                                    [
+                                        'key' => 'teamfähig',
+                                        'value' => 'teamfähig',
+                                    ],
+                                    [
+                                        'key' => 'unternehmerisch',
+                                        'value' => 'unternehmerisch',
+                                    ],
+                                    [
+                                        'key' => 'verantwortungsbewusst',
+                                        'value' => 'verantwortungsbewusst',
+                                    ],
+                                    [
+                                        'key' => 'zielstrebig',
+                                        'value' => 'zielstrebig',
+                                    ],
+                                    [
+                                        'key' => 'zuverlassig',
+                                        'value' => 'zuverlassig',
+                                    ],
+                                    [
+                                        'key' => 'zuversichtlich',
+                                        'value' => 'zuversichtlich',
+                                    ]
+                                ],
                             ],
                             [
                                 'type' => FieldType::FIELD_TEXTAREA(),

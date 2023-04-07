@@ -112,10 +112,11 @@ class Field extends Component
         }
 
         if ($this->field->key == 'phone') {
-            $validation['fieldValue'][] = 'phone:DE';
+//            $validation['fieldValue'][] = 'phone:DE';
+
             // $validation['fieldValue'][] = 'numeric';
             $validation['fieldValue'][] = 'min:9';
-            $validation['fieldValue'][] = 'max:15';
+            $validation['fieldValue'][] = 'max:20';
         }
 
         if ($this->field->key == 'street_house_number') {

@@ -94,11 +94,11 @@
                                         </a>
                                     </div>
                                 @else
-{{--                                    <div>--}}
-{{--                                        <a class="text-primary" href="{{ route('companies.index') }}">--}}
-{{--                                            {{ __("Skip") }}--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
+                                    <div>
+                                        <a class="text-primary" href="{{ route('companies.index') }}">
+                                            {{ __("Skip") }}
+                                        </a>
+                                    </div>
                                     <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm"
                                        href="motivation">
                                         <svg class="w-4 h-4 stroke-current text-white flex-shrink-0" width="25"
@@ -249,12 +249,17 @@
                             @endif
                         @endif
 
-                        @if($errors->any())
-                            <span class="text-red">{{ __('Please complete all required fields.') }}</span>
+                        @if(!$profileProgress)
+                            <span class="text-primary text-sm">{{ __('Please fill in all required fields before submitting the form') }}</span>
                         @endif
 
                         @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && auth()->user()->application_status == \App\Enums\ApplicationStatus::REGISTRATION_SUBMITTED)
-                            <x-primary-button type="button" wire:click="submitProfileInformation">
+                            <x-primary-button type="button" wire:click="submitProfileInformation"
+                                              :disabled="!$profileProgress"
+                                @class([
+                                    'bg-opacity-50 cursor-not-allowed' => !$profileProgress,
+                                ])
+                            >
                                 {{ __('Submit data & continue with test') }}
                             </x-primary-button>
                         @endif

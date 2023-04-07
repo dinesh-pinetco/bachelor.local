@@ -19,7 +19,7 @@ class Manage extends Component
         'user.first_name' => ['required', 'max:100'],
         'user.last_name' => ['required', 'max:100'],
         'user.email' => ['required', 'unique:users,email', 'email:rfc,dns,spoof'],
-        'user.phone' => ['nullable', 'phone:DE', 'min:9', 'max:15'],
+        'user.phone' => ['nullable', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:9', 'max:20'],
     ];
 
     public function mount(User $user)

@@ -53,7 +53,7 @@ class CreateNewUser implements CreatesNewUsers
                     }
                 },
             ],
-            'phone' => ['nullable', 'phone:DE', 'min:9', 'max:15'],
+            'phone'             => ['nullable', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:9'],
             'desired_beginning' => ['required', 'date'],
             'course_ids' => ['required', 'array'],
         ], [], [

@@ -14,6 +14,7 @@
     <script src="{{ asset('js/tippy-bundle.umd.js') }}"></script>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/intlTelInput.min.css') }}" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css"/>
 
@@ -123,6 +124,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
+@stack('scripts')
+<script src="{{ asset('plugins/intlTelInput.min.js') }}"></script>
 @livewireScripts
 </body>
 </html>

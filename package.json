@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "@alpinejs/collapse": "^3.9.6",
+        "intl-tel-input": "^17.0.21",
         "jquery": "^3.6.0",
         "jquery-nice-select": "^1.1.0",
         "trix": "^2.0.0-alpha.0"
