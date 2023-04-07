@@ -48,13 +48,13 @@ trait GovernmentFormValidations
             'governmentForm.last_exam_country_id' => ['nullable'],
             'governmentForm.last_exam_id' => ['required', 'integer'],
             'governmentForm.last_study_type_id' => ['required', 'integer'],
-            'governmentForm.last_exam_year' => ['nullable','integer', 'min:1900', 'max:2200'],
-            'governmentForm.last_exam_month' => ['nullable','integer', 'min:1', 'max:12'],
+            'governmentForm.last_exam_year' => ['nullable', 'integer', 'min:1900', 'max:2200'],
+            'governmentForm.last_exam_month' => ['nullable', 'integer', 'min:1', 'max:12'],
             'governmentForm.last_exam_course_id' => ['nullable'],
             'governmentForm.last_exam_second_course_id' => ['nullable'],
             'governmentForm.last_exam_third_course_id' => ['nullable'],
             'governmentForm.is_last_exam_pass' => ['required'],
-            'governmentForm.last_exam_grade' => ['nullable','regex:/[0-9]{1}.[0-9]{1}/u'],
+            'governmentForm.last_exam_grade' => ['nullable', 'regex:/[0-9]{1}.[0-9]{1}/u'],
         ];
     }
 
