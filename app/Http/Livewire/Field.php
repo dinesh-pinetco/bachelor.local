@@ -166,6 +166,10 @@ class Field extends Component
             $this->fieldValue = json_decode($this->fieldValue) ?? [];
         }
 
+        if ($this->field && $this->field->type === FieldType::FIELD_CHECKBOX()) {
+            $this->fieldValue = (array) json_decode($this->fieldValue) ?? [];
+        }
+
         if (
             $this->field->related_option_table == 'courses'
             || $this->field->related_option_table == 'desired_beginnings'
