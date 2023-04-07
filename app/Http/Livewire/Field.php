@@ -162,12 +162,8 @@ class Field extends Component
             config()->set('livewire.temporary_file_upload.rules', ['required', 'file', 'max:125']);
         }
 
-        if ($this->field && $this->field->type === FieldType::FIELD_MULTI_SELECT()) {
+        if ($this->field && in_array($this->field->type, [FieldType::FIELD_MULTI_SELECT(), FieldType::FIELD_CHECKBOX()])) {
             $this->fieldValue = json_decode($this->fieldValue) ?? [];
-        }
-
-        if ($this->field && $this->field->type === FieldType::FIELD_CHECKBOX()) {
-            $this->fieldValue = (array) json_decode($this->fieldValue) ?? [];
         }
 
         if (

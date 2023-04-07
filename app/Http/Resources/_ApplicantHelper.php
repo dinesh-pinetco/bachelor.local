@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\FieldType;
 use App\Models\Company;
 use App\Models\CompanyContacts;
 use App\Models\Course;
@@ -17,6 +18,11 @@ trait _ApplicantHelper
             return $item->fields->key == $identifier;
         })->first();
         $value = $fieldValue ? $fieldValue->value : null;
+
+        if (in_array($fieldValue?->fields?->type, [FieldType::FIELD_MULTI_SELECT(), FieldType::FIELD_CHECKBOX()])) {
+            return json_decode($value);
+        }
+
         if ($identifier == 'nationality_id') {
             return Nationality::where('id', $value)->value('name');
         }
