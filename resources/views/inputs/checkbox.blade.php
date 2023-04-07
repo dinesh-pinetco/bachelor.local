@@ -1,4 +1,7 @@
-<ul class="grid grid-cols-2 gap-4 -mx-4">
+<ul @class([
+        'flex flex-wrap items-start -mx-4' => count($field->options) <= 1,
+        'grid grid-cols-2 gap-4 -mx-4' => count($field->options) > 1
+])>
     @foreach($field->options as $option)
         <li class="px-4">
             <div class="relative">
