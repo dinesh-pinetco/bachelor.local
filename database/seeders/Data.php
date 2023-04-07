@@ -374,6 +374,7 @@ class Data
                             [
                                 'type' => FieldType::FIELD_CHECKBOX(),
                                 'label' => 'Welche Erwartungen haben Sie an das Studium (Inhalte, Studienmotivation, Berufsplanung, zeitlicher und finanzieller Aufwand)?',
+                                'key' => 'characteristics',
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
