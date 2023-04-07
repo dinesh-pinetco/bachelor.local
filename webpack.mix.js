@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,20 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .css('resources/css/nice-select.css', 'public/css')
-    .copy([
-        'resources/js/popper.min.js',
-        'resources/js/tippy-bundle.umd.js'
-    ], 'public/js')
-    .copy([
-        'node_modules/intl-tel-input/build/js/intlTelInput.min.js',
-        'node_modules/intl-tel-input/build/js/utils.js',
-        'node_modules/intl-tel-input/build/css/intlTelInput.min.css'
-    ], 'public/plugins')
-    .postCss('resources/css/app.css', 'public/css', [
-        require('postcss-import'),
-        require('tailwindcss'),
+mix.js("resources/js/app.js", "public/js")
+    .copy("resources/fonts", "public/fonts")
+    .css("resources/css/nice-select.css", "public/css")
+    .copy(
+        ["resources/js/popper.min.js", "resources/js/tippy-bundle.umd.js"],
+        "public/js"
+    )
+    .copy(
+        [
+            "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
+            "node_modules/intl-tel-input/build/js/utils.js",
+            "node_modules/intl-tel-input/build/css/intlTelInput.min.css",
+        ],
+        "public/plugins"
+    )
+    .postCss("resources/css/app.css", "public/css", [
+        require("postcss-import"),
+        require("tailwindcss"),
     ]);
 
 if (mix.inProduction()) {
