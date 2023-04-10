@@ -11,6 +11,7 @@ use App\Notifications\PasswordReset as NotificationsPasswordReset;
 use App\Notifications\SelectionTestResult;
 use App\Traits\Mediable;
 use App\Traits\User\ContractPdf;
+use App\Traits\User\StudyContractPdf;
 use App\Traits\User\SelectionTestPdf;
 use App\Traits\User\UserRelations;
 use Carbon\Carbon;
@@ -43,7 +44,8 @@ class User extends Authenticatable implements ContractsAuditable
         UserRelations,
         SelectionTestPdf,
         Metable,
-        ContractPdf;
+        ContractPdf,
+        StudyContractPdf;
 
     public const GENDER_MALE = 'male';
 
@@ -286,6 +288,8 @@ class User extends Authenticatable implements ContractsAuditable
             $this->application_status = ApplicationStatus::ENROLLMENT_ON;
 
             $this->saveContractPdf();
+
+            $this->saveStudyContractPdf();
 
             Mail::to($this)->send(new ContractPdfSend($this));
 
