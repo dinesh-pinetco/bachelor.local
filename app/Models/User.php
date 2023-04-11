@@ -10,7 +10,7 @@ use App\Mail\GovernmentStudySheetSubmit;
 use App\Notifications\PasswordReset as NotificationsPasswordReset;
 use App\Notifications\SelectionTestResult;
 use App\Traits\Mediable;
-use App\Traits\User\ContractPdf;
+use App\Traits\User\ManagementSheetPdf;
 use App\Traits\User\StudyContractPdf;
 use App\Traits\User\SelectionTestPdf;
 use App\Traits\User\UserRelations;
@@ -44,7 +44,7 @@ class User extends Authenticatable implements ContractsAuditable
         UserRelations,
         SelectionTestPdf,
         Metable,
-        ContractPdf,
+        ManagementSheetPdf,
         StudyContractPdf;
 
     public const GENDER_MALE = 'male';
@@ -287,7 +287,7 @@ class User extends Authenticatable implements ContractsAuditable
             Mail::to(config('mail.supporter.address'))->send(new GovernmentStudySheetSubmit($this));
             $this->application_status = ApplicationStatus::ENROLLMENT_ON;
 
-            $this->saveContractPdf();
+            $this->saveManagementSheetPdf();
 
             $this->saveStudyContractPdf();
 

@@ -929,5 +929,9 @@
     "Let's go: Fill in all data fields and take the selection test. Then you are ready to study at NORDAKADEMIE.": "Los geht's: Fülle alle Datenfelder aus und absolviere den Auswahltest. Dann bist du bereit für ein Studium an der NORDAKADEMIE.",
     "Your data is automatically saved while you enter it and you can interrupt at any time and log back in later to continue the process.": "Deine Daten werden während der Eingabe automatisch gespeichert und du kannst jederzeit unterbrechen und dich später wieder einloggen und den Prozess fortsetzen.",
     "PLEASE NOTE: However, you cannot interrupt the selection test.": "BITTE BEACHTE: Den Auswahltest kannst du allerdings nicht unterbrechen.",
-    "You have to submit your form from progress-bar.": "Sie müssen Ihr Formular über die Fortschrittsleiste übermitteln."
+    "You have to submit your form from progress-bar.": "Sie müssen Ihr Formular über die Fortschrittsleiste übermitteln.",
+    "administration sheet": "Verwaltungsbogen",
+    "study contract": "Studienvertrag",
+    "passed result": "Bestandenes Ergebnis",
+    "failed result": "fehlgeschlagenes Ergebnis"
 }

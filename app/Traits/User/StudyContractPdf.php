@@ -11,7 +11,7 @@ trait StudyContractPdf
 {
     public function saveStudyContractPdf()
     {
-        $pdfPath = sprintf('study-contract-pdf/%s.pdf', Str::kebab(class_basename($this->id.' '.$this->full_name.' study contract')));
+        $pdfPath = sprintf('study-contract-pdf/%s.pdf', Str::snake($this->id. ' '.__('study contract').$this->full_name));
 
         UserConfiguration::updateOrCreate(['user_id' => $this->id], [
             'study_contract_pdf_path' => $pdfPath,
