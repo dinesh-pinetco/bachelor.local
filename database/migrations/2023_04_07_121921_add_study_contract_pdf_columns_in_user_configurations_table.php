@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_configurations', function (Blueprint $table) {
-            $table->string('contract_pdf_path', 2048)->nullable()->after('fail_pdf_created_at');
-            $table->date('contract_pdf_created_at')->nullable()->after('contract_pdf_path');
+            $table->string('study_contract_pdf_path', 2048)->nullable()->after('contract_pdf_path');
+            $table->date('study_contract_pdf_created_at')->nullable()->after('study_contract_pdf_path');
         });
     }
 
@@ -27,8 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('user_configurations', function (Blueprint $table) {
-            $table->dropColumn('contract_pdf_path');
-            $table->dropColumn('contract_pdf_created_at');
+            $table->dropColumn('study_contract_pdf_path');
+            $table->dropColumn('study_contract_pdf_created_at');
         });
     }
 };

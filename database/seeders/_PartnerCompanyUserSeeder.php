@@ -171,12 +171,14 @@ class _PartnerCompanyUserSeeder extends Seeder
                 'user_id' => $user->id,
                 'company_id' => 1,
                 'mail_content' => '<div>Test</div>',
+                'is_see_test_results' => true,
             ]);
 
             $user->companies()->create([
                 'user_id' => $user->id,
                 'company_id' => 2,
                 'mail_content' => '<div>Test</div>',
+                'is_see_test_results' => true,
             ]);
 
             $user->touch('show_application_on_marketplace_at');

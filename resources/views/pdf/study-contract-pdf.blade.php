@@ -5,6 +5,30 @@
 Carbon\Carbon::setlocale($user->locale);
 @endphp
 <style>
+     @font-face {
+        font-display: swap;
+        font-family: 'Interstate';
+        font-style: normal;
+        font-weight: 400;
+        src: url({{ asset("fonts/Interstate-Light.ttf")  }});
+
+    }
+     @font-face {
+        font-display: swap;
+        font-family: 'Interstate';
+        font-style: normal;
+        font-weight: 600;
+        src: url({{ asset("fonts/Interstate-Bold.ttf")  }});
+
+    }
+     @font-face {
+        font-display: swap;
+        font-family: 'Interstate';
+        font-style: normal;
+        font-weight: 900;
+        src: url({{ asset("fonts/Interstate-Ultra.ttf")  }});
+
+    }
     @page{
         padding: 0;
         margin: 0;
@@ -19,23 +43,18 @@ Carbon\Carbon::setlocale($user->locale);
         font-weight: bold;
     }
     body{
+        font-size: 14px;
         font-family: 'Interstate', sans-serif;
         line-height: 1;
     }
-    @font-face {
-        font-display: swap;
-        font-family: 'Interstate';
-        font-style: normal;
-        font-weight: 400;
-        src: url({{ asset("public/fonts/Interstate-Black.woff")}});
 
-    }
+
     .main-title{
-        font-size: 20px;
+        font-size: 16px;
         margin-bottom:10px;
         color: #003a79;
-        font-weight: 600;
-        line-height: 32px;
+        font-weight: 900;
+        line-height: 20px;
 
     }
     @media print {
@@ -44,7 +63,7 @@ Carbon\Carbon::setlocale($user->locale);
         }
     }
 </style>
-<table width="600" align="center" style="padding:20px;font-size:16px;font-family:Interstate;" cellspacing="0" cellpadding="0" border="0" >
+<table width="600" align="center" style="padding:20px;font-size:14px;font-family:Interstate;" cellspacing="0" cellpadding="0" border="0" >
     <tbody>
         <tr>
             <td>
@@ -56,9 +75,9 @@ Carbon\Carbon::setlocale($user->locale);
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" width="100%">
-                                <h2 style="color: black;font-size: 22px;line-height:32px;text-align:center;">Studienvertrag für Studierende der NORDAKADEMIE
-                                    <br>
+                            <td align="center" width="100%" style="padding:0 120px">
+                                <h2 style="color: black;font-size: 18px;line-height:16px;text-align:center;font-weight:900;">Studienvertrag für Studierende der NORDAKADEMIE
+
                                     Duales Studium - Bachelor of Science
                                 </h2>
                             </td>
@@ -74,11 +93,11 @@ Carbon\Carbon::setlocale($user->locale);
                                             </td>
                                             <td width="33.33%" align="center">
                                                 <span>Beginn:</span>
-                                                <span>{{ "[1. Oktober ".$desiredBeginning->format('Y')."]" }}</span>
+                                                <span>{{ "1. Oktober [".$desiredBeginning->format('Y')."]" }}</span>
                                             </td>
                                             <td width="33.33%" align="center">
                                                 <span>Ende:</span>
-                                                <span>year of desired beginning</span>
+                                                <span>??</span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -119,7 +138,7 @@ Carbon\Carbon::setlocale($user->locale);
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding-bottom:10px;" valign="top" height="300px">
+                                        <td style="padding-bottom:10px;text-align:center;" valign="top" height="200px">
                                             <p>
                                                 {{ $user->fullName }}
                                             </p>
@@ -581,7 +600,7 @@ Carbon\Carbon::setlocale($user->locale);
                                                 6.1
                                             </td>
                                             <td width="95%" align="left" valign="top" style="padding-left: 10px;">
-                                                <p style="margin-bottom: 10px;">
+                                                <p style="margin-bottom:6px;">
                                                     Dieser Studienvertrag wird vorbehaltlich der nachstehenden Bedingungen für die
                                                     gesamte Studienzeit bis zur Beendigung des Studiums geschlossen. Dieser Vertrag
                                                     kann von jedem Vertragspartner unter Einhaltung einer Kündigungsfrist von vier
@@ -595,7 +614,7 @@ Carbon\Carbon::setlocale($user->locale);
                                                 6.2
                                             </td>
                                             <td width="95%" align="left" valign="top" style="padding-left: 10px;">
-                                                <p style="margin-bottom: 10px;">
+                                                <p style="margin-bottom: 6px;">
                                                     Die Hochschule kann nach Beginn des Studiums den Studienvertrag bei Vorliegen eines
                                                     wichtigen Grundes mit sofortiger Wirkung kündigen. Ein wichtiger Grund liegt
                                                     insbesondere dann vor, wenn die/der Studierende durch ihr/sein persönliches
@@ -614,13 +633,12 @@ Carbon\Carbon::setlocale($user->locale);
                                                 6.3
                                             </td>
                                             <td width="95%" align="left" valign="top" style="padding-left: 10px;">
-                                                <p style="margin-bottom: 10px;">
+                                                <p style="margin-bottom: 6px;">
                                                     Die Hochschule hat das Recht, den Studiengang vor Beginn des Semesters abzusagen,
                                                     wenn die Durchführung wirtschaftlich nicht vertretbar ist, insbesondere, wenn die
                                                     durch die Hochschule zu bestimmende Mindestteilnehmerzahl für den Studiengang
                                                     nicht erreicht wird oder wenn andere wichtige Gründe vorliegen, insbesondere auf
-                                                    Grund gesetzlich angeordneter Maßnahmen, die von der Hochschule nicht zu vertreten
-                                                    sind.
+
                                                 </p>
                                             </td>
                                         </tr>
@@ -658,6 +676,10 @@ Carbon\Carbon::setlocale($user->locale);
                                         <tr>
                                             <td  width="5%" align="left" valign="top"></td>
                                             <td width="95%" align="left" valign="top" style="padding-left: 10px;">
+                                                <p>
+                                                    Grund gesetzlich angeordneter Maßnahmen, die von der Hochschule nicht zu vertreten
+                                                    sind.
+                                                </p>
                                                 <p style="margin-bottom: 10px;">
                                                     Die Absage muss spätestens 6 Wochen vor Beginn des Studiengangs den Studierenden
                                                     bekanntgegeben werden. Innerhalb dieser Frist erwachsen der/dem Studierenden
@@ -887,22 +909,7 @@ Carbon\Carbon::setlocale($user->locale);
                                                 </p>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <h3 class="main-title">11. Organisatorische Änderungen</h3>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" align="left" valign="top">
-                                                <p style="margin-bottom: 10px;">
-                                                    Die Hochschule behält sich vor, Änderungen im Studienablauf vorzunehmen, sofern die
-                                                    Studienziele hierdurch nicht beeinträchtigt werden und die Änderungen im Einklang mit der
-                                                    geltenden Prüfungsordnung stehen und die Studieninhalte nicht wesentlich verändert werden.
-                                                    Als Änderungen im Studienablauf gelten insbesondere der Beginn der Semester oder die
-                                                    Länge der Vorlesungszeiten.
-                                                </p>
-                                            </td>
-                                        </tr>
+
 
                                     </tbody>
                                 </table>
@@ -938,6 +945,22 @@ Carbon\Carbon::setlocale($user->locale);
                                 </table>
                                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                     <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h3 class="main-title">11. Organisatorische Änderungen</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="left" valign="top">
+                                                <p style="margin-bottom: 10px;">
+                                                    Die Hochschule behält sich vor, Änderungen im Studienablauf vorzunehmen, sofern die
+                                                    Studienziele hierdurch nicht beeinträchtigt werden und die Änderungen im Einklang mit der
+                                                    geltenden Prüfungsordnung stehen und die Studieninhalte nicht wesentlich verändert werden.
+                                                    Als Änderungen im Studienablauf gelten insbesondere der Beginn der Semester oder die
+                                                    Länge der Vorlesungszeiten.
+                                                </p>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td colspan="2">
                                                 <h3 class="main-title">12. Online-Streitbeilegung</h3>
@@ -991,7 +1014,7 @@ Carbon\Carbon::setlocale($user->locale);
 
                                     </tbody>
                                 </table>
-                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:100px">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:80px">
                                     <tbody>
                                         <tr>
                                             <td width="49%" align="left">
@@ -1027,7 +1050,7 @@ Carbon\Carbon::setlocale($user->locale);
                                         </tr>
                                     </tbody>
                                 </table>
-                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:100px;margin-bottom:50px">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:80px;margin-bottom:50px">
                                     <tbody>
                                         <tr>
                                             <td width="49%" align="left">
@@ -1107,7 +1130,7 @@ Carbon\Carbon::setlocale($user->locale);
                                 <p style="margin-bottom: 10px;">
                                     Seite 8 von 9
                                 </p>
-                                <b style="font-size: 22px;">Widerrufsbelehrung</b>
+                                <b style="font-size: 22px;font-weight:900">Widerrufsbelehrung</b>
                             </td>
                         </tr>
                         <tr>
