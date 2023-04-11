@@ -1,6 +1,37 @@
 <div>
     <x-data-table.table :model="$applicants" :columns="$columns">
-        <x-slot name="tableAction"></x-slot>
+        <x-slot name="tableAction">
+            @can('exportApplicantReport', auth()->user())
+                <button
+                    class="inline-block px-4 py-2 bg-primary border border-transparent rounded-sm font-semibold text-base text-white hover:bg-opacity-90 focus:outline-none focus:bg-opacity-90 disabled:opacity-25 transition mt-4 duration-150 ease-in-out flex items-center mb-4 xl:mb-0 -mt-0"
+                    wire:click="exportApplicants">
+                    <svg wire:loading.remove wire:target="exportApplicants" class="stroke-current" width="20"
+                         height="20"
+                         viewBox="0 0 20 20" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_392_11349)">
+                            <path d="M15.33 8L10 12" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                            <path d="M4.67001 8L10 12" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                            <path d="M19 13V18H1V13" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                            <path d="M10 12V1" stroke="currentcolor" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_392_11349">
+                                <rect width="20" height="19" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <img wire:loading wire:target="exportApplicants"
+                         src="{{asset('images/loading-loading-forever.gif')}}"
+                         alt="verify email background image"
+                         class="h-5 w-5 object-cover object-center">
+                </button>
+            @endcan
+        </x-slot>
         <x-slot name="head">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">

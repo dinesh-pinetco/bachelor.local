@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Employee\Applicants;
 
 use App\Enums\ApplicationStatus;
+use App\Exports\ApplicantsExport;
 use App\Models\Course;
 use App\Models\DesiredBeginning;
 use App\Models\User;
@@ -13,6 +14,7 @@ use App\Traits\Livewire\WithDataTable;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -138,6 +140,22 @@ class Index extends Component
         }
 
         return $applicants;
+    }
+
+    public function exportApplicants()
+    {
+        request()->merge($this->only(['sort_by', 'sort_type', 'search', 'selectedStatuses', 'filteredBy']));
+
+        $user_ids = $this->filteredBy
+            ? (new Statistics())->getApplicantsByFilter($this->filteredBy, 'get', '*')->pluck('id')->toArray()
+            : User::role(ROLE_APPLICANT)
+                ->searchByKey($this->column, request('search'))
+                ->filter()
+                ->orderBy('id', 'DESC')
+                ->pluck('id')
+                ->toArray();
+
+        return Excel::download(new ApplicantsExport($user_ids), 'applicants.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     public function render()

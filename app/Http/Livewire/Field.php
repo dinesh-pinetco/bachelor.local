@@ -200,11 +200,12 @@ class Field extends Component
         if ($this->field->key == 'desired_beginning_id' && $this->field->related_option_table == 'desired_beginnings') {
             $this->desiredBeginningUpdate();
         } else {
-            if($this->field->key == 'characteristics' && (count($this->fieldValue) > 10)){
-                $this->fieldValue = array_slice($this->fieldValue,0,-1);
-                $this->toastNotify(__('Maximum of 10 characteristics allowed.'),'', TOAST_INFO);
+            if ($this->field->key == 'characteristics' && (count($this->fieldValue) > 10)) {
+                $this->fieldValue = array_slice($this->fieldValue, 0, -1);
+                $this->toastNotify(__('Maximum of 10 characteristics allowed.'), '', TOAST_INFO);
+
                 return;
-            }elseif($this->field->key == 'characteristics' && (count($this->fieldValue) == 0)){
+            } elseif ($this->field->key == 'characteristics' && (count($this->fieldValue) == 0)) {
                 $this->fieldValue = [];
             }
             $this->save();
