@@ -20,6 +20,11 @@
             @this.set('fieldValue', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
         });
 
+        input.addEventListener("countrychange", function() {
+            // const countryCode = PhoneNumber.getSelectedCountryData().dialCode;
+            @this.set('fieldValue', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
+        });
+
         Livewire.on('initialiseTelInput', () => {
             initialiseValue();
         });
