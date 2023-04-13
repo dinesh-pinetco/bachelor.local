@@ -12,7 +12,7 @@ trait SelectionTestPdf
 {
     public function savePassedPdf()
     {
-        $pdfPath = sprintf('test-results/%s.pdf', Str::kebab(class_basename($this->id.' '.$this->full_name. ' ' .__('passed result'))));
+        $pdfPath = sprintf('test-results/%s.pdf', Str::kebab(class_basename($this->id.' '.$this->full_name.' '.__('passed result'))));
 
         UserConfiguration::updateOrCreate(['user_id' => $this->id], [
             'selection_test_result_passed_pdf_path' => $pdfPath,

@@ -27,7 +27,9 @@ class Meteor
     {
         $testUrl = '';
         if ($this->naTan) {
-            $testUrl = config('services.meteor.base_url').'&f='.$this->f;
+            $parsedUrl  = parse_url(config('app.url'));
+
+            $testUrl = config('services.meteor.base_url') . '&f=' . $this->f . '&back_redirection=' . $parsedUrl['host'];
         }
 
         return $testUrl;

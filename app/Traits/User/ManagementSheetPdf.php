@@ -11,7 +11,7 @@ trait ManagementSheetPdf
 {
     public function saveManagementSheetPdf()
     {
-        $pdfPath = sprintf('contract-pdf/%s.pdf', Str::snake($this->id.' '.__('administration sheet') .$this->full_name));
+        $pdfPath = sprintf('contract-pdf/%s.pdf', Str::snake($this->id.' '.__('administration sheet').$this->full_name));
 
         UserConfiguration::updateOrCreate(['user_id' => $this->id], [
             'contract_pdf_path' => $pdfPath,
