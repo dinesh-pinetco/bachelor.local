@@ -114,22 +114,26 @@
             let PhoneNumber = null;
 
             @if($contactProfile?->phone)
-            let telValue = "{{ $contactProfile?->phone }}";
-            document.getElementById('numberValue').value =  "+" + telValue;
+                document.getElementById('numberValue').value =  "{{ $contactProfile?->phone }}";
             @endif
 
-                window.onload = function() {
-                const input = document.querySelector(".tel-input");
+            const input = document.querySelector(".tel-input");
+
+            window.onload = function() {
                 PhoneNumber = intlTelInput(input, {
                     separateDialCode: true,
                     preferredCountries:["de"],
                     utilsScript : "{{ asset('plugins/utils.js') }}",
                 });
-
-                input.addEventListener("change", (event) => {
-                    @this.set('contactProfile.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
-                });
             };
+
+            input.addEventListener("countrychange", function() {
+                @this.set('contactProfile.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
+            });
+
+            input.addEventListener("change", (event) => {
+                @this.set('contactProfile.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
+            });
         </script>
     @endpush
 </div>

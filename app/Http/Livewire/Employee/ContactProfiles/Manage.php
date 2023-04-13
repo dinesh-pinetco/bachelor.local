@@ -30,7 +30,7 @@ class Manage extends Component
     public array $rules = [
         'contactProfile.name' => ['required', 'max:100'],
         'contactProfile.email' => ['required', 'email:rfc,dns,spoof'],
-        'contactProfile.phone' => ['required', 'numeric'],
+        'contactProfile.phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:9'],
         'photo' => ['required', 'image', 'mimes:jpg,jpeg,png'],
     ];
 
