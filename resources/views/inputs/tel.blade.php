@@ -21,7 +21,6 @@
         });
 
         input.addEventListener("countrychange", function() {
-            // const countryCode = PhoneNumber.getSelectedCountryData().dialCode;
             @this.set('fieldValue', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
         });
 
@@ -32,7 +31,7 @@
         function initialiseValue() {
             {{--alert({{ $fieldValue }});--}}
             @if($fieldValue)
-                document.getElementById('numberValue').value = "{{ $fieldValue }}";
+            document.getElementById('numberValue').value = "{{ $fieldValue }}";
 
             @endif
         }
