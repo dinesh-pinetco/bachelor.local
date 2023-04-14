@@ -197,7 +197,7 @@ class User extends Authenticatable implements ContractsAuditable
     {
         Meteor::create([
             'user_id' => $this->id,
-            'na_tan' => Str::random(10),
+            'na_tan' => Meteor::generate_na_tan(),
         ]);
     }
 
