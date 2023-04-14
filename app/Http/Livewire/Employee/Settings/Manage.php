@@ -40,6 +40,7 @@ class Manage extends Component
         'wantToUseTable' => ['required_if:field.type,select'],
         'field.related_option_table' => ['required_if:wantToUseTable,true'],
         'field.is_required' => ['boolean'],
+        'field.validation' => ['nullable'],
         'field.is_active' => ['required'],
         'options.*.key' => ['exclude_if:wantToUseTable,true', 'required_if:field.type,select,radio,checkbox'],
         'options.*.value' => ['exclude_if:wantToUseTable,true', 'required_if:field.type,select,radio,checkbox'],
@@ -119,7 +120,6 @@ class Manage extends Component
         if ($propertyName == 'field.type') {
             $this->resetForm();
         }
-
         if ($propertyName == 'wantToUseTable' && ! $this->wantToUseTable) {
             $this->field->related_option_table = null;
         }

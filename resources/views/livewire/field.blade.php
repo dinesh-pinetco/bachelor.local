@@ -16,6 +16,7 @@
             'field' => $field,
             'validation_errors' => $validation_errors,
         ])
+        <x-jet-input-error for="fieldValue" />
     @elseif($field->type === App\Enums\FieldType::FIELD_MONTH())
         <livewire:date :isEdit="$isEdit" :groupKey="$groupKey" :field="$field" :key="time() . $field->id" hiddenFields="day,year"
             :applicant="$applicant" />

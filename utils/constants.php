@@ -31,3 +31,10 @@ const BACHELOR_PERSONAL_DATA_COMPLETED = 'bachelor_personal_data_completed';
 const BACHELOR_CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD = 'bachelor_consent_to_company_portal_bulletin_board';
 const BACHELOR_APPROVED_BY_COMPANY_FOR_ENROLMENT = 'bachelor_approved_by_company_for_enrolment';
 const BACHELOR_REJECTED_BY_APPLICANT = 'bachelor_rejected_by_applicant';
+
+// Validation
+const VALIDATION_ALPHA = 'alpha';
+const VALIDATION_NUMBERS = 'regex:/^[0-9\s\+]+$/';
+const VALIDATION_ALPHA_NUMBERS = 'regex:/^[a-zA-Z0-9\s]+$/';
+const VALIDATION_ALPHA_NUMBERS_SPECIAL_CHARACTER = 'regex:/^[a-zA-Z0-9\s\-\.\,\&\@\#\%|]*$/';
+
