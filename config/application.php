@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'prefix_na_tan' => env('PREFIX_NA_TAN'),
     'option_tables' => [
         'desired_beginnings',
         'courses',
