@@ -60,7 +60,6 @@ class CreateNewUser implements CreatesNewUsers
             'first_name' => 'Vorname',
             'last_name' => 'Nachname',
             'email' => 'E-Mail Adresse',
-            'phone' => 'Phone',
             'desired_beginning' => 'gewünschter Beginn',
             'course_ids' => 'Studiengang',
         ])->validate();
