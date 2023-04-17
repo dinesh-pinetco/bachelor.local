@@ -89,4 +89,9 @@ class UserPolicy
             ApplicationStatus::TEST_RESET,
         ]);
     }
+
+    public function exportApplicantReport(User $user)
+    {
+        return $user->hasRole([ROLE_EMPLOYEE, ROLE_ADMIN, ROLE_SUPER_ADMIN]);
+    }
 }

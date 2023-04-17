@@ -20,6 +20,10 @@
             @this.set('fieldValue', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
         });
 
+        input.addEventListener("countrychange", function() {
+            @this.set('fieldValue', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
+        });
+
         Livewire.on('initialiseTelInput', () => {
             initialiseValue();
         });
@@ -27,7 +31,7 @@
         function initialiseValue() {
             {{--alert({{ $fieldValue }});--}}
             @if($fieldValue)
-                document.getElementById('numberValue').value = "{{ $fieldValue }}";
+            document.getElementById('numberValue').value = "{{ $fieldValue }}";
 
             @endif
         }

@@ -29,8 +29,12 @@
                 </div>
             @endif
 
-
             <div class="flex-grow w-1/3 text-primary relative">
+                @if($isProfile && auth()->user()->hasRole(ROLE_APPLICANT))
+                    <p>{{ __("Let's go: Fill in all data fields and take the selection test. Then you are ready to study at NORDAKADEMIE.") }}</p>
+                    <p class="mt-3">{{ __("Your data is automatically saved while you enter it and you can interrupt at any time and log back in later to continue the process.") }}</p>
+                    <p class="mt-3">{{ __("PLEASE NOTE: However, you cannot interrupt the selection test.") }}</p>
+                @endif
                 <div class="md:flex items-center justify-between {{ $isProfile ? 'my-7 lg:my-10' : '' }}">
                     <div>
                         <h6 class="text-2xl md:text-3xl font-medium text-primary {{ $isProfile ? '' : 'ml-20 md:ml-32 lg:ml-0 my-7 lg:my-10' }}">
@@ -68,7 +72,7 @@
                     @if(auth()->user()->hasRole(ROLE_APPLICANT) && !$isProfile)
                         <div>
                             <div class="flex items-center justify-end space-x-2 mb-5 md:mb-0">
-                                @if(!urlContains('industries'))
+                                @if($tab?->slug != 'industries')
                                     <div>
                                         <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm"
                                            href="industries">

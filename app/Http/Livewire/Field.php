@@ -108,26 +108,35 @@ class Field extends Component
             $validation['fieldValue'][] = 'email:rfc,dns,spoof';
         }
 
-        if ($this->field->key == 'first_name') {
-            $validation['fieldValue'][] = 'max:512';
-            $validation['fieldValue'][] = 'string';
-        }
+//        if ($this->field->key == 'first_name') {
+//            $validation['fieldValue'][] = 'max:512';
+//            $validation['fieldValue'][] = 'string';
+//        }
+//
+//        if ($this->field->key == 'last_name') {
+//            $validation['fieldValue'][] = 'max:512';
+//            $validation['fieldValue'][] = 'string';
+//        }
 
-        if ($this->field->key == 'last_name') {
-            $validation['fieldValue'][] = 'max:512';
-            $validation['fieldValue'][] = 'string';
+
+        if ($this->field->type == FieldType::FIELD_TEXT()) {
+            $validation['fieldValue'][] = $this->field->validation;
         }
 
         if ($this->field->key == 'phone') {
 //            $validation['fieldValue'][] = 'phone:DE';
 
-            // $validation['fieldValue'][] = 'numeric';
+             $validation['fieldValue'][] = VALIDATION_NUMBERS;
             $validation['fieldValue'][] = 'min:9';
             $validation['fieldValue'][] = 'max:20';
         }
 
         if ($this->field->key == 'street_house_number') {
             $validation['fieldValue'][] = 'string';
+        }
+
+        if ($this->field->key == 'date_of_birth') {
+            $validation['fieldValue'][] = 'before:now';
         }
 
         if ($this->field->key == 'postal_code') {
@@ -200,6 +209,14 @@ class Field extends Component
         if ($this->field->key == 'desired_beginning_id' && $this->field->related_option_table == 'desired_beginnings') {
             $this->desiredBeginningUpdate();
         } else {
+            if ($this->field->key == 'characteristics' && (count($this->fieldValue) > 10)) {
+                $this->fieldValue = array_slice($this->fieldValue, 0, -1);
+                $this->toastNotify(__('Maximum of 10 characteristics allowed.'), '', TOAST_INFO);
+
+                return;
+            } elseif ($this->field->key == 'characteristics' && (count($this->fieldValue) == 0)) {
+                $this->fieldValue = [];
+            }
             $this->save();
         }
 

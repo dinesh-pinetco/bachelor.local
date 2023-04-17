@@ -10,7 +10,7 @@ class SelectionTestResultResource extends JsonResource
 {
     public static function collection($resource)
     {
-        $resource = $resource->whereNotIn('test_id', [6]);
+        $resource = count($resource) ? $resource->whereNotIn('test_id', [6]) : $resource;
 
         return tap(new AnonymousResourceCollection($resource, static::class), function ($collection) {
             if (property_exists(static::class, 'preserveKeys')) {

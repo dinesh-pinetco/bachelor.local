@@ -47,7 +47,7 @@ class ApplicationResource extends JsonResource
                 'martkplatzfreigabe_am' => $this->show_application_on_marketplace_at,
                 'datenfreigabe' => $this->show_test_result_on_marketplace,
                 'studiengaengeIds' => $this->selectedCourses(),
-                'tags' => [],
+                'tags' => $this->getValueByIdentifier('characteristics'),
                 'ort' => $this->getValueByIdentifier('location'),
                 'branche' => ApplicantIndustryResource::collection($this->industries()),
                 'studienbeginn' => $this->desiredBeginning->course_start_date,

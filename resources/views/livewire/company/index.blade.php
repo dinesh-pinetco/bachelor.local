@@ -19,6 +19,10 @@
                         {{ __('Apply directly to selected company') }}
                     </x-primary-button>
                 </div>
+            @elseif(auth()->user()->application_status === ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON)
+                <p>
+                    {{ __("You have to submit your form from progress-bar.") }}
+                </p>
             @endif
 
             @if(auth()->user()->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)

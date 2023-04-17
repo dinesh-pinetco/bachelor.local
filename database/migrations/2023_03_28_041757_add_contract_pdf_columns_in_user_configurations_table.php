@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_configurations', function (Blueprint $table) {
-            $table->string('contract_pdf_path', 2048)->nullable();
-            $table->date('contract_pdf_created_at')->nullable();
+            $table->string('contract_pdf_path', 2048)->nullable()->after('fail_pdf_created_at');
+            $table->date('contract_pdf_created_at')->nullable()->after('contract_pdf_path');
         });
     }
 

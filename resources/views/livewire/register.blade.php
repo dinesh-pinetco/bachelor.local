@@ -119,8 +119,8 @@
         <script>
             let PhoneNumber = null;
 
+            const input = document.querySelector("#phone");
             window.onload = function() {
-                const input = document.querySelector("#phone");
                 PhoneNumber = intlTelInput(input, {
                     separateDialCode: true,
                     preferredCountries:["de"],
@@ -132,10 +132,8 @@
             function submitForm() {
                 PhoneNumber = PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164);
                 document.getElementById('phone').value= PhoneNumber;
-
                 document.querySelector("#application_register").submit();
             }
-
         </script>
     @endpush
 </div>

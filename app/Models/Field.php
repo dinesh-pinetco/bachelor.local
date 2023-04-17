@@ -18,7 +18,7 @@ class Field extends Model implements ContractsAuditable
 {
     use AuditingAuditable, FieldRelations, SetLatestSortOrder, HasManySync;
 
-    protected $fillable = ['tab_id', 'group_id', 'type', 'related_option_table', 'label', 'key', 'placeholder', 'sort_order', 'is_active', 'meta_data'];
+    protected $fillable = ['tab_id', 'group_id', 'type', 'related_option_table', 'label', 'key', 'placeholder', 'sort_order', 'is_active', 'meta_data','validation'];
 
     protected $casts = [
         'meta_data' => 'array',

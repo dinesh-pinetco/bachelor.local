@@ -108,7 +108,7 @@ class _PartnerCompanyUserSeeder extends Seeder
             $user->values()->create([
                 'field_id' => 24,
                 'group_key' => $user->id.'1'.'0',
-                'value' => 'Quia reprehenderit ',
+                'value' => '["belastbar","analytisch"]',
             ]);
 
             $user->values()->create([
@@ -122,7 +122,7 @@ class _PartnerCompanyUserSeeder extends Seeder
     public static function documentFilled($users)
     {
         foreach ($users as $user) {
-            \File::copy(public_path('sample.pdf'), storage_path('app/public/documents/sample.pdf'));
+            \File::copy(public_path('sample.pdf'), storage_path('app/documents/sample.pdf'));
 
             Media::create([
                 'user_id' => $user->id,
@@ -171,12 +171,14 @@ class _PartnerCompanyUserSeeder extends Seeder
                 'user_id' => $user->id,
                 'company_id' => 1,
                 'mail_content' => '<div>Test</div>',
+                'is_see_test_results' => true,
             ]);
 
             $user->companies()->create([
                 'user_id' => $user->id,
                 'company_id' => 2,
                 'mail_content' => '<div>Test</div>',
+                'is_see_test_results' => true,
             ]);
 
             $user->touch('show_application_on_marketplace_at');

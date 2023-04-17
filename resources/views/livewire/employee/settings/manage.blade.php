@@ -69,6 +69,54 @@
                                 <x-jet-input-error for="field.type"/>
                             </div>
 
+                            @if ($field->type == App\Enums\FieldType::FIELD_TEXT())
+                                <div>
+                                    <div class="mt-7 pl-7 space-y-1">
+                                        <div >
+
+                                            <input wire:model="field.validation"
+                                                   type="radio"
+                                                   name="text_validation"
+                                                   value="{{VALIDATION_ALPHA}}"
+                                                   {{ $isEdit ? '' : 'disabled' }}
+                                                    id="only_text"
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor">
+                                            <span class="text-xs ml-0.5" for="only_text">{{ __('Only letters') }}</span>
+                                        </div>
+                                        <div>
+                                            <input wire:model="field.validation"
+                                                   type="radio"
+                                                   name="text_validation"
+                                                   value="{{ VALIDATION_ALPHA_NUMBERS }}"
+                                                   {{ $isEdit ? '' : 'disabled' }}
+                                                   id="text_number"
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor">
+                                            <span class="text-xs ml-0.5" for="text_number">{{ __("Only letters with Number") }}</span>
+                                        </div>
+                                        <div>
+                                            <input wire:model="field.validation"
+                                                   type="radio"
+                                                   name="text_validation"
+                                                   value="{{ VALIDATION_ALPHA_NUMBERS_SPECIAL_CHARACTER }}"
+                                                   {{ $isEdit ? '' : 'disabled' }}
+                                                   id="text_special"
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor">
+                                            <span class="text-xs ml-0.5" for="text_special">{{ __("Letters, Number With Special Characters like ., - , & , @ , #") }}</span>
+                                        </div>
+                                        <div>
+                                            <input wire:model="field.validation"
+                                                   type="radio"
+                                                   name="text_validation"
+                                                   value=""
+                                                   {{ $isEdit ? '' : 'disabled' }}
+                                                   id="no_validation"
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ringoffset-0 focus:outline-none focus:ring-0 hover:cursor">
+                                            <span class="text-xs ml-0.5" for="no_validation">{{ __("Not require any validation") }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
                             @if ($field->type == App\Enums\FieldType::FIELD_SELECT())
                                 <div>
                                     <x-jet-label for="wantToUseTable" class="block">
