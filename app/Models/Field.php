@@ -18,12 +18,12 @@ class Field extends Model implements ContractsAuditable
 {
     use AuditingAuditable, FieldRelations, SetLatestSortOrder, HasManySync;
 
-    protected $fillable = ['tab_id', 'group_id', 'type', 'related_option_table', 'label', 'key', 'placeholder', 'sort_order', 'is_active', 'meta_data','validation'];
+    protected $fillable = ['tab_id', 'group_id', 'type', 'related_option_table', 'label', 'key', 'placeholder', 'sort_order', 'is_active', 'meta_data', 'validation'];
 
     protected $casts = [
         'meta_data' => 'array',
-        'is_required' => 'boolean',
-        'is_active' => 'boolean',
+        'is_required' => 'bool',
+        //        'is_active' => 'bool',
         'field_type' => FieldType::class,
     ];
 
@@ -50,6 +50,11 @@ class Field extends Model implements ContractsAuditable
     public function scopeRequired($query)
     {
         return $query->where('is_required', true);
+    }
+
+    public function scopeActivate($query)
+    {
+        return $query->where('is_active', true);
     }
 
     public function required(): bool

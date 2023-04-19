@@ -93,7 +93,9 @@ class Show extends Component
             if ((count(array_filter(data_get($group->fields, '*.values.*.value')))) > 0) {
                 $fieldsValueCount = count(data_get($group->fields, '0.values')) == 0 ? 1 : count(data_get($group->fields, '0.values'));
                 for ($i = 0; $i < $fieldsValueCount; $i++) {
-                    $emptyGroup = Group::with(['child', 'fields'])->find($group->id);
+                    $emptyGroup = Group::with(['child', 'fields' => function ($q) {
+                        $q->activate();
+                    }])->find($group->id);
                     $group->fields->each(function ($field, $fieldKey) use ($emptyGroup, $i) {
                         $emptyGroup->fields->find($field->id)->setRelation('values', $field->values->slice($i, 1));
                     });
@@ -105,7 +107,9 @@ class Show extends Component
                 $fieldsValueCount = $fieldsValueCount == 0 ? 1 : $fieldsValueCount;
 
                 for ($i = 0; $i < $fieldsValueCount; $i++) {
-                    $emptyGroup = Group::with(['child', 'fields'])->find($group->id);
+                    $emptyGroup = Group::with(['child', 'fields' => function ($q) {
+                        $q->activate();
+                    }])->find($group->id);
                     $group->child->each(function ($child, $childKey) use ($emptyGroup, $i) {
                         // Field Code
                         // check field value is available or not
@@ -123,7 +127,9 @@ class Show extends Component
         });
 
         if ($groupId != null) {
-            $group = Group::with(['child', 'fields'])->find($groupId);
+            $group = Group::with(['child', 'fields' => function ($q) {
+                $q->activate();
+            }])->find($groupId);
             $parentCustomGroups->push($group);
         }
 

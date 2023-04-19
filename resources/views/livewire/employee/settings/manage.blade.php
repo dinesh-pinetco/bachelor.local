@@ -222,15 +222,14 @@
                             </div>
 
                             <div>
-                                <x-jet-label for="status" class="block required">{{ __('Status') }}</x-jet-label>
-                                <x-livewire-select
-                                    class="w-full py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm text-primary placeholder-gray"
-                                    id="status" name="status" model="field.is_active">
+                                <x-jet-label for="is_active" class="block required">{{ __('Status') }}</x-jet-label>
+                                <x-livewire-select id="is_active" name="field.is_active" model="field.is_active"
+                                                   class="w-full">
                                     <option value="">{{ __('Select Status') }}</option>
                                     <option value="1">{{ __('Active') }}</option>
                                     <option value="0">{{ __('InActive') }}</option>
                                 </x-livewire-select>
-                                <x-jet-input-error for="field.is_active"/>
+                                <x-jet-input-error for="field.is_active" />
                             </div>
 
                         </div>
