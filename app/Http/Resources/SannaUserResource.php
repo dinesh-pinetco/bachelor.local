@@ -89,7 +89,6 @@ class SannaUserResource extends JsonResource
             'vertrag_verschickt_am' => $this->contract?->send_date,
             'vertrag_zurueck_am' => $this->contract?->receive_date,
             'studienbeginn' => $this->desiredBeginning->course_start_date,
-//            'bild' => 'SSL issue',
             'bild' => $this->study_sheet?->student_id_card_photo
                 ? get_base64_from_local_storage_file($this->study_sheet?->student_id_card_photo)
                 : ($this->getValueByIdentifier('avatar')
