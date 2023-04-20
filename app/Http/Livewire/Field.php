@@ -118,7 +118,6 @@ class Field extends Component
 //            $validation['fieldValue'][] = 'string';
 //        }
 
-
         if ($this->field->type == FieldType::FIELD_TEXT()) {
             $validation['fieldValue'][] = $this->field->validation;
         }

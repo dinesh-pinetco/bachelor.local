@@ -33,10 +33,13 @@ class ProgressBar
 
     public function calculateProgressByTab($tabSlug): float|int
     {
-        $tab = Tab::where('slug', $tabSlug)->first();
+        $tab = Tab::where('slug', $tabSlug)->with(['fields' => function ($q) {
+            $q->activate();
+        }])->first();
         $points = $tab->fields->where('is_required')->count();
 
         $achievedPoints = $tab->fields()
+            ->activate()
             ->where('is_required', true)
             ->whereHas('values', function ($q) {
                 return $q->where('user_id', $this->applicant->id)

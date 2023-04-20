@@ -77,7 +77,7 @@ return [
     'min' => [
         'numeric' => 'Das :attribute muss mindestens :min sein.',
         'file' => 'Das :attribute muss mindestens :min kilobytes groß sein.',
-        'string' => 'Das :attribute muss mindestens :min Zeichen enthalten.',
+        'string' => 'Die :attribute muss mindestens :min Zeichen enthalten.',
         'array' => 'Das :attribute muss mindestens :min Elemente haben.',
     ],
     'multiple_of' => 'Das :attribute muss ein Vielfaches von :value sein',
@@ -153,5 +153,6 @@ return [
         'employer_academic_degrees.*.ects_credit_point' => 'ECTS-Kreditpunkte ',
         'employer_academic_degrees.*.graduation_date' => 'Datum des Abschlusses',
         'test.passing_limit' => 'Bestehensgrenze',
+        'phone' => 'Telefonnummer',
     ],
 ];

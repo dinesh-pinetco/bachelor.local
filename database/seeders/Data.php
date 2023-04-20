@@ -130,16 +130,6 @@ class Data
                                 'meta_data' => [],
                             ],
                             [
-                                'type' => FieldType::FIELD_EMAIL(),
-                                'label' => 'E-Mail Adresse (wiederholung)',
-                                'placeholder' => 'E-Mail Adresse wiederholung eingeben',
-                                'key' => 'email_repetition',
-                                'sort_order' => 5,
-                                'is_active' => 1,
-                                'is_required' => 1,
-                                'meta_data' => [],
-                            ],
-                            [
                                 'type' => FieldType::FIELD_TEL(),
                                 'label' => 'Telefon',
                                 'placeholder' => 'Telefon',

@@ -16,8 +16,7 @@ class ApplicantDocumentResource extends JsonResource
     {
         return [
             'name' => $this->tag,
-            'file' => 'SSL issue',
-            //            'file' => get_base64_from_local_storage_file($this->path),
+            'file' => get_base64_from_local_storage_file($this->path),
         ];
     }
 }
