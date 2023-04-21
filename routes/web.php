@@ -44,29 +44,31 @@ Route::middleware(['signed'])->group(function () {
     Route::get('/government-form/{user}', GovernmentFormController::class)->name('government-form');
 });
 
-Route::middleware(['auth:sanctum', 'verified', 'activated', 'role:'.ROLE_APPLICANT])->group(function () {
+Route::middleware(['auth:sanctum', 'activated'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
-    Route::get('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::prefix('application/{tab:slug}')->name('application.')->group(function () {
-        Route::get('/', ApplicationController::class)->name('index');
+    Route::middleware(['verified', 'role:'.ROLE_APPLICANT])->group(function () {
+        Route::get('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::prefix('application/{tab:slug}')->name('application.')->group(function () {
+            Route::get('/', ApplicationController::class)->name('index');
+        });
+        Route::get('documents', DocumentController::class)->name('documents.index');
+        Route::get('selection-test', [SelectionTestController::class, 'index'])->name('selection-test.index');
+
+        Route::get('companies', [CompanyController::class, 'index'])->name('companies.index');
+
+        route::prefix('support')->group(function () {
+            Route::get('contact-us', ContactUsController::class)->name('contact-us.index');
+            Route::post('contact-us', [ContactUsController::class, 'store'])->name('contact-us.mail');
+
+            Route::get('faq', FaqController::class)->name('faq.index');
+        });
+
+        Route::get('update-password', function () {
+            return view('livewire.application.update-password');
+        })->name('update-password');
+
+        Route::get('tests/{test}/redirect', \App\Http\Controllers\TestRedirectController::class)->name('tests.redirect');
     });
-    Route::get('documents', DocumentController::class)->name('documents.index');
-    Route::get('selection-test', [SelectionTestController::class, 'index'])->name('selection-test.index');
-
-    Route::get('companies', [CompanyController::class, 'index'])->name('companies.index');
-
-    route::prefix('support')->group(function () {
-        Route::get('contact-us', ContactUsController::class)->name('contact-us.index');
-        Route::post('contact-us', [ContactUsController::class, 'store'])->name('contact-us.mail');
-
-        Route::get('faq', FaqController::class)->name('faq.index');
-    });
-
-    Route::get('update-password', function () {
-        return view('livewire.application.update-password');
-    })->name('update-password');
-
-    Route::get('tests/{test}/redirect', \App\Http\Controllers\TestRedirectController::class)->name('tests.redirect');
 });
 
 Route::get('verified/{hash}', [TestResultVerifyController::class, '__invoke'])->name('applicant.test-result');
