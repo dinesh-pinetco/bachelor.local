@@ -72,46 +72,45 @@
                             @if ($field->type == App\Enums\FieldType::FIELD_TEXT())
                                 <div>
                                     <div class="mt-7 pl-7 space-y-1">
-                                        <div >
-
+                                        <div class="flex space-x-2 items-center">
                                             <input wire:model="field.validation"
                                                    type="radio"
                                                    name="text_validation"
                                                    value="{{VALIDATION_ALPHA}}"
                                                    {{ $isEdit ? '' : 'disabled' }}
-                                                    id="only_text"
-                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor">
-                                            <span class="text-xs ml-0.5" for="only_text">{{ __('Only letters') }}</span>
+                                                   id="only_text"
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor  cursor-pointer">
+                                            <label class="text-xs ml-0.5 -mb-0 cursor-pointer" for="only_text">{{ __('Only letters') }}</label>
                                         </div>
-                                        <div>
+                                        <div class="flex space-x-2 items-center">
                                             <input wire:model="field.validation"
                                                    type="radio"
                                                    name="text_validation"
                                                    value="{{ VALIDATION_ALPHA_NUMBERS }}"
                                                    {{ $isEdit ? '' : 'disabled' }}
                                                    id="text_number"
-                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor">
-                                            <span class="text-xs ml-0.5" for="text_number">{{ __("Only letters with Number") }}</span>
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor  cursor-pointer">
+                                            <label class="text-xs ml-0.5 -mb-0 cursor-pointer" for="text_number">{{ __("Only letters with Number") }}</label>
                                         </div>
-                                        <div>
+                                        <div class="flex space-x-2 items-center">
                                             <input wire:model="field.validation"
                                                    type="radio"
                                                    name="text_validation"
                                                    value="{{ VALIDATION_ALPHA_NUMBERS_SPECIAL_CHARACTER }}"
                                                    {{ $isEdit ? '' : 'disabled' }}
                                                    id="text_special"
-                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor">
-                                            <span class="text-xs ml-0.5" for="text_special">{{ __("Letters, Number With Special Characters like ., - , & , @ , #") }}</span>
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ring-offset-0 focus:outline-none focus:ring-0 hover:cursor  cursor-pointer">
+                                            <label class="text-xs ml-0.5 -mb-0 cursor-pointer" for="text_special">{{ __("Letters, Number With Special Characters like ., - , & , @ , #") }}</label>
                                         </div>
-                                        <div>
+                                        <div class="flex space-x-2 items-center">
                                             <input wire:model="field.validation"
                                                    type="radio"
                                                    name="text_validation"
                                                    value=""
                                                    {{ $isEdit ? '' : 'disabled' }}
                                                    id="no_validation"
-                                                   class="w-5 h-5 form-checkbox text-primary focus:ringoffset-0 focus:outline-none focus:ring-0 hover:cursor">
-                                            <span class="text-xs ml-0.5" for="no_validation">{{ __("Not require any validation") }}</span>
+                                                   class="w-5 h-5 form-checkbox text-primary focus:ringoffset-0 focus:outline-none focus:ring-0 hover:cursor  cursor-pointer">
+                                            <label class="text-xs ml-0.5 -mb-0 cursor-pointer" for="no_validation">{{ __("Not require any validation") }}</label>
                                         </div>
                                     </div>
                                 </div>
