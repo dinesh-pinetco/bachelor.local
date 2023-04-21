@@ -941,5 +941,6 @@
     "Page Expired": "Seite Abgelaufen",
     "Too Many Requests": "Zu viele Anfragen",
     "Server Error": "Server-Fehler",
-    "Service Unavailable": "Dienst nicht verfügbar"
+    "Service Unavailable": "Dienst nicht verfügbar",
+    "User is not logged in.": "Der Benutzer ist nicht eingeloggt."
 }
