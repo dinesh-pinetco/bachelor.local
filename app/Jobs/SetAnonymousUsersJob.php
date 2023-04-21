@@ -34,9 +34,13 @@ class SetAnonymousUsersJob implements ShouldQueue
      */
     public function handle(): void
     {
-        User::where('created_at', '<', Carbon::now()->subYears(ANONYMOUS_USER_YEARS))->role(ROLE_APPLICANT)->get()->each( function ($user){
-            MakeAnonymousUser::make($user)->execute();
-        });
+        User::role(ROLE_APPLICANT)->whereHas('desiredBeginning', function ($query) {
+            $query->where('course_start_date', '<', Carbon::now()->subYears(ANONYMOUS_USER_YEARS));
+        })
+            ->get()
+            ->each(function ($user) {
+                MakeAnonymousUser::make($user)->execute();
+            });
 
     }
 }
