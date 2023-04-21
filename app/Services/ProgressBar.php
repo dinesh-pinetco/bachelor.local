@@ -93,7 +93,7 @@ class ProgressBar
         $updatedStatusResults = $results
             ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED]);
 
-        if($updatedStatusResults->count() === $results->count()){
+        if ($updatedStatusResults->count() === $results->count()) {
             $firstCategoryPoint = Test::query()
             ->where('category', Test::FIRST_CATEGORY)
             ->matchCourses($courses)
@@ -114,6 +114,7 @@ class ProgressBar
 
             return $this->calculateAverageProcess($points, $achievedPoints);
         }
+
         return false;
     }
 }
