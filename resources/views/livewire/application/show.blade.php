@@ -253,7 +253,7 @@
                             @endif
                         @endif
 
-                        @if(!$profileProgress)
+                        @if(!$profileProgress && auth()->user()->hasRole(ROLE_APPLICANT))
                             <span class="text-primary text-sm">{{ __('Please fill in all required fields before submitting the form') }}</span>
                         @endif
 
