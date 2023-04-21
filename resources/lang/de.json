@@ -933,5 +933,14 @@
     "administration sheet": "Verwaltungsbogen",
     "study contract": "Studienvertrag",
     "passed result": "Bestandenes Ergebnis",
-    "failed result": "fehlgeschlagenes Ergebnis"
+    "failed result": "fehlgeschlagenes Ergebnis",
+    "User does not have the right roles.": "Der Benutzer hat nicht die richtigen Rollen.",
+    "Go to Dashboard": "Zum Dashboard gehen",
+    "Not Found": "Nicht gefunden",
+    "Unauthorized": "Unbefugte",
+    "Page Expired": "Seite Abgelaufen",
+    "Too Many Requests": "Zu viele Anfragen",
+    "Server Error": "Server-Fehler",
+    "Service Unavailable": "Dienst nicht verfügbar",
+    "User is not logged in.": "Der Benutzer ist nicht eingeloggt."
 }
