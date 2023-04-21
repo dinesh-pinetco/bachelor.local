@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Document;
+use App\Models\Result;
 use App\Models\Tab;
 use App\Models\Test;
 use App\Models\User;
@@ -84,7 +85,16 @@ class ProgressBar
         $courses = $this->applicant->courses->pluck('course_id')->toArray();
         $points = count(Test::categories());
 
-        $firstCategoryPoint = Test::query()
+        $results = Result::myResults(auth()->user())
+        ->join('tests', 'tests.id', '=', 'results.test_id')
+        ->select(['tests.category', 'results.status', 'results.is_passed', 'results.user_id', 'results.failed_by_nak'])
+        ->get();
+
+        $updatedStatusResults = $results
+            ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED]);
+
+        if($updatedStatusResults->count() === $results->count()){
+            $firstCategoryPoint = Test::query()
             ->where('category', Test::FIRST_CATEGORY)
             ->matchCourses($courses)
             ->whereHas('results', function ($q) {
@@ -92,16 +102,18 @@ class ProgressBar
                     ->where('is_passed', true);
             })->exists();
 
-        $secondCategoryPoint = Test::query()
-            ->where('category', Test::SECOND_CATEGORY)
-            ->matchCourses($courses)
-            ->whereHas('results', function ($q) {
-                $q->where('user_id', $this->applicant->id)
-                    ->where('is_passed', true);
-            })->exists();
+            $secondCategoryPoint = Test::query()
+                ->where('category', Test::SECOND_CATEGORY)
+                ->matchCourses($courses)
+                ->whereHas('results', function ($q) {
+                    $q->where('user_id', $this->applicant->id)
+                        ->where('is_passed', true);
+                })->exists();
 
-        $achievedPoints = (intval($firstCategoryPoint) + intval($secondCategoryPoint));
+            $achievedPoints = (intval($firstCategoryPoint) + intval($secondCategoryPoint));
 
-        return $this->calculateAverageProcess($points, $achievedPoints);
+            return $this->calculateAverageProcess($points, $achievedPoints);
+        }
+        return false;
     }
 }
