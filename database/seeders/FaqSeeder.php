@@ -25,6 +25,6 @@ class FaqSeeder extends Seeder
             'name' => 'Nach dem Einreichen',
             'question' => 'Was passiert nach dem Einreichen meiner Bewerbung?',
             'answer' => 'Wenn Sie Ihre Bewerbung eingereicht haben, werden die Daten von uns überprüft. Anschließend werden Sie zum Auswahltest freigeschaltet.',
-        ])->attachCourses([1, 2, 3]);
+        ])->attachCourses(Course::inRandomOrder()->take(2)->pluck('id')->toArray());
     }
 }

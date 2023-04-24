@@ -31,6 +31,6 @@ class DocumentSeeder extends Seeder
             'description' => __('Upload your Testimonies'),
             'is_required' => true,
             'is_active' => true,
-        ])->attachCourses([1, 2, 3])->extensions()->attach(Extension::pluck('id')->toArray());
+        ])->attachCourses(Course::inRandomOrder()->take(2)->pluck('id')->toArray())->extensions()->attach(Extension::pluck('id')->toArray());
     }
 }
