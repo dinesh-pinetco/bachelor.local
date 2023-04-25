@@ -18,13 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(EmployeeSeeder::class);
         $this->call(DesiredBeginningSeeder::class);
-        $this->call(CourseSeeder::class);
-        $this->call(ExtensionSeeder::class);
-        $this->call(DocumentSeeder::class);
-        $this->call(TestSeeder::class);
-        $this->call(ContactProfileSeeder::class);
-        $this->call(FaqSeeder::class);
         $this->call(TabSeeder::class);
+        $this->call(ApplicantEnrolmentFieldSeeder::class);
         $this->call(StateSeeder::class);
         $this->call(DistrictSeeder::class);
         $this->call(UniversitySeeder::class);
@@ -36,13 +31,15 @@ class DatabaseSeeder extends Seeder
         $this->call(IndustrySeeder::class);
         $this->call(EntranceQualificationSeeder::class);
         $this->call(HealthInsuranceCompanySeeder::class);
-        $this->call(ApplicantEnrolmentFieldSeeder::class);
+        $this->call(CourseSeeder::class);
 
-        // if (app()->environment('local')) {
-        //     $this->call(PartnerCompanyUserSeeder::class);
-        //     $this->call(TestFailedUserSeeder::class);
-        //     $this->call(ContractedUserSeeder::class);
-        // }
+        if (app()->environment('local')) {
+            $this->call(ExtensionSeeder::class);
+            $this->call(DocumentSeeder::class);
+            $this->call(TestSeeder::class);
+            $this->call(ContactProfileSeeder::class);
+            $this->call(FaqSeeder::class);
+        }
 
         Artisan::call('company:sync');
     }
