@@ -32,5 +32,11 @@ class AdminSeeder extends Seeder
             'last_name' => 'hamburg',
             'email' => 'office.hamburg@nordakademie.de',
         ])->assignRole(ROLE_ADMIN);
+
+        User::factory()->hasPreference()->create([
+            'first_name' => 'office',
+            'last_name' => 'hamburg',
+            'email' => 'ado.nolte@nordakademie.de',
+        ])->assignRole(ROLE_ADMIN);
     }
 }
