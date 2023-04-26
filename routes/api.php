@@ -20,18 +20,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('platform/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
-    Route::get('/platform/sanna-users', [SannaUserController::class, 'index']);
-    Route::get('/platform/sanna-users/{user}', [SannaUserController::class, 'show']);
-    Route::post('/platform/sanna-sync', [SannaUserController::class, 'userSync']);
+    Route::get('/sanna-users', [SannaUserController::class, 'index']); // Done
+    Route::get('/sanna-users/{user}', [SannaUserController::class, 'show']);
+    Route::post('/sanna-sync', [SannaUserController::class, 'userSync']);
 
-    Route::get('/platform/firmenportal/bewerber', [ApplicationController::class, 'index']);
-    Route::get('/platform/firmenportal/bewerber/{user}', [ApplicationController::class, 'show']);
-    Route::put('/platform/firmenportal/bewerber/{user}', [ApplicationController::class, 'applicantRejection']);
+    Route::get('/bewerber', [ApplicationController::class, 'index']);
+    Route::get('/bewerber/{user}', [ApplicationController::class, 'show']);
+    Route::put('/bewerber/{user}', [ApplicationController::class, 'applicantRejection']);
 
-    Route::post('platform/logout', [LoginController::class, 'logout']);
+    // /platform/firmenportal/bewerbung
+    // /platform/firmenportal/test
+    // /platform/firmenportal/testablauf
+    // /platform/firmenportal/testablauf/{id}
+    // /platform/firmenportal/testergebnis/iqt
+    // /platform/firmenportal/testablauf/vid
+    // /platform/firmenportal/testtan
+
+    Route::post('/logout', [LoginController::class, 'logout']);
 
     Route::middleware(['auth:sanctum', 'role:'.ROLE_ADMIN])->post('admin-create', function (Request $request) {
         $validateData = $request->validate([
