@@ -31,14 +31,6 @@ Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group
     Route::get('/platform/firmenportal/bewerber/{user}', [ApplicationController::class, 'show']);
     Route::put('/platform/firmenportal/bewerber/{user}', [ApplicationController::class, 'applicantRejection']);
 
-    // /platform/firmenportal/bewerbung
-    // /platform/firmenportal/test
-    // /platform/firmenportal/testablauf
-    // /platform/firmenportal/testablauf/{id}
-    // /platform/firmenportal/testergebnis/iqt
-    // /platform/firmenportal/testablauf/vid
-    // /platform/firmenportal/testtan
-
     Route::post('platform/logout', [LoginController::class, 'logout']);
 
     Route::middleware(['auth:sanctum', 'role:'.ROLE_ADMIN])->post('admin-create', function (Request $request) {
