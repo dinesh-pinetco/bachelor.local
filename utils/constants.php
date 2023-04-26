@@ -38,5 +38,5 @@ const VALIDATION_NUMBERS = 'regex:/^[0-9\s\+]+$/';
 const VALIDATION_ALPHA_NUMBERS = 'regex:/^[a-zA-Z0-9\s]+$/';
 const VALIDATION_ALPHA_NUMBERS_SPECIAL_CHARACTER = 'regex:/^[a-zA-Z0-9\s\-\.\,\&\@\#\%|]*$/';
 
-
+// Applicant anonymous after following year(s)
 const ANONYMOUS_USER_YEARS = 2;
