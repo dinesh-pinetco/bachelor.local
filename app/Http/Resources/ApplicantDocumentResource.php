@@ -15,10 +15,10 @@ class ApplicantDocumentResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'   => $this->id,
+            'id' => $this->id,
             'name' => $this->tag,
             'file' => get_base64_from_local_storage_file($this->path),
-            'file_type' => pathinfo($this->path, PATHINFO_EXTENSION)
+            'file_type' => pathinfo($this->path, PATHINFO_EXTENSION),
         ];
     }
 }

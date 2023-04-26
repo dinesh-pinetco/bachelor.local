@@ -23,21 +23,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN])->group(function () {
-    Route::get('/sanna-users', [SannaUserController::class, 'index']); // Done
+    Route::get('/sanna-users', [SannaUserController::class, 'index']);
     Route::get('/sanna-users/{user}', [SannaUserController::class, 'show']);
     Route::post('/sanna-sync', [SannaUserController::class, 'userSync']);
 
     Route::get('/bewerber', [ApplicationController::class, 'index']);
     Route::get('/bewerber/{user}', [ApplicationController::class, 'show']);
     Route::put('/bewerber/{user}', [ApplicationController::class, 'applicantRejection']);
-
-    // /platform/firmenportal/bewerbung
-    // /platform/firmenportal/test
-    // /platform/firmenportal/testablauf
-    // /platform/firmenportal/testablauf/{id}
-    // /platform/firmenportal/testergebnis/iqt
-    // /platform/firmenportal/testablauf/vid
-    // /platform/firmenportal/testtan
 
     Route::post('/logout', [LoginController::class, 'logout']);
 
