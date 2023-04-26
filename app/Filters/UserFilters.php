@@ -20,8 +20,8 @@ class UserFilters extends Filter
         'isAnonymisiert',
         'location',
         'listedmaketplace',
-        'lastChangedBefore',
-        'lastChangedAfter',
+        'last_changed_gte',
+        'last_changed_lte',
     ];
 
     public function search($keyword)
@@ -57,10 +57,8 @@ class UserFilters extends Filter
     {
         $value = setBoolValueForAPI($value);
 
-        $anonymousKeyId = Field::where('key', 'is_anonymous')->value('id');
-        $this->builder->whereHas('values', function (\Illuminate\Database\Eloquent\Builder $query) use ($anonymousKeyId, $value) {
-            $query->where('field_id', $anonymousKeyId)
-                ->where('value', $value);
+        $this->builder->whereHas('configuration', function ($query) use ($value) {
+            $query->where('competency_catch_up', $value);
         });
     }
 
@@ -83,12 +81,12 @@ class UserFilters extends Filter
         });
     }
 
-    public function lastChangedBefore($timestamps)
+    public function last_changed_gte($timestamps)
     {
         $this->builder->where('last_data_updated_at', '>=', $timestamps);
     }
 
-    public function lastChangedAfter($timestamps)
+    public function last_changed_lte($timestamps)
     {
         $this->builder->where('last_data_updated_at', '<=', $timestamps);
     }

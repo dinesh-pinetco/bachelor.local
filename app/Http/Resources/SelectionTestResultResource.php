@@ -57,6 +57,8 @@ class SelectionTestResultResource extends JsonResource
                 'ergebnis' => sprintf('%s / %s', data_get($meta_mix, 4), data_get($meta_iqt, 3)),
                 'tan' => sprintf('%s - %s', data_get($meta_mix, 0), data_get($meta_mix, 1)),
                 'ergebnis_link' => $this->result,
+                'ergebnis_mix_link' => $cubia_mix->result,
+                'ergebnis_iqt_link' => $cubia_iqt?->result,
 
                 'bindungMix' => data_get($meta_mix, 3),
                 'leistungMix' => data_get($meta_mix, 4),
