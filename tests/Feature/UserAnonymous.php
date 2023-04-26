@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Enums\ApplicationStatus;
-use App\Http\Livewire\Document;
 use App\Models\Course;
 use App\Models\Field;
 use App\Models\FieldValue;
@@ -30,7 +29,7 @@ class UserAnonymous extends TestCase
         $this->assertNotNull(auth()->user()?->values->where('fields.key', 'first_name')->value('value'));
         $this->assertNotNull(auth()->user()?->values->where('fields.key', 'last_name')->value('value'));
 
-        if (auth()->user()->desiredBeginning?->course_start_date <  Carbon::now()->subYears(ANONYMOUS_USER_YEARS)) {
+        if (auth()->user()->desiredBeginning?->course_start_date < Carbon::now()->subYears(ANONYMOUS_USER_YEARS)) {
             MakeAnonymousUser::make(User::latest()->first())->execute();
         }
 
@@ -54,7 +53,7 @@ class UserAnonymous extends TestCase
         $this->assertNotNull(auth()->user()->values->where('fields.key', 'first_name')->value('value'));
         $this->assertNotNull(auth()->user()->values->where('fields.key', 'last_name')->value('value'));
 
-        if (auth()->user()->desiredBeginning?->course_start_date <  Carbon::now()->subYears(ANONYMOUS_USER_YEARS)) {
+        if (auth()->user()->desiredBeginning?->course_start_date < Carbon::now()->subYears(ANONYMOUS_USER_YEARS)) {
             MakeAnonymousUser::make(auth()->user())->execute();
         }
 

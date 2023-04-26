@@ -28,7 +28,7 @@ class MakeAnonymousUser
         $fieldValues = collect([
             ['field_id' => $fieldIds['date_of_birth'], 'value' => null],
             ['field_id' => $fieldIds['first_name'], 'value' => null],
-            ['field_id' => $fieldIds['last_name'], 'value' => null]
+            ['field_id' => $fieldIds['last_name'], 'value' => null],
         ]);
 
         $fieldValues->each(function ($fieldValue) {
