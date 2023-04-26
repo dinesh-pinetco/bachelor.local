@@ -2,12 +2,10 @@
 
 namespace App\Jobs;
 
-use App\Console\Commands\SetAnonymouseUsers;
 use App\Models\User;
 use App\Services\MakeAnonymousUser;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -29,18 +27,18 @@ class SetAnonymousUsersJob implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle(): void
     {
-        User::role(ROLE_APPLICANT)->whereHas('desiredBeginning', function ($query) {
-            $query->where('course_start_date', '<', Carbon::now()->subYears(ANONYMOUS_USER_YEARS));
-        })
-            ->get()
-            ->each(function ($user) {
-                MakeAnonymousUser::make($user)->execute();
+        User::role(ROLE_APPLICANT)
+            ->with('desiredBeginning')
+            ->whereHas('desiredBeginning', function ($beginningQuery) {
+                $beginningQuery->where('course_start_date', '<', Carbon::now()->subYears(ANONYMOUS_USER_YEARS));
+            })
+            ->chunk(100, function ($users) {
+                foreach ($users as $user) {
+                    MakeAnonymousUser::make($user)->execute();
+                }
             });
-
     }
 }
