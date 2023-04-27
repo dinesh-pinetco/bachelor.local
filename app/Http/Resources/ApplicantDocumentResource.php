@@ -18,7 +18,7 @@ class ApplicantDocumentResource extends JsonResource
             'id' => $this->id,
             'name' => $this->tag,
             'file' => get_base64_from_local_storage_file($this->path),
-            'file_type' => pathinfo($this->path, PATHINFO_EXTENSION),
+            'file_type' => $this->extension,
         ];
     }
 }
