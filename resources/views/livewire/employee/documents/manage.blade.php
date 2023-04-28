@@ -71,7 +71,7 @@
                                 <x-jet-input-error for="document.is_active"/>
                             </div>
 
-                            <div>
+                            <div class="pb-1">
                                 <x-jet-label for="courses" class="block">{{ __('Assign Course') }}
                                 </x-jet-label>
                                 <x-multi-select
@@ -81,6 +81,7 @@
                                     :value="$course_ids"
                                     :placeholder="__('Select course')"
                                     :options='$courses'
+                                    position="top"
                                     key-by="id"
                                     label-by="name"
                                 />
