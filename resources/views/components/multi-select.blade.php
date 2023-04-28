@@ -6,13 +6,23 @@
 'value' => [],
 'wireModel' => $attributes->whereStartsWith('wire:model')->first(),
 'disabled'=> false,
-'maxHight'
+'maxHight',
+'position' => ''
 ])
 @php
     $maxHight = [
             'h-32' => 'max-h-32',
             'h-60' => 'max-h-60',
         ][$maxHight ?? 'h-60'];
+
+    switch ($position) {
+        case 'top':
+            $position = 'bottom-full mb-1';
+            break;
+        default:
+            $position = 'top-full';
+            break;
+    }
 @endphp
 @php
     if ($value && count($value)) {
@@ -85,14 +95,14 @@
 
         <ul x-ref="panel"
             x-show="open"
-            x-transition.origin.top.left
+            x-transition
             x-on:click.outside="close($refs.button)"
             :id="$id('multiselect')"
             tabindex="-1"
             role="listbox"
             aria-labelledby="listbox-label"
             aria-activedescendant="listbox-option-3"
-            class="absolute z-10 mt-1 {{ $maxHight }} w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            class="absolute z-10 mt-1 {{ $maxHight }} {{ $position }} left-0 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
 
             @forelse($options as $option)
                 <li class="text-primary relative cursor-default select-none py-2 pl-8 pr-4" id="listbox-option-0"
