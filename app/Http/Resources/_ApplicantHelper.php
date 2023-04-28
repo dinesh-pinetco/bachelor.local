@@ -27,16 +27,6 @@ trait _ApplicantHelper
             return Nationality::where('id', $value)->value('name');
         }
 
-        if ($identifier == 'gender') {
-            $genders = [
-                'mr' => 1,
-                'ms' => 2,
-                'mrs' => 3,
-            ];
-
-            return data_get($genders, $value);
-        }
-
         return $value;
     }
 
