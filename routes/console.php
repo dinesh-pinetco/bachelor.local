@@ -32,20 +32,20 @@ Artisan::command('clean-dump:testing', function () {
     DB::table('study_sheets')->truncate();
     DB::table('user_configurations')->truncate();
     DB::table('user_hubspot_configurations')->truncate();
+    DB::table('media')->truncate();
+    DB::table('audits')->truncate();
+    DB::table('field_values')->truncate();
+    DB::table('meta')->truncate();
 
-    User::all()->each(function ($user) {
-        if($user->hasRole(ROLE_APPLICANT)){
-            DB::table('media')->where('user_id', $user->id)->truncate();
-            DB::table('audits')->where('user_id', $user->id)->truncate();
-            DB::table('field_values')->where('user_id', $user->id)->truncate();
-            DB::table('meta')->where('user_id', $user->id)->truncate();
-            DB::table('model_has_courses')->where('user_id', $user->id)->truncate();
-            DB::table('model_has_roles')->where('user_id', $user->id)->truncate();
-            DB::table('sessions')->where('user_id', $user->id)->truncate();
-        }
-    });
+    $users = User::whereHas('roles', function ($query) {
+        $query->where('name', ROLE_APPLICANT);
+    })->get();
 
-    User::role(ROLE_APPLICANT)->forceDelete();
+    foreach($users as $user){
+        DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+        User::where('id', $user->id)->forceDelete();
+    }
+
     User::all()->each(function ($user) {
         $user->update(['password' => Hash::make('nak@123#')]);
     });
