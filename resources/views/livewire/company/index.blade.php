@@ -45,13 +45,16 @@
                                 </div>
                                 <x-jet-input-error for="mailContent"/>
                                 <div class="flex items-start space-x-2 mt-5">
-                                    <input
-                                        wire:model="is_see_test_results"
-                                        type="checkbox"
-                                        class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
-                                    <span class="checkbox-label flex-grow">
-                                        {{ __('Selected companies can see the test results') }}
-                                    </span>
+                                    <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
+                                        <input
+                                            id="is_see_test_results"
+                                            wire:model="is_see_test_results"
+                                            type="checkbox"
+                                            class="flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
+                                        <span class="checkbox-label flex-grow pl-2">
+                                            {{ __('Selected companies can see the test results') }}
+                                        </span>
+                                    </label>
 
                                 </div>
                                 <x-primary-button type="button" @click="applyToSelectedCompany()">
@@ -146,7 +149,7 @@
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <p class="text-sm">
-                        {{__('Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.')}}
+                        {!! trans('Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.')!!}
                     </p>
                 </div>
                 <h6 class="text-lg lg:text-2xl font-medium text-primary mb-2">{{ __('Appllied Company') }}: </h6>
@@ -174,7 +177,7 @@
                             fill="currentColor"/>
                     </svg>
                     <p class="text-sm">
-                        {{ __('Additionally, would you like to be listed on the market place so companies can contact you?') }}
+                        {!! trans('Would you also like to be listed on the applicant marketplace so that you become visible to all partner companies and they can even contact you directly?') !!}
                     </p>
                 </div>
                 <div class="flex flex-wrap items-end gap-4">
@@ -189,8 +192,8 @@
 
             @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
                 <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
-                <div class="flex justify-start space-x-4 text-white p-4 bg-darkgreen rounded-sm mr-auto mb-5">
-                    <svg class="text-white stroke-current w-6 h-6 flex-shrink-0" width="44" height="44"
+                <div class="flex justify-start items-center space-x-4 text-darkgreen rounded-sm mr-auto mb-7">
+                    <svg class="text-darkgreen stroke-current w-6 h-6 flex-shrink-0" width="44" height="44"
                             viewBox="0 0 44 44"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -203,7 +206,10 @@
                     </p>
                 </div>
 
+                <h5 class="text-base font-medium md:text-lg text-primary mb-2">Application to companies</h5>
+
                 <div class="w-full max-w-md">
+                    <x-jet-label>{{ __('Selected Companies') }}</x-jet-label>
                     <x-multi-select
                         name="company"
                         wire:model="selectedCompanies"
@@ -232,6 +238,8 @@
                     @endforeach
                 </div>
                     <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
+                        <h5 class="text-base font-medium md:text-lg text-primary mb-2">Marketplace</h5>
+
                         <input id="email-content" type="hidden" name="mailContent">
                         <trix-editor class="prose formatted-content"
                                      id="trix-editor"
@@ -243,17 +251,20 @@
                     <x-jet-input-error for="mailContent"/>
 
                     <div class="flex items-start space-x-2 mt-5">
-                        <input
-                            wire:model="is_see_test_results"
-                            type="checkbox"
-                            class="flex-shrink-0 w-5 h-5 mt-1 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
-                        <span class="checkbox-label flex-grow">
-                            {{ __('Selected companies can see the test results') }}
-                        </span>
+                        <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
+                            <input
+                                id="is_see_test_results"
+                                wire:model="is_see_test_results"
+                                type="checkbox"
+                                class="flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
+                            <span class="checkbox-label flex-grow pl-2">
+                                {{ __('Selected companies can see the test results') }}
+                            </span>
+                        </label>
 
                     </div>
                     <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
-                        {{ __('Apply to Selected Company') }}
+                        {{ __('Update') }}
                     </x-primary-button>
                 @endif
 
