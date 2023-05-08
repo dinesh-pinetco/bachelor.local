@@ -1,4 +1,4 @@
-# NAK bachelor
+# NAK bachelor 
 
 ### Project setup steps:
 
