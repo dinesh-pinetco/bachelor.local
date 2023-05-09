@@ -1,11 +1,14 @@
-<div class="h-full">
-    <div :class="{ 'bg-primary hover:bg-opacity-80 text-white': '{{ $overAllProgress == 100 }}' }"
-         class="rounded-full flex items-center px-4 py-2 h-full text-primary">
-
+<div class="h-full flex items-center">
         @if ($overAllProgress == 100 && auth()->user()->application_status->id() < \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id())
             <button wire:click="$set('show', true)"
-                    class="hidden md:inline-block text-sm lg:text-base opacity-0 select-none text-white font-bold capitalize mr-6 -mb-0 opacity-100">{{ __('Submit') }}</button>
+                    class="hidden md:inline-block text-sm lg:text-base opacity-0 select-none bg-red rounded-md px-4 py-2 text-white font-bold capitalize mr-4 -mb-0 opacity-100">{{ __('Submit') }}</button>
         @endif
+        <div @class([
+            'rounded-full flex items-center px-4 py-2 h-full',
+            'text-primary' => $overAllProgress < 100,
+            'bg-darkgreen hover:bg-opacity-80 text-white' => $overAllProgress == 100 && auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id(),
+            'bg-primary hover:bg-opacity-80 text-white' => $overAllProgress == 100,
+         ])>
 
         <div class="flex items-center space-x-4">
             <svg data-tippy-content="({{ __('Here you can see the progress of your application. After filling out all mandatory fields, your application progress is at 100% and a button appears to submit your application. On the way to 100%, your entries are automatically saved so that no data is lost.') }})" :class="{ 'text-white font-semibold': '{{ $overAllProgress == 100 }}' }" class="w-5 h-5 cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

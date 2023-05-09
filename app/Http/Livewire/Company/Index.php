@@ -5,10 +5,13 @@ namespace App\Http\Livewire\Company;
 use App\Enums\ApplicationStatus;
 use App\Models\Company;
 use App\Models\User;
+use App\Traits\Livewire\HasModal;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use HasModal;
+
     public $companies = [];
 
     public $selectedCompanies = [];
@@ -52,7 +55,7 @@ class Index extends Component
         $this->user = auth()->user();
 
         $this->mailContent = $this->user?->companies()->first()?->mail_content;
-        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results;
+        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results ?? false;
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
@@ -138,8 +141,6 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
-
-        // $this->reset('selectedCompanies');
     }
 
     protected function fetchAppliedCompanies()
@@ -188,9 +189,11 @@ class Index extends Component
             ]);
         }
 
-        $this->user->update([
-            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
-        ]);
+        if ($this->user->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id()) {
+            $this->user->update([
+                'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
+            ]);
+        }
 
         $this->isAppliedToCompany = true;
 
@@ -214,6 +217,11 @@ class Index extends Component
         $this->selectedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+    }
+
+    public function updateCompanies()
+    {
+        $this->open();
     }
 
     public function render()

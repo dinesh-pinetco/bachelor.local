@@ -764,7 +764,7 @@
     ":name is ready for enrollment": ":Name is ready for enrollment",
     "Partner companies": "Partner companies",
     ":name failed the test.": ":name failed the test.",
-    "Cancle / Reject Applicantion": "Cancle / Reject Applicantion",
+    "Cancel application (your data will be deleted)": "Cancel application (your data will be deleted)",
     "cancel / reject": "cancel / reject",
     "Sync Companies": "Sync Companies",
     "Syncing...": "Syncing...",
@@ -775,8 +775,8 @@
     "Select partner company": "Select partner company",
     "Partner company contacts": "Partner company contacts",
     "Select company contacts": "Select company contacts",
-    "Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.": "Congratulations! You have applied to the following companies. You can edit the selected companies or add more at any time.",
-    "Additionally, would you like to be listed on the market place so companies can contact you?": "Additionally, would you like to be listed on the market place so companies can contact you?",
+    "Congratulations! You have announced your application to the following companies. They are now looking forward to your application on their career or jobs page. You can edit the selected companies or add more at any time.": "Congratulations! You have announced your application to the following companies. They are now looking forward to your application on their career or jobs page. You can edit the selected companies or add more at any time.",
+    "Would you also like to be listed on the applicant marketplace so that you become visible to all partner companies and they can even contact you directly?": "Would you also like to be listed on the applicant marketplace so that you become visible to all partner companies and they can even contact you directly?",
     "Yes, get listed": "Yes, get listed",
     "Applicant has transferred data to the company portal": "Applicant has transferred data to the company portal",
     "Active application to the following": "Active application to the following",
@@ -844,7 +844,7 @@
     "Congratulations! You have entered all data in the application process." : "Congratulations! You have entered all data in the application process.",
     "In the next step you can select and mark the companies you want to apply to.": "In the next step you can select and mark the companies you want to apply to.",
     "You can also activate your data for all our partner companies to view, as this increases your chances of a dual study place even further.": "You can also activate your data for all our partner companies to view, as this increases your chances of a dual study place even further.",
-    "You will be informed as soon as the test results are available": "You will be informed as soon as the test results are available",
+    "You will be informed as soon as the test results are available.": "You will be informed as soon as the test results are available.",
     "The file is required": "The file is required",
     "The file size must not be greater than :max": "The file size must not be greater than :max",
     "Applicant has been enrolled successfully.": "Applicant has been enrolled successfully.",
@@ -865,5 +865,7 @@
     "Moodle: Mathe-Test": "Mathe-Test",
     "Moodle: Englisch-Test": "Englisch-Test",
     "Welcome to the selection test. This consists of several sections and is not an insurmountable challenge for you. Stay calm and take two quiet hours for it. No preparation is necessary.": "Welcome to the selection test. This consists of several sections and is not an insurmountable challenge for you. Stay calm and take two quiet hours for it. No preparation is necessary.",
-    "Is enrolled outside system?": "Is enrolled outside system?"
+    "Is enrolled outside system?": "Is enrolled outside system?",
+    "Application to companies": "Application to companies",
+    "Marketplace": "Marketplace"
 }
