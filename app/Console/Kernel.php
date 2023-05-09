@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('sync:statistics')->lastDayOfMonth()->at('23:55');
 
         $schedule->command('applicant:hubspot')->dailyAt('03:00');
+        $schedule->command('anonymous:users')->yearlyOn(10, 1, '01:00');
     }
 
     /**
