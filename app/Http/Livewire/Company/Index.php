@@ -189,9 +189,11 @@ class Index extends Component
             ]);
         }
 
-        $this->user->update([
-            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
-        ]);
+        if ($this->user->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id()) {
+            $this->user->update([
+                'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
+            ]);
+        }
 
         $this->isAppliedToCompany = true;
 
