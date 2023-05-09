@@ -844,7 +844,7 @@
     "Congratulations! You have entered all data in the application process." : "Congratulations! You have entered all data in the application process.",
     "In the next step you can select and mark the companies you want to apply to.": "In the next step you can select and mark the companies you want to apply to.",
     "You can also activate your data for all our partner companies to view, as this increases your chances of a dual study place even further.": "You can also activate your data for all our partner companies to view, as this increases your chances of a dual study place even further.",
-    "You will be informed as soon as the test results are available": "You will be informed as soon as the test results are available",
+    "You will be informed as soon as the test results are available.": "You will be informed as soon as the test results are available.",
     "The file is required": "The file is required",
     "The file size must not be greater than :max": "The file size must not be greater than :max",
     "Applicant has been enrolled successfully.": "Applicant has been enrolled successfully.",
@@ -865,5 +865,7 @@
     "Moodle: Mathe-Test": "Mathe-Test",
     "Moodle: Englisch-Test": "Englisch-Test",
     "Welcome to the selection test. This consists of several sections and is not an insurmountable challenge for you. Stay calm and take two quiet hours for it. No preparation is necessary.": "Welcome to the selection test. This consists of several sections and is not an insurmountable challenge for you. Stay calm and take two quiet hours for it. No preparation is necessary.",
-    "Is enrolled outside system?": "Is enrolled outside system?"
+    "Is enrolled outside system?": "Is enrolled outside system?",
+    "Application to companies": "Application to companies",
+    "Marketplace": "Marketplace"
 }

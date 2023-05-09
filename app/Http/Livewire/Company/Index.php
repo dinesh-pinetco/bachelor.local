@@ -5,10 +5,13 @@ namespace App\Http\Livewire\Company;
 use App\Enums\ApplicationStatus;
 use App\Models\Company;
 use App\Models\User;
+use App\Traits\Livewire\HasModal;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use HasModal;
+
     public $companies = [];
 
     public $selectedCompanies = [];
@@ -138,8 +141,6 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
-
-        // $this->reset('selectedCompanies');
     }
 
     protected function fetchAppliedCompanies()
@@ -214,6 +215,11 @@ class Index extends Component
         $this->selectedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+    }
+
+    public function updateCompanies()
+    {
+        $this->open();
     }
 
     public function render()
