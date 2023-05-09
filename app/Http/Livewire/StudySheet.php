@@ -8,6 +8,7 @@ use App\Models\Nationality;
 use App\Models\School;
 use App\Models\StudySheet as StudySheetModel;
 use App\Traits\StudySheetFormValidations;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -61,9 +62,9 @@ class StudySheet extends Component
 
         $this->courseName = Course::where('id', $this->applicant->getValueByField('enroll_course')?->value)->first()?->name;
 
-        $this->dateOfBirth = $this->applicant->getValueByField('date_of_birth')?->value;
+        $this->dateOfBirth = Carbon::parse($this->applicant->getValueByField('date_of_birth')?->value)->format('d.m.Y');
 
-        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F.Y');
+        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F Y');
 
         $this->firstName = $this->applicant->first_name;
 

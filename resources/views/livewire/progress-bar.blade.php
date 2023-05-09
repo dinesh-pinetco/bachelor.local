@@ -1,6 +1,9 @@
 <div class="h-full">
-    <div :class="{ 'bg-primary hover:bg-opacity-80 text-white': '{{ $overAllProgress == 100 }}' }"
-         class="rounded-full flex items-center px-4 py-2 h-full text-primary">
+        <div @class([
+            'rounded-full flex items-center px-4 py-2 h-full text-primary',
+            'bg-darkgreen hover:bg-opacity-80 text-white' => $overAllProgress == 100 && auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id(),
+            'bg-primary hover:bg-opacity-80 text-white' => $overAllProgress == 100,
+         ])>
 
         @if ($overAllProgress == 100 && auth()->user()->application_status->id() < \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id())
             <button wire:click="$set('show', true)"

@@ -52,7 +52,7 @@ class Index extends Component
         $this->user = auth()->user();
 
         $this->mailContent = $this->user?->companies()->first()?->mail_content;
-        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results;
+        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results ?? false;
 
         $this->dispatchBrowserEvent('init-trix-editor');
 

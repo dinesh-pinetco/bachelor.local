@@ -32,14 +32,11 @@ class DatabaseSeeder extends Seeder
         $this->call(EntranceQualificationSeeder::class);
         $this->call(HealthInsuranceCompanySeeder::class);
         $this->call(CourseSeeder::class);
-
-        if (app()->environment('local')) {
-            $this->call(ExtensionSeeder::class);
-            $this->call(DocumentSeeder::class);
-            $this->call(TestSeeder::class);
-            $this->call(ContactProfileSeeder::class);
-            $this->call(FaqSeeder::class);
-        }
+        $this->call(ExtensionSeeder::class);
+        $this->call(DocumentSeeder::class);
+        $this->call(TestSeeder::class);
+        $this->call(ContactProfileSeeder::class);
+        $this->call(FaqSeeder::class);
 
         Artisan::call('company:sync');
     }

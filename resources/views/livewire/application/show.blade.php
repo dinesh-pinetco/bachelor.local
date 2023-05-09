@@ -99,7 +99,7 @@
                                     </div>
                                 @else
                                     <div>
-                                        <a class="text-primary" href="{{ route('companies.index') }}">
+                                        <a class="w-28 h-10 flex items-center justify-center text-white bg-primary rounded-sm" href="{{ route('companies.index') }}">
                                             {{ __("Skip") }}
                                         </a>
                                     </div>
