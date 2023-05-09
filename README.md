@@ -17,6 +17,7 @@
   yarn && yarn run dev
   ```
 - If you need test data run following:
+
   ```shell
   php artisan db:seed
   ```
