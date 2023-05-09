@@ -49,7 +49,7 @@
                     fill="currentColor"/>
             </svg>
             <p class="text-sm">
-                {{ __('You will be informed as soon as the test results are available') }}
+                {{ __('You will be informed as soon as the test results are available.') }}
             </p>
         </div>
     @endif

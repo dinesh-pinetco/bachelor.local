@@ -943,5 +943,9 @@
     "Server Error": "Server-Fehler",
     "Service Unavailable": "Dienst nicht verfügbar",
     "User is not logged in.": "Der Benutzer ist nicht eingeloggt.",
-    "Update": "aktualisieren"
+    "Update": "aktualisieren",
+    "Application to companies": "Bewerbung bei Unternehmen",
+    "Marketplace": "Bewerbermarktplatz",
+    "You will be informed as soon as the test results are available.": "Du wirst informiert, sobald die Ergebnisse vorliegen.",
+    "Add companies": "Unternehmen hinzufügen"
 }
