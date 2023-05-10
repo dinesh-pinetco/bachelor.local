@@ -312,6 +312,7 @@ class User extends Authenticatable implements ContractsAuditable
     public function industries()
     {
         $industry_ids = json_decode($this->values()->where('field_id', Field::where('key', 'industry')->value('id'))->value('value')) ?? [];
+
         return Industry::whereIn('id', $industry_ids)->get();
 
     }
