@@ -126,7 +126,6 @@
                     preferredCountries:["de"],
                     utilsScript : "{{ asset('plugins/utils.js') }}",
                 });
-
             };
 
             function submitForm() {
