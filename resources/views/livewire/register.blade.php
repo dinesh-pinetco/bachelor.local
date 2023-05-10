@@ -58,7 +58,7 @@
             <div class="tel-input" wire:ignore>
                 <x-jet-label class="text-white font-bold" for="password_confirmation"
                              value="{{ __('Phone number') }}"></x-jet-label>
-                <x-jet-input class="block w-full" type="tel" id="phone" name="phone" :value="old('phone')"
+                <x-jet-input class="block w-full tel-input" type="tel" id="phone" name="phone" :value="old('phone')"
                              placeholder="{{ __('Enter phone number') }}" maxlength="15"></x-jet-input>
             </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -78,19 +78,6 @@
                 </div>
             @endif
         </div>
-{{--        <div class="flex items-center justify-end mt-6 md:mt-10">--}}
-{{--            <x-jet-secondary-button id="myButton" class="relative" type="submit" onclick="this.disabled=true; this.form.submit();">--}}
-{{--                {{ __('Start application') }}--}}
-{{--                <svg class="stroke-current ml-4" width="20" height="16" viewBox="0 0 20 16" fill="none"--}}
-{{--                     xmlns="http://www.w3.org/2000/svg">--}}
-{{--                    <path d="M12 1L19 8M19 8L12 15M19 8H1" stroke="stroke-current" stroke-width="2"--}}
-{{--                          stroke-linecap="round" stroke-linejoin="round"/>--}}
-{{--                </svg>--}}
-{{--                <div id="loader" class="">--}}
-{{--                    <span class="absolute inset-0 flex items-center justify-center bg-primary text-white">{{ __('Loading...') }}</span>--}}
-{{--                </div>--}}
-{{--            </x-jet-secondary-button>--}}
-{{--        </div>--}}
         <div class="flex items-center justify-end mt-6 md:mt-10">
             <x-jet-secondary-button type="button" onclick="submitForm()">
                 {{ __('Start application') }}
@@ -126,13 +113,25 @@
                     preferredCountries:["de"],
                     utilsScript : "{{ asset('plugins/utils.js') }}",
                 });
+
+                // Tel input script
+                const numberInput = document.querySelector(".tel-input");
+                numberInput.addEventListener('input', function(event) {
+                    const inputValue = event.target.value;
+                    const numberPattern = /^[0-9]*$/;
+
+                    if (!numberPattern.test(inputValue)) {
+                        event.target.value = inputValue.replace(/\D/g, '');
+                    }
+                });
             };
 
             function submitForm() {
                 PhoneNumber = PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164);
-                document.getElementById('phone').value= PhoneNumber;
+                document.getElementById('phone').value = PhoneNumber;
                 document.querySelector("#application_register").submit();
             }
+
         </script>
     @endpush
 </div>

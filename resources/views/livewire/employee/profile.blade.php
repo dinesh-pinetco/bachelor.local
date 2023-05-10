@@ -26,6 +26,7 @@
                             <input class="w-full tel-input h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
                                    type="text"
                                    id="numberValue"
+                                   value="{{ $user?->phone }}"
                                    placeholder="{{ __('Enter phone number') }}"
                             />
                         </div>
@@ -81,10 +82,6 @@
         <script>
             let PhoneNumber = null;
 
-            @if($user?->phone)
-                document.getElementById('numberValue').value =  "{{ $user?->phone }}";
-            @endif
-
             const input = document.querySelector(".tel-input");
 
             window.onload = function() {
@@ -92,6 +89,15 @@
                     separateDialCode: true,
                     preferredCountries:["de"],
                     utilsScript : "{{ asset('plugins/utils.js') }}",
+                });
+
+                input.addEventListener('input', function(event) {
+                    const inputValue = event.target.value;
+                    const numberPattern = /^[0-9]*$/;
+
+                    if (!numberPattern.test(inputValue)) {
+                        event.target.value = inputValue.replace(/\D/g, '');
+                    }
                 });
             };
 

@@ -63,9 +63,7 @@ $('#myButton').on('click', function (event){
     $(this).addClass('active');
 });
 
-$('#phone').keyup(function () {
-    $(this).replace(/[^0-9\.]/g,'');
-});
+
 
 tippy('[data-tippy-content]', {
     theme: 'light',
@@ -88,4 +86,15 @@ tippy('[data-tippy-content]', {
         let cont = instance.reference.dataset.tippyContent;
         instance.setContent(cont);
     },
+});
+
+// Tel input script
+const numberInput = document.querySelector(".tel-input");
+numberInput.addEventListener('input', function(event) {
+    const inputValue = event.target.value;
+    const numberPattern = /^[0-9]*$/;
+
+    if (!numberPattern.test(inputValue)) {
+        event.target.value = inputValue.replace(/\D/g, '');
+    }
 });
