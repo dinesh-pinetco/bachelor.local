@@ -63,6 +63,10 @@ $('#myButton').on('click', function (event){
     $(this).addClass('active');
 });
 
+$('#phone').keyup(function () {
+    $(this).replace(/[^0-9\.]/g,'');
+});
+
 tippy('[data-tippy-content]', {
     theme: 'light',
     maxWidth: 300,

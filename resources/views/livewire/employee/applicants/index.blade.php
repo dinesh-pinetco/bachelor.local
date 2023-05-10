@@ -181,7 +181,7 @@
                                 </div>
                             @else
                                 <span class="cursor-auto">
-                                    {{ $applicant->desiredBeginning?->courses->first()->name }}
+                                    {{ $applicant->desiredBeginning?->courses->first()?->name }}
                                 </span>
                             @endif
                         </td>

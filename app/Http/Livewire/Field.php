@@ -153,6 +153,16 @@ class Field extends Component
         return $validation;
     }
 
+    public function messages(): array
+    {
+        if ($this->field->key == 'phone') {
+            return [
+                'fieldValue.regex' => __('The Phone number field contains an invalid number'),
+            ];
+        }
+        return  [];
+    }
+
     public function mount()
     {
         if ($this->field) {

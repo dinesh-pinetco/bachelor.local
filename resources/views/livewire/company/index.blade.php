@@ -188,6 +188,18 @@
                         {{ __('No') }}
                     </x-secondary-button>
                 </div>
+                <div class="flex items-start space-x-2 mt-5">
+                    <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
+                        <input
+                            id="is_see_test_results"
+                            wire:model="is_see_test_results"
+                            type="checkbox"
+                            class="flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
+                        <span class="checkbox-label flex-grow pl-2 text-sm">
+                            {!! trans('I have read and agree to the privacy policy.') !!}
+                        </span>
+                    </label>
+                </div>
             @endif
 
             @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
