@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\FieldType;
+use App\Models\Field;
+use App\Models\Tab;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ApplicationResource extends JsonResource
@@ -46,7 +49,7 @@ class ApplicationResource extends JsonResource
                 'martkplatzfreigabe_am' => $this->show_application_on_marketplace_at,
                 'datenfreigabe' => $this->show_test_result_on_marketplace,
                 'studiengaengeIds' => $this->selectedCourses(),
-                'tags' => $this->getValueByIdentifier('characteristics'),
+                'tags' => $this->motivationsTags(),
                 'ort' => $this->getValueByIdentifier('location'),
                 'branche' => ApplicantIndustryResource::collection($this->industries()),
                 'studienbeginn' => $this->desiredBeginning->course_start_date,
@@ -55,8 +58,28 @@ class ApplicationResource extends JsonResource
             ],
             'testergebnisse' => SelectionTestResultResource::collection($this->show_test_result_on_marketplace ? $this->results : []),
             'bewerbungen' => ApplicantCompanyResource::collection($this->companies),
-
-            //            'motivation' => ApplicantMotivationResource::collection($this->filterFieldData('motivation')),
         ];
+    }
+
+    private function motivationsTags()
+    {
+        $tags = [];
+
+        $this->user->values->whereIn('field_id',
+            Field::where('tab_id',
+                Tab::where('slug', 'motivation')->value('id')
+            )->where('type', FieldType::FIELD_CHECKBOX)
+                ->pluck('id'))
+            ->each(function ($motivation) use (&$tags) {
+                foreach ($this->getValueByIdentifier(data_get($motivation, 'fields.key')) as $value) {
+                    $tags[] = [
+                        'id' => $value,
+                        'kategorie_id' => data_get($motivation, 'fields.key'),
+                        'name' => $value,
+                    ];
+                }
+            });
+
+        return $tags;
     }
 }
