@@ -102,7 +102,9 @@ function number_format_locale($number, $decimals = 2, $locale = 'en')
     return number_format($number, $decimals, $locale['decimal_point'], $locale['thousands_sep']);
 }
 
-function get_base64_from_local_storage_file($path): string
+function get_base64_from_local_storage_file($path): ?string
 {
-    return base64_encode(file_get_contents(storage_path('app/'.$path)));
+    if (!$path) return null;
+
+    return base64_encode(file_get_contents(storage_path('app/' . $path)));
 }
