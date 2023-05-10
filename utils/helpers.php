@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 function kbFromBytes($bytes)
 {
     return round($bytes / 1024);
@@ -8,7 +10,7 @@ function kbFromBytes($bytes)
 function isNotEmptyValue($optionArray)
 {
     return count(array_filter($optionArray, function ($array) {
-        return count(array_filter($array)) >= 2;
+            return count(array_filter($array)) >= 2;
     })) == count($optionArray);
 }
 
@@ -104,7 +106,9 @@ function number_format_locale($number, $decimals = 2, $locale = 'en')
 
 function get_base64_from_local_storage_file($path): ?string
 {
-    if (!$path) return null;
+    if (Storage::exists($path)) {
+        return base64_encode(file_get_contents(storage_path('app/'.$path)));
+    }
 
-    return base64_encode(file_get_contents(storage_path('app/' . $path)));
+    return null;
 }
