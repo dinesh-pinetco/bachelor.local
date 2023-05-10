@@ -68,6 +68,7 @@ class Data
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
+                                'validation' => VALIDATION_ALPHA
                             ],
                             [
                                 'type' => FieldType::FIELD_TEXT(),
@@ -78,6 +79,7 @@ class Data
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
+                                'validation' => VALIDATION_ALPHA
                             ],
                             [
                                 'type' => FieldType::FIELD_TEXT(),
@@ -88,6 +90,7 @@ class Data
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
+                                'validation' => VALIDATION_ALPHA_NUMBERS
                             ],
                             [
                                 'type' => FieldType::FIELD_TEXT(),
@@ -108,6 +111,7 @@ class Data
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
+                                'validation' => VALIDATION_ALPHA
                             ],
                             [
                                 'type' => FieldType::FIELD_TEXT(),
@@ -118,6 +122,7 @@ class Data
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
+                                'validation' => VALIDATION_ALPHA
                             ],
                             [
                                 'type' => FieldType::FIELD_EMAIL(),
