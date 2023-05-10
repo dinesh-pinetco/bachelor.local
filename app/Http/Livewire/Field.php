@@ -160,7 +160,8 @@ class Field extends Component
                 'fieldValue.regex' => __('The Phone number field contains an invalid number'),
             ];
         }
-        return  [];
+
+        return [];
     }
 
     public function mount()
