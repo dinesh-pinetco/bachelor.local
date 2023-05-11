@@ -31,8 +31,8 @@ class SannaRejectedUserResource extends JsonResource
         return [
             'bewerber_id' => $this->user_id,
             'unternehmenId' => $this->company?->sana_id,
-            'ablehnung' => (bool) $this->company_rejected_at,
-            'eingestellt_am' => $applicantCompany->user->getMeta('enrollment_at'),
+            'ablehnung' => (bool)$this->company_rejected_at,
+            'eingestellt_am' => $this->company_hired_at,
             'betreuer_id' => CompanyContacts::where('id', $value)->value('sana_id'),
         ];
     }
