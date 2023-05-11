@@ -44,7 +44,10 @@ enum ApplicationStatus: string
 
         $options = collect();
         foreach (array_column($cases, 'value', 'name') as $key => $option) {
-            if ($key != 'APPLICATION_REJECTED_BY_NAK') {
+
+            $statuses = ['APPLICATION_REJECTED_BY_NAK', 'APPLICATION_REJECTED_BY_NAK'];
+
+            if (! in_array($key, $statuses)) {
                 $options->push(['id' => $key, 'label' => __($option)]);
             }
         }
