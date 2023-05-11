@@ -22,13 +22,14 @@
 
                     <div>
                         <x-jet-label value="{{ __('Phone number') }}"/>
-                        <div wire:ignore>
+                        <div >
                             <input class="w-full tel-input h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
                                    type="text"
                                    id="numberValue"
                                    value="{{ $user?->phone }}"
                                    placeholder="{{ __('Enter phone number') }}"
                             />
+
                         </div>
                         <x-jet-input-error for="user.phone" class="mt-2"/>
                     </div>
@@ -79,36 +80,7 @@
     </div>
 
     @push('scripts')
-        <script>
-            let PhoneNumber = null;
-
-            const input = document.querySelector(".tel-input");
-
-            window.onload = function() {
-                PhoneNumber = intlTelInput(input, {
-                    separateDialCode: true,
-                    preferredCountries:["de"],
-                    utilsScript : "{{ asset('plugins/utils.js') }}",
-                });
-
-                input.addEventListener('input', function(event) {
-                    const inputValue = event.target.value;
-                    const numberPattern = /^[0-9]*$/;
-
-                    if (!numberPattern.test(inputValue)) {
-                        event.target.value = inputValue.replace(/\D/g, '');
-                    }
-                });
-            };
-
-            input.addEventListener("change", (event) => {
-                @this.set('user.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
-            });
-
-            input.addEventListener("countrychange", function() {
-                @this.set('user.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
-            });
-        </script>
+        <x-tel-input-phone/>
     @endpush
 </div>
 

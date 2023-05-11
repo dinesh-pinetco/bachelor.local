@@ -56,10 +56,12 @@
                              placeholder="{{ __('Enter email address') }}" required></x-jet-input>
             </div>
             <div class="tel-input" wire:ignore>
-                <x-jet-label class="text-white font-bold" for="password_confirmation"
-                             value="{{ __('Phone number') }}"></x-jet-label>
-                <x-jet-input class="block w-full tel-input" type="tel" id="phone" name="phone" :value="old('phone')"
-                             placeholder="{{ __('Enter phone number') }}" maxlength="15"></x-jet-input>
+{{--                <x-jet-label class="text-white font-bold" for="password_confirmation"--}}
+{{--                             value="{{ __('Phone number') }}"></x-jet-label>--}}
+{{--                <x-jet-input class="block w-full tel-input" type="tel" id="phone" name="phone" :value="old('phone')"--}}
+{{--                             placeholder="{{ __('Enter phone number') }}" maxlength="15"></x-jet-input>--}}
+                <x-tel-input-phone  livewire="false"/>
+
             </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
@@ -101,37 +103,37 @@
     </form>
 
 
-    @push('scripts')
-        <script src="{{ asset('plugins/intlTelInput.min.js') }}"> </script>
-        <script>
-            let PhoneNumber = null;
+{{--    @push('scripts')--}}
+{{--        <script src="{{ asset('plugins/intlTelInput.min.js') }}"> </script>--}}
+{{--        <script>--}}
+{{--            let PhoneNumber = null;--}}
 
-            const input = document.querySelector("#phone");
-            window.onload = function() {
-                PhoneNumber = intlTelInput(input, {
-                    separateDialCode: true,
-                    preferredCountries:["de"],
-                    utilsScript : "{{ asset('plugins/utils.js') }}",
-                });
+{{--            const input = document.querySelector("#phone");--}}
+{{--            window.onload = function() {--}}
+{{--                PhoneNumber = intlTelInput(input, {--}}
+{{--                    separateDialCode: true,--}}
+{{--                    preferredCountries:["de"],--}}
+{{--                    utilsScript : "{{ asset('plugins/utils.js') }}",--}}
+{{--                });--}}
 
-                // Tel input script
-                const numberInput = document.querySelector(".tel-input");
-                numberInput.addEventListener('input', function(event) {
-                    const inputValue = event.target.value;
-                    const numberPattern = /^[0-9]*$/;
+{{--                // Tel input script--}}
+{{--                const numberInput = document.querySelector(".tel-input");--}}
+{{--                numberInput.addEventListener('input', function(event) {--}}
+{{--                    const inputValue = event.target.value;--}}
+{{--                    const numberPattern = /^[0-9]*$/;--}}
 
-                    if (!numberPattern.test(inputValue)) {
-                        event.target.value = inputValue.replace(/\D/g, '');
-                    }
-                });
-            };
+{{--                    if (!numberPattern.test(inputValue)) {--}}
+{{--                        event.target.value = inputValue.replace(/\D/g, '');--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            };--}}
 
-            function submitForm() {
-                PhoneNumber = PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164);
-                document.getElementById('phone').value = PhoneNumber;
-                document.querySelector("#application_register").submit();
-            }
+{{--            function submitForm() {--}}
+{{--                PhoneNumber = PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164);--}}
+{{--                document.getElementById('phone').value = PhoneNumber;--}}
+{{--                document.querySelector("#application_register").submit();--}}
+{{--            }--}}
 
-        </script>
-    @endpush
+{{--        </script>--}}
+{{--    @endpush--}}
 </div>
