@@ -950,5 +950,6 @@
     "Add companies": "Unternehmen hinzufügen",
     "The Phone number field contains an invalid number": "Das Feld Telefonnummer enthält eine ungültige Zahl.",
     "I have read and agree to the privacy policy.": "Ich habe die <strong>Datenschutzbestimmungen</strong> gelesen und bin damit einverstanden.",
-    "Next": "Weiter"
+    "Next": "Weiter",
+    "Please agree to the privacy policy to continue.": "Bitte stimme der Datenschutzerklärung zu, um fortzufahren."
 }
