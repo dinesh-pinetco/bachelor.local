@@ -15,7 +15,11 @@ class CreateApplicationRejectionRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+
+        /** @var User $user */
+        $user = $this->route('user');
+
+        return $user->companies()->whereNotNull('company_hired_at')->doesntExist();
     }
 
     /**
@@ -36,9 +40,20 @@ class CreateApplicationRejectionRequest extends FormRequest
     {
         $company = Company::findFromSannaId($this->unternehmenId);
 
-        return $user->companies()->updateOrCreate([
-            'user_id' => $this->bewerberId,
-            'company_id' => $company->id,
-        ], ['company_rejected_at' => now()]);
+        if ($this->ablehnung) {
+            return $user->companies()->updateOrCreate([
+                'user_id' => $this->bewerberId,
+                'company_id' => $company->id,
+            ], [
+                'company_rejected_at' => now(),
+                'company_hired_at' => null,
+            ]);
+        } else {
+            return $user->companies()->updateOrCreate([
+                'user_id' => $this->bewerberId,
+                'company_id' => $company->id,
+            ], ['company_hired_at' => now(), 'company_rejected_at' => null]);
+        }
+
     }
 }
