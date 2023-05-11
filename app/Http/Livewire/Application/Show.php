@@ -51,7 +51,7 @@ class Show extends Component
         'competency_comment' => 'required|nullable',
     ];
 
-    protected $listeners = ['profileProgressComplete'];
+    protected $listeners = ['profileProgressComplete','refresh' => 'refreshData'];
 
     public function mount()
     {
