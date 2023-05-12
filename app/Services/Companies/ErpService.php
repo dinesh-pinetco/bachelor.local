@@ -35,6 +35,39 @@ abstract class ErpService
         return Http::baseUrl(config('services.nordakademie.baseUrl'));
     }
 
+    public function setPage($page = 1)
+    {
+        $this->params['page'] = $page;
+
+        return $this;
+    }
+
+    public function setItemsPerPage($items = 1)
+    {
+        $this->params['itemsPerPage'] = $items;
+
+        return $this;
+    }
+
+    public function getTotalItems()
+    {
+        try {
+            $response = $this->http()
+                ->get($this->endpoint, $this->params)
+                ->json();
+
+
+            if (data_get($response, '@type') === 'hydra:Error') {
+                $this->logError(data_get($response, 'hydra:description'));
+            }
+
+            return data_get($response, 'hydra:totalItems');
+        } catch (Exception $exception) {
+            $this->logError($exception->getMessage());
+        }
+    }
+
+
     public function get()
     {
         try {
@@ -85,7 +118,7 @@ abstract class ErpService
 
     public function sync()
     {
-        $companies = self::make()->get();
+        $companies = $this->get();
 
         foreach ($companies as $company) {
             $companyObject = Company::updateOrCreate([

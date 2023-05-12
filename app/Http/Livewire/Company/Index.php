@@ -36,6 +36,8 @@ class Index extends Component
 
     public $applicantCompany = [];
 
+    public $marketplacePrivacyPolicyAccepted = false;
+
     protected $rules = [
         'mailContent' => ['required', 'min:4'],
     ];
@@ -64,6 +66,8 @@ class Index extends Component
         $this->applicantCompany = $this->user->companies;
 
         $this->isAppliedToCompany = $this->user->companies()->exists();
+
+        $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
     }
 
     public function selectCompany()
@@ -81,25 +85,16 @@ class Index extends Component
         $this->emitSelf('refresh');
     }
 
-    public function directShowProfileOnMarketPlace()
-    {
-        if (! $this->showAccessDeniedMessage()) {
-            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
-        }
-
-        $this->user->update([
-            'application_status' => ApplicationStatus::APPLIED_ON_MARKETPLACE(),
-        ]);
-
-        $this->user->touch('show_application_on_marketplace_at');
-
-        $this->selectedCompanies();
-
-        $this->emitSelf('refresh');
-    }
-
     public function showProfileMarketplace()
     {
+        if($this->marketplacePrivacyPolicyAccepted == false){
+            return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
+        }
+
+        $this->user->marketplace_privacy_policy_accepted = $this->marketplacePrivacyPolicyAccepted;
+
+        $this->user->save();
+
         $this->user->touch('show_application_on_marketplace_at');
 
         $this->toastNotify(__('You have sent your application to the marketplace.'), __('Success'), TOAST_SUCCESS);

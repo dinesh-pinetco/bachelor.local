@@ -188,11 +188,11 @@
                         {{ __('No') }}
                     </x-secondary-button>
                 </div>
-                <div class="flex items-start space-x-2 mt-5">
-                    <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
+                <div class="flex items-start space-x-2 mt-8">
+                    <label for="marketplacePrivacyPolicyAccepted" class="flex cursor-pointer items-center mb-0">
                         <input
-                            id="is_see_test_results"
-                            wire:model="is_see_test_results"
+                            id="marketplacePrivacyPolicyAccepted"
+                            wire:model="marketplacePrivacyPolicyAccepted"
                             type="checkbox"
                             class="flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary">
                         <span class="checkbox-label flex-grow pl-2 text-sm">
@@ -233,6 +233,15 @@
                             </svg>
                         </button>
                     </div>
+                    <div class="mt-2">
+                        <input id="email-content" type="hidden" name="mailContent">
+                        <trix-editor class="prose formatted-content"
+                                     id="trix-editor"
+                                     input="email-content"
+                                     wire:ignore
+                                     wire:key="competency_comment"
+                                     wire:model="mailContent"></trix-editor>
+                    </div>
                 </div>
                     <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
                         <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Marketplace') }}</h5>
@@ -249,14 +258,6 @@
                                 {{ !is_null($user->show_application_on_marketplace_at) ? __('You have applied to the marketplace.') : __('You have opted out to show your profile on marketplace.')}}
                             </p>
                         </div>
-
-                        <input id="email-content" type="hidden" name="mailContent">
-                        <trix-editor class="prose formatted-content"
-                                     id="trix-editor"
-                                     input="email-content"
-                                     wire:ignore
-                                     wire:key="competency_comment"
-                                     wire:model="mailContent"></trix-editor>
                     </div>
                     <x-jet-input-error for="mailContent"/>
 
