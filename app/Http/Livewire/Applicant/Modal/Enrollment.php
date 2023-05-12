@@ -65,16 +65,13 @@ class Enrollment extends Component
 
     public function mount()
     {
-        $this->fetchCompanies();
+        if (! auth()->user()->hasRole(ROLE_APPLICANT)) {
+            $this->companies = Company::with('contacts')->get();
 
-        $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
-        $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
-        $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
-    }
-
-    protected function fetchCompanies()
-    {
-        $this->companies = Company::with('contacts')->get();
+            $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
+            $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
+            $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
+        }
     }
 
     public function toggle(User $user)
@@ -109,7 +106,6 @@ class Enrollment extends Component
     public function syncCompanies()
     {
         Companies::make()->sync();
-        $this->fetchCompanies();
 
         $this->reset(['selectedCompanyContacts', 'selectedCompany']);
     }
