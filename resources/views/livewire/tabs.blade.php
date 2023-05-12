@@ -82,25 +82,46 @@
         </ul>
         <div class="block sm:hidden">
             <x-livewire-select isTab=true>
-                @foreach ($tabs as $tab)
-                    @if (auth()->user()->hasRole(ROLE_APPLICANT))
-                        <option {{ urlContains($tab->slug) ? 'selected' : '' }}
-                                value="{{ route('application.index', ['tab' => $tab->slug]) }}">{{ $tab->name }}
-                        </option>
-                    @else
-                        <option {{ urlContains($tab->slug) ? 'selected' : '' }}
-                                value="{{ route('application.index', ['tab' => $tab->slug]) }}">{{ $tab->name }}
-                        </option>
-                    @endif
-                @endforeach
-                <option {{ urlContains('documents') ? 'selected' : '' }}
-                        value="{{ route('employee.applicants.edit', ['slug' => 'documents', 'applicant' => $applicant]) }}">
-                    {{ __('Documents') }}
-                </option>
-                <option {{ urlContains('selection-test') ? 'selected' : '' }}
-                        value="{{ route('employee.selection-tests.index', ['applicant' => $applicant]) }}">
-                    {{ __('Selection Test') }}
-                </option>
+                @if (auth()->user()->hasRole(ROLE_APPLICANT))
+                    @foreach ($tabs as $tab)
+                            <option {{ urlContains($tab->slug) ? 'selected' : '' }}
+                                    value="{{ route('application.index', ['tab' => $tab->slug]) }}">{{ __($tab->name) }}
+                            </option>
+                    @endforeach
+                    <option {{ urlContains('documents') ? 'selected' : '' }}
+                            value="{{ route('documents.index') }}">{{ __('Document') }}
+                    </option>
+                @endif
+                @if(! auth()->user()->hasRole(ROLE_APPLICANT))
+                    <option {{ urlContains('profile') ? 'selected' : '' }}
+                            value="{{ route('employee.applicants.edit', ['slug' => 'profile', 'applicant' => $applicant]) }}">
+                            {{ __('Profile') }}
+                    </option>
+                    <option {{ urlContains('industries') ? 'selected' : '' }}
+                            value="{{ route('employee.applicants.edit', ['slug' => 'industries', 'applicant' => $applicant]) }}">
+                            {{ __('Industry') }}
+                    </option>
+                    <option {{ urlContains('motivation') ? 'selected' : '' }}
+                            value="{{ route('employee.applicants.edit', ['slug' => 'motivation', 'applicant' => $applicant]) }}">
+                            {{ __('Motivation') }}
+                    </option>
+                    <option {{ urlContains('documents') ? 'selected' : '' }}
+                            value="{{ route('employee.applicants.edit', ['slug' => 'documents', 'applicant' => $applicant]) }}">
+                            {{ __('Documents') }}
+                    </option>
+                    <option {{ urlContains('selection-test') ? 'selected' : '' }}
+                            value="{{ route('employee.selection-tests.index', ['applicant' => $applicant]) }}">
+                            {{ __('Selection Test') }}
+                    </option>
+                    <option {{ urlContains('companies') ? 'selected' : '' }}
+                            value="{{ route('employee.applicants.edit', ['slug' => 'companies', 'applicant' => $applicant]) }}">
+                            {{ __('Companies') }}
+                    </option>
+                    <option {{ urlContains('contracts') ? 'selected' : '' }}
+                            value="{{ route('employee.applicants.edit', ['slug' => 'contracts', 'applicant' => $applicant]) }}">
+                            {{ __('Contract') }}
+                    </option>
+                @endif
             </x-livewire-select>
         </div>
     </div>
