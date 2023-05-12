@@ -68,6 +68,14 @@
                                 </x-primary-button>
                             </div>
                         @endif
+                            <div class="flex items-center space-x-4">
+                                <x-primary-button type="button"
+                                                  wire:click="$emit('Applicant.Modal.Anonymous.modal.toggle',{{ $applicant->id }})"
+                                                  :disabled="!$applicant->email"
+                                                  class="md:-mt-0 {{ $applicant->email ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                                    {{ __('Anonymous') }}
+                                </x-primary-button>
+                            </div>
                     </div>
                     @if(auth()->user()->hasRole(ROLE_APPLICANT) && !$isProfile)
                         <div>
@@ -271,5 +279,6 @@
                 </div>
             </div>
         </div>
+        <livewire:applicant.modal.anonymous/>
         <livewire:applicant.modal.enrollment/>
 </div>
