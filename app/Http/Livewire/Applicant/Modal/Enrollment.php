@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Applicant\Modal;
 
 use App\Http\Livewire\Traits\HasModal;
+use App\Jobs\FetchSannaCompaniesJob;
 use App\Mail\ApplicantEnrolled;
 use App\Models\Company;
 use App\Models\CompanyContacts;
 use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\User;
-use App\Services\Companies\Companies;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -105,7 +105,7 @@ class Enrollment extends Component
 
     public function syncCompanies()
     {
-        Companies::make()->sync();
+        FetchSannaCompaniesJob::dispatch();
 
         $this->reset(['selectedCompanyContacts', 'selectedCompany']);
     }
