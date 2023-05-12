@@ -951,5 +951,10 @@
     "The Phone number field contains an invalid number": "Das Feld Telefonnummer enthält eine ungültige Zahl.",
     "I have read and agree to the privacy policy.": "Ich habe die <strong>Datenschutzbestimmungen</strong> gelesen und bin damit einverstanden.",
     "Next": "Weiter",
-    "Please agree to the privacy policy to continue.": "Bitte stimme der Datenschutzerklärung zu, um fortzufahren."
+    "Please agree to the privacy policy to continue.": "Bitte stimme der Datenschutzerklärung zu, um fortzufahren.",
+    "Personal Information Completed": "Profilinformationen ausgefüllt",
+    "Test failed (not yet confirmed)": "Test nicht bestanden (nicht bestätigt)",
+    "Test pdf retrieved": "Testergebnis pdf abgerufen am",
+    "Consent company portal": "Daten vervollständigt",
+    "Enrollment": "Zur Immatrikulation freigegeben"
 }

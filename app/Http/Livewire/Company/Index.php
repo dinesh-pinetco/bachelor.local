@@ -61,6 +61,8 @@ class Index extends Component
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
+        $this->companies = $this->fetchCompanies();
+
         $this->selectedCompanies();
 
         $this->applicantCompany = $this->user->companies;
@@ -80,7 +82,7 @@ class Index extends Component
             'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
         ]);
 
-        $this->fetchCompanies();
+        $this->companies;
 
         $this->emitSelf('refresh');
     }
@@ -145,7 +147,7 @@ class Index extends Component
 
     protected function fetchCompanies()
     {
-        $this->companies = Company::when($this->search, function ($query) {
+        return Company::when($this->search, function ($query) {
             $query->where('name', 'like', "%$this->search%");
         })
         ->when($this->zip_code, function ($query) {
@@ -221,8 +223,6 @@ class Index extends Component
 
     public function render()
     {
-        $this->fetchCompanies();
-
         $this->fetchAppliedCompanies();
 
         return view('livewire.company.index');
