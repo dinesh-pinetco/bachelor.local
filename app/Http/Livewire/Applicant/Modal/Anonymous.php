@@ -32,3 +32,4 @@ class Anonymous extends Component
         return view('livewire.applicant.modal.anonymous');
     }
 }
+
