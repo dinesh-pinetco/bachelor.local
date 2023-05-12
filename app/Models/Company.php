@@ -14,9 +14,9 @@ class Company extends Model
         'name',
     ];
 
-    public static function findFromSannaId(mixed $unternehmenId)
+    public static function findFromSannaId(mixed $sannaId)
     {
-        return self::where('sana_id', $unternehmenId)->first();
+        return self::where('sana_id', $sannaId)->first();
     }
 
     public function contacts()
