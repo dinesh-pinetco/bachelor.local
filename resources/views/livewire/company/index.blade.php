@@ -233,16 +233,17 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="mt-2">
-                        <input id="email-content" type="hidden" name="mailContent">
-                        <trix-editor class="prose formatted-content"
-                                     id="trix-editor"
-                                     input="email-content"
-                                     wire:ignore
-                                     wire:key="competency_comment"
-                                     wire:model="mailContent"></trix-editor>
-                    </div>
                 </div>
+                <div wire:ignore class="mt-6">
+                    <input wire:ignore id="email-content" type="hidden" name="mailContent">
+                    <trix-editor class="prose formatted-content"
+                                id="trix-editor"
+                                input="email-content"
+                                wire:ignore
+                                wire:key="competency_comment"
+                                wire:model="mailContent"></trix-editor>
+                </div>
+                <x-jet-input-error for="mailContent"/>
                     <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
                         <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Marketplace') }}</h5>
                         <div class="flex justify-start items-center space-x-4 text-darkgreen rounded-sm mr-auto mb-7">
@@ -259,8 +260,6 @@
                             </p>
                         </div>
                     </div>
-                    <x-jet-input-error for="mailContent"/>
-
                     <div class="flex items-start space-x-2 mt-5">
                         <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
                             <input
@@ -272,7 +271,6 @@
                                 {{ __('Selected companies can see the test results') }}
                             </span>
                         </label>
-
                     </div>
                     <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
                         {{ __('Update') }}
@@ -300,6 +298,7 @@
                     key-by="id"
                     label-by="name"
                 />
+                <x-jet-input-error for="mailContent"/>
             </div>
         </div>
         <x-slot name="footer">

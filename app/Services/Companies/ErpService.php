@@ -56,7 +56,6 @@ abstract class ErpService
                 ->get($this->endpoint, $this->params)
                 ->json();
 
-
             if (data_get($response, '@type') === 'hydra:Error') {
                 $this->logError(data_get($response, 'hydra:description'));
             }
@@ -66,7 +65,6 @@ abstract class ErpService
             $this->logError($exception->getMessage());
         }
     }
-
 
     public function get()
     {

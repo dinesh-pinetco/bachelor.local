@@ -87,7 +87,7 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
-        if($this->marketplacePrivacyPolicyAccepted == false){
+        if ($this->marketplacePrivacyPolicyAccepted == false) {
             return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
         }
 

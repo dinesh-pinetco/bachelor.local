@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Services\Companies\Companies;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -35,10 +34,10 @@ class FetchSannaCompaniesJob implements ShouldQueue
     {
         $totalItems = Companies::make()->setItemsPerPage(1)->getTotalItems();
 
-        $totalPages = ceil($totalItems/100);
+        $totalPages = ceil($totalItems / 100);
 
-        for($i = 1; $i <= $totalPages; $i++){
-            SyncCompaniesJob::dispatch($i,100);
+        for ($i = 1; $i <= $totalPages; $i++) {
+            SyncCompaniesJob::dispatch($i, 100);
         }
     }
 }
