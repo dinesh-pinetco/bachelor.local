@@ -10,13 +10,8 @@ use Livewire\Component;
 class Anonymous extends Component
 {
     use HasModal;
-    public User $applicant;
 
-    public function toggle(User $user)
-    {
-        $this->show = ! $this->show;
-        $this->applicant = $user;
-    }
+    public User $applicant;
 
     public function AnonymousApplicant()
     {
@@ -32,4 +27,3 @@ class Anonymous extends Component
         return view('livewire.applicant.modal.anonymous');
     }
 }
-

@@ -70,7 +70,7 @@
                         @endif
                             <div class="flex items-center space-x-4">
                                 <x-primary-button type="button"
-                                                  wire:click="$emit('Applicant.Modal.Anonymous.modal.toggle',{{ $applicant->id }})"
+                                                  wire:click="$emit('Applicant.Modal.Anonymous.modal.toggle')"
                                                   :disabled="!$applicant->email"
                                                   class="md:-mt-0 {{ $applicant->email ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                                     {{ __('Anonymous') }}
@@ -279,6 +279,6 @@
                 </div>
             </div>
         </div>
-        <livewire:applicant.modal.anonymous/>
+        <livewire:applicant.modal.anonymous :applicant="$applicant"/>
         <livewire:applicant.modal.enrollment/>
 </div>
