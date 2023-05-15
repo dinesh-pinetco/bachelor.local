@@ -36,6 +36,8 @@ class Index extends Component
 
     public $applicantCompany = [];
 
+    public $marketplacePrivacyPolicyAccepted = false;
+
     protected $rules = [
         'mailContent' => ['required', 'min:4'],
     ];
@@ -59,11 +61,15 @@ class Index extends Component
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
+        $this->companies = $this->fetchCompanies();
+
         $this->selectedCompanies();
 
         $this->applicantCompany = $this->user->companies;
 
         $this->isAppliedToCompany = $this->user->companies()->exists();
+
+        $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
     }
 
     public function selectCompany()
@@ -76,30 +82,21 @@ class Index extends Component
             'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
         ]);
 
-        $this->fetchCompanies();
-
-        $this->emitSelf('refresh');
-    }
-
-    public function directShowProfileOnMarketPlace()
-    {
-        if (! $this->showAccessDeniedMessage()) {
-            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
-        }
-
-        $this->user->update([
-            'application_status' => ApplicationStatus::APPLIED_ON_MARKETPLACE(),
-        ]);
-
-        $this->user->touch('show_application_on_marketplace_at');
-
-        $this->selectedCompanies();
+        $this->companies;
 
         $this->emitSelf('refresh');
     }
 
     public function showProfileMarketplace()
     {
+        if ($this->marketplacePrivacyPolicyAccepted == false) {
+            return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
+        }
+
+        $this->user->marketplace_privacy_policy_accepted = $this->marketplacePrivacyPolicyAccepted;
+
+        $this->user->save();
+
         $this->user->touch('show_application_on_marketplace_at');
 
         $this->toastNotify(__('You have sent your application to the marketplace.'), __('Success'), TOAST_SUCCESS);
@@ -150,7 +147,7 @@ class Index extends Component
 
     protected function fetchCompanies()
     {
-        $this->companies = Company::when($this->search, function ($query) {
+        return Company::when($this->search, function ($query) {
             $query->where('name', 'like', "%$this->search%");
         })
         ->when($this->zip_code, function ($query) {
@@ -226,8 +223,6 @@ class Index extends Component
 
     public function render()
     {
-        $this->fetchCompanies();
-
         $this->fetchAppliedCompanies();
 
         return view('livewire.company.index');

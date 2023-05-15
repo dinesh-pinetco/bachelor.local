@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Applicant\Modal;
 
 use App\Http\Livewire\Traits\HasModal;
+use App\Jobs\FetchSannaCompaniesJob;
 use App\Mail\ApplicantEnrolled;
 use App\Models\Company;
 use App\Models\CompanyContacts;
 use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\User;
-use App\Services\Companies\Companies;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -65,16 +65,13 @@ class Enrollment extends Component
 
     public function mount()
     {
-        $this->fetchCompanies();
+        if (! auth()->user()->hasRole(ROLE_APPLICANT)) {
+            $this->companies = Company::with('contacts')->get();
 
-        $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
-        $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
-        $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
-    }
-
-    protected function fetchCompanies()
-    {
-        $this->companies = Company::with('contacts')->get();
+            $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
+            $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
+            $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
+        }
     }
 
     public function toggle(User $user)
@@ -108,8 +105,7 @@ class Enrollment extends Component
 
     public function syncCompanies()
     {
-        Companies::make()->sync();
-        $this->fetchCompanies();
+        FetchSannaCompaniesJob::dispatch();
 
         $this->reset(['selectedCompanyContacts', 'selectedCompany']);
     }

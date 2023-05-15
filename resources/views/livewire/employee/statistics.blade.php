@@ -46,9 +46,16 @@
     <div class="my-2 flex flex-wrap lg:flex-nowrap lg:space-x-4 mx-auto">
         <div class="w-full lg:w-1/2 border border-lightgray p-6 space-y-4 rounded-md">
             <div class="flex">
-                <h6 class="text-darkgray">{{ __('Application incomplete') }}: </h6>
-                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'applicationIncomplete']) }}"
-                   class="text-primary pl-1">{{ data_get($statistics, 'applicationIncomplete') }}
+                <h6 class="text-darkgray">{{ __('Register') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'registerSubmit']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'registerSubmit') }}
+                </a>
+            </div>
+
+            <div class="flex">
+                <h6 class="text-darkgray">{{ __('Personal Information Completed') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'personalInformationCompleted']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'personalInformationCompleted') }}
                 </a>
             </div>
 
@@ -59,19 +66,10 @@
                 </a>
             </div>
 
-            <div>
-                <x-link-button
-                    href="{{ route('employee.applicants.index', ['filteredBy' => \App\Enums\ApplicationStatus::TEST_FAILED()]) }}">
-                    {{__('Check failed tests')}}
-                </x-link-button>
-            </div>
-        </div>
-
-        <div class="w-full lg:w-1/2 border border-lightgray p-6 space-y-4 rounded-md mt-4 lg:mt-0">
             <div class="flex">
-                <h6 class="text-darkgray">{{ __('Submitted') }}: </h6>
-                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'submitted']) }}"
-                   class="text-primary pl-1">{{ data_get($statistics, 'submitted') }}
+                <h6 class="text-darkgray">{{ __('Test taken') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'testTaken']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'testTaken') }}
                 </a>
             </div>
 
@@ -83,9 +81,39 @@
             </div>
 
             <div class="flex">
-                <h6 class="text-darkgray">{{ __('Contracts') }}: </h6>
-                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'contractCompleted']) }}"
-                   class="text-primary pl-1">{{ data_get($statistics, 'contracts') }}
+                <h6 class="text-darkgray">{{ __('Test failed (not yet confirmed)') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'testFailed']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'testFailed') }}
+                </a>
+            </div>
+
+            <div>
+                <x-link-button
+                    href="{{ route('employee.applicants.index', ['filteredBy' => 'testFailedConfirmed']) }}">
+                    {{__('Check failed tests')}}
+                </x-link-button>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-1/2 border border-lightgray p-6 space-y-4 rounded-md mt-4 lg:mt-0">
+            <div class="flex">
+                <h6 class="text-darkgray">{{ __('Test pdf retrieved') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'testResultPdfRetrieved']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'testResultPdfRetrieved') }}
+                </a>
+            </div>
+
+            <div class="flex">
+                <h6 class="text-darkgray">{{ __('Consent company portal') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'consentCompanyPortal']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'consentCompanyPortal') }}
+                </a>
+            </div>
+
+            <div class="flex">
+                <h6 class="text-darkgray">{{ __('Enrollment') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'enrollment']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'enrollment') }}
                 </a>
             </div>
         </div>

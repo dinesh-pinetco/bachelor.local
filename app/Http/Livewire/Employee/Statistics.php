@@ -43,11 +43,16 @@ class Statistics extends Component
     {
         $statistics = new StatisticsServices();
         $this->statistics = [
-            'applicationIncomplete' => $statistics->applicationIncomplete('count'),
-            'submitted' => $statistics->submitted('count'),
+            'registerSubmit' => $statistics->registerSubmit('count'),
+            'personalInformationCompleted' => $statistics->personalInformationCompleted('count'),
             'competencyCatchUp' => $statistics->competencyCatchUp('count'),
+            'testTaken' => $statistics->testTaken('count'),
             'testPassed' => $statistics->testPassed('count'),
-            'contracts' => $statistics->contracts('count'),
+            'testFailed' => $statistics->testFailed('count'),
+            'testFailedConfirmed' => $statistics->testFailedConfirmed('count'),
+            'testResultPdfRetrieved' => $statistics->testResultPdfRetrieved('count'),
+            'consentCompanyPortal' => $statistics->consentCompanyPortal('count'),
+            'enrollment' => $statistics->enrollment('count'),
         ];
     }
 
