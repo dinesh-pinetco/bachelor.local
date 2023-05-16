@@ -1,4 +1,4 @@
-`<div>
+<div>
     <x-custom-modal wire:model="show">
         <x-slot name="title">
             {{ __('Applicant:') }} {{ $applicant?->full_name }}
@@ -30,4 +30,4 @@
             </div>
         </x-slot>
     </x-custom-modal>
-</div>`
+</div>

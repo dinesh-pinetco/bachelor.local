@@ -75,8 +75,13 @@
                             <div>
                                 <x-jet-label for="phone"
                                              class="block required">{{ __('Phone') }}</x-jet-label>
-                                    <div>
-                                    <x-tel-input-phone setValue="{{$contactProfile->phone}}" setKey="contactProfile.phone" />
+                                    <div wire:ignore>
+                                        <x-input-tel name="phone"
+                                                    wire:model='contactProfile.phone'
+                                                    :value="old('phone')"
+                                                    placeholder="{{ __('Enter phone number') }}"
+                                                    maxlength="15">
+                                        </x-input-tel>
                                     </div>
                                 <x-jet-input-error for="contactProfile.phone"/>
                             </div>
