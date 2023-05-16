@@ -1,5 +1,5 @@
 <div wire:ignore>
-    <x-tel disabled="{{ !$isEdit }}"
+    <x-tel :disabled="!$isEdit"
            wire:model="fieldValue"
            value="{{ $fieldValue }}"
            name="fieldValue"
