@@ -5,7 +5,6 @@
 <input id="phone"
     {!! $attributes->merge(['class' => 'tel-input w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray']) !!}
 >
-
 @push('scripts')
     <script src="{{ asset('plugins/intlTelInput.min.js') }}"></script>
     <script>

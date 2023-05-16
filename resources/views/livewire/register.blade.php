@@ -56,10 +56,10 @@
                              placeholder="{{ __('Enter email address') }}" required></x-jet-input>
             </div>
             <div class="tel-input" wire:ignore>
-                <x-tel name="phone"
+                <x-input-tel name="phone"
                        :value="old('phone')"
                        placeholder="{{ __('Enter phone number') }}"
-                       maxlength="15"></x-tel>
+                       maxlength="15"></x-input-tel>
 
             </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
