@@ -56,11 +56,10 @@
                              placeholder="{{ __('Enter email address') }}" required></x-jet-input>
             </div>
             <div class="tel-input" wire:ignore>
-{{--                <x-jet-label class="text-white font-bold" for="password_confirmation"--}}
-{{--                             value="{{ __('Phone number') }}"></x-jet-label>--}}
-{{--                <x-jet-input class="block w-full tel-input" type="tel" id="phone" name="phone" :value="old('phone')"--}}
-{{--                             placeholder="{{ __('Enter phone number') }}" maxlength="15"></x-jet-input>--}}
-                <x-tel-input-phone  livewire="false"/>
+                <x-tel name="phone"
+                       :value="old('phone')"
+                       placeholder="{{ __('Enter phone number') }}"
+                       maxlength="15"></x-tel>
 
             </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -88,9 +87,6 @@
                     <path d="M12 1L19 8M19 8L12 15M19 8H1" stroke="stroke-current" stroke-width="2"
                           stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-{{--                <div id="loader" class="">--}}
-{{--                    <span class="absolute inset-0 flex items-center justify-center bg-primary text-white">{{ __('Loading...') }}</span>--}}
-{{--                </div>--}}
             </x-jet-secondary-button>
         </div>
         <div class="flex items-center justify-end mt-2 md:mt-4 pb-1">
@@ -103,37 +99,11 @@
     </form>
 
 
-{{--    @push('scripts')--}}
-{{--        <script src="{{ asset('plugins/intlTelInput.min.js') }}"> </script>--}}
-{{--        <script>--}}
-{{--            let PhoneNumber = null;--}}
-
-{{--            const input = document.querySelector("#phone");--}}
-{{--            window.onload = function() {--}}
-{{--                PhoneNumber = intlTelInput(input, {--}}
-{{--                    separateDialCode: true,--}}
-{{--                    preferredCountries:["de"],--}}
-{{--                    utilsScript : "{{ asset('plugins/utils.js') }}",--}}
-{{--                });--}}
-
-{{--                // Tel input script--}}
-{{--                const numberInput = document.querySelector(".tel-input");--}}
-{{--                numberInput.addEventListener('input', function(event) {--}}
-{{--                    const inputValue = event.target.value;--}}
-{{--                    const numberPattern = /^[0-9]*$/;--}}
-
-{{--                    if (!numberPattern.test(inputValue)) {--}}
-{{--                        event.target.value = inputValue.replace(/\D/g, '');--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            };--}}
-
-{{--            function submitForm() {--}}
-{{--                PhoneNumber = PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164);--}}
-{{--                document.getElementById('phone').value = PhoneNumber;--}}
-{{--                document.querySelector("#application_register").submit();--}}
-{{--            }--}}
-
-{{--        </script>--}}
-{{--    @endpush--}}
+    @push('scripts')
+        <script>
+            function submitForm() {
+                document.querySelector("#application_register").submit();
+            }
+        </script>
+    @endpush
 </div>

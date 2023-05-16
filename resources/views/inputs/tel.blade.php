@@ -1,3 +1,7 @@
 <div wire:ignore>
-    <x-tel-input-phone setValue="{{$fieldValue}}" setKey="fieldValue" isEdit="{{ $isEdit }}" required="{{ $field->required() }}"/>
+    <x-tel disabled="{{ !$isEdit }}"
+           wire:model="fieldValue"
+           value="{{ $fieldValue }}"
+           name="fieldValue"
+           required="{{ $field->required() }}"></x-tel>
 </div>
