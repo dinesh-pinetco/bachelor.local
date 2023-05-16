@@ -18,13 +18,14 @@ class ApplicantCompany extends Model
         'mail_content',
         'company_contacted_at',
         'company_rejected_at',
-        'hired_at',
+        'company_hired_at',
+        'company_contact_id',
         'is_see_test_results',
     ];
 
     protected $casts = [
         'company_contacted_at' => 'datetime',
-        'hired_at' => 'datetime',
+        'company_hired_at' => 'datetime',
         'company_rejected_at' => 'datetime',
         'is_see_test_results' => 'bool',
     ];
@@ -44,5 +45,10 @@ class ApplicantCompany extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function companyContact()
+    {
+        return $this->belongsTo(CompanyContacts::class);
     }
 }

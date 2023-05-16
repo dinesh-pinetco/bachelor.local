@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\Companies\Companies;
+use App\Jobs\FetchSannaCompaniesJob;
 use Illuminate\Console\Command;
 
 class SyncCompanies extends Command
@@ -28,7 +28,7 @@ class SyncCompanies extends Command
      */
     public function handle()
     {
-        Companies::make()->sync();
+        FetchSannaCompaniesJob::dispatch();
 
         return Command::SUCCESS;
     }

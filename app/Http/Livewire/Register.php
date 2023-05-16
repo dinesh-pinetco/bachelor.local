@@ -43,7 +43,7 @@ class Register extends Component
     {
         $this->courses = Course::query()
             ->active()
-            ->where(fn ($q) => $q->whereNull('last_start')->orWhere('last_start', '>', Carbon::parse()->year($year)))
+            ->where(fn ($q) => $q->where('first_start', '<=', Carbon::parse()->year($year))->orWhere('last_start', '>=', Carbon::parse()->year($year)))
             ->select('id', 'name', 'first_start', 'last_start', 'lead_time', 'dead_time')
             ->get()
             ->filter(function ($course) use ($year) {

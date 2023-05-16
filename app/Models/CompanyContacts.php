@@ -28,4 +28,9 @@ class CompanyContacts extends Model
             return collect([$attributes['first_name'], $attributes['last_name']])->filter()->implode(' ');
         });
     }
+
+    public static function findFromSannaId(mixed $sannaId)
+    {
+        return self::where('sana_id', $sannaId)->first();
+    }
 }

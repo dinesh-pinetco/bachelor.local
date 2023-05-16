@@ -93,7 +93,7 @@ Carbon\Carbon::setlocale($user->locale);
                                             </td>
                                             <td width="33.33%" align="center">
                                                 <span>Beginn:</span>
-                                                <span>{{ "1. Oktober [".$desiredBeginning->format('Y')."]" }}</span>
+                                                <span>{{ "1. Oktober ".$desiredBeginning->format('Y') }}</span>
                                             </td>
                                             <td width="33.33%" align="center">
                                                 <span>Ende:</span>
