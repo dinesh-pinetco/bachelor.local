@@ -87,14 +87,3 @@ tippy('[data-tippy-content]', {
         instance.setContent(cont);
     },
 });
-
-// Tel input script
-const numberInput = document.querySelector(".tel-input");
-numberInput.addEventListener('input', function(event) {
-    const inputValue = event.target.value;
-    const numberPattern = /^[0-9]*$/;
-
-    if (!numberPattern.test(inputValue)) {
-        event.target.value = inputValue.replace(/\D/g, '');
-    }
-});
