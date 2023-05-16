@@ -12,6 +12,8 @@ class Company extends Model
     protected $fillable = [
         'sana_id',
         'name',
+        'zip_code',
+        'meta',
     ];
 
     public static function findFromSannaId(mixed $sannaId)
