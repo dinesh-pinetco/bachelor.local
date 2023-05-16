@@ -12,7 +12,7 @@ class Index extends Component
 {
     use HasModal;
 
-    public $companies = [];
+    public $companies;
 
     public $selectedCompanies = [];
 
@@ -38,6 +38,8 @@ class Index extends Component
 
     public $marketplacePrivacyPolicyAccepted = false;
 
+    public $filterCompanies = [];
+
     protected $rules = [
         'mailContent' => ['required', 'min:4'],
     ];
@@ -61,7 +63,7 @@ class Index extends Component
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
-        $this->companies = $this->fetchCompanies();
+        $this->companies = $this->filterCompanies = $this->fetchCompanies();
 
         $this->selectedCompanies();
 
@@ -70,6 +72,23 @@ class Index extends Component
         $this->isAppliedToCompany = $this->user->companies()->exists();
 
         $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
+    }
+
+    public function updatedSearch()
+    {
+        $this->getFilteredCompanies();
+    }
+
+    public function updatedZipCode()
+    {
+        $this->getFilteredCompanies();
+    }
+
+    public function getFilteredCompanies()
+    {
+        $this->filterCompanies = $this->companies->filter(function ($company) {
+            return str_contains(strtolower($company->name), strtolower($this->search)) && str_contains($company->zip_code, $this->zip_code);
+        });
     }
 
     public function selectCompany()
@@ -81,8 +100,6 @@ class Index extends Component
         $this->user->update([
             'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
         ]);
-
-        $this->companies;
 
         $this->emitSelf('refresh');
     }
@@ -147,13 +164,7 @@ class Index extends Component
 
     protected function fetchCompanies()
     {
-        return Company::when($this->search, function ($query) {
-            $query->where('name', 'like', "%$this->search%");
-        })
-        ->when($this->zip_code, function ($query) {
-            $query->where('zip_code', 'like', "$this->zip_code%");
-        })
-        ->get();
+        return Company::all();
     }
 
     public function showAccessDeniedMessage()
