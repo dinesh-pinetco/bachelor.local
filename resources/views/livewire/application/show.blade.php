@@ -68,14 +68,16 @@
                                 </x-primary-button>
                             </div>
                         @endif
+                        @if(!auth()->user()->hasRole(ROLE_APPLICANT))
                             <div class="flex items-center space-x-4">
                                 <x-primary-button type="button"
-                                                  wire:click="$emit('Applicant.Modal.Anonymous.modal.toggle')"
-                                                  :disabled="!$applicant->email"
-                                                  class="md:-mt-0 {{ $applicant->email ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                                                wire:click="$emit('Applicant.Modal.Anonymous.modal.toggle')"
+                                                :disabled="!$applicant->email"
+                                                class="md:-mt-0 {{ $applicant->email ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                                     {{ __('Anonymous') }}
                                 </x-primary-button>
                             </div>
+                        @endif
                     </div>
                     @if(auth()->user()->hasRole(ROLE_APPLICANT) && !$isProfile)
                         <div>

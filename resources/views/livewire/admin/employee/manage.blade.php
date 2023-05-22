@@ -32,11 +32,12 @@
                             <div>
                                 <x-jet-label for="phone" class="block">{{ __('Phone') }}</x-jet-label>
                                 <div wire:ignore>
-                                    <input class="w-full tel-input h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
-                                           type="text"
-                                           id="numberValue"
-                                           placeholder="{{ __('Enter phone number') }}"
-                                    />
+                                    <x-input-tel name="phone"
+                                            wire:model='user.phone'
+                                            :value="old('phone')"
+                                            placeholder="{{ __('Enter phone number') }}"
+                                            maxlength="15">
+                                    </x-input-tel>
                                 </div>
                                 <x-jet-input-error for="user.phone"/>
                             </div>
@@ -51,30 +52,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script>
-            let PhoneNumber = null;
-
-            @if($user?->phone)
-                document.getElementById('numberValue').value =  "{{ $user?->phone }}";
-            @endif
-
-            const input = document.querySelector(".tel-input");
-            window.onload = function() {
-                PhoneNumber = intlTelInput(input, {
-                    separateDialCode: true,
-                    preferredCountries:["de"],
-                    utilsScript : "{{ asset('plugins/utils.js') }}",
-                });
-            };
-
-            input.addEventListener("countrychange", function() {
-                @this.set('user.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
-            });
-
-            input.addEventListener("change", (event) => {
-                @this.set('user.phone', PhoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
-            });
-        </script>
-    @endpush
 </div>

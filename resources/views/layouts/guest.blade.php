@@ -55,6 +55,8 @@
     <a class="cursor-pointer px-2 text-primary hover:text-primary-light"
        href="{{route('data_protection')}}">{{__('Privacy policy')}}</a>
 </div>
+        <script src="{{ asset('plugins/intlTelInput.min.js') }}"> </script>
+
 @stack('scripts')
 <script src="{{ asset('plugins/intlTelInput.min.js') }}"></script>
 @livewireScripts

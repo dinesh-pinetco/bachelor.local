@@ -245,18 +245,17 @@
                                         </x-livewire-select>
                                         <x-jet-input-error for="studySheet.school"/>
                                     </div>
-                                    <div>
+                                    <div wire:ignore>
                                         <x-jet-label for="phone"
                                                      class="block required">
                                             {{ __('Phone') }}
                                         </x-jet-label>
-                                        <x-jet-input
-                                            class="w-full"
-                                            type="text"
-                                            :placeholder="__('Phone')"
-                                            wire:model.lazy="studySheet.phone"
-                                            id="phone"
-                                        ></x-jet-input>
+                                        <x-input-tel name="phone"
+                                                :value="old('phone')"
+                                                wire:model.lazy="studySheet.phone"
+                                                placeholder="{{ __('Enter phone number') }}"
+                                                maxlength="15">
+                                        </x-input-tel>
                                         <x-jet-input-error for="studySheet.phone"/>
                                     </div>
                                     <div>
