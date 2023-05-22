@@ -159,13 +159,13 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
                 $sheet->setCellValue('K1', 'Gesprch');
 
                 $sheet->setCellValue('N1', 'Immatrikuliert');
-                $sheet->setCellValue('N3', '=SUM(C3:M3)');
-                $sheet->setCellValue('N4', '=SUM(C4:M4)');
-                $sheet->setCellValue('N5', '=SUM(C5:M5)');
-                $sheet->setCellValue('N6', '=SUM(C6:M6)');
-                $sheet->setCellValue('N7', '=SUM(C7:M7)');
-                $sheet->setCellValue('N8', '=SUM(C8:M8)');
-                $sheet->setCellValue('N9', '=SUM(C9:M9)');
+                $sheet->setCellValue('N3', '=IF(SUM(C3:M3)<>0, SUM(C3:M3), "")');
+                $sheet->setCellValue('N4', '=IF(SUM(C4:M4)<>0, SUM(C4:M4), "")');
+                $sheet->setCellValue('N5', '=IF(SUM(C5:M5)<>0, SUM(C5:M5), "")');
+                $sheet->setCellValue('N6', '=IF(SUM(C6:M6)<>0, SUM(C6:M6), "")');
+                $sheet->setCellValue('N7', '=IF(SUM(C7:M7)<>0, SUM(C7:M7), "")');
+                $sheet->setCellValue('N8', '=IF(SUM(C8:M8)<>0, SUM(C8:M8), "")');
+                $sheet->setCellValue('N9', '=IF(SUM(C9:M9)<>0, SUM(C9:M9), "")');
 
                 $styleArray = [
                     'alignment' => [
