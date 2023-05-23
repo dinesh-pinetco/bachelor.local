@@ -1,4 +1,8 @@
+@impersonating
+    @include('partials._impersonating_headline')
+@endImpersonating
 <nav x-data="{ open: false }" class="h-screen shadow-xl relative z-50 bg-white overflow-y-auto">
+
     <!-- Primary Navigation Menu -->
     <div class="py-4 md:py-6 h-full">
         <div class="flex flex-col justify-between h-full">

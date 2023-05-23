@@ -94,4 +94,9 @@ class UserPolicy
     {
         return $user->hasRole([ROLE_EMPLOYEE, ROLE_ADMIN, ROLE_SUPER_ADMIN]);
     }
+
+    public function impersonate(User $user)
+    {
+        return $user->hasRole(ROLE_SUPER_ADMIN);
+    }
 }

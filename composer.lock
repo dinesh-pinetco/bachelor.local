@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66273f253df62a98c3bfb04886d4fc70",
+    "content-hash": "10c988c54f62429484190ca3729eb810",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -3921,84 +3921,6 @@
             "time": "2023-02-08T01:06:31+00:00"
         },
         {
-            "name": "opcodesio/log-viewer",
-            "version": "v2.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/opcodesio/log-viewer.git",
-                "reference": "caddf3336e4a3c23e655e0c1a11b2ae8e6ab4c7d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/caddf3336e4a3c23e655e0c1a11b2ae8e6ab4c7d",
-                "reference": "caddf3336e4a3c23e655e0c1a11b2ae8e6ab4c7d",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^8.0|^9.0|^10.0",
-                "php": "^8.0"
-            },
-            "conflict": {
-                "arcanedev/log-viewer": "^8.0"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "^7.2",
-                "itsgoingd/clockwork": "^5.1",
-                "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^6.0",
-                "orchestra/testbench": "^7.6|^8.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpunit/phpunit": "^9.5",
-                "spatie/test-time": "^1.3"
-            },
-            "suggest": {
-                "guzzlehttp/guzzle": "Required for multi-host support. ^7.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Opcodes\\LogViewer\\LogViewerServiceProvider"
-                    ],
-                    "aliases": {
-                        "LogViewer": "Opcodes\\LogViewer\\Facades\\LogViewer"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Opcodes\\LogViewer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Arunas Skirius",
-                    "email": "arukomp@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Fast and easy-to-use log viewer for your Laravel application",
-            "homepage": "https://github.com/opcodesio/log-viewer",
-            "keywords": [
-                "arukompas",
-                "better-log-viewer",
-                "laravel",
-                "log viewer",
-                "logs",
-                "opcodesio"
-            ],
-            "support": {
-                "issues": "https://github.com/opcodesio/log-viewer/issues",
-                "source": "https://github.com/opcodesio/log-viewer/tree/v2.4.1"
-            },
-            "time": "2023-04-05T05:44:00+00:00"
-        },
-        {
             "name": "owen-it/laravel-auditing",
             "version": "v13.5.0",
             "source": {
@@ -4477,6 +4399,83 @@
                 }
             ],
             "time": "2023-02-25T19:38:58+00:00"
+        },
+        {
+            "name": "pinetco-dev/laravel-impersonate",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pinetco-dev/laravel-impersonate.git",
+                "reference": "9a10eeda203860e025dae9432ac1f85f08c77cd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pinetco-dev/laravel-impersonate/zipball/9a10eeda203860e025dae9432ac1f85f08c77cd2",
+                "reference": "9a10eeda203860e025dae9432ac1f85f08c77cd2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.13.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^6.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pinetcodev\\LaravelImpersonate\\LaravelImpersonateServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelImpersonate": "Pinetcodev\\LaravelImpersonate\\Facades\\LaravelImpersonate"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Pinetcodev\\LaravelImpersonate\\": "src",
+                    "Pinetcodev\\LaravelImpersonate\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pooja Jadav",
+                    "email": "contact2pooja36@gmail.com",
+                    "homepage": "https://www.pinetco.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Impersonate - A package that allows for easy and secure user impersonation within a Laravel application.",
+            "homepage": "https://github.com/pinetco-dev/laravel-impersonate",
+            "keywords": [
+                "laravel",
+                "laravel-impersonate",
+                "pinetco-dev"
+            ],
+            "support": {
+                "issues": "https://github.com/pinetco-dev/laravel-impersonate/issues",
+                "source": "https://github.com/pinetco-dev/laravel-impersonate/tree/1.0.0"
+            },
+            "time": "2023-04-21T11:04:09+00:00"
         },
         {
             "name": "plank/laravel-metable",

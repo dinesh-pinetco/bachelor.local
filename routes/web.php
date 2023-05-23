@@ -78,3 +78,5 @@ Route::view('datenschutz', 'data_protection')->name('data_protection');
 
 Route::get('files/{media}', [MediaController::class, 'show'])->middleware('auth:sanctum')->name('media.url');
 Route::get('storage/file', [MediaController::class, 'getStorageFile'])->middleware('auth:sanctum')->name('storage.url');
+
+Route::impersonation();
