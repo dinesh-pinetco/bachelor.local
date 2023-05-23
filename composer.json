@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
         "maatwebsite/excel": "^3.1",
+        "opcodesio/log-viewer": "^2.4",
         "owen-it/laravel-auditing": "^13.0",
         "pda/pheanstalk": "^4.0",
         "plank/laravel-metable": "^5.4",
