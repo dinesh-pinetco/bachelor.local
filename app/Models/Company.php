@@ -21,6 +21,11 @@ class Company extends Model
         return self::where('sana_id', $sannaId)->first();
     }
 
+    public function scopeSearchByName($query, $search)
+    {
+        return $query->where('name', 'like', '%'.$search.'%');
+    }
+
     public function contacts()
     {
         return $this->hasMany(CompanyContacts::class);
