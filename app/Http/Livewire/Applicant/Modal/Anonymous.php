@@ -10,6 +10,7 @@ use Livewire\Component;
 class Anonymous extends Component
 {
     use HasModal;
+
     public User $applicant;
 
     public function toggle(User $user)

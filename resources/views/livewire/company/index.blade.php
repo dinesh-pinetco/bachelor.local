@@ -88,7 +88,7 @@
                                     {{__('Company list')}}
                                 </h6>
                                 <div class="max-h-64 overflow-y-auto">
-                                    @forelse ($filterCompanies as $company)
+                                    @forelse ($companies as $company)
                                         <div class="flex items-center gap-2 py-1">
                                             <input
                                                 class="m-1 flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
@@ -109,10 +109,12 @@
                                     {{__('Selected companies')}}
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
-                                    @forelse ($companies->whereIn('id', $selectedCompanies) as $selectedCompany)
-                                        <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
-                                            {{ $selectedCompany->name }}
-                                        </div>
+                                    @forelse ($selectedCompanies as $selectedCompanyId)
+                                        @if ($selectedCompany = $companies->firstWhere('id', $selectedCompanyId))
+                                            <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
+                                                {{ $selectedCompany->name }}
+                                            </div>
+                                        @endif
                                     @empty
                                         <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>
                                     @endforelse
