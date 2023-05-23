@@ -233,6 +233,11 @@ class Field extends Component
         if ($this->field->key == 'city') {
             $this->emit('cityFieldValueChanged');
         }
+
+        if ($this->field->type == FieldType::FIELD_TEL()) {
+            $this->dispatchBrowserEvent('livewire:tel-load');
+
+        }
     }
 
     public function save()
