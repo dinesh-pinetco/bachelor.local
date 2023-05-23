@@ -33,8 +33,8 @@ class Statistics
             return $this->consentCompanyPortal($method);
         } elseif ($filteredBy == 'competencyCatchUp') {
             return $this->competencyCatchUp($method);
-        } elseif ($filteredBy == 'enrollment') {
-            return $this->enrollment($method);
+        } elseif ($filteredBy == 'approvedByCompanyForEnrollment') {
+            return $this->approvedByCompanyForEnrollment($method);
         }
 
         return $this->applicantFilterByApplication(null)
@@ -89,9 +89,9 @@ class Statistics
             ->{$method}($this->params);
     }
 
-    public function enrollment($method)
+    public function approvedByCompanyForEnrollment($method)
     {
-        return $this->applicantFilterByApplication(ApplicationStatus::ENROLLMENT_ON())
+        return $this->applicantFilterByApplication(ApplicationStatus::ENROLLMENT_ON(), ApplicationStatus::CONTRACT_SENT_ON(), ApplicationStatus::CONTRACT_RETURNED_ON())
             ->{$method}($this->params);
     }
 

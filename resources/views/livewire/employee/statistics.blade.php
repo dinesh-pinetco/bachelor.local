@@ -111,9 +111,9 @@
             </div>
 
             <div class="flex">
-                <h6 class="text-darkgray">{{ __('Enrollment') }}: </h6>
-                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'enrollment']) }}"
-                   class="text-primary pl-1">{{ data_get($statistics, 'enrollment') }}
+                <h6 class="text-darkgray">{{ __('Approved By Company For Enrollment') }}: </h6>
+                <a href="{{ route('employee.applicants.index', ['filteredBy' => 'approvedByCompanyForEnrollment']) }}"
+                   class="text-primary pl-1">{{ data_get($statistics, 'approvedByCompanyForEnrollment') }}
                 </a>
             </div>
         </div>

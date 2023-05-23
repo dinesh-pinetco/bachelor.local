@@ -52,7 +52,7 @@ class Statistics extends Component
             'testFailedConfirmed' => $statistics->testFailedConfirmed('count'),
             'testResultPdfRetrieved' => $statistics->testResultPdfRetrieved('count'),
             'consentCompanyPortal' => $statistics->consentCompanyPortal('count'),
-            'enrollment' => $statistics->enrollment('count'),
+            'approvedByCompanyForEnrollment' => $statistics->approvedByCompanyForEnrollment('count'),
         ];
     }
 
