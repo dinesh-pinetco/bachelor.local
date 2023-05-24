@@ -40,8 +40,8 @@ Artisan::command('clean-dump:testing', function () {
     $users = User::query()->withTrashed()->role(ROLE_APPLICANT)->get();
 
     foreach ($users as $user) {
+        User::where('id', $user->id)->forceDelete();
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
-        $user->forceDelete();
     }
 
     User::query()->update(['password' => Hash::make('nak@123#')]);
