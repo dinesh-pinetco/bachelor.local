@@ -21,6 +21,7 @@ const COURSE_STARTING_MONTH = 10;
 
 const PER_STEP_PROGRESS = 50;
 
+const BACHELOR_APPLICANT_ID = 'bachelor_applicant_id';
 const BACHELOR_DESIRED_BEGINNING = 'bachelor_desired_beginning';
 const BACHELOR_STUDY_COURSES = 'bachelor_study_courses';
 const BACHELOR_REGISTRATION_SUBMITTED = 'bachelor_registration_submitted';
