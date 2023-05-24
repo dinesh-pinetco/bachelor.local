@@ -31,8 +31,8 @@ class ContactUsController extends Controller
         ]);
 
         Mail::to($request->email)
-                ->bcc(config('mail.supporter.address'))
-                ->send(new ContactSupport($request->message));
+            ->bcc(config('mail.supporter.address'))
+            ->send(new ContactSupport($request->message));
 
         return back()->with('message', __('Message Sent Successfully!!'));
     }

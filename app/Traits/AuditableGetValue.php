@@ -34,7 +34,7 @@ trait AuditableGetValue
     private function course($key, array $value)
     {
         $this->foreignKeyCollection->{$key} = $value;
-//        $this->foreignKeyCollection->{$key} = Course::whereIn('id', $value)->get();
+        //        $this->foreignKeyCollection->{$key} = Course::whereIn('id', $value)->get();
     }
 
     private function desiredBeginning($key, array $value)

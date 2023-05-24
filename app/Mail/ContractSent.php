@@ -30,10 +30,10 @@ class ContractSent extends Mailable
     public function build()
     {
         return $this->subject(__('Your contract is on the way').' | '.$this->course->name.' | NORDAKADEMIE')
-        ->from(config('mail.from.address'), config('mail.from.name'))
-        ->markdown('emails.contract-sent', [
-            'name' => $this->applicant->full_name,
-            'desiredBeginning' => $this->applicant->desiredBeginning->course_start_date->format('Y-m-d'),
-        ]);
+            ->from(config('mail.from.address'), config('mail.from.name'))
+            ->markdown('emails.contract-sent', [
+                'name' => $this->applicant->full_name,
+                'desiredBeginning' => $this->applicant->desiredBeginning->course_start_date->format('Y-m-d'),
+            ]);
     }
 }

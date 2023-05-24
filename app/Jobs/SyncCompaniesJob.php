@@ -35,6 +35,6 @@ class SyncCompaniesJob implements ShouldQueue
      */
     public function handle()
     {
-       Companies::make()->setPage($this->page)->setItemsPerPage($this->items)->sync();
+        Companies::make()->setPage($this->page)->setItemsPerPage($this->items)->sync();
     }
 }

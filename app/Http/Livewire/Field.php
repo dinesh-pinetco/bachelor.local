@@ -108,24 +108,24 @@ class Field extends Component
             $validation['fieldValue'][] = 'email:rfc,dns,spoof';
         }
 
-//        if ($this->field->key == 'first_name') {
-//            $validation['fieldValue'][] = 'max:512';
-//            $validation['fieldValue'][] = 'string';
-//        }
-//
-//        if ($this->field->key == 'last_name') {
-//            $validation['fieldValue'][] = 'max:512';
-//            $validation['fieldValue'][] = 'string';
-//        }
+        //        if ($this->field->key == 'first_name') {
+        //            $validation['fieldValue'][] = 'max:512';
+        //            $validation['fieldValue'][] = 'string';
+        //        }
+        //
+        //        if ($this->field->key == 'last_name') {
+        //            $validation['fieldValue'][] = 'max:512';
+        //            $validation['fieldValue'][] = 'string';
+        //        }
 
         if ($this->field->type == FieldType::FIELD_TEXT()) {
             $validation['fieldValue'][] = $this->field->validation;
         }
 
         if ($this->field->key == 'phone') {
-//            $validation['fieldValue'][] = 'phone:DE';
+            //            $validation['fieldValue'][] = 'phone:DE';
 
-             $validation['fieldValue'][] = VALIDATION_NUMBERS;
+            $validation['fieldValue'][] = VALIDATION_NUMBERS;
             $validation['fieldValue'][] = 'min:9';
             $validation['fieldValue'][] = 'max:20';
         }

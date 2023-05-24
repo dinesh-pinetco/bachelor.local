@@ -21,7 +21,7 @@ class EmployeeSeeder extends Seeder
                 'last_name' => 'Zeidler',
                 'email' => 'a.zeidler@pinetco.com',
             ])
-        ->assignRole(ROLE_EMPLOYEE);
+            ->assignRole(ROLE_EMPLOYEE);
 
         User::factory()
             ->hasPreference()
@@ -30,7 +30,7 @@ class EmployeeSeeder extends Seeder
                 'last_name' => 'User',
                 'email' => 'employee@nak.com',
             ])
-        ->assignRole(ROLE_EMPLOYEE);
+            ->assignRole(ROLE_EMPLOYEE);
 
         User::factory()->create([
             'first_name' => 'Ulf',

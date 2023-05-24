@@ -25,9 +25,9 @@ class ProgressBar
         //Client wants only progress bar on profile and tests
         $progressPoints = $this->calculateProgressByTab('profile')
             + $this->selectionTestsProgress();
-//            + $this->calculateProgressByTab('industries')
-//            + $this->calculateProgressByTab('motivation')
-//            + $this->documentProgress();
+        //            + $this->calculateProgressByTab('industries')
+        //            + $this->calculateProgressByTab('motivation')
+        //            + $this->documentProgress();
 
         return round($progressPoints);
     }
@@ -86,21 +86,21 @@ class ProgressBar
         $points = count(Test::categories());
 
         $results = Result::myResults(auth()->user())
-        ->join('tests', 'tests.id', '=', 'results.test_id')
-        ->select(['tests.category', 'results.status', 'results.is_passed', 'results.user_id', 'results.failed_by_nak'])
-        ->get();
+            ->join('tests', 'tests.id', '=', 'results.test_id')
+            ->select(['tests.category', 'results.status', 'results.is_passed', 'results.user_id', 'results.failed_by_nak'])
+            ->get();
 
         $updatedStatusResults = $results
             ->whereNotIn('status', [Result::STATUS_NOT_STARTED, Result::STATUS_STARTED]);
 
         if ($updatedStatusResults->count() === $results->count()) {
             $firstCategoryPoint = Test::query()
-            ->where('category', Test::FIRST_CATEGORY)
-            ->matchCourses($courses)
-            ->whereHas('results', function ($q) {
-                $q->where('user_id', $this->applicant->id)
-                    ->where('is_passed', true);
-            })->exists();
+                ->where('category', Test::FIRST_CATEGORY)
+                ->matchCourses($courses)
+                ->whereHas('results', function ($q) {
+                    $q->where('user_id', $this->applicant->id)
+                        ->where('is_passed', true);
+                })->exists();
 
             $secondCategoryPoint = Test::query()
                 ->where('category', Test::SECOND_CATEGORY)

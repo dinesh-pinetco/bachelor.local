@@ -57,7 +57,7 @@ return [
    */
     'authorized_emails' => [
         'raviraj@pinetco.com',
-        'pooja@pinetco.com'
+        'pooja@pinetco.com',
     ],
 
     /*

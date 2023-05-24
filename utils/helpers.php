@@ -10,7 +10,7 @@ function kbFromBytes($bytes)
 function isNotEmptyValue($optionArray)
 {
     return count(array_filter($optionArray, function ($array) {
-            return count(array_filter($array)) >= 2;
+        return count(array_filter($array)) >= 2;
     })) == count($optionArray);
 }
 
