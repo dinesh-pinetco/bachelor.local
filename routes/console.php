@@ -37,18 +37,14 @@ Artisan::command('clean-dump:testing', function () {
     DB::table('field_values')->truncate();
     DB::table('meta')->truncate();
 
-    $users = User::whereHas('roles', function ($query) {
-        $query->where('name', ROLE_APPLICANT);
-    })->get();
+    $users = User::query()->withTrashed()->role(ROLE_APPLICANT)->get();
 
-    foreach($users as $user){
+    foreach ($users as $user) {
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
-        User::where('id', $user->id)->forceDelete();
+        $user->forceDelete();
     }
 
-    User::all()->each(function ($user) {
-        $user->update(['password' => Hash::make('nak@123#')]);
-    });
+    User::query()->update(['password' => Hash::make('nak@123#')]);
 
-    $this->comment('Success');
+    $this->comment('Dump DB is ready to use!');
 });
