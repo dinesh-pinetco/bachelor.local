@@ -34,6 +34,7 @@ class Contact
     public function get()
     {
         return [
+            BACHELOR_APPLICANT_ID => $this->user->id,
             'email' => $this->user->email,
             'firstname' => $this->user->first_name,
             'lastname' => $this->user->last_name,

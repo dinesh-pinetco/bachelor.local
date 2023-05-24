@@ -1,6 +1,14 @@
 <?php
 
 return [
+    BACHELOR_APPLICANT_ID => [
+        'label' => 'NAK bachelor applicant ID',
+        'groupName' => 'nak_bachelor',
+        'description' => 'Applicant ID of application portal',
+        'type' => 'number',
+        'filedType' => 'number',
+        'options' => [],
+    ],
     'email' => [
         'label' => 'Email',
         'groupName' => 'contactinformation',
