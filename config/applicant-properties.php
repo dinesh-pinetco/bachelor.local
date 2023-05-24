@@ -2,9 +2,9 @@
 
 return [
     BACHELOR_APPLICANT_ID => [
-        'label' => 'NAK Bachelor Applicant Id',
+        'label' => 'NAK bachelor applicant ID',
         'groupName' => 'nak_bachelor',
-        'description' => 'A contact\'s Id',
+        'description' => 'Applicant ID of application portal',
         'type' => 'number',
         'filedType' => 'number',
         'options' => [],
