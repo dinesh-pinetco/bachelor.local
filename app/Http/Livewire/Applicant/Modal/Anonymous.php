@@ -13,10 +13,9 @@ class Anonymous extends Component
 
     public User $applicant;
 
-    public function toggle(User $user)
+    public function toggle()
     {
         $this->show = ! $this->show;
-        $this->applicant = $user;
     }
 
     public function AnonymousApplicant()
