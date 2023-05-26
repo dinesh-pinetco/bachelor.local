@@ -88,7 +88,7 @@
                                     {{__('Company list')}}
                                 </h6>
                                 <div class="max-h-64 overflow-y-auto">
-                                    @forelse ($companies as $company)
+                                    @forelse ($filterCompanies as $company)
                                         <div class="flex items-center gap-2 py-1">
                                             <input
                                                 class="m-1 flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
