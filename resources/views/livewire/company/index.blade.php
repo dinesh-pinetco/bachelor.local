@@ -282,7 +282,6 @@
                 @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
                     <p class="text-primary">{{ __('You have applied to marketplace.') }}</p>
                 @endif
-
         </div>
     </div>
     <x-custom-modal wire:model="show" maxWidth="lg">
@@ -293,7 +292,7 @@
             <div class="space-y-3">
                 <x-multi-select
                     name="company"
-                    wire:model="selectedCompanies"
+                    wire:model="addNewCompaniesToApplicant"
                     :placeholder="__('Select Company')"
                     :options="$companies"
                     :value="$selectedCompanies"
@@ -305,7 +304,7 @@
         </div>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-secondary-button data-cy="cancel-button" x-on:click="show = false"> {{ __('Close') }} </x-secondary-button>
+                <x-secondary-button data-cy="cancel-button" wire:click="applyToSelectedCompany"> {{ __('Close') }} </x-secondary-button>
             </div>
         </x-slot>
     </x-custom-modal>

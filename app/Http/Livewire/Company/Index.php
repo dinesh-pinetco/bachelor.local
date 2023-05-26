@@ -36,6 +36,8 @@ class Index extends Component
 
     public $appliedCompanies = [];
 
+    public $addNewCompaniesToApplicant = [];
+
     protected $rules = [
         'mailContent' => ['required', 'min:4'],
     ];
@@ -131,7 +133,8 @@ class Index extends Component
 
     public function selectedCompanies()
     {
-        $this->selectedCompanies = $this->appliedCompanies?->pluck('company_id')?->toArray();
+        $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
+        $this->addNewCompaniesToApplicant = $this->selectedCompanies;
     }
 
     public function updatedSelectedCompanies()
@@ -188,6 +191,10 @@ class Index extends Component
     {
         $this->validate();
 
+        if($this->addNewCompaniesToApplicant){
+            $this->selectedCompanies = $this->addNewCompaniesToApplicant;
+        }
+
         foreach (array_filter($this->selectedCompanies) as $companyId) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
@@ -209,6 +216,8 @@ class Index extends Component
         $this->selectedCompanies();
 
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
+
+        $this->show = false;
 
         $this->emitSelf('refresh');
     }
