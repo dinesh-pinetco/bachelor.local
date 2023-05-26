@@ -217,7 +217,7 @@
                     @foreach ($appliedCompanies as $appliedCompany)
                         <div class="inline-flex items-center space-x-2 px-3 py-2 bg-primary bg-opacity-10 rounded-sm">
                             <div class="text-xs">
-                                {{ $appliedCompany->company->name }}
+                                {{ $appliedCompany->company?->name }}
                             </div>
                             <button wire:click="removeCompany({{ $appliedCompany->company_id }})" class="ml-2 text-red">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
