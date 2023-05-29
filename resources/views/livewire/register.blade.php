@@ -58,11 +58,12 @@
             <div class="tel-input" wire:ignore>
                 <x-jet-label class="text-white font-bold" for="password_confirmation"
                              value="{{ __('Phone number') }}"></x-jet-label>
-                <x-input-tel name="phone"
-                       :value="old('phone')"
-                       placeholder="{{ __('Enter phone number') }}"
-                       maxlength="15">
-                </x-input-tel>
+                <x-tel-input
+                    wire:model="phone"
+                    id="phone"
+                    class="block w-full text-black"
+                />
+                <input type="hidden" id="number" name="phone"/>
             </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
@@ -103,6 +104,12 @@
 
     @push('scripts')
         <script>
+            const input = document.querySelector("#phone");
+            input.addEventListener('telchange', function(e) {
+                document.getElementById('phone').value = e.detail.number;
+                document.getElementById('number').value = e.detail.number;
+            });
+
             function submitForm() {
                 document.querySelector("#application_register").submit();
             }

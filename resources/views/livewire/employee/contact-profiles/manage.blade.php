@@ -76,12 +76,12 @@
                                 <x-jet-label for="phone"
                                              class="block required">{{ __('Phone') }}</x-jet-label>
                                     <div wire:ignore>
-                                        <x-input-tel name="phone"
-                                                    wire:model='contactProfile.phone'
-                                                    :value="old('phone')"
-                                                    placeholder="{{ __('Enter phone number') }}"
-                                                    maxlength="15">
-                                        </x-input-tel>
+                                        <x-tel-input
+                                            id="phone"
+                                            value="{{ $contactProfile->phone }}"
+                                            placeholder="{{ __('Enter phone number') }}"
+                                            class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                        />
                                     </div>
                                 <x-jet-input-error for="contactProfile.phone"/>
                             </div>
@@ -110,4 +110,22 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            const input = document.querySelector("#phone");
+            input.addEventListener('telchange', function(e) {
+                if(e.detail.valid)
+                {
+                    @this.set('contactProfile.phone', e.detail.number);
+                } else {
+                    if(e.detail.number.includes(e.detail.dialCode)){
+                        @this.set('contactProfile.phone', e.detail.number);
+                    } else {
+                        const combineString = "+" + e.detail.dialCode + "" + e.detail.number;
+                        @this.set('contactProfile.phone', combineString);
+                    }
+                }
+            });
+        </script>
+    @endpush
 </div>

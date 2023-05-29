@@ -1,4 +1,3 @@
-@php use App\Models\StudySheet; @endphp
 <div>
     <div class="xl:px-20 w-full max-w-screen-xl mx-auto h-full">
         <div>
@@ -250,12 +249,15 @@
                                                      class="block required">
                                             {{ __('Phone') }}
                                         </x-jet-label>
-                                        <x-input-tel name="phone"
-                                                :value="old('phone')"
-                                                wire:model.lazy="studySheet.phone"
+                                        <div wire:ignore>
+                                            <x-tel-input
+                                                id="phone"
+                                                value="{{ $studySheet->phone }}"
                                                 placeholder="{{ __('Enter phone number') }}"
-                                                maxlength="15">
-                                        </x-input-tel>
+                                                class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                            />
+                                        </div>
+
                                         <x-jet-input-error for="studySheet.phone"/>
                                     </div>
                                     <div>
@@ -409,4 +411,20 @@
             </div>
         </div>
     </div>
+    <script>
+        const input = document.querySelector("#phone");
+        input.addEventListener('telchange', function(e) {
+            if(e.detail.valid)
+            {
+                @this.set('studySheet.phone', e.detail.number);
+            } else {
+                if(e.detail.number.includes(e.detail.dialCode)){
+                    @this.set('studySheet.phone', e.detail.number);
+                } else {
+                    const combineString = "+" + e.detail.dialCode + "" + e.detail.number;
+                    @this.set('studySheet.phone', combineString);
+                }
+            }
+        });
+    </script>
 </div>
