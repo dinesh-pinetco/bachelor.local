@@ -48,3 +48,20 @@ Artisan::command('clean-dump:testing', function () {
 
     $this->comment('Dump DB is ready to use!');
 });
+
+Artisan::command('import-db', function () {
+    Artisan::call('db:wipe');
+
+    $sql = public_path('nak_bachelor.sql');
+
+    $db_details = [
+        'username' => env('DB_USERNAME'),
+        'password' => env('DB_PASSWORD'),
+        'host'     => env('DB_HOST'),
+        'database' => env('DB_DATABASE')
+    ];
+
+    exec("mysql --user={$db_details['username']} --password={$db_details['password']} --host={$db_details['host']} --database={$db_details['database']} < $sql");
+
+    $this->comment('DB imported successfully.');
+});
