@@ -32,11 +32,10 @@
                             <div>
                                 <x-jet-label for="phone" class="block">{{ __('Phone') }}</x-jet-label>
                                 <div wire:ignore>
-                                    <x-tel-input
-                                        id="phone"
-                                        value="{{ $user->phone }}"
-                                        placeholder="{{ __('Enter phone number') }}"
-                                        class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                    <x-input-tel  wire:model="user.phone"
+                                                  value="{{ $user->phone }}"
+                                                  class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                                  placeholder="{{ __('Enter phone number') }}"
                                     />
                                 </div>
                                 <x-jet-input-error for="user.phone"/>
@@ -52,20 +51,4 @@
             </div>
         </div>
     </div>
-    <script>
-        const input = document.querySelector("#phone");
-        input.addEventListener('telchange', function(e) {
-            if(e.detail.valid)
-            {
-                @this.set('user.phone', e.detail.number);
-            } else {
-                if(e.detail.number.includes(e.detail.dialCode)){
-                    @this.set('user.phone', e.detail.number);
-                } else {
-                    const combineString = "+" + e.detail.dialCode + "" + e.detail.number;
-                    @this.set('user.phone', combineString);
-                }
-            }
-        });
-    </script>
 </div>

@@ -10,7 +10,7 @@
                 </div>
                 <div class="mt-5 md:mt-0 px-4 w-full lg:w-1/2 xl:w-2/5">
                     <form wire:submit.prevent="submit" id="contactProfileForm">
-                        <div class="space-y-7 overflow-y-auto px-4 -mx-4">
+                        <div class="space-y-7  px-4 -mx-4">
                             <div>
                                 <div x-data="{photoName: null, photoPreview: null}">
                                     <div class="flex flex-col items-start">
@@ -75,14 +75,11 @@
                             <div>
                                 <x-jet-label for="phone"
                                              class="block required">{{ __('Phone') }}</x-jet-label>
-                                    <div wire:ignore>
-                                        <x-tel-input
-                                            id="phone"
-                                            value="{{ $contactProfile->phone }}"
-                                            placeholder="{{ __('Enter phone number') }}"
-                                            class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
-                                        />
-                                    </div>
+                                <x-input-tel wire:model="contactProfile.phone"
+                                             value="{{ $contactProfile->phone }}"
+                                             class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                             placeholder="{{ __('Enter phone number') }}"
+                                />
                                 <x-jet-input-error for="contactProfile.phone"/>
                             </div>
 
@@ -110,22 +107,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script>
-            const input = document.querySelector("#phone");
-            input.addEventListener('telchange', function(e) {
-                if(e.detail.valid)
-                {
-                    @this.set('contactProfile.phone', e.detail.number);
-                } else {
-                    if(e.detail.number.includes(e.detail.dialCode)){
-                        @this.set('contactProfile.phone', e.detail.number);
-                    } else {
-                        const combineString = "+" + e.detail.dialCode + "" + e.detail.number;
-                        @this.set('contactProfile.phone', combineString);
-                    }
-                }
-            });
-        </script>
-    @endpush
 </div>
