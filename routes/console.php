@@ -52,16 +52,19 @@ Artisan::command('clean-dump:testing', function () {
 Artisan::command('import-db', function () {
     Artisan::call('db:wipe');
 
-    $sql = public_path('nak_bachelor.sql');
+    $sqlFile = database_path('mysql-nak_bachelor.sql');
+    $databaseConfig = config('database.connections.mysql');
 
-    $db_details = [
-        'username' => env('DB_USERNAME'),
-        'password' => env('DB_PASSWORD'),
-        'host'     => env('DB_HOST'),
-        'database' => env('DB_DATABASE')
-    ];
+    $command = sprintf(
+        'mysql --user=%s --password=%s --host=%s --database=%s < %s',
+        $databaseConfig['username'],
+        $databaseConfig['password'],
+        $databaseConfig['host'],
+        $databaseConfig['database'],
+        $sqlFile
+    );
 
-    exec("mysql --user={$db_details['username']} --password={$db_details['password']} --host={$db_details['host']} --database={$db_details['database']} < $sql");
+    exec($command);
 
-    $this->comment('DB imported successfully.');
+    $this->info('Database imported successfully.');
 });
