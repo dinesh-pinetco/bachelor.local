@@ -1,7 +1,6 @@
-<div wire:ignore>
-    <x-input-tel :disabled="!$isEdit"
-           wire:model="fieldValue"
-           value="{{ $fieldValue }}"
-           name="fieldValue"
-           required="{{ $field->required() }}"></x-input-tel>
-</div>
+<x-input-tel  wire:model="fieldValue"
+              value="{{ $fieldValue }}"
+              required="{{ $field->required() }}"
+              class="block w-full"
+              placeholder="{{ __('Enter phone number') }}"
+/>
