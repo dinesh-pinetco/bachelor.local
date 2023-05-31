@@ -1,51 +1,38 @@
 @props([
     'wireModel' => $attributes->whereStartsWith('wire:model')->first(),
+    'value' => '',
+    'name' => '',
+    'required' => false,
+    'disabled' => false
 ])
+<x-tel-input id="phone"
+             {{--             class="block w-full @if($disabled) cursor-not-allowed opacity-50 @endif"--}}
+             class="block w-full text-black"
+             {{--             {!! $attributes->except(['id', $attributes->wire('model')->directive])->merge(['class' => 'tel-input w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray']) !!}--}}
+             value="{{ $value }}"
+/>
+<input type="hidden" id="number" name="phone"/>
 
-<input
-    id="phone" {!! $attributes->merge(['class' => 'tel-input w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray']) !!}>
 @push('scripts')
     <script>
-        function initializeTelInput() {
-            const input = document.querySelector("#phone");
-
-            let phoneNumber = intlTelInput(input, {
-                separateDialCode: true,
-                preferredCountries: ["de"],
-                utilsScript: "{{ asset('plugins/utils.js') }}",
-            });
-
-
-            input.addEventListener('input', function (event) {
-                const inputValue = event.target.value;
-                const numberPattern = /^[0-9]*$/;
-
-                if (!numberPattern.test(inputValue)) {
-                    event.target.value = inputValue.replace(/\D/g, '');
+        const input = document.querySelector("#phone");
+        input.addEventListener('telchange', function(e) {
+            document.getElementById('phone').value = e.detail.number;
+            document.getElementById('number').value = e.detail.number;
+            @if($wireModel)
+                if(e.detail.valid)
+                {
+                    @this.set('{{ $wireModel }}', e.detail.number);
+                } else {
+                    if(e.detail.number.includes(e.detail.dialCode)){
+                        @this.set('{{ $wireModel }}', e.detail.number);
+                    } else {
+                        const combineString = "+" + e.detail.dialCode + "" + e.detail.number;
+                        @this.set('{{ $wireModel }}', combineString);
+                    }
                 }
-            });
-
-            function handleInputChange() {
-                input.value = phoneNumber.getNumber(intlTelInputUtils.numberFormat.E164);
-
-                @if($wireModel)
-                @this.
-                set('{{ $wireModel }}', phoneNumber.getNumber(intlTelInputUtils.numberFormat.E164));
-                @endif
-            }
-
-            input.addEventListener("change", handleInputChange);
-            input.addEventListener("countrychange", handleInputChange);
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('window load')
-            initializeTelInput()
+            @endif
         });
-
-        window.addEventListener('livewire:tel-load', function () {
-            console.log('livewire:tel-load')
-            initializeTelInput()
-        });
+        document.dispatchEvent(new Event('telDOMChanged'));
     </script>
 @endpush
