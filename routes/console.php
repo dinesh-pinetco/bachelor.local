@@ -50,6 +50,8 @@ Artisan::command('clean-dump:testing', function () {
 });
 
 Artisan::command('import-db', function () {
+    $password = $this->ask('What is database password?');
+
     Artisan::call('db:wipe');
 
     $sqlFile = database_path('mysql-nak_bachelor.sql');
@@ -58,7 +60,7 @@ Artisan::command('import-db', function () {
     $command = sprintf(
         'mysql --user=%s --password=%s --host=%s --database=%s < %s',
         $databaseConfig['username'],
-        $databaseConfig['password'],
+        $password,
         $databaseConfig['host'],
         $databaseConfig['database'],
         $sqlFile
