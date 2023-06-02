@@ -161,6 +161,8 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
+        $this->fetchAppliedCompanies();
+
     }
 
     protected function fetchAppliedCompanies()
@@ -229,6 +231,7 @@ class Index extends Component
         $this->user->companies()->where('company_id', $appliedCompanyId)->first()->delete();
 
         $this->selectedCompanies();
+        $this->fetchAppliedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
     }
