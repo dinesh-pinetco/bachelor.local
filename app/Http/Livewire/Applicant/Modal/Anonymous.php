@@ -13,11 +13,6 @@ class Anonymous extends Component
 
     public User $applicant;
 
-    public function toggle()
-    {
-        $this->show = ! $this->show;
-    }
-
     public function AnonymousApplicant()
     {
         MakeAnonymousUser::make($this->applicant)->execute();

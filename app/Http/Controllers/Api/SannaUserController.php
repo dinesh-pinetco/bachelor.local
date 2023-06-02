@@ -18,15 +18,22 @@ class SannaUserController extends Controller
 
         $users = User::query()
             ->role(ROLE_APPLICANT)
-            ->where('application_status', ApplicationStatus::CONTRACT_SENT_ON)
             ->whereHas('configuration', function ($query) {
                 $query->where('is_synced_to_sanna', false);
             })
-            ->whereHas('study_sheet', function ($query) {
-                $query->where('is_submit', true);
-            })
-            ->whereHas('government_form', function ($query) {
-                $query->where('is_submit', true);
+            ->where(function ($query) {
+                $query->whereHas('configuration', function ($query) {
+                    $query->where('competency_catch_up', true);
+                })
+                    ->orWhere(function ($q) {
+                        $q->where('application_status', ApplicationStatus::CONTRACT_SENT_ON)
+                            ->whereHas('study_sheet', function ($query) {
+                                $query->where('is_submit', true);
+                            })
+                            ->whereHas('government_form', function ($query) {
+                                $query->where('is_submit', true);
+                            });
+                    });
             })
             ->with([
                 'configuration',
