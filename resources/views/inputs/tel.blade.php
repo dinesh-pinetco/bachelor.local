@@ -3,4 +3,5 @@
               required="{{ $field->required() }}"
               class="block w-full"
               placeholder="{{ __('Enter phone number') }}"
+              :disabled="!$isEdit"
 />

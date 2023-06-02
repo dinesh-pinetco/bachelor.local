@@ -58,7 +58,7 @@
             <div class="tel-input" wire:ignore>
                 <x-jet-label class="text-white font-bold" for="password_confirmation"
                              value="{{ __('Phone number') }}"></x-jet-label>
-                <x-input-tel name="phone" class="block w-full bg-white text-black" />
+                <x-input-tel class="block w-full bg-white text-black" />
             </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
