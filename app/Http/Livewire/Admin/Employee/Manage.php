@@ -27,6 +27,7 @@ class Manage extends Component
         if ($user->exists) {
             $this->formMode = 'edit';
         }
+        $this->user->only(['id','first_name','last_name','email','phone','created_at']);
     }
 
     public function render()
