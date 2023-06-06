@@ -289,7 +289,6 @@
             {{ __('Add companies') }}
         </x-slot>
         <div>
-            @dump($selectedCompanies)
             <div class="space-y-3">
                 <x-multi-select
                     name="company"
