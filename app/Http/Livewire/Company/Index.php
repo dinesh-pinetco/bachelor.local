@@ -69,6 +69,8 @@ class Index extends Component
         $this->isAppliedToCompany = $this->appliedCompanies->isNotEmpty();
 
         $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
+
+        $this->addNewCompaniesToApplicant = $this?->selectedCompanies;
     }
 
     public function updatedSearch()
@@ -134,7 +136,6 @@ class Index extends Component
     public function selectedCompanies()
     {
         $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
-        $this->addNewCompaniesToApplicant = $this->selectedCompanies;
     }
 
     public function updatedSelectedCompanies()
@@ -191,10 +192,6 @@ class Index extends Component
     {
         $this->validate();
 
-        if($this->addNewCompaniesToApplicant){
-            $this->selectedCompanies = $this->addNewCompaniesToApplicant;
-        }
-
         foreach (array_filter($this->selectedCompanies) as $companyId) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
@@ -213,13 +210,13 @@ class Index extends Component
 
         $this->isAppliedToCompany = true;
 
+        $this->emitSelf('refresh');
+
         $this->selectedCompanies();
 
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
         $this->show = false;
-
-        $this->emitSelf('refresh');
     }
 
     public function removeCompany($appliedCompanyId)
@@ -235,11 +232,18 @@ class Index extends Component
         $this->selectedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+
+        $this->emitSelf('refresh');
     }
 
     public function updateCompanies()
     {
         $this->open();
+    }
+
+    public function updatedAddNewCompaniesToApplicant()
+    {
+        $this->selectedCompanies = $this->addNewCompaniesToApplicant;
     }
 
     public function render()

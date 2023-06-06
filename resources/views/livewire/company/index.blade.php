@@ -289,6 +289,7 @@
             {{ __('Add companies') }}
         </x-slot>
         <div>
+            @dump($selectedCompanies)
             <div class="space-y-3">
                 <x-multi-select
                     name="company"
@@ -304,7 +305,7 @@
         </div>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-secondary-button data-cy="cancel-button" wire:click="applyToSelectedCompany"> {{ __('Close') }} </x-secondary-button>
+                <x-secondary-button data-cy="submit-button" wire:click="applyToSelectedCompany"> {{ __('Submit') }} </x-secondary-button>
             </div>
         </x-slot>
     </x-custom-modal>
