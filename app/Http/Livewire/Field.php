@@ -345,6 +345,7 @@ class Field extends Component
             $desiredBeginning = DesiredBeginning::where('id', $fieldValue->value)
                 ->update(['course_start_date' => $this->fieldValue]);
 
+            $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
             //TODO: must reset courses
         }
     }
