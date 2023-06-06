@@ -168,6 +168,21 @@ class Show extends Component
         }
     }
 
+    public function resetEnrollment()
+    {
+        $this->applicant->getValueByField('enroll_course')->forceDelete();
+        $this->applicant->getValueByField('enroll_company')->forceDelete();
+        $this->applicant->getValueByField('enroll_company_contact')->forceDelete();
+
+        $this->applicant->update([
+            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY
+        ]);
+
+        $this->isEnrolled = false;
+
+        $this->toastNotify(__('Enrollment reset successfully.'), __('Success'), TOAST_SUCCESS);
+    }
+
     public function handleCompetencyCatchUp()
     {
         UserConfiguration::updateOrCreate(['user_id' => $this->applicant->id], [

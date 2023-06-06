@@ -49,6 +49,14 @@
 
                     <div class="flex items-center space-x-4 flex-shrink-0">
                         @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && $isEnrolled)
+                            <div class="inline-flex items-center gap-2">
+                                <button wire:click="resetEnrollment"
+                                    data-tippy-content="{{__('Cancel the enrollment')}}">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#003a79">
+                                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM15 16L9 8M9 16l6-8" stroke="#003a79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                            </div>
                             <div class="inline-flex items-center gap-2 text-green-500 text-sm mt-4 md:mt-0">
                                 <svg class="w-3 h-3 fill-current" fill="currentcolor" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 512 512">
@@ -58,7 +66,7 @@
                                 <p>{{__('Has been hired')}}</p>
                             </div>
                         @endif
-                        @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status->id() > ApplicationStatus::TEST_TAKEN->id() && $isProfile)
+                        @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && $isProfile)
                             <div class="flex items-center space-x-4">
                                 <x-primary-button type="button"
                                                   wire:click="$emit('Applicant.Modal.Enrollment.modal.toggle',{{ $applicant->id }})"
