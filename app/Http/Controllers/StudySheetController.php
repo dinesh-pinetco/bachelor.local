@@ -8,6 +8,15 @@ class StudySheetController extends Controller
 {
     public function __invoke(User $user)
     {
+        if (auth()->user()->hasRole(ROLE_APPLICANT)) {
+            if ($user->id == auth()->user()->id) {
+                return view('study-sheet', ['applicant' => auth()->user()]);
+            } else {
+                abort(403);
+            }
+        }
+
         return view('study-sheet', ['applicant' => $user]);
+
     }
 }

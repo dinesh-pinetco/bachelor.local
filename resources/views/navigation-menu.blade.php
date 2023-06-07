@@ -289,6 +289,23 @@
                             </li>
                         @endif
 
+                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::ENROLLMENT_ON->id())
+                            <li>
+                                <x-jet-nav-link href="{{ route('applicant-forms') }}"
+                                                :active="urlContains('applicant-forms')"
+                                                class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                                    <div
+                                        class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4 21.4V2.6a.6.6 0 01.6-.6h11.652a.6.6 0 01.424.176l3.148 3.148A.6.6 0 0120 5.75V21.4a.6.6 0 01-.6.6H4.6a.6.6 0 01-.6-.6z" stroke="currentcolor" stroke-width="round" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M16 2v3.4a.6.6 0 00.6.6H20" stroke="currentcolor" stroke-width="1.96" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </div>
+                                    <span>{{ __('Forms') }}</span>
+                                </x-jet-nav-link>
+                            </li>
+                        @endif
+
                         <li>
                             <x-jet-nav-link href="{{ route('update-password') }}"
                                             :active="urlContains('update-password')"
