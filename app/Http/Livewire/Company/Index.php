@@ -6,11 +6,12 @@ use App\Enums\ApplicationStatus;
 use App\Models\Company;
 use App\Models\User;
 use App\Traits\Livewire\HasModal;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Index extends Component
 {
-    use HasModal;
+    use HasModal, AuthorizesRequests;
 
     public $companies;
 
@@ -115,23 +116,31 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
+        if (! $this->showAccessDeniedMessage()) {
+            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
+        }
+
         if ($this->marketplacePrivacyPolicyAccepted == false) {
             return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
         }
 
-        $this->user->marketplace_privacy_policy_accepted = $this->marketplacePrivacyPolicyAccepted;
-
-        $this->user->save();
+        $this->user->update([
+            'marketplace_privacy_policy_accepted' => $this->marketplacePrivacyPolicyAccepted,
+        ]);
 
         $this->user->touch('show_application_on_marketplace_at');
 
         $this->toastNotify(__('You have sent your application to the marketplace.'), __('Success'), TOAST_SUCCESS);
 
-        $this->emitSelf('refresh');
+        return to_route('application.index', ['tab' => 'industries']);
     }
 
     public function DoNotShowProfileMarketplace()
     {
+        if (! $this->showAccessDeniedMessage()) {
+            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
+        }
+
         $this->user->touch('reject_marketplace_application_at');
 
         $this->selectedCompanies();
@@ -178,7 +187,7 @@ class Index extends Component
 
     public function showAccessDeniedMessage()
     {
-        return ! ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY || $this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE);
+        return ! ($this->user->reject_marketplace_application_at || $this->user->show_application_on_marketplace_at);
     }
 
     public function next()
@@ -243,6 +252,8 @@ class Index extends Component
 
     public function render()
     {
+        $this->authorize('view', User::class);
+
         $this->fetchAppliedCompanies();
 
         return view('livewire.company.index');

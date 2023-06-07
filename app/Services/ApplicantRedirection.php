@@ -62,7 +62,7 @@ class ApplicantRedirection
 
     private function test_result_pdf_retrieved_on()
     {
-        return to_route('application.index', ['tab' => 'industries']);
+        return to_route('companies.index');
     }
 
     private function personal_data_completed()
