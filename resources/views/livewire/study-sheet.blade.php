@@ -1,6 +1,4 @@
-@php use App\Models\StudySheet; @endphp
 <div>
-    @if($applicant->application_status >= ApplicationStatus::ENROLLMENT_ON)
         <div class="xl:px-20 w-full max-w-screen-xl mx-auto h-full">
             <div>
                 <div class="md:-mx-4">
@@ -397,6 +395,8 @@
                                             {{ __('Save') }}
                                         </x-primary-button>
                                     </div>
+                                    </div>
+
                                 </div>
                             </form>
                         @else
@@ -411,7 +411,4 @@
                 </div>
             </div>
         </div>
-    @else
-        <h2>{{ __('Not elligible for this.') }}</h2>
-    @endif
 </div>

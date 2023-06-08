@@ -4,7 +4,7 @@
             <livewire:tabs :applicant="$applicant??''"/>
         @endif
         <div class="">
-            @if($applicant->application_status >= ApplicationStatus::ENROLLMENT_ON)
+            @if($applicant->getMeta('enrollment_at'))
                 <div class="mt-4">
                     <a class="text-primary text-sm" href="{{ URL::signedRoute('study-sheet', ['user' => $applicant->id]) }}" target="_blank">{{__('Study Sheet')}}:</a>
                 </div>
