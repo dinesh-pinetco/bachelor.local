@@ -22,6 +22,8 @@ class StudySheet extends Component
 
     public $applicant;
 
+    public $showThanks = false;
+
     public StudySheetModel $studySheet;
 
     public bool $formAlreadySubmitted = false;
@@ -53,6 +55,8 @@ class StudySheet extends Component
         $this->studySheet = $this->applicant->study_sheet ?? new StudySheetModel();
 
         $this->formAlreadySubmitted = $this->studySheet->is_submit ?? false;
+
+        $this->showThanks = $this->formAlreadySubmitted;
 
         $this->schools = School::get();
 
@@ -112,6 +116,8 @@ class StudySheet extends Component
 
         $this->studySheet->is_submit = true;
         $this->studySheet->save();
+
+        $this->showThanks = true;
 
         $this->applicant->load(['government_form', 'study_sheet']);
 
