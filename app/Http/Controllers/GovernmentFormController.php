@@ -8,15 +8,7 @@ class GovernmentFormController extends Controller
 {
     public function __invoke(User $user)
     {
-        // TODO: kishan, add policy and improve this code
-
-        if (auth()->user()->hasRole(ROLE_APPLICANT)) {
-            if ($user->id == auth()->user()->id) {
-                return view('government-form', ['applicant' => auth()->user()]);
-            } else {
-                abort(403);
-            }
-        }
+        $this->authorize('viewGovernmentForm', $user);
 
         return view('government-form', ['applicant' => $user]);
     }
