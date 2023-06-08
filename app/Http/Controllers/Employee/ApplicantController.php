@@ -22,7 +22,7 @@ class ApplicantController extends Controller
         } elseif ($slug == 'contracts') {
             return view('application.contracts', ['applicant' => $applicant, 'tab' => $slug]);
         } elseif ($slug == 'forms') {
-            return view('application.forms', ['applicant' => $applicant]);
+            return view('application.forms', ['applicant' => $applicant, 'tab' => $slug]);
         } else {
             $tab = Tab::where('slug', $slug)->first();
 
