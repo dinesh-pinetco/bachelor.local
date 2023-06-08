@@ -178,7 +178,7 @@ class Index extends Component
 
     public function showAccessDeniedMessage()
     {
-        return ! ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY || $this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE);
+        return ! ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY);
     }
 
     public function next()

@@ -166,7 +166,6 @@ class User extends Authenticatable implements ContractsAuditable
     public function scopeHasConsentToCompanyPortalBulletinBoard($query)
     {
         return $query->whereIn('application_status', [
-            ApplicationStatus::APPLIED_ON_MARKETPLACE,
             ApplicationStatus::APPLYING_TO_SELECTED_COMPANY,
             ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
         ]);
@@ -181,9 +180,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     public function getEctsPointvalue($identifier)
     {
-        return $this->values->filter(function ($item) use ($identifier) {
-            return $item->fields->key == $identifier;
-        })->first()?->value;
+        return $this->values->where('values.fields.key', $identifier)->value('value');
     }
 
     public function saveCubiaId()

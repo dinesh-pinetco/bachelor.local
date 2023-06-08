@@ -278,11 +278,6 @@
                         {{ __('Update') }}
                     </x-primary-button>
                 @endif
-
-                @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
-                    <p class="text-primary">{{ __('You have applied to marketplace.') }}</p>
-                @endif
-
         </div>
     </div>
     <x-custom-modal wire:model="show" maxWidth="lg">

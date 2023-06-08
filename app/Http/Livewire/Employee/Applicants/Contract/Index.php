@@ -32,7 +32,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->enrollCompany = Company::where('id', $this->applicant->getEctsPointvalue('enroll_company'))->first()?->name;
+        $this->enrollCompany = Company::where('id', $this->applicant->getValueByField('enroll_company')?->value)->value('name');
 
         $this->contract = $this->applicant->contract ?? new Contract();
     }

@@ -24,14 +24,13 @@ enum ApplicationStatus: string
     #[ApplicationStatusOrder(7)] case TEST_RESET = 'test_reset';
     #[ApplicationStatusOrder(8)] case TEST_RESULT_PDF_RETRIEVED_ON = 'test_result_pdf_retrieved_on';
 
-    #[ApplicationStatusOrder(9)] case PERSONAL_DATA_COMPLETED = 'personal_data_completed';
-    #[ApplicationStatusOrder(9)] case APPLIED_ON_MARKETPLACE = 'applied_on_marketplace';
+    #[ApplicationStatusOrder(9)] case APPLICATION_REJECTED_BY_APPLICANT = 'application_rejected_by_applicant';
+    #[ApplicationStatusOrder(10)] case APPLICATION_REJECTED_BY_NAK = 'application_rejected_by_nak';
 
-    #[ApplicationStatusOrder(10)] case APPLICATION_REJECTED_BY_APPLICANT = 'application_rejected_by_applicant';
-    #[ApplicationStatusOrder(11)] case APPLICATION_REJECTED_BY_NAK = 'application_rejected_by_nak';
+    #[ApplicationStatusOrder(11)] case APPLYING_TO_SELECTED_COMPANY = 'applying_to_selected_company';
+    #[ApplicationStatusOrder(12)] case APPLIED_TO_SELECTED_COMPANY = 'applied_to_selected_company';
 
-    #[ApplicationStatusOrder(12)] case APPLYING_TO_SELECTED_COMPANY = 'applying_to_selected_company';
-    #[ApplicationStatusOrder(13)] case APPLIED_TO_SELECTED_COMPANY = 'applied_to_selected_company';
+    #[ApplicationStatusOrder(13)] case PERSONAL_DATA_COMPLETED = 'personal_data_completed';
 
     #[ApplicationStatusOrder(14)] case ENROLLMENT_ON = 'enrollment_on';
     #[ApplicationStatusOrder(15)] case CONTRACT_RETURNED_ON = 'contract_returned_on'; //Applicant return signed PDF
