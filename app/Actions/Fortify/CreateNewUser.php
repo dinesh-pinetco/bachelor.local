@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Enums\ApplicationStatus;
 use App\Mail\UserCreated;
+use App\Models\DesiredBeginning;
 use App\Models\User;
 use App\Services\DeleteRejectedApplicationData;
 use App\Services\SyncUserValue;
@@ -26,6 +27,7 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        //        dd($input);
         Validator::make($input, [
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
@@ -34,7 +36,7 @@ class CreateNewUser implements CreatesNewUsers
                 function ($attribute, $value, $fail) use ($input) {
                     $user = User::query()
                         ->where('email', $value)
-                        ->with('desiredBeginning')
+                        ->with('userDesiredBeginning')
                         ->withTrashed()
                         ->first();
 
@@ -91,8 +93,10 @@ class CreateNewUser implements CreatesNewUsers
             ])->assignRole(ROLE_APPLICANT);
         }
 
+        $desiredBeginningId = DesiredBeginning::where('course_start_date', data_get($input, 'desired_beginning'))->first()->id;
+
         Mail::to($user)->send(new UserCreated($user, $password));
-        $user->attachCourseWithDesiredBeginning(data_get($input, 'desired_beginning'), data_get($input, 'course_ids'));
+        $user->attachCourseWithDesiredBeginning($desiredBeginningId, data_get($input, 'course_ids'));
 
         $syncUser = new SyncUserValue($user);
         $syncUser();

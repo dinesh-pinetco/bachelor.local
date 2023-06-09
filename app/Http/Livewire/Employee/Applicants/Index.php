@@ -64,7 +64,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->desiredBeginnings = DesiredBeginning::all()->unique('course_start_date');
+        $this->desiredBeginnings = DesiredBeginning::active()->get()->unique('course_start_date');
 
         $this->courseOptions = Course::all();
 
@@ -135,7 +135,7 @@ class Index extends Component
                 ->searchByKey($this->column, request('search'))
                 ->filter()
                 ->orderBy('id', 'DESC')
-                ->with(['configuration', 'values.fields', 'desiredBeginning.courses', 'courses'])
+                ->with(['configuration', 'values.fields', 'userDesiredBeginning.courses'])
                 ->paginate($this->perPage);
         }
 

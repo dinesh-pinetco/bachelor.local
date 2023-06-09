@@ -44,36 +44,49 @@
                                 </div>
                             </div>
 
-                            <div>
-                                <x-jet-label for="name" class="block required">{{ __('First Start') }}
-                                </x-jet-label>
-                                <livewire:semester-date :value="$course->first_start" type="first_start" />
-                                <x-jet-input-error for="course.first_start" />
-                            </div>
+{{--                            <div>--}}
+{{--                                <x-jet-label for="name" class="block required">{{ __('First Start') }}--}}
+{{--                                </x-jet-label>--}}
+{{--                                <livewire:semester-date :value="$course->first_start" type="first_start" />--}}
+{{--                                <x-jet-input-error for="course.first_start" />--}}
+{{--                            </div>--}}
+
+{{--                            <div>--}}
+{{--                                <x-jet-label for="name" class="block">{{ __('Last Start') }}--}}
+{{--                                </x-jet-label>--}}
+{{--                                <livewire:semester-date :value="$course->last_start" type="last_start" />--}}
+{{--                                <x-jet-input-error for="course.last_start" />--}}
+{{--                            </div>--}}
+
+{{--                            <div>--}}
+{{--                                <x-jet-label for="lead_time" class="block required">{{ __('Lead Time') }}--}}
+{{--                                </x-jet-label>--}}
+{{--                                <x-jet-input class="w-full" type="number" name="lead_time" :placeholder="__('Lead Time')"--}}
+{{--                                             wire:model.defer="course.lead_time" id="lead_time"></x-jet-input>--}}
+{{--                                <x-jet-input-error for="course.lead_time"/>--}}
+{{--                            </div>--}}
+
+{{--                            <div>--}}
+{{--                                <x-jet-label for="dead_time" class="block required">{{ __('Dead Time') }}--}}
+{{--                                </x-jet-label>--}}
+{{--                                <x-jet-input class="w-full" type="number" name="dead_time" :placeholder="__('Dead Time')"--}}
+{{--                                             wire:model.defer="course.dead_time" id="dead_time"></x-jet-input>--}}
+{{--                                <x-jet-input-error for="course.dead_time"/>--}}
+{{--                            </div>--}}
 
                             <div>
-                                <x-jet-label for="name" class="block">{{ __('Last Start') }}
-                                </x-jet-label>
-                                <livewire:semester-date :value="$course->last_start" type="last_start" />
-                                <x-jet-input-error for="course.last_start" />
+                                <x-jet-label for="name"
+                                             class="block">{{ __('DesireBeginning') }}</x-jet-label>
+                                <x-multi-select
+                                    wire:model="selectedDesiredBeginning"
+                                    :placeholder="__('Select course')"
+                                    :options='$desireBeginnings'
+                                    :value="$selectedDesiredBeginning"
+                                    key-by="id"
+                                    label-by="course_start_date"
+                                />
+                                <x-jet-input-error for="selectedCourses"/>
                             </div>
-
-                            <div>
-                                <x-jet-label for="lead_time" class="block required">{{ __('Lead Time') }}
-                                </x-jet-label>
-                                <x-jet-input class="w-full" type="number" name="lead_time" :placeholder="__('Lead Time')"
-                                             wire:model.defer="course.lead_time" id="lead_time"></x-jet-input>
-                                <x-jet-input-error for="course.lead_time"/>
-                            </div>
-
-                            <div>
-                                <x-jet-label for="dead_time" class="block required">{{ __('Dead Time') }}
-                                </x-jet-label>
-                                <x-jet-input class="w-full" type="number" name="dead_time" :placeholder="__('Dead Time')"
-                                             wire:model.defer="course.dead_time" id="dead_time"></x-jet-input>
-                                <x-jet-input-error for="course.dead_time"/>
-                            </div>
-
                             <div>
                                 <x-jet-label for="is_active" class="block required">{{ __('Status') }}</x-jet-label>
                                 <x-livewire-select id="is_active"

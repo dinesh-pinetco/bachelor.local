@@ -21,7 +21,7 @@ class ManagementSheetPdf extends Pdf
         return [
             'user' => $this->user,
             'course' => Course::where('id', $this->user->getEctsPointvalue('enroll_course'))->first()?->name,
-            'desiredBeginning' => $this->user->desiredBeginning->course_start_date->format('d.m.Y'),
+            'desiredBeginning' => $this->user->desiredBeginnings->course_start_date->format('d.m.Y'),
             'date_of_birth' => date_create_from_format('Y-m-d', $this->user->values->where('fields.key', 'date_of_birth')->value('value'))->format('d.m.Y'),
             'nationality' => $this->user->values->where('fields.key', 'country')->value('value'),
             'profilePhoto' => $this->user->study_sheet?->student_id_card_photo,
