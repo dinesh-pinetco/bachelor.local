@@ -100,20 +100,7 @@ class UserPolicy
         return $user->hasRole(ROLE_SUPER_ADMIN);
     }
 
-    public function viewStudySheet(User $user, User $applicant)
-    {
-        if ($user->hasRole(ROLE_APPLICANT)) {
-            if ($user->id === $applicant->id) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function viewGovernmentForm(User $user, User $applicant)
+    public function viewForms(User $user, User $applicant)
     {
         if ($user->hasRole(ROLE_APPLICANT)) {
             if ($user->id === $applicant->id) {

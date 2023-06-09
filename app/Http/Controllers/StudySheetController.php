@@ -8,7 +8,7 @@ class StudySheetController extends Controller
 {
     public function __invoke(User $user)
     {
-        $this->authorize('viewStudySheet', $user);
+        $this->authorize('viewForms', $user);
 
         return view('study-sheet', ['applicant' => $user]);
 
