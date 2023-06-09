@@ -101,8 +101,8 @@ class StatisticsExport implements FromCollection, WithHeadings, WithStrictNullCo
     {
         if ($this->date->format('Y M') != Carbon::now()->format('Y M')) {
             $this->storeStatistics = Statistics::where('course_id', $courseId)
-                ->whereYear('desired_beginning_date', $this->desiredBeginningDate->year)
-                ->whereMonth('desired_beginning_date', $this->desiredBeginningDate->month)
+                ->whereYear('desired_beginning_date', Carbon::parse($this->desiredBeginningDate)->year)
+                ->whereMonth('desired_beginning_date', Carbon::parse($this->desiredBeginningDate)->month)
                 ->whereYear('created_at', $this->date->year)
                 ->whereMonth('created_at', $this->date->month)
                 ->first();

@@ -6,7 +6,7 @@
         <div class="lg:pl-40 2xl:pl-64 mt-5 md:mt-0">
             <div class="space-y-6">
                 <div class="flex items-center space-x-4">
-                    @if ($applicant->application_status == \App\Enums\ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+                    @if ($applicant->application_status->id() >= \App\Enums\ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id())
                         <svg class="w-9 h-9 flex-shrink-0" width="35px" height="35px" stroke-width="1.5" viewBox="0 0 24 24"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg" color="#07a207">
