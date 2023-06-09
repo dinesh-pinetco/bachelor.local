@@ -959,5 +959,6 @@
     "Enrollment": "Zur Immatrikulation freigegeben",
     "are you sure you want an anonymous applicant?": "Sind Sie sicher, dass Sie einen anonymen Bewerber wollen?",
     "Anonymous": "Anony",
-    "Approved By Company For Enrollment": "Vom Unternehmen zur Einschreibung freigegeben"
+    "Approved By Company For Enrollment": "Vom Unternehmen zur Einschreibung freigegeben",
+    "Enrollment undone successfully.": "Immatrikulation erfolgreich rückgängig gemacht."
 }

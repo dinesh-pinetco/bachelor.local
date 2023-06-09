@@ -180,7 +180,7 @@ class Show extends Component
 
         $this->isEnrolled = false;
 
-        $this->toastNotify(__('Enrollment reset successfully.'), __('Success'), TOAST_SUCCESS);
+        $this->toastNotify(__('Enrollment undone successfully.'), __('Success'), TOAST_SUCCESS);
     }
 
     public function handleCompetencyCatchUp()
