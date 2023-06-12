@@ -65,7 +65,7 @@ class ApplicantRedirection
         return to_route('application.index', ['tab' => 'industries']);
     }
 
-    private function personal_data_completed()
+    private function applied_on_marketplace()
     {
         return to_route('companies.index');
     }
@@ -101,11 +101,6 @@ class ApplicantRedirection
     }
 
     private function contract_returned_on()
-    {
-        return to_route('companies.index');
-    }
-
-    private function applied_on_marketplace()
     {
         return to_route('companies.index');
     }

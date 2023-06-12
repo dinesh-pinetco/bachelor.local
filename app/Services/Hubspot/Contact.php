@@ -45,7 +45,7 @@ class Contact
             BACHELOR_PROFILE_INFORMATION_COMPLETED => $this->updatedStatusDataTime('profile_information_completed'),
             BACHELOR_TEST_TAKEN => $this->getBooleanValueOfStatus('test_taken'),
             BACHELOR_TEST_PASSED => $this->getBooleanValueOfStatus('test_passed'),
-            BACHELOR_PERSONAL_DATA_COMPLETED => $this->getBooleanValueOfStatus('personal_data_completed'),
+            BACHELOR_APPLIED_ON_MARKETPLACE => $this->getBooleanValueOfStatus('applied_on_marketplace'),
             BACHELOR_CONSENT_TO_COMPANY_PORTAL_BULLETIN_BOARD => $this->consentToCompanyPortalBulletinBoard(),
             BACHELOR_APPROVED_BY_COMPANY_FOR_ENROLMENT => $this->getBooleanValueOfStatus('enrollment_on'),
             BACHELOR_REJECTED_BY_APPLICANT => $this->getBooleanValueOfStatus('rejected_by_applicant'),

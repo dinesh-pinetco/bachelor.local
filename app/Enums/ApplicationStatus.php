@@ -30,9 +30,9 @@ enum ApplicationStatus: string
     #[ApplicationStatusOrder(11)] case APPLYING_TO_SELECTED_COMPANY = 'applying_to_selected_company';
     #[ApplicationStatusOrder(12)] case APPLIED_TO_SELECTED_COMPANY = 'applied_to_selected_company';
 
-    #[ApplicationStatusOrder(13)] case PERSONAL_DATA_COMPLETED = 'personal_data_completed';
+    #[ApplicationStatusOrder(13)] case ENROLLMENT_ON = 'enrollment_on';
 
-    #[ApplicationStatusOrder(14)] case ENROLLMENT_ON = 'enrollment_on';
+    #[ApplicationStatusOrder(14)] case APPLIED_ON_MARKETPLACE = 'applied_on_marketplace';
     #[ApplicationStatusOrder(15)] case CONTRACT_RETURNED_ON = 'contract_returned_on'; //Applicant return signed PDF
     #[ApplicationStatusOrder(16)] case CONTRACT_SENT_ON = 'contract_sent_on'; //NAK return PDF
 

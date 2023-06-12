@@ -58,7 +58,7 @@
                                 <p>{{__('Has been hired')}}</p>
                             </div>
                         @endif
-                        @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status->id() > ApplicationStatus::TEST_TAKEN->id() && $isProfile)
+                        @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && $isProfile)
                             <div class="flex items-center space-x-4">
                                 <x-primary-button type="button"
                                                   wire:click="$emit('Applicant.Modal.Enrollment.modal.toggle',{{ $applicant->id }})"

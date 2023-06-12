@@ -112,10 +112,10 @@ return [
             ],
         ],
     ],
-    BACHELOR_PERSONAL_DATA_COMPLETED => [
-        'label' => 'Personal data completed',
+    BACHELOR_APPLIED_ON_MARKETPLACE => [
+        'label' => 'Applied on marketpalce',
         'groupName' => 'nak_bachelor',
-        'description' => 'NAK contact\'s personal data completed',
+        'description' => 'NAK contact\'s applied on marketpalce',
         'type' => 'enumeration',
         'fieldType' => 'booleancheckbox',
         'options' => [

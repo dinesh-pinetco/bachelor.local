@@ -7,7 +7,7 @@
         </div>
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
-            @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED && is_null(auth()->user()->show_application_on_marketplace_at))
+            @if (auth()->user()->application_status === ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON && is_null(auth()->user()->show_application_on_marketplace_at))
                 <p>
                     {{ __("You've almost made it, now all you have to do is choose one or more partner companies where you would like to apply for a position as a dual student.") }}
                 </p>

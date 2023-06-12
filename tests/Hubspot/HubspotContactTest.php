@@ -106,7 +106,7 @@ class HubspotContactTest extends TestCase
             'bachelor_profile_information_completed' => 1678440316000,
             'bachelor_test_taken' => false,
             'bachelor_test_passed' => true,
-            'bachelor_personal_data_completed' => true,
+            'bachelor_applied_on_marketplace' => true,
             'bachelor_consent_to_company_portal_bulletin_board' => true,
             'bachelor_approved_by_company_for_enrolment' => false,
             'bachelor_rejected_by_applicant' => false,
