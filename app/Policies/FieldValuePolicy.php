@@ -26,7 +26,7 @@ class FieldValuePolicy
 
     public function update(User $user, FieldValue $fieldValue): Response|bool
     {
-        $defaultDisableField = ['email', 'course_id', 'desired_beginning_id'];
+        $defaultDisableField = ['email', 'desired_beginning_id'];
         $applicantStatus = $user->application_status;
         $applicationRejectStatus = [ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT, ApplicationStatus::APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
