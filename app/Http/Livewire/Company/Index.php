@@ -91,7 +91,7 @@ class Index extends Component
 
     public function selectCompany()
     {
-        if (! $this->showAccessDeniedMessage()) {
+        if ($this->user->application_status->id() >= ApplicationStatus::APPLYING_TO_SELECTED_COMPANY->id()) {
             return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
         }
 
@@ -104,11 +104,11 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
-        if (! $this->showAccessDeniedMessage()) {
+        if ($this->showAccessDeniedMessage()) {
             return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
         }
 
-        if ($this->marketplacePrivacyPolicyAccepted == false) {
+        if (! $this->marketplacePrivacyPolicyAccepted) {
             return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
         }
 
@@ -123,9 +123,9 @@ class Index extends Component
         return to_route('application.index', ['tab' => 'industries']);
     }
 
-    public function DoNotShowProfileMarketplace()
+    public function doNotShowProfileMarketplace()
     {
-        if (! $this->showAccessDeniedMessage()) {
+        if ($this->showAccessDeniedMessage()) {
             return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
         }
 
@@ -173,7 +173,7 @@ class Index extends Component
 
     public function showAccessDeniedMessage()
     {
-        return ! ($this->user->reject_marketplace_application_at || $this->user->show_application_on_marketplace_at);
+        return $this->user->reject_marketplace_application_at || $this->user->show_application_on_marketplace_at;
     }
 
     public function next()
