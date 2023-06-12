@@ -15,12 +15,13 @@ use App\Models\University;
 use App\Models\User;
 use App\Traits\GovernmentFormValidations;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
 class GovernmentForm extends Component
 {
-    use GovernmentFormValidations;
+    use GovernmentFormValidations, AuthorizesRequests;
 
     public User $applicant;
 
@@ -60,6 +61,8 @@ class GovernmentForm extends Component
 
     public $graduationDistrict;
 
+    public bool $isEdit;
+
     public function mount()
     {
         $countryOfBirth = $this->applicant->getValueByField('nationality_id');
@@ -84,6 +87,8 @@ class GovernmentForm extends Component
         $this->refreshPreviousResidenceCountryData();
         $this->refreshCurrentResidenceCountryData();
         $this->refreshGraduationCountryData();
+
+        $this->isEdit = true;
     }
 
     public function getUniversitiesProperty(): Collection
@@ -259,6 +264,8 @@ class GovernmentForm extends Component
 
     public function render()
     {
+        $this->authorize('update', $this->governmentForm);
+
         return view('livewire.government-form');
     }
 }

@@ -24,6 +24,7 @@
                                             {{ __('Nationality, if German with additional nationality please select German') }}
                                         </x-jet-label>
                                         <x-livewire-select id="country_id" name="country_id"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.country_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option> {{ __('Please select') }}</option>
@@ -40,6 +41,7 @@
                                             {{ __('Second nationality, if not present leave blank') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.second_country_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -61,6 +63,7 @@
                                             {{ __('State of residence before beginning studies') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.previous_residence_country_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -77,6 +80,7 @@
                                             {{ __('State of residence prior to commencement of studies, if abroad please do not select and enter a state') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.previous_residence_state_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -93,6 +97,7 @@
                                             {{ __('District of residence before the start of the study') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.previous_residence_district_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -119,6 +124,7 @@
                                             {{ __('State during studies, if the place of residence during the studies (not semester abroad) is in another state') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.current_residence_country_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -135,6 +141,7 @@
                                             {{ __('State of residence during studies') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.current_residence_state_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -151,6 +158,7 @@
                                             {{ __('District during studies (Elmshorn is located in the district of Pinneberg)') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.current_residence_district_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -177,6 +185,7 @@
                                             {{ __('University in Germany where studies were started for the first time') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.enrollment_university_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -193,6 +202,7 @@
                                             {{ __('If the first enrollment was at an institution of higher education abroad, please indicate the state') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.enrollment_country_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
@@ -209,6 +219,7 @@
                                             {{ __('University in Germany where studies were started for the first time (only specify if "other university" was selected)') }}
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="text" placeholder="{{ __('Enter enrollment course') }}"
+                                                     :disabled="!$isEdit"
                                                      wire:model.lazy="governmentForm.enrollment_course"
                                                      id="governmentForm_enrollment_course"></x-jet-input>
                                         <x-jet-input-error for="governmentForm.enrollment_course" />
@@ -218,6 +229,7 @@
                                             {{ __('Semester in which studies were started for the first time') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
+                                                           :isEdit="$isEdit"
                                                            model="governmentForm.enrollment_semester_id"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="" selected>{{ __('Semester Day') }}</option>
@@ -231,6 +243,7 @@
                                             {{ __('Year in which studies were started for the first time') }}
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="number" min="1900" max="2200"
+                                                     :disabled="!$isEdit"
                                                      wire:model.lazy="governmentForm.enrollment_year"
                                                      placeholder="{{ _('z.B. 2016') }}"
                                                      id="governmentForm_enrollment_year">
@@ -242,6 +255,7 @@
                                             {{ __('Total of all semesters completed in Germany to date') }}
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="number" min="0"
+                                                     :disabled="!$isEdit"
                                                      wire:model.lazy="governmentForm.enrollment_total_semester"
                                                      placeholder="{{ __('Enter enrollment total semester') }}"
                                                      id="governmentForm_enrollment_total_semester"></x-jet-input>
@@ -261,6 +275,7 @@
                                             {{ __('Year of university entrance qualification / school-leaving qualification') }}
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="number" min="1900" max="2200"
+                                                     :disabled="!$isEdit"
                                                      wire:model.lazy="governmentForm.graduation_year"
                                                      placeholder="{{ __('Enter graduation year') }}"
                                                      id="governmentForm_graduation_year">
@@ -273,6 +288,7 @@
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="number" min="1" max="12"
                                                      wire:model.lazy="governmentForm.graduation_month"
+                                                     :disabled="!$isEdit"
                                                      placeholder="{{ __('Enter graduation month') }}"
                                                      id="governmentForm_graduation_month"></x-jet-input>
                                         <x-jet-input-error for="governmentForm.graduation_month" />
@@ -289,6 +305,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.graduation_entrance_qualification_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}
                                             </option>
@@ -306,6 +323,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.graduation_country_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($nationalities as $nationality)
@@ -322,6 +340,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.graduation_state_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($graduationStates as $state)
@@ -338,6 +357,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.graduation_district_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($graduationDistrict as $district)
@@ -363,6 +383,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.is_vocational_training_completed"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">{{ __('Please select') }}</option>
                                             <option value="1">{{ __('Yes') }}</option>
@@ -386,6 +407,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.is_previous_another_university"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">{{ __('Please select') }}</option>
                                             <option value="1">{{ __('Yes') }}</option>
@@ -399,6 +421,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.previous_college_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->universities as $university)
@@ -415,6 +438,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.previous_college_country_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option> {{ __('Please select') }}</option>
                                             @foreach ($nationalities as $nationality)
@@ -431,6 +455,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.previous_study_type_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->studyTypes as $studyType)
@@ -447,6 +472,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.previous_final_exam_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->finalExams as $finalExam)
@@ -476,6 +502,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.previous_course_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->studyPrograms as $studyProgram1)
@@ -492,6 +519,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.previous_second_course_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->studyPrograms as $studyProgram2)
@@ -508,6 +536,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.previous_third_course_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->studyPrograms as $studyProgram3)
@@ -534,6 +563,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.last_exam_university_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->universities as $university)
@@ -550,6 +580,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.last_exam_country_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($nationalities as $nationality)
@@ -566,6 +597,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.last_exam_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->finalExams as $finalExam)
@@ -582,6 +614,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.last_study_type_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option> {{ __('Please select') }}</option>
                                             @foreach ($this->studyTypes as $studyType)
@@ -598,6 +631,7 @@
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="number" min="1900" max="2200"
                                                      wire:model.lazy="governmentForm.last_exam_year"
+                                                     :disabled="!$isEdit"
                                                      placeholder="{{ __('Enter last exam year') }}"
                                                      id="governmentForm_last_exam_year">
                                         </x-jet-input>
@@ -609,6 +643,7 @@
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="number" min="1" max="12"
                                                      wire:model.lazy="governmentForm.last_exam_month"
+                                                     :disabled="!$isEdit"
                                                      placeholder="{{ __('Enter last exam month') }}"
                                                      id="governmentForm_last_exam_month"></x-jet-input>
                                         <x-jet-input-error for="governmentForm.last_exam_month" />
@@ -630,6 +665,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.last_exam_course_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->studyPrograms as $studyProgram11)
@@ -646,6 +682,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.last_exam_second_course_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->studyPrograms as $studyProgram22)
@@ -662,6 +699,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.last_exam_third_course_id"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($this->studyPrograms as $studyProgram33)
@@ -678,6 +716,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
                                                            model="governmentForm.is_last_exam_pass"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">{{ __('Please select') }}</option>
                                             <option value="1">{{ __('Yes') }}</option>
@@ -691,6 +730,7 @@
                                         </x-jet-label>
                                         <x-jet-input class="w-full" type="text" placeholder="{{ __('Enter last exam grade') }}"
                                                      wire:model.lazy="governmentForm.last_exam_grade"
+                                                     :disabled="!$isEdit"
                                                      id="governmentForm_last_exam_grade"></x-jet-input>
                                         <x-jet-input-error for="governmentForm.last_exam_grade" />
                                     </div>

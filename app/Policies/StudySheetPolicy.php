@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Enums\ApplicationStatus;
+use App\Models\StudySheet;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class StudySheetPolicy
 {
     use HandlesAuthorization;
 
@@ -23,12 +23,11 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user)
+    public function view(User $user, StudySheet $studySheet)
     {
-        return ! in_array($user->application_status->value, [ApplicationStatus::TEST_FAILED(), ApplicationStatus::TEST_FAILED_CONFIRM()]);
+        //
     }
 
     /**
@@ -46,9 +45,9 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, StudySheet $studySheet)
     {
-        //
+        return $user->hasRole(ROLE_ADMIN) ? true : $user->id == $studySheet->user_id;
     }
 
     /**
@@ -56,7 +55,7 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, StudySheet $studySheet)
     {
         //
     }
@@ -66,7 +65,7 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, StudySheet $studySheet)
     {
         //
     }
@@ -76,27 +75,8 @@ class UserPolicy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, StudySheet $studySheet)
     {
         //
-    }
-
-    public function updateSelectionTestStatus(User $user, User $applicant)
-    {
-        return in_array($applicant->application_status, [
-            ApplicationStatus::PROFILE_INFORMATION_COMPLETED,
-            ApplicationStatus::TEST_TAKEN,
-            ApplicationStatus::TEST_RESET,
-        ]);
-    }
-
-    public function exportApplicantReport(User $user)
-    {
-        return $user->hasRole([ROLE_EMPLOYEE, ROLE_ADMIN, ROLE_SUPER_ADMIN]);
-    }
-
-    public function impersonate(User $user)
-    {
-        return $user->hasRole(ROLE_SUPER_ADMIN);
     }
 }
