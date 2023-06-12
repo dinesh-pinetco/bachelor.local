@@ -42,7 +42,7 @@
                         <option value="">{{ __('Select desired beginning') }}</option>
                         @foreach ($this->desiredBeginnings as $beginning)
                             <option
-                                value="{{ $beginning->course_start_date }}">{{ $beginning->course_start_date->translatedFormat('F Y') }}</option>
+                                value="{{ $beginning->id }}">{{ $beginning->course_start_date->translatedFormat('F Y') }}</option>
                         @endforeach
                     </x-livewire-select>
                 </div>

@@ -32,6 +32,8 @@ class CourseImport implements ToModel, WithHeadingRow
 
         $course->save();
 
+        $course->attachDesiredBeginnings($course->id);
+
         return $course;
     }
 }
