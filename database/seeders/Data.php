@@ -143,7 +143,6 @@ class Data
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
-                                'validation' => VALIDATION_ALPHA,
                             ],
                             [
                                 'type' => FieldType::FIELD_TEXT(),
@@ -154,7 +153,6 @@ class Data
                                 'is_active' => 1,
                                 'is_required' => 1,
                                 'meta_data' => [],
-                                'validation' => VALIDATION_ALPHA,
                             ],
                             [
                                 'type' => FieldType::FIELD_EMAIL(),
@@ -233,7 +231,7 @@ class Data
 
                             [
                                 'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'Stadt auswählen',
+                                'label' => 'In welcher Stadt ist die Schule, in der du die Hochschulberechtigung erwerben wirst oder erworben hast?',
                                 'placeholder' => 'Bitte wählen',
                                 'key' => 'city',
                                 'related_option_table' => 'cities',
@@ -245,7 +243,7 @@ class Data
 
                             [
                                 'type' => FieldType::FIELD_SELECT(),
-                                'label' => 'An welcher Schule wirst/hast Du Ihre Hochschulzugangsberechtigung erworben?',
+                                'label' => 'An welcher Schule wirst/hast Du deine Hochschulzugangsberechtigung erworben?',
                                 'placeholder' => 'Bitte wählen',
                                 'key' => 'school_qualification',
                                 'related_option_table' => 'schools',
@@ -320,7 +318,7 @@ class Data
                     [
                         'internal_name' => 'Un 1',
                         'title' => '',
-                        'description' => '<p>Bitte geben Sie einen kurzen Überblick über Ihre berufliche Laufbahn. Bitte beginnen Sie mit Ihrer gegenwärtigen Position. Bei Bedarf fügen Sie bitte weitere Zeilen ein.</p> <p> Wenn bei Ende kein Zeitpunkt eingegeben wird, wird angenommen, dass Sie die Stelle zur Zeit ausüben</p> <p><b>Sollten Sie bisher keine Arbeit ausgeübt haben, schreiben Sie bitte als Arbeitgeber “keinen” und lassen den Zeitraum offen.</b></p>',
+                        'description' => '<div>Liebe:r Bewerber:in, hier kannst du deine Daten vervollständigen und so dein gesamtes Profil für ausgewählte und / oder alle Partnerunternehmen der NORDAKADEMIE sichtbar machen.</div><div><strong>Dein Vorteil:</strong> Viele Unternehmen suchen händeringend nach dualen Student:innen und kommen vielleicht sogar direkt auf dich zu - cool, oder?</div><div>Dennoch ist es wichtig, dass du dich bei deinen Wunschunternehmen nochmals direkt über deren Karriere-Portal bewirbst!!</div><div>Wir wünschen dir viel Erfolg und freuen uns, dich bald an der NORDAKADEMIE begrüßen zu dürfen :-)</div><div><br></div>',
                         'can_add_more' => false,
                         'add_more_label' => 'weiteren Arbeitgeber hinzufügen',
                         'fields' => [
@@ -345,6 +343,7 @@ class Data
                 'description' => 'Tell me something about you.',
                 'slug' => 'motivation',
                 'icon' => 'motivation',
+                'title' => 'Motivation',
                 'sort_order' => 3,
                 'is_progress_countable' => false,
                 'meta_data' => [
@@ -358,7 +357,7 @@ class Data
                         'fields' => [
                             [
                                 'type' => FieldType::FIELD_TEXTAREA(),
-                                'label' => 'Bitte begründen Sie Ihren Studienwunsch.',
+                                'label' => 'Bitte erläutere kurz, warum du dich für ein duales Studium interessierst, was dich ausmacht und was deinen zukünftigen Arbeitgeber ausmachen sollte:',
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
@@ -368,7 +367,7 @@ class Data
                             ],
                             [
                                 'type' => FieldType::FIELD_CHECKBOX(),
-                                'label' => 'Welche Erwartungen haben Sie an das Studium (Inhalte, Studienmotivation, Berufsplanung, zeitlicher und finanzieller Aufwand)?',
+                                'label' => 'Bitte markiere max. 10 Eigenschaften, die am deutlichsten auf dich zutreffen: *',
                                 'key' => 'characteristics',
                                 'placeholder' => '',
                                 'sort_order' => 1,
@@ -525,15 +524,6 @@ class Data
                                         'value' => 'zuversichtlich',
                                     ],
                                 ],
-                            ],
-                            [
-                                'type' => FieldType::FIELD_TEXTAREA(),
-                                'label' => 'Unterstützt Ihr Arbeitgeber Sie zeitlich und/oder finanziell?',
-                                'placeholder' => '',
-                                'sort_order' => 1,
-                                'is_active' => 1,
-                                'is_required' => 0,
-                                'meta_data' => [],
                             ],
                         ],
                     ],

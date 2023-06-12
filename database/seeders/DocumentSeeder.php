@@ -19,16 +19,16 @@ class DocumentSeeder extends Seeder
     {
         Document::create([
             'creator_id' => User::first()->id,
-            'name' => 'CV',
-            'description' => __('Upload your CV'),
+            'name' => 'Lebenslauf',
+            'description' => 'Lade bitte deinen Lebenslauf hoch',
             'is_required' => true,
             'is_active' => true,
         ])->attachCourses(Course::pluck('id')->toArray())->extensions()->attach(Extension::pluck('id')->toArray());
 
         Document::create([
             'creator_id' => User::first()->id,
-            'name' => 'Testimonies',
-            'description' => __('Upload your Testimonies'),
+            'name' => 'Zeugnisse',
+            'description' => 'Bitte lade hier deine Zeugnisse hoch (Schule, Praktikum, u.ä.) *',
             'is_required' => true,
             'is_active' => true,
         ])->attachCourses(Course::inRandomOrder()->take(2)->pluck('id')->toArray())->extensions()->attach(Extension::pluck('id')->toArray());

@@ -16,9 +16,9 @@ class ContactProfileSeeder extends Seeder
     public function run()
     {
         ContactProfile::create([
-            'name' => 'Nordakademie Team',
+            'name' => 'NORDAKADEMIE Campus Elmshorn',
             'email' => 'auswahltest@nordakademie.de',
-            'phone' => '+49 (0)40 554387-300',
+            'phone' => '+49412140900',
         ])->attachCourses(Course::pluck('id')->toArray());
     }
 }
