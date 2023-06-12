@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDesiredBeginningsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDesiredBeginningsTable extends Migration
      */
     public function up()
     {
-        Schema::create('desired_beginnings', function (Blueprint $table) {
+        Schema::create('user_desired_beginnings', function (Blueprint $table) {
             $table->id();
-            $table->date('course_start_date')->nullable();
-            $table->dateTime('archived_at')->nullable();
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\DesiredBeginning::class);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateDesiredBeginningsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desired_beginnings');
+        Schema::dropIfExists('user_desired_beginnings');
     }
-}
+};

@@ -3,11 +3,16 @@
 namespace App\Http\Livewire\Employee\Courses;
 
 use App\Models\Course;
+use App\Models\DesiredBeginning;
 use Livewire\Component;
 
 class Manage extends Component
 {
     public Course $course;
+
+    public $desireBeginnings;
+
+    public array $selectedDesiredBeginning = [];
 
     public string $formMode = 'create';
 
@@ -17,10 +22,10 @@ class Manage extends Component
         'course.form_of_study' => ['required', 'max:50'],
         'course.description' => ['required'],
         'course.is_active' => ['required'],
-        'course.first_start' => ['required', 'date'],
-        'course.last_start' => ['nullable', 'date', 'after_or_equal:course.first_start'],
-        'course.lead_time' => ['required', 'numeric', 'gt:course.dead_time', 'max_digits:10'],
-        'course.dead_time' => ['required', 'numeric', 'lt:course.lead_time'],
+        //        'course.first_start' => ['required', 'date'],
+        //        'course.last_start' => ['nullable', 'date', 'after_or_equal:course.first_start'],
+        //        'course.lead_time' => ['required', 'numeric', 'gt:course.dead_time', 'max_digits:10'],
+        //        'course.dead_time' => ['required', 'numeric', 'lt:course.lead_time'],
     ];
 
     protected $listeners = [
@@ -40,12 +45,16 @@ class Manage extends Component
         if ($course->exists) {
             if (request()->routeIs('employee.courses.edit')) {
                 $this->formMode = 'edit';
+            //                $this->selectedDesiredBeginning = $course->desiredBeginnings();
             } elseif (request()->routeIs('employee.courses.clone')) {
                 $this->formMode = 'clone';
             }
         }
 
+        $this->selectedDesiredBeginning = $this->course->desiredBeginnings()->pluck('model_id')->toArray();
+
         $this->course = $course;
+        $this->desireBeginnings = DesiredBeginning::active()->get();
     }
 
     public function render()
@@ -65,9 +74,12 @@ class Manage extends Component
 
     private function create()
     {
+
         $this->validate();
 
         $this->course->save();
+
+        $this->course->attachDesiredBeginnings($this->selectedDesiredBeginning);
 
         $this->toastNotify(__('Course created successfully!'), __('Success'), TOAST_SUCCESS);
 
@@ -85,7 +97,7 @@ class Manage extends Component
             ['course.name' => ['required', 'max:100', "unique:courses,name,{$this->course->id}"]]));
 
         $this->course->save();
-
+        $this->course->attachDesiredBeginnings($this->selectedDesiredBeginning);
         $this->toastNotify(__('Course updated successfully!'), __('Success'), TOAST_SUCCESS);
 
         $this->course->syncOnHubspot();

@@ -4,7 +4,6 @@ namespace App\Traits\User;
 
 use App\Models\ApplicantCompany;
 use App\Models\Contract;
-use App\Models\DesiredBeginning;
 use App\Models\Document;
 use App\Models\FieldValue;
 use App\Models\GovernmentForm;
@@ -15,6 +14,7 @@ use App\Models\Moodle;
 use App\Models\Result;
 use App\Models\StudySheet;
 use App\Models\UserConfiguration;
+use App\Models\UserDesiredBeginning;
 use App\Models\UserHubspotConfiguration;
 use App\Models\UserPreference;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -52,22 +52,21 @@ trait UserRelations
         return $this->hasOne(UserHubspotConfiguration::class);
     }
 
-    public function desiredBeginning()
+    public function userDesiredBeginning()
     {
-        return $this->hasOne(DesiredBeginning::class)
-            ->latest();
+        return $this->hasOne(UserDesiredBeginning::class)->latest();
     }
 
     public function courses()
     {
         return $this->hasManyThrough(
             ModelHasCourse::class,
-            DesiredBeginning::class,
+            UserDesiredBeginning::class,
             'user_id',
             'model_id',
             'id',
             'id'
-        )->where('model_type', DesiredBeginning::class);
+        )->where('model_type', UserDesiredBeginning::class);
     }
 
     public function configuration(): HasOne

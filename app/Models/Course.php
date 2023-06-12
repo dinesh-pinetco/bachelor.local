@@ -78,6 +78,18 @@ class Course extends Model implements ContractsAuditable
         }
     }
 
+    public function desiredBeginnings()
+    {
+        return $this->morphedByMany(DesiredBeginning::class, 'model', 'model_has_courses', 'course_id', 'model_id')->withTimestamps();
+    }
+
+    public function attachDesiredBeginnings($desiredBeginnings)
+    {
+        $this->desiredBeginnings()->sync($desiredBeginnings);
+
+        return $this;
+    }
+
     public function syncOnHubspot()
     {
         if (! app()->environment('production')) {

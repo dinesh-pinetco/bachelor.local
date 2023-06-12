@@ -33,7 +33,7 @@ class ContractSent extends Mailable
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.contract-sent', [
                 'name' => $this->applicant->full_name,
-                'desiredBeginning' => $this->applicant->desiredBeginning->course_start_date->format('Y-m-d'),
+                'desiredBeginning' => $this->applicant->desiredBeginnings->course_start_date->format('Y-m-d'),
             ]);
     }
 }

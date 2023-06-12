@@ -959,5 +959,10 @@
     "Enrollment": "Zur Immatrikulation freigegeben",
     "are you sure you want an anonymous applicant?": "Sind Sie sicher, dass Sie diese:n Bewerber:in anonymisieren wollen?",
     "Anonymous": "Anonymisieren",
-    "Approved By Company For Enrollment": "Vom Unternehmen zur Einschreibung freigegeben"
+    "Approved By Company For Enrollment": "Vom Unternehmen zur Einschreibung freigegeben",
+    "Desire Beginning": "Begierde Anfang",
+    "Create Desire Beginning": "Beginn der Sehnsucht schaffen",
+    "Desired Beginning created successfully.": "Gewünschter Beginn erfolgreich erstellt.",
+    "Desire Beginning could not be deleted because it is still in use.": "Desire Beginning konnte nicht gelöscht werden, da es noch in Gebrauch ist.",
+    "Desire Beginning deleted successfully.": "Desire Beginning erfolgreich gelöscht."
 }

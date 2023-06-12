@@ -19,7 +19,7 @@ class StudyContractPdf extends Pdf
     {
         return [
             'user' => $this->user,
-            'desiredBeginning' => $this->user->desiredBeginning->course_start_date,
+            'desiredBeginning' => $this->user->desiredBeginnings->course_start_date,
             'street_no' => $this->user->study_sheet?->street,
             'zip' => $this->user->study_sheet?->zip,
             'city' => $this->user->study_sheet?->place,

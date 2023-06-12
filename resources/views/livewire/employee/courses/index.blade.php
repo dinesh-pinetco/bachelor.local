@@ -11,6 +11,7 @@
             </x-link-button>
         </x-slot>
 
+
         <x-slot name="head">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-darkgray tracking-wider">

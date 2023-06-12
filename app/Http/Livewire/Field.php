@@ -332,7 +332,7 @@ class Field extends Component
         }
 
         $this->applicant->attachCourseWithDesiredBeginning(
-            $this->applicant->desiredBeginning->course_start_date,
+            $this->applicant->desiredBeginnings->id,
             $this->fieldValue
         );
     }
