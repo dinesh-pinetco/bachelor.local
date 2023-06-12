@@ -24,6 +24,8 @@ class GovernmentForm extends Component
 
     public User $applicant;
 
+    public $showThanks = false;
+
     public GovernmentFormModel $governmentForm;
 
     public bool $formAlreadySubmitted = false;
@@ -68,6 +70,8 @@ class GovernmentForm extends Component
 
         $this->governmentForm = $this->applicant->government_form ?? new GovernmentFormModel();
         $this->formAlreadySubmitted = $this->governmentForm->is_submit ?? false;
+
+        $this->showThanks = $this->formAlreadySubmitted;
         //        $this->universities           = University::orderBy('name')->get();
         //        $this->studyPrograms          = StudyProgram::orderBy('name')->get();
         //        $this->finalExams             = FinalExam::orderBy('name')->get();
@@ -162,6 +166,10 @@ class GovernmentForm extends Component
 
     public function updated($propertyName)
     {
+        if ($propertyName == 'showThanks') {
+            return;
+        }
+
         if (in_array($propertyName,
             ['governmentForm.previous_residence_country_id', 'governmentForm.previous_residence_state_id',
                 'governmentForm.previous_residence_district_id', ])
@@ -242,6 +250,8 @@ class GovernmentForm extends Component
         $this->governmentForm->last_exam_grade = str_replace(',', '.', $this->governmentForm->last_exam_grade);
         $this->governmentForm->save();
         $this->applicant->load(['government_form', 'study_sheet']);
+
+        $this->showThanks = true;
 
         $this->applicant->enrollApplicant();
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
