@@ -11,6 +11,10 @@ require('livewire-sortable')
 //nice select
 require('jquery-nice-select');
 
+//tel input
+import intlTelInput from 'intl-tel-input';
+window.intlTelInput = intlTelInput;
+
 /*jQuery( document ).ready(function() {
     jQuery('select').niceSelect();
 });*/

@@ -32,12 +32,11 @@
                             <div>
                                 <x-jet-label for="phone" class="block">{{ __('Phone') }}</x-jet-label>
                                 <div wire:ignore>
-                                    <x-input-tel name="phone"
-                                            wire:model='user.phone'
-                                            :value="old('phone')"
-                                            placeholder="{{ __('Enter phone number') }}"
-                                            maxlength="15">
-                                    </x-input-tel>
+                                    <x-input-tel  wire:model="user.phone"
+                                                  value="{{ $user->phone }}"
+                                                  class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                                  placeholder="{{ __('Enter phone number') }}"
+                                    />
                                 </div>
                                 <x-jet-input-error for="user.phone"/>
                             </div>
