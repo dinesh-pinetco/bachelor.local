@@ -15,17 +15,11 @@ class Index extends Component
 
     public $companies;
 
-    public $selectedCompanies = [];
-
-    public $appliedCompanies = [];
-
     public $mailContent = null;
 
     public $is_see_test_results = false;
 
     public $search = null;
-
-    public $industry = null;
 
     public $zip_code = null;
 
@@ -35,11 +29,13 @@ class Index extends Component
 
     public bool $isAppliedToCompany = true;
 
-    public $applicantCompany = [];
-
     public $marketplacePrivacyPolicyAccepted = false;
 
     public $filterCompanies = [];
+
+    public $selectedCompanies = [];
+
+    public $appliedCompanies = [];
 
     protected $rules = [
         'mailContent' => ['required', 'min:4'],
@@ -52,15 +48,16 @@ class Index extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'zip_code' => ['except' => ''],
-        'industry' => ['except' => ''],
     ];
 
     public function mount()
     {
-        $this->user = auth()->user();
+        $this->user = auth()->user()->load('companies.company');
 
-        $this->mailContent = $this->user?->companies()->first()?->mail_content;
-        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results ?? false;
+        $this->appliedCompanies = $this->user?->companies;
+
+        $this->mailContent = $this->appliedCompanies?->first()?->mail_content;
+        $this->is_see_test_results = $this->appliedCompanies->first()?->is_see_test_results ?? false;
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
@@ -68,9 +65,7 @@ class Index extends Component
 
         $this->selectedCompanies();
 
-        $this->applicantCompany = $this->user->companies;
-
-        $this->isAppliedToCompany = $this->user->companies()->exists();
+        $this->isAppliedToCompany = $this->appliedCompanies->isNotEmpty();
 
         $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
     }
@@ -150,7 +145,7 @@ class Index extends Component
 
     public function selectedCompanies()
     {
-        $this->selectedCompanies = $this->user->companies()->pluck('company_id')->toArray();
+        $this->selectedCompanies = $this->appliedCompanies?->pluck('company_id')?->toArray();
     }
 
     public function updatedSelectedCompanies()
@@ -163,12 +158,14 @@ class Index extends Component
             } else {
                 $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
 
-                $this->user->companies()->updateOrCreate([
-                    'user_id' => $this->user->id,
-                    'company_id' => array_first($companiesToBeAdded),
-                ], [
-                    'mail_content' => $this->mailContent,
-                ]);
+                if ($companiesToBeAdded){
+                    $this->user->companies()->updateOrCreate([
+                        'user_id' => $this->user->id,
+                        'company_id' => array_first($companiesToBeAdded),
+                    ], [
+                        'mail_content' => $this->mailContent,
+                    ]);
+                }
 
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }

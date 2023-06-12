@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="{{ asset('plugins/intlTelInput.min.css') }}" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css"/>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/css/intlTelInput.css"  referrerpolicy="no-referrer" />
 
     @livewireStyles
+    @laravelTelInputStyles
+
     @stack('styles')
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -126,6 +128,10 @@
 <script src="https://unpkg.com/tippy.js@6"></script>
 @stack('scripts')
 <script src="{{ asset('plugins/intlTelInput.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/js/intlTelInput.min.js" referrerpolicy="no-referrer"></script>
+
 @livewireScripts
+@laravelTelInputScripts
+
 </body>
 </html>
