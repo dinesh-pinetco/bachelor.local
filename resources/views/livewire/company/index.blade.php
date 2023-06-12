@@ -28,18 +28,6 @@
                         <div
                             class="flex flex-wrap xl:flex-nowrap w-full gap-10 xl:gap-6">
                             <div class="w-full xl:w-2/3 flex-shrink-0 h-full overflow-y-auto px-2 -mx-2">
-                                <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
-                                    {{__('Email Content')}}
-                                </h6>
-                                <div class="w-full sm:max-w-lg xl:max-w-2xl" wire:ignore>
-                                    <input id="email-content" type="hidden" name="mailContent">
-                                    <trix-editor class="prose formatted-content"
-                                                 id="trix-editor"
-                                                 input="email-content"
-                                                 wire:ignore
-                                                 wire:key="competency_comment"></trix-editor>
-                                </div>
-                                <x-jet-input-error for="mailContent"/>
                                 <div class="flex items-start space-x-2 mt-5">
                                     <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
                                         <input
@@ -51,7 +39,6 @@
                                             {{ __('Selected companies can see the test results') }}
                                         </span>
                                     </label>
-
                                 </div>
                                 <x-primary-button type="button" @click="applyToSelectedCompany()">
                                     {{ __('Apply to Selected Company') }}
@@ -232,16 +219,6 @@
                         </button>
                     </div>
                 </div>
-                <div wire:ignore class="mt-6">
-                    <input wire:ignore id="email-content" type="hidden" name="mailContent">
-                    <trix-editor class="prose formatted-content"
-                                id="trix-editor"
-                                input="email-content"
-                                wire:ignore
-                                wire:key="competency_comment"
-                                wire:model="mailContent"></trix-editor>
-                </div>
-                <x-jet-input-error for="mailContent"/>
                     <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
                         <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Marketplace') }}</h5>
                         <div class="flex justify-start items-center space-x-4 text-darkgreen rounded-sm mr-auto mb-7">
@@ -296,7 +273,6 @@
                     key-by="id"
                     label-by="name"
                 />
-                <x-jet-input-error for="mailContent"/>
             </div>
         </div>
         <x-slot name="footer">
@@ -316,7 +292,6 @@
     })
 
     function applyToSelectedCompany() {
-    @this.set('mailContent', trixEditor.getAttribute('value'));
     @this.applyToSelectedCompany();
     }
 </script>

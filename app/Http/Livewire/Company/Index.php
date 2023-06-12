@@ -15,7 +15,9 @@ class Index extends Component
 
     public $companies;
 
-    public $mailContent = null;
+    public $selectedCompanies = [];
+
+    public $appliedCompanies = [];
 
     public $is_see_test_results = false;
 
@@ -33,14 +35,6 @@ class Index extends Component
 
     public $filterCompanies = [];
 
-    public $selectedCompanies = [];
-
-    public $appliedCompanies = [];
-
-    protected $rules = [
-        'mailContent' => ['required', 'min:4'],
-    ];
-
     protected $listeners = [
         'refresh' => '$refresh',
     ];
@@ -54,10 +48,7 @@ class Index extends Component
     {
         $this->user = auth()->user()->load('companies.company');
 
-        $this->appliedCompanies = $this->user?->companies;
-
-        $this->mailContent = $this->appliedCompanies?->first()?->mail_content;
-        $this->is_see_test_results = $this->appliedCompanies->first()?->is_see_test_results ?? false;
+        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results ?? false;
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
@@ -158,14 +149,10 @@ class Index extends Component
             } else {
                 $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
 
-                if ($companiesToBeAdded){
-                    $this->user->companies()->updateOrCreate([
-                        'user_id' => $this->user->id,
-                        'company_id' => array_first($companiesToBeAdded),
-                    ], [
-                        'mail_content' => $this->mailContent,
-                    ]);
-                }
+                $this->user->companies()->updateOrCreate([
+                    'user_id' => $this->user->id,
+                    'company_id' => array_first($companiesToBeAdded),
+                ]);
 
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
@@ -200,14 +187,11 @@ class Index extends Component
 
     public function applyToSelectedCompany()
     {
-        $this->validate();
-
         foreach (array_filter($this->selectedCompanies) as $companyId) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
                 'company_id' => $companyId,
             ], [
-                'mail_content' => $this->mailContent,
                 'is_see_test_results' => $this->is_see_test_results,
             ]);
         }
