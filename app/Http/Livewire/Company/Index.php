@@ -48,6 +48,8 @@ class Index extends Component
     {
         $this->user = auth()->user()->load('companies.company');
 
+        $this->appliedCompanies = $this->user?->companies;
+
         $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results ?? false;
 
         $this->dispatchBrowserEvent('init-trix-editor');
