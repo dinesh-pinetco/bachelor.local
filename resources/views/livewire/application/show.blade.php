@@ -144,7 +144,7 @@
                                         @foreach ($group->fields as $fieldKey => $field)
                                             @if ($field->relationLoaded('values') && count($field->values) > 0)
                                                 @forelse ($field->values as $value)
-                                                    <div class="value" wire:key="{{ $fieldKey }}">
+                                                    <div class="value" wire:key="{{ uuid() }}">
                                                         <livewire:field :applicant="$applicant" :isEdit="$isEdit"
                                                                         :groupKey="$customGroupKey" :value="$value"
                                                                         :key="time() . $value->id"/>
@@ -152,14 +152,14 @@
                                                                            class="mt-2"/>
                                                     </div>
                                                 @empty
-                                                    <div class="field" wire:key="{{ $fieldKey }}">
+                                                    <div class="field" wire:key="{{ uuid() }}">
                                                         <livewire:field :applicant="$applicant" :isEdit="$isEdit"
                                                                         :groupKey="$customGroupKey" :field="$field"
                                                                         :key="time() . $field->id"/>
                                                     </div>
                                                 @endforelse
                                             @else
-                                                <div class="field" wire:key="{{ $fieldKey }}">
+                                                <div class="field" wire:key="{{ uuid() }}">
                                                     <livewire:field :applicant="$applicant" :isEdit="$isEdit"
                                                                     :groupKey="$customGroupKey" :field="$field"
                                                                     :key="time() . $field->id"/>
@@ -269,10 +269,6 @@
 
                         @if(auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && auth()->user()->application_status == \App\Enums\ApplicationStatus::REGISTRATION_SUBMITTED)
                             <x-primary-button type="button" wire:click="submitProfileInformation"
-                                              :disabled="!$profileProgress"
-                                @class([
-                                    'bg-opacity-50 cursor-not-allowed' => !$profileProgress,
-                                ])
                             >
                                 {{ __('Submit data & continue with test') }}
                             </x-primary-button>
