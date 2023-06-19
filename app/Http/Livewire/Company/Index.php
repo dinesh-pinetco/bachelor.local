@@ -110,7 +110,7 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
-        if ($this->marketplacePrivacyPolicyAccepted == false) {
+        if (!$this->marketplacePrivacyPolicyAccepted) {
             return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
         }
 
@@ -132,6 +132,22 @@ class Index extends Component
         $this->selectedCompanies();
 
         $this->emitSelf('refresh');
+    }
+
+    public function enrollIntoMarketPlace(bool $enroll)
+    {
+        if ($enroll) {
+            $this->marketplacePrivacyPolicyAccepted = true;
+            $this->user->reject_marketplace_application_at = null;
+            $this->user->save();
+            $this->showProfileMarketplace();
+        } else {
+            $this->user->marketplace_privacy_policy_accepted = false;
+            $this->user->show_application_on_marketplace_at = null;
+            $this->user->save();
+            $this->DoNotShowProfileMarketplace();
+        }
+        return to_route('companies.index');
     }
 
     public function selectedCompanies()

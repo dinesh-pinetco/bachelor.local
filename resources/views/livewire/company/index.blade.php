@@ -274,6 +274,17 @@
                             </span>
                         </label>
                     </div>
+                    <div class="flex items-start space-x-2 mt-5">
+                        @if(!is_null($user->show_application_on_marketplace_at))
+                            <x-secondary-button class="h-11" wire:click="enrollIntoMarketPlace(false)" wire:loading.attr="disabled">
+                                {{ __('Not be listed anymore in Marketplace') }}
+                            </x-secondary-button>
+                        @else
+                            <x-primary-button class="h-11" type="button"  wire:click="enrollIntoMarketPlace(true)">
+                                {{ __('Get listed in Marketplace') }}
+                            </x-primary-button>
+                        @endif
+                    </div>
                     <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
                         {{ __('Update') }}
                     </x-primary-button>
