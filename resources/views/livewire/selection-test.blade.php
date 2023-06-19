@@ -103,6 +103,7 @@
                                         @endif
                                         @if (!in_array($test->result?->status,[\App\Models\Result::STATUS_COMPLETED,\App\Models\Result::STATUS_FAILED]))
                                             <x-link-button :active="true"
+                                                           data-tippy-content="{{ __('You will leave the system when you click the button') }}"
                                                            href="{{ route('tests.redirect', $test) }}"
                                                            class="items-center -mt-0"
                                                            target="_blank">
