@@ -5,9 +5,9 @@ return [
 
     'new-user' => [
         'subject' => 'Welcome to the application portal of the Nordakademie!',
-        'body1' => '<br> Thank you for your interest in a part-time Masters program at NORDAKADEMIE!',
-        'body2' => '<br> In the following you will receive your NORDAKADEMIE access data, which you will need in the further course of the application.',
-        'body3' => '<br> The data is valid for both our selection test and our master portal, where you can adjust your information at any time.',
+        'body1' => '<br> Thank you for your interest in a dual Bachelor program at NORDAKADEMIE!',
+        'body2' => '<br> In the following, you will receive your NORDAKADEMIE access data, which you will need in the further you will need in the further course of the application process.',
+        'body3' => '<br> The data is valid for our selection test as well as for our Bachelor portal, where you can where you can change your data at any time.',
         'body4' => '<br> We will inform you about the further steps of the application process separately by e-mail after receiving your <b> application documents </b>.',
         'action' => 'Login',
         'email' => '<br> E-Mail. <strong> :email </strong>',

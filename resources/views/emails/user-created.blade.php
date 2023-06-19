@@ -8,7 +8,6 @@
                     @lang('mail.new-user.body2') <br>
                     @lang('mail.new-user.email', ['email' => $email])
                     @lang('mail.new-user.password', ['password' => $password])<br>
-                    @lang('mail.new-user.body3') <br>
                 </p>
             </td>
         </tr>
@@ -17,8 +16,8 @@
         @endcomponent
         <tr align="left">
             <td>
-                <p style="display:block;color:#003A79;line-height: 1.4;margin-top: 60px;">
-                    @lang('mail.new-user.body4') <br><br>
+                <p style="display:block;color:#003A79;line-height: 1.4;">
+                    @lang('mail.new-user.body3') <br><br>
                     @lang('mail.greeting-message') <br>
                 </p>
             </td>
