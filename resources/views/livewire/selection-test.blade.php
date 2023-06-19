@@ -1,28 +1,29 @@
 <div class="max-w-screen-xl w-full mx-auto">
     <div class="flex mb-5 md:mb-9">
         <div class="hidden lg:block flex-shrink-0 w-20 md:w-32 lg:w-40 2xl:w-64"></div>
-        <div class="w-full flex items-start flex-col">
-            <div class="flex flex-wrap items-center justify-between">
-                <h2 class="text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight pr-3 pb-2">
-                    {{ __('Selection test') }}
-                </h2>
-                @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
-                    <div wire:click="getTestResultPdf" id="download-result"
-                         data-tippy-content="{{__('Here you can download your result')}}"
-                         class="px-8 py-3 flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
-                        <svg class="h-5 w-5 stroke-current" width="16" height="16" viewBox="0 0 16 16"
-                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 5.71432L8 11.7143L14 5.71432H10.2857V0.857178H5.71429V5.71432H2Z"
-                                  fill="currentColor"/>
-                            <rect y="14.0002" width="16" height="1.14286" fill="currentColor"/>
-                        </svg>
-                        <p class="ml-4 lg:text-lg text-base font-semibold">{{__('Download')}}</p>
-                    </div>
-                    <div class="w-full mt-3">
-                        <p class="text-primary">{{ __('The result of your selection test is now available for download. Please use the document when you apply to our partner companies in the next step.') }}</p>
-                    </div>
-                @endif
+        <div class="w-full">
+        <h2 class="text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight pr-3 pb-2">
+            {{ __('Selection test') }}
+        </h2>
+        @if(in_array($applicant->application_status, [\App\Enums\ApplicationStatus::TEST_PASSED, \App\Enums\ApplicationStatus::TEST_FAILED_CONFIRM]))
+            <div class="w-full mt-3">
+                <p class="text-primary">{{ __('The result of your selection test is now available for download. Please use the document when you apply to our partner companies in the next step.') }}</p>
             </div>
+            <div class="text-right">
+                <div wire:click="getTestResultPdf" id="download-result"
+                     data-tippy-content="{{__('Here you can download your result')}}"
+                     class="px-8 py-3 inline-flex items-center justify-end text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
+                    <svg class="h-5 w-5 stroke-current" width="16" height="16" viewBox="0 0 16 16"
+                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 5.71432L8 11.7143L14 5.71432H10.2857V0.857178H5.71429V5.71432H2Z"
+                              fill="currentColor"/>
+                        <rect y="14.0002" width="16" height="1.14286" fill="currentColor"/>
+                    </svg>
+                    <p class="ml-4 lg:text-lg text-base font-semibold">{{__('Download')}}</p>
+                </div>
+            </div>
+        @endif
+
             @if($applicant->application_status == \App\Enums\ApplicationStatus::PROFILE_INFORMATION_COMPLETED)
                 <p class="text-primary text-sm">
                     {{ __("Welcome to the selection test. This consists of several sections and is not an insurmountable challenge for you. Stay calm and take two quiet hours for it. No preparation is necessary.") }}
