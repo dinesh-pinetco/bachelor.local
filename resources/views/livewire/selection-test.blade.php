@@ -9,10 +9,10 @@
             <div class="w-full mt-3">
                 <p class="text-primary">{{ __('The result of your selection test is now available for download. Please use the document when you apply to our partner companies in the next step.') }}</p>
             </div>
-            <div class="text-right">
+            <div class="text-center pt-5">
                 <div wire:click="getTestResultPdf" id="download-result"
                      data-tippy-content="{{__('Here you can download your result')}}"
-                     class="px-8 py-3 inline-flex items-center justify-end text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
+                     class="px-8 py-3 inline-flex items-center justify-center text-black bg-secondary hover:bg-secondary-light rounded-md cursor-pointer">
                     <svg class="h-5 w-5 stroke-current" width="16" height="16" viewBox="0 0 16 16"
                          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 5.71432L8 11.7143L14 5.71432H10.2857V0.857178H5.71429V5.71432H2Z"
