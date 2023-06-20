@@ -10,8 +10,8 @@ return [
         'body3' => '<br> Die Daten sind sowohl für unseren Auswahltest als auch unser Bachelorportal gültig, in welchem du deine Angaben jederzeit anpassen kannst.',
         'body4' => '<br> Über die weiteren Schritte des Bewerbungsprozesses informieren wir Sie gesondert per E-Mail nach Erhalt Ihrer <b>Bewerbungsunterlagen</b>.',
         'action' => 'Login',
-        'email' => '<br> Anmeldename. <strong> :email </strong>',
-        'password' => '<br> Passwort. <strong> :password </strong>',
+        'email' => '<br> Anmeldename: <strong> :email </strong>',
+        'password' => '<br> Passwort: <strong> :password </strong>',
     ],
 
     'new-employee' => [

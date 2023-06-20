@@ -10,8 +10,8 @@ return [
         'body3' => '<br> The data is valid for our selection test as well as for our Bachelor portal, where you can where you can change your data at any time.',
         'body4' => '<br> We will inform you about the further steps of the application process separately by e-mail after receiving your <b> application documents </b>.',
         'action' => 'Login',
-        'email' => '<br> E-Mail. <strong> :email </strong>',
-        'password' => '<br> Password. <strong> :password </strong>',
+        'email' => '<br> E-Mail: <strong> :email </strong>',
+        'password' => '<br> Password: <strong> :password </strong>',
     ],
 
     'new-employee' => [
