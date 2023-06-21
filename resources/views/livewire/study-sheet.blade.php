@@ -70,7 +70,7 @@
                                             <x-jet-label for="place_of_birth" class="block required">
                                                 {{ __('place of birth') }}
                                             </x-jet-label>
-                                            <x-jet-input class="w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}" type="text"
+                                            <x-jet-input class="w-full {{ $isEdit ? 'cursor-auto' : 'cursor-not-allowed' }}" type="text"
                                                         :placeholder="__('place of birth')"
                                                         :disabled="!$isEdit"
                                                         wire:model.lazy="studySheet.place_of_birth"
@@ -82,7 +82,7 @@
                                             <x-jet-label for="country_of_birth" class="block required">
                                                 {{ __('Country of birth') }}
                                             </x-jet-label>
-                                            <x-jet-input class="w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}" type="text"
+                                            <x-jet-input class="w-full {{ $isEdit ? 'cursor-auto' : 'cursor-not-allowed' }}" type="text"
                                                         :placeholder="__('Country of birth')"
                                                         :disabled="!$isEdit"
                                                         wire:model.lazy="studySheet.country_of_birth"
@@ -148,7 +148,7 @@
                                                         <input type="file"
                                                             class="hidden {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
                                                             wire:model="studySheet.student_id_card_photo"
-                                                            disabled="{{ !$isEdit }}"
+                                                            {{-- {{ $isEdit ? '' : 'disabled' }} --}}
                                                             name="student_id_card_photo"
                                                             accept="image/png, image/jpg, image/jpeg"
                                                         >
@@ -157,8 +157,8 @@
                                                 <!-- Remove Button Start -->
                                                 @if(!is_null($studySheet->student_id_card_photo) && !$errors->has('studySheet.student_id_card_photo'))
                                                     <a href="javascript:void(0)"
+                                                    {{ $isEdit ? '' : 'disabled' }}
                                                     wire:click="deletePhoto"
-                                                    disabled="{{ !$isEdit }}"
                                                     class="inline-block px-4 cursor-pointer py-2 bg-primary border border-transparent rounded-sm font-semibold text-base text-white hover:bg-opacity-90 focus:outline-none focus:bg-opacity-90 disabled:opacity-25 transition mt-4 duration-150 ease-in-out {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                                                         <span class="xl:text-lg"><i class="fal fa-trash-alt"></i></span>
                                                         <span class="ml-1">{{ __('Remove Photo') }}</span>
@@ -174,7 +174,7 @@
                                             <div class="flex form-check flex space-x-4">
                                                 <input wire:model="studySheet.have_health_insurance"
                                                     id="do_you_health_insurance"
-                                                    disabled="{{ !$isEdit }}"
+                                                    {{ $isEdit ? '' : 'disabled' }}
                                                     class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
                                                     type="checkbox">
                                                 <label class="form-check-label inline-block text-gray-800"
@@ -194,7 +194,7 @@
                                                 <div class="flex items-center form-check flex space-x-4">
                                                     <input wire:model="studySheet.is_health_insurance_private"
                                                         id="is_health_insurance_private"
-                                                        disabled="{{ !$isEdit }}"
+                                                        {{ $isEdit ? '' : 'disabled' }}
                                                         class="flex-shrink-0 w-5 h-5 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
                                                         type="checkbox">
                                                     <label class="form-check-label inline-block text-gray-800 mb-0"
@@ -226,7 +226,7 @@
                                                     <x-jet-label for="health_insurance_number" class="block required">
                                                         {{ __('Health insurance number') }}
                                                     </x-jet-label>
-                                                    <x-jet-input class="w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}" type="text"
+                                                    <x-jet-input class="w-full {{ $isEdit ? 'cursor-text' : 'cursor-not-allowed' }}" type="text"
                                                                 :placeholder="__('Enter health insurance number')"
                                                                 :disabled="!$isEdit"
                                                                 wire:model.lazy="studySheet.health_insurance_number"
@@ -244,6 +244,7 @@
                                         </x-jet-label>
                                         <x-livewire-select id="school" name="school"
                                                            model="studySheet.school"
+                                                           :isEdit="$isEdit"
                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value=""> {{ __('Please select') }}</option>
                                             @foreach ($schools as $school)
@@ -261,7 +262,7 @@
                                         </x-jet-label>
                                         <x-input-tel wire:model="studySheet.phone"
                                                      value="{{ $studySheet->phone }}"
-                                                     class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                                     class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}"
                                                      placeholder="{{ __('Enter phone number') }}"
                                         />
 
@@ -288,10 +289,11 @@
                                             {{ __('address supplement') }}
                                         </x-jet-label>
                                         <x-jet-input
-                                            class="w-full"
+                                            class="w-full {{ $isEdit ? 'cursor-text' : 'cursor-not-allowed' }}"
                                             type="text"
                                             :placeholder="__('address supplement')"
                                             wire:model.lazy="studySheet.address"
+                                            :disabled="!$isEdit"
                                             id="address"
                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.address"/>
@@ -302,10 +304,11 @@
                                             {{ __('Street') }}
                                         </x-jet-label>
                                         <x-jet-input
-                                            class="w-full"
+                                            class="w-full {{ $isEdit ? 'cursor-text' : 'cursor-not-allowed' }}"
                                             type="text"
                                             :placeholder="__('Street')"
                                             wire:model.lazy="studySheet.street"
+                                            :disabled="!$isEdit"
                                             id="street"
                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.street"/>
@@ -316,10 +319,11 @@
                                             {{ __('Zip') }}
                                         </x-jet-label>
                                         <x-jet-input
-                                            class="w-full"
+                                            class="w-full {{ $isEdit ? 'cursor-text' : 'cursor-not-allowed' }}"
                                             type="text"
                                             :placeholder="__('Zip')"
                                             wire:model.lazy="studySheet.zip"
+                                            :disabled="!$isEdit"
                                             id="zip"
                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.zip"/>
@@ -330,10 +334,11 @@
                                             {{ __('Place') }}
                                         </x-jet-label>
                                         <x-jet-input
-                                            class="w-full"
+                                            class="w-full {{ $isEdit ? 'cursor-text' : 'cursor-not-allowed' }}"
                                             type="text"
                                             :placeholder="__('Place')"
                                             wire:model.lazy="studySheet.place"
+                                            :disabled="!$isEdit"
                                             id="place"
                                         ></x-jet-input>
                                         <x-jet-input-error for="studySheet.place"/>
@@ -351,7 +356,8 @@
                                         </x-jet-label>
                                         <x-livewire-select id="secondary_language" name="secondary_language"
                                                            model="studySheet.secondary_language"
-                                                           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                           :isEdit="$isEdit"
+                                                           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}">
                                             <option value=""> {{ __('Please select a language') }}</option>
                                             <option value="fr">{{__('Französisch')}}</option>
                                             <option value="es">{{__('Spanisch')}}</option>
@@ -382,10 +388,11 @@
                                     <div class="mb-7">
                                         <div class="flex form-check flex space-x-4">
                                             <input wire:model.lazy="studySheet.privacy_policy"
+                                                   {{ $isEdit ? '' : 'disabled' }}
                                                    id="studySheet.privacy_policy"
-                                                   class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none"
+                                                   class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}"
                                                    type="checkbox">
-                                            <label class="form-check-label inline-block text-gray-800"
+                                            <label class="form-check-label inline-block text-gray-800 {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}"
                                                    for="studySheet.privacy_policy">
                                                 <span>{{ __('I agree that NORDAKADEMIE may transfer my contact details to the alumni network Nordakademiker e. V. as described above and that Nordakademiker e. V. may use the contact details for the purposes described. General information on data protection can be found at') }}</span> <a href="https://www.nordakademie.de/datenschutz/" class="text-primary underline font-black">https://www.nordakademie.de/datenschutz/</a> <span>{{ __('bzw.') }}</span> <a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black"> https://nordakademiker.de/privacy/</a>
                                             </label>
@@ -398,11 +405,13 @@
                                         @endif
                                     </div>
 
-                                    <div class="py-3 text-right">
-                                        <x-primary-button type="submit" class="">
-                                            {{ __('Save') }}
-                                        </x-primary-button>
-                                    </div>
+                                    @if(! $formAlreadySubmitted)
+                                        <div class="py-3 text-right">
+                                            <x-primary-button type="submit" class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                                                {{ __('Save') }}
+                                            </x-primary-button>
+                                        </div>
+                                    @endif
                                     </div>
 
                                 </div>

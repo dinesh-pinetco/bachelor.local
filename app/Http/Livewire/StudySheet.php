@@ -55,7 +55,9 @@ class StudySheet extends Component
 
     public function mount()
     {
-        $this->studySheet = $this->applicant->study_sheet ?? new StudySheetModel();
+        $this->studySheet = $this->applicant->study_sheet ?? $this->applicant->study_sheet()->create([
+            'user_id' => $this->applicant->id,
+        ]);
 
         $this->formAlreadySubmitted = $this->studySheet->is_submit ?? false;
 
@@ -78,7 +80,7 @@ class StudySheet extends Component
         $this->lastName = $this->applicant->last_name;
         $this->email = $this->applicant->email;
 
-        $this->isEdit = true;
+        $this->isEdit = auth()->user()->hasRole(ROLE_APPLICANT) && $this->formAlreadySubmitted ? false : true;
     }
 
     public function updatedStudySheetStudentIdCardPhoto()
@@ -111,6 +113,9 @@ class StudySheet extends Component
         if ($this->applicant->study_sheet == null) {
             $this->applicant->study_sheet()->save($this->studySheet);
         } else {
+            if ($this->formAlreadySubmitted) {
+                $this->toastNotify(__('Information updated successfully.'), __('Success'), TOAST_SUCCESS);
+            }
             $this->studySheet->save();
         }
     }
@@ -122,13 +127,17 @@ class StudySheet extends Component
         $this->studySheet->is_submit = true;
         $this->studySheet->save();
 
-        $this->showThanks = true;
-
         $this->applicant->load(['government_form', 'study_sheet']);
 
         $this->applicant->enrollApplicant();
 
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
+
+        $this->showThanks = true;
+
+        $this->isEdit = false;
+
+        $this->formAlreadySubmitted = true;
     }
 
     public function render(): Factory|View|Application

@@ -242,7 +242,7 @@
                                         <x-jet-label for="is_active" class="block required">
                                             {{ __('Year in which studies were started for the first time') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full" type="number" min="1900" max="2200"
+                                        <x-jet-input class="w-full {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}" type="number" min="1900" max="2200"
                                                      :disabled="!$isEdit"
                                                      wire:model.lazy="governmentForm.enrollment_year"
                                                      placeholder="{{ _('z.B. 2016') }}"
@@ -254,7 +254,7 @@
                                         <x-jet-label for="is_active" class="block required">
                                             {{ __('Total of all semesters completed in Germany to date') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full" type="number" min="0"
+                                        <x-jet-input class="w-full {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}" type="number" min="0"
                                                      :disabled="!$isEdit"
                                                      wire:model.lazy="governmentForm.enrollment_total_semester"
                                                      placeholder="{{ __('Enter enrollment total semester') }}"
@@ -274,7 +274,7 @@
                                         <x-jet-label for="is_active" class="block required">
                                             {{ __('Year of university entrance qualification / school-leaving qualification') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full" type="number" min="1900" max="2200"
+                                        <x-jet-input class="w-full {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}" type="number" min="1900" max="2200"
                                                      :disabled="!$isEdit"
                                                      wire:model.lazy="governmentForm.graduation_year"
                                                      placeholder="{{ __('Enter graduation year') }}"
@@ -286,7 +286,7 @@
                                         <x-jet-label for="is_active" class="block required">
                                             {{ __('Month of university entrance qualification, two digits (e.g. 07)') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full" type="number" min="1" max="12"
+                                        <x-jet-input class="w-full {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}" type="number" min="1" max="12"
                                                      wire:model.lazy="governmentForm.graduation_month"
                                                      :disabled="!$isEdit"
                                                      placeholder="{{ __('Enter graduation month') }}"
@@ -629,7 +629,7 @@
                                         <x-jet-label for="is_active" class="block">
                                             {{ __('Year') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full" type="number" min="1900" max="2200"
+                                        <x-jet-input class="w-full {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}" type="number" min="1900" max="2200"
                                                      wire:model.lazy="governmentForm.last_exam_year"
                                                      :disabled="!$isEdit"
                                                      placeholder="{{ __('Enter last exam year') }}"
@@ -641,7 +641,7 @@
                                         <x-jet-label for="is_active" class="block">
                                             {{ __('Month') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full" type="number" min="1" max="12"
+                                        <x-jet-input class="w-full {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}" type="number" min="1" max="12"
                                                      wire:model.lazy="governmentForm.last_exam_month"
                                                      :disabled="!$isEdit"
                                                      placeholder="{{ __('Enter last exam month') }}"
@@ -728,7 +728,7 @@
                                         <x-jet-label for="is_active" class="block">
                                             {{ __('Examination result Grade (with 1 decimal place) e.g.: 2.8') }}
                                         </x-jet-label>
-                                        <x-jet-input class="w-full" type="text" placeholder="{{ __('Enter last exam grade') }}"
+                                        <x-jet-input class="w-full {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}" type="text" placeholder="{{ __('Enter last exam grade') }}"
                                                      wire:model.lazy="governmentForm.last_exam_grade"
                                                      :disabled="!$isEdit"
                                                      id="governmentForm_last_exam_grade"></x-jet-input>
@@ -743,11 +743,13 @@
                                 @endif
                             </div>
 
-                            <div class="py-3 text-right">
-                                <x-primary-button type="submit" class="">
-                                    {{ __('Save') }}
-                                </x-primary-button>
-                            </div>
+                            @if(! $formAlreadySubmitted)
+                                <div class="py-3 text-right">
+                                    <x-primary-button type="submit" class="{{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
+                                        {{ __('Save') }}
+                                    </x-primary-button>
+                                </div>
+                            @endif
                         </form>
                     @else
                         <div>
