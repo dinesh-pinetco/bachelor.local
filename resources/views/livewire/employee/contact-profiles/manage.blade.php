@@ -10,7 +10,7 @@
                 </div>
                 <div class="mt-5 md:mt-0 px-4 w-full lg:w-1/2 xl:w-2/5">
                     <form wire:submit.prevent="submit" id="contactProfileForm">
-                        <div class="space-y-7 overflow-y-auto px-4 -mx-4">
+                        <div class="space-y-7  px-4 -mx-4">
                             <div>
                                 <div x-data="{photoName: null, photoPreview: null}">
                                     <div class="flex flex-col items-start">
@@ -75,14 +75,11 @@
                             <div>
                                 <x-jet-label for="phone"
                                              class="block required">{{ __('Phone') }}</x-jet-label>
-                                    <div wire:ignore>
-                                        <x-input-tel name="phone"
-                                                    wire:model='contactProfile.phone'
-                                                    :value="old('phone')"
-                                                    placeholder="{{ __('Enter phone number') }}"
-                                                    maxlength="15">
-                                        </x-input-tel>
-                                    </div>
+                                <x-input-tel wire:model="contactProfile.phone"
+                                             value="{{ $contactProfile->phone }}"
+                                             class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                             placeholder="{{ __('Enter phone number') }}"
+                                />
                                 <x-jet-input-error for="contactProfile.phone"/>
                             </div>
 

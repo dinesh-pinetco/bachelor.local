@@ -238,167 +238,157 @@
                                             @endif
                                         @endif
 
-                                        <div>
-                                            <x-jet-label for="school" class="block">
-                                                {{ __('School') }}({{ __('When in list') }})
-                                            </x-jet-label>
-                                            <x-livewire-select id="school" name="school"
-                                                            model="studySheet.school"
-                                                            :isEdit="$isEdit"
-                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
-                                                <option value=""> {{ __('Please select') }}</option>
-                                                @foreach ($schools as $school)
-                                                    <option value="{{ $school->id }}">
-                                                        {{ $school->name }}
-                                                    </option>
-                                                @endforeach
-                                            </x-livewire-select>
-                                            <x-jet-input-error for="studySheet.school"/>
-                                        </div>
-                                        <div wire:ignore>
-                                            <x-jet-label for="phone"
-                                                        class="block required">
-                                                {{ __('Phone') }}
-                                            </x-jet-label>
-                                            <x-input-tel name="phone"
-                                                    :value="old('phone')"
-                                                    :disabled="!$isEdit"
-                                                    wire:model.lazy="studySheet.phone"
-                                                    placeholder="{{ __('Enter phone number') }}"
-                                                    maxlength="15">
-                                            </x-input-tel>
-                                            <x-jet-input-error for="studySheet.phone"/>
-                                        </div>
-                                        <div>
-                                            <x-jet-label for="email"
-                                                        class="block required">
-                                                {{ __('Email') }}
-                                            </x-jet-label>
-                                            <x-jet-input
-                                                class="w-full cursor-not-allowed"
-                                                type="text"
-                                                disabled="true"
-                                                :placeholder="__('Email')"
-                                                wire:model.lazy="email"
-                                                id="email"
-                                            ></x-jet-input>
-                                            <x-jet-input-error for="studySheet.email"/>
-                                        </div>
-                                        <div>
-                                            <x-jet-label for="address"
-                                                        class="block">
-                                                {{ __('address supplement') }}
-                                            </x-jet-label>
-                                            <x-jet-input
-                                                class="w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
-                                                type="text"
-                                                :disabled="!$isEdit"
-                                                :placeholder="__('address supplement')"
-                                                wire:model.lazy="studySheet.address"
-                                                id="address"
-                                            ></x-jet-input>
-                                            <x-jet-input-error for="studySheet.address"/>
-                                        </div>
-                                        <div>
-                                            <x-jet-label for="street"
-                                                        class="block required">
-                                                {{ __('Street') }}
-                                            </x-jet-label>
-                                            <x-jet-input
-                                                class="w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
-                                                type="text"
-                                                :placeholder="__('Street')"
-                                                :disabled="!$isEdit"
-                                                wire:model.lazy="studySheet.street"
-                                                id="street"
-                                            ></x-jet-input>
-                                            <x-jet-input-error for="studySheet.street"/>
-                                        </div>
-                                        <div>
-                                            <x-jet-label for="zip"
-                                                        class="block required">
-                                                {{ __('Zip') }}
-                                            </x-jet-label>
-                                            <x-jet-input
-                                                class="w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
-                                                type="text"
-                                                :placeholder="__('Zip')"
-                                                :disabled="!$isEdit"
-                                                wire:model.lazy="studySheet.zip"
-                                                id="zip"
-                                            ></x-jet-input>
-                                            <x-jet-input-error for="studySheet.zip"/>
-                                        </div>
-                                        <div>
-                                            <x-jet-label for="place"
-                                                        class="block required">
-                                                {{ __('Place') }}
-                                            </x-jet-label>
-                                            <x-jet-input
-                                                class="w-full {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
-                                                type="text"
-                                                :disabled="!$isEdit"
-                                                :placeholder="__('Place')"
-                                                wire:model.lazy="studySheet.place"
-                                                id="place"
-                                            ></x-jet-input>
-                                            <x-jet-input-error for="studySheet.place"/>
-                                        </div>
-                                        <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
-                                            {{ __('If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.') }}
-                                        </p>
+                                    <div>
+                                        <x-jet-label for="school" class="block">
+                                            {{ __('School') }}({{ __('When in list') }})
+                                        </x-jet-label>
+                                        <x-livewire-select id="school" name="school"
+                                                           model="studySheet.school"
+                                                           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value=""> {{ __('Please select') }}</option>
+                                            @foreach ($schools as $school)
+                                                <option value="{{ $school->id }}">
+                                                    {{ $school->name }}
+                                                </option>
+                                            @endforeach
+                                        </x-livewire-select>
+                                        <x-jet-input-error for="studySheet.school"/>
+                                    </div>
+                                    <div wire:ignore>
+                                        <x-jet-label for="phone"
+                                                     class="block required">
+                                            {{ __('Phone') }}
+                                        </x-jet-label>
+                                        <x-input-tel wire:model="studySheet.phone"
+                                                     value="{{ $studySheet->phone }}"
+                                                     class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                                     placeholder="{{ __('Enter phone number') }}"
+                                        />
 
-                                        <p class="text-sm py-4 bg-opacity-25">
-                                            {{ __('Spanish and French can be taken as beginners (no previous knowledge) or as advanced (2-3 years previous knowledge). Based on a placement test, homogeneous teaching groups are formed according to individual language skills.') }}
+                                        <x-jet-input-error for="studySheet.phone"/>
+                                    </div>
+                                    <div>
+                                        <x-jet-label for="email"
+                                                     class="block required">
+                                            {{ __('Email') }}
+                                        </x-jet-label>
+                                        <x-jet-input
+                                            class="w-full cursor-not-allowed"
+                                            type="text"
+                                            disabled="true"
+                                            :placeholder="__('Email')"
+                                            wire:model.lazy="email"
+                                            id="email"
+                                        ></x-jet-input>
+                                        <x-jet-input-error for="studySheet.email"/>
+                                    </div>
+                                    <div>
+                                        <x-jet-label for="address"
+                                                     class="block">
+                                            {{ __('address supplement') }}
+                                        </x-jet-label>
+                                        <x-jet-input
+                                            class="w-full"
+                                            type="text"
+                                            :placeholder="__('address supplement')"
+                                            wire:model.lazy="studySheet.address"
+                                            id="address"
+                                        ></x-jet-input>
+                                        <x-jet-input-error for="studySheet.address"/>
+                                    </div>
+                                    <div>
+                                        <x-jet-label for="street"
+                                                     class="block required">
+                                            {{ __('Street') }}
+                                        </x-jet-label>
+                                        <x-jet-input
+                                            class="w-full"
+                                            type="text"
+                                            :placeholder="__('Street')"
+                                            wire:model.lazy="studySheet.street"
+                                            id="street"
+                                        ></x-jet-input>
+                                        <x-jet-input-error for="studySheet.street"/>
+                                    </div>
+                                    <div>
+                                        <x-jet-label for="zip"
+                                                     class="block required">
+                                            {{ __('Zip') }}
+                                        </x-jet-label>
+                                        <x-jet-input
+                                            class="w-full"
+                                            type="text"
+                                            :placeholder="__('Zip')"
+                                            wire:model.lazy="studySheet.zip"
+                                            id="zip"
+                                        ></x-jet-input>
+                                        <x-jet-input-error for="studySheet.zip"/>
+                                    </div>
+                                    <div>
+                                        <x-jet-label for="place"
+                                                     class="block required">
+                                            {{ __('Place') }}
+                                        </x-jet-label>
+                                        <x-jet-input
+                                            class="w-full"
+                                            type="text"
+                                            :placeholder="__('Place')"
+                                            wire:model.lazy="studySheet.place"
+                                            id="place"
+                                        ></x-jet-input>
+                                        <x-jet-input-error for="studySheet.place"/>
+                                    </div>
+                                    <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
+                                        {{ __('If your insurance information is available for your health insurance company, enter it here. Enrollment is only possible after the data on your health insurance status has been entered and checked. Therefore, this data should be added here as soon as you have it.') }}
+                                    </p>
 
-                                        <div>
-                                            <x-jet-label for="secondary_language" class="block">
-                                                {{ __('Please choose your 2nd foreign language') }}
-                                            </x-jet-label>
-                                            <x-livewire-select id="secondary_language" name="secondary_language"
-                                                            :isEdit="$isEdit"
-                                                            model="studySheet.secondary_language"
-                                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
-                                                <option value=""> {{ __('Please select a language') }}</option>
-                                                <option value="fr">{{__('Französisch')}}</option>
-                                                <option value="es">{{__('Spanisch')}}</option>
-                                            </x-livewire-select>
-                                        </div>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('Spanish and French can be taken as beginners (no previous knowledge) or as advanced (2-3 years previous knowledge). Based on a placement test, homogeneous teaching groups are formed according to individual language skills.') }}
 
-                                        <h6 class="mb-5 md:mb-9 text-primary text-xl font-medium leading-tight">
-                                            {{ __('Alumni Network Nordakademiker e.V.') }}</h6>
-                                        <p class="text-sm py-4 bg-opacity-25">
-                                            {{ __('Ein Studium an der NORDAKADEMIE verbindet nicht nur für die Studienzeit, sondern auch nach dem Abschluss. Als Mitglied der offiziellen Alumni-Organisation der NORDAKADEMIE, dem Nordakademiker e. V., heißt es miteinander in Verbindung bleiben, um gemeinsam zu wachsen und voneinander zu lernen. Der Verein wurde bereits 1993 von Studierenden gegründet und steht seitdem in engem Kontakt zu seiner Hochschule. Der Nordakademiker e. V. bietet neben einem Netzwerk aus weltweit 3.000 Alumni und Studierenden der NORDAKADEMIE ein breites Spektrum attraktiver Leistungen über Expertenvorträge, Zugang zu Fachzeitschriften oder Mentoring- Programmen - nicht nur für Alumni sondern beitragsfrei auch für aktiv Studierende.') }}
-                                        </p>
-                                        <p class="text-sm py-4 bg-opacity-25">
-                                            {{ __('Your consent is required for us to transfer your contact data to the alumni network Nordakademiker e. V. (Köllner Chaussee 11, 25337 Elmshorn) and for Nordakademiker e. V. to use the contact data for the purposes described below (Art. 6 Para. 1 lit. a DSGVO). Your consent is required for us to transfer your contact data to the alumni network Nordakademiker e. V. (Köllner Chaussee 11, 25337 Elmshorn) and for Nordakademiker e. V. to use the contact data for the purposes described below (Art. 6 para. 1 lit. a DSGVO).') }}
-                                        </p>
-                                        <p class="text-sm py-4 bg-opacity-25">
-                                            {{ __('The subject of the transmission are the following personal data: First and last name, address, e-mail address and the study number') }}
-                                        </p>
-                                        <p class="text-sm py-4 bg-opacity-25">
-                                            {{ __('The alumni network Nordakademiker e. V. uses the personal data mentioned for the following purposes: To provide information about the alumni network Nordakademiker e. V. as well as its members, especially about events (e.g. professional events or company visits etc.) or other actions relevant to you.') }}
-                                        </p>
-                                        <p class="text-sm py-4 bg-opacity-25">
-                                            <span>{{ __('Consent to the specific use described above is voluntary and, if granted, may be given to NORDAKADEMIE at any time under the link') }} </span><a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black">https://nordakademiker.de/privacy/</a> <span>{{ __('freely revocable without giving reasons with effect for the future.') }}</span>
-                                        </p>
+                                    <div>
+                                        <x-jet-label for="secondary_language" class="block">
+                                            {{ __('Please choose your 2nd foreign language') }}
+                                        </x-jet-label>
+                                        <x-livewire-select id="secondary_language" name="secondary_language"
+                                                           model="studySheet.secondary_language"
+                                                           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value=""> {{ __('Please select a language') }}</option>
+                                            <option value="fr">{{__('Französisch')}}</option>
+                                            <option value="es">{{__('Spanisch')}}</option>
+                                        </x-livewire-select>
+                                    </div>
+
+                                    <h6 class="mb-5 md:mb-9 text-primary text-xl font-medium leading-tight">
+                                        {{ __('Alumni Network Nordakademiker e.V.') }}</h6>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('Ein Studium an der NORDAKADEMIE verbindet nicht nur für die Studienzeit, sondern auch nach dem Abschluss. Als Mitglied der offiziellen Alumni-Organisation der NORDAKADEMIE, dem Nordakademiker e. V., heißt es miteinander in Verbindung bleiben, um gemeinsam zu wachsen und voneinander zu lernen. Der Verein wurde bereits 1993 von Studierenden gegründet und steht seitdem in engem Kontakt zu seiner Hochschule. Der Nordakademiker e. V. bietet neben einem Netzwerk aus weltweit 3.000 Alumni und Studierenden der NORDAKADEMIE ein breites Spektrum attraktiver Leistungen über Expertenvorträge, Zugang zu Fachzeitschriften oder Mentoring- Programmen - nicht nur für Alumni sondern beitragsfrei auch für aktiv Studierende.') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('Your consent is required for us to transfer your contact data to the alumni network Nordakademiker e. V. (Köllner Chaussee 11, 25337 Elmshorn) and for Nordakademiker e. V. to use the contact data for the purposes described below (Art. 6 Para. 1 lit. a DSGVO). Your consent is required for us to transfer your contact data to the alumni network Nordakademiker e. V. (Köllner Chaussee 11, 25337 Elmshorn) and for Nordakademiker e. V. to use the contact data for the purposes described below (Art. 6 para. 1 lit. a DSGVO).') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('The subject of the transmission are the following personal data: First and last name, address, e-mail address and the study number') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        {{ __('The alumni network Nordakademiker e. V. uses the personal data mentioned for the following purposes: To provide information about the alumni network Nordakademiker e. V. as well as its members, especially about events (e.g. professional events or company visits etc.) or other actions relevant to you.') }}
+                                    </p>
+                                    <p class="text-sm py-4 bg-opacity-25">
+                                        <span>{{ __('Consent to the specific use described above is voluntary and, if granted, may be given to NORDAKADEMIE at any time under the link') }} </span><a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black">https://nordakademiker.de/privacy/</a> <span>{{ __('freely revocable without giving reasons with effect for the future.') }}</span>
+                                    </p>
 
 
-                                        <div class="">
+                                    <div class="">
 
-                                        <div class="mb-7">
-                                            <div class="flex form-check flex space-x-4">
-                                                <input wire:model.lazy="studySheet.privacy_policy"
-                                                    id="studySheet.privacy_policy"
-                                                    disabled="{{ !$isEdit }}"
-                                                    class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
-                                                    type="checkbox">
-                                                <label class="form-check-label inline-block text-gray-800"
-                                                    for="studySheet.privacy_policy">
-                                                    <span>{{ __('I agree that NORDAKADEMIE may transfer my contact details to the alumni network Nordakademiker e. V. as described above and that Nordakademiker e. V. may use the contact details for the purposes described. General information on data protection can be found at') }}</span> <a href="https://www.nordakademie.de/datenschutz/" class="text-primary underline font-black">https://www.nordakademie.de/datenschutz/</a> <span>{{ __('bzw.') }}</span> <a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black"> https://nordakademiker.de/privacy/</a>
-                                                </label>
-                                            </div>
-                                            <x-jet-input-error for="studySheet.privacy_policy"/>
+                                    <div class="mb-7">
+                                        <div class="flex form-check flex space-x-4">
+                                            <input wire:model.lazy="studySheet.privacy_policy"
+                                                   id="studySheet.privacy_policy"
+                                                   class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none"
+                                                   type="checkbox">
+                                            <label class="form-check-label inline-block text-gray-800"
+                                                   for="studySheet.privacy_policy">
+                                                <span>{{ __('I agree that NORDAKADEMIE may transfer my contact details to the alumni network Nordakademiker e. V. as described above and that Nordakademiker e. V. may use the contact details for the purposes described. General information on data protection can be found at') }}</span> <a href="https://www.nordakademie.de/datenschutz/" class="text-primary underline font-black">https://www.nordakademie.de/datenschutz/</a> <span>{{ __('bzw.') }}</span> <a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black"> https://nordakademiker.de/privacy/</a>
+                                            </label>
                                         </div>
                                     </div>
 

@@ -4,8 +4,9 @@
         <x-jet-authentication-card-logo/>
     </div>
     <div class="h-full w-full absolute inset-0 z-0">
-        <img src="images/login.png" alt="login background image"
+        <img src="images/register-bg.webp" alt="login background image"
              class="h-full w-full object-cover object-top">
+             <div class="register-grediant absolute inset-0 mt-auto z-0"></div>
     </div>
 
 

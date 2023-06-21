@@ -26,6 +26,7 @@ mix.js("resources/js/app.js", "public/js")
         ],
         "public/plugins"
     )
+    .copy('node_modules/intl-tel-input/build/js/utils.js', 'public/vendor/intl-tel-input/build/js')
     .postCss("resources/css/app.css", "public/css", [
         require("postcss-import"),
         require("tailwindcss"),
