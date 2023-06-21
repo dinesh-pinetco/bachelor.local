@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Application;
 
 use App\Enums\ApplicationStatus;
+use App\Http\Livewire\Traits\HasModal;
 use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\Group;
@@ -21,7 +22,7 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    use AuthorizesRequests;
+    use AuthorizesRequests, HasModal;
 
     public $tabId = null;
 
@@ -169,6 +170,11 @@ class Show extends Component
         }
     }
 
+    public function openResetEnrollmentModal()
+    {
+        $this->open();
+    }
+
     public function resetEnrollment()
     {
         $this->applicant->getValueByField('enroll_course')->forceDelete();
@@ -192,6 +198,8 @@ class Show extends Component
         $this->isEnrolled = false;
 
         $this->toastNotify(__('Enrollment undone successfully.'), __('Success'), TOAST_SUCCESS);
+
+        $this->close();
     }
 
     private function deleteFile($path)

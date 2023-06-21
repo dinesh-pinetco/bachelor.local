@@ -960,5 +960,8 @@
     "are you sure you want an anonymous applicant?": "Sind Sie sicher, dass Sie diese:n Bewerber:in anonymisieren wollen?",
     "Anonymous": "Anonymisieren",
     "Approved By Company For Enrollment": "Vom Unternehmen zur Einschreibung freigegeben",
-    "Enrollment undone successfully.": "Immatrikulation erfolgreich rückgängig gemacht."
+    "Enrollment undone successfully.": "Immatrikulation erfolgreich rückgängig gemacht.",
+    "Undo Enrollment": "Immatrikulation rückgängig machen",
+    "Are you sure you want to undo enrollment?": "Sind Sie sicher, dass Sie die Immatrikulation rückgängig machen wollen?",
+    "Yes, Undo it": "Ja, Rückgängig"
 }
