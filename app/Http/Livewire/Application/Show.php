@@ -15,6 +15,7 @@ use App\Services\ProgressBar;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
@@ -174,13 +175,30 @@ class Show extends Component
         $this->applicant->getValueByField('enroll_company')->forceDelete();
         $this->applicant->getValueByField('enroll_company_contact')->forceDelete();
 
+        $this->deleteFile($this->applicant->study_sheet->student_id_card_photo);
+
+        $this->deleteFile($this->applicant->configuration->contract_pdf_path);
+
+        $this->deleteFile($this->applicant->configuration->study_contract_pdf_path);
+
+        $this->applicant->study_sheet->delete();
+
+        $this->applicant->government_form->delete();
+
         $this->applicant->update([
-            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY
+            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
         ]);
 
         $this->isEnrolled = false;
 
         $this->toastNotify(__('Enrollment undone successfully.'), __('Success'), TOAST_SUCCESS);
+    }
+
+    private function deleteFile($path)
+    {
+        if (Storage::exists($path)) {
+            Storage::delete($path);
+        }
     }
 
     public function handleCompetencyCatchUp()
