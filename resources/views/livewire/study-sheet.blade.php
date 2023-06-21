@@ -1,4 +1,3 @@
-@php use App\Models\StudySheet; @endphp
 <div>
     <div class="xl:px-20 w-full max-w-screen-xl mx-auto h-full">
         <div>
@@ -250,12 +249,12 @@
                                                      class="block required">
                                             {{ __('Phone') }}
                                         </x-jet-label>
-                                        <x-input-tel name="phone"
-                                                :value="old('phone')"
-                                                wire:model.lazy="studySheet.phone"
-                                                placeholder="{{ __('Enter phone number') }}"
-                                                maxlength="15">
-                                        </x-input-tel>
+                                        <x-input-tel wire:model="studySheet.phone"
+                                                     value="{{ $studySheet->phone }}"
+                                                     class="w-full h-11 py-2.5 px-4 border border-gray focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none rounded-sm text-sm md:text-base text-primary placeholder-gray"
+                                                     placeholder="{{ __('Enter phone number') }}"
+                                        />
+
                                         <x-jet-input-error for="studySheet.phone"/>
                                     </div>
                                     <div>

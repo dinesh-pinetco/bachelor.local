@@ -3,8 +3,9 @@
         <x-jet-authentication-card-logo/>
     </div>
     <div class="h-full w-full absolute inset-0 z-0">
-        <img src="/images/login.png" alt="register background image"
+        <img src="/images/register-bg.webp" alt="register background image"
              class="h-full w-full object-cover object-top">
+             <div class="register-grediant absolute inset-0 mt-auto z-0"></div>
     </div>
     <div class="mb-4 text-sm text-gray">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}

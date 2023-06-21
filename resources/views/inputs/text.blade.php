@@ -1,4 +1,5 @@
 <input wire:model.lazy="fieldValue"
+       wire:key="{{uuid()}}"
        {{ $isEdit ? '' : 'disabled' }}
        name="{{ $name?$name:"" }}"
        type="text"
