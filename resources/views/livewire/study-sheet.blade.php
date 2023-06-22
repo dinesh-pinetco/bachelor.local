@@ -148,7 +148,7 @@
                                                         <input type="file"
                                                             class="hidden {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}"
                                                             wire:model="studySheet.student_id_card_photo"
-                                                            {{-- {{ $isEdit ? '' : 'disabled' }} --}}
+                                                            {{ $isEdit ? '' : 'disabled' }}
                                                             name="student_id_card_photo"
                                                             accept="image/png, image/jpg, image/jpeg"
                                                         >
@@ -156,13 +156,13 @@
                                                 </div>
                                                 <!-- Remove Button Start -->
                                                 @if(!is_null($studySheet->student_id_card_photo) && !$errors->has('studySheet.student_id_card_photo'))
-                                                    <a href="javascript:void(0)"
+                                                    <button
                                                     {{ $isEdit ? '' : 'disabled' }}
                                                     wire:click="deletePhoto"
                                                     class="inline-block px-4 cursor-pointer py-2 bg-primary border border-transparent rounded-sm font-semibold text-base text-white hover:bg-opacity-90 focus:outline-none focus:bg-opacity-90 disabled:opacity-25 transition mt-4 duration-150 ease-in-out {{ $isEdit ? 'cursor-pointer' : 'cursor-not-allowed' }}">
                                                         <span class="xl:text-lg"><i class="fal fa-trash-alt"></i></span>
                                                         <span class="ml-1">{{ __('Remove Photo') }}</span>
-                                                    </a>
+                                                    </button>
                                                 @endif
                                                 <!-- Remove Button End -->
                                             </div>
