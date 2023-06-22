@@ -17,7 +17,7 @@ class GovernmentFormPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class GovernmentFormPolicy
      */
     public function view(User $user, GovernmentForm $governmentForm)
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class GovernmentFormPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -47,7 +47,7 @@ class GovernmentFormPolicy
      */
     public function update(User $user, GovernmentForm $governmentForm)
     {
-        return $user->hasRole(ROLE_ADMIN) ? true : $user->id == $governmentForm->user_id && $user->hasMeta('enrollment_at');
+        return $user->hasMeta('enrollment_at') && ($user->hasRole(ROLE_ADMIN) || $user->id == $governmentForm->user_id);
     }
 
     /**
@@ -57,7 +57,7 @@ class GovernmentFormPolicy
      */
     public function delete(User $user, GovernmentForm $governmentForm)
     {
-        //
+        return true;
     }
 
     /**
@@ -67,7 +67,7 @@ class GovernmentFormPolicy
      */
     public function restore(User $user, GovernmentForm $governmentForm)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,6 +77,6 @@ class GovernmentFormPolicy
      */
     public function forceDelete(User $user, GovernmentForm $governmentForm)
     {
-        //
+        return true;
     }
 }

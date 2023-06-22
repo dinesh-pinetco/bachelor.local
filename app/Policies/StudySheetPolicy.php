@@ -17,7 +17,7 @@ class StudySheetPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class StudySheetPolicy
      */
     public function view(User $user, StudySheet $studySheet)
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class StudySheetPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -47,7 +47,7 @@ class StudySheetPolicy
      */
     public function update(User $user, StudySheet $studySheet)
     {
-        return $user->hasRole(ROLE_ADMIN) ? true : $user->id == $studySheet->user_id && $user->hasMeta('enrollment_at');
+        return $user->hasMeta('enrollment_at') && ($user->hasRole(ROLE_ADMIN) || $user->id == $studySheet->user_id);
     }
 
     /**
@@ -57,7 +57,7 @@ class StudySheetPolicy
      */
     public function delete(User $user, StudySheet $studySheet)
     {
-        //
+        return true;
     }
 
     /**
@@ -67,7 +67,7 @@ class StudySheetPolicy
      */
     public function restore(User $user, StudySheet $studySheet)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,6 +77,6 @@ class StudySheetPolicy
      */
     public function forceDelete(User $user, StudySheet $studySheet)
     {
-        //
+        return true;
     }
 }
