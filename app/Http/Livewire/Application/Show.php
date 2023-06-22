@@ -181,15 +181,17 @@ class Show extends Component
         $this->applicant->getValueByField('enroll_company')->forceDelete();
         $this->applicant->getValueByField('enroll_company_contact')->forceDelete();
 
-        $this->deleteFile($this->applicant->study_sheet->student_id_card_photo);
+        $this->deleteFile($this->applicant->study_sheet?->student_id_card_photo);
 
         $this->deleteFile($this->applicant->configuration->contract_pdf_path);
 
         $this->deleteFile($this->applicant->configuration->study_contract_pdf_path);
 
-        $this->applicant->study_sheet->delete();
+        $this->applicant->study_sheet?->delete();
 
-        $this->applicant->government_form->delete();
+        $this->applicant->government_form?->delete();
+
+        $this->applicant->removeMeta('enrollment_at');
 
         $this->applicant->update([
             'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
@@ -202,9 +204,9 @@ class Show extends Component
         $this->close();
     }
 
-    private function deleteFile($path)
+    public function deleteFile($path)
     {
-        if (Storage::exists($path)) {
+        if (! is_null($path) && Storage::exists($path)) {
             Storage::delete($path);
         }
     }
