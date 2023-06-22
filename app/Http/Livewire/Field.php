@@ -284,10 +284,14 @@ class Field extends Component
 
         $this->emit('progressUpdated');
 
-        $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
+
 
         if ($this->field->key == 'course_id' && $this->field->related_option_table == 'courses') {
             $this->coursesUpdated();
+        }
+        if (!empty($this->fieldValue)){
+
+            $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
         }
     }
 
