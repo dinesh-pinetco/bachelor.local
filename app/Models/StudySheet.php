@@ -28,6 +28,8 @@ class StudySheet extends Model implements ContractsAuditable
 
     const HEALTH_INSURANCE_OTHER = 1;
 
+    protected $guarded = [];
+
     protected $casts = [
         'custom_billing_address' => 'array',
         'custom_delivery_address' => 'array',

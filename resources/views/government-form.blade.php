@@ -1,5 +1,5 @@
-<x-web>
+<x-app-layout>
     <div>
         <livewire:government-form :applicant="$applicant" />
     </div>
-</x-web>
+</x-app-layout>
