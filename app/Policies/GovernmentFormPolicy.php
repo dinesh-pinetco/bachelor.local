@@ -47,7 +47,7 @@ class GovernmentFormPolicy
      */
     public function update(User $user, GovernmentForm $governmentForm)
     {
-        return $user->hasRole(ROLE_ADMIN) ? true : $user->id == $governmentForm->user_id;
+        return $user->hasRole(ROLE_ADMIN) ? true : $user->id == $governmentForm->user_id && $user->hasMeta('enrollment_at');
     }
 
     /**
