@@ -80,7 +80,7 @@ class StudySheet extends Component
         $this->lastName = $this->applicant->last_name;
         $this->email = $this->applicant->email;
 
-        $this->isEdit = auth()->user()->hasRole(ROLE_APPLICANT) && $this->formAlreadySubmitted ? false : true;
+        $this->isEdit = !(auth()->user()->hasRole(ROLE_APPLICANT) && $this->formAlreadySubmitted);
     }
 
     public function updatedStudySheetStudentIdCardPhoto()
