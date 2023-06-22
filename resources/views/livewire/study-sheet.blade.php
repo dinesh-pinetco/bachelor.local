@@ -5,9 +5,11 @@
                     <div class="mt-5 md:mt-0 md:px-4 w-full md:w-1/2 mx-auto space-y-2">
                         <h2 class="mb-5 md:mb-9 text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
                             {{ __('Study Sheet') }}</h2>
-                        <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
-                            {{ __('This information will be shared with staff members of the Nordakademie. Please check the information for accuracy.') }}
-                        </p>
+                        @role(ROLE_APPLICANT)
+                            <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
+                                {{ __('This information will be shared with staff members of the Nordakademie. Please check the information for accuracy.') }}
+                            </p>
+                        @endrole
                     </div>
                     <div class="mt-8 md:px-4 w-full md:w-1/2 mx-auto">
                         @if (!$showThanks)
@@ -418,9 +420,11 @@
                             </form>
                         @else
                             <div>
-                                <p class="mt-2 text-darkblack">
-                                    {{ $formAlreadySubmitted ? __('Your form already submitted successfully.') : __('Your form submitted successfully.') }}
-                                </p>
+                                @role(ROLE_APPLICANT)
+                                    <p class="mt-2 text-darkblack">
+                                        {{ $formAlreadySubmitted ? __('Your form already submitted successfully.') : __('Your form submitted successfully.') }}
+                                    </p>
+                                @endrole
                                 <button class="mt-2 bg-darkgreen text-white px-4 py-2 underline" wire:click="$set('showThanks', false)" wire:loading.class="cursor-wait" >{{ __('Edit') }}</button>
                             </div>
                         @endif

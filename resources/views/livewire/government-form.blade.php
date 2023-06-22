@@ -2,15 +2,18 @@
     <div class="xl:px-20 w-full max-w-screen-xl mx-auto h-full">
         <div>
             <div class="md:-mx-4">
+
                 <div class="mt-5 md:mt-0 md:px-4 w-full md:w-1/2 mx-auto space-y-2">
-                    <h2 class="mb-5 md:mb-9 text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
-                        {{ __('State Statistical Office') }}</h2>
-                    <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
-                        {{ __('Data is already available, but you are welcome to correct it.') }}
-                    </p>
-                    <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
-                        {{ __('NORDAKADEMIE is required by high school law to transmit the following data to the State Statistics Office.') }}
-                    </p>
+                        <h2 class="mb-5 md:mb-9 text-primary text-2xl md:text-3xl lg:text-5xl font-light leading-tight">
+                            {{ __('State Statistical Office') }}</h2>
+                        @role(ROLE_APPLICANT)
+                            <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
+                                {{ __('Data is already available, but you are welcome to correct it.') }}
+                            </p>
+                            <p class="text-sm text-primary p-4 bg-primary-light bg-opacity-25">
+                                {{ __('NORDAKADEMIE is required by high school law to transmit the following data to the State Statistics Office.') }}
+                            </p>
+                        @endrole
                 </div>
                 <div class="mt-8 md:px-4 w-full md:w-1/2 mx-auto">
                     @if (!$showThanks)
@@ -753,9 +756,11 @@
                         </form>
                     @else
                         <div>
-                            <p class="mt-2 text-darkblack">
-                                {{ $formAlreadySubmitted ? __('Your form already submitted successfully.') : __('Your form submitted successfully.') }}
-                            </p>
+                            @role(ROLE_APPLICANT)
+                                <p class="mt-2 text-darkblack">
+                                    {{ $formAlreadySubmitted ? __('Your form already submitted successfully.') : __('Your form submitted successfully.') }}
+                                </p>
+                            @endrole
                             <button class="mt-2 bg-darkgreen text-white px-4 py-2 underline" wire:click="$set('showThanks', false)" wire:loading.class="cursor-wait" >{{ __('Edit') }}</button>
                         </div>
                     @endif
