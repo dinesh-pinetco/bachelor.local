@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TestSeeder::class);
         $this->call(ContactProfileSeeder::class);
         $this->call(FaqSeeder::class);
-        $this->call(UserSeeder::class);
+        // $this->call(UserSeeder::class);
 
         Artisan::call('company:sync');
     }
