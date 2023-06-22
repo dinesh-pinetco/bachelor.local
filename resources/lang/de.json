@@ -966,5 +966,7 @@
     "Are you sure you want to undo enrollment?": "Sind Sie sicher, dass Sie die Immatrikulation rückgängig machen wollen?",
     "Yes, Undo it": "Ja, Rückgängig",
     "Information updated successfully.": "Informationen erfolgreich aktualisiert.",
-    "Forms": "Formulare"
+    "Forms": "Formulare",
+    "Study sheet form": "Formular Verwaltungsbogen",
+    "Government form": "Daten für das Statistische Landesamt"
 }
