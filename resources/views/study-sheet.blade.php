@@ -1,5 +1,5 @@
-<x-web>
+<x-app-layout>
     <div>
         <livewire:study-sheet :applicant="$applicant"/>
     </div>
-</x-web>
+</x-app-layout>

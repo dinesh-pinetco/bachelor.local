@@ -154,5 +154,8 @@ return [
         'employer_academic_degrees.*.graduation_date' => 'Datum des Abschlusses',
         'test.passing_limit' => 'Bestehensgrenze',
         'phone' => 'Telefonnummer',
+        'applicantCourse' => 'AntragstellerKurs',
+        'selectedCompany' => 'ausgewähltes Unternehmen',
+        'selectedCompanyContacts' => 'ausgewählte Firmenkontakte',
     ],
 ];

@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\GovernmentFormController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
@@ -39,13 +40,16 @@ Route::get('fake/government-form/{user}', [TestController::class, 'seedGovernmen
 
 Route::view('study-programs', 'study-programs')->name('study-programs');
 
-Route::middleware(['signed'])->group(function () {
-    Route::get('/study-sheet/{user}', StudySheetController::class)->name('study-sheet');
-    Route::get('/government-form/{user}', GovernmentFormController::class)->name('government-form');
-});
-
 Route::middleware(['auth:sanctum', 'activated'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+    Route::middleware(['auth', 'role:'.ROLE_EMPLOYEE.'|'.ROLE_ADMIN.'|'.ROLE_SUPER_ADMIN.'|'.ROLE_APPLICANT])->group(function () {
+        Route::get('forms', FormController::class)->name('applicant-forms');
+
+        Route::get('/study-sheet/{user}', StudySheetController::class)->name('study-sheet');
+        Route::get('/government-form/{user}', GovernmentFormController::class)->name('government-form');
+    });
+
     Route::middleware(['verified', 'role:'.ROLE_APPLICANT])->group(function () {
         Route::get('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         Route::prefix('application/{tab:slug}')->name('application.')->group(function () {

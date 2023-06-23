@@ -12,15 +12,18 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class StudySheet extends Component
 {
-    use StudySheetFormValidations , WithFileUploads;
+    use StudySheetFormValidations , WithFileUploads, AuthorizesRequests;
 
     public $applicant;
+
+    public $showThanks = false;
 
     public StudySheetModel $studySheet;
 
@@ -48,11 +51,17 @@ class StudySheet extends Component
 
     public $dateOfBirth;
 
+    public bool $isEdit;
+
     public function mount()
     {
-        $this->studySheet = $this->applicant->study_sheet ?? new StudySheetModel();
+        $this->studySheet = $this->applicant->study_sheet ?? $this->applicant->study_sheet()->create([
+            'user_id' => $this->applicant->id,
+        ]);
 
         $this->formAlreadySubmitted = $this->studySheet->is_submit ?? false;
+
+        $this->showThanks = $this->formAlreadySubmitted;
 
         $this->schools = School::get();
 
@@ -70,6 +79,8 @@ class StudySheet extends Component
 
         $this->lastName = $this->applicant->last_name;
         $this->email = $this->applicant->email;
+
+        $this->isEdit = ! (auth()->user()->hasRole(ROLE_APPLICANT) && $this->formAlreadySubmitted);
     }
 
     public function updatedStudySheetStudentIdCardPhoto()
@@ -102,6 +113,9 @@ class StudySheet extends Component
         if ($this->applicant->study_sheet == null) {
             $this->applicant->study_sheet()->save($this->studySheet);
         } else {
+            if ($this->formAlreadySubmitted) {
+                $this->toastNotify(__('Information updated successfully.'), __('Success'), TOAST_SUCCESS);
+            }
             $this->studySheet->save();
         }
     }
@@ -118,10 +132,18 @@ class StudySheet extends Component
         $this->applicant->enrollApplicant();
 
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
+
+        $this->showThanks = true;
+
+        $this->isEdit = false;
+
+        $this->formAlreadySubmitted = true;
     }
 
     public function render(): Factory|View|Application
     {
+        $this->authorize('update', $this->studySheet);
+
         return view('livewire.study-sheet');
     }
 }
