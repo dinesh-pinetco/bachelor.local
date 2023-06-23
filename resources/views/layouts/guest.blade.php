@@ -11,9 +11,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/nice-select.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/intlTelInput.min.css') }}" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/css/intlTelInput.css"  referrerpolicy="no-referrer" />
     @livewireStyles
+    @laravelTelInputStyles
+
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -58,7 +59,8 @@
         <script src="{{ asset('plugins/intlTelInput.min.js') }}"> </script>
 
 @stack('scripts')
-<script src="{{ asset('plugins/intlTelInput.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.6/js/intlTelInput.min.js" referrerpolicy="no-referrer"></script>
 @livewireScripts
+@laravelTelInputScripts
 </body>
 </html>
