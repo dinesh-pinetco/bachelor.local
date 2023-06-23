@@ -110,7 +110,7 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
-        if (!$this->marketplacePrivacyPolicyAccepted) {
+        if (! $this->marketplacePrivacyPolicyAccepted) {
             return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
         }
 
@@ -147,6 +147,7 @@ class Index extends Component
             $this->user->save();
             $this->doNotShowProfileMarketplace();
         }
+
         return to_route('companies.index');
     }
 
