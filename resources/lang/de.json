@@ -965,4 +965,12 @@
     "Desired Beginning created successfully.": "Gewünschter Beginn erfolgreich erstellt.",
     "Desire Beginning could not be deleted because it is still in use.": "Desire Beginning konnte nicht gelöscht werden, da es noch in Gebrauch ist.",
     "Desire Beginning deleted successfully.": "Desire Beginning erfolgreich gelöscht."
+    "Enrollment undone successfully.": "Immatrikulation erfolgreich rückgängig gemacht.",
+    "Undo Enrollment": "Immatrikulation rückgängig machen",
+    "Are you sure you want to undo enrollment?": "Sind Sie sicher, dass Sie die Immatrikulation rückgängig machen wollen?",
+    "Yes, Undo it": "Ja, Rückgängig",
+    "Information updated successfully.": "Informationen erfolgreich aktualisiert.",
+    "Forms": "Formulare",
+    "Study sheet form": "Formular Verwaltungsbogen",
+    "Government form": "Daten für das Statistische Landesamt"
 }

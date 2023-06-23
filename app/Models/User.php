@@ -181,9 +181,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     public function getEctsPointvalue($identifier)
     {
-        return $this->values->filter(function ($item) use ($identifier) {
-            return $item->fields->key == $identifier;
-        })->first()?->value;
+        return $this->values->where('values.fields.key', $identifier)->value('value');
     }
 
     public function saveCubiaId()

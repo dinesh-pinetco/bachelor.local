@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Course;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SannaUserResource extends JsonResource
@@ -88,7 +89,7 @@ class SannaUserResource extends JsonResource
             ],
             'vertrag_verschickt_am' => $this->contract?->send_date,
             'vertrag_zurueck_am' => $this->contract?->receive_date,
-            'studienbeginn' => $this->desiredBeginnings?->course_start_date,
+            'studienbeginn' => $this->desiredBeginning->course_start_date,
             'bild' => $this->study_sheet?->student_id_card_photo
                 ? get_base64_from_local_storage_file($this->study_sheet?->student_id_card_photo)
                 : ($this->getValueByIdentifier('avatar')
@@ -97,7 +98,7 @@ class SannaUserResource extends JsonResource
             'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),
             'datenschutzerklaerung_alumni' => filter_var($this->getValueByIdentifier('terms_and_condition'), FILTER_VALIDATE_BOOLEAN),
             'geburtsland' => $this->getValueByIdentifier('nationality_id'),
-            'studiengangId' => $this->courses()->first()?->course?->sana_id,
+            'studiengangId' => Course::findSannaId($this->user->getValueByField('enroll_course')?->value),
             'krankenversicherung' => [
                 'art_der_krankenversicherung' => $this->study_sheet?->health_insurance_type == '1' ? 'gesetzlich' : 'privat',
                 'krankenversichertennummer' => $this->study_sheet?->health_insurance_number,

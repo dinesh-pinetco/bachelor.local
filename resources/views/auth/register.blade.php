@@ -5,7 +5,7 @@
     </div>
 
     <div class="h-full w-full absolute inset-0 z-0">
-        <img src="images/register-bg.png" alt="register background image"
+        <img src="images/register-bg.webp" alt="register background image"
              class="h-full w-full object-cover object-top">
         <div class="register-grediant absolute inset-0 mt-auto z-0"></div>
     </div>
