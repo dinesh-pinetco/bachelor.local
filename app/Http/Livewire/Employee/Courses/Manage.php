@@ -45,7 +45,6 @@ class Manage extends Component
         if ($course->exists) {
             if (request()->routeIs('employee.courses.edit')) {
                 $this->formMode = 'edit';
-            //                $this->selectedDesiredBeginning = $course->desiredBeginnings();
             } elseif (request()->routeIs('employee.courses.clone')) {
                 $this->formMode = 'clone';
             }
@@ -54,7 +53,7 @@ class Manage extends Component
         $this->selectedDesiredBeginning = $this->course->desiredBeginnings()->pluck('model_id')->toArray();
 
         $this->course = $course;
-        $this->desireBeginnings = DesiredBeginning::active()->get();
+        $this->desireBeginnings = DesiredBeginning::options();
     }
 
     public function render()

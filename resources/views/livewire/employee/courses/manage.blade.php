@@ -83,7 +83,7 @@
                                     :options='$desireBeginnings'
                                     :value="$selectedDesiredBeginning"
                                     key-by="id"
-                                    label-by="course_start_date"
+                                    label-by="title"
                                 />
                                 <x-jet-input-error for="selectedCourses"/>
                             </div>

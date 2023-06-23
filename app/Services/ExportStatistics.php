@@ -23,7 +23,7 @@ class ExportStatistics
         $this->desiredBeginningDate = $desiredBeginningDate;
 
         $this->applicant = User::role(ROLE_APPLICANT)
-            ->whereRelation('desiredBeginning', 'course_start_date', $this->desiredBeginningDate);
+            ->whereRelation('desiredBeginnings', 'course_start_date', $this->desiredBeginningDate);
     }
 
     public function getApplicantsByFilter($filteredBy, $method, $courseId)

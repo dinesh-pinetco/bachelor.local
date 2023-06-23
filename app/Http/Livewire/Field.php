@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Enums\FieldType;
-use App\Models\Course;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Models\School;
@@ -344,8 +343,8 @@ class Field extends Component
         $fieldValue = $this->applicant->getValueByField('desired_beginning_id');
 
         if ($fieldValue) {
-            $desiredBeginning = DesiredBeginning::where('id', $fieldValue->value)
-                ->update(['course_start_date' => $this->fieldValue]);
+            $desiredBeginning = DesiredBeginning::where('course_start_date', $this->fieldValue)->first();
+            $applicantDesiredBeginning = $this->applicant->userDesiredBeginning->update(['desired_beginning_id' => $desiredBeginning->id]);
 
             $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
             //TODO: must reset courses
@@ -355,15 +354,14 @@ class Field extends Component
     private function attachOptions()
     {
         if ($this->field->related_option_table == 'courses') {
-            $this->courseOptions = Course::query()
-                ->active()
-                ->where(fn ($q) => $q->whereNull('last_start')->orWhere('last_start', '>', today()))
-                ->get();
+            $applicantDesiredBeginning = $this->applicant->userDesiredBeginning->desired_beginning_id;
+            $desiredBeginning = DesiredBeginning::where('id', $applicantDesiredBeginning)->first();
+            $this->courseOptions = $desiredBeginning?->courses;
         }
 
         if ($this->field->related_option_table == 'desired_beginnings') {
             $this->desiredBeginningOptions = DesiredBeginning::options();
-            $this->fieldValue = DesiredBeginning::find($this->fieldValue)?->course_start_date?->format('Y-m-d');
+            $this->fieldValue = DesiredBeginning::where('id', $this->applicant->userDesiredBeginning->desired_beginning_id)->first()?->course_start_date?->format('Y-m-d');
         }
     }
 
