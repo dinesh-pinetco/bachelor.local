@@ -21,6 +21,8 @@ class ApplicantController extends Controller
             return view('application.companies', ['applicant' => $applicant, 'tab' => $slug]);
         } elseif ($slug == 'contracts') {
             return view('application.contracts', ['applicant' => $applicant, 'tab' => $slug]);
+        } elseif ($slug == 'forms') {
+            return view('application.forms', ['applicant' => $applicant, 'tab' => $slug]);
         } else {
             $tab = Tab::where('slug', $slug)->first();
 
