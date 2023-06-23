@@ -78,6 +78,13 @@
                     {{ __('Contract') }}
                 </x-jet-nav-link>
             </li>
+            <li>
+                <x-jet-nav-link :active="urlContains('forms')"
+                                href="{{ route('employee.applicants.edit',['slug' => 'forms', 'applicant' => $applicant]) }}"
+                                class="flex-shrink-0 whitespace-nowrap px-4 py-2 text-base bg-lightgray hover:bg-primary text-primary hover:text-lightgray leading-snug transition duration-200 ease-in-out rounded-sm">
+                    {{ __('Forms') }}
+                </x-jet-nav-link>
+            </li>
             @endunlessrole
         </ul>
         <div class="block sm:hidden">

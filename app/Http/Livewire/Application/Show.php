@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Application;
 
 use App\Enums\ApplicationStatus;
+use App\Http\Livewire\Traits\HasModal;
 use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\Group;
@@ -15,12 +16,13 @@ use App\Services\ProgressBar;
 use App\Services\SelectionTests\Moodle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class Show extends Component
 {
-    use AuthorizesRequests;
+    use AuthorizesRequests, HasModal;
 
     public $tabId = null;
 
@@ -165,6 +167,47 @@ class Show extends Component
     {
         if ($propertyName == 'competency_comment') {
             $this->handleCompetencyCatchUp();
+        }
+    }
+
+    public function openResetEnrollmentModal()
+    {
+        $this->open();
+    }
+
+    public function resetEnrollment()
+    {
+        $this->applicant->getValueByField('enroll_course')->forceDelete();
+        $this->applicant->getValueByField('enroll_company')->forceDelete();
+        $this->applicant->getValueByField('enroll_company_contact')->forceDelete();
+
+        $this->deleteFile($this->applicant->study_sheet?->student_id_card_photo);
+
+        $this->deleteFile($this->applicant->configuration->contract_pdf_path);
+
+        $this->deleteFile($this->applicant->configuration->study_contract_pdf_path);
+
+        $this->applicant->study_sheet?->delete();
+
+        $this->applicant->government_form?->delete();
+
+        $this->applicant->removeMeta('enrollment_at');
+
+        $this->applicant->update([
+            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
+        ]);
+
+        $this->isEnrolled = false;
+
+        $this->toastNotify(__('Enrollment undone successfully.'), __('Success'), TOAST_SUCCESS);
+
+        $this->close();
+    }
+
+    public function deleteFile($path)
+    {
+        if (! is_null($path) && Storage::exists($path)) {
+            Storage::delete($path);
         }
     }
 

@@ -165,7 +165,7 @@ class Index extends Component
             } else {
                 $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
 
-                if ($companiesToBeAdded){
+                if ($companiesToBeAdded) {
                     $this->user->companies()->updateOrCreate([
                         'user_id' => $this->user->id,
                         'company_id' => array_first($companiesToBeAdded),
