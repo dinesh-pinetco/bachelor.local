@@ -125,7 +125,7 @@ class Index extends Component
         $this->emitSelf('refresh');
     }
 
-    public function DoNotShowProfileMarketplace()
+    public function doNotShowProfileMarketplace()
     {
         $this->user->touch('reject_marketplace_application_at');
 
@@ -145,7 +145,7 @@ class Index extends Component
             $this->user->marketplace_privacy_policy_accepted = false;
             $this->user->show_application_on_marketplace_at = null;
             $this->user->save();
-            $this->DoNotShowProfileMarketplace();
+            $this->doNotShowProfileMarketplace();
         }
         return to_route('companies.index');
     }

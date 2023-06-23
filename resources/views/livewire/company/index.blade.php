@@ -187,7 +187,7 @@
                         <x-primary-button class="h-11" type="button" wire:click="showProfileMarketplace">
                             {{ __('Yes') }}
                         </x-primary-button>
-                        <x-secondary-button class="h-11" wire:click="DoNotShowProfileMarketplace" wire:loading.attr="disabled">
+                        <x-secondary-button class="h-11" wire:click="doNotShowProfileMarketplace" wire:loading.attr="disabled">
                             {{ __('No') }}
                         </x-secondary-button>
                     </div>
