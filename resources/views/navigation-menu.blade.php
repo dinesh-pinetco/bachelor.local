@@ -310,7 +310,7 @@
                         @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::ENROLLMENT_ON->id())
                             <li>
                                 <x-jet-nav-link href="{{ route('applicant-forms') }}"
-                                                :active="urlContains('applicant-forms')"
+                                                :active="urlContains('forms')"
                                                 class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
                                     <div
                                         class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">

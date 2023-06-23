@@ -15,12 +15,13 @@ use App\Models\University;
 use App\Models\User;
 use App\Traits\GovernmentFormValidations;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
 class GovernmentForm extends Component
 {
-    use GovernmentFormValidations;
+    use GovernmentFormValidations, AuthorizesRequests;
 
     public User $applicant;
 
@@ -60,6 +61,8 @@ class GovernmentForm extends Component
 
     public $graduationDistrict;
 
+    public bool $isEdit;
+
     public function mount()
     {
         $countryOfBirth = $this->applicant->getValueByField('nationality_id');
@@ -68,7 +71,10 @@ class GovernmentForm extends Component
             $this->isGermanUser = $countryOfBirth->value == $germanCountry->id;
         }
 
-        $this->governmentForm = $this->applicant->government_form ?? new GovernmentFormModel();
+        $this->governmentForm = $this->applicant->government_form ?? $this->applicant->government_form()->create([
+            'user_id' => $this->applicant->id,
+        ]);
+
         $this->formAlreadySubmitted = $this->governmentForm->is_submit ?? false;
 
         $this->showThanks = $this->formAlreadySubmitted;
@@ -84,6 +90,8 @@ class GovernmentForm extends Component
         $this->refreshPreviousResidenceCountryData();
         $this->refreshCurrentResidenceCountryData();
         $this->refreshGraduationCountryData();
+
+        $this->isEdit = auth()->user()->hasRole(ROLE_APPLICANT) && $this->formAlreadySubmitted ? false : true;
     }
 
     public function getUniversitiesProperty(): Collection
@@ -233,6 +241,10 @@ class GovernmentForm extends Component
         if ($formProperty) {
             $property = Str::afterLast($formProperty, '.');
             $this->governmentForm->update([$property => $this->governmentForm->{$property}]);
+
+            if ($this->formAlreadySubmitted) {
+                $this->toastNotify(__('Information updated successfully.'), __('Success'), TOAST_SUCCESS);
+            }
         } else {
             if ($this->applicant->government_form == null) {
                 $this->applicant->government_form()->save($this->governmentForm);
@@ -253,12 +265,18 @@ class GovernmentForm extends Component
 
         $this->showThanks = true;
 
+        $this->isEdit = false;
+
+        $this->formAlreadySubmitted = true;
+
         $this->applicant->enrollApplicant();
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
     }
 
     public function render()
     {
+        $this->authorize('update', $this->governmentForm);
+
         return view('livewire.government-form');
     }
 }

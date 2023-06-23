@@ -6,10 +6,8 @@ class FormController extends Controller
 {
     public function __invoke()
     {
-        if (auth()->user()->hasRole(ROLE_APPLICANT)) {
-            return view('application.forms', ['applicant' => auth()->user()]);
-        }
-
-        return view('application.forms');
+        return auth()->user()->hasRole(ROLE_APPLICANT)
+            ? view('application.forms', ['applicant' => auth()->user()])
+            : view('application.forms');
     }
 }
