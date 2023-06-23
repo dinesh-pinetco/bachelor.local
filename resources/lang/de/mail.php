@@ -5,13 +5,13 @@ return [
 
     'new-user' => [
         'subject' => 'Willkommen im Bewerbungsportal der Nordakademie!',
-        'body1' => '<br>  vielen Dank für Ihr Interesse an einem berufsbegleitenden Masterstudium an der NORDAKADEMIE!',
-        'body2' => '<br>  Im Folgenden erhalten Sie Ihre Zugangsdaten der NORDAKADEMIE, die Sie im weiteren Verlauf der Bewerbung benötigen.',
-        'body3' => '<br> Die Daten sind sowohl für unseren Auswahltest als auch unser Masterportal gültig, in welchem Sie Ihre Angaben jederzeit anpassen können.',
+        'body1' => '<br>  vielen Dank für dein Interesse an einem dualen Bachelorstudium an der NORDAKADEMIE!',
+        'body2' => '<br>  Im Folgenden erhältst du deine Zugangsdaten der NORDAKADEMIE, die du im weiteren Verlauf des Bewerbungsverfahrens benötigst.',
+        'body3' => '<br> Die Daten sind sowohl für unseren Auswahltest als auch unser Bachelorportal gültig, in welchem du deine Angaben jederzeit anpassen kannst.',
         'body4' => '<br> Über die weiteren Schritte des Bewerbungsprozesses informieren wir Sie gesondert per E-Mail nach Erhalt Ihrer <b>Bewerbungsunterlagen</b>.',
         'action' => 'Login',
-        'email' => '<br> Anmeldename. <strong> :email </strong>',
-        'password' => '<br> Passwort. <strong> :password </strong>',
+        'email' => '<br> Anmeldename: <strong> :email </strong>',
+        'password' => '<br> Passwort: <strong> :password </strong>',
     ],
 
     'new-employee' => [

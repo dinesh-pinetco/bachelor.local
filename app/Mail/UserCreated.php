@@ -39,7 +39,7 @@ class UserCreated extends Mailable implements ShouldQueue
                 'link' => route('login', ['email' => $this->user->email]),
                 'email' => $this->user->email,
                 'password' => $this->password,
-                'name' => $this->user->full_name,
+                'name' => $this->user->first_name,
             ]);
     }
 }
