@@ -226,7 +226,7 @@
                     @endif
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                         @can('updateSelectionTestStatus', $applicant)
-                          `  <span data-cy="test-pass-button-{{ $applicant->id }}" role="button"
+                            <span data-cy="test-pass-button-{{ $applicant->id }}" role="button"
                                   data-tippy-content="{{__('Pass Applicant')}}"
                                   class="text-darkgray hover:text-green-600 inline-block cursor-pointer"
                                   wire:click="$emit('Applicant.Modal.TestPass.modal.toggle',{{ $applicant->id }})">
@@ -235,7 +235,7 @@
                                     <path
                                         d="M320 64H280h-9.6C263 27.5 230.7 0 192 0s-71 27.5-78.4 64H104 64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64zM80 112v24c0 13.3 10.7 24 24 24h88 88c13.3 0 24-10.7 24-24V112h16c8.8 0 16 7.2 16 16V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V128c0-8.8 7.2-16 16-16H80zm88-32a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM289 267.6c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-89.7 89.7L129 287c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l53.3 53.3c4.5 4.5 10.6 7 17 7s12.5-2.5 17-7L289 267.6z"/>
                                 </svg>
-                            </span>`
+                            </span>
                         @endcan
                         <a data-cy="edit-button-{{ $applicant->id }}" role="button"
                            class="text-darkgray hover:text-gray inline-block cursor-pointer"
@@ -247,11 +247,11 @@
                             </svg>
                         </a>
                         @canImpersonate
-                            <a data-cy="edit-button-{{ $applicant->id }}" role="button"
-                               class="text-darkgray hover:text-gray inline-block cursor-pointer "
-                               href="{{ route('impersonate', $applicant->id) }}">
-                                <x-icons.impersonate class="stroke-current h-4 w-4" />
-                            </a>
+                        <a data-cy="edit-button-{{ $applicant->id }}" role="button"
+                           class="text-darkgray hover:text-gray inline-block cursor-pointer "
+                           href="{{ route('impersonate', $applicant->id) }}">
+                            <x-icons.impersonate class="stroke-current h-4 w-4"/>
+                        </a>
                         @endCanImpersonate
                         <span data-cy="delete-button-{{ $applicant->id }}" role="button"
                               class="text-darkgray hover:text-lightred inline-block cursor-pointer"
