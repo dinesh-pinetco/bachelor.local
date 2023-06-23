@@ -64,7 +64,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->desiredBeginnings = DesiredBeginning::active()->get()->unique('course_start_date');
+        $this->desiredBeginnings = DesiredBeginning::active()->get();
 
         $this->courseOptions = Course::all();
 
