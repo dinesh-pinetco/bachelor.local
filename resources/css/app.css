@@ -168,3 +168,7 @@ li > label, .multiple-dropdown-box > label {
 .btn-grp button{
     @apply mt-0;
 }
+
+input[disabled] {
+    @apply text-gray
+}

@@ -67,5 +67,5 @@ return [
          * - path to the utils.js file in public/ directory.
          */
         'utilsScript' => '/vendor/intl-tel-input/build/js/utils.js',
-    ]
+    ],
 ];
