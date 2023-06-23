@@ -136,6 +136,23 @@ class Index extends Component
         $this->emitSelf('refresh');
     }
 
+    public function enrollIntoMarketPlace(bool $enroll)
+    {
+        if ($enroll) {
+            $this->marketplacePrivacyPolicyAccepted = true;
+            $this->user->reject_marketplace_application_at = null;
+            $this->user->save();
+            $this->showProfileMarketplace();
+        } else {
+            $this->user->marketplace_privacy_policy_accepted = false;
+            $this->user->show_application_on_marketplace_at = null;
+            $this->user->save();
+            $this->doNotShowProfileMarketplace();
+        }
+
+        return to_route('companies.index');
+    }
+
     public function selectedCompanies()
     {
         $this->selectedCompanies = $this->appliedCompanies?->pluck('company_id')?->toArray();
@@ -159,6 +176,8 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
+        $this->fetchAppliedCompanies();
+
     }
 
     protected function fetchAppliedCompanies()
@@ -224,6 +243,7 @@ class Index extends Component
         $this->user->companies()->where('company_id', $appliedCompanyId)->first()->delete();
 
         $this->selectedCompanies();
+        $this->fetchAppliedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
     }

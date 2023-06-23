@@ -63,7 +63,8 @@ class Enrollment extends Component
         return $rules;
     }
 
-    public function mount()
+
+    public function toggle(User $user)
     {
         if (! auth()->user()->hasRole(ROLE_APPLICANT)) {
             $this->companies = Company::with('contacts')->get();
@@ -72,10 +73,6 @@ class Enrollment extends Component
             $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
             $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
         }
-    }
-
-    public function toggle(User $user)
-    {
         $this->show = ! $this->show;
         $this->applicant = $user;
         $this->applicant->load('configuration');
