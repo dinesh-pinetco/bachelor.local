@@ -9,7 +9,7 @@
     @endslot
     @component('mail::table')
         <tr align="center">
-            <td style="background-image: url('{{ url('images/register-bg.png') }}');height:312px;width:100%;background-position: center;background-size: cover;"
+            <td style="background-image: url('{{ url('images/register-bg.webp') }}');height:312px;width:100%;background-position: center;background-size: cover;"
                 alt="">
             </td>
         </tr>

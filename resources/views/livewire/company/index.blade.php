@@ -187,7 +187,7 @@
                         <x-primary-button class="h-11" type="button" wire:click="showProfileMarketplace">
                             {{ __('Yes') }}
                         </x-primary-button>
-                        <x-secondary-button class="h-11" wire:click="DoNotShowProfileMarketplace" wire:loading.attr="disabled">
+                        <x-secondary-button class="h-11" wire:click="doNotShowProfileMarketplace" wire:loading.attr="disabled">
                             {{ __('No') }}
                         </x-secondary-button>
                     </div>
@@ -264,6 +264,17 @@
                                 {{ __('Selected companies can see the test results') }}
                             </span>
                         </label>
+                    </div>
+                    <div class="flex items-start space-x-2 mt-5">
+                        @if(!is_null($user->show_application_on_marketplace_at))
+                            <x-secondary-button class="h-11" wire:click="enrollIntoMarketPlace(false)" wire:loading.attr="disabled">
+                                {{ __('Remove from marketplace') }}
+                            </x-secondary-button>
+                        @else
+                            <x-primary-button class="h-11" type="button"  wire:click="enrollIntoMarketPlace(true)">
+                                {{ __('I want to go to the marketplace') }}
+                            </x-primary-button>
+                        @endif
                     </div>
                     <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
                         {{ __('Update') }}
