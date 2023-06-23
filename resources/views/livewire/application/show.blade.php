@@ -49,6 +49,13 @@
 
                     <div class="flex items-center space-x-4 flex-shrink-0">
                         @if (!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile && $isEnrolled)
+                            <div class="inline-flex items-center gap-2">
+                                <button wire:click="openResetEnrollmentModal">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#003a79">
+                                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM15 16L9 8M9 16l6-8" stroke="#003a79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                            </div>
                             <div class="inline-flex items-center gap-2 text-green-500 text-sm mt-4 md:mt-0">
                                 <svg class="w-3 h-3 fill-current" fill="currentcolor" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 512 512">
@@ -58,7 +65,7 @@
                                 <p>{{__('Has been hired')}}</p>
                             </div>
                         @endif
-                        @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status->id() > ApplicationStatus::TEST_TAKEN->id() && $isProfile)
+                        @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $applicant->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && $isProfile)
                             <div class="flex items-center space-x-4">
                                 <x-primary-button type="button"
                                                   wire:click="$emit('Applicant.Modal.Enrollment.modal.toggle',{{ $applicant->id }})"
@@ -108,11 +115,7 @@
                                         </a>
                                     </div>
                                 @else
-                                    <div>
-                                        <a class="w-28 h-10 flex items-center justify-center text-white bg-primary rounded-sm" href="{{ route('companies.index') }}">
-                                            {{ __("Skip") }}
-                                        </a>
-                                    </div>
+
                                     <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm"
                                        href="motivation">
                                         <svg class="w-4 h-4 stroke-current text-white flex-shrink-0" width="25"
@@ -279,4 +282,36 @@
         </div>
         <livewire:applicant.modal.anonymous :applicant="$applicant"/>
         <livewire:applicant.modal.enrollment/>
+        <x-custom-modal wire:model="show">
+            <x-slot name="title">
+                {{ __('Undo Enrollment') }}
+            </x-slot>
+            <div>
+                <div class="space-y-3">
+                    <p class="text-center text-red flex justify-center">
+                        <svg class="h-12 w-12 stroke-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 512 512">
+                            <path
+                                d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM256 304c13.25 0 24-10.75 24-24v-128C280 138.8 269.3 128 256 128S232 138.8 232 152v128C232 293.3 242.8 304 256 304zM256 337.1c-17.36 0-31.44 14.08-31.44 31.44C224.6 385.9 238.6 400 256 400s31.44-14.08 31.44-31.44C287.4 351.2 273.4 337.1 256 337.1z"/>
+                        </svg>
+                    </p>
+                    <h4 class="text-center text-darkgray text-sm sm:text-base">
+                        {{ __('Are you sure you want to undo enrollment?') }}
+                    </h4>
+                </div>
+            </div>
+            <x-jet-input-error for="client" class="mt-1"/>
+            <x-slot name="footer">
+                <div class="flex justify-end space-x-2">
+                    <x-danger-button data-cy="delete-button"
+                                     wire:click="resetEnrollment">
+                        {{ __('Yes, Undo it') }}
+                    </x-danger-button>
+                    <x-secondary-button
+                        data-cy="cancel-button"
+                        wire:click="$set('show', false)"> {{ __('Cancel') }}
+                    </x-secondary-button>
+                </div>
+            </x-slot>
+        </x-custom-modal>
 </div>

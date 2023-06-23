@@ -165,3 +165,10 @@ li > label, .multiple-dropdown-box > label {
 .tel-input .iti__dial-code {
     @apply text-darkgray;
 }
+.btn-grp button{
+    @apply mt-0;
+}
+
+input[disabled] {
+    @apply text-gray
+}
