@@ -63,7 +63,6 @@ class Enrollment extends Component
         return $rules;
     }
 
-
     public function toggle(User $user)
     {
         if (! auth()->user()->hasRole(ROLE_APPLICANT)) {

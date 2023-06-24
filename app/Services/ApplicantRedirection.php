@@ -82,6 +82,10 @@ class ApplicantRedirection
 
     private function applied_to_selected_company()
     {
+        if ($this->applicant->show_application_on_marketplace_at && $this->applicant->marketplace_privacy_policy_accepted) {
+            return to_route('application.index', ['tab' => 'industries']);
+        }
+
         return to_route('companies.index');
     }
 

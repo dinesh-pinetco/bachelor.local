@@ -39,7 +39,7 @@ class Index extends Component
         request()->merge($this->only(['sort_by', 'sort_type', 'search', 'status']));
 
         return view('livewire.admin.employee.index', [
-            'users' => User::select(['id','first_name','last_name','email','phone','created_at'])->searchByKey($this->column, request('search'))->filter()->Role(ROLE_EMPLOYEE)->paginate($this->perPage),
+            'users' => User::select(['id', 'first_name', 'last_name', 'email', 'phone', 'created_at'])->searchByKey($this->column, request('search'))->filter()->Role(ROLE_EMPLOYEE)->paginate($this->perPage),
         ]);
     }
 }

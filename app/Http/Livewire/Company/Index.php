@@ -149,8 +149,6 @@ class Index extends Component
             $this->user->save();
             $this->doNotShowProfileMarketplace();
         }
-
-        return to_route('companies.index');
     }
 
     public function selectedCompanies()
