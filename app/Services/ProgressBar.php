@@ -20,16 +20,21 @@ class ProgressBar
         $this->applicant = is_null($this->applicant_id) ? auth()->user() : (User::find($this->applicant_id) ?? auth()->user());
     }
 
-    public function overAllProgress(): float
+    public function firstCategoryPercentage()
     {
-        //Client wants only progress bar on profile and tests
-        $progressPoints = $this->calculateProgressByTab('profile')
+        $firstCategoryTabProgress = $this->calculateProgressByTab('profile')
             + $this->selectionTestsProgress();
-        //            + $this->calculateProgressByTab('industries')
-        //            + $this->calculateProgressByTab('motivation')
-        //            + $this->documentProgress();
 
-        return round($progressPoints);
+        return round($firstCategoryTabProgress);
+    }
+
+    public function secondCategoryPercentage()
+    {
+        $secondCategoryTabProgress = $this->calculateProgressByTab('industries')
+        + $this->calculateProgressByTab('motivation')
+        + $this->documentProgress();
+
+        return round($secondCategoryTabProgress);
     }
 
     public function calculateProgressByTab($tabSlug): float|int
@@ -56,6 +61,7 @@ class ProgressBar
 
     private function calculateAverageProcess($points, $achievedPoints): float|int
     {
+        //Get total count of tab here and divide by 100 as per tab count
         return $points ? round(($achievedPoints * PER_STEP_PROGRESS) / $points, 2) : ($achievedPoints ? 0 : 25);
     }
 

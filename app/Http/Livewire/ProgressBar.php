@@ -16,10 +16,11 @@ class ProgressBar extends Component
 
     public function mount()
     {
-        $this->overAllProgress = (new ProgressInfo())->overAllProgress();
-        //        if ($profileTabProgress == PER_STEP_PROGRESS && $this->overAllProgress != 100) {
-        //            $this->emitTo('application.show', 'profileProgressComplete');
-        //        }
+        if (auth()->user()->application_status->id() <= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id()) {
+            $this->overAllProgress = (new ProgressInfo())->firstCategoryPercentage();
+        } else {
+            $this->overAllProgress = (new ProgressInfo())->secondCategoryPercentage();
+        }
     }
 
     public function submit()

@@ -312,7 +312,7 @@ class Data
                 'slug' => 'industries',
                 'icon' => 'industry',
                 'sort_order' => 2,
-                'is_progress_countable' => false,
+                'is_progress_countable' => true,
                 'meta_data' => [
                     'button_text' => 'Speichern und weiter',
                 ],
@@ -332,7 +332,7 @@ class Data
                                 'sort_order' => 2,
                                 'related_option_table' => 'industries',
                                 'is_active' => 1,
-                                'is_required' => 0,
+                                'is_required' => 1,
                                 'options' => [],
                                 'meta_data' => [],
                             ],
@@ -346,7 +346,7 @@ class Data
                 'slug' => 'motivation',
                 'icon' => 'motivation',
                 'sort_order' => 3,
-                'is_progress_countable' => false,
+                'is_progress_countable' => true,
                 'meta_data' => [
                     'button_text' => 'Speichern und weiter',
                 ],
@@ -362,7 +362,7 @@ class Data
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
-                                'is_required' => 0,
+                                'is_required' => 1,
                                 'options' => [],
                                 'meta_data' => [],
                             ],
@@ -373,7 +373,7 @@ class Data
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
-                                'is_required' => 0,
+                                'is_required' => 1,
                                 'meta_data' => [],
                                 'options' => [
                                     [
@@ -532,7 +532,7 @@ class Data
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
-                                'is_required' => 0,
+                                'is_required' => 1,
                                 'meta_data' => [],
                             ],
                         ],
