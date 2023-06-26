@@ -357,7 +357,7 @@ class Data
                         'fields' => [
                             [
                                 'type' => FieldType::FIELD_TEXTAREA(),
-                                'label' => 'Bitte begründen Sie Ihren Studienwunsch.',
+                                'label' => 'Bitte erläutere kurz, warum du dich für ein duales Studium interessierst, was dich ausmacht und was deinen zukünftigen Arbeitgeber ausmachen sollte:',
                                 'key' => 'reasons_to_study',
                                 'placeholder' => '',
                                 'sort_order' => 1,
