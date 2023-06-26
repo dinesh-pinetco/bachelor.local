@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ApplicationStatus;
 use App\Models\Document;
 use App\Models\Result;
 use App\Models\Tab;
@@ -20,16 +21,30 @@ class ProgressBar
         $this->applicant = is_null($this->applicant_id) ? auth()->user() : (User::find($this->applicant_id) ?? auth()->user());
     }
 
+    public function firstCategoryPercentage()
+    {
+        $firstCategoryTabProgress = $this->calculateProgressByTab('profile')
+            + $this->selectionTestsProgress();
+
+        return round($firstCategoryTabProgress);
+    }
+
+    public function secondCategoryPercentage()
+    {
+        $secondCategoryTabProgress = $this->calculateProgressByTab('industries')
+        + $this->calculateProgressByTab('motivation')
+        + $this->documentProgress();
+
+        return round($secondCategoryTabProgress);
+    }
+
     public function overAllProgress(): float
     {
-        //Client wants only progress bar on profile and tests
-        $progressPoints = $this->calculateProgressByTab('profile')
-            + $this->selectionTestsProgress();
-        //            + $this->calculateProgressByTab('industries')
-        //            + $this->calculateProgressByTab('motivation')
-        //            + $this->documentProgress();
-
-        return round($progressPoints);
+        if (auth()->user()->application_status->id() <= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && ! auth()->user()->show_application_on_marketplace_at) {
+            return $this->firstCategoryPercentage();
+        } else {
+            return $this->secondCategoryPercentage();
+        }
     }
 
     public function calculateProgressByTab($tabSlug): float|int
@@ -56,7 +71,11 @@ class ProgressBar
 
     private function calculateAverageProcess($points, $achievedPoints): float|int
     {
-        return $points ? round(($achievedPoints * PER_STEP_PROGRESS) / $points, 2) : ($achievedPoints ? 0 : 25);
+        if (auth()->user()->hasRole(ROLE_APPLICANT) && $this->applicant->application_status->id() <= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && ! $this->applicant->show_application_on_marketplace_at) {
+            return $points ? round(($achievedPoints * PER_STEP_PROGRESS) / $points, 2) : ($achievedPoints ? 0 : 25);
+        } else {
+            return $points ? round(($achievedPoints * 33.33) / $points, 2) : ($achievedPoints ? 0 : 25);
+        }
     }
 
     public function documentProgress(): float|int

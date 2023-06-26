@@ -7,7 +7,7 @@
         </div>
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
-            @if (auth()->user()->application_status === ApplicationStatus::PERSONAL_DATA_COMPLETED && is_null(auth()->user()->show_application_on_marketplace_at))
+            @if (auth()->user()->application_status === ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON && is_null(auth()->user()->show_application_on_marketplace_at))
                 <p>
                     {{ __("You've almost made it, now all you have to do is choose one or more partner companies where you would like to apply for a position as a dual student.") }}
                 </p>
@@ -19,10 +19,6 @@
                         {{ __('Apply directly to selected company') }}
                     </x-primary-button>
                 </div>
-            @elseif(auth()->user()->application_status === ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON)
-                <p>
-                    {{ __("You have to submit your form from progress-bar.") }}
-                </p>
             @endif
 
             @if(auth()->user()->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)
@@ -32,18 +28,6 @@
                         <div
                             class="flex flex-wrap xl:flex-nowrap w-full gap-10 xl:gap-6">
                             <div class="w-full xl:w-2/3 flex-shrink-0 h-full overflow-y-auto px-2 -mx-2">
-                                <h6 class="text-lg lg:text-2xl font-medium text-primary mb-5">
-                                    {{__('Email Content')}}
-                                </h6>
-                                <div class="w-full sm:max-w-lg xl:max-w-2xl" wire:ignore>
-                                    <input id="email-content" type="hidden" name="mailContent">
-                                    <trix-editor class="prose formatted-content"
-                                                 id="trix-editor"
-                                                 input="email-content"
-                                                 wire:ignore
-                                                 wire:key="competency_comment"></trix-editor>
-                                </div>
-                                <x-jet-input-error for="mailContent"/>
                                 <div class="flex items-start space-x-2 mt-5">
                                     <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
                                         <input
@@ -55,7 +39,6 @@
                                             {{ __('Selected companies can see the test results') }}
                                         </span>
                                     </label>
-
                                 </div>
                                 <x-primary-button type="button" @click="applyToSelectedCompany()">
                                     {{ __('Apply to Selected Company') }}
@@ -88,7 +71,7 @@
                                     {{__('Company list')}}
                                 </h6>
                                 <div class="max-h-64 overflow-y-auto">
-                                    @forelse ($companies as $company)
+                                    @forelse ($filterCompanies as $company)
                                         <div class="flex items-center gap-2 py-1">
                                             <input
                                                 class="m-1 flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
@@ -195,7 +178,7 @@
 
             @endif
 
-            @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+            @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && auth()->user()->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id())
                 <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
 
                 <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Application to companies') }}</h5>
@@ -227,16 +210,6 @@
                         </button>
                     </div>
                 </div>
-                <div wire:ignore class="mt-6">
-                    <input wire:ignore id="email-content" type="hidden" name="mailContent">
-                    <trix-editor class="prose formatted-content"
-                                id="trix-editor"
-                                input="email-content"
-                                wire:ignore
-                                wire:key="competency_comment"
-                                wire:model="mailContent"></trix-editor>
-                </div>
-                <x-jet-input-error for="mailContent"/>
                     <div wire:ignore class="w-full sm:max-w-lg xl:max-w-2xl mt-10">
                         <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Marketplace') }}</h5>
                         <div class="flex justify-start items-center space-x-4 text-darkgreen rounded-sm mr-auto mb-7">
@@ -280,11 +253,6 @@
                         {{ __('Update') }}
                     </x-primary-button>
                 @endif
-
-                @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
-                    <p class="text-primary">{{ __('You have applied to marketplace.') }}</p>
-                @endif
-
         </div>
     </div>
     <x-custom-modal wire:model="show" maxWidth="lg">
@@ -295,19 +263,18 @@
             <div class="space-y-3">
                 <x-multi-select
                     name="company"
-                    wire:model="selectedCompanies"
+                    wire:model="addNewCompaniesToApplicant"
                     :placeholder="__('Select Company')"
                     :options="$companies"
                     :value="$selectedCompanies"
                     key-by="id"
                     label-by="name"
                 />
-                <x-jet-input-error for="mailContent"/>
             </div>
         </div>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-secondary-button data-cy="cancel-button" x-on:click="show = false"> {{ __('Close') }} </x-secondary-button>
+                <x-secondary-button data-cy="submit-button" wire:click="applyToSelectedCompany"> {{ __('Submit') }} </x-secondary-button>
             </div>
         </x-slot>
     </x-custom-modal>
@@ -322,7 +289,6 @@
     })
 
     function applyToSelectedCompany() {
-    @this.set('mailContent', trixEditor.getAttribute('value'));
     @this.applyToSelectedCompany();
     }
 </script>

@@ -177,9 +177,16 @@ class Show extends Component
 
     public function resetEnrollment()
     {
-        $this->applicant->getValueByField('enroll_course')->forceDelete();
-        $this->applicant->getValueByField('enroll_company')->forceDelete();
-        $this->applicant->getValueByField('enroll_company_contact')->forceDelete();
+        $this->applicant->companies()->delete();
+
+        $this->deleteValueByField('enroll_course');
+        $this->deleteValueByField('enroll_company');
+        $this->deleteValueByField('enroll_company_contact');
+
+        $this->deleteValueByField('industry');
+        $this->deleteValueByField('characteristics');
+        $this->deleteValueByField('reasons_to_study');
+        $this->deleteValueByField('employer_support_time_financially');
 
         $this->deleteFile($this->applicant->study_sheet?->student_id_card_photo);
 
@@ -194,7 +201,10 @@ class Show extends Component
         $this->applicant->removeMeta('enrollment_at');
 
         $this->applicant->update([
-            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
+            'show_application_on_marketplace_at' => null,
+            'reject_marketplace_application_at' => null,
+            'marketplace_privacy_policy_accepted' => false,
+            'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY,
         ]);
 
         $this->isEnrolled = false;
@@ -202,6 +212,11 @@ class Show extends Component
         $this->toastNotify(__('Enrollment undone successfully.'), __('Success'), TOAST_SUCCESS);
 
         $this->close();
+    }
+
+    private function deleteValueByField($field)
+    {
+        $this->applicant->getValueByField($field)?->forceDelete();
     }
 
     public function deleteFile($path)

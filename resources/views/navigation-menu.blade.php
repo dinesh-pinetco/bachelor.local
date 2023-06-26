@@ -271,7 +271,7 @@
                             </li>
                         @endif
 
-                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id())
+                        @if(auth()->user()->show_application_on_marketplace_at && auth()->user()->marketplace_privacy_policy_accepted)
                             <li>
                                 <x-jet-nav-link href="{{ route('application.index',['tab' => 'industries']) }}"
                                                 :active="urlContains('industries') || urlContains('motivation') || urlContains('documents')"
@@ -289,7 +289,7 @@
                             </li>
                         @endif
 
-                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id())
+                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id())
                             <li>
                                 <x-jet-nav-link href="{{ route('companies.index') }}"
                                                 :active="request()->routeIs('companies.index')"

@@ -1,5 +1,5 @@
 <div class="h-full flex items-center">
-        @if ($overAllProgress == 100 && auth()->user()->application_status->id() < \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id())
+        @if ($overAllProgress == 100 && auth()->user()->show_application_on_marketplace_at && auth()->user()->application_status->id() <= \App\Enums\ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id())
             <button wire:click="$set('show', true)"
                     class="hidden md:inline-block text-sm lg:text-base opacity-0 select-none bg-red rounded-full px-4 py-2 text-white font-bold capitalize mr-4 -mb-0 opacity-100">{{ __('Submit') }}</button>
         @endif
@@ -17,16 +17,29 @@
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
 
-            <div class="w-20 xl:w-44 relative">
-                <div class="overflow-hidden h-2 xl:h-3 text-xs flex rounded-full bg-lightgray">
-                    <div style="width:{{ $overAllProgress }}%"
-                         class="shadow-none flex flex-col text-center rounded-full whitespace-nowrap text-white justify-center
-                            @if ($overAllProgress == 0) bg-gray
-                            @elseif($overAllProgress < 100) bg-primary-light
-                            @elseif($overAllProgress == 100) bg-white @endif transition duration-150 ease-in-out">
+            @if(auth()->user()->application_status->id() <= \App\Enums\ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id())
+                <div class="w-20 xl:w-44 relative">
+                    <div class="overflow-hidden h-2 xl:h-3 text-xs flex rounded-full bg-lightgray">
+                        <div style="width:{{ $overAllProgress }}%"
+                            class="shadow-none flex flex-col text-center rounded-full whitespace-nowrap text-white justify-center
+                                @if ($overAllProgress == 0) bg-gray
+                                @elseif($overAllProgress < 100) bg-primary-light
+                                @elseif($overAllProgress == 100) bg-white @endif transition duration-150 ease-in-out">
+                        </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="w-20 xl:w-44 relative">
+                    <div class="overflow-hidden h-2 xl:h-3 text-xs flex rounded-full bg-lightgray">
+                        <div style="width:{{ $overAllProgress }}%"
+                            class="shadow-none flex flex-col text-center rounded-full whitespace-nowrap text-white justify-center
+                                @if ($overAllProgress == 0) bg-gray
+                                @elseif($overAllProgress < 100) bg-primary-light
+                                @elseif($overAllProgress == 100) bg-white @endif transition duration-150 ease-in-out">
+                        </div>
+                    </div>
+                </div>
+            @endif
             <span :class="{ 'text-white font-semibold': '{{ $overAllProgress == 100 }}' }" class="text-sm">
                 {{ $overAllProgress }}%</span>
         </div>

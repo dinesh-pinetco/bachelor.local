@@ -6,15 +6,18 @@ use App\Enums\ApplicationStatus;
 use App\Models\Company;
 use App\Models\User;
 use App\Traits\Livewire\HasModal;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Index extends Component
 {
-    use HasModal;
+    use HasModal, AuthorizesRequests;
 
     public $companies;
 
-    public $mailContent = null;
+    public $selectedCompanies = [];
+
+    public $appliedCompanies = [];
 
     public $is_see_test_results = false;
 
@@ -32,14 +35,6 @@ class Index extends Component
 
     public $filterCompanies = [];
 
-    public $selectedCompanies = [];
-
-    public $appliedCompanies = [];
-
-    protected $rules = [
-        'mailContent' => ['required', 'min:4'],
-    ];
-
     protected $listeners = [
         'refresh' => '$refresh',
     ];
@@ -55,18 +50,19 @@ class Index extends Component
 
         $this->appliedCompanies = $this->user?->companies;
 
-        $this->mailContent = $this->appliedCompanies?->first()?->mail_content;
-        $this->is_see_test_results = $this->appliedCompanies->first()?->is_see_test_results ?? false;
+        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results ?? false;
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
-        $this->companies = $this->fetchCompanies();
+        $this->companies = $this->filterCompanies = $this->fetchCompanies();
 
         $this->selectedCompanies();
 
         $this->isAppliedToCompany = $this->appliedCompanies->isNotEmpty();
 
         $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
+
+        $this->addNewCompaniesToApplicant = $this?->selectedCompanies;
     }
 
     public function updatedSearch()
@@ -81,23 +77,18 @@ class Index extends Component
 
     public function getFilteredCompanies()
     {
-        $this->companies = Company::query()
-            ->when(! empty($this->search), function ($query) {
-                return $query->searchByName($this->search);
-            })
-            ->when(! empty($this->zip_code), function ($query) {
-                return $query->where('zip_code', $this->zip_code);
-            })
-            ->get();
+        $this->filterCompanies = $this->companies->filter(function ($company) {
+            return str_contains(strtolower($company->name), strtolower($this->search)) && str_contains($company->zip_code, $this->zip_code);
+        });
 
         if (empty($this->search) && empty($this->zip_code)) {
-            $this->fetchCompanies();
+            $this->filterCompanies = $this->companies;
         }
     }
 
     public function selectCompany()
     {
-        if (! $this->showAccessDeniedMessage()) {
+        if ($this->user->application_status->id() >= ApplicationStatus::APPLYING_TO_SELECTED_COMPANY->id()) {
             return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
         }
 
@@ -110,23 +101,31 @@ class Index extends Component
 
     public function showProfileMarketplace()
     {
+        if ($this->showAccessDeniedMessage()) {
+            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
+        }
+
         if (! $this->marketplacePrivacyPolicyAccepted) {
             return $this->toastNotify(__('Please agree to the privacy policy to continue.'), __('Error'), TOAST_ERROR);
         }
 
-        $this->user->marketplace_privacy_policy_accepted = $this->marketplacePrivacyPolicyAccepted;
-
-        $this->user->save();
+        $this->user->update([
+            'marketplace_privacy_policy_accepted' => $this->marketplacePrivacyPolicyAccepted,
+        ]);
 
         $this->user->touch('show_application_on_marketplace_at');
 
         $this->toastNotify(__('You have sent your application to the marketplace.'), __('Success'), TOAST_SUCCESS);
 
-        $this->emitSelf('refresh');
+        return to_route('application.index', ['tab' => 'industries']);
     }
 
     public function doNotShowProfileMarketplace()
     {
+        if ($this->showAccessDeniedMessage()) {
+            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
+        }
+
         $this->user->touch('reject_marketplace_application_at');
 
         $this->selectedCompanies();
@@ -147,13 +146,11 @@ class Index extends Component
             $this->user->save();
             $this->doNotShowProfileMarketplace();
         }
-
-        return to_route('companies.index');
     }
 
     public function selectedCompanies()
     {
-        $this->selectedCompanies = $this->appliedCompanies?->pluck('company_id')?->toArray();
+        $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
     }
 
     public function updatedSelectedCompanies()
@@ -166,14 +163,10 @@ class Index extends Component
             } else {
                 $companiesToBeAdded = array_diff($this->selectedCompanies, collect($this->appliedCompanies)->pluck('company_id')?->toArray());
 
-                if ($companiesToBeAdded) {
-                    $this->user->companies()->updateOrCreate([
-                        'user_id' => $this->user->id,
-                        'company_id' => array_first($companiesToBeAdded),
-                    ], [
-                        'mail_content' => $this->mailContent,
-                    ]);
-                }
+                $this->user->companies()->updateOrCreate([
+                    'user_id' => $this->user->id,
+                    'company_id' => array_first($companiesToBeAdded),
+                ]);
 
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
@@ -194,7 +187,7 @@ class Index extends Component
 
     public function showAccessDeniedMessage()
     {
-        return ! ($this->user->application_status == ApplicationStatus::APPLYING_TO_SELECTED_COMPANY || $this->user->application_status == ApplicationStatus::APPLIED_ON_MARKETPLACE);
+        return $this->user->reject_marketplace_application_at || $this->user->show_application_on_marketplace_at;
     }
 
     public function next()
@@ -210,19 +203,16 @@ class Index extends Component
 
     public function applyToSelectedCompany()
     {
-        $this->validate();
-
         foreach (array_filter($this->selectedCompanies) as $companyId) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
                 'company_id' => $companyId,
             ], [
-                'mail_content' => $this->mailContent,
                 'is_see_test_results' => $this->is_see_test_results,
             ]);
         }
 
-        if ($this->user->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id()) {
+        if ($this->user->application_status->id() <= ApplicationStatus::APPLYING_TO_SELECTED_COMPANY->id()) {
             $this->user->update([
                 'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
             ]);
@@ -230,11 +220,13 @@ class Index extends Component
 
         $this->isAppliedToCompany = true;
 
+        $this->emitSelf('refresh');
+
         $this->selectedCompanies();
 
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
-        $this->emitSelf('refresh');
+        $this->show = false;
     }
 
     public function removeCompany($appliedCompanyId)
@@ -251,6 +243,8 @@ class Index extends Component
         $this->fetchAppliedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+
+        $this->emitSelf('refresh');
     }
 
     public function updateCompanies()
@@ -258,8 +252,17 @@ class Index extends Component
         $this->open();
     }
 
+    public function updatedAddNewCompaniesToApplicant()
+    {
+        $this->selectedCompanies = $this->addNewCompaniesToApplicant;
+    }
+
     public function render()
     {
+        $this->authorize('view', User::class);
+
+        $this->fetchAppliedCompanies();
+
         return view('livewire.company.index');
     }
 }

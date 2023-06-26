@@ -57,7 +57,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $fillable = [
         'application_status', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
-        'cubia_id', 'is_active', 'locale', 'show_application_on_marketplace_at',
+        'cubia_id', 'is_active', 'locale', 'show_application_on_marketplace_at', 'marketplace_privacy_policy_accepted', 'reject_marketplace_application_at',
     ];
 
     protected $hidden = [
@@ -166,7 +166,6 @@ class User extends Authenticatable implements ContractsAuditable
     public function scopeHasConsentToCompanyPortalBulletinBoard($query)
     {
         return $query->whereIn('application_status', [
-            ApplicationStatus::APPLIED_ON_MARKETPLACE,
             ApplicationStatus::APPLYING_TO_SELECTED_COMPANY,
             ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
         ]);

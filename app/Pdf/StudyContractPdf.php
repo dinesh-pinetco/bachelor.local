@@ -23,7 +23,7 @@ class StudyContractPdf extends Pdf
             'street_no' => $this->user->study_sheet?->street,
             'zip' => $this->user->study_sheet?->zip,
             'city' => $this->user->study_sheet?->place,
-            'course' => Course::where('id', $this->user->getEctsPointvalue('enroll_course'))->first()?->name,
+            'course' => Course::where('id', $this->user->getValueByField('enroll_course')->value)->first()?->name,
         ];
     }
 }

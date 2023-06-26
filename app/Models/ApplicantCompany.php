@@ -15,7 +15,6 @@ class ApplicantCompany extends Model
     protected $fillable = [
         'user_id',
         'company_id',
-        'mail_content',
         'company_contacted_at',
         'company_rejected_at',
         'company_hired_at',

@@ -75,7 +75,7 @@
                                 </x-primary-button>
                             </div>
                         @endif
-                        @if(!auth()->user()->hasRole(ROLE_APPLICANT))
+                        @if(!auth()->user()->hasRole(ROLE_APPLICANT) && $isProfile)
                             <div class="flex items-center space-x-4">
                                 <x-primary-button type="button"
                                                 wire:click="$emit('Applicant.Modal.Anonymous.modal.toggle')"
