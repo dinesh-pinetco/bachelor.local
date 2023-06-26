@@ -38,7 +38,7 @@
 
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
                             <dt class="text-sm font-medium text-gray-500">{{ __('Study course') }}</dt>
-                            <div class="w-full order-4 xl:order-2 mt-4 sm:mt-0 col-span-2">
+                            <div class="w-full order-4 xl:order-2 mt-4 sm:mt-0 col-span-2 space-y-1">
                                 <select
                                     class="h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
                                     wire:model="applicantCourse" id="applicantCourse">
@@ -66,7 +66,7 @@
                                         {{ __('Syncing...') }}
                                     </x-primary-button>
                                 </dt>
-                                <dd class="col-span-2">
+                                <dd class="col-span-2 space-y-1">
                                     <select
                                         class="h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
                                         wire:model="selectedCompany" id="selectedCompany">
@@ -81,19 +81,21 @@
 
                             <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">
                                 <dt class="text-sm font-medium text-gray-500">{{ __('Contact Person from Company') }}</dt>
-                                @if ($selectedCompany)
-                                    <select
-                                        class="col-span-2 h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
-                                        wire:model="selectedCompanyContacts" id="selectedCompanyContacts">
-                                        <option value="null">{{ __('Select Company Contact') }}</option>
-                                        @foreach ($companyContacts as $companyContact)
-                                            <option value="{{ $companyContact->id }}">{{ $companyContact->fullName }}</option>
-                                        @endforeach
-                                    </select>
-                                @else
-                                    <p class="col-span-2 text-sm font-medium text-gray-500">{{ __('Please select partner company') }}</p>
-                                @endif
-                                <x-jet-input-error for="selectedCompanyContacts"/>
+                                <dd class="col-span-2 space-y-1">
+                                    @if ($selectedCompany)
+                                        <select
+                                            class="col-span-2 h-11 py-2.5 text-sm md:text-base pl-4 border border-gray whitespace-normal focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 focus:shadow-sm outline-none rounded-sm w-full placeholder-gray  cursor-pointer text-primary"
+                                            wire:model="selectedCompanyContacts" id="selectedCompanyContacts">
+                                            <option value="null">{{ __('Select Company Contact') }}</option>
+                                            @foreach ($companyContacts as $companyContact)
+                                                <option value="{{ $companyContact->id }}">{{ $companyContact->fullName }}</option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        <p class="col-span-2 text-sm font-medium text-gray-500">{{ __('Please select partner company') }}</p>
+                                    @endif
+                                    <x-jet-input-error for="selectedCompanyContacts"/>
+                                </dd>
                             </div>
                         @else
                             <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-3">

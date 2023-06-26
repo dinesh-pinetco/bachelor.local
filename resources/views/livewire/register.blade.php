@@ -13,11 +13,12 @@
                     <option value="">{{ __('Please select') }}</option>
                     @foreach($desiredBeginnings as $desiredBeginning)
                         <option
-                            value="{{ data_get($desiredBeginning,'key') }}">
-                            {{ data_get($desiredBeginning,'title') }}
+                            value="{{ data_get($desiredBeginning,'course_start_date') }}">
+                            {{   $desiredBeginning->course_start_date->translatedFormat('F Y') }}
                         </option>
                     @endforeach
                 </x-livewire-select>
+                <input type="hidden" name="" wire:model="desired_beginning_id">
             </div>
             <div wire:ignore>
                 <x-jet-label class="text-white font-bold required" for="name"

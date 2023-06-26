@@ -26,7 +26,7 @@ class FieldValuePolicy
 
     public function update(User $user, FieldValue $fieldValue): Response|bool
     {
-        $defaultDisableField = ['email', 'course_id', 'desired_beginning_id'];
+        $defaultDisableField = ['email', 'desired_beginning_id'];
         $applicantStatus = $user->application_status;
         $applicationRejectStatus = [ApplicationStatus::APPLICATION_REJECTED_BY_APPLICANT, ApplicationStatus::APPLICATION_REJECTED_BY_NAK];
         if (in_array($applicantStatus, $applicationRejectStatus)) {
@@ -39,7 +39,7 @@ class FieldValuePolicy
                 return $user->application_status->id() <= ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id() || (! $fieldValue->is_process_countable_field || (new ProgressBar(auth()->id()))->overAllProgress() != 100);
             }
         } elseif (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
-            $defaultDisableField = ['email'];
+            $defaultDisableField = ['email', 'desired_beginning_id'];
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {
                 return false;
             } else {

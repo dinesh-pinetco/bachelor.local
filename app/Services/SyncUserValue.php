@@ -13,7 +13,7 @@ class SyncUserValue
 
     public function __construct(User $user)
     {
-        $this->user = $user->load('desiredBeginning.courses');
+        $this->user = $user->load('userDesiredBeginning.courses');
     }
 
     public function __invoke(): void
@@ -22,9 +22,9 @@ class SyncUserValue
             $this->fieldInsert($key, $this->user[$key]);
         }
 
-        $this->fieldInsert('course_id', $this->user->desiredBeginning->courses()->pluck('course_id'));
+        $this->fieldInsert('course_id', $this->user->userDesiredBeginning->courses()->pluck('course_id'));
 
-        $this->fieldInsert('desired_beginning_id', $this->user->desiredBeginning->id);
+        $this->fieldInsert('desired_beginning_id', $this->user->userDesiredBeginning->id);
     }
 
     public function fieldInsert($key, $value): void

@@ -15,7 +15,7 @@
                     </x-livewire-select>
                 </div>
             </div>
-            @if ($columns)
+                @if ($columns)
 
                 <div class="w-full sm:w-1/2 xl:w-1/4 md:px-1 xl:px-2 py-1 order-4 xl:order-2">
                     <x-livewire-select data-cy="datatable-column" class="" id="column" name="column"
@@ -42,7 +42,7 @@
                         <option value="">{{ __('Select desired beginning') }}</option>
                         @foreach ($this->desiredBeginnings as $beginning)
                             <option
-                                value="{{ $beginning->course_start_date }}">{{ $beginning->course_start_date->translatedFormat('F Y') }}</option>
+                                value="{{ $beginning->id }}">{{ $beginning->course_start_date->translatedFormat('F Y') }}</option>
                         @endforeach
                     </x-livewire-select>
                 </div>

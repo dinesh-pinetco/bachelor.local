@@ -24,7 +24,7 @@ class ContractSent extends Mailable
     {
         $this->applicant = $applicant;
 
-        $this->course = Course::where('id', $this->applicant->getEctsPointvalue('enroll_course'))->first();
+        $this->course = Course::where('id', $this->applicant->getValueByField('enroll_course')->value)->first();
     }
 
     public function build()
@@ -33,7 +33,7 @@ class ContractSent extends Mailable
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->markdown('emails.contract-sent', [
                 'name' => $this->applicant->full_name,
-                'desiredBeginning' => $this->applicant->desiredBeginning->course_start_date->format('Y-m-d'),
+                'desiredBeginning' => $this->applicant->desiredBeginnings->course_start_date->format('Y-m-d'),
             ]);
     }
 }

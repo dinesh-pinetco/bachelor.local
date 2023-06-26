@@ -77,9 +77,9 @@ class Enrollment extends Component
         $this->applicant = $user;
         $this->applicant->load('configuration');
         $this->date_of_birth = $this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
-        $this->desiredBeginning = $this->applicant?->desiredBeginning->course_start_date->translatedFormat('F.Y');
+        $this->desiredBeginning = $this->applicant?->desiredBeginnings->course_start_date->translatedFormat('F.Y');
         $this->courses = $this->applicant->courses()->with('course')->get();
-        $this->enrolledOutsideSystem = $this->applicant->configuration->is_enrolled_outside_system;
+        $this->enrolledOutsideSystem = $this->applicant->configuration?->is_enrolled_outside_system;
 
         $this->selectedCompany = FieldValue::where('field_id', $this->partnerCompanyFieldId)
             ->where('user_id', $this->applicant->id)

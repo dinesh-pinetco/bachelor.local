@@ -106,8 +106,8 @@ class UserFilters extends Filter
 
     public function desiredBeginning($desiredBeginning)
     {
-        $this->builder->whereHas('desiredBeginning', function ($query) use ($desiredBeginning) {
-            $query->where('course_start_date', $desiredBeginning);
+        $this->builder->whereHas('userDesiredBeginning', function ($query) use ($desiredBeginning) {
+            $query->where('desired_beginning_id', $desiredBeginning);
         });
     }
 

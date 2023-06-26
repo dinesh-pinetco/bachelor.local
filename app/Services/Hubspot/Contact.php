@@ -54,12 +54,12 @@ class Contact
 
     private function study_courses()
     {
-        return $this->user->desiredBeginning->courses->pluck('id')->implode(';');
+        return $this->user->userDesiredBeginning->courses->pluck('id')->implode(';');
     }
 
     private function desired_beginning()
     {
-        return $this->user->desiredBeginning->course_start_date->format(DesiredBeginning::TITLE);
+        return $this->user->desiredBeginnings->course_start_date->format(DesiredBeginning::TITLE);
     }
 
     private function consentToCompanyPortalBulletinBoard()

@@ -247,11 +247,11 @@
                             </svg>
                         </a>
                         @canImpersonate
-                            <a data-cy="edit-button-{{ $applicant->id }}" role="button"
-                               class="text-darkgray hover:text-gray inline-block cursor-pointer "
-                               href="{{ route('impersonate', $applicant->id) }}">
-                                <x-icons.impersonate class="stroke-current h-4 w-4" />
-                            </a>
+                        <a data-cy="edit-button-{{ $applicant->id }}" role="button"
+                           class="text-darkgray hover:text-gray inline-block cursor-pointer "
+                           href="{{ route('impersonate', $applicant->id) }}">
+                            <x-icons.impersonate class="stroke-current h-4 w-4"/>
+                        </a>
                         @endCanImpersonate
                         <span data-cy="delete-button-{{ $applicant->id }}" role="button"
                               class="text-darkgray hover:text-lightred inline-block cursor-pointer"

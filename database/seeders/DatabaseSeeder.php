@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(EmployeeSeeder::class);
         $this->call(DesiredBeginningSeeder::class);
+        $this->call(CourseSeeder::class);
         $this->call(TabSeeder::class);
         $this->call(ApplicantEnrolmentFieldSeeder::class);
         $this->call(StateSeeder::class);
@@ -31,12 +32,12 @@ class DatabaseSeeder extends Seeder
         $this->call(IndustrySeeder::class);
         $this->call(EntranceQualificationSeeder::class);
         $this->call(HealthInsuranceCompanySeeder::class);
-        $this->call(CourseSeeder::class);
         $this->call(ExtensionSeeder::class);
         $this->call(DocumentSeeder::class);
         $this->call(TestSeeder::class);
         $this->call(ContactProfileSeeder::class);
         $this->call(FaqSeeder::class);
+        // $this->call(UserSeeder::class);
 
         Artisan::call('company:sync');
     }

@@ -272,11 +272,11 @@ class User extends Authenticatable implements ContractsAuditable
         $this->notify(new NotificationsPasswordReset($token, request()->email));
     }
 
-    public function attachCourseWithDesiredBeginning($desiredBeginning, array $course_ids)
+    public function attachCourseWithDesiredBeginning($desiredBeginningId, array $course_ids)
     {
-        $desiredBeginning = $this->desiredBeginning()
-            ->updateOrCreate(['course_start_date' => $desiredBeginning]);
-        $desiredBeginning->courses()->sync($course_ids);
+        $userDesiredBeginning = $this->userDesiredBeginning()->updateOrCreate(['desired_beginning_id' => $desiredBeginningId]);
+        $userDesiredBeginning->attachCourses($course_ids);
+
     }
 
     public function enrollApplicant()
@@ -313,5 +313,10 @@ class User extends Authenticatable implements ContractsAuditable
 
         return Industry::whereIn('id', $industry_ids)->get();
 
+    }
+
+    public function desiredBeginnings()
+    {
+        return $this->hasOneThrough(DesiredBeginning::class, UserDesiredBeginning::class, 'user_id', 'id', 'id', 'desired_beginning_id');
     }
 }
