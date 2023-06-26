@@ -215,7 +215,7 @@ class Index extends Component
             ]);
         }
 
-        if ($this->user->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id()) {
+        if ($this->user->application_status->id() <= ApplicationStatus::APPLYING_TO_SELECTED_COMPANY->id()) {
             $this->user->update([
                 'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
             ]);

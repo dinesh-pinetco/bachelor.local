@@ -6,7 +6,7 @@
         <div @class([
             'rounded-full flex items-center px-4 py-2 h-full',
             'text-primary' => $overAllProgress < 100,
-            'bg-darkgreen hover:bg-opacity-80 text-white' => $overAllProgress == 100 && auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id(),
+            'bg-darkgreen hover:bg-opacity-80 text-white' => $overAllProgress == 100 && auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::APPLIED_ON_MARKETPLACE->id(),
             'bg-primary hover:bg-opacity-80 text-white' => $overAllProgress == 100,
          ])>
 

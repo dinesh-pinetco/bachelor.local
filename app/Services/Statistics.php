@@ -85,7 +85,7 @@ class Statistics
 
     public function consentCompanyPortal($method)
     {
-        return $this->applicantFilterByApplication(ApplicationStatus::PERSONAL_DATA_COMPLETED())
+        return $this->applicantFilterByApplication(ApplicationStatus::APPLIED_ON_MARKETPLACE())
             ->{$method}($this->params);
     }
 
