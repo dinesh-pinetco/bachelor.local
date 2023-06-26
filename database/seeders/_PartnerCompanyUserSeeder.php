@@ -153,7 +153,7 @@ class _PartnerCompanyUserSeeder extends Seeder
     public static function personalDataCompleted($users)
     {
         foreach ($users as $user) {
-            $user->update(['application_status' => ApplicationStatus::APPLIED_ON_MARKETPLACE()]);
+            $user->update(['application_status' => ApplicationStatus::PERSONAL_DATA_COMPLETED()]);
         }
     }
 

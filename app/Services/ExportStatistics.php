@@ -125,7 +125,7 @@ class ExportStatistics
     {
         $applicant = clone $this->applicant;
 
-        return $applicant->where('application_status', ApplicationStatus::APPLIED_ON_MARKETPLACE)
+        return $applicant->where('application_status', ApplicationStatus::PERSONAL_DATA_COMPLETED)
             ->coursesIn([$this->courseId])
             ->{$method}($this->params);
     }
