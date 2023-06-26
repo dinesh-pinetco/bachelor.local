@@ -66,12 +66,13 @@ class Enrollment extends Component
     public function toggle(User $user)
     {
         if (! auth()->user()->hasRole(ROLE_APPLICANT)) {
-            $this->companies = Company::with('contacts')->get();
+            $this->companies = Company::with('contacts')->orderBy('name')->get();
 
             $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
             $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
             $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
         }
+
         $this->show = ! $this->show;
         $this->applicant = $user;
         $this->applicant->load('configuration');
@@ -80,22 +81,14 @@ class Enrollment extends Component
         $this->courses = $this->applicant->courses()->with('course')->get();
         $this->enrolledOutsideSystem = $this->applicant->configuration?->is_enrolled_outside_system;
 
-        $this->selectedCompany = FieldValue::where('field_id', $this->partnerCompanyFieldId)
-            ->where('user_id', $this->applicant->id)
-            ->first()
-            ?->value;
+        $this->selectedCompany = $this->applicant->getValueByField('enroll_company')?->value;
 
-        $this->applicantCourse = FieldValue::where('field_id', $this->enrollCourse)
-            ->where('user_id', $this->applicant->id)
-            ->first()?->value;
+        $this->applicantCourse = $this->applicant->getValueByField('enroll_course')?->value;
 
         if ($this->selectedCompany) {
             $this->companyContacts = CompanyContacts::where('company_id', $this->selectedCompany)->get();
 
-            $this->selectedCompanyContacts = FieldValue::where('field_id', $this->partnerCompanyContactFieldId)
-                ->where('user_id', $this->applicant->id)
-                ->first()
-                ?->value;
+            $this->selectedCompanyContacts = $this->applicant->getValueByField('enroll_company_contact')?->value;
         }
     }
 
