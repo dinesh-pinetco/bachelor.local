@@ -16,11 +16,7 @@ class ProgressBar extends Component
 
     public function mount()
     {
-        if (auth()->user()->application_status->id() <= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id()) {
-            $this->overAllProgress = (new ProgressInfo())->firstCategoryPercentage();
-        } else {
-            $this->overAllProgress = (new ProgressInfo())->secondCategoryPercentage();
-        }
+        $this->overAllProgress = (new ProgressInfo())->overAllProgress();
     }
 
     public function submit()

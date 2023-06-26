@@ -66,7 +66,6 @@ class Contact
     {
         return $this->user->audits
             ->whereIn('new_values.application_status', [
-                ApplicationStatus::APPLIED_ON_MARKETPLACE(),
                 ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
                 ApplicationStatus::APPLIED_TO_SELECTED_COMPANY(),
             ])

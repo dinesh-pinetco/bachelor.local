@@ -1,5 +1,5 @@
 <div class="h-full flex items-center">
-        @if ($overAllProgress == 100 && auth()->user()->application_status->id() < \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id())
+        @if ($overAllProgress == 100 && auth()->user()->show_application_on_marketplace_at && auth()->user()->application_status->id() < \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id())
             <button wire:click="$set('show', true)"
                     class="hidden md:inline-block text-sm lg:text-base opacity-0 select-none bg-red rounded-full px-4 py-2 text-white font-bold capitalize mr-4 -mb-0 opacity-100">{{ __('Submit') }}</button>
         @endif

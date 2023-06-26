@@ -178,7 +178,7 @@
 
             @endif
 
-            @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status === ApplicationStatus::APPLIED_TO_SELECTED_COMPANY)
+            @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && auth()->user()->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id())
                 <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
 
                 <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Application to companies') }}</h5>
@@ -253,11 +253,6 @@
                         {{ __('Update') }}
                     </x-primary-button>
                 @endif
-
-                @if(!is_null($user->show_application_on_marketplace_at) && auth()->user()->application_status === ApplicationStatus::APPLIED_ON_MARKETPLACE)
-                    <p class="text-primary">{{ __('You have applied to marketplace.') }}</p>
-                @endif
-
         </div>
     </div>
     <x-custom-modal wire:model="show" maxWidth="lg">
