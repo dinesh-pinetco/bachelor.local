@@ -57,7 +57,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     protected $fillable = [
         'application_status', 'first_name', 'last_name', 'phone', 'email', 'password', 'profile_photo_path',
-        'cubia_id', 'is_active', 'locale', 'show_application_on_marketplace_at', 'marketplace_privacy_policy_accepted',
+        'cubia_id', 'is_active', 'locale', 'show_application_on_marketplace_at', 'marketplace_privacy_policy_accepted', 'reject_marketplace_application_at',
     ];
 
     protected $hidden = [

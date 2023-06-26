@@ -359,6 +359,7 @@ class Data
                             [
                                 'type' => FieldType::FIELD_TEXTAREA(),
                                 'label' => 'Bitte begründen Sie Ihren Studienwunsch.',
+                                'key' => 'reasons_to_study',
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
@@ -529,6 +530,7 @@ class Data
                             [
                                 'type' => FieldType::FIELD_TEXTAREA(),
                                 'label' => 'Unterstützt Ihr Arbeitgeber Sie zeitlich und/oder finanziell?',
+                                'key' => 'employer_support_time_financially',
                                 'placeholder' => '',
                                 'sort_order' => 1,
                                 'is_active' => 1,
