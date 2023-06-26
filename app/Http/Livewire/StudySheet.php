@@ -142,8 +142,6 @@ class StudySheet extends Component
 
     public function render(): Factory|View|Application
     {
-        $this->authorize('update', $this->studySheet);
-
         return view('livewire.study-sheet');
     }
 }

@@ -179,14 +179,14 @@ class Show extends Component
     {
         $this->applicant->companies()->delete();
 
-        $this->applicant->getValueByField('enroll_course')->forceDelete();
-        $this->applicant->getValueByField('enroll_company')->forceDelete();
-        $this->applicant->getValueByField('enroll_company_contact')->forceDelete();
+        $this->deleteValueByField('enroll_course');
+        $this->deleteValueByField('enroll_company');
+        $this->deleteValueByField('enroll_company_contact');
 
-        $this->applicant->getValueByField('industry')?->forceDelete();
-        $this->applicant->getValueByField('characteristics')?->forceDelete();
-        $this->applicant->getValueByField('reasons_to_study ')?->forceDelete();
-        $this->applicant->getValueByField('employer_support_time_financially')?->forceDelete();
+        $this->deleteValueByField('industry');
+        $this->deleteValueByField('characteristics');
+        $this->deleteValueByField('reasons_to_study');
+        $this->deleteValueByField('employer_support_time_financially');
 
         $this->deleteFile($this->applicant->study_sheet?->student_id_card_photo);
 
@@ -212,6 +212,11 @@ class Show extends Component
         $this->toastNotify(__('Enrollment undone successfully.'), __('Success'), TOAST_SUCCESS);
 
         $this->close();
+    }
+
+    private function deleteValueByField($field)
+    {
+        $this->applicant->getValueByField($field)?->forceDelete();
     }
 
     public function deleteFile($path)
