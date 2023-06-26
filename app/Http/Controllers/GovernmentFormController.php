@@ -9,8 +9,6 @@ class GovernmentFormController extends Controller
 {
     public function __invoke(User $user, GovernmentForm $governmentForm)
     {
-        $this->authorize('update', $governmentForm);
-
         return view('government-form', ['applicant' => $user]);
     }
 }

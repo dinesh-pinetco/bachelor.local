@@ -275,6 +275,8 @@ class GovernmentForm extends Component
 
     public function render()
     {
+        $this->authorize('update', $this->governmentForm);
+
         return view('livewire.government-form');
     }
 }
