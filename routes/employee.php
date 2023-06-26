@@ -16,6 +16,7 @@ use App\Http\Controllers\Employee\ApplicantController;
 use App\Http\Controllers\Employee\ContactProfileController;
 use App\Http\Controllers\Employee\CourseController;
 use App\Http\Controllers\Employee\DashboardController;
+use App\Http\Controllers\Employee\DesiredBeginningController;
 use App\Http\Controllers\Employee\DocumentController;
 use App\Http\Controllers\Employee\FaqController;
 use App\Http\Controllers\Employee\GroupController;
@@ -32,6 +33,7 @@ Route::get('profile', ProfileController::class)->name('profile');
 
 Route::get('courses/{course}/clone', [CourseController::class, 'edit'])->name('courses.clone');
 Route::resource('courses', CourseController::class)->only(['index', 'create', 'edit']);
+Route::resource('desired-beginning', DesiredBeginningController::class)->only(['index', 'create', 'edit']);
 
 Route::resource('settings', SettingController::class)->only(['index']);
 
