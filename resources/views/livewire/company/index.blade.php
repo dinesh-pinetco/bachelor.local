@@ -71,7 +71,7 @@
                                     {{__('Company list')}}
                                 </h6>
                                 <div class="max-h-64 overflow-y-auto">
-                                    @forelse ($companies as $company)
+                                    @forelse ($filterCompanies as $company)
                                         <div class="flex items-center gap-2 py-1">
                                             <input
                                                 class="m-1 flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none text-primary"
@@ -263,7 +263,7 @@
             <div class="space-y-3">
                 <x-multi-select
                     name="company"
-                    wire:model="selectedCompanies"
+                    wire:model="addNewCompaniesToApplicant"
                     :placeholder="__('Select Company')"
                     :options="$companies"
                     :value="$selectedCompanies"
@@ -274,7 +274,7 @@
         </div>
         <x-slot name="footer">
             <div class="flex justify-end space-x-2">
-                <x-secondary-button data-cy="cancel-button" x-on:click="show = false"> {{ __('Close') }} </x-secondary-button>
+                <x-secondary-button data-cy="submit-button" wire:click="applyToSelectedCompany"> {{ __('Submit') }} </x-secondary-button>
             </div>
         </x-slot>
     </x-custom-modal>

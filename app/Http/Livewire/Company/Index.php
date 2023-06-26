@@ -54,13 +54,15 @@ class Index extends Component
 
         $this->dispatchBrowserEvent('init-trix-editor');
 
-        $this->companies = $this->fetchCompanies();
+        $this->companies = $this->filterCompanies = $this->fetchCompanies();
 
         $this->selectedCompanies();
 
         $this->isAppliedToCompany = $this->appliedCompanies->isNotEmpty();
 
         $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
+
+        $this->addNewCompaniesToApplicant = $this?->selectedCompanies;
     }
 
     public function updatedSearch()
@@ -75,17 +77,12 @@ class Index extends Component
 
     public function getFilteredCompanies()
     {
-        $this->companies = Company::query()
-            ->when(! empty($this->search), function ($query) {
-                return $query->searchByName($this->search);
-            })
-            ->when(! empty($this->zip_code), function ($query) {
-                return $query->where('zip_code', $this->zip_code);
-            })
-            ->get();
+        $this->filterCompanies = $this->companies->filter(function ($company) {
+            return str_contains(strtolower($company->name), strtolower($this->search)) && str_contains($company->zip_code, $this->zip_code);
+        });
 
         if (empty($this->search) && empty($this->zip_code)) {
-            $this->fetchCompanies();
+            $this->filterCompanies = $this->companies;
         }
     }
 
@@ -153,7 +150,7 @@ class Index extends Component
 
     public function selectedCompanies()
     {
-        $this->selectedCompanies = $this->appliedCompanies?->pluck('company_id')?->toArray();
+        $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
     }
 
     public function updatedSelectedCompanies()
@@ -223,11 +220,13 @@ class Index extends Component
 
         $this->isAppliedToCompany = true;
 
+        $this->emitSelf('refresh');
+
         $this->selectedCompanies();
 
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
-        $this->emitSelf('refresh');
+        $this->show = false;
     }
 
     public function removeCompany($appliedCompanyId)
@@ -244,11 +243,18 @@ class Index extends Component
         $this->fetchAppliedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
+
+        $this->emitSelf('refresh');
     }
 
     public function updateCompanies()
     {
         $this->open();
+    }
+
+    public function updatedAddNewCompaniesToApplicant()
+    {
+        $this->selectedCompanies = $this->addNewCompaniesToApplicant;
     }
 
     public function render()
