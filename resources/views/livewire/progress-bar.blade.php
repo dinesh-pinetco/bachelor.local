@@ -60,7 +60,7 @@
                         {{ __('Congratulations! You have entered the necessary data in the application process and selected at least one company to which you would like to apply.') }}
                     </h4>
                     <h4 class="text-center text-darkgray text-sm sm:text-base">
-                        {{ __('our partner companies for viewing (applicant marketplace), because this will increase your your chances of finding a dual study place even further.') }}
+                        {{ __('You can now activate your data for viewing by ALL of our partner companies (applicant marketplace), because this increases your chances of finding a dual study position even more.') }}
                     </h4>
                     <h4 class="text-center text-darkgray text-sm sm:text-base">
                         {{ __('Would you also like to be listed on the be listed on the applicant marketplace?') }}
