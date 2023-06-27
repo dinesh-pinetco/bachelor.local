@@ -37,7 +37,7 @@ class ExcelApplicantResource extends JsonResource
             'citizenship_id' => $this->getValueByIdentifier('citizenship_id'),
             'telefonnummer' => $this->getValueByIdentifier('phone'),
             'studiengangId' => $this->selectedCourses(),
-            'studienbeginn' => $this->desiredBeginnings->course_start_date,
+            'studienbeginn' => $this->selectedDesiredBeginning->course_start_date,
             'eCTS_erststudium' => $this->getValueByIdentifier('ects_point'),
             'Kompetenznachholung' => $this->competency_catch_up,
             'datenschutzerklaerung' => filter_var($this->getValueByIdentifier('privacy_policy'), FILTER_VALIDATE_BOOLEAN),

@@ -23,7 +23,7 @@ class ApplicantCompanyResource extends JsonResource
             'datenfreigabe' => $this->is_see_test_results,
             'ablehnung' => $this->is_rejected,
             'studiengangId' => Course::findSannaId($this->user->getValueByField('enroll_course')?->value),
-            'studienbeginn' => $this->user->desiredBeginnings->course_start_date,
+            'studienbeginn' => $this->user->selectedDesiredBeginning->course_start_date,
             'eingestellt_am' => $this->company_hired_at,
             'eingestellt_bestaetigt_am' => $this->user->getMeta('enrollment_at'),
             'betreuer_id' => $companyContact?->company_id == $this?->company_id ? $this->user->getValueByField('enroll_company_contact')?->value : null,

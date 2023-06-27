@@ -59,7 +59,7 @@ class Contact
 
     private function desired_beginning()
     {
-        return $this->user->desiredBeginnings->course_start_date->format(DesiredBeginning::TITLE);
+        return $this->user->selectedDesiredBeginning->course_start_date->format(DesiredBeginning::TITLE);
     }
 
     private function consentToCompanyPortalBulletinBoard()

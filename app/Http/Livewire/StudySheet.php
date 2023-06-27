@@ -73,7 +73,7 @@ class StudySheet extends Component
 
         $this->dateOfBirth = Carbon::parse($this->applicant->getValueByField('date_of_birth')?->value)->format('d.m.Y');
 
-        $this->desiredBeginning = $this->applicant?->desiredBeginnings->course_start_date->translatedFormat('F Y');
+        $this->desiredBeginning = $this->applicant?->selectedDesiredBeginning->course_start_date->translatedFormat('F Y');
 
         $this->firstName = $this->applicant->first_name;
 

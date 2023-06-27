@@ -314,7 +314,7 @@ class User extends Authenticatable implements ContractsAuditable
 
     }
 
-    public function desiredBeginnings()
+    public function selectedDesiredBeginning()
     {
         return $this->hasOneThrough(DesiredBeginning::class, UserDesiredBeginning::class, 'user_id', 'id', 'id', 'desired_beginning_id');
     }
