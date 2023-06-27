@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Http;
 
 class GetCourse
 {
-
     protected $params = [];
+
     public function __construct()
     {
         $this->params = [
@@ -18,7 +18,7 @@ class GetCourse
 
     public function get($sanaId, Carbon $desiredBeginningDate)
     {
-        $endpoint = '/platform/studienvertrag-anhang/studiengangId='. $sanaId .';startdatum='. $desiredBeginningDate->format('Y-m-d');
+        $endpoint = '/platform/studienvertrag-anhang/studiengangId='.$sanaId.';startdatum='.$desiredBeginningDate->format('Y-m-d');
 
         try {
             $response = Http::baseUrl(config('services.nordakademie.baseUrl'))
@@ -26,12 +26,12 @@ class GetCourse
                 ->json();
 
             if (data_get($response, '@type') === 'hydra:Error') {
-                $this->logError(data_get($response, 'hydra:description'),$endpoint);
+                $this->logError(data_get($response, 'hydra:description'), $endpoint);
             }
 
             return collect($response);
         } catch (\Exception $exception) {
-            $this->logError($exception->getMessage(),$endpoint);
+            $this->logError($exception->getMessage(), $endpoint);
         }
     }
 
