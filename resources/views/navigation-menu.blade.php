@@ -303,7 +303,7 @@
                             </li>
                         @endif
 
-                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::ENROLLMENT_ON->id())
+                        @if(auth()->user()->hasMeta('enrollment_at'))
                             <li>
                                 <x-jet-nav-link href="{{ route('applicant-forms') }}"
                                                 :active="urlContains('forms')"

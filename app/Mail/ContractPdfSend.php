@@ -3,10 +3,10 @@
 namespace App\Mail;
 
 use App\Models\Course;
+use App\Models\DesiredBeginning;
 use App\Models\User;
 use App\Services\Companies\GetCourse;
 use App\Services\Companies\GetCourseFiles;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -34,10 +34,10 @@ class ContractPdfSend extends Mailable
      */
     public function build(): static
     {
-        $courseId = $this->user->getValueByField('enroll_course');
+        $courseId = $this->user->getValueByField('enroll_course')?->value;
 
-       // Get applicant->enroll course sanna id
-        // Applicant desired beginning
+        $courseSannaId = Course::find($courseId)->get();
+        $desiredBeginningDate = DesiredBeginning::where('id', $this->user->userDesiredBeginning->id)->value('course_start_date');
 
         $courseMaterialObject = (new GetCourse())->get($courseSannaId, $desiredBeginningDate);
         $courseMaterialFiles = data_get($courseMaterialObject, 'anhaenge');
