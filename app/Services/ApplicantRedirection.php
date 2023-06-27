@@ -25,11 +25,6 @@ class ApplicantRedirection
         return to_route('application.index', ['tab' => 'profile']);
     }
 
-    private function application_rejected_by_applicant()
-    {
-        return to_route('application.index', ['tab' => 'profile']);
-    }
-
     private function profile_information_completed()
     {
         return to_route('selection-test.index');
@@ -45,11 +40,6 @@ class ApplicantRedirection
         return to_route('selection-test.index');
     }
 
-    private function test_reset()
-    {
-        return to_route('selection-test.index');
-    }
-
     private function test_failed()
     {
         return to_route('selection-test.index');
@@ -60,17 +50,12 @@ class ApplicantRedirection
         return to_route('selection-test.index');
     }
 
+    private function test_reset()
+    {
+        return to_route('selection-test.index');
+    }
+
     private function test_result_pdf_retrieved_on()
-    {
-        return to_route('companies.index');
-    }
-
-    private function applied_on_marketplace()
-    {
-        return to_route('companies.index');
-    }
-
-    private function consent_to_company_portal_bulletin_board()
     {
         return to_route('companies.index');
     }
@@ -89,7 +74,17 @@ class ApplicantRedirection
         return to_route('companies.index');
     }
 
-    private function show_application_on_marketplace()
+    private function application_rejected_by_applicant()
+    {
+        return to_route('application.index', ['tab' => 'profile']);
+    }
+
+    private function application_rejected_by_nak()
+    {
+        return to_route('application.index', ['tab' => 'profile']);
+    }
+
+    private function personal_data_completed()
     {
         return to_route('companies.index');
     }
