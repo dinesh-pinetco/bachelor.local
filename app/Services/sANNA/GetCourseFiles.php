@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Companies;
+namespace App\Services\sANNA;
 
 class GetCourseFiles extends ErpService
 {

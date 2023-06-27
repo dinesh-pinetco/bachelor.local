@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Companies;
+namespace App\Services\sANNA;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;

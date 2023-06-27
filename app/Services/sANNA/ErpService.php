@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Companies;
+namespace App\Services\sANNA;
 
 use App\Models\Company;
 use App\Models\CompanyContacts;
