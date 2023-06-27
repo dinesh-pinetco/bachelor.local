@@ -37,5 +37,11 @@ class EmployeeSeeder extends Seeder
             'last_name' => 'Wohlers',
             'email' => 'ulf.wohlers@nordakademie.de',
         ])->assignRole(ROLE_EMPLOYEE);
+
+        User::factory()->create([
+            'first_name' => 'Anette',
+            'last_name' => 'Rostock',
+            'email' => 'anette.rostock@nordakademie.de',
+        ])->assignRole(ROLE_EMPLOYEE);
     }
 }
