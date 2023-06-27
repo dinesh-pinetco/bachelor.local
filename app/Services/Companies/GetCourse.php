@@ -3,9 +3,12 @@
 namespace App\Services\Companies;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
-class GetCourse extends ErpService
+class GetCourse
 {
+
+    protected $params = [];
     public function __construct()
     {
         $this->params = [
@@ -15,20 +18,28 @@ class GetCourse extends ErpService
 
     public function get($sanaId, Carbon $desiredBeginningDate)
     {
-        $this->endpoint = '/platform/studienvertrag-anhang/studiengangId='. $sanaId .';startdatum='. $desiredBeginningDate->format('Y-m-d');
+        $endpoint = '/platform/studienvertrag-anhang/studiengangId='. $sanaId .';startdatum='. $desiredBeginningDate->format('Y-m-d');
 
         try {
-            $response = $this->http()
-                ->get($this->endpoint, $this->params)
+            $response = Http::baseUrl(config('services.nordakademie.baseUrl'))
+                ->get($endpoint, $this->params)
                 ->json();
 
             if (data_get($response, '@type') === 'hydra:Error') {
-                $this->logError(data_get($response, 'hydra:description'));
+                $this->logError(data_get($response, 'hydra:description'),$endpoint);
             }
 
             return collect($response);
         } catch (\Exception $exception) {
-            $this->logError($exception->getMessage());
+            $this->logError($exception->getMessage(),$endpoint);
         }
+    }
+
+    protected function logError($message, $endpoint): void
+    {
+        logger()->error($message, [
+            'endpoint' => $endpoint,
+            'params' => $this->params,
+        ]);
     }
 }

@@ -35,8 +35,7 @@ class ApplicantEnrolled extends Mailable implements ShouldQueue
      */
     public function build(): static
     {
-        // find enroll course and get name for subject
-        $courseName = Course::find();
+        $courseName = Course::find($this->applicant->getValueByField('enroll_course')?->value);
 
         return $this->subject(__('Your contract has arrived') . ' | ' . $courseName->name . ' | NORDAKADEMIE')
             ->from(config('mail.from.address'), config('mail.from.name'))
