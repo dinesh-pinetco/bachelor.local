@@ -32,7 +32,7 @@
                 </div>
             @else
                 <div class="">
-                    <p class="text-primary">{{ __('Applicant not submit study-sheet and government-form.') }}</p>
+                    <p class="text-primary">{{ __('Applicant doesn\'t have study-sheet and government-form.') }}</p>
                 </div>
             @endif
         </div>

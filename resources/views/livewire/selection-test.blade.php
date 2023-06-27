@@ -132,7 +132,7 @@
         <div>
             <div class="space-y-3">
                 <h4 class="text-center text-darkgray text-sm sm:text-base">
-                    {{ __('In the next step, you can now select the companies you want to apply to.') }}
+                    {{ __('Congratulations! You have passed the NORDAKADEMIE selection test and are ready to apply to our partner companies.') }}
                 </h4>
                 <h4 class="text-center text-darkgray text-sm sm:text-base">
                     {{ __('However, you can also upload other documents and information and make your data visible to all our partner companies on our "Applicant Marketplace" (recommended).') }}

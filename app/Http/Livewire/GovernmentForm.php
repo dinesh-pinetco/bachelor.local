@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\CourseOfStudy;
 use App\Models\District;
 use App\Models\EntranceQualification;
 use App\Models\FinalExam;
@@ -10,7 +9,6 @@ use App\Models\GovernmentForm as GovernmentFormModel;
 use App\Models\Nationality;
 use App\Models\State;
 use App\Models\StudyProgram;
-use App\Models\StudyType;
 use App\Models\University;
 use App\Models\User;
 use App\Traits\GovernmentFormValidations;
@@ -65,6 +63,8 @@ class GovernmentForm extends Component
 
     public function mount()
     {
+        $isAuthApplicant = auth()->user()->hasRole(ROLE_APPLICANT);
+
         $countryOfBirth = $this->applicant->getValueByField('nationality_id');
         if ($countryOfBirth) {
             $germanCountry = Nationality::where('name', 'Deutschland')->first();
@@ -77,13 +77,9 @@ class GovernmentForm extends Component
 
         $this->formAlreadySubmitted = $this->governmentForm->is_submit ?? false;
 
-        $this->showThanks = $this->formAlreadySubmitted;
-        //        $this->universities           = University::orderBy('name')->get();
-        //        $this->studyPrograms          = StudyProgram::orderBy('name')->get();
-        //        $this->finalExams             = FinalExam::orderBy('name')->get();
-        //        $this->entranceQualifications = EntranceQualification::orderBy('name')->get();
-        //        $this->courseOfStudies        = CourseOfStudy::orderBy('name')->get();
-        //        $this->studyTypes             = StudyType::orderBy('name')->get();
+        if ($isAuthApplicant) {
+            $this->showThanks = $this->formAlreadySubmitted;
+        }
 
         $this->nationalities = Nationality::orderBy('name')->get();
         $this->states = State::orderBy('name')->get();
@@ -91,7 +87,7 @@ class GovernmentForm extends Component
         $this->refreshCurrentResidenceCountryData();
         $this->refreshGraduationCountryData();
 
-        $this->isEdit = auth()->user()->hasRole(ROLE_APPLICANT) && $this->formAlreadySubmitted ? false : true;
+        $this->isEdit = ! ($isAuthApplicant && $this->formAlreadySubmitted);
     }
 
     public function getUniversitiesProperty(): Collection
@@ -112,16 +108,6 @@ class GovernmentForm extends Component
     public function getEntranceQualificationsProperty(): Collection
     {
         return EntranceQualification::orderBy('name')->get();
-    }
-
-    public function getCourseOfStudiesProperty(): Collection
-    {
-        return CourseOfStudy::orderBy('name')->get();
-    }
-
-    public function getStudyTypesProperty(): Collection
-    {
-        return StudyType::orderBy('name')->get();
     }
 
     public function refreshPreviousResidenceCountryData($propertyName = null)

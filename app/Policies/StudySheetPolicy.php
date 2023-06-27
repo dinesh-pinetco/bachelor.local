@@ -47,7 +47,7 @@ class StudySheetPolicy
      */
     public function update(User $user, StudySheet $studySheet)
     {
-        return $user->hasMeta('enrollment_at') && ($user->hasRole(ROLE_ADMIN) || $user->id == $studySheet->user_id);
+        return $user->hasRole([ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_EMPLOYEE]) || ($user->hasMeta('enrollment_at') && $user->id == $studySheet->user_id);
     }
 
     /**
