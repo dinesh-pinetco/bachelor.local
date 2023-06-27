@@ -55,13 +55,17 @@ class StudySheet extends Component
 
     public function mount()
     {
+        $isAuthApplicant = auth()->user()->hasRole(ROLE_APPLICANT);
+
         $this->studySheet = $this->applicant->study_sheet ?? $this->applicant->study_sheet()->create([
             'user_id' => $this->applicant->id,
         ]);
 
         $this->formAlreadySubmitted = $this->studySheet->is_submit ?? false;
 
-        $this->showThanks = $this->formAlreadySubmitted;
+        if ($isAuthApplicant) {
+            $this->showThanks = $this->formAlreadySubmitted;
+        }
 
         $this->schools = School::get();
 
@@ -80,7 +84,7 @@ class StudySheet extends Component
         $this->lastName = $this->applicant->last_name;
         $this->email = $this->applicant->email;
 
-        $this->isEdit = ! (auth()->user()->hasRole(ROLE_APPLICANT) && $this->formAlreadySubmitted);
+        $this->isEdit = ! ($isAuthApplicant && $this->formAlreadySubmitted);
     }
 
     public function updatedStudySheetStudentIdCardPhoto()
