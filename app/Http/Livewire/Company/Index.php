@@ -135,10 +135,6 @@ class Index extends Component
 
     public function enrollIntoMarketPlace(bool $enroll)
     {
-        if ($this->showAccessDeniedMessage()) {
-            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
-        }
-
         if ($enroll) {
             $this->marketplacePrivacyPolicyAccepted = true;
             $this->user->reject_marketplace_application_at = null;
