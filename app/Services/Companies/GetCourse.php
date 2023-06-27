@@ -2,6 +2,8 @@
 
 namespace App\Services\Companies;
 
+use Carbon\Carbon;
+
 class GetCourse extends ErpService
 {
     public function __construct()
@@ -11,9 +13,9 @@ class GetCourse extends ErpService
         ];
     }
 
-    public function get($course = null)
+    public function get($sanaId, Carbon $desiredBeginningDate)
     {
-        $this->endpoint = '/platform/studienvertrag-anhang/studiengangId='.data_get($course, 'sana_id').';startdatum='.$course?->first_start->format('Y-m-d');
+        $this->endpoint = '/platform/studienvertrag-anhang/studiengangId='. $sanaId .';startdatum='. $desiredBeginningDate->format('Y-m-d');
 
         try {
             $response = $this->http()

@@ -9,6 +9,7 @@ use App\Models\GovernmentForm as GovernmentFormModel;
 use App\Models\Nationality;
 use App\Models\State;
 use App\Models\StudyProgram;
+use App\Models\StudyType;
 use App\Models\University;
 use App\Models\User;
 use App\Traits\GovernmentFormValidations;
@@ -108,6 +109,11 @@ class GovernmentForm extends Component
     public function getEntranceQualificationsProperty(): Collection
     {
         return EntranceQualification::orderBy('name')->get();
+    }
+
+    public function getStudyTypesProperty(): Collection
+    {
+        return StudyType::orderBy('name')->get();
     }
 
     public function refreshPreviousResidenceCountryData($propertyName = null)
