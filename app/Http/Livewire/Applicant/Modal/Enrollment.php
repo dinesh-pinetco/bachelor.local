@@ -117,6 +117,7 @@ class Enrollment extends Component
 
     public function enroll()
     {
+
         $this->validate();
 
         $this->applicant->configuration()->update([
@@ -147,7 +148,7 @@ class Enrollment extends Component
         $this->applicant->setMeta('enrollment_at', now());
 
         if ($company->wasRecentlyCreated && $companyContacts->wasRecentlyCreated) {
-            Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ApplicantEnrolled($this->applicant));
+            Mail::to($this->applicant)->bcc(config('mail.supporter.address'))->send(new ApplicantEnrolled($this->applicant, $this->applicantCourse));
         }
 
         $this->emitUp('refresh');
