@@ -3,7 +3,6 @@
         <tr align="left">
             <td>
                 <p style="display:block;color:#003A79;line-height: 1.4;margin-top: 60px;">
-                    hey, pooja
                     @lang('mail.welcome', compact('name')), <br>
                     @lang('mail.new-user.body1') <br>
                     @lang('mail.new-user.body2') <br>
@@ -13,7 +12,7 @@
             </td>
         </tr>
         @component('mail::button', ['url' => $link])
-            @lang('Click here to go to the applicant portal')
+            @lang('mail.new-user.action')
         @endcomponent
         <tr align="left">
             <td>
