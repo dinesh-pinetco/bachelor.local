@@ -7,7 +7,6 @@ use App\Models\ApplicantCompany;
 use App\Models\Company;
 use App\Models\User;
 use App\Traits\Livewire\HasModal;
-use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class ApplicationToCompany extends Component
@@ -30,18 +29,25 @@ class ApplicationToCompany extends Component
 
         $this->is_see_test_results = $this->user?->companies?->first()?->is_see_test_results ?? false;
 
-        $this->companies = Company::query()->select('id','name')->get();
+        $this->companies = Company::query()->select('id', 'name')->get();
 
         $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
     }
 
     public function removeCompany($appliedCompanyId)
     {
+
         if (count($this->user->companies()->get()) <= 1) {
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
         ApplicantCompany::where('user_id', $this->user->id)->where('company_id', $appliedCompanyId)->delete();
+
+        $index = array_search($appliedCompanyId, $this->selectedCompanies);
+
+        if ($index !== false) {
+            array_splice($this->selectedCompanies, $index, 1);
+        }
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
     }
