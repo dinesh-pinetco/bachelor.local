@@ -9,9 +9,16 @@ class ApplicationOnMarketplace extends Component
 {
     public User $user;
 
+    public bool $marketplacePrivacyPolicyAccepted;
+
     protected $listeners = [
         'refresh' => '$refresh',
     ];
+
+    public function mount()
+    {
+        $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
+    }
 
     public function getAppliedCompaniesProperty()
     {
