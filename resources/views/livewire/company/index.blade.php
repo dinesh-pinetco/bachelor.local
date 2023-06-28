@@ -93,7 +93,7 @@
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
                                     @forelse ($selectedCompanies as $selectedCompanyId)
-                                        @if ($selectedCompany = $companies->firstWhere('id', $selectedCompanyId))
+                                        @if ($selectedCompany = $companies?->firstWhere('id', $selectedCompanyId))
                                             <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
                                                 {{ $selectedCompany->name }}
                                             </div>
