@@ -15,6 +15,7 @@ use App\Traits\User\SelectionTestPdf;
 use App\Traits\User\StudyContractPdf;
 use App\Traits\User\UserRelations;
 use Carbon\Carbon;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,7 +31,7 @@ use OwenIt\Auditing\Contracts\Auditable as ContractsAuditable;
 use Plank\Metable\Metable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements ContractsAuditable
+class User extends Authenticatable implements ContractsAuditable, HasLocalePreference
 {
     use AuditingAuditable,
         SoftDeletes,
@@ -129,6 +130,11 @@ class User extends Authenticatable implements ContractsAuditable
 
             return $value;
         });
+    }
+
+    public function preferredLocale()
+    {
+        return $this->locale;
     }
 
     public function hasExamPassed(): bool

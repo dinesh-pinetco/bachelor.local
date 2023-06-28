@@ -37,7 +37,7 @@ class ContractPdfSend extends Mailable
         $courseId = $this->user->getValueByField('enroll_course')?->value;
 
         $courseSannaId = Course::whereId($courseId)->value('sana_id');
-        $desiredBeginningDate = DesiredBeginning::where('id', $this->user->userDesiredBeginning->id)->value('course_start_date');
+        $desiredBeginningDate = DesiredBeginning::where('id', $this->user->userDesiredBeginning->desired_beginning_id)->value('course_start_date');
 
         $courseMaterialObject = (new GetCourse())->get($courseSannaId, $desiredBeginningDate);
         $courseMaterialFiles = data_get($courseMaterialObject, 'anhaenge');
