@@ -123,13 +123,12 @@ class Index extends Component
 
         $this->getSelectedCompanies();
 
-//        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
     }
 
     public function enrollIntoMarketPlace(bool $enroll)
     {
         if ($enroll) {
-            $this->marketplacePrivacyPolicyAccepted = true;
             $this->user->reject_marketplace_application_at = null;
             $this->user->save();
             $this->showProfileMarketplace();
@@ -164,7 +163,7 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
-//        $this->fetchAppliedCompanies();
+        //        $this->fetchAppliedCompanies();
 
     }
 
@@ -211,7 +210,7 @@ class Index extends Component
 
         $this->isAppliedToCompany = true;
 
-//        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
 
         $this->getSelectedCompanies();
 
@@ -235,7 +234,7 @@ class Index extends Component
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
 
-//        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
     }
 
     public function updateCompanies()
