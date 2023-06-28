@@ -760,8 +760,8 @@
                                 <p class="mt-2 text-darkblack">
                                     {{ $formAlreadySubmitted ? __('Your form already submitted successfully.') : __('Your form submitted successfully.') }}
                                 </p>
+                                <button class="mt-2 bg-darkgreen text-white px-4 py-2 underline" wire:click="$set('showThanks', false)" wire:loading.class="cursor-wait" >{{ __('View') }}</button>
                             @endrole
-                            <button class="mt-2 bg-darkgreen text-white px-4 py-2 underline" wire:click="$set('showThanks', false)" wire:loading.class="cursor-wait" >{{ __('Edit') }}</button>
                         </div>
                     @endif
                 </div>

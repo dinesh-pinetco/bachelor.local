@@ -53,6 +53,11 @@ class Index extends Component
         $this->contract->{$dateType} = null;
         $this->contract->save();
 
+        if($dateType === 'receive_date'){
+            $this->contract->send_date = null;
+            $this->contract->save();
+        }
+
         $dateType === 'send_date'
             ? $this->toastNotify(__('Contract send date deleted successfully.'), __('Success'), TOAST_SUCCESS)
             : $this->toastNotify(__('Contract received date deleted successfully.'), __('Success'), TOAST_SUCCESS);
