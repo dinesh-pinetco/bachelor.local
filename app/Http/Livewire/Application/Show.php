@@ -188,11 +188,15 @@ class Show extends Component
         $this->deleteValueByField('reasons_to_study');
         $this->deleteValueByField('employer_support_time_financially');
 
+        Storage::delete($this->applicant->documents?->pluck('path')->toArray());
+
         $this->deleteFile($this->applicant->study_sheet?->student_id_card_photo);
 
         $this->deleteFile($this->applicant->configuration->contract_pdf_path);
 
         $this->deleteFile($this->applicant->configuration->study_contract_pdf_path);
+
+        $this->applicant->documents()?->delete();
 
         $this->applicant->study_sheet?->delete();
 
