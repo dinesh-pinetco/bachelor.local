@@ -25,7 +25,7 @@ class Index extends Component
 
     public $zip_code = null;
 
-    public $showTextarea = false;
+    public $showApplyButton = false;
 
     public User $user;
 
@@ -43,6 +43,7 @@ class Index extends Component
         'search' => ['except' => ''],
         'zip_code' => ['except' => ''],
     ];
+
     /**
      * @var array|mixed|null
      */
@@ -52,7 +53,7 @@ class Index extends Component
     {
         $this->user = auth()->user()->load('companies.company');
 
-        if ($this->user->application_status->id() > ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id()){
+        if ($this->user->application_status->id() > ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id()) {
             $this->initialRender();
         }
     }
@@ -187,9 +188,7 @@ class Index extends Component
         if (! count($this->selectedCompanies)) {
             $this->toastNotify(__('Please select at-least one company!'), '', TOAST_INFO);
         } else {
-            $this->showTextarea = true;
-
-            $this->dispatchBrowserEvent('init-trix-editor');
+            $this->showApplyButton = true;
         }
     }
 

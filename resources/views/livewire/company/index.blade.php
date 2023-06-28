@@ -24,7 +24,7 @@
             @if($user->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)
 
                 <div class="flex flex-wrap items-start justify-between gap-5 max-w-4xl h-full">
-                    @if ($showTextarea)
+                    @if ($showApplyButton)
                         <div
                             class="flex flex-wrap xl:flex-nowrap w-full gap-10 xl:gap-6">
                             <div class="w-full xl:w-2/3 flex-shrink-0 h-full overflow-y-auto px-2 -mx-2">
@@ -280,16 +280,8 @@
     </x-custom-modal>
 </div>
 <script>
-    var companys = @js($appliedCompanies);
-
-    let trixEditor = companys == null ? "" : document.getElementById("email-content");
-
-    window.addEventListener('init-trix-editor', event => {
-        trixEditor = document.getElementById("email-content");
-    })
-
     function applyToSelectedCompany() {
-    @this.applyToSelectedCompany();
+        @this.applyToSelectedCompany();
     }
 </script>
 </div>

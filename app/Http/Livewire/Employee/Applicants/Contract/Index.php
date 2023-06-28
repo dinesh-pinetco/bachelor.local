@@ -53,7 +53,7 @@ class Index extends Component
         $this->contract->{$dateType} = null;
         $this->contract->save();
 
-        if($dateType === 'receive_date'){
+        if ($dateType === 'receive_date') {
             $this->contract->send_date = null;
             $this->contract->save();
         }
