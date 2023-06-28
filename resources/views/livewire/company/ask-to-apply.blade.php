@@ -1,5 +1,5 @@
 <div>
-    <div class="w-full max-w-screen-xl mx-auto lg:pl-40 2xl:pl-64">
+    <div>
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
             <p>

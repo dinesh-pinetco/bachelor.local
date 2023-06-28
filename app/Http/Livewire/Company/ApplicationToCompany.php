@@ -7,7 +7,6 @@ use App\Models\ApplicantCompany;
 use App\Models\Company;
 use App\Models\User;
 use App\Traits\Livewire\HasModal;
-use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class ApplicationToCompany extends Component
@@ -30,7 +29,7 @@ class ApplicationToCompany extends Component
 
         $this->is_see_test_results = $this->user?->companies?->first()?->is_see_test_results ?? false;
 
-        $this->companies = Company::query()->select('id','name')->get();
+        $this->companies = Company::query()->select('id', 'name')->get();
 
         $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
     }
