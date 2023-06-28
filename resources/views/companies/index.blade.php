@@ -18,6 +18,9 @@
             <livewire:company.application-on-marketplace :user="$applicant??''"/>
         @endif
 
+        @if((!is_null($applicant->show_application_on_marketplace_at) || !is_null($applicant->reject_marketplace_application_at)) && $applicant->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && $applicant->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id())
+            <livewire:company.application-to-company :user="$applicant??''">
+        @endif
 
         @if($applicant->application_status->id() >= \App\Enums\ApplicationStatus::ENROLLMENT_ON->id())
             <div class="inline-flex justify-start space-x-4 text-white p-4 bg-darkgreen rounded-sm mr-auto mb-5">
@@ -32,9 +35,9 @@
                     {{__("Congratulations! You have been hired for the position you applied for.")}}
                 </p>
             </div>
-    @endif
+        @endif
 
 
-    {{--    <livewire:company.index/>--}}
+       {{-- <livewire:company.index/> --}}
 
 </x-app-layout>

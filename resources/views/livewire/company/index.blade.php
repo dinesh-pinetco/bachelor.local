@@ -94,11 +94,6 @@
                                 <div class="flex flex-wrap gap-2">
                                     @forelse ($selectedCompanies as $selectedCompanyId)
                                         {{ $selectedCompanyId }}
-                                        {{--                                        @if ($selectedCompany = $this->companies?->firstWhere('id', $selectedCompanyId))--}}
-                                        {{--                                            <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">--}}
-                                        {{--                                                {{ $selectedCompany->name }}--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        @endif--}}
                                     @empty
                                         <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>
                                     @endforelse
@@ -180,7 +175,7 @@
             @endif
 
             @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && $user->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && $user->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id())
-                <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
+                <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __('You can now select companies and write an optional text that will be displayed to all selected companies.') }}</p>
 
                 <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Application to companies') }}</h5>
 

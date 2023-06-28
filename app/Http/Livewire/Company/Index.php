@@ -129,7 +129,6 @@ class Index extends Component
     public function enrollIntoMarketPlace(bool $enroll)
     {
         if ($enroll) {
-            $this->marketplacePrivacyPolicyAccepted = true;
             $this->user->reject_marketplace_application_at = null;
             $this->user->save();
             $this->showProfileMarketplace();

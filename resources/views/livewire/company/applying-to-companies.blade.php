@@ -69,21 +69,13 @@
                             {{__('Selected companies')}}
                         </h6>
                         <div class="flex flex-wrap gap-2">
-                            @foreach($companies->whereIn('id', $selectedCompanyIds) as $selectedCompany)
+                            @forelse ($companies->whereIn('id', $selectedCompanyIds) as $selectedCompany)
                                 <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
                                     {{ $selectedCompany->name }}
                                 </div>
-                            @endforeach
-                            {{--                                                        @forelse ($selectedCompanies as $selectedCompanyId)--}}
-                            {{--                                                            {{ $selectedCompanyId }}--}}
-                            {{--                            @if ($selectedCompany = $this->companies?->firstWhere('id', $selectedCompanyId))--}}
-                            {{--                                <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">--}}
-                            {{--                                    {{ $selectedCompany->name }}--}}
-                            {{--                                </div>--}}
-                            {{--                            @endif--}}
-                            {{--                        @empty--}}
-                            {{--                            <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>--}}
-                            {{--                        @endforelse--}}
+                            @empty
+                                <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>
+                            @endforelse
                         </div>
                     </div>
                 </div>
