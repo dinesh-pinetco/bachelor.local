@@ -43,6 +43,7 @@ class Index extends Component
         'search' => ['except' => ''],
         'zip_code' => ['except' => ''],
     ];
+
     /**
      * @var array|mixed|null
      */
@@ -52,7 +53,7 @@ class Index extends Component
     {
         $this->user = auth()->user()->load('companies.company');
 
-        if ($this->user->application_status->id() > ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id()){
+        if ($this->user->application_status->id() > ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id()) {
             $this->initialRender();
         }
     }
@@ -122,7 +123,7 @@ class Index extends Component
 
         $this->getSelectedCompanies();
 
-//        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
     }
 
     public function enrollIntoMarketPlace(bool $enroll)
@@ -163,7 +164,7 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
-//        $this->fetchAppliedCompanies();
+        //        $this->fetchAppliedCompanies();
 
     }
 
@@ -212,7 +213,7 @@ class Index extends Component
 
         $this->isAppliedToCompany = true;
 
-//        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
 
         $this->getSelectedCompanies();
 
@@ -236,7 +237,7 @@ class Index extends Component
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
 
-//        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
     }
 
     public function updateCompanies()

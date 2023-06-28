@@ -49,7 +49,7 @@
                                     {{__('Selected companies')}}
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
-                                    @forelse ($companies->whereIn('id', $selectedCompanies) as $selectedCompany)
+                                    @forelse ($this->companies->whereIn('id', $selectedCompanies) as $selectedCompany)
                                         <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
                                             {{ $selectedCompany->name }}
                                         </div>
@@ -93,11 +93,12 @@
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
                                     @forelse ($selectedCompanies as $selectedCompanyId)
-                                        @if ($selectedCompany = $companies?->firstWhere('id', $selectedCompanyId))
-                                            <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
-                                                {{ $selectedCompany->name }}
-                                            </div>
-                                        @endif
+                                        {{ $selectedCompanyId }}
+                                        {{--                                        @if ($selectedCompany = $this->companies?->firstWhere('id', $selectedCompanyId))--}}
+                                        {{--                                            <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">--}}
+                                        {{--                                                {{ $selectedCompany->name }}--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        @endif--}}
                                     @empty
                                         <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>
                                     @endforelse
@@ -255,6 +256,7 @@
                 @endif
         </div>
     </div>
+
     <x-custom-modal wire:model="show" maxWidth="lg">
         <x-slot name="title">
             {{ __('Add companies') }}
@@ -265,7 +267,7 @@
                     name="company"
                     wire:model="addNewCompaniesToApplicant"
                     :placeholder="__('Select Company')"
-                    :options="$companies"
+                    :options="$this->companies"
                     :value="$selectedCompanies"
                     key-by="id"
                     label-by="name"
