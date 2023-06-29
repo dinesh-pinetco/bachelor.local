@@ -39,7 +39,7 @@ class ApplyingToCompanies extends Component
 
         if ($this->search) {
             $companies = $companies->filter(function ($company) {
-                return str_contains($company->name, $this->search);
+                return str_contains(strtolower($company->name), strtolower($this->search));
             });
         }
 
