@@ -36,8 +36,9 @@ class FieldValuePolicy
 
         if (auth()->user()->hasRole(ROLE_APPLICANT)
             && ! in_array($fieldValue->fields->key, $defaultDisableField)
-            && ($user->application_status->id() < ApplicationStatus::PERSONAL_DATA_COMPLETED->id() && $user->show_application_on_marketplace_at)
-            || ($user->application_status->id() < ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id() && $user->reject_marketplace_application_at)) {
+            && $user->application_status->id() < ApplicationStatus::PERSONAL_DATA_COMPLETED->id()
+            && ($user->show_application_on_marketplace_at
+                || ! $user->reject_marketplace_application_at)) {
             return true;
         } elseif (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
             if (in_array($fieldValue->fields->key, $defaultDisableField)) {

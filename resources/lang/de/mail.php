@@ -9,7 +9,7 @@ return [
         'body2' => '<br>  Im Folgenden erhältst du deine Zugangsdaten der NORDAKADEMIE, die du im weiteren Verlauf des Bewerbungsverfahrens benötigst.',
         'body3' => '<br> Die Daten sind sowohl für unseren Auswahltest als auch unser Bachelorportal gültig, in welchem du deine Angaben jederzeit anpassen kannst.',
         'body4' => '<br> Über die weiteren Schritte des Bewerbungsprozesses informieren wir Sie gesondert per E-Mail nach Erhalt Ihrer <b>Bewerbungsunterlagen</b>.',
-        'action' => 'Login',
+        'action' => 'Hier gelangst du zum Bewerberportal',
         'email' => '<br> Anmeldename: <strong> :email </strong>',
         'password' => '<br> Passwort: <strong> :password </strong>',
     ],

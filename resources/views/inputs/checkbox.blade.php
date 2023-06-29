@@ -12,6 +12,7 @@
                                id="{{ data_get($option, 'key') }}"
                                value="{{ data_get($option, 'key') }}"
                                wire:model="fieldValue"
+                               {{ $isEdit ? '' : 'disabled' }}
                                name="fieldValue"
                                {{ in_array(data_get($option,'key'), $fieldValue) ? 'checked' : '' }}
                                class="flex-shrink-0 w-5 h-5 form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none {{ $isEdit ? 'text-primary' : 'text-gray cursor-not-allowed' }}">

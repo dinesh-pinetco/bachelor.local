@@ -12,7 +12,7 @@
             </td>
         </tr>
         @component('mail::button', ['url' => $link])
-            {{ __('Click here to go to the applicant portal') }}
+            @lang('mail.new-user.action')
         @endcomponent
         <tr align="left">
             <td>

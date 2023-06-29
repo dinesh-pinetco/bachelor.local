@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Services\Companies\Companies;
+use App\Services\sANNA\Companies;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

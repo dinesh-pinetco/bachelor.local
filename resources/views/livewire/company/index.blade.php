@@ -7,7 +7,7 @@
         </div>
 
         <div class="flex-grow flex flex-col flex-wrap text-primary relative">
-            @if (auth()->user()->application_status === ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON && is_null(auth()->user()->show_application_on_marketplace_at))
+            @if ($user->application_status === ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON && is_null($user->show_application_on_marketplace_at))
                 <p>
                     {{ __("You've almost made it, now all you have to do is choose one or more partner companies where you would like to apply for a position as a dual student.") }}
                 </p>
@@ -21,10 +21,10 @@
                 </div>
             @endif
 
-            @if(auth()->user()->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)
+            @if($user->application_status === ApplicationStatus::APPLYING_TO_SELECTED_COMPANY)
 
                 <div class="flex flex-wrap items-start justify-between gap-5 max-w-4xl h-full">
-                    @if ($showTextarea)
+                    @if ($showApplyButton)
                         <div
                             class="flex flex-wrap xl:flex-nowrap w-full gap-10 xl:gap-6">
                             <div class="w-full xl:w-2/3 flex-shrink-0 h-full overflow-y-auto px-2 -mx-2">
@@ -49,7 +49,7 @@
                                     {{__('Selected companies')}}
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
-                                    @forelse ($companies->whereIn('id', $selectedCompanies) as $selectedCompany)
+                                    @forelse ($this->companies->whereIn('id', $selectedCompanies) as $selectedCompany)
                                         <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
                                             {{ $selectedCompany->name }}
                                         </div>
@@ -93,11 +93,7 @@
                                 </h6>
                                 <div class="flex flex-wrap gap-2">
                                     @forelse ($selectedCompanies as $selectedCompanyId)
-                                        @if ($selectedCompany = $companies->firstWhere('id', $selectedCompanyId))
-                                            <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
-                                                {{ $selectedCompany->name }}
-                                            </div>
-                                        @endif
+                                        {{ $selectedCompanyId }}
                                     @empty
                                         <p class="text-sm text-darkgray">{{__('please select the companies')}}</p>
                                     @endforelse
@@ -109,7 +105,7 @@
         </div>
         @endif
 
-        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::ENROLLMENT_ON->id())
+        @if($user->application_status->id() >= \App\Enums\ApplicationStatus::ENROLLMENT_ON->id())
             <div class="inline-flex justify-start space-x-4 text-white p-4 bg-darkgreen rounded-sm mr-auto mb-5">
                 <svg class="text-white stroke-current w-6 h-6 flex-shrink-0" width="44" height="44"
                      viewBox="0 0 44 44"
@@ -124,7 +120,7 @@
             </div>
         @endif
         <div class="flex-grow max-w-4xl">
-            @if((is_null($user->show_application_on_marketplace_at) && is_null($user->reject_marketplace_application_at)) && auth()->user()->companies()->exists())
+            @if((is_null($user->show_application_on_marketplace_at) && is_null($user->reject_marketplace_application_at)) && $user->companies()->exists())
                 <div class="inline-flex justify-center space-x-2 text-darkgreen mx-auto lg:mb-10 mb-6">
                     <svg class="text-darkgreen stroke-current w-6 h-6 flex-shrink-0" width="44" height="44"
                          viewBox="0 0 44 44"
@@ -178,8 +174,8 @@
 
             @endif
 
-            @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && auth()->user()->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && auth()->user()->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id())
-                <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __("You can now select companies and write an optional text that will be displayed to all selected companies.") }}</p>
+            @if((!is_null($user->show_application_on_marketplace_at) || !is_null($user->reject_marketplace_application_at)) && $user->application_status->id() >= ApplicationStatus::APPLIED_TO_SELECTED_COMPANY->id() && $user->application_status->id() < ApplicationStatus::ENROLLMENT_ON->id())
+                <p class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">{{ __('You can now select companies and write an optional text that will be displayed to all selected companies.') }}</p>
 
                 <h5 class="text-base font-medium md:text-lg text-primary mb-2">{{ __('Application to companies') }}</h5>
 
@@ -255,6 +251,7 @@
                 @endif
         </div>
     </div>
+
     <x-custom-modal wire:model="show" maxWidth="lg">
         <x-slot name="title">
             {{ __('Add companies') }}
@@ -265,7 +262,7 @@
                     name="company"
                     wire:model="addNewCompaniesToApplicant"
                     :placeholder="__('Select Company')"
-                    :options="$companies"
+                    :options="$this->companies"
                     :value="$selectedCompanies"
                     key-by="id"
                     label-by="name"
@@ -280,16 +277,8 @@
     </x-custom-modal>
 </div>
 <script>
-    var companys = @js($appliedCompanies);
-
-    let trixEditor = companys == null ? "" : document.getElementById("email-content");
-
-    window.addEventListener('init-trix-editor', event => {
-        trixEditor = document.getElementById("email-content");
-    })
-
     function applyToSelectedCompany() {
-    @this.applyToSelectedCompany();
+        @this.applyToSelectedCompany();
     }
 </script>
 </div>

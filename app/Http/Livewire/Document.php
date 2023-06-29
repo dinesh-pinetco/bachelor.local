@@ -26,7 +26,7 @@ class Document extends Component
         if (auth()->user()->hasRole([ROLE_ADMIN, ROLE_EMPLOYEE])) {
             $this->isEdit = true;
         } elseif (auth()->user()->hasRole(ROLE_APPLICANT)) {
-            $this->isEdit = $this->applicant->application_status->id() >= \App\Enums\ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id();
+            $this->isEdit = $this->applicant->application_status->id() >= \App\Enums\ApplicationStatus::PERSONAL_DATA_COMPLETED->id();
         }
 
         $this->documents = ModelsDocument::with(['medias' => function ($query) {

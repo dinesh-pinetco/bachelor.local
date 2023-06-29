@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Enums\FieldType;
+use App\Models\City;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Models\School;
@@ -309,9 +310,11 @@ class Field extends Component
         if ($this->field->key == 'school_qualification') {
             $cityId = $this->applicant->getValueByField('city');
 
-            $model = School::where('city_id', $cityId?->value)->orderBy('name');
+            return School::where('city_id', $cityId?->value)->orderBy('name')->get();
+        }
 
-            return $model->get();
+        if ($this->field->key == 'city') {
+            return City::orderBy('name')->get();
         }
 
         $model = ModelHelper::getModelByName(str::singular(str_replace(
@@ -332,10 +335,10 @@ class Field extends Component
             $fieldValue->save();
         }
 
-        $this->applicant->attachCourseWithDesiredBeginning(
-            $this->applicant->userDesiredBeginning->id,
-            $this->fieldValue
-        );
+        // $this->applicant->attachCourseWithDesiredBeginning(
+        //     $this->applicant->userDesiredBeginning->id,
+        //     $this->fieldValue
+        // );
     }
 
     private function desiredBeginningUpdate()

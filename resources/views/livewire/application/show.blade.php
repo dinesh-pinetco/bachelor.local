@@ -115,7 +115,6 @@
                                         </a>
                                     </div>
                                 @else
-
                                     <a class="w-10 h-10 flex items-center justify-center bg-primary hover:bg-opacity-80 rounded-sm"
                                        href="motivation">
                                         <svg class="w-4 h-4 stroke-current text-white flex-shrink-0" width="25"

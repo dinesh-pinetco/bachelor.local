@@ -25,7 +25,7 @@ class Index extends Component
 
     public $zip_code = null;
 
-    public $showTextarea = false;
+    public $showApplyButton = false;
 
     public User $user;
 
@@ -44,25 +44,18 @@ class Index extends Component
         'zip_code' => ['except' => ''],
     ];
 
+    /**
+     * @var array|mixed|null
+     */
+    public mixed $addNewCompaniesToApplicant;
+
     public function mount()
     {
         $this->user = auth()->user()->load('companies.company');
 
-        $this->appliedCompanies = $this->user?->companies;
-
-        $this->is_see_test_results = $this->user?->companies()->first()?->is_see_test_results ?? false;
-
-        $this->dispatchBrowserEvent('init-trix-editor');
-
-        $this->companies = $this->filterCompanies = $this->fetchCompanies();
-
-        $this->selectedCompanies();
-
-        $this->isAppliedToCompany = $this->appliedCompanies->isNotEmpty();
-
-        $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
-
-        $this->addNewCompaniesToApplicant = $this?->selectedCompanies;
+        if ($this->user->application_status->id() > ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id()) {
+            $this->initialRender();
+        }
     }
 
     public function updatedSearch()
@@ -96,7 +89,7 @@ class Index extends Component
             'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY(),
         ]);
 
-        $this->emitSelf('refresh');
+        $this->initialRender();
     }
 
     public function showProfileMarketplace()
@@ -128,19 +121,14 @@ class Index extends Component
 
         $this->user->touch('reject_marketplace_application_at');
 
-        $this->selectedCompanies();
+        $this->getSelectedCompanies();
 
-        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
     }
 
     public function enrollIntoMarketPlace(bool $enroll)
     {
-        if ($this->showAccessDeniedMessage()) {
-            return $this->toastNotify(__("You can't access it."), __('Error'), TOAST_ERROR);
-        }
-
         if ($enroll) {
-            $this->marketplacePrivacyPolicyAccepted = true;
             $this->user->reject_marketplace_application_at = null;
             $this->user->save();
             $this->showProfileMarketplace();
@@ -152,7 +140,7 @@ class Index extends Component
         }
     }
 
-    public function selectedCompanies()
+    public function getSelectedCompanies()
     {
         $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
     }
@@ -175,7 +163,7 @@ class Index extends Component
                 $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
             }
         }
-        $this->fetchAppliedCompanies();
+        //        $this->fetchAppliedCompanies();
 
     }
 
@@ -199,9 +187,7 @@ class Index extends Component
         if (! count($this->selectedCompanies)) {
             $this->toastNotify(__('Please select at-least one company!'), '', TOAST_INFO);
         } else {
-            $this->showTextarea = true;
-
-            $this->dispatchBrowserEvent('init-trix-editor');
+            $this->showApplyButton = true;
         }
     }
 
@@ -224,9 +210,9 @@ class Index extends Component
 
         $this->isAppliedToCompany = true;
 
-        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
 
-        $this->selectedCompanies();
+        $this->getSelectedCompanies();
 
         $this->toastNotify(__('Successfully applied to selected company.'), __('Success'), TOAST_SUCCESS);
 
@@ -236,19 +222,19 @@ class Index extends Component
     public function removeCompany($appliedCompanyId)
     {
         if (count($this->user->companies()->get()) <= 1) {
-            $this->selectedCompanies();
+            $this->getSelectedCompanies();
 
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
         $this->user->companies()->where('company_id', $appliedCompanyId)->first()->delete();
 
-        $this->selectedCompanies();
+        $this->getSelectedCompanies();
         $this->fetchAppliedCompanies();
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
 
-        $this->emitSelf('refresh');
+        //        $this->emitSelf('refresh');
     }
 
     public function updateCompanies()
@@ -263,10 +249,26 @@ class Index extends Component
 
     public function render()
     {
-        $this->authorize('view', User::class);
-
-        $this->fetchAppliedCompanies();
-
         return view('livewire.company.index');
+    }
+
+    private function initialRender()
+    {
+        $this->appliedCompanies = $this->user?->companies;
+
+        $this->is_see_test_results = $this->user?->companies?->first()?->is_see_test_results ?? false;
+
+        $this->dispatchBrowserEvent('init-trix-editor');
+
+        $this->filterCompanies = $this->fetchCompanies();
+        $this->companies = $this->filterCompanies;
+
+        $this->getSelectedCompanies();
+
+        $this->isAppliedToCompany = $this->appliedCompanies->isNotEmpty();
+
+        $this->marketplacePrivacyPolicyAccepted = $this->user->marketplace_privacy_policy_accepted;
+
+        $this->addNewCompaniesToApplicant = $this?->selectedCompanies;
     }
 }

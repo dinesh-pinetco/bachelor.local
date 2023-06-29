@@ -1,5 +1,5 @@
 <div x-data="{
-        content: '',
+        content: @entangle('fieldValue').defer,
         limit: $el.dataset.limit,
         get remaining() {
             return this.limit - this.content.length
