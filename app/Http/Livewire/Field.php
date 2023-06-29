@@ -310,15 +310,11 @@ class Field extends Component
         if ($this->field->key == 'school_qualification') {
             $cityId = $this->applicant->getValueByField('city');
 
-            $model = School::where('city_id', $cityId?->value)->orderBy('name');
-
-            return $model->get();
+            return School::where('city_id', $cityId?->value)->orderBy('name')->get();
         }
 
-        if($this->field->key == 'city'){
-            $model = City::orderBy('name');
-
-            return $model->get();
+        if ($this->field->key == 'city') {
+            return City::orderBy('name')->get();
         }
 
         $model = ModelHelper::getModelByName(str::singular(str_replace(
