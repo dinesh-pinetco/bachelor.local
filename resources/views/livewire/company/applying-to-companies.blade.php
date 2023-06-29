@@ -17,7 +17,7 @@
                         </label>
                     </div>
                     <x-primary-button type="button" wire:click="applyToSelectedCompany">
-                        {{ __('Apply to Selected Company') }}
+                        {{ __('Share test results for these companies') }}
                     </x-primary-button>
                 </div>
                 <div class="w-full xl:w-1/3 flex-shrink-0 h-full overflow-y-auto">
