@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Enums\FieldType;
+use App\Models\City;
 use App\Models\DesiredBeginning;
 use App\Models\FieldValue;
 use App\Models\School;
@@ -310,6 +311,12 @@ class Field extends Component
             $cityId = $this->applicant->getValueByField('city');
 
             $model = School::where('city_id', $cityId?->value)->orderBy('name');
+
+            return $model->get();
+        }
+
+        if($this->field->key == 'city'){
+            $model = City::orderBy('name');
 
             return $model->get();
         }
