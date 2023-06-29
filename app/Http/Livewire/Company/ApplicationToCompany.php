@@ -36,11 +36,18 @@ class ApplicationToCompany extends Component
 
     public function removeCompany($appliedCompanyId)
     {
+
         if (count($this->user->companies()->get()) <= 1) {
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }
 
         ApplicantCompany::where('user_id', $this->user->id)->where('company_id', $appliedCompanyId)->delete();
+
+        $index = array_search($appliedCompanyId, $this->selectedCompanies);
+
+        if ($index !== false) {
+            array_splice($this->selectedCompanies, $index, 1);
+        }
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
     }
