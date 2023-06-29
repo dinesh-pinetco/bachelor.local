@@ -177,18 +177,18 @@ class Show extends Component
 
     public function resetEnrollment()
     {
-        $this->applicant->companies()->delete();
+        // $this->applicant->companies()->delete();
 
         $this->deleteValueByField('enroll_course');
         $this->deleteValueByField('enroll_company');
         $this->deleteValueByField('enroll_company_contact');
 
-        $this->deleteValueByField('industry');
-        $this->deleteValueByField('characteristics');
-        $this->deleteValueByField('reasons_to_study');
-        $this->deleteValueByField('employer_support_time_financially');
+        // $this->deleteValueByField('industry');
+        // $this->deleteValueByField('characteristics');
+        // $this->deleteValueByField('reasons_to_study');
+        // $this->deleteValueByField('employer_support_time_financially');
 
-        Storage::delete($this->applicant->documents?->pluck('path')->toArray());
+        // Storage::delete($this->applicant->documents?->pluck('path')->toArray());
 
         $this->deleteFile($this->applicant->study_sheet?->student_id_card_photo);
 
@@ -196,7 +196,7 @@ class Show extends Component
 
         $this->deleteFile($this->applicant->configuration->study_contract_pdf_path);
 
-        $this->applicant->documents()?->delete();
+        // $this->applicant->documents()?->delete();
 
         $this->applicant->study_sheet?->delete();
 
@@ -205,10 +205,7 @@ class Show extends Component
         $this->applicant->removeMeta('enrollment_at');
 
         $this->applicant->update([
-            'show_application_on_marketplace_at' => null,
-            'reject_marketplace_application_at' => null,
-            'marketplace_privacy_policy_accepted' => false,
-            'application_status' => ApplicationStatus::APPLYING_TO_SELECTED_COMPANY,
+            'application_status' => ApplicationStatus::APPLIED_TO_SELECTED_COMPANY,
         ]);
 
         $this->isEnrolled = false;
