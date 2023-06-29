@@ -52,7 +52,7 @@ class ApplicationResource extends JsonResource
                 'tags' => $this->motivationsTags(),
                 'ort' => $this->getValueByIdentifier('location'),
                 'branche' => ApplicantIndustryResource::collection($this->industries()),
-                'studienbeginn' => $this->selectedDesiredBeginning->course_start_date,
+                'studienbeginn' => $this->user->selectedDesiredBeginning->course_start_date,
                 'motivationschreiben' => $this->marketplace_motivation_text,
                 'dokumente' => ApplicantDocumentResource::collection($this->documents),
             ],
