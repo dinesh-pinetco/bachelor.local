@@ -71,6 +71,9 @@
             </x-primary-button>
         @endif
     </div>
+    <x-primary-button id="submit" type="button" @click="applyToSelectedCompany()">
+        {{ __('Update') }}
+    </x-primary-button>
     <x-custom-modal wire:model="show" maxWidth="lg">
         <x-slot name="title">
             {{ __('Add companies') }}
@@ -94,4 +97,10 @@
             </div>
         </x-slot>
     </x-custom-modal>
+
+    <script>
+        function applyToSelectedCompany() {
+            @this.applyToSelectedCompany();
+        }
+    </script>
 </div>

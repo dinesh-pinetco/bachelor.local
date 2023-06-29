@@ -332,10 +332,10 @@ class Field extends Component
             $fieldValue->save();
         }
 
-        $this->applicant->attachCourseWithDesiredBeginning(
-            $this->applicant->userDesiredBeginning->id,
-            $this->fieldValue
-        );
+        // $this->applicant->attachCourseWithDesiredBeginning(
+        //     $this->applicant->userDesiredBeginning->id,
+        //     $this->fieldValue
+        // );
     }
 
     private function desiredBeginningUpdate()
