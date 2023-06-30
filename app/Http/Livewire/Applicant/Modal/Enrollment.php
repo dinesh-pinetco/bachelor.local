@@ -7,6 +7,7 @@ use App\Jobs\FetchSannaCompaniesJob;
 use App\Mail\ApplicantEnrolled;
 use App\Models\Company;
 use App\Models\CompanyContacts;
+use App\Models\Course;
 use App\Models\Field;
 use App\Models\FieldValue;
 use App\Models\User;
@@ -63,10 +64,14 @@ class Enrollment extends Component
         return $rules;
     }
 
+    public function mount()
+    {
+        $this->companies = Company::select('id', 'sana_id', 'name')->with('contacts:id,company_id,sana_id,first_name,last_name')->orderBy('name')->get();
+    }
+
     public function toggle(User $user)
     {
         if (! auth()->user()->hasRole(ROLE_APPLICANT)) {
-            $this->companies = Company::with('contacts')->orderBy('name')->get();
 
             $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
             $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
@@ -78,7 +83,8 @@ class Enrollment extends Component
         $this->applicant->load('configuration');
         $this->date_of_birth = $this->applicant?->values->where('fields.key', 'date_of_birth')->value('value');
         $this->desiredBeginning = $this->applicant?->selectedDesiredBeginning->course_start_date->translatedFormat('F.Y');
-        $this->courses = $this->applicant->courses()->with('course')->get();
+        $courseIds = $this->applicant->getValueByField('course_id')?->value;
+        $this->courses = Course::whereIn('id', json_decode($courseIds))->get();
         $this->enrolledOutsideSystem = $this->applicant->configuration?->is_enrolled_outside_system;
 
         $this->selectedCompany = $this->applicant->getValueByField('enroll_company')?->value;

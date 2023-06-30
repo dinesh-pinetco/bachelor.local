@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="w-full max-w-screen-xl mx-auto lg:pl-40 2xl:pl-64">
+    <div class="w-full max-w-screen-xl mx-auto lg:pl-40 2xl:pl-64 2xl:pr-20 lg:pr-16">
         <div class="flex">
             <h1 class="mb-5 md:mb-10 text-primary text-2xl md:text-3xl lg:text-5xl font-thin leading-tight">
                 {{ __('Your company selection') }}

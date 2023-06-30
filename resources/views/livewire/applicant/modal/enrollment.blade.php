@@ -44,7 +44,7 @@
                                     wire:model="applicantCourse" id="applicantCourse">
                                     <option value="">{{ __('Select Course') }}</option>
                                     @foreach ($courses as $course)
-                                        <option value="{{ $course->course?->id }}">{{ $course->course?->name }}</option>
+                                        <option value="{{ $course->id }}">{{ $course->name }}</option>
                                     @endforeach
                                 </select>
                                 <x-jet-input-error for="applicantCourse"/>

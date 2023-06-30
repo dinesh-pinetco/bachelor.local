@@ -32,10 +32,10 @@ class JetstreamServiceProvider extends ServiceProvider
             RegisterResponse::class,
         );
 
-        $this->app->singleton(
-            \Laravel\Fortify\Contracts\LoginResponse::class,
-            LoginResponse::class
-        );
+//        $this->app->singleton(
+//            \Laravel\Fortify\Contracts\LoginResponse::class,
+//            LoginResponse::class
+//        );
     }
 
     /**

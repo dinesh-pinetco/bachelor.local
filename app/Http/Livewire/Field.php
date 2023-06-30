@@ -136,6 +136,7 @@ class Field extends Component
 
         if ($this->field->key == 'date_of_birth') {
             $validation['fieldValue'][] = 'before:now';
+            $validation['fieldValue'][] = 'date';
         }
 
         if ($this->field->key == 'postal_code') {

@@ -28,4 +28,4 @@ public/vendor
 tests/cypress/support/routes.json
 package-lock.json
 public/plugins/*
-
+storage

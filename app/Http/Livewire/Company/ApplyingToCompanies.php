@@ -13,7 +13,7 @@ class ApplyingToCompanies extends Component
 
     public bool $showTextarea = false;
 
-    public bool $is_see_test_results = false;
+    public bool $is_see_test_results;
 
     public string|null $search = null;
 
@@ -22,6 +22,10 @@ class ApplyingToCompanies extends Component
     public mixed $companies = [];
 
     public mixed $selectedCompanyIds = [];
+
+    public $rules = [
+        'is_see_test_results' => ['required', 'boolean'],
+    ];
 
     public function mount()
     {
@@ -63,6 +67,8 @@ class ApplyingToCompanies extends Component
 
     public function applyToSelectedCompany()
     {
+        $this->validate();
+
         foreach (array_filter($this->selectedCompanyIds) as $companyId) {
             $this->user->companies()->updateOrCreate([
                 'user_id' => $this->user->id,
