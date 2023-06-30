@@ -12,6 +12,6 @@ class LoginResponse implements LoginResponseContract
      */
     public function toResponse($request)
     {
-        return redirect(RouteServiceProvider::homeRedirectPath());
+        return redirect()->intended(); //redirect(RouteServiceProvider::homeRedirectPath());
     }
 }
