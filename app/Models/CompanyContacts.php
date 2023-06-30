@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class CompanyContacts extends Model
 {
@@ -32,5 +33,16 @@ class CompanyContacts extends Model
     public static function findFromSannaId(mixed $sannaId)
     {
         return self::where('sana_id', $sannaId)->first();
+    }
+
+
+    public static function catchCollection()
+    {
+        Cache::put('fetchSannaCompanyContacts', CompanyContacts::all());
+    }
+
+    public static function getFromCache()
+    {
+        return Cache::get('fetchSannaCompanyContacts', []);
     }
 }

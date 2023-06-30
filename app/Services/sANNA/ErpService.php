@@ -137,5 +137,7 @@ abstract class ErpService
                 ]);
             }
         }
+
+        Company::catchCollection();
     }
 }
