@@ -15,7 +15,7 @@ class ApplicationToCompany extends Component
 
     public User $user;
 
-    public $selectedCompanies = [];
+    public array $selectedCompanyIds = [];
 
     public $companies = [];
 
@@ -31,7 +31,7 @@ class ApplicationToCompany extends Component
 
         $this->companies = Company::query()->select('id', 'name')->get();
 
-        $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
+        $this->selectedCompanyIds = $this->user->companies->pluck('company_id')?->toArray();
     }
 
     public function removeCompany($appliedCompanyId)
@@ -43,10 +43,10 @@ class ApplicationToCompany extends Component
 
         ApplicantCompany::where('user_id', $this->user->id)->where('company_id', $appliedCompanyId)->delete();
 
-        $index = array_search($appliedCompanyId, $this->selectedCompanies);
+        $index = array_search($appliedCompanyId, $this->selectedCompanyIds);
 
         if ($index !== false) {
-            array_splice($this->selectedCompanies, $index, 1);
+            array_splice($this->selectedCompanyIds, $index, 1);
         }
 
         $this->toastNotify(__('Company deleted successfully.'), __('Success'), TOAST_SUCCESS);
@@ -59,12 +59,12 @@ class ApplicationToCompany extends Component
 
     public function applyToSelectedCompany()
     {
-        $companiesToBeDeleted = array_diff(collect($this->user->companies)->pluck('company_id')->toArray(), $this->selectedCompanies);
+        $companiesToBeDeleted = array_diff(collect($this->user->companies)->pluck('company_id')->toArray(), $this->selectedCompanyIds);
 
         if (count($companiesToBeDeleted)) {
             $this->removeCompany(array_first($companiesToBeDeleted));
         } else {
-            foreach (array_filter($this->selectedCompanies) as $companyId) {
+            foreach (array_filter($this->selectedCompanyIds) as $companyId) {
                 $this->user->companies()->updateOrCreate([
                     'user_id' => $this->user->id,
                     'company_id' => $companyId,
@@ -87,7 +87,7 @@ class ApplicationToCompany extends Component
 
     public function getAppliedCompaniesProperty()
     {
-        return collect($this->companies)->whereIn('id', $this->selectedCompanies)->all();
+        return collect($this->companies)->whereIn('id', $this->selectedCompanyIds)->all();
     }
 
     public function showProfileMarketplace()
@@ -125,9 +125,9 @@ class ApplicationToCompany extends Component
         }
     }
 
-    public function close(): void
+    public function close()
     {
-        $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
+        $this->selectedCompanyIds = $this->user->companies->pluck('company_id')?->toArray();
 
         $this->show = false;
     }

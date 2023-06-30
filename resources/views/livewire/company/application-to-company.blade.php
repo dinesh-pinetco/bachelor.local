@@ -82,10 +82,10 @@
             <div class="space-y-3">
                 <x-multi-select
                     name="company"
-                    wire:model="selectedCompanies"
+                    wire:model="selectedCompanyIds"
                     :placeholder="__('Select Company')"
                     :options="$companies"
-                    :value="$selectedCompanies"
+                    :value="$selectedCompanyIds"
                     keyBy="id"
                     labelBy="name"
                 />
@@ -97,10 +97,4 @@
             </div>
         </x-slot>
     </x-custom-modal>
-
-    <script>
-        function applyToSelectedCompany() {
-            @this.applyToSelectedCompany();
-        }
-    </script>
 </div>

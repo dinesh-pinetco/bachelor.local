@@ -21,10 +21,10 @@
     <div
         x-cloak
         x-show="show"
-        x-on:click="show = false"
+        x-on:click="$wire.close()"
         @click="show=false"
         class="fixed inset-0 z-40 bg-black bg-opacity-75"
-        x-on:keydown.escape.window="show = false"
+        x-on:keydown.escape.window="$wire.close()"
         x-transition:enter="transition transform ease-in duration-150"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -46,7 +46,7 @@
         <div class="flex flex-col items-center justify-center bg-white w-full rounded-md">
             <div class="p-4 flex items-center justify-between flex-wrap w-full border-b border-lightgray">
                 <h4 class="text-primary font-medium tracking-wide">{{ isset($title) ? $title : null }}</h4>
-                <a href="javascript:void(0);" @click="show = false"
+                <a href="javascript:void(0);" @click="$wire.close()"
                    class="text-xl text-primary  flex items-center justify-center rounded-md duration-300 hover:text-lightred">
                     <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                         <path
