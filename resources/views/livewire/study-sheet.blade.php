@@ -257,7 +257,7 @@
                                         </x-livewire-select>
                                         <x-jet-input-error for="studySheet.school"/>
                                     </div>
-                                    <div wire:ignore>
+                                    <div>
                                         <x-jet-label for="phone"
                                                      class="block required">
                                             {{ __('Phone') }}

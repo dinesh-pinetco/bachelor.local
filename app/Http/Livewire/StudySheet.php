@@ -122,6 +122,8 @@ class StudySheet extends Component
             }
             $this->studySheet->save();
         }
+        $this->dispatchBrowserEvent('refreshTelJs');
+
     }
 
     public function submit()

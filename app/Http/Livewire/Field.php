@@ -41,7 +41,7 @@ class Field extends Component
 
     public bool $isEdit = false;
 
-    protected $listeners = ['date-updated' => 'updateDate', 'cityFieldValueChanged'];
+    protected $listeners = ['cityFieldValueChanged'];
 
     public function validationAttributes(): array
     {
@@ -208,12 +208,6 @@ class Field extends Component
         }
     }
 
-    public function updateDate($date)
-    {
-        $this->fieldValue = $date;
-        $this->save();
-    }
-
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -233,11 +227,6 @@ class Field extends Component
 
         if ($this->field->key == 'city') {
             $this->emit('cityFieldValueChanged');
-        }
-
-        if ($this->field->type == FieldType::FIELD_TEL()) {
-            $this->dispatchBrowserEvent('livewire:tel-load');
-
         }
     }
 

@@ -33,11 +33,11 @@
         ])
     @else
         @if (view()->exists("inputs.{$field->type}"))
-            @include("inputs.{$field->type}", [
-                'field' => $field,
-                'isEdit' => $isEdit,
-                'name' => $field->key,
-            ])
+                @include("inputs.{$field->type}", [
+                    'field' => $field,
+                    'isEdit' => $isEdit,
+                    'name' => $field->key,
+                ])
             <x-jet-input-error for="fieldValue" />
         @else
             <span class="font-medium text-sm text-red-500">
