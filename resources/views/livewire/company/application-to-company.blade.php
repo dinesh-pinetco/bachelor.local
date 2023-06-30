@@ -97,4 +97,9 @@
             </div>
         </x-slot>
     </x-custom-modal>
+    <script>
+        function applyToSelectedCompany() {
+            @this.applyToSelectedCompany();
+        }
+    </script>
 </div>

@@ -174,7 +174,7 @@ class Index extends Component
 
     protected function fetchCompanies()
     {
-        return Company::all();
+        return Company::getFromCache();
     }
 
     public function showAccessDeniedMessage()

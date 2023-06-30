@@ -74,9 +74,9 @@ class Enrollment extends Component
     {
         if (! auth()->user()->hasRole(ROLE_APPLICANT)) {
 
-            $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
-            $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
-            $this->enrollCourse = Field::where('label', 'Enroll Course')->first()?->id;
+            $this->partnerCompanyFieldId = Field::where('key', 'enroll_company')->first()?->id;
+            $this->partnerCompanyContactFieldId = Field::where('key', 'enroll_company_contact')->first()?->id;
+            $this->enrollCourse = Field::where('key', 'enroll_course')->first()?->id;
         }
 
         $this->show = ! $this->show;

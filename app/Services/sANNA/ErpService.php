@@ -139,5 +139,6 @@ abstract class ErpService
         }
 
         Company::catchCollection();
+        CompanyContacts::catchCollection();
     }
 }

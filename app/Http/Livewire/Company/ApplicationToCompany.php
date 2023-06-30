@@ -29,14 +29,13 @@ class ApplicationToCompany extends Component
 
         $this->is_see_test_results = $this->user?->companies?->first()?->is_see_test_results ?? false;
 
-        $this->companies = Company::query()->select('id', 'name')->get();
+        $this->companies = Company::query()->select('id', 'name')->orderBy('name')->get();
 
         $this->selectedCompanyIds = $this->user->companies->pluck('company_id')?->toArray();
     }
 
     public function removeCompany($appliedCompanyId)
     {
-
         if (count($this->user->companies()->get()) <= 1) {
             return $this->toastNotify(__("You can't delete all company."), __('Warning'), TOAST_WARNING);
         }

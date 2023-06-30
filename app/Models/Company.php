@@ -24,7 +24,7 @@ class Company extends Model
 
     public function scopeSearchByName($query, $search)
     {
-        return $query->where('name', 'like', '%' . $search . '%');
+        return $query->where('name', 'like', '%'.$search.'%');
     }
 
     public function contacts()

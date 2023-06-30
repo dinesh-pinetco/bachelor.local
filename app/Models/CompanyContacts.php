@@ -35,7 +35,6 @@ class CompanyContacts extends Model
         return self::where('sana_id', $sannaId)->first();
     }
 
-
     public static function catchCollection()
     {
         Cache::put('fetchSannaCompanyContacts', CompanyContacts::all());
