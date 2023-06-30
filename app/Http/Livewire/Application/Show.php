@@ -170,11 +170,6 @@ class Show extends Component
         }
     }
 
-    public function openResetEnrollmentModal()
-    {
-        $this->open();
-    }
-
     public function resetEnrollment()
     {
         // $this->applicant->companies()->delete();
