@@ -4,6 +4,18 @@
             <div
                 class="flex flex-wrap xl:flex-nowrap w-full gap-10 xl:gap-6">
                 <div class="w-full xl:w-2/3 flex-shrink-0 h-full overflow-y-auto px-2 -mx-2">
+                    <div>
+                        <h6 class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">
+                            {{__('Selected companies')}}
+                        </h6>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach ($this->companies->whereIn('id', $selectedCompanyIds) as $selectedCompany)
+                                <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
+                                    {{ $selectedCompany->name }}
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                     <div class="flex items-start space-x-2 mt-5">
                         <label for="is_see_test_results" class="flex cursor-pointer items-center mb-0">
                             <input
@@ -16,21 +28,10 @@
                                         </span>
                         </label>
                     </div>
+                    <x-jet-input-error for="is_see_test_results" />
                     <x-primary-button type="button" wire:click="applyToSelectedCompany">
                         {{ __('Share test results for these companies') }}
                     </x-primary-button>
-                </div>
-                <div class="w-full xl:w-1/3 flex-shrink-0 h-full overflow-y-auto">
-                    <h6 class="text-lg lg:text-2xl font-medium text-primary mb-3 md:mb-5">
-                        {{__('Selected companies')}}
-                    </h6>
-                    <div class="flex flex-wrap gap-2">
-                        @foreach ($this->companies->whereIn('id', $selectedCompanyIds) as $selectedCompany)
-                            <div class="text-xs py-2 px-4 bg-primary bg-opacity-10 rounded-sm">
-                                {{ $selectedCompany->name }}
-                            </div>
-                        @endforeach
-                    </div>
                 </div>
             </div>
         @else

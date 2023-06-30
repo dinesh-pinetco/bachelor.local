@@ -267,6 +267,20 @@
                             </li>
                         @endif
 
+                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id())
+                            <li>
+                                <x-jet-nav-link href="{{ route('companies.index') }}"
+                                                :active="request()->routeIs('companies.index')"
+                                                class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
+                                    <div
+                                        class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
+                                        <x-icons.partner-company />
+                                    </div>
+                                    <span>{{ __('Partner companies') }}</span>
+                                </x-jet-nav-link>
+                            </li>
+                        @endif
+
                         @if(auth()->user()->show_application_on_marketplace_at && auth()->user()->marketplace_privacy_policy_accepted)
                             <li>
                                 <x-jet-nav-link href="{{ route('application.index',['tab' => 'industries']) }}"
@@ -281,20 +295,6 @@
                                         </svg>
                                     </div>
                                     <span>{{ __('Application') }}</span>
-                                </x-jet-nav-link>
-                            </li>
-                        @endif
-
-                        @if(auth()->user()->application_status->id() >= \App\Enums\ApplicationStatus::TEST_RESULT_PDF_RETRIEVED_ON->id())
-                            <li>
-                                <x-jet-nav-link href="{{ route('companies.index') }}"
-                                                :active="request()->routeIs('companies.index')"
-                                                class="w-full px-4 sm:py-2 text-primary space-x-2 hover:bg-primary hover:text-white">
-                                    <div
-                                        class="icon w-8 h-8 bg-primary bg-opacity-0 flex items-center justify-center rounded-full">
-                                        <x-icons.partner-company />
-                                    </div>
-                                    <span>{{ __('Partner companies') }}</span>
                                 </x-jet-nav-link>
                             </li>
                         @endif

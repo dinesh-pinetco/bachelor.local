@@ -79,7 +79,7 @@
                                         <x-jet-input-error for="governmentForm.previous_residence_country_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->previous_residence_country_id == 1 ? 'required' : '' }}">
                                             {{ __('State of residence prior to commencement of studies, if abroad please do not select and enter a state') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -96,7 +96,7 @@
                                         <x-jet-input-error for="governmentForm.previous_residence_state_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block required">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->previous_residence_state_id ? 'required' : '' }}">
                                             {{ __('District of residence before the start of the study') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -140,7 +140,7 @@
                                         <x-jet-input-error for="governmentForm.current_residence_country_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block required">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->current_residence_country_id == 1 ? 'required' : '' }}">
                                             {{ __('State of residence during studies') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -157,7 +157,7 @@
                                         <x-jet-input-error for="governmentForm.current_residence_state_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block required">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->current_residence_state_id ? 'required' : '' }}">
                                             {{ __('District during studies (Elmshorn is located in the district of Pinneberg)') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -338,7 +338,7 @@
                                         <x-jet-input-error for="governmentForm.graduation_country_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block required">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->graduation_country_id == 1 ? 'required' : '' }}">
                                             {{ __('State in which the university entrance qualification was obtained. Please select only one state for school-leaving qualifications obtained abroad') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -355,7 +355,7 @@
                                         <x-jet-input-error for="governmentForm.graduation_state_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block required">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->graduation_state_id ? 'required' : '' }}">
                                             {{ __('District of university entrance qualification') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -419,7 +419,7 @@
                                         <x-jet-input-error for="governmentForm.is_previous_another_university" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->is_previous_another_university == '1' ? 'required' : '' }}">
                                             {{ __('Previous university') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -453,7 +453,7 @@
                                         <x-jet-input-error for="governmentForm.previous_college_country_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->is_previous_another_university == '1' ? 'required' : '' }}">
                                             {{ __('Type of study') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"
@@ -470,7 +470,7 @@
                                         <x-jet-input-error for="governmentForm.previous_study_type_id" />
                                     </div>
                                     <div>
-                                        <x-jet-label for="is_active" class="block">
+                                        <x-jet-label for="is_active" class="block {{ $governmentForm->is_previous_another_university == '1' ? 'required' : '' }}">
                                             {{ __('Aimed final examination') }}
                                         </x-jet-label>
                                         <x-livewire-select id="is_active" name="is_active"

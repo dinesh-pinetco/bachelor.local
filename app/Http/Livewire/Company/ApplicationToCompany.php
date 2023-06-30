@@ -59,13 +59,19 @@ class ApplicationToCompany extends Component
 
     public function applyToSelectedCompany()
     {
-        foreach (array_filter($this->selectedCompanies) as $companyId) {
-            $this->user->companies()->updateOrCreate([
-                'user_id' => $this->user->id,
-                'company_id' => $companyId,
-            ], [
-                'is_see_test_results' => $this->is_see_test_results,
-            ]);
+        $companiesToBeDeleted = array_diff(collect($this->user->companies)->pluck('company_id')->toArray(), $this->selectedCompanies);
+
+        if (count($companiesToBeDeleted)) {
+            $this->removeCompany(array_first($companiesToBeDeleted));
+        } else {
+            foreach (array_filter($this->selectedCompanies) as $companyId) {
+                $this->user->companies()->updateOrCreate([
+                    'user_id' => $this->user->id,
+                    'company_id' => $companyId,
+                ], [
+                    'is_see_test_results' => $this->is_see_test_results,
+                ]);
+            }
         }
 
         if ($this->user->application_status->id() <= ApplicationStatus::APPLYING_TO_SELECTED_COMPANY->id()) {

@@ -11,8 +11,8 @@ trait GovernmentFormValidations
             'governmentForm.second_country_id' => ['nullable', 'integer'],
 
             'governmentForm.previous_residence_country_id' => ['required', 'integer'],
-            'governmentForm.previous_residence_state_id' => ['required_if:governmentForm.previous_residence_country_id,1', 'integer'],
-            'governmentForm.previous_residence_district_id' => ['required_if:governmentForm.previous_residence_country_id,1', 'integer'],
+            'governmentForm.previous_residence_state_id' => ['required_if:governmentForm.previous_residence_country_id,1', 'nullable', 'integer'],
+            'governmentForm.previous_residence_district_id' => ['required_if:governmentForm.previous_residence_country_id,1', 'nullable', 'integer'],
 
             'governmentForm.current_residence_country_id' => ['required'],
             'governmentForm.current_residence_state_id' => ['required_if:governmentForm.current_residence_country_id,1'],

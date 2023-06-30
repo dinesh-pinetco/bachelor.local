@@ -394,11 +394,12 @@
                                                    id="studySheet.privacy_policy"
                                                    class="flex-shrink-0 w-5 h-5 mt-1 text-primary form-checkbox focus:border-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50 shadow-sm outline-none {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}"
                                                    type="checkbox">
-                                            <label class="form-check-label inline-block text-gray-800 {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}"
+                                            <label class="form-check-label inline-block text-gray-800 required {{ $isEdit ? 'cursor-default' : 'cursor-not-allowed' }}"
                                                    for="studySheet.privacy_policy">
                                                 <span>{{ __('I agree that NORDAKADEMIE may transfer my contact details to the alumni network Nordakademiker e. V. as described above and that Nordakademiker e. V. may use the contact details for the purposes described. General information on data protection can be found at') }}</span> <a href="https://www.nordakademie.de/datenschutz/" class="text-primary underline font-black">https://www.nordakademie.de/datenschutz/</a> <span>{{ __('bzw.') }}</span> <a href="https://nordakademiker.de/privacy/" class="text-primary underline font-black"> https://nordakademiker.de/privacy/</a>
                                             </label>
                                         </div>
+                                        <x-jet-input-error for="studySheet.privacy_policy"/>
                                     </div>
 
                                     <div class="mt-4">

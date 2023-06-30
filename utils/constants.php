@@ -36,7 +36,7 @@ const BACHELOR_REJECTED_BY_APPLICANT = 'bachelor_rejected_by_applicant';
 // Validation
 const VALIDATION_ALPHA = 'alpha';
 const VALIDATION_NUMBERS = 'regex:/^[0-9\s\+]+$/';
-const VALIDATION_ALPHA_NUMBERS = 'regex:/^[a-zA-Z0-9\s]+$/';
+const VALIDATION_ALPHA_NUMBERS = 'regex:/^[a-zA-Z0-9\sÄÖÜßäöü]+$/';
 const VALIDATION_ALPHA_NUMBERS_SPECIAL_CHARACTER = 'regex:/^[a-zA-Z0-9\s\-\.\,\&\@\#\%|]*$/';
 
 // Applicant anonymous after following year(s)
