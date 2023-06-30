@@ -32,7 +32,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->enrollCompany = collect(Company::getFromCache())->where('id', $this->applicant->getValueByField('enroll_company')?->value)->value('name');
+        $this->enrollCompany = Company::where('id', $this->applicant->getValueByField('enroll_company')?->value)->value('name');
 
         $this->contract = $this->applicant->contract ?? new Contract();
     }
