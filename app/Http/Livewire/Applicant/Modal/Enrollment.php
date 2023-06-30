@@ -64,10 +64,14 @@ class Enrollment extends Component
         return $rules;
     }
 
+    public function mount()
+    {
+        $this->companies = Company::select('id', 'sana_id', 'name')->with('contacts:id,company_id,sana_id,first_name,last_name')->orderBy('name')->get();
+    }
+
     public function toggle(User $user)
     {
         if (! auth()->user()->hasRole(ROLE_APPLICANT)) {
-            $this->companies = Company::with('contacts')->orderBy('name')->get();
 
             $this->partnerCompanyFieldId = Field::where('label', 'Partner company')->first()?->id;
             $this->partnerCompanyContactFieldId = Field::where('label', 'Partner company contacts')->first()?->id;
