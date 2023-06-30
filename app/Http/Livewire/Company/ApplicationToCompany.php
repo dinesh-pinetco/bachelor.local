@@ -125,6 +125,13 @@ class ApplicationToCompany extends Component
         }
     }
 
+    public function close(): void
+    {
+        $this->selectedCompanies = $this->user->companies->pluck('company_id')?->toArray();
+
+        $this->show = false;
+    }
+
     public function render()
     {
         return view('livewire.company.application-to-company');
