@@ -18,8 +18,7 @@ class Anonymous extends Component
         MakeAnonymousUser::make($this->applicant)->execute();
         $this->emitUp('refresh');
         $this->close();
-        $this->toastNotify(__('Applicant has been enrolled successfully.'));
-
+        $this->toastNotify(__('Anonymous done successfully.'));
     }
 
     public function render()
