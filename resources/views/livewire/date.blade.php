@@ -32,10 +32,9 @@
                     @for ($i = PAST_YEAR; $i <= \Carbon\Carbon::now()->addYears(FUTURE_YEAR)->year; $i++)
                         <option @if ($i == data_get($date, '0')) selected @endif value="{{ $i }}">
                             {{ $i }}</option>
-                    @endfor``
+                    @endfor
                 </x-livewire-select>
             </div>
         @endif
     </div>
-
 </div>

@@ -57,17 +57,17 @@ class Date extends Component
     {
         if (($this->day && $this->month && $this->year)) {
             $this->date = $this->year.'-'.$this->month.'-'.$this->day;
-
-            $this->emitUp('date-updated', $this->date);
         } elseif ($this->field->type === FieldType::FIELD_MONTH_YEAR() && $this->month && $this->year) {
             $this->date = $this->year.'-'.$this->month;
-
-            $this->emitUp('date-updated', $this->date);
         } elseif ($this->field->type === FieldType::FIELD_MONTH() && $this->month) {
             $this->date = $this->month;
-
-            $this->emitUp('date-updated', $this->date);
         }
+
+        $this->field->value->value = $this->date;
+        $this->field->value->save();
+
+        $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
+
     }
 
     public function updatedMonth()
