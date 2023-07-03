@@ -8,7 +8,7 @@
         <tr>
             <td align="right">
                 <img style="display:block;height:32px;margin-right: 52px;"
-                     src="data:image/png;base64,{{ base64_encode(file_get_contents(asset('images/logo.png'))) }}"
+                     src="{{ asset('images/logo.png') }}"
                      alt="logo">
             </td>
         </tr>
