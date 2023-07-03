@@ -29,7 +29,7 @@ class ApplicationToCompany extends Component
 
         $this->is_see_test_results = $this->user?->companies?->first()?->is_see_test_results ?? false;
 
-        $this->companies = Company::query()->select('id', 'name')->orderBy('name')->get();
+        $this->companies = Company::getFromCache();
 
         $this->selectedCompanyIds = $this->user->companies->pluck('company_id')?->toArray();
     }

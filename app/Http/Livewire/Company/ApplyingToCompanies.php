@@ -34,7 +34,7 @@ class ApplyingToCompanies extends Component
 
     public function fetchCompanies()
     {
-        return Company::query()->select('id', 'name')->get();
+        return Company::getFromCache();
     }
 
     public function getFilteredCompaniesProperty()
