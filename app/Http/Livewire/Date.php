@@ -26,20 +26,22 @@ class Date extends Component
 
     public bool $isEdit = false;
 
+    public $fieldValue;
+
     public function mount()
     {
         $this->applicant = $this->applicant ?: auth()->user();
 
         $this->hiddenFields = explode(',', $this->hiddenFields);
 
-        $fieldValue = $this->applicant->values()->where('group_key', $this->groupKey)->where('field_id', $this->field->id)->first();
+        $this->fieldValue = $this->applicant->values()->where('group_key', $this->groupKey)->where('field_id', $this->field->id)->first();
 
-        if ($fieldValue && $this->field->type != FieldType::FIELD_MONTH->value) {
-            $this->year = data_get(Str::of($fieldValue->value)->explode('-'), '0');
-            $this->month = data_get(Str::of($fieldValue->value)->explode('-'), '1');
-            $this->day = data_get(Str::of($fieldValue->value)->explode('-'), '2');
-        } elseif ($fieldValue && $this->field->type === FieldType::FIELD_MONTH()) {
-            $this->month = data_get($fieldValue, 'value');
+        if ($this->fieldValue && $this->field->type != FieldType::FIELD_MONTH->value) {
+            $this->year = data_get(Str::of($this->fieldValue->value)->explode('-'), '0');
+            $this->month = data_get(Str::of($this->fieldValue->value)->explode('-'), '1');
+            $this->day = data_get(Str::of($this->fieldValue->value)->explode('-'), '2');
+        } elseif ($this->fieldValue && $this->field->type === FieldType::FIELD_MONTH()) {
+            $this->month = data_get($this->fieldValue, 'value');
         }
     }
 
@@ -63,8 +65,8 @@ class Date extends Component
             $this->date = $this->month;
         }
 
-        $this->field->value->value = $this->date;
-        $this->field->value->save();
+        $this->fieldValue->value = $this->date;
+        $this->fieldValue->save();
 
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
 
