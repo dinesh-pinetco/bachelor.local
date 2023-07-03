@@ -65,8 +65,14 @@ class Date extends Component
             $this->date = $this->month;
         }
 
-        $this->fieldValue->value = $this->date;
-        $this->fieldValue->save();
+        if ($this->fieldValue) {
+            $this->fieldValue->value = $this->date;
+            $this->fieldValue->save();
+        } else {
+
+            $this->applicant->values()->updateOrCreate(['field_id' => $this->field->id],
+                ['value' => $this->date, 'group_key' => $this->groupKey]);
+        }
 
         $this->toastNotify(__('Information saved successfully.'), __('Success'), TOAST_SUCCESS);
 
