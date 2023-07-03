@@ -37,4 +37,5 @@
             </div>
         @endif
     </div>
+    <x-jet-input-error for="date" class="mt-2"/>
 </div>

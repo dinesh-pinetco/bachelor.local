@@ -28,6 +28,10 @@ class Date extends Component
 
     public $fieldValue;
 
+    protected array $rules = [
+        'date' => ['before:now', 'date'],
+    ];
+
     public function mount()
     {
         $this->applicant = $this->applicant ?: auth()->user();
@@ -64,6 +68,8 @@ class Date extends Component
         } elseif ($this->field->type === FieldType::FIELD_MONTH() && $this->month) {
             $this->date = $this->month;
         }
+
+        $this->validate();
 
         if ($this->fieldValue) {
             $this->fieldValue->value = $this->date;
