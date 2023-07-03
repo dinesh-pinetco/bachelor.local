@@ -34,6 +34,5 @@ class Companies extends ErpService
         }
 
         Company::catchCollection();
-        CompanyContacts::catchCollection();
     }
 }
