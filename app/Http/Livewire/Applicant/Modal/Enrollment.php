@@ -66,7 +66,12 @@ class Enrollment extends Component
 
     public function mount()
     {
-        $this->companies = Company::select('id', 'sana_id', 'name')->with('contacts:id,company_id,sana_id,first_name,last_name')->orderBy('name')->get();
+        $this->companies = Company::getFromCache();
+
+//        $this->companies = Company::select('id', 'sana_id', 'name')
+//            ->with('contacts:id,company_id,sana_id,first_name,last_name')
+//            ->orderBy('name')
+//            ->get();
 
     }
 

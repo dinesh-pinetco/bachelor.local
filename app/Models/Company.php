@@ -34,7 +34,7 @@ class Company extends Model
 
     public static function catchCollection()
     {
-        Cache::put('fetchSannaCompanies', Company::orderBy('name')->get());
+        Cache::put('fetchSannaCompanies', Company::query()->select('id', 'sana_id', 'name', 'zip_code')->orderBy('name')->get());
     }
 
     public static function getFromCache()
