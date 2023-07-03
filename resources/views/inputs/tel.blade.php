@@ -12,10 +12,12 @@
         var error = document.getElementById("error_phone")
 
         input.addEventListener('telchange', function (e) {
-            if (e.detail.valid) {
-                @this.set('fieldValue', e.detail.number);
-            } else {
-                error.textContent = "{{__("Please enter a valid number") }}";
+            if(e.detail.number.length >= 6) {
+                if (e.detail.valid) {
+                    @this.set('fieldValue', e.detail.number);
+                } else {
+                    error.textContent = "{{__("Please enter a valid number") }}";
+                }
             }
         });
     </script>
