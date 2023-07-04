@@ -24,6 +24,8 @@
         var error = document.getElementById("error_phone")
 
         input.addEventListener('telchange', function (e) {
+            error.textContent = "";
+
             document.getElementById('number').value = e.detail.number;
             if ( e.detail.number.length >= 6 && e.detail.valid) {
                 @if($wireModel)
